@@ -20,18 +20,8 @@
     <name>UITests</name>
     <repositories>
         <repository>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-                <updatePolicy>never</updatePolicy>
-            </snapshots>
             <id>uisteps.livejournal.com</id>
-            <name>UISteps</name>
-            <url>
-                https://github.com/Solyankin/UISteps
-            </url>
+            <url>https://github.com/Solyankin/UITests.git</url>
             <layout>default</layout>
         </repository>
     </repositories>
