@@ -15,7 +15,7 @@
         <repository>
             <id>uisteps.livejournal.com</id>
             <name>UISteps</name>
-            <url>https://github.com/Solyankin/UITests.git</url>
+            <url>https://github.com/Solyankin/UISteps.git</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
