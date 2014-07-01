@@ -14,15 +14,7 @@
     <repositories>
         <repository>
             <id>com.livejournal.uisteps</id>
-            <name>UISteps</name>
             <url>https://github.com/Solyankin/UISteps.git</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <layout>default</layout>
         </repository>
     </repositories>
     <dependencies>
