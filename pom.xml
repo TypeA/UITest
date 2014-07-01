@@ -5,17 +5,12 @@
     <artifactId>com.livejournal.uitests</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
+    <name>UITests</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
-    <name>UITests</name>
-    <dependency>
-        <groupId>com.livejournal</groupId>
-        <artifactId>com.livejournal.uisteps</artifactId>
-        <version>0.1</version>
-    </dependency>
     <repositories>
         <repository>
             <id>com.livejournal.uisteps</id>
@@ -27,6 +22,11 @@
         </repository>
     </repositories>
     <dependencies>
+        <dependency>
+            <groupId>com.livejournal</groupId>
+            <artifactId>com.livejournal.uisteps</artifactId>
+            <version>0.1</version>
+        </dependency>
         <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
