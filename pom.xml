@@ -13,7 +13,7 @@
     <name>UITests</name>
     <repositories>
         <repository>
-            <id>uisteps.livejournal.com</id>
+            <id>com.livejournal.uisteps</id>
             <name>UISteps</name>
             <url>https://github.com/Solyankin/UISteps.git</url>
             <releases>
@@ -27,7 +27,7 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.livejournal</groupId>
             <artifactId>uisteps</artifactId>
             <version>0.1</version>
         </dependency>
