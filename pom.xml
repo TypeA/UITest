@@ -14,7 +14,7 @@
     <repositories>
         <repository>
             <id>com.livejournal.qatools.uisteps</id>
-            <url>https://github.com/Solyankin/UISteps/releases</url>
+            <url>https://github.com/Solyankin/UISteps-repo</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
