@@ -13,7 +13,7 @@
     </properties>
     <repositories>
         <repository>
-            <id>com.livejournal.uisteps</id>
+            <id>com.livejournal.qatools.uisteps</id>
             <url>https://github.com/Solyankin/UISteps</url>
             <snapshots>
                 <enabled>true</enabled>
@@ -23,16 +23,16 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>com.livejournal</groupId>
-            <artifactId>com.livejournal.uisteps</artifactId>
-            <version>0.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
             <version>3.9.2</version>
             <scope>test</scope>
             <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.livejournal.qatools</groupId>
+            <artifactId>uisteps</artifactId>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
