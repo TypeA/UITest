@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.livejournal</groupId>
             <artifactId>uisteps</artifactId>
-            <version>0.2-SNAPSHOT</version>
+            <version>0.1-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
     </dependencies>
