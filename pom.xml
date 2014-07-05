@@ -30,9 +30,22 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.livejournal</groupId>
-            <artifactId>uisteps</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-jbehave-plugin</artifactId>
+            <version>0.9.250</version>
+            <scope>test</scope>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-core</artifactId>
+            <version>0.9.250</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>ru.yandex.qatools.htmlelements</groupId>
+            <artifactId>htmlelements-java</artifactId>
+            <version>1.11</version>
             <type>jar</type>
         </dependency>
     </dependencies>
