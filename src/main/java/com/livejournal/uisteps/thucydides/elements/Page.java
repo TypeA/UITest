@@ -25,6 +25,7 @@ public class Page extends PageObject implements BasePage {
         actions = new UIActions();
     }
 
+    @Override
     public Url getUrl() {
         return url;
     }
