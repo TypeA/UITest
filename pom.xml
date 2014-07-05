@@ -13,8 +13,8 @@
     </properties>
     <repositories>
         <repository>
-            <id>com.livejournal.qatools.uisteps</id>
-            <url>https://github.com/Solyankin/UISteps-repo</url>
+            <id>github.com</id>
+            <url>https://git@github.com:/Solyankin/UISteps.git</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.livejournal</groupId>
             <artifactId>uisteps</artifactId>
-            <version>0.1-SNAPSHOT</version>
+            <version>0.2-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
     </dependencies>
