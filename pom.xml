@@ -14,7 +14,7 @@
     <repositories>
         <repository>
             <id>github.com</id>
-            <url>https://git@github.com:/Solyankin/UISteps.git</url>
+            <url>https://git@github.com:/Solyankin/UISteps/releases/tag/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
