@@ -14,7 +14,7 @@
     <repositories>
         <repository>
             <id>github.com</id>
-            <url>https://git@github.com:/Solyankin/UISteps/releases/tag/</url>
+            <url>https://github.com:/Solyankin/UISteps/tree</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>com.livejournal</groupId>
             <artifactId>uisteps</artifactId>
-            <version>uisteps-0.1-SNAPSHOT</version>
+            <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>
