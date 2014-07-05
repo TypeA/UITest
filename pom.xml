@@ -30,8 +30,8 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>tree</groupId>
-            <artifactId>master</artifactId>
+            <groupId>tree.master</groupId>
+            <artifactId>releases</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
