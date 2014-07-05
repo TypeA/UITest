@@ -10,6 +10,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <thucydides.version>0.9.250</thucydides.version>
     </properties>
     <!--
     <repositories>
@@ -24,6 +25,25 @@
     </repositories>
     
     -->
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.thucydides.maven.plugins</groupId>
+                <artifactId>maven-thucydides-plugin</artifactId>
+                <version>${thucydides.version}</version>
+                <executions>
+                    <execution>
+                        <id>thucydides-reports</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>aggregate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>      
     <dependencies>
         <dependency>
             <groupId>org.jbehave</groupId>
@@ -35,7 +55,7 @@
         <dependency>
             <groupId>net.thucydides</groupId>
             <artifactId>thucydides-jbehave-plugin</artifactId>
-            <version>0.9.250</version>
+            <version>${thucydides.version}</version>
             <scope>test</scope>
             <type>jar</type>
         </dependency>
