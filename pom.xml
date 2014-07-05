@@ -33,6 +33,7 @@
             <groupId>com.livejournal</groupId>
             <artifactId>uisteps</artifactId>
             <version>0.1-SNAPSHOT</version>
+            <type>jar</type>>
         </dependency>
     </dependencies>
 </project>
