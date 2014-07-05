@@ -14,7 +14,7 @@
     <repositories>
         <repository>
             <id>github.com</id>
-            <url>https://github.com:/Solyankin/UISteps/tree/master</url>
+            <url>https://github.com:/Solyankin/UISteps/</url>
             <snapshots>
                 <enabled>true</enabled>
                 <updatePolicy>always</updatePolicy>
@@ -30,8 +30,8 @@
             <type>jar</type>
         </dependency>
         <dependency>
-            <groupId>com.livejournal</groupId>
-            <artifactId>uisteps</artifactId>
+            <groupId>tree</groupId>
+            <artifactId>master</artifactId>
             <version>0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
