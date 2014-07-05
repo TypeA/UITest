@@ -23,7 +23,7 @@
         </repository>
     </repositories>
     
-    --ß>
+    -->
     <dependencies>
         <dependency>
             <groupId>org.jbehave</groupId>
