@@ -28,7 +28,7 @@
                 <configuration>
                     <skip>true</skip>
                 </configuration>
-                          </plugin>
+            </plugin>
             <plugin>
                 <artifactId>maven-failsafe-plugin</artifactId>
                 <version>2.17</version>
@@ -40,6 +40,8 @@
                         <include>**/When*.java</include>
                     </includes>
                     <argLine>-Xmx512m</argLine>
+                    <forkCount>2C</forkCount>
+                    <reuseForks>true</reuseForks>
                     <parallel>classes</parallel>
                     <systemPropertyVariables>
                         <webdriver.driver>${webdriver.driver}</webdriver.driver>
