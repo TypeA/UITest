@@ -40,8 +40,8 @@
                         <include>**/When*.java</include>
                     </includes>
                     <argLine>-Xmx512m</argLine>
-                    <forkCount>2C</forkCount>
-                    <reuseForks>true</reuseForks>
+                    <threadCountClasses>4</threadCountClasses>
+                    <perCoreThreadCount>true</perCoreThreadCount>
                     <parallel>classes</parallel>
                     <systemPropertyVariables>
                         <webdriver.driver>${webdriver.driver}</webdriver.driver>
