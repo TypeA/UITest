@@ -18,5 +18,11 @@
             <artifactId>uisteps</artifactId>
             <version>0.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides</artifactId>
+            <version>0.9.250</version>
+            <type>pom</type>
+        </dependency>
     </dependencies>
 </project>
