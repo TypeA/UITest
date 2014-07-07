@@ -40,7 +40,7 @@
                         <include>**/When*.java</include>
                     </includes>
                     <argLine>-Xmx512m</argLine>
-                    <threadCountClasses>4</threadCountClasses>
+                    <threadCountClasses>1</threadCountClasses>
                     <perCoreThreadCount>true</perCoreThreadCount>
                     <parallel>classes</parallel>
                     <systemPropertyVariables>
