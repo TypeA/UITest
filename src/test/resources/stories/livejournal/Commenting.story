@@ -20,3 +20,4 @@ When user on post page <page> clicks on Reply
 And when user submits Comment field
 And when user clicks Add a comment
 Then user should see his comment have been replyed to original comment
+
