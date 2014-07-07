@@ -12,19 +12,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <thucydides.version>0.9.250</thucydides.version>
     </properties>
-    <!--
-    <repositories>
-        <repository>
-            <id>github.com</id>
-            <url>https://github.com:/Solyankin/UISteps/tree/master</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-    </repositories>
-    
-    -->
     
         
     <dependencies>
