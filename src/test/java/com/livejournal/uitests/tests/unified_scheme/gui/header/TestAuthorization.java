@@ -12,9 +12,9 @@ import org.junit.Assert;
  */
 public class TestAuthorization extends WebTest {
 
-    @When("I on submit authorization form with correct login $login and password $password")
+    @When("I submit authorization form with correct login $login and password $password")
     public void submit_authorization_form_with_correct(String login, String password) {
-   //     on(LoginPage.class).authorizeBy(login, password);
+        on(LoginPage.class).authorizeBy(login, password);
     }
 
     @Then("I should be authorized")
