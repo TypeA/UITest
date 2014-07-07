@@ -1,7 +1,7 @@
 Scenario: Authorize
 
 Meta: 
-@tags execution:manual,component:authorization,attribute:personal
+@tags execution:manual,component:Authorization
 
 Given unlogged user
 When user on page <page> clicks on Login menu item
