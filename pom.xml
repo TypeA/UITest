@@ -40,9 +40,11 @@
                         <include>**/When*.java</include>
                     </includes>
                     <argLine>-Xmx512m</argLine>
+                    <!--
                     <threadCountClasses>1</threadCountClasses>
                     <perCoreThreadCount>true</perCoreThreadCount>
                     <parallel>classes</parallel>
+                    -->
                     <systemPropertyVariables>
                         <webdriver.driver>${webdriver.driver}</webdriver.driver>
                         <jira.url>${jira.url}</jira.url>
