@@ -15,8 +15,6 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ".s-body .b-loginform"))
 public class LoginForm extends UIBlock {
 
-    @FindBy(css = ".b-loginform-close")
-    public Button cross;
     @FindBy(css = "#user")
     public TextField loginField;
     @FindBy(css = "#lj_loginwidget_password")
@@ -29,9 +27,5 @@ public class LoginForm extends UIBlock {
         loginField.enter(login);
         passwordField.enter(password);
         submitButton.click();
-    }
-     
-    public void close() {
-        cross.click();
     }
 }
