@@ -68,7 +68,7 @@
             <plugin>
                 <groupId>net.thucydides.maven.plugins</groupId>
                 <artifactId>maven-thucydides-plugin</artifactId>
-                <version>${thucydides.version}</version>
+                <version>${thucydides.version}-SNAPSHOT</version>
                 <executions>
                     <execution>
                         <id>thucydides-reports</id>
