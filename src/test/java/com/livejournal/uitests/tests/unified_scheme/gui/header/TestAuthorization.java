@@ -13,7 +13,9 @@ import org.junit.Assert;
 public class TestAuthorization extends WebTest {
 
     @When("I submit authorization form with correct login $login and password $password")
-    public void submit_authorization_form_with_correct(String login, String password) {
+    public void submit_authorization_form_with_correct(String login, String password) throws InterruptedException {
+        on(LoginPage.class);
+        Thread.sleep(50000);
         on(LoginPage.class).authorizeBy(login, password);
     }
 
