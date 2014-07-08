@@ -18,6 +18,11 @@
             <artifactId>uisteps</artifactId>
             <version>0.2.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.jbehave</groupId>
+            <artifactId>jbehave-maven-plugin</artifactId>
+            <version>3.9.3</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
