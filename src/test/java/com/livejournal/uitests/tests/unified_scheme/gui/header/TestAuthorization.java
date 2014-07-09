@@ -1,7 +1,8 @@
 package com.livejournal.uitests.tests.unified_scheme.gui.header;
 
-import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uitests.pages.common_elements.LoginForm;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
@@ -13,7 +14,7 @@ import org.junit.Assert;
 public class TestAuthorization extends WebTest {
 
     @When("I submit authorization form with correct login $login and password $password")
-    public void submit_authorization_form_with_correct(String login, String password) throws InterruptedException {
+    public void submit_authorization_form_with_correct(String login, String password) {
         on(LoginPage.class).authorizeBy(login, password);
     }
 
