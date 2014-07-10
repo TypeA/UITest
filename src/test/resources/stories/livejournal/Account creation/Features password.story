@@ -20,3 +20,5 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter password <password>
+When user see bubble Password Bubble In Registration Page
+Then Password Bubble In Registration Page contains text <text> and URL <URL>
