@@ -1,6 +1,7 @@
 package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -19,8 +20,9 @@ public class RegistrationTest extends WebTest {
 
     @When("user enter correct name $name")
     public void user_enter_correct_name(String name) {
-        on(CreateAccountPage.class).createAccountForm.userNameField
-                .enter(name);
+        getCurrentBrowser().openUrl("");
+        on(CreateAccountPage.class);//.createAccountForm.userNameField
+            //    .enter(name);
     }
 
     @Then("user see than name is $name")
