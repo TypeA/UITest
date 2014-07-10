@@ -7,7 +7,8 @@ Meta:
 Given unlogged user on Registration Form
 When user enter correct data whith empty name:
 |name|email|password|day|monse|year|
-Then user see message <Используйте строчные латинские буквы a-z, цифры 0-9 и знак подчёркивания _ (не в начале и не в конце).>
+Then user see bubble Name Bubble In Registration Page
+And then in Name Bubble In Registration Page user see message <Используйте строчные латинские буквы a-z, цифры 0-9 и знак подчёркивания _ (не в начале и не в конце).>
 And then button Create Account is not active
 
 
@@ -21,7 +22,8 @@ Meta:
 Given unlogged user on Registration Form
 When user enter correct data whith empty email:
 |name|email|password|day|monse|year|
-Then user see message <Нужен для подтверждения регистрации и восстановления пароля>
+Then user see bubble Email Bubble In Registration Page
+And then in Email Bubble In Registration Page user see message <Нужен для подтверждения регистрации и восстановления пароля>
 And then button Create Account is not active
 
 
@@ -35,7 +37,8 @@ Meta:
 Given unlogged user on Registration Form
 When user enter correct data whith empty password:
 |name|email|password|day|monse|year|
-Then user see message <Требования к паролю:>
+Then user see bubble Password Bubble In Registration Page
+And then in Password Bubble In Registration Page user see message <Требования к паролю:>
 And then button Create Account is not active
 
 
