@@ -6,6 +6,7 @@
 
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -15,7 +16,16 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author m.prytkova
  */
 @Block(
-        @FindBy(css = "form.b-ljform"))
+        @FindBy(css = ".b-panel-step2"))
 public class FinishForm extends UIBlock{
+    
+    // тут надо вставить все ссылочки, которые есть 
+    // на форме удачного создания аккаунта
+    
+    @FindBy(id = "createpage_post")
+    public Button createFirstPostButton;
+    
+    // тут надо вставить все ссылочки, которые есть 
+    // на форме неудачного создания аккаунта (меньше 13)
     
 }

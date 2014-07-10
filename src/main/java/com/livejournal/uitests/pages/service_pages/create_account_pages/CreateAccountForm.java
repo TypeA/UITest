@@ -30,4 +30,6 @@ public class CreateAccountForm extends UIBlock {
     
     @FindBy(id = "createpage_create")
     public Button createAccountButton;
+    
+    // тут надо вставить две ссылочки, которые есть на форме
 }

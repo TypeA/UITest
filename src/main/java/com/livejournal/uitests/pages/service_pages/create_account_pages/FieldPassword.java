@@ -15,14 +15,15 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 /**
  *
  * @author m.prytkova
- */@Block(
-        @FindBy(css = ".js-select-date"))
+ */
+@Block(
+        @FindBy(css = ".b-passview"))
 public class FieldPassword extends UIBlock{
      
     @FindBy(id = "password")
     public TextField passwordField;
     
-    @FindBy(id = "password")
+    @FindBy(css = "b-passview-icon")
     public Link passwordMappingLink;  
     
 }
