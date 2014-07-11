@@ -3,9 +3,10 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import org.openqa.jetty.html.Select;
+import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
+import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
  *
@@ -34,4 +35,15 @@ public class CreateAccountForm extends UIBlock {
     // тут надо вставить две ссылочки, которые есть на форме
     
     public FinishForm finishForm;
+    
+    @StepGroup
+    public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
+        userNameField.enter(name);
+        emailField.enter(email);
+        fieldPassword.passwordField.enter(password);
+        birthDateForm.dayDropDownMenu.selectByValue(day);
+        birthDateForm.monthDropDownMenu.selectByValue(month);
+        birthDateForm.yearDropDownMenu.selectByValue(year);
+        genderDropDownMenu.selectByValue(gender);   
+    }
 }
