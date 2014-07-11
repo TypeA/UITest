@@ -18,6 +18,8 @@ import org.openqa.selenium.support.FindBy;
 @DefaultUrl("/")//мне кажется, не так
 public class MainPage extends ServicePage{
     
+    //дополнительная страница, надо переделать
+    
     @FindBy(xpath=".//*[@href[contains(.,'/login.bml')]]")
     public Link enterLink;
 }

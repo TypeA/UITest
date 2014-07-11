@@ -12,6 +12,8 @@ import net.thucydides.core.annotations.StepGroup;
 public class CreateAccountPage extends ServicePage {
 
     public CreateAccountForm createAccountForm;
+    
+    public FinishForm finishForm;
 
     @StepGroup
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
