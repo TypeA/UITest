@@ -13,22 +13,21 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author ASolyankin
  */
 @Block(
-        @FindBy(css = ".s-body .b-loginform"))
+      @FindBy(css = ".s-body .b-loginform"))
 public class LoginForm extends UIBlock {
 
     @FindBy(css = "#user")
-    public TextField loginField;
+    public TextField loginnnnnField;
     @FindBy(css = "#lj_loginwidget_password")
     public TextField passwordField;
     @FindBy(css = "[name='action:login']")
     public Button submitButton;
-    
     @FindBy(xpath=".//*[@href[contains(.,'/create')]]")
     public Link createAccountLink;
 
     @StepGroup
     public void authorizeBy(String login, String password) {
-        loginField.enter(login);
+        loginnnnnField.enter(login);
         passwordField.enter(password);
         submitButton.click();
     }
