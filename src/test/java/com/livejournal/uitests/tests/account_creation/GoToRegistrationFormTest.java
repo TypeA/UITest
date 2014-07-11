@@ -21,10 +21,6 @@ import org.junit.Assert;
  */
 public class GoToRegistrationFormTest extends WebTest {
 
-    @Given("unlogged user")
-    public void unlogged_user() {
-    }
-
     @When("user on Main Page clicks on Login Menu") 
     public void user_on_Main_Page_clicks_on_Login_Menu(){
         on(MainPage.class).enterLink.click();
