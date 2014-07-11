@@ -1,35 +1,34 @@
-################################
 Scenario: Go to registration form
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Registration,attributes:Useful, test:test
 
-Given unlogged user
 When user on Main Page clicks on Login Menu 
-And when user clicks Create New Account
+When user clicks Create New Account
 Then user should be on Registration Form
 
 
 
 
-######################
 Scenario: Registration
 
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data:
-name|email|password|day|monse|year|gender
-##1. В имени строчные буквы, цифры, пол задан, в пароле пробел
-##2. В имени заглавные буквы, нижний слеш в середине, пол не задан, сегогдня исполняется 13
-And when user clicks Create Account
-Then user go to Finish registration form and see message <message>
-And then user is registrsted
+When user enter correct data: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
+When user clicks Create Account
+Then user go to Finish Registration Form and see message <message>
+Then user is registreted and create First Post
+
+Examples:
+|name|email|password|day|monse|year|gender|message|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Добро пожаловать|
+|TEST_TESTrnd|test@test.ru|Test123|today|today|today||Проверка возраста|
 
 
 
-######################
+
 Scenario: Test
 
 Meta: 
