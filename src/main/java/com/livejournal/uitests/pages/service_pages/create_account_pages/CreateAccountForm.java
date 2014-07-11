@@ -32,4 +32,6 @@ public class CreateAccountForm extends UIBlock {
     public Button createAccountButton;
     
     // тут надо вставить две ссылочки, которые есть на форме
+    
+    public FinishForm finishForm;
 }

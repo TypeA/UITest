@@ -23,7 +23,7 @@ public class FieldPassword extends UIBlock{
     @FindBy(id = "password")
     public TextField passwordField;
     
-    @FindBy(css = "b-passview-icon")
+    @FindBy(css = "b-passview-icon")//по ней и скрытый и открытый найти можно
     public Link passwordMappingLink;  
     
 }
