@@ -1,6 +1,7 @@
 package com.livejournal.uitests.pages.common_elements;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import net.thucydides.core.annotations.StepGroup;
@@ -21,6 +22,9 @@ public class LoginForm extends UIBlock {
     public TextField passwordField;
     @FindBy(css = "[name='action:login']")
     public Button submitButton;
+    
+    @FindBy(xpath=".//*[@href[contains(.,'/create')]]")
+    public Link createAccountLink;
 
     @StepGroup
     public void authorizeBy(String login, String password) {
