@@ -19,5 +19,5 @@ import org.openqa.selenium.support.FindBy;
 public class MainPage extends ServicePage{
     
     @FindBy(xpath=".//*[@href[contains(.,'/login.bml')]]")
-    public Link EnterLink;
+    public Link enterLink;
 }
