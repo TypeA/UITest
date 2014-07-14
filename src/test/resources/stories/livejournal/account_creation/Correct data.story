@@ -1,7 +1,7 @@
 Scenario: Go to registration form
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful, test:test
+@tags execution:auto,component:Registration,attributes:Useful
 
 When user on Main Page clicks on Login Menu 
 When user clicks Create New Account
@@ -24,21 +24,6 @@ Then user is registreted and create First Post
 Examples:
 |name|email|password|day|monse|year|gender|message|
 |test1234rnd|test@test.ru|Test123|1|4|1990|M|Добро пожаловать|
-|TEST_TESTrnd|test@test.ru|Test123|today|today|today||Проверка возраста|
+|TEST_TEST|test@test.ru|Test123|1|2|1990||Добро пожаловать|
 
-
-
-
-Scenario: Test
-
-Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
-
-
-When user enter correct name <name>
-Then user see than name is <name>
-
-Examples:
-|name|
-|test|
 
