@@ -24,6 +24,6 @@ Then user is registreted and create First Post
 Examples:
 |name|email|password|day|monse|year|gender|message|
 |test1234rnd|test@test.ru|Test123|1|4|1990|M|Добро пожаловать|
-|TEST_TEST|test@test.ru|Test123|1|2|1990||Добро пожаловать|
+|TEST_TESTrnd|test@test.ru|Test123|today|today|today|U|Добро пожаловать|
 
 

@@ -7,7 +7,7 @@ package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.tests.utility.ActualDate;
+import com.livejournal.uitests.tests.utility.Date;
 import com.livejournal.uitests.tests.utility.RandomName;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
@@ -34,17 +34,14 @@ public class RegistrationTest extends WebTest {
             @Named("monse") String month,
             @Named("year") String year,
             @Named("gender") String gender) throws InterruptedException {
-        
-        
+          
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                                                       email, 
                                                       password,
-                                                      new ActualDate(day,month,year).getDay(day),
-                                                      new ActualDate(day,month,year).getMonth(month),
-                                                      new ActualDate(day,month,year).getYear(year),
+                                                      Date.parceDayOrGetCurrent(day).toString(),
+                                                      Date.parceDayOrGetCurrent(month).toString(),
+                                                      Date.parceDayOrGetCurrent(year).toString(),
                                                       gender);
-
-    Thread.sleep(5000);
     }
 
     @When("user clicks Create Account")
