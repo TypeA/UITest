@@ -7,7 +7,7 @@
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import net.thucydides.core.annotations.DefaultUrl;
+
 
 /**
  *
