@@ -34,6 +34,8 @@ public class CreateAccountForm extends UIBlock {
     
     // тут надо вставить две ссылочки, которые есть на форме
     
+    public Popups popups;
+    
     @StepGroup
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
         userNameField.enter(name);
