@@ -34,7 +34,6 @@ public class GoToRegistrationFormTest extends WebTest {
     @Then ("user should be on Registration Form")
     public void user_should_be_on_Registration_Form()  throws InterruptedException{
         Url createAccountURL = on(CreateAccountPage.class).getUrl();       
- //       Thread.sleep(5000);
         Assert.assertTrue("We are not in Create Account Page", createAccountURL.toString().contains("/create"));
     }
     

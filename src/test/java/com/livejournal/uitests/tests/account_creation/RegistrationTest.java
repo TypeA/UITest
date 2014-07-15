@@ -39,8 +39,8 @@ public class RegistrationTest extends WebTest {
                                                       email, 
                                                       password,
                                                       Date.parceDayOrGetCurrent(day).toString(),
-                                                      Date.parceDayOrGetCurrent(month).toString(),
-                                                      Date.parceDayOrGetCurrent(year).toString(),
+                                                      Date.parceMonthOrGetCurrent(month).toString(),
+                                                      Date.parceYearOrGetCurrent(year).toString(),
                                                       gender);
     }
 
@@ -52,7 +52,7 @@ public class RegistrationTest extends WebTest {
     @Then("user go to Finish Registration Form and see message <message>")
     public void user_go_to_Finish_Registration_Form(@Named("message") String message) {
         String finishTextT = on(CreateAccountPage.class).finishForm.finishText.getText();
-        Assert.assertTrue("Incorrect text!", finishTextT.toString().contains(message));
+        Assert.assertTrue("Incorrect text!", finishTextT.contains(message));
     }
 
     @Then("user is registreted and create First Post")

@@ -23,10 +23,10 @@ public class FieldPassword extends UIBlock{
     @FindBy(id = "password")
     public TextField passwordField;
     
-    @FindBy(css = "b-passview-icon-show")
+    @FindBy(css = ".b-passview-icon-show")
     public Link passwordMappingLinkShow;  
     
-    @FindBy(css = "b-passview-icon-show")
+    @FindBy(css = ".b-passview-icon-hide")
     public Link passwordMappingLinkHide; 
     
 }
