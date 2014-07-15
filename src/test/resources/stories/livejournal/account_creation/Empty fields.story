@@ -1,4 +1,4 @@
-########################
+
 Scenario: Empty name
 
 Meta: 
@@ -13,7 +13,7 @@ And then button Create Account is not active
 
 
 
-########################
+
 Scenario: Empty email
 
 Meta: 
@@ -28,7 +28,7 @@ And then button Create Account is not active
 
 
 
-########################
+
 Scenario: Empty password
 
 Meta: 
@@ -43,7 +43,7 @@ And then button Create Account is not active
 
 
 
-########################
+
 Scenario: Empty age
 
 Meta: 

@@ -4,24 +4,20 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data except for the name:
-|name|email|password|day|monse|year|
-##1. Русские буквы
-##2. Знаки препинания
-##3. Пробел
-##4. Нижний слеш в начале
-##5. Нижний слеш в конце
-##6. Ограничение по длинне
-Then field Name Field turns red
-And then user see message:
-|message|
-|Имя пользователя содержит недопустимые символы|
-|Имя пользователя содержит недопустимые символы|
-|Имя пользователя содержит недопустимые символы|
-|НЕПРАВИЛЬНО!!!!|
-|НЕПРАВИЛЬНО!!!!|
-||
-And then button Create Account is not active
+When user enter correct data except for the name: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
+Then button Create Account is not active
+Then user see message <message> on popup
+
+Examples:
+|name|email|password|day|monse|year|gender|message|
+|лоргшнеrnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
+|t.es,t1234rnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
+|te st1234rnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
+|_test1234rnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
+|test1234rnd_|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
+|te987777779070987987098709870987098709870987097870970987097097098790870987098707st1234rnd|test@test.ru|Test123|1|4|1990|M||
+
+
 
 
 
@@ -32,28 +28,21 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data except for the email:
-|name|email|password|day|monse|year|
-##1. Двойные ковычки в логине
-##2. Знаки препинания в логине
-##3. Пробел в логине
-##4. Нет собаки
-##5. Две собаки
-##6. Ограничение по длинне
-##7. Одинарные ковычки в домене
-##8. Скобки в домене
-Then field Email Field  turns red
-And then user see message:
-|message|
-|Ваш адрес email содержит недопустимые символы|
-|Ваш адрес email содержит недопустимые символы|
-|Ваш адрес email содержит недопустимые символы|
-|Вы указали неверный адрес email. Адрес email выглядит так: username@some.domain|
-|Вы указали неверный адрес email. Адрес email выглядит так: username@some.domain|
-||
-|Неверный домен адреса email|
-|Неверный домен адреса email|
-And then button Create Account is not active
+When user enter correct data except for the email: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
+Then button Create Account is not active
+Then user see message <message> on popup
+
+
+Examples:
+|name|email|password|day|monse|year|gender|message|
+|test1234rnd|te"st@test.ru|Test123|1|4|1990|M|Ваш адрес email содержит недопустимые символы|
+|test1234rnd|tes,t@test.ru|Test123|1|4|1990|M||Ваш адрес email содержит недопустимые символы|
+|test1234rnd|te st@test.ru|Test123|1|4|1990|M|Ваш адрес email содержит недопустимые символы|
+|test1234rnd|testtest.ru|Test123|1|4|1990|M|Вы указали неверный адрес email. Адрес email выглядит так: username@some.domain|
+|test1234rnd|test@@test.ru|Test123|1|4|1990|M|Вы указали неверный адрес email. Адрес email выглядит так: username@some.domain|
+|test1234rnd|tes222222222222222222222222222222222222222222222222222222222222222222t@test.ru|Test123|1|4|1990|M||
+|test1234rnd|test@test.r'u|Test123|1|4|1990|M|Неверный домен адреса email|
+|test1234rnd|test@test.r()u|Test123|1|4|1990|M|Неверный домен адреса email|
 
 
 
@@ -65,8 +54,9 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
-Then user see message <message> on popup
 Then button Create Account is not active
+Then user see message <message> on popup
+
 
 Examples:
 |name|email|password|day|monse|year|gender|message|
