@@ -6,13 +6,13 @@
 
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
+
 /**
  *
  * @author s.savinykh
  */
-public class FullscreenHeaderUnlogged extends FullscreenHeader
+public class FeedbackMenuItem extends UIBlock 
 {
-    public ShopMenuItem shopMenuItem;
-    
     
 }

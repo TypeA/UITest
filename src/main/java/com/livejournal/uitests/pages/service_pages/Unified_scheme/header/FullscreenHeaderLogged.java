@@ -6,6 +6,9 @@
 
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
+import com.livejournal.uisteps.thucydides.elements.Link;
+import org.openqa.selenium.support.FindBy;
+
 /**
  *
  * @author s.savinykh
@@ -13,7 +16,13 @@ package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 public class FullscreenHeaderLogged extends FullscreenHeader
 {
     
+    public FriendsFeedMenuItem friendsFiedMenuItem;
     
+    public MyJournalMenuItem myJournalMenuItem;
     
+    @FindBy(css=".s-do-item.s-do-item-post")
+    public Link postNewEntry;
     
+    @FindBy(css=".s-do-item.s-do-item-message")
+    public Link Messages;
 }

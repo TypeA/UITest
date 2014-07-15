@@ -7,26 +7,14 @@
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import org.openqa.selenium.support.FindBy;
-
 
 /**
  *
  * @author s.savinykh
  */
-public class FullscreenHeader extends UIBlock
+public class ShopLogged extends ShopMenuItem
 {
-    
-    public Logo logo;
-    
-    @FindBy(css=".s-nav-rootlink-discovery")
-    public Link ljMagazine;
-    
-    public HelpMenuItem helpMenuItem;
-    
-    public FeedbackMenuItem feedback;
-    
-    public SearchMenuItem searchMenuItem;
-    
+    @FindBy(css=".s-nav-item-paid-history")
+    public Link orderHistory;
 }
