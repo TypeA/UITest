@@ -1,4 +1,3 @@
-########################
 Scenario: Incorrect name
 
 Meta: 
@@ -26,7 +25,7 @@ And then button Create Account is not active
 
 
 
-#########################
+
 Scenario: Incorrect email
 
 Meta: 
@@ -58,47 +57,39 @@ And then button Create Account is not active
 
 
 
-#########################
+
 Scenario: Incorrect password
 
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data except for the password:
-|name|email|password|day|monse|year|
-##1. Русские буквы
-##2. Меньше шести символов (включая все необходимые)
-##3. Больше 30 символов (включая все необходимые)
-##4. Нет цифр и знаков
-##5. Нет заглавных букв
-##6. Нет строчных букв
-##7. Используется только три разных символа
-Then field Password Field turns red
-And then user see message:
-|message|
-|Пароль должен состоять только из символов, входящих в ASCII. В частности, русские буквы не годятся.|
-|Пароль не должен быть меньше 6 символов.|
-||
-|Пароль, помимо букв алфавита, должен включать в себя не менее 1 цифры или символа.|
-|Пароль должен содержать хотя бы одну заглавную букву (A-Z)|
-|Пароль должен содержать хотя бы одну прописную букву (a-z)|
-|Пароль должен содержать как минимум 4 разных символа.|
-And then button Create Account is not active
+When user enter correct data except for the password: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
+Then user see message <message> on popup
+Then button Create Account is not active
+
+Examples:
+|name|email|password|day|monse|year|gender|message|
+|test1234rnd|test@test.ru|Ешка123|1|4|1990|M|Пароль должен состоять только из символов, входящих в ASCII. В частности, русские буквы не годятся.|
+|test1234rnd|test@test.ru|1Qqk|1|4|1990|M|Пароль не должен быть меньше 6 символов.|
+|test1234rnd|test@test.ru|1Qqyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy|1|4|1990|M||
+|test1234rnd|test@test.ru|rRtTyYiI|1|4|1990|M|Пароль, помимо букв алфавита, должен включать в себя не менее 1 цифры или символа.|
+|test1234rnd|test@test.ru|ytrytr123|1|4|1990|M|Пароль должен содержать хотя бы одну заглавную букву (A-Z)|
+|test1234rnd|test@test.ru|RTYFGH123|1|4|1990|M|Пароль должен содержать хотя бы одну прописную букву (a-z)|
+|test1234rnd|test@test.ru|Rr1Rr1Rr1Rr1|1|4|1990|M|Пароль должен содержать как минимум 4 разных символа.|
 
 
 
-
-#########################
 Scenario: Incorrect age
 
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data except for the age:
-|name|email|password|day|monse|year|
-##1. Пользователю меньше 13
-And when user clicks Create Account
-Then user go to Finish registration form and see message <message>
-And then user is not registrsted
+When user enter correct data except for the age: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
+When user clicks Create Account
+Then user go to Finish Registration Form and see message <message>
+
+Examples:
+|name|email|password|day|monse|year|gender|message|
+|test1234rnd|test@test.ru|Test123|1|4|2010|M|Проверка возраста|

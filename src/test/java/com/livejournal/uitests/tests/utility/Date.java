@@ -28,4 +28,40 @@ public class Date {
             return getCurrentDay();
         }
     }
+    
+    
+    
+    public static Integer parcseMonth(String month) throws Exception {
+        return Integer.parseInt(month);
+    }
+
+    public static Integer getCurrentMonth() {
+        return Calendar.getInstance().get(Calendar.MONTH);
+    }
+
+    public static Integer parceMonthOrGetCurrent(String month) {
+        try {
+            return parcseMonth(month);
+        } catch (Exception ex) {
+            return getCurrentMonth();
+        }
+    }
+    
+    
+    
+    public static Integer parcseYear(String year) throws Exception {
+        return Integer.parseInt(year);
+    }
+
+    public static Integer getCurrentYear() {
+        return Calendar.getInstance().get(Calendar.YEAR);
+    }
+
+    public static Integer parceYearOrGetCurrent(String year) {
+        try {
+            return parcseYear(year);
+        } catch (Exception ex) {
+            return getCurrentYear();
+        }
+    }
 }

@@ -8,6 +8,7 @@ package com.livejournal.uitests.tests.account_creation;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -19,12 +20,12 @@ import org.junit.Assert;
  */
 public class PasswordDescriptionTest extends WebTest {
 
-    @When("user see bubble Password Bubble In Registration Page")
+    @When("user see Password Bubble In Registration Page")
     public void user_see_Password_Bubble_In_Registration_Page() {
-        on(CreateAccountPage.class).createAccountForm.popups.getClass();
+        on(Popups.class).isDisplayed();
     }
 
-    @Then("Then Password Bubble In Registration Page contains text <text>")
+    @Then("Password Bubble In Registration Page contains text <text>")
     public void password_Bubble_contains_text(@Named("text") String text) {
         String correctText = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
         Assert.assertTrue("Incorrect text!", correctText.contains(text));
