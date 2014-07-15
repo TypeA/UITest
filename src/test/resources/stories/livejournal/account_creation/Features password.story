@@ -21,9 +21,10 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter password <password>
-When user see bubble Password Bubble In Registration Page
-Then Password Bubble In Registration Page contains text <text> and URL <URL>
+When user see Password Bubble In Registration Page
+Then Password Bubble In Registration Page contains text <text> 
+Then Password Bubble In Registration Page contains URL <URL>
 
 Examples:
-|password|
-|Test123|
+|password|text|URL|
+|Test123|Требования к паролю:|http://www.livejournal.com/support/faq/71.html|
