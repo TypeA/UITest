@@ -22,7 +22,7 @@ public class PasswordDescriptionTest extends WebTest {
 
     @When("user see Password Bubble In Registration Page")
     public void user_see_Password_Bubble_In_Registration_Page() {
-        on(Popups.class).isDisplayed();
+        Assert.assertTrue("Popup is not displyed!", on(Popups.class).isDisplayed());
     }
 
     @Then("Password Bubble In Registration Page contains text <text>")

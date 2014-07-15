@@ -51,8 +51,8 @@ public class RegistrationTest extends WebTest {
 
     @Then("user go to Finish Registration Form and see message <message>")
     public void user_go_to_Finish_Registration_Form(@Named("message") String message) {
-        String finishTextT = on(CreateAccountPage.class).finishForm.finishText.getText();
-        Assert.assertTrue("Incorrect text!", finishTextT.contains(message));
+        String finishText = on(CreateAccountPage.class).finishForm.finishText.getText();
+        Assert.assertTrue("Incorrect text!", finishText.contains(message));
     }
 
     @Then("user is registreted and create First Post")
