@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package com.livejournal.uitests.tests.account_creation;
 
@@ -25,8 +20,8 @@ public class DisplaysPassword extends WebTest{
         on(CreateAccountPage.class);
     }
     
-    @When ("user enter password <password>")
-    public void user_enter_password (@Named("password") String password){
+    @When ("user enter password $password")
+    public void user_enter_password (String password){
         on(CreateAccountPage.class)
                 .createAccountForm
                 .passwordBlock

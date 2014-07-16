@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
@@ -25,7 +21,7 @@ public class IncorrectAge extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When(" user enter correct data except for the age: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
+    @When("user enter correct data except for the age: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
     public void user_enter_data(@Named("name") String name,
             @Named("email") String email,
             @Named("password") String password,
