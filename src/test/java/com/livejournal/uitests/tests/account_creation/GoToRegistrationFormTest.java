@@ -20,26 +20,17 @@ import org.junit.Assert;
  * @author m.prytkova
  */
 public class GoToRegistrationFormTest extends WebTest {
-    
-    @Given("unlogged user on Registration Form")
-    public void unlogged_user_on_Registration_Form() {
-        on(CreateAccountPage.class);
-    }
 
-    @When("user on Main Page clicks on Login Menu") 
-    public void user_on_Main_Page_clicks_on_Login_Menu(){
-        on(MainPage.class).enterLink.click();    
-    }
-    
-    @When ("user clicks Create New Account")
-    public void user_clicks_Create_New_Account() {
+    @When("user on Main Page clicks on Login Menu and clicks Create New Account")
+    public void user_on_Main_Page_clicks_on_Login_Menu() {
+        on(MainPage.class).enterLink.click();
         on(LoginForm.class).createAccountLink.click();
     }
-        
-    @Then ("user should be on Registration Form")
-    public void user_should_be_on_Registration_Form()  throws InterruptedException{
-        Url createAccountURL = on(CreateAccountPage.class).getUrl();       
+
+    @Then("user should be on Registration Form")
+    public void user_should_be_on_Registration_Form() throws InterruptedException {
+        Url createAccountURL = on(CreateAccountPage.class).getUrl();
         Assert.assertTrue("We are not in Create Account Page", createAccountURL.toString().contains("/create"));
     }
-    
+
 }
