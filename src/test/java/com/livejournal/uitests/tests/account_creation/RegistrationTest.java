@@ -26,14 +26,14 @@ public class RegistrationTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data: <name>,<email>,<password>,<day>,<monse>,<year>,<gender> and clicks Create Account")
+    @When("user enter correct data: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
     public void user_enter_data(@Named("name") String name,
             @Named("email") String email,
             @Named("password") String password,
             @Named("day") String day,
-            @Named("monse") String month,
+            @Named("month") String month,
             @Named("year") String year,
-            @Named("gender") String gender) throws InterruptedException {
+            @Named("gender") String gender) {
           
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                                                       email, 
