@@ -21,14 +21,8 @@ public class IncorrectAge extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the age: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
-    public void user_enter_data(@Named("name") String name,
-            @Named("email") String email,
-            @Named("password") String password,
-            @Named("day") String day,
-            @Named("month") String month,
-            @Named("year") String year,
-            @Named("gender") String gender) {
+    @When("user enter correct data except for the age: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
+    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -39,8 +33,8 @@ public class IncorrectAge extends WebTest {
         on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
     }
 
-    @Then("user go to Finish Registration Form and see message <message>")
-    public void user_go_to_Finish_Registration_Form(@Named("message") String message) {
+    @Then("user go to Finish Registration Form and see message $message")
+    public void user_go_to_Finish_Registration_Form(String message) {
         String finishText = on(CreateAccountPage.class).finishForm.finishText.getText();
         Assert.assertTrue("Incorrect text!", finishText.contains(message));
         on(CreateAccountPage.class).finishForm.createFirstPostButton.click();

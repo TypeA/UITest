@@ -26,14 +26,8 @@ public class IncorrectPasswordTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the password: <name>,<email>,<password>,<day>,<month>,<year>,<gender>")
-    public void user_enter_data(@Named("name") String name,
-            @Named("email") String email,
-            @Named("password") String password,
-            @Named("day") String day,
-            @Named("month") String month,
-            @Named("year") String year,
-            @Named("gender") String gender){
+    @When("user enter correct data except for the password: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
+    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender){
 
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
@@ -44,8 +38,8 @@ public class IncorrectPasswordTest extends WebTest {
                 gender);
     }
 
-    @Then("button Create Account is not active and user see message <message> on popup")
-    public void user_see_message_on_popup(@Named("message") String message) {
+    @Then("button Create Account is not active and user see message $message on popup")
+    public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
         //Assert.assertTrue("Popup is not displyed!", on(Popups.class).isDisplayed());
         //String correctMessage = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();

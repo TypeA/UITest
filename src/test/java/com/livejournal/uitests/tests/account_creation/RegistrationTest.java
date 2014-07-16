@@ -26,22 +26,16 @@ public class RegistrationTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data: name $name, email $email, password $password,day $day, month $month, year $year, gender $gender and clicks Create Account")
-    public void user_enter_data(String name,
-             String email,
-            String password,
-            String day,
-            String month,
-            String year,
-            String gender) {
-          
+    @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
+    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
+
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
-                                                      email, 
-                                                      password,
-                                                      Date.parceDayOrGetCurrent(day).toString(),
-                                                      Date.parceMonthOrGetCurrent(month).toString(),
-                                                      Date.parceYearOrGetCurrent(year).toString(),
-                                                      gender);
+                email,
+                password,
+                Date.parceDayOrGetCurrent(day).toString(),
+                Date.parceMonthOrGetCurrent(month).toString(),
+                Date.parceYearOrGetCurrent(year).toString(),
+                gender);
         on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
     }
 
@@ -50,5 +44,5 @@ public class RegistrationTest extends WebTest {
         String finishText = on(CreateAccountPage.class).finishForm.finishText.getText();
         Assert.assertTrue("Incorrect text!", finishText.contains(message));
     }
-    
+
 }
