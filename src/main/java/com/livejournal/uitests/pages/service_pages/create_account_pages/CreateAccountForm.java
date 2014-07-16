@@ -22,7 +22,7 @@ public class CreateAccountForm extends UIBlock {
     @FindBy(id = "email")
     public TextField emailField;
     
-    public FieldPassword fieldPassword;
+    public FieldPassword passwordBlock;
     
     public BirthDateForm birthDateForm;
     
@@ -40,7 +40,7 @@ public class CreateAccountForm extends UIBlock {
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
         userNameField.enter(name);
         emailField.enter(email);
-        fieldPassword.passwordField.enter(password);
+        passwordBlock.passwordField.enter(password);
         birthDateForm.dayDropDownMenu.selectByValue(day);
         birthDateForm.monthDropDownMenu.selectByValue(month);
         birthDateForm.yearDropDownMenu.selectByValue(year);

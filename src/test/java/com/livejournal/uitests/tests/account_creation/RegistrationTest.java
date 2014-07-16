@@ -26,7 +26,7 @@ public class RegistrationTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>")
+    @When("user enter correct data: <name>,<email>,<password>,<day>,<monse>,<year>,<gender> and clicks Create Account")
     public void user_enter_data(@Named("name") String name,
             @Named("email") String email,
             @Named("password") String password,
@@ -42,10 +42,6 @@ public class RegistrationTest extends WebTest {
                                                       Date.parceMonthOrGetCurrent(month).toString(),
                                                       Date.parceYearOrGetCurrent(year).toString(),
                                                       gender);
-    }
-
-    @When("user clicks Create Account")
-    public void user_clicks_Create_Account() {
         on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
     }
 
@@ -53,11 +49,6 @@ public class RegistrationTest extends WebTest {
     public void user_go_to_Finish_Registration_Form(@Named("message") String message) {
         String finishText = on(CreateAccountPage.class).finishForm.finishText.getText();
         Assert.assertTrue("Incorrect text!", finishText.contains(message));
-    }
-
-    @Then("user is registreted and create First Post")
-    public void user_create_First_Post() {
-        on(CreateAccountPage.class).finishForm.createFirstPostButton.click();
     }
     
 }

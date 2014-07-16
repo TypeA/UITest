@@ -20,10 +20,8 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter password <password>
-When user see Password Bubble In Registration Page
-Then Password Bubble In Registration Page contains text <text> 
-Then Password Bubble In Registration Page contains URL <URL>
+When user enter password <password> 
+Then user see Password Bubble which contains text <text> and URL <URL>
 
 Examples:
 |password|text|URL|

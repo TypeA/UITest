@@ -3,10 +3,8 @@ Scenario: Go to registration form
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful
 
-When user on Main Page clicks on Login Menu 
-When user clicks Create New Account
+When user on Main Page clicks on Login Menu and clicks Create New Account 
 Then user should be on Registration Form
-
 
 
 
@@ -16,10 +14,9 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
-When user clicks Create Account
-Then user go to Finish Registration Form and see message <message>
-Then user is registreted and create First Post
+When user enter correct data: <name>,<email>,<password>,<day>,<monse>,<year>,<gender> and clicks Create Account
+Then user go to Finish Registration Form and see message <message> and create First Post
+
 
 Examples:
 |name|email|password|day|monse|year|gender|message|
