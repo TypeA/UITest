@@ -10,6 +10,7 @@ import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPage;
+import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
@@ -19,15 +20,19 @@ import org.junit.Assert;
  * @author m.prytkova
  */
 public class GoToRegistrationFormTest extends WebTest {
+    
+    @Given("unlogged user on Registration Form")
+    public void unlogged_user_on_Registration_Form() {
+        on(CreateAccountPage.class);
+    }
 
     @When("user on Main Page clicks on Login Menu") 
     public void user_on_Main_Page_clicks_on_Login_Menu(){
-        on(MainPage.class).enterLink.click();
+        on(MainPage.class).enterLink.click();    
     }
     
     @When ("user clicks Create New Account")
     public void user_clicks_Create_New_Account() {
-        on(LoginForm.class).loginnnnnField.enter("Я тут");
         on(LoginForm.class).createAccountLink.click();
     }
         
