@@ -16,7 +16,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block
-        (@FindBy(css=".i-iconus.i-iconus-search"))
+        (@FindBy(css=".i-iconus-search"))
 public class SearchMenuItem extends UIBlock
 {
     @FindBy(css=".s-search #SearchText")

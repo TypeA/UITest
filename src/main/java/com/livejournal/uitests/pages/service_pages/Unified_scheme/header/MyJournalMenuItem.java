@@ -6,6 +6,7 @@
 
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
+import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -16,8 +17,11 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 
 @Block
-        (@FindBy(css="s-nav-item.s-nav-item-sub.s-drop-master.s-nav-item-user"))
+        (@FindBy(css=".s-nav-item-user"))
 public class MyJournalMenuItem extends UIBlock
 {
+    @FindBy(css="label[for='s-nav-body-user'] .s-userpic")
+    public Link UserPic;
+    
     
 }

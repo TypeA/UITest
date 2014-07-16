@@ -6,10 +6,16 @@
 
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
+
 /**
  *
  * @author s.savinykh
- */
-public class LangSwitch {
+ */@Block
+        (@FindBy(css=".s-nav-item-lang-open"))
+public class LangSwitch
+{
+    
     
 }

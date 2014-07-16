@@ -16,7 +16,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block 
-        (@FindBy(css=".s-nav-item.s-nav-item-sub.s-drop-master.s-nav-item-friends"))
+        (@FindBy(css=".s-nav-item-friends"))
 public class FriendsFeedMenuItem extends UIBlock 
 {
     @FindBy(css=".s-nav-rootlink-feed")
