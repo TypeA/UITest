@@ -17,7 +17,7 @@ import org.junit.Assert;
  *
  * @author m.prytkova
  */
-public class PasswordDescriptionTest extends WebTest {
+public class PasswordDescription extends WebTest {
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {

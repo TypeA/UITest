@@ -18,14 +18,14 @@ import org.junit.Assert;
  *
  * @author m.prytkova
  */
-public class IncorrectAgeTest extends WebTest {
+public class IncorrectAge extends WebTest {
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the age: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
+    @When(" user enter correct data except for the age: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
     public void user_enter_data(@Named("name") String name,
             @Named("email") String email,
             @Named("password") String password,
@@ -43,8 +43,8 @@ public class IncorrectAgeTest extends WebTest {
         on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
     }
 
-    @Then("user go to Finish Registration Form and see message $message and create First Post")
-    public void user_go_to_Finish_Registration_Form(String message) {
+    @Then("user go to Finish Registration Form and see message <message>")
+    public void user_go_to_Finish_Registration_Form(@Named("message") String message) {
         String finishText = on(CreateAccountPage.class).finishForm.finishText.getText();
         Assert.assertTrue("Incorrect text!", finishText.contains(message));
         on(CreateAccountPage.class).finishForm.createFirstPostButton.click();

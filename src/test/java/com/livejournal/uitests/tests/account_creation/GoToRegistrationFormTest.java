@@ -10,7 +10,6 @@ import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPage;
-import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;

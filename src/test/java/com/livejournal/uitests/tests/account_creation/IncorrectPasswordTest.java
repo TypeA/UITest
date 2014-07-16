@@ -7,7 +7,6 @@ package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import com.livejournal.uitests.tests.utility.Date;
 import com.livejournal.uitests.tests.utility.RandomName;
 import org.jbehave.core.annotations.Given;
