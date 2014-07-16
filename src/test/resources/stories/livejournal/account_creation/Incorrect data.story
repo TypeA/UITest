@@ -5,8 +5,7 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
-Then button Create Account is not active
-Then user see message <message> on popup
+Then button Create Account is not active and user see message <message> on popup
 
 Examples:
 |name|email|password|day|monse|year|gender|message|
@@ -29,8 +28,7 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
-Then button Create Account is not active
-Then user see message <message> on popup
+Then button Create Account is not active and user see message <message> on popup
 
 
 Examples:
@@ -54,8 +52,7 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
-Then button Create Account is not active
-Then user see message <message> on popup
+Then button Create Account is not active and user see message <message> on popup
 
 
 Examples:
@@ -76,8 +73,7 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data except for the age: <name>,<email>,<password>,<day>,<monse>,<year>,<gender>
-When user clicks Create Account
+When user enter correct data except for the age: <name>,<email>,<password>,<day>,<monse>,<year>,<gender> and clicks Create Account
 Then user go to Finish Registration Form and see message <message>
 
 Examples:
