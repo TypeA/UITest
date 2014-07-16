@@ -5,10 +5,8 @@
  */
 package com.livejournal.uitests.tests.account_creation;
 
-import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
@@ -27,7 +25,7 @@ public class PasswordDescriptionTest extends WebTest {
     }
 
     @When("user enter password <password>")
-    public void user_see_Password_Bubble_In_Registration_Page(String password) {
+    public void user_see_Password_Bubble_In_Registration_Page(@Named("password") String password) {
         on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.enter(password);
         
     }

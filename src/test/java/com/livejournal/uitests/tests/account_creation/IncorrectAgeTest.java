@@ -9,6 +9,7 @@ import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.tests.utility.RandomName;
 import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Named;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
@@ -24,8 +25,14 @@ public class IncorrectAgeTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the age: $name, $email, $password,  $day,  $month,  $year,  $gender and clicks Create Account")
-    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
+    @When("user enter correct data except for the age: <name>,<email>,<password>,<day>,<month>,<year>,<gender> and clicks Create Account")
+    public void user_enter_data(@Named("name") String name,
+            @Named("email") String email,
+            @Named("password") String password,
+            @Named("day") String day,
+            @Named("month") String month,
+            @Named("year") String year,
+            @Named("gender") String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
