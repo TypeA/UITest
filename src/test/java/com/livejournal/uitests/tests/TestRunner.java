@@ -1,4 +1,4 @@
-package com.livejournal.uitests.tests.one_test;
+package com.livejournal.uitests.tests;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 
