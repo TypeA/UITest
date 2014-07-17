@@ -3,6 +3,7 @@ package com.livejournal.uitests.tests.account_creation;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.tests.utility.Date;
+import com.livejournal.uitests.tests.utility.NumberOfSymbols;
 import com.livejournal.uitests.tests.utility.RandomName;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
@@ -28,7 +29,7 @@ public class IncorrectEmail extends WebTest {
     public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
 
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
-                email,
+                NumberOfSymbols.get(email, 30),
                 password,
                 Date.parceDayOrGetCurrent(day).toString(),
                 Date.parceMonthOrGetCurrent(month).toString(),
