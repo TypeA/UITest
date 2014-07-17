@@ -25,4 +25,7 @@ public class FullscreenHeaderLogged extends FullscreenHeader
     
     @FindBy(css=".s-do-item.s-do-item-message")
     public Link Messages;
+    
+    public ShopLogged shopLogged;
+    
 }
