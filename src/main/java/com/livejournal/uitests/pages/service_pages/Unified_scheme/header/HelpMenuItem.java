@@ -38,7 +38,7 @@ public class HelpMenuItem extends UIBlock
     @FindBy(css=".s-nav-item-dmca")
     public Link dmca;    
    
-    @FindBy(id="SearchText")
+    @FindBy(css=".s-nav-item-search #SearchText")
     public TextField searchLine; 
         
 }
