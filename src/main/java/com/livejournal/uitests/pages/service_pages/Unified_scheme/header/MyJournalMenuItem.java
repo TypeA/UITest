@@ -21,7 +21,24 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 public class MyJournalMenuItem extends UIBlock
 {
     @FindBy(css="label[for='s-nav-body-user'] .s-userpic")
-    public Link UserPic;
+    public Link userPic;
     
+    @FindBy(css=".s-nav-rootlink-blog")
+    public Link myJournal;
+    
+    @FindBy(css=".s-nav-item-you")
+    public Link authorizedAs;
+    
+    @FindBy(css=".s-nav-item-post")
+    public Link newPost;
+    
+    @FindBy(css=".s-nav-item-profile")
+    public Link profile;
+    
+    @FindBy(css=".s-nav-item-counter")
+    public Link messagesInMenu;
+    
+    @FindBy(css=".s-nav-item-scheduled")
+    public Link sheduledEntries;
     
 }
