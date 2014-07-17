@@ -20,7 +20,26 @@ Examples:
 
 
 
+Scenario: Incorrect email
 
+Meta: 
+@tags execution:auto,component:Registration,attributes:Useful
+
+Given unlogged user on Registration Form
+When user enter correct data except for the email: <name>,<email>,<password>,<day>,<month>,<year>,<gender>
+Then button Create Account is not active and user see message <message> on popup
+
+
+Examples:
+|name|email|password|day|month|year|gender|message|
+|test1234rnd|te"st@test.ru|Test123|1|4|1990|M|Ваш адрес email содержит недопустимые символы|
+|test1234rnd|tes,t@test.ru|Test123|1|4|1990|M||Ваш адрес email содержит недопустимые символы|
+|test1234rnd|te st@test.ru|Test123|1|4|1990|M|Ваш адрес email содержит недопустимые символы|
+|test1234rnd|testtest.ru|Test123|1|4|1990|M|Вы указали неверный адрес email|
+|test1234rnd|test@@test.ru|Test123|1|4|1990|M|Вы указали неверный адрес email|
+|test1234rnd|tes222222222222222222222222222222222222222222222222222222222222222222t@test.ru|Test123|1|4|1990|M||
+|test1234rnd|test@test.r'u|Test123|1|4|1990|M|Неверный домен адреса email|
+|test1234rnd|test@test.r()u|Test123|1|4|1990|M|Неверный домен адреса email|
 
 
 
