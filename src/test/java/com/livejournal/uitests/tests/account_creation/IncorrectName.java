@@ -8,6 +8,7 @@ package com.livejournal.uitests.tests.account_creation;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.tests.utility.Date;
+import com.livejournal.uitests.tests.utility.NumberOfSymbols;
 import com.livejournal.uitests.tests.utility.RandomName;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
@@ -31,8 +32,8 @@ public class IncorrectName extends WebTest {
 
     @When("user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>")
     public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
-
-        on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
+ 
+        on(CreateAccountPage.class).createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
                 email,
                 password,
                 Date.parceDayOrGetCurrent(day).toString(),
