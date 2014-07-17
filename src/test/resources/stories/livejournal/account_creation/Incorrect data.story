@@ -26,7 +26,7 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data except for the email: <name>,<email>,<password>,<day>,<month>,<year>,<gender>
+When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
 Then button Create Account is not active and user see message <message> on popup
 
 
