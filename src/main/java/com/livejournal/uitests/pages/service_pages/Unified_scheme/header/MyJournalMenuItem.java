@@ -41,4 +41,22 @@ public class MyJournalMenuItem extends UIBlock
     @FindBy(css=".s-nav-item-scheduled")
     public Link sheduledEntries;
     
+    @FindBy(css=".s-nav-item-comments")
+    public Link recentComments;
+    
+    @FindBy(css=".s-nav-item-statistics")
+    public Link statictics;
+    
+    @FindBy(css=".s-nav-item-tags")
+    public Link tags;
+    
+    @FindBy(css=".s-nav-item-customize")
+    public Link journalStyle;
+    
+    @FindBy(css=".s-nav-item-settings")
+    public Link settings;
+    
+    @FindBy(css=".s-nav-item-logout")
+    public Link logOut;
+    
 }
