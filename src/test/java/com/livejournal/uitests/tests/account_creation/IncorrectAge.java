@@ -5,27 +5,33 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAc
 import com.livejournal.uitests.tests.utility.RandomName;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
-import org.jbehave.core.annotations.Given;
-import org.jbehave.core.annotations.Then;
-import org.jbehave.core.annotations.When;
-import org.junit.Assert;
+import net.thucydides.junit.runners.ThucydidesRunner;
+import org.junit.Ignore;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 /**
  *
  * @author m.prytkova
  */
+@RunWith(ThucydidesRunner.class)
 public class IncorrectAge extends WebTest {
+
+    private String name = "test1234rnd";
+    private String email = "test@test.ru";
+    private String password = "Test123";
+    private String day = "1";
+    private String month = "4";
+    private String year = "2010";
+    private String gender = "M";
+    private String message = "Проверка возраста";
 
     @Steps
     Verificate verify;
 
-    @Given("unlogged user on Registration Form")
-    public void unlogged_user_on_Registration_Form() {
+    @Ignore @Test
+    public void incorrect_age() {
         on(CreateAccountPage.class);
-    }
-
-    @When("user enter correct data except for the age: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -34,12 +40,8 @@ public class IncorrectAge extends WebTest {
                 year,
                 gender);
         on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
-    }
-
-    @Then("user go to Finish Registration Form and see message $message")
-    public void user_go_to_Finish_Registration_Form(String message) {
         verify.verifyText("Incorrect text on Finish Registration Form!", on(CreateAccountPage.class).finishForm.finishText.getText(), message);
         on(CreateAccountPage.class).finishForm.createFirstPostButton.click();
-    }
 
+    }
 }
