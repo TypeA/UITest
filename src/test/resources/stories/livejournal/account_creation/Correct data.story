@@ -1,3 +1,7 @@
+2 сценария про регистрацию с двумя итерациями
+
+
+
 Scenario: Go to registration form
 
 Meta: 

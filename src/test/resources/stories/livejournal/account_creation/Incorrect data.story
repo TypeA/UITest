@@ -1,3 +1,5 @@
+4 сценария про регистрацию с 23 итерациями
+
 Scenario: Incorrect name
 
 Meta: 

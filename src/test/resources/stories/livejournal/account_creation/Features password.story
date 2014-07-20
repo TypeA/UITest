@@ -1,3 +1,6 @@
+2 сценария про регистрацию с двумя итерациями
+
+
 Scenario: Displays password
 
 Meta: 
