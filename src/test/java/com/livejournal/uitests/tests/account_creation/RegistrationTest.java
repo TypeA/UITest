@@ -23,7 +23,7 @@ import org.openqa.selenium.WebDriver;
  *
  * @author m.prytkova
  */
-@RunWith(ThucydidesParameterizedRunner.class)
+//@RunWith(ThucydidesParameterizedRunner.class)
 @UseTestDataFrom("src/test/java/com/livejournal/uitests/tests/account_creation/data/Regisrtation.csv")
 public class RegistrationTest extends SimpleTest {
 

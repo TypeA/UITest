@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
  *
  * @author m.prytkova
  */
-@RunWith(ThucydidesRunner.class)
+//@RunWith(ThucydidesRunner.class)
 public class IncorrectAge extends WebTest {
 
     private String name = "test1234rnd";

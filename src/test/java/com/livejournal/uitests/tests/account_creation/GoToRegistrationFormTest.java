@@ -17,7 +17,7 @@ import org.junit.runner.RunWith;
  *
  * @author m.prytkova
  */
-@RunWith(ThucydidesRunner.class)
+//@RunWith(ThucydidesRunner.class)
 public class GoToRegistrationFormTest extends WebTest {
 
     @Steps

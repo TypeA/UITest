@@ -14,7 +14,7 @@ import org.junit.runner.RunWith;
  *
  * @author m.prytkova
  */
-@RunWith(ThucydidesRunner.class)
+//@RunWith(ThucydidesRunner.class)
 public class PasswordDescriptionTest extends WebTest {
     
     private String password = "Test123";
