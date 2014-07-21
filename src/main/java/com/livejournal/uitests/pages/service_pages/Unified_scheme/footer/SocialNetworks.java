@@ -1,0 +1,34 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package com.livejournal.uitests.pages.service_pages.Unified_scheme.footer;
+
+import com.livejournal.uisteps.thucydides.elements.Link;
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
+
+/**
+ *
+ * @author s.savinykh
+ */
+@Block
+        (@FindBy(css=".s-social"))
+public class SocialNetworks extends UIBlock
+{
+    @FindBy(css=".s-social-item-f")
+    public Link Facebook;
+    
+    @FindBy(css=".s-social-item-tw")
+    public Link Twitter;
+    
+    @FindBy(css=".s-social-item-vk")
+    public Link VK;
+    
+    @FindBy(css=".s-social-item-gp")
+    public Link Gplus;
+    
+}
