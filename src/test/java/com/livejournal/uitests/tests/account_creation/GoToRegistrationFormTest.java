@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.core.Url;
@@ -8,25 +12,26 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAc
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPage;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
-import net.thucydides.junit.runners.ThucydidesRunner;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 
 /**
  *
  * @author m.prytkova
  */
-//@RunWith(ThucydidesRunner.class)
 public class GoToRegistrationFormTest extends WebTest {
 
     @Steps
     Verificate verify;
 
-    @Ignore @Test
-    public void go_to_Registration_Form() {
+    @When("user on Main Page clicks on Login Menu and clicks Create New Account")
+    public void user_on_Main_Page_clicks_on_Login_Menu() {
         on(MainPage.class).enterLink.click();
         on(LoginForm.class).createAccountLink.click();
+    }
+
+    @Then("user should be on Registration Form")
+    public void user_should_be_on_Registration_Form() throws InterruptedException {
         Url createAccountURL = on(CreateAccountPage.class).getUrl();
         verify.verifyText("We are not in Create Account Page", createAccountURL.toString(), "/create");
     }
