@@ -12,7 +12,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class DisplaysPassword extends WebTest {
+public class DisplaysPasswordTest extends WebTest {
 
     @Steps
     Verificate verify;

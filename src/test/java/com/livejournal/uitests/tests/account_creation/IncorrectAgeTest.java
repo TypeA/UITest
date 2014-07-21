@@ -14,7 +14,7 @@ import org.junit.Assert;
  *
  * @author m.prytkova
  */
-public class IncorrectAge extends WebTest {
+public class IncorrectAgeTest extends WebTest {
 
     @Steps
     Verificate verify;
@@ -33,6 +33,7 @@ public class IncorrectAge extends WebTest {
                 month,
                 year,
                 gender);
+        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
         on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
     }
 

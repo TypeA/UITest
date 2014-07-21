@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.livejournal.uitests.tests.account_creation;
+package com.livejournal.uitests.tests.account_creation.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import com.livejournal.uitests.tests.utility.Date;
 import com.livejournal.uitests.tests.utility.NumberOfSymbols;
 import com.livejournal.uitests.tests.utility.RandomName;
@@ -20,7 +21,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class IncorrectName extends WebTest {
+public class IncorrectNameTest extends WebTest {
 
     @Steps
     Verificate verify;
@@ -44,8 +45,8 @@ public class IncorrectName extends WebTest {
 
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
-        on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
-        //Assert.assertTrue("Popup is not displyed!", on(Popups.class).isDisplayed());
+        on(CreateAccountPage.class).createAccountForm.userNameField.click();
+        verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
         //String correctMessage = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
         //Assert.assertTrue("Incorrect text!", correctMessage.contains(message));
         verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());

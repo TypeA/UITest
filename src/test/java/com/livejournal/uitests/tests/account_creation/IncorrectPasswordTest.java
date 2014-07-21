@@ -7,6 +7,7 @@ package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import com.livejournal.uitests.tests.utility.Date;
 import com.livejournal.uitests.tests.utility.NumberOfSymbols;
 import com.livejournal.uitests.tests.utility.RandomName;
@@ -45,7 +46,7 @@ public class IncorrectPasswordTest extends WebTest {
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
-        //Assert.assertTrue("Popup is not displyed!", on(Popups.class).isDisplayed());
+        verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
         //String correctMessage = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
         //Assert.assertTrue("Incorrect text!", correctMessage.contains(message));
         verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());

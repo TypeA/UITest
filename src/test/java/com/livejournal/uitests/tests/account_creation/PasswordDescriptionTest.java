@@ -7,6 +7,7 @@ package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
@@ -17,7 +18,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class PasswordDescription extends WebTest {
+public class PasswordDescriptionTest extends WebTest {
 
     @Steps
     Verificate verify;
@@ -36,7 +37,7 @@ public class PasswordDescription extends WebTest {
     @Then("user see Password Bubble which contains text $text and URL $URL")
     public void password_Bubble_contains_text(String text, String learnMoreUrl) {
         on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
-        //Assert.assertTrue("Popup is not displyed!", on(Popups.class).isDisplayed());
+        verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
         //String correctText = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
         //Assert.assertTrue("Incorrect text!", correctText.contains(text));
         //       on(CreateAccountPage.class).createAccountForm.popups.learnMoreLink.click();

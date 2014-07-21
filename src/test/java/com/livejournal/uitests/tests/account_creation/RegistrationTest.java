@@ -35,7 +35,8 @@ public class RegistrationTest extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
+        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
+        on(CreateAccountPage.class).createAccountForm.createAccountButton.click();   
     }
 
     @Then("user go to Finish Registration Form and see message $message")
