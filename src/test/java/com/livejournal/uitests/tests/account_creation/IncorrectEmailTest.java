@@ -26,7 +26,7 @@ public class IncorrectEmailTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>")
+    @When("user enter correct data except for the email: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
 
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
@@ -38,12 +38,11 @@ public class IncorrectEmailTest extends WebTest {
                 gender);
     }
 
-    @Then("button Create Account is not active and user see message <message> on popup")
+    @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).createAccountForm.emailField.click();
         verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
-        //String correctMessage = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
-        //Assert.assertTrue("Incorrect text!", correctMessage.contains(message));
+        verify.verifyText("Incorrect text on Popup!", on(Popups.class).popupText.getText(), message);
         verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
     }
 

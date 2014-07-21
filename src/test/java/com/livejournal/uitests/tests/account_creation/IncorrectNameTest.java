@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.livejournal.uitests.tests.account_creation.one_test;
+package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -31,7 +31,7 @@ public class IncorrectNameTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>")
+    @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
  
         on(CreateAccountPage.class).createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
@@ -47,9 +47,8 @@ public class IncorrectNameTest extends WebTest {
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).createAccountForm.userNameField.click();
         verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
-        //String correctMessage = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
-        //Assert.assertTrue("Incorrect text!", correctMessage.contains(message));
-        verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
+        verify.verifyText("Incorrect text on Popup!", on(Popups.class).popupText.getText(), message);
+        verify.verifyStatus("Button is ensabled!", !on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
     }
 
 }

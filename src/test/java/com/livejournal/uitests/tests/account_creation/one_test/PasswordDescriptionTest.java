@@ -1,14 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.livejournal.uitests.tests.account_creation;
+
+package com.livejournal.uitests.tests.account_creation.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import com.livejournal.uitests.tests.utility.Verificate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -35,15 +34,12 @@ public class PasswordDescriptionTest extends WebTest {
     }
 
     @Then("user see Password Bubble which contains text $text and URL $URL")
-    public void password_Bubble_contains_text(String text, String learnMoreUrl) {
-        on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
+    public void password_Bubble_contains_text(String text, String URL) {
+        //on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
         verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
-        //String correctText = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
-        //Assert.assertTrue("Incorrect text!", correctText.contains(text));
-        //       on(CreateAccountPage.class).createAccountForm.popups.learnMoreLink.click();
-//        on(Popups.class).learnMoreLink.click();
-        //String correctURL = this.getCurrentBrowser().getDriver().getCurrentUrl();
-        //verify.verifyText("Incorrect URL!", correctURL, learnMoreUrl);
+        verify.verifyText("Incorrect text on Popup!", on(Popups.class).popupText.getText(), text);
+        on(Popups.class).learnMoreLink.click();
+        //verify.verifyText("Incorrect URL!", getCurrentBrowser().getDriver().getCurrentUrl(), URL);
+        // вытаскивает страницу, которыю он инициализировал, а не текущую
     }
-
 }

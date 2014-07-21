@@ -47,8 +47,7 @@ public class IncorrectPasswordTest extends WebTest {
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
         verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
-        //String correctMessage = on(CreateAccountPage.class).createAccountForm.popups.popupText.getText();
-        //Assert.assertTrue("Incorrect text!", correctMessage.contains(message));
+        verify.verifyText("Incorrect text on Popup!", on(Popups.class).popupText.getText(), message);
         verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
     }
 

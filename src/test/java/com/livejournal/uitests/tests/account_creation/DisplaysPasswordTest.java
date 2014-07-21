@@ -29,8 +29,8 @@ public class DisplaysPasswordTest extends WebTest {
 
     @Then("the password is hidden")
     public void the_password_is_hidden() {
-        verify.verifyStatus("Incorrect icon display password!", on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkHide.isDisplayed());
-        verify.verifyStatus("Incorrect icon display password!", !on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkShow.isDisplayed());
+        verify.verifyStatus("Correct icon display password!", on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkHide.isDisplayed());
+        verify.verifyStatus("Correct icon display password!", !on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkShow.isDisplayed());
     }
 
     @When("user clicks Mapping Button")
