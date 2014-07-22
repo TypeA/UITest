@@ -11,10 +11,13 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  * @author m.prytkova
  */
 @Block(
-        @FindBy(xpath = ".//*[@class='b-popup bubble-node b-createpage-bubble b-popup-noclosecontrol' and @style[not(contains(.,'display: none'))]]"))
+@FindBy(css = "body"))
 public class Popups extends UIBlock {
 
-    @FindBy(xpath = ".//div[@style='display: block;']")
+    @FindBy(xpath = ".//*[@class='b-popup bubble-node b-createpage-bubble b-popup-noclosecontrol' and @style[not(contains(.,'display: none'))]]")
+    private Link popupBlock;
+    
+    @FindBy(xpath = ".//*[@class='b-popup bubble-node b-createpage-bubble b-popup-noclosecontrol' and @style[not(contains(.,'display: none'))]]//div[@style='display: block;']")
     private TextBlock popupText;
 
     @FindBy(xpath = ".//*[@class[contains(.,'b-popup-outer')]] //a[@target='_blank' and @href[contains(.,'/support/faqbrowse.bml')]]")
@@ -26,5 +29,9 @@ public class Popups extends UIBlock {
 
     public Link getLearnMoreLink() {
         return learnMoreLink;
+    }
+
+    public Link getPopupBlock() {
+        return popupBlock;
     }
 }

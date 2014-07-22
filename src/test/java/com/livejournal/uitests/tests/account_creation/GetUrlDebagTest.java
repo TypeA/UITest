@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.livejournal.uitests.tests.account_creation.one_test;
+package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -39,7 +39,7 @@ public class GetUrlDebagTest extends WebTest {
 
     @Then("user in TOS Page")
     public void user_in_TOS_Page() {
-        on(PrivacyRusPage.class);
+        on(TosRusPage.class);
         verify.verifyText("Initialized TOS Page!!!   " + getCurrentBrowser().getDriver().getCurrentUrl(), "", "");
     }
 
@@ -53,7 +53,7 @@ public class GetUrlDebagTest extends WebTest {
 
     @Then("user in Privacy Page")
     public void user_in_Privacy_Page() {
-        on(TosRusPage.class);
+        on(PrivacyRusPage.class);
         verify.verifyText("Initialized Privacy Page!!!   " + getCurrentBrowser().getDriver().getCurrentUrl(), "", "");
     }
 

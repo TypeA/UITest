@@ -13,7 +13,6 @@ public class CreateAccountPage extends ServicePage {
 
     private CreateAccountForm createAccountForm;
     private FinishForm finishForm;
-   // private Popups popups;
 
     @StepGroup
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
@@ -27,9 +26,4 @@ public class CreateAccountPage extends ServicePage {
     public FinishForm getFinishForm() {
         return elem(finishForm);
     }
-
-   // public Popups getPopups() {
-   //     return (Popups) element(popups);
-    //}
-
 }
