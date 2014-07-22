@@ -1,4 +1,4 @@
-package com.livejournal.uitests.tests.account_creation.one_test;
+package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -41,9 +41,8 @@ public class IncorrectEmailTest extends WebTest {
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getEmailField().click();
-        verify.verifyStatus("Popup is not displyed!1", on(Popups.class).getPopupBlock() != null);
+        //verify.verifyStatus("Popup is not displyed!", on(Popups.class).getPopupBlock().isDisplayed()); 
         verify.verifyText("Incorrect text on Popup!", on(Popups.class).getPopupText().getText(), message);
-        verify.verifyStatus("Popup is not displyed!2", on(Popups.class).getPopupBlock().isDisplayed());       
         verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
     }
 

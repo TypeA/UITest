@@ -42,7 +42,7 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data leave password field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Email Popup user see message <message> and button Create Account is not active
+Then in Password Popup user see message <message> and button Create Account is not active
 
 Examples:
 |name|email|password|day|month|year|gender|message|
@@ -58,7 +58,7 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Email Popup user see message <message> and button Create Account is not active
+Then in Age Popup user see message <message> and button Create Account is not active
 
 |name|email|password|day|month|year|gender|message|
 |test654rnd|test@test.ru|Test123|-1|4|1990|M|Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц|
