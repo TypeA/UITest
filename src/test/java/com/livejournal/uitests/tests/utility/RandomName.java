@@ -22,7 +22,7 @@ public class RandomName {
     }
     
     public String get (){
-        return name.replace("rnd", "" + random.nextInt(100));
+        return name.replace("rnd", "" + random.nextInt(100000));
     }
     
 }

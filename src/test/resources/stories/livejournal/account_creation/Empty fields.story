@@ -5,11 +5,14 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data whith empty name:
-|name|email|password|day|monse|year|
-Then user see bubble Name Bubble In Registration Page
-And then in Name Bubble In Registration Page user see message <Используйте строчные латинские буквы a-z, цифры 0-9 и знак подчёркивания _ (не в начале и не в конце).>
-And then button Create Account is not active
+When user enter correct data leave name field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+Then in Name Popup user see message <message> and button Create Account is not active
+
+Examples:
+|name|email|password|day|month|year|gender|message|
+||test@test.ru|Test123|1|4|1990|M|Используйте строчные латинские буквы a-z, цифры 0-9 и знак подчёркивания _ (не в начале и не в конце).|
+
+
 
 
 
@@ -20,11 +23,14 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data whith empty email:
-|name|email|password|day|monse|year|
-Then user see bubble Email Bubble In Registration Page
-And then in Email Bubble In Registration Page user see message <Нужен для подтверждения регистрации и восстановления пароля>
-And then button Create Account is not active
+When user enter correct data leave email field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+Then in Email Popup user see message <message> and button Create Account is not active
+
+
+Examples:
+|name|email|password|day|month|year|gender|message|
+|test654rnd||Test123|1|4|1990|M|Нужен для подтверждения регистрации и восстановления пароля|
+
 
 
 
@@ -35,11 +41,12 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data whith empty password:
-|name|email|password|day|monse|year|
-Then user see bubble Password Bubble In Registration Page
-And then in Password Bubble In Registration Page user see message <Требования к паролю:>
-And then button Create Account is not active
+When user enter correct data leave password field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+Then in Email Popup user see message <message> and button Create Account is not active
+
+Examples:
+|name|email|password|day|month|year|gender|message|
+|test654rnd|test@test.ru||1|4|1990|M|Требования к паролю:|
 
 
 
@@ -50,9 +57,12 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Useful
 
 Given unlogged user on Registration Form
-When user enter correct data whith empty age:
-|name|email|password|day|monse|year|
-##1. Не заполнен день
-##2. Не заполнен месяц
-##3. Не заполнен год
-And then button Create Account is not active
+When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+Then in Email Popup user see message <message> and button Create Account is not active
+
+|name|email|password|day|month|year|gender|message|
+|test654rnd|test@test.ru|Test123|-1|4|1990|M|Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц|
+|test654rnd|test@test.ru|Test123|1|-1|1990|M|Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц|
+|test654rnd|test@test.ru|Test123|1|4|-1|M|Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц|
+
+

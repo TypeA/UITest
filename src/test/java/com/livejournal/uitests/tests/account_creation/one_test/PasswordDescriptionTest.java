@@ -35,11 +35,10 @@ public class PasswordDescriptionTest extends WebTest {
 
     @Then("user see Password Bubble which contains text $text and URL $URL")
     public void password_Bubble_contains_text(String text, String URL) {
-        //on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.click();
         verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
         verify.verifyText("Incorrect text on Popup!", on(Popups.class).popupText.getText(), text);
         on(Popups.class).learnMoreLink.click();
-        //verify.verifyText("Incorrect URL!", getCurrentBrowser().getDriver().getCurrentUrl(), URL);
+        verify.verifyText("Incorrect URL!", getCurrentBrowser().getDriver().getTitle(), URL);
         // вытаскивает страницу, которыю он инициализировал, а не текущую
     }
 }
