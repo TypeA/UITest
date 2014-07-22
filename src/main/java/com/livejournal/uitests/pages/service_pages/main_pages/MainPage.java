@@ -8,6 +8,7 @@ package com.livejournal.uitests.pages.service_pages.main_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
+import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.support.FindBy;
 
@@ -22,4 +23,6 @@ public class MainPage extends ServicePage{
     
     @FindBy(xpath=".//*[@href[contains(.,'/login.bml')]]")
     public Link enterLink;
+    
+    public FullscreenHeader fullscreenHeader;
 }
