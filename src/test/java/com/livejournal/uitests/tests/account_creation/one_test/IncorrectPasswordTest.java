@@ -46,7 +46,7 @@ public class IncorrectPasswordTest extends WebTest {
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().click();
-        verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
+        verify.verifyStatus("Popup is not displyed!", on(Popups.class).getPopupBlock().isDisplayed());
         verify.verifyText("Incorrect text on Popup!", on(Popups.class).getPopupText().getText(), message);
         verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
     }

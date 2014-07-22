@@ -3,12 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.livejournal.uitests.tests.account_creation.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
 import com.livejournal.uitests.tests.utility.Date;
+import com.livejournal.uitests.tests.utility.NumberOfSymbols;
 import com.livejournal.uitests.tests.utility.RandomName;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
@@ -20,8 +21,8 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class EmptyNameTest extends WebTest{
-    
+public class IncorrectNameTest extends WebTest {
+
     @Steps
     Verificate verify;
 
@@ -29,10 +30,11 @@ public class EmptyNameTest extends WebTest{
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
     }
-    
-    @When ("user enter correct data leave name field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>")
-    public void user_enter_data_leave_name(String name, String email, String password, String day, String month, String year, String gender){
-            on(CreateAccountPage.class).createAccountData(name,
+
+    @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
+    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
+ 
+        on(CreateAccountPage.class).createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
                 email,
                 password,
                 Date.parceDayOrGetCurrent(day).toString(),
@@ -40,10 +42,13 @@ public class EmptyNameTest extends WebTest{
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
     }
-    
-    @Then ("in Name Popup user see message <message> and button Create Account is not active")
-    public void user_see_message_on_popup(String message){
-    
+
+    @Then("button Create Account is not active and user see message $message on popup")
+    public void user_see_message_on_popup(String message) {
+        on(CreateAccountPage.class).getCreateAccountForm().getUserNameField().click();
+        verify.verifyStatus("Popup is not displyed!", on(Popups.class).getPopupBlock().isDisplayed());
+        verify.verifyText("Incorrect text on Popup!", on(Popups.class).getPopupText().getText(), message);
+        verify.verifyStatus("Button is ensabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
     }
-    
-    }
+
+}

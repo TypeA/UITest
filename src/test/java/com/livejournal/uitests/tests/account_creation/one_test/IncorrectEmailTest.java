@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package com.livejournal.uitests.tests.account_creation;
+package com.livejournal.uitests.tests.account_creation.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -21,7 +16,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class IncorrectNameTest extends WebTest {
+public class IncorrectEmailTest extends WebTest {
 
     @Steps
     Verificate verify;
@@ -31,11 +26,11 @@ public class IncorrectNameTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
+    @When("user enter correct data except for the email: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
- 
-        on(CreateAccountPage.class).createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
-                email,
+
+        on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
+                NumberOfSymbols.get(email, 30),
                 password,
                 Date.parceDayOrGetCurrent(day).toString(),
                 Date.parceMonthOrGetCurrent(month).toString(),
@@ -45,10 +40,10 @@ public class IncorrectNameTest extends WebTest {
 
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
-        on(CreateAccountPage.class).getCreateAccountForm().getUserNameField().click();
-        verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
+        on(CreateAccountPage.class).getCreateAccountForm().getEmailField().click();
+        verify.verifyStatus("Popup is not displyed!", on(Popups.class).getPopupBlock().isDisplayed());
         verify.verifyText("Incorrect text on Popup!", on(Popups.class).getPopupText().getText(), message);
-        verify.verifyStatus("Button is ensabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
+        verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
     }
 
 }
