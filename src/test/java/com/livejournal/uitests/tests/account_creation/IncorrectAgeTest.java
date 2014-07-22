@@ -33,14 +33,14 @@ public class IncorrectAgeTest extends WebTest {
                 month,
                 year,
                 gender);
-        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
-        on(CreateAccountPage.class).createAccountForm.createAccountButton.click();
+        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
+        on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        verify.verifyText("Incorrect text on Finish Registration Form!", on(CreateAccountPage.class).finishForm.finishText.getText(), message);
-        on(CreateAccountPage.class).finishForm.createFirstPostButton.click();
+        verify.verifyText("Incorrect text on Finish Registration Form!", on(CreateAccountPage.class).getFinishForm().getFinishText().getText(), message);
+        on(CreateAccountPage.class).getFinishForm().getCreateFirstPostButton().click();
     }
 
 }

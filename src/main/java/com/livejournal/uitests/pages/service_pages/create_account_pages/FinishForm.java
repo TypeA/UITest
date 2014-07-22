@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.UIBlock;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -18,13 +18,27 @@ public class FinishForm extends UIBlock{
     // на форме удачного создания аккаунта
     
     @FindBy(id = "createpage_post")
-    public Button createFirstPostButton;
+    private Button createFirstPostButton;
     
     @FindBy(css = ".b-createpage-welcome")
-    public WebElement finishText;
+    private WebElement finishText;
     
     // тут надо вставить все ссылочки, которые есть 
     // на форме неудачного создания аккаунта (меньше 13) 
+
+    /**
+     * @return the createFirstPostButton
+     */
+    public Button getCreateFirstPostButton() {
+        return elem(createFirstPostButton);
+    }
+
+    /**
+     * @return the finishText
+     */
+    public WebElement getFinishText() {
+        return elem(finishText);
+    }
     
     
     

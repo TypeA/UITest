@@ -8,7 +8,7 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -21,12 +21,33 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 public class FieldPassword extends UIBlock{
      
     @FindBy(id = "password")
-    public TextField passwordField;
+    private TextField passwordField;
     
     @FindBy(css = ".b-passview-icon-show")
-    public Link passwordMappingLinkShow;  
+    private Link passwordMappingLinkShow;  
     
     @FindBy(css = ".b-passview-icon-hide")
-    public Link passwordMappingLinkHide; 
+    private Link passwordMappingLinkHide; 
+
+    /**
+     * @return the passwordField
+     */
+    public TextField getPasswordField() {
+        return elem(passwordField);
+    }
+
+    /**
+     * @return the passwordMappingLinkShow
+     */
+    public Link getPasswordMappingLinkShow() {
+        return elem(passwordMappingLinkShow);
+    }
+
+    /**
+     * @return the passwordMappingLinkHide
+     */
+    public Link getPasswordMappingLinkHide() {
+        return elem(passwordMappingLinkHide);
+    }
     
 }

@@ -35,13 +35,13 @@ public class RegistrationTest extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).createAccountForm.createAccountButton.isEnabled());
-        on(CreateAccountPage.class).createAccountForm.createAccountButton.click();   
+        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
+        on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();   
     }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        String finishText = on(CreateAccountPage.class).finishForm.finishText.getText();
+        String finishText = on(CreateAccountPage.class).getFinishForm().getFinishText().getText();
         verify.verifyText("Incorrect text on Finish Registration Form!", finishText, message);
     }
 

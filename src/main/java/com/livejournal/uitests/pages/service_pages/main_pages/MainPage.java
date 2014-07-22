@@ -22,7 +22,21 @@ public class MainPage extends ServicePage{
     //дополнительная страница, надо переделать
     
     @FindBy(xpath=".//*[@href[contains(.,'/login.bml')]]")
-    public Link enterLink;
+    private Link enterLink;
     
-    public FullscreenHeader fullscreenHeader;
+    private FullscreenHeader fullscreenHeader;
+
+    /**
+     * @return the enterLink
+     */
+    public Link getEnterLink() {
+        return elem(enterLink);
+    }
+
+    /**
+     * @return the fullscreenHeader
+     */
+    public FullscreenHeader getFullscreenHeader() {
+        return elem(fullscreenHeader);
+    }
 }

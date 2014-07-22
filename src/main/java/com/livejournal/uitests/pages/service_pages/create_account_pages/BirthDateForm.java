@@ -6,7 +6,8 @@
 
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+
+import com.livejournal.uitests.pages.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.Select;
@@ -19,12 +20,33 @@ import ru.yandex.qatools.htmlelements.element.Select;
         @FindBy(css = ".js-select-date"))
 public class BirthDateForm extends UIBlock{
     @FindBy(id = "day")
-    public Select dayDropDownMenu;
+    private Select dayDropDownMenu;
     
     @FindBy(id = "month")
-    public Select monthDropDownMenu;
+    private Select monthDropDownMenu;
     
     @FindBy(id = "year")
-    public Select yearDropDownMenu;
+    private Select yearDropDownMenu;
+
+    /**
+     * @return the dayDropDownMenu
+     */
+    public Select getDayDropDownMenu() {
+        return elem(dayDropDownMenu);
+    }
+
+    /**
+     * @return the monthDropDownMenu
+     */
+    public Select getMonthDropDownMenu() {
+        return elem(monthDropDownMenu);
+    }
+
+    /**
+     * @return the yearDropDownMenu
+     */
+    public Select getYearDropDownMenu() {
+        return elem(yearDropDownMenu);
+    }
     
 }

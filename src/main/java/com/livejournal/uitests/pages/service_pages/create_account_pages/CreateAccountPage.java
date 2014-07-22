@@ -11,13 +11,20 @@ import net.thucydides.core.annotations.StepGroup;
 @DefaultUrl("/create")
 public class CreateAccountPage extends ServicePage {
 
-    public CreateAccountForm createAccountForm;
-    
-    public FinishForm finishForm;
+    private CreateAccountForm createAccountForm;
+    private FinishForm finishForm;
 
     @StepGroup
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
-        createAccountForm.createAccountData(name, email, password, day, month, year, gender);
+        getCreateAccountForm().createAccountData(name, email, password, day, month, year, gender);
+    }
+
+    public CreateAccountForm getCreateAccountForm() {
+        return elem(createAccountForm);
+    }
+
+    public FinishForm getFinishForm() {
+        return elem(finishForm);
     }
 
 }

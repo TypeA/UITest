@@ -26,8 +26,8 @@ public class GoToRegistrationFormTest extends WebTest {
 
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu() {
-        on(MainPage.class).enterLink.click();
-        on(LoginForm.class).createAccountLink.click();
+        on(MainPage.class).getEnterLink().click();
+        on(LoginForm.class).getCreateAccountLink().click();
     }
 
     @Then("user should be on Registration Form")

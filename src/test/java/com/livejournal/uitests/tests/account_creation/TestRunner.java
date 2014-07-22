@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.tests.account_creation.one_test;
+package com.livejournal.uitests.tests.account_creation;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 

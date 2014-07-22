@@ -2,7 +2,7 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.UIBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -17,20 +17,20 @@ import ru.yandex.qatools.htmlelements.element.Select;
 public class CreateAccountForm extends UIBlock {
 
     @FindBy(id = "username")
-    public TextField userNameField;
+    private TextField userNameField;
 
     @FindBy(id = "email")
-    public TextField emailField;
+    private TextField emailField;
     
-    public FieldPassword passwordBlock;
+    private FieldPassword passwordBlock;
     
-    public BirthDateForm birthDateForm;
+    private BirthDateForm birthDateForm;
     
     @FindBy(id = "gender")
-    public Select genderDropDownMenu;
+    private Select genderDropDownMenu;
     
     @FindBy(id = "createpage_create")
-    public Button createAccountButton;
+    private Button createAccountButton;
     
     // тут надо вставить две ссылочки, которые есть на форме
     
@@ -38,12 +38,54 @@ public class CreateAccountForm extends UIBlock {
     
     @StepGroup
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
-        userNameField.enter(name);
-        emailField.enter(email);
-        passwordBlock.passwordField.enter(password);
-        birthDateForm.dayDropDownMenu.selectByValue(day);
-        birthDateForm.monthDropDownMenu.selectByValue(month);
-        birthDateForm.yearDropDownMenu.selectByValue(year);
-        genderDropDownMenu.selectByValue(gender);   
+        getUserNameField().enter(name);
+        getEmailField().enter(email);
+        getPasswordBlock().getPasswordField().enter(password);
+        getBirthDateForm().getDayDropDownMenu().selectByValue(day);
+        getBirthDateForm().getMonthDropDownMenu().selectByValue(month);
+        getBirthDateForm().getYearDropDownMenu().selectByValue(year);
+        getGenderDropDownMenu().selectByValue(gender);   
+    }
+
+    /**
+     * @return the userNameField
+     */
+    public TextField getUserNameField() {
+        return elem(userNameField);
+    }
+
+    /**
+     * @return the emailField
+     */
+    public TextField getEmailField() {
+        return elem(emailField);
+    }
+
+    /**
+     * @return the passwordBlock
+     */
+    public FieldPassword getPasswordBlock() {
+        return elem(passwordBlock);
+    }
+
+    /**
+     * @return the birthDateForm
+     */
+    public BirthDateForm getBirthDateForm() {
+        return elem(birthDateForm);
+    }
+
+    /**
+     * @return the genderDropDownMenu
+     */
+    public Select getGenderDropDownMenu() {
+        return elem(genderDropDownMenu);
+    }
+
+    /**
+     * @return the createAccountButton
+     */
+    public Button getCreateAccountButton() {
+        return elem(createAccountButton);
     }
 }

@@ -24,23 +24,23 @@ public class DisplaysPasswordTest extends WebTest {
 
     @When("user enter password $password")
     public void user_enter_password(String password) {
-        on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordField.enter(password);
+        on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().enter(password);
     }
 
     @Then("the password is hidden")
     public void the_password_is_hidden() {
-        verify.verifyStatus("Correct icon display password!", on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkHide.isDisplayed());
-        verify.verifyStatus("Correct icon display password!", !on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkShow.isDisplayed());
+        verify.verifyStatus("Correct icon display password!", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed());
+        verify.verifyStatus("Correct icon display password!", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed());
     }
 
     @When("user clicks Mapping Button")
     public void user_clicks_Mapping_Button() {
-        on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkHide.click();
+        on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().click();
     }
 
     @Then("the password is displayed")
     public void the_password_is_displayed() {
-        verify.verifyStatus("Incorrect icon display password!", !on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkHide.isDisplayed());
-        verify.verifyStatus("Incorrect icon display password!", on(CreateAccountPage.class).createAccountForm.passwordBlock.passwordMappingLinkShow.isDisplayed());
+        verify.verifyStatus("Incorrect icon display password!", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed());
+        verify.verifyStatus("Incorrect icon display password!", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed());
     }
 }
