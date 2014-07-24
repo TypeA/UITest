@@ -12,34 +12,24 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".b-panel-step2"))
-public class FinishForm extends UIBlock{
-    
+public class FinishForm extends UIBlock {
+
     // тут надо вставить все ссылочки, которые есть 
     // на форме удачного создания аккаунта
-    
     @FindBy(id = "createpage_post")
     private Button createFirstPostButton;
-    
+
     @FindBy(css = ".b-createpage-welcome")
     private WebElement finishText;
-    
+
     // тут надо вставить все ссылочки, которые есть 
     // на форме неудачного создания аккаунта (меньше 13) 
-
-    /**
-     * @return the createFirstPostButton
-     */
     public Button getCreateFirstPostButton() {
         return elem(createFirstPostButton);
     }
 
-    /**
-     * @return the finishText
-     */
     public WebElement getFinishText() {
         return elem(finishText);
     }
-    
-    
-    
+
 }

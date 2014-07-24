@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  */
 @Block(
 @FindBy(css = "body"))
-public class Popups extends UIBlock {
+public class PopupsBlock extends UIBlock {
 
     @FindBy(xpath = ".//*[@class='b-popup bubble-node b-createpage-bubble b-popup-noclosecontrol' and @style[not(contains(.,'display: none'))]]")
     private Link popupBlock;

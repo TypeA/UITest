@@ -15,7 +15,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class RegistrationTest extends WebTest {
+public class SuccessfullyRegistrationTest extends WebTest {
 
     @Steps
     Verificate verify;

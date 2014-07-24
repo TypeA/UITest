@@ -1,4 +1,4 @@
-Scenario: GetURL debag
+Scenario: TOS and Privacy links
 
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful

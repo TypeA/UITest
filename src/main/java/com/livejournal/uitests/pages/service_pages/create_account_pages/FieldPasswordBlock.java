@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
@@ -18,36 +17,27 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".b-passview"))
-public class FieldPassword extends UIBlock{
-     
+public class FieldPasswordBlock extends UIBlock {
+
     @FindBy(id = "password")
     private TextField passwordField;
-    
-    @FindBy(css = ".b-passview-icon-show")
-    private Link passwordMappingLinkShow;  
-    
-    @FindBy(css = ".b-passview-icon-hide")
-    private Link passwordMappingLinkHide; 
 
-    /**
-     * @return the passwordField
-     */
+    @FindBy(css = ".b-passview-icon-show")
+    private Link passwordMappingLinkShow;
+
+    @FindBy(css = ".b-passview-icon-hide")
+    private Link passwordMappingLinkHide;
+
     public TextField getPasswordField() {
         return elem(passwordField);
     }
 
-    /**
-     * @return the passwordMappingLinkShow
-     */
     public Link getPasswordMappingLinkShow() {
         return elem(passwordMappingLinkShow);
     }
 
-    /**
-     * @return the passwordMappingLinkHide
-     */
     public Link getPasswordMappingLinkHide() {
         return elem(passwordMappingLinkHide);
     }
-    
+
 }

@@ -23,7 +23,7 @@ public class CreateAccountForm extends UIBlock {
     @FindBy(id = "email")
     private TextField emailField;
 
-    private FieldPassword passwordBlock;
+    private FieldPasswordBlock passwordBlock;
 
     private BirthDateForm birthDateForm;
 
@@ -58,7 +58,7 @@ public class CreateAccountForm extends UIBlock {
         return elem(emailField);
     }
 
-    public FieldPassword getPasswordBlock() {
+    public FieldPasswordBlock getPasswordBlock() {
         return elem(passwordBlock);
     }
 

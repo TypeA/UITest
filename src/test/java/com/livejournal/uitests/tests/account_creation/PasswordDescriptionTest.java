@@ -4,7 +4,7 @@ package com.livejournal.uitests.tests.account_creation;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.Popups;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
 import com.livejournal.uitests.tests.utility.Verificate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,9 +35,9 @@ public class PasswordDescriptionTest extends WebTest {
 
     @Then("user see Password Bubble which contains text $text and URL $URL")
     public void password_Bubble_contains_text(String text, String URL) {
-        verify.verifyStatus("Popup is not displyed!", on(Popups.class).isDisplayed());
-        verify.verifyText("Incorrect text on Popup!", on(Popups.class).getPopupText().getText(), text);
-        on(Popups.class).getLearnMoreLink().click();
+        verify.verifyStatus("Popup is not displyed!", on(PopupsBlock.class).isDisplayed());
+        verify.verifyText("Incorrect text on Popup!", on(PopupsBlock.class).getPopupText().getText(), text);
+        on(PopupsBlock.class).getLearnMoreLink().click();
         verify.verifyText("Incorrect URL!", getCurrentBrowser().getDriver().getTitle(), URL);
         // вытаскивает страницу, которыю он инициализировал, а не текущую
     }

@@ -12,7 +12,7 @@ Then user should be on Registration Form
 
 
 
-Scenario: Registration
+Scenario: Successfully registration
 
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful

@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.livejournal.uitests.pages.service_pages.main_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
@@ -17,25 +16,18 @@ import org.openqa.selenium.support.FindBy;
  * @author m.prytkova
  */
 @DefaultUrl("/")//мне кажется, не так
-public class MainPage extends ServicePage{
-    
+public class MainPage extends ServicePage {
+
     //дополнительная страница, надо переделать
-    
-    @FindBy(xpath=".//*[@href[contains(.,'/login.bml')]]")
+    @FindBy(xpath = ".//*[@href[contains(.,'/login.bml')]]")
     private Link enterLink;
-    
+
     private FullscreenHeader fullscreenHeader;
 
-    /**
-     * @return the enterLink
-     */
     public Link getEnterLink() {
         return elem(enterLink);
     }
 
-    /**
-     * @return the fullscreenHeader
-     */
     public FullscreenHeader getFullscreenHeader() {
         return elem(fullscreenHeader);
     }

@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.common_elements;
 
+import com.livejournal.uitests.pages.service_pages.login_page.SocialNetworksBlock;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
@@ -13,8 +14,10 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author ASolyankin
  */
 @Block(
-      @FindBy(css = ".s-body .b-loginform"))
+        @FindBy(css = ".s-body .b-loginform"))
 public class LoginForm extends UIBlock {
+
+    private SocialNetworksBlock socialNetworksBlock;
 
     @FindBy(css = "#user")
     private TextField loginnnnnField;
@@ -22,7 +25,7 @@ public class LoginForm extends UIBlock {
     private TextField passwordField;
     @FindBy(css = "[name='action:login']")
     private Button submitButton;
-    @FindBy(xpath=".//*[@href[contains(.,'/create')]]")
+    @FindBy(xpath = ".//*[@href[contains(.,'/create')]]")
     private Link createAccountLink;
 
     @StepGroup
@@ -32,31 +35,23 @@ public class LoginForm extends UIBlock {
         getSubmitButton().click();
     }
 
-    /**
-     * @return the loginnnnnField
-     */
     public TextField getLoginnnnnField() {
         return elem(loginnnnnField);
     }
 
-    /**
-     * @return the passwordField
-     */
     public TextField getPasswordField() {
         return elem(passwordField);
     }
 
-    /**
-     * @return the submitButton
-     */
     public Button getSubmitButton() {
         return elem(submitButton);
     }
 
-    /**
-     * @return the createAccountLink
-     */
     public Link getCreateAccountLink() {
         return elem(createAccountLink);
+    }
+
+    public SocialNetworksBlock getSocialNetworksBlock() {
+        return socialNetworksBlock;
     }
 }

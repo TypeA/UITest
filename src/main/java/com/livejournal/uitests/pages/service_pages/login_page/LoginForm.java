@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.pages.service_pages;
+package com.livejournal.uitests.pages.service_pages.login_page;
 
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
