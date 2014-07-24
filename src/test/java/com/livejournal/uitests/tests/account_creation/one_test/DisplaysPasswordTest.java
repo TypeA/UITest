@@ -1,4 +1,4 @@
-package com.livejournal.uitests.tests.account_creation;
+package com.livejournal.uitests.tests.account_creation.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -40,7 +40,7 @@ public class DisplaysPasswordTest extends WebTest {
 
     @Then("the password is displayed")
     public void the_password_is_displayed() {
-        verify.verifyStatus("Incorrect icon display password!", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed());
+        verify.verifyStatus("Incorrect icon display password!", (!on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed()));
         verify.verifyStatus("Incorrect icon display password!", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed());
     }
 }

@@ -19,7 +19,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class GetUrlDebagTest extends WebTest {
+public class TosAndPrivacyLinksTest extends WebTest {
 
     @Steps
     Verificate verify;

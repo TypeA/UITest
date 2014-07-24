@@ -4,7 +4,7 @@
 Scenario: Displays password
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Registration,attributes:Comfortable
 
 Given unlogged user on Registration Form
 When user enter password <password>
@@ -19,7 +19,7 @@ Examples:
 Scenario: Password description
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Registration,attributes:Comfortable
 
 Given unlogged user on Registration Form
 When user enter password <password> 

@@ -1,7 +1,7 @@
 Scenario: Successful autorization through Facebook 
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Autorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through Facebook with correct data: login <login>, password <password> 
@@ -18,7 +18,7 @@ Examples:
 Scenario: Successful autorization through Twitter 
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Autorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through Twitter with correct data: login <login>, password <password> 
@@ -33,7 +33,7 @@ Examples:
 Scenario: Successful autorization through VK 
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Autorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through VK with correct data: login <login>, password <password> 
@@ -50,7 +50,7 @@ Examples:
 Scenario: Successful autorization through Google+ 
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Autorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through Google+ with correct data: login <login>, password <password> 
@@ -67,7 +67,7 @@ Examples:
 Scenario: Successful autorization through Mail.ru 
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Autorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through Mail.ru with correct data: login <login>, password <password> 
@@ -84,7 +84,7 @@ Examples:
 Scenario: Successful autorization through OpenID 
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@tags execution:auto,component:Autorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through OpenID with correct data: OpenID_URL <OpenID_URL> 
