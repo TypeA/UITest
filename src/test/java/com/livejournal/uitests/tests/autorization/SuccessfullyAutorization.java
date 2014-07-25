@@ -1,4 +1,4 @@
-package com.livejournal.uitests.tests.autorization.one_test;
+package com.livejournal.uitests.tests.autorization;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;
@@ -27,7 +27,7 @@ public class SuccessfullyAutorization extends WebTest {
     
     @When("user enter correct data: name $name, password $password and clicks LogIn")
     public void user_login(String name, String password) {
-        on(LoginPage.class).loginForm.authorizeBy(name, password);
+        on(LoginPage.class).getLoginForm().authorizeBy(name, password);
     }
     
     @Then ("user logged in")

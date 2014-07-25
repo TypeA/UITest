@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
@@ -13,14 +7,25 @@ import net.thucydides.core.annotations.findby.FindBy;
  *
  * @author s.savinykh
  */
-public class FullscreenHeaderUnlogged extends FullscreenHeader
-{
-    public ShopMenuItem shopMenuItem;
+public class FullscreenHeaderUnlogged extends FullscreenHeader {
+
+    private ShopMenuItem shopMenuItem;
     
-    @FindBy(css=".s-nav-item.s-nav-item-login")
-    public Link loginMenuItem;
-    
-    public LangSwitch langSwitch;
-  
-   
+    @FindBy(css = ".s-nav-item.s-nav-item-login a")
+    private Link loginMenuItem;
+
+    private LangSwitch langSwitch;
+
+    public ShopMenuItem getShopMenuItem() {
+        return elem(shopMenuItem);
+    }
+
+    public Link getLoginMenuItem() {
+        return elem(loginMenuItem);
+    }
+
+    public LangSwitch getLangSwitch() {
+        return elem(langSwitch);
+    }
+
 }

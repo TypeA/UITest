@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -25,23 +25,23 @@ public class FullscreenHeader extends UIBlock {
     private SearchMenuItem searchMenuItem;
 
     public Logo getLogo() {
-        return logo;
+        return elem(logo);
     }
 
     public Link getLjMagazine() {
-        return ljMagazine;
+        return elem(ljMagazine);
     }
 
     public HelpMenuItem getHelpMenuItem() {
-        return helpMenuItem;
+        return elem(helpMenuItem);
     }
 
     public FeedbackMenuItem getFeedback() {
-        return feedback;
+        return elem(feedback);
     }
 
     public SearchMenuItem getSearchMenuItem() {
-        return searchMenuItem;
+        return elem(searchMenuItem);
     }
 
 }

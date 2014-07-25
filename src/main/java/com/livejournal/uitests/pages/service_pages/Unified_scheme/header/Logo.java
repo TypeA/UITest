@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -10,21 +10,21 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block(
-        @FindBy(css = "body"))
+        @FindBy(css = ".s-logo"))
 public class Logo extends UIBlock {
 
-    @FindBy(xpath = ".//div[@class='s-logo']/a")
+    @FindBy(css = ".s-logo a")
     private Link LogoPic;
 
     @FindBy(xpath = ".//div[@class='s-logo']/sup/a")
     private Link TestPic;
 
     public Link getLogoPic() {
-        return LogoPic;
+        return elem(LogoPic);
     }
 
     public Link getTestPic() {
-        return TestPic;
+        return elem(TestPic);
     }
 
 }

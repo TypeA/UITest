@@ -5,10 +5,12 @@ Meta:
 
 Given unlogged user on Login Form
 When user enter incorrect data: name <name>, password <password> and clicks LogIn
-Then user not logged in and see message <message>
+Then user is not logged and see message <message>
 
 
 Examples:
 |name|password|message|
-|maxapryg|rndMary1992|Неверный пароль.|
-|maxaprygrndtest|Mary1992|Такой пользователь не существует. Хотите ли вы создать аккаунт с этим именем?|
+|test|testrnd|Неверный пароль.|
+|test||Неверный пароль.|
+|testrnd|test|Такой пользователь не существует. Хотите ли вы создать аккаунт с этим именем?|
+||123Qwe|Такой пользователь не существует. Хотите ли вы создать аккаунт с этим именем?|

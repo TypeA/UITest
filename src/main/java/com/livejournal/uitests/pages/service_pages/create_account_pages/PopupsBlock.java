@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -24,14 +24,14 @@ public class PopupsBlock extends UIBlock {
     private Link learnMoreLink;
 
     public TextBlock getPopupText() {
-        return popupText;
+        return elem(popupText);
     }
 
     public Link getLearnMoreLink() {
-        return learnMoreLink;
+        return elem(learnMoreLink);
     }
 
     public Link getPopupBlock() {
-        return popupBlock;
+        return elem(popupBlock);
     }
 }

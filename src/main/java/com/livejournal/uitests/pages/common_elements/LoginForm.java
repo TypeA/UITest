@@ -54,4 +54,5 @@ public class LoginForm extends UIBlock {
     public SocialNetworksBlock getSocialNetworksBlock() {
         return elem(socialNetworksBlock);
     }
+
 }

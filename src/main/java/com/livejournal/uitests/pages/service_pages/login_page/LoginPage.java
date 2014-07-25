@@ -4,6 +4,8 @@ import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 /**
  *
@@ -11,10 +13,22 @@ import net.thucydides.core.annotations.StepGroup;
  */
 @DefaultUrl("/login.bml")
 public class LoginPage extends ServicePage {
-    public LoginForm loginForm;
+
+    @FindBy(css = ".b-bubble-noarrow")
+    private TextBlock errorText;
+
+    private LoginForm loginForm;
 
     @StepGroup
     public void authorizeBy(String login, String password) {
-        loginForm.authorizeBy(login, password);
+        getLoginForm().authorizeBy(login, password);
+    }
+
+    public LoginForm getLoginForm() {
+        return elem(loginForm);
+    }
+
+    public TextBlock getErrorText() {
+        return errorText;
     }
 }
