@@ -20,7 +20,7 @@ public class LoginForm extends UIBlock {
     private SocialNetworksBlock socialNetworksBlock;
 
     @FindBy(css = "#user")
-    private TextField loginnnnnField;
+    private TextField loginField;
     @FindBy(css = "#lj_loginwidget_password")
     private TextField passwordField;
     @FindBy(css = "[name='action:login']")
@@ -30,13 +30,13 @@ public class LoginForm extends UIBlock {
 
     @StepGroup
     public void authorizeBy(String login, String password) {
-        getLoginnnnnField().enter(login);
+        getLoginField().enter(login);
         getPasswordField().enter(password);
         getSubmitButton().click();
     }
 
-    public TextField getLoginnnnnField() {
-        return elem(loginnnnnField);
+    public TextField getLoginField() {
+        return elem(loginField);
     }
 
     public TextField getPasswordField() {
@@ -52,6 +52,6 @@ public class LoginForm extends UIBlock {
     }
 
     public SocialNetworksBlock getSocialNetworksBlock() {
-        return socialNetworksBlock;
+        return elem(socialNetworksBlock);
     }
 }

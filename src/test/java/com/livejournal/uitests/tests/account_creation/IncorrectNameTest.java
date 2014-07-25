@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
@@ -33,7 +28,7 @@ public class IncorrectNameTest extends WebTest {
 
     @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
- 
+
         on(CreateAccountPage.class).createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
                 email,
                 password,
@@ -46,7 +41,7 @@ public class IncorrectNameTest extends WebTest {
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getUserNameField().type("");
-       // verify.verifyStatus("Popup is not displyed!", on(Popups.class).getPopupBlock().isDisplayed());
+        // verify.verifyStatus("Popup is not displyed!", on(Popups.class).getPopupBlock().isDisplayed());
         verify.verifyText("Incorrect text on Popup!", on(PopupsBlock.class).getPopupText().getText(), message);
         verify.verifyStatus("Button is ensabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
     }

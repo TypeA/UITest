@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.tests.account_creation;
 
-import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;

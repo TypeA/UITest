@@ -1,4 +1,3 @@
-
 package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
@@ -36,7 +35,7 @@ public class SuccessfullyRegistrationTest extends WebTest {
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
         verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
-        on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();   
+        on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
     @Then("user go to Finish Registration Form and see message $message")

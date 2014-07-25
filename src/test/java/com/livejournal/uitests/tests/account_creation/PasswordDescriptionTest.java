@@ -1,13 +1,9 @@
-
 package com.livejournal.uitests.tests.account_creation;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
-import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
 import com.livejournal.uitests.tests.utility.Verificate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
