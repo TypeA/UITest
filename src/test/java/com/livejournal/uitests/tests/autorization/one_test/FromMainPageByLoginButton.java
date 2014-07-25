@@ -1,8 +1,7 @@
 package com.livejournal.uitests.tests.autorization.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
-import com.livejournal.uitests.pages.common_elements.LoginForm;
-import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeaderUnlogged;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPage;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
@@ -14,7 +13,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class FromTheMainPageByLoginButton extends WebTest {
+public class FromMainPageByLoginButton extends WebTest {
 
     @Steps
     Verificate verify;
@@ -26,7 +25,8 @@ public class FromTheMainPageByLoginButton extends WebTest {
     
     @When ("user clicks on the Login Button in the Header")
     public void user_clicks_Login_Button_in_Header (){
-        on(FullscreenHeaderUnlogged.class).getLoginMenuItem().click();
+        on(MainPage.class).getEnterLink().click();
+        //тут нужно переделать через Header
     }
     
     @Then ("user see Autorization Form")

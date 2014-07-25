@@ -10,7 +10,7 @@ import net.thucydides.core.annotations.findby.FindBy;
 public class FullscreenHeaderUnlogged extends FullscreenHeader {
 
     private ShopMenuItem shopMenuItem;
-    
+
     @FindBy(css = ".s-nav-item.s-nav-item-login a")
     private Link loginMenuItem;
 

@@ -1,4 +1,4 @@
-Scenario: From the Main Page by Login Button
+Scenario: From Main Page by Login Button
 
 Meta: 
 @tags execution:auto,component:Autorization,attributes:Useful
@@ -10,7 +10,7 @@ Then user see Autorization Form
 
 
 
-Scenario: From the Main Page by Tokens
+Scenario: From Main Page by Tokens
 
 Meta: 
 @tags execution:auto,component:Autorization,attributes:Useful
@@ -23,23 +23,23 @@ Then user in Autorization Page
 
 
 
-Scenario: From the Magazine by Tokens
+Scenario: From Shop by Tokens
 
 Meta: 
 @tags execution:auto,component:Autorization,attributes:Useful
 
-Given unlogged user in Magazine
+Given unlogged user in Shop
 When user clicks on the Tokens Link
 Then user in Autorization Page
 
 
 
 
-Scenario: From the Magazine by Rename Account
+Scenario: From Shop by Rename Account
 
 Meta: 
 @tags execution:auto,component:Autorization,attributes:Useful
 
-Given unlogged user in Magazine
+Given unlogged user in Shop
 When user clicks on the Rename Account Link
 Then user in Autorization Page

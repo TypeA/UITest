@@ -21,6 +21,7 @@ public class GoToRegistrationFormTest extends WebTest {
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu() {
         on(MainPage.class).getEnterLink().click();
+        //тут нужно переделать через Header
         on(LoginForm.class).getCreateAccountLink().click();
     }
 
