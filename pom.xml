@@ -44,7 +44,7 @@
             <version>1.4</version>
         </dependency>
         <dependency>
-            <groupId>com.livejournal</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>uisteps</artifactId>
             <version>0.2.5</version>
         </dependency>

@@ -21,9 +21,8 @@ public class GoToDMCATest extends WebTest
         @When("user on Main page moves cursor on Help menu item and user clicks on DMCA in dropdown menu")
         public void user_on_main_page_move_cursor_on_help_menu_item_and_click_dmca()
         {
-            on(MainPageUnlogged.class).getFullscreenHeader().getHelpMenuItem().moveMouseOver();
-            //on(FullscreenHeader.class).helpMenuItem.moveMouseOver();
-            on(MainPageUnlogged.class).getFullscreenHeader().getHelpMenuItem().dmca.click();
+           // on(MainPageUnlogged.class).getFullscreenHeader().getHelpMenuItem().getHelpBigLink().moveMouseOver();
+           // on(MainPageUnlogged.class).getFullscreenHeader().getHelpMenuItem().dmca.click();
         }
         
         @Then("user should be on DMCA page")
