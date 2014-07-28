@@ -10,7 +10,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block(
-        @FindBy(css=".s-header"))
+        @FindBy(css=HeaderLocator.CSS))
 public class FullscreenHeader extends UIBlock {
 
     private Logo logo;

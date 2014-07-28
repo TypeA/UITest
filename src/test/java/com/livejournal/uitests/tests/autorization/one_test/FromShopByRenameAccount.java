@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.livejournal.uitests.tests.autorization;
+package com.livejournal.uitests.tests.autorization.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.shop_pages.ShopPage;

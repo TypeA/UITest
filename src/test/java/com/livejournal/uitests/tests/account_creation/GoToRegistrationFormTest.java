@@ -3,7 +3,7 @@ package com.livejournal.uitests.tests.account_creation;
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPage;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Then;
@@ -20,8 +20,7 @@ public class GoToRegistrationFormTest extends WebTest {
 
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu() {
-        on(MainPage.class).getEnterLink().click();
-        //тут нужно переделать через Header
+        on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getLoginMenuItem().click();
         on(LoginForm.class).getCreateAccountLink().click();
     }
 

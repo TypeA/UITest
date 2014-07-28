@@ -3,7 +3,7 @@ package com.livejournal.uitests.tests.unified_scheme.Support;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPage;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.tests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Then;
@@ -21,9 +21,9 @@ public class GoToDMCATest extends WebTest
         @When("user on Main page moves cursor on Help menu item and user clicks on DMCA in dropdown menu")
         public void user_on_main_page_move_cursor_on_help_menu_item_and_click_dmca()
         {
-            on(MainPage.class).getFullscreenHeader().getHelpMenuItem().moveMouseOver();
+            on(MainPageUnlogged.class).getFullscreenHeader().getHelpMenuItem().moveMouseOver();
             //on(FullscreenHeader.class).helpMenuItem.moveMouseOver();
-            on(MainPage.class).getFullscreenHeader().getHelpMenuItem().dmca.click();
+            on(MainPageUnlogged.class).getFullscreenHeader().getHelpMenuItem().dmca.click();
         }
         
         @Then("user should be on DMCA page")
