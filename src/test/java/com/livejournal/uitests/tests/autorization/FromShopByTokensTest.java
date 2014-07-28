@@ -12,7 +12,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class FromShopByTokens extends WebTest {
+public class FromShopByTokensTest extends WebTest {
 
     @Steps
     Verificate verify;

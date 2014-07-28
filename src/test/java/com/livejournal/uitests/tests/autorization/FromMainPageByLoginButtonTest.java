@@ -14,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class FromMainPageByLoginButton extends WebTest {
+public class FromMainPageByLoginButtonTest extends WebTest {
 
     @Steps
     Verificate verify;

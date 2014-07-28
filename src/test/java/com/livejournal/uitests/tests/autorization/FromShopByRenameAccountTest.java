@@ -18,7 +18,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class FromShopByRenameAccount extends WebTest{
+public class FromShopByRenameAccountTest extends WebTest{
     
     
     @Steps

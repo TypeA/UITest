@@ -12,7 +12,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class FromMainPageByTokens extends WebTest {
+public class FromMainPageByTokensTest extends WebTest {
 
     @Steps
     Verificate verify;
@@ -24,8 +24,8 @@ public class FromMainPageByTokens extends WebTest {
 
     @When("user clicks on the Tokens in the Header")
     public void user_clicks_on_Tokens_in_Header() {
-        on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getShopMenuItem().getShopGeneralLink().click();
-        
+        on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getShopMenuItem().getShopGeneralLink().moveMouseOver();
+        //допиши!
     }
     
     @Then ("user in Autorization Page")
