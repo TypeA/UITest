@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.tests.autorization.one_test;
+package com.livejournal.uitests.tests;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 

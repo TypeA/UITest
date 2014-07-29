@@ -1,4 +1,4 @@
-package com.livejournal.uitests.tests.autorization.one_test;
+package com.livejournal.uitests.tests.autorization;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
