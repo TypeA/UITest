@@ -1,10 +1,10 @@
 package com.livejournal.uitests.pages.common_elements;
 
-import com.livejournal.uitests.pages.service_pages.login_page.SocialNetworksBlock;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uitests.pages.UIBlock;
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.login_page.SocialNetworksBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;

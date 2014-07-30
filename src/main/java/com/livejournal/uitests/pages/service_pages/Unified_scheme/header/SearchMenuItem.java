@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
@@ -15,10 +9,10 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  *
  * @author s.savinykh
  */
-@Block
-        (@FindBy(css=".i-iconus-search"))
-public class SearchMenuItem extends UIBlock
-{
-    @FindBy(css=".s-search #SearchText")
+@Block(
+        @FindBy(css = ".i-iconus-search"))
+public class SearchMenuItem extends UIBlock {
+
+    @FindBy(css = ".s-search #SearchText")
     public TextField searchLine;
 }
