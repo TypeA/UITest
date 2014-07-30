@@ -25,7 +25,7 @@ public class FromMainPageByTokensTest extends WebTest {
     @When("user clicks on the Tokens in the Header")
     public void user_clicks_on_Tokens_in_Header() {
         on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getShopMenuItem().getShopGeneralLink().moveMouseOver();
-        //допиши!
+        //допиши! пока не работает метод moveMouseOver
     }
     
     @Then ("user in Autorization Page")

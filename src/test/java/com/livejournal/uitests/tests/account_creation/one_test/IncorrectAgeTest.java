@@ -1,4 +1,4 @@
-package com.livejournal.uitests.tests.account_creation;
+package com.livejournal.uitests.tests.account_creation.one_test;
 
 import com.livejournal.uisteps.thucydides.tests.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -38,8 +38,7 @@ public class IncorrectAgeTest extends WebTest {
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        verify.verifyText("Incorrect text on Finish Registration Form!", on(CreateAccountPage.class).getFinishForm().getFinishText().getText(), message);
-        on(CreateAccountPage.class).getFinishForm().getCreateFirstPostButton().click();
+        //verify.verifyText("Incorrect text on Finish Registration Form!", on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText(), message);
     }
 
 }

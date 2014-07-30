@@ -56,7 +56,7 @@ Scenario: Empty age
 Meta: 
 @tags execution:auto,component:Registration,attributes:Useful
 
-Given unlogged user on Registration Form
+Given unlogged user on Registration Form1
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
 Then in Age Popup user see message <message> and button Create Account is not active
 

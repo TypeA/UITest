@@ -21,10 +21,16 @@ public class LoginForm extends UIBlock {
 
     @FindBy(css = "#user")
     private TextField loginField;
+
     @FindBy(css = "#lj_loginwidget_password")
     private TextField passwordField;
+
     @FindBy(css = "[name='action:login']")
     private Button submitButton;
+
+    @FindBy(css = "a[href*='/lostinfo']")
+    private Link lostInfo;
+
     @FindBy(xpath = ".//*[@href[contains(.,'/create')]]")
     private Link createAccountLink;
 
@@ -53,6 +59,10 @@ public class LoginForm extends UIBlock {
 
     public SocialNetworksBlock getSocialNetworksBlock() {
         return elem(socialNetworksBlock);
+    }
+
+    public Link getLostInfo() {
+        return elem(lostInfo);
     }
 
 }

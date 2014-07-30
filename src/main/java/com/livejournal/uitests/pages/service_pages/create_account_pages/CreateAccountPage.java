@@ -12,7 +12,10 @@ import net.thucydides.core.annotations.StepGroup;
 public class CreateAccountPage extends ServicePage {
 
     private CreateAccountForm createAccountForm;
-    private FinishForm finishForm;
+
+    //private SuccessfulFinishForm successfulFinishForm;
+
+    //private UnsuccessfulFinishForm unsuccessfulFinishForm;
 
     @StepGroup
     public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
@@ -23,7 +26,12 @@ public class CreateAccountPage extends ServicePage {
         return elem(createAccountForm);
     }
 
-    public FinishForm getFinishForm() {
-        return elem(finishForm);
+    /*public SuccessfulFinishForm getSuccessfulFinishForm() {
+        return successfulFinishForm;
     }
+
+    public UnsuccessfulFinishForm getUnsuccessfulFinishForm() {
+        return unsuccessfulFinishForm;
+    }*/
+
 }

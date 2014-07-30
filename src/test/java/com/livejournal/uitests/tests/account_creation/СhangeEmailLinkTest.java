@@ -14,19 +14,13 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class SuccessfullyRegistrationTest extends WebTest {
+public class СhangeEmailLinkTest extends WebTest {
 
     @Steps
     Verificate verify;
 
-    @Given("unlogged user on Registration Form")
-    public void unlogged_user_on_Registration_Form() {
-        on(CreateAccountPage.class);
-    }
-
-    @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
-    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
-
+    @Given("new user on Finish Form (data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender)")
+    public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -34,14 +28,19 @@ public class SuccessfullyRegistrationTest extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
+
     }
 
-    @Then("user go to Finish Registration Form and see message $message")
-    public void user_go_to_Finish_Registration_Form(String message) {
-        //String finishText = on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText();
-       // verify.verifyText("Incorrect text on Finish Registration Form!", finishText, message);
+    @When("user click Сhange Email Link")
+    public void user_click_Сhange_Email_Link() {
+       // on(CreateAccountPage.class).getSuccessfulFinishForm().getChangeEmail().click();
+
+    }
+
+    @Then("user in Сhange Email Page")
+    public void user_in_Сhange_Email_Page() {
+        verify.verifyText("You are not in Сhange Email Page", getCurrentBrowser().getDriver().getCurrentUrl(), "/changeemail.bml");
     }
 
 }

@@ -19,7 +19,7 @@ public class EmptyAgeTest extends WebTest {
     @Steps
     Verificate verify;
 
-    @Given("unlogged user on Registration Form")
+    @Given("unlogged user on Registration Form1")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
     }
