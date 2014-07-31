@@ -14,7 +14,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author ASolyankin
  */
 @Block(
-        @FindBy(css = ".s-body .b-loginform"))
+        @FindBy(css = ".s-body .b-loginform, .b-loginform-body"))
 public class LoginForm extends UIBlock {
 
     private SocialNetworksBlock socialNetworksBlock;
