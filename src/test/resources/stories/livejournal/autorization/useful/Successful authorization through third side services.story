@@ -1,24 +1,27 @@
-Scenario: Successful autorization through Facebook 
+As a user of third side services
+I want to authorize to livejournal 
+
+
+Scenario: Authorization through Facebook 
 
 Meta: 
-@tags execution:auto,component:Autorization,attributes:Social
+@tags execution:auto,component:Authorization,attributes:Social
 
-Given unlogged user on Autorization Form
-When user autorizated through Facebook with correct data: login <login>, password <password> 
-Then user should be in LJ through Facebook
+When user authorizated through Facebook with correct data: login <login>, password <password> 
+Then user should be autorizated in LJ through Facebook
 
 Examples:
-|login|password|
-|auto-test@rambler.ru|Test123|
+|login                  |password   |
+|auto-test@rambler.ru   |Test123    |
 
 
 
 
 
-Scenario: Successful autorization through Twitter 
+Scenario: Authorization through Twitter 
 
 Meta: 
-@tags execution:auto,component:Autorization,attributes:Social
+@tags execution:auto,component:Authorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through Twitter with correct data: login <login>, password <password> 
@@ -30,10 +33,10 @@ Examples:
 
 
 
-Scenario: Successful autorization through VK 
+Scenario: Authorization through VK 
 
 Meta: 
-@tags execution:auto,component:Autorization,attributes:Social
+@tags execution:auto,component:Authorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through VK with correct data: login <login>, password <password> 
@@ -47,7 +50,7 @@ Examples:
 
 
 
-Scenario: Successful autorization through Google+ 
+Scenario: Authorization through Google+ 
 
 Meta: 
 @tags execution:auto,component:Autorization,attributes:Social
@@ -64,10 +67,10 @@ Examples:
 
 
 
-Scenario: Successful autorization through Mail.ru 
+Scenario: Authorization through Mail.ru 
 
 Meta: 
-@tags execution:auto,component:Autorization,attributes:Social
+@tags execution:auto,component:Authorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through Mail.ru with correct data: login <login>, password <password> 
@@ -81,10 +84,10 @@ Examples:
 
 
 
-Scenario: Successful autorization through OpenID 
+Scenario: Authorization with OpenID 
 
 Meta: 
-@tags execution:auto,component:Autorization,attributes:Social
+@tags execution:auto,component:Authorization,attributes:Social
 
 Given unlogged user on Autorization Form
 When user autorizated through OpenID with correct data: OpenID_URL <OpenID_URL> 
