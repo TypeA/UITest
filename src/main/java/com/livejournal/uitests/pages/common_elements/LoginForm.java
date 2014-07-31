@@ -31,7 +31,7 @@ public class LoginForm extends UIBlock {
     @FindBy(css = "a[href*='/lostinfo']")
     private Link lostInfo;
 
-    @FindBy(xpath = ".//*[@href[contains(.,'/create')]]")
+    @FindBy(css = "a[href*='/create']")
     private Link createAccountLink;
 
     @StepGroup
