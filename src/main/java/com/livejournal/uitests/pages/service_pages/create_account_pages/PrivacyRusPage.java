@@ -1,19 +1,11 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.annotations.Block;
+import com.livejournal.uitests.pages.service_pages.ServicePage;
 
 /**
  *
  * @author m.prytkova
  */
-/*@DefaultUrl("/legal/tos-russian-translation.bml")
- public class PrivacyRusPage extends ServicePage{
-    
- }*/
-@Block(
-        @FindBy(css = "body"))
-public class PrivacyRusPage extends UIBlock {
+public class PrivacyRusPage extends ServicePage {
 
 }
