@@ -1,6 +1,6 @@
-package com.livejournal.uitests.registration;
+package com.livejournal.uitests.registration.comfortable.features_of_password;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
 import com.livejournal.uitests.utility.Verificate;
@@ -23,7 +23,7 @@ public class PasswordDescriptionTest extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    @When("user enter password $password")
+    @When("user enter123 password $password")
     public void user_see_Password_Bubble_In_Registration_Page(String password) {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().enter(password);
 

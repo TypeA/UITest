@@ -1,6 +1,12 @@
-package com.livejournal.uitests.authorization;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+package com.livejournal.uitests.authorization.comfortable.daylight_authorization_form_from_different_points;
+
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.shop_pages.ShopPage;
 import com.livejournal.uitests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
@@ -12,8 +18,9 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class FromShopByTokensTest extends WebTest {
-
+public class FromShopByRenameAccountTest extends WebTest{
+    
+    
     @Steps
     Verificate verify;
 
@@ -22,14 +29,14 @@ public class FromShopByTokensTest extends WebTest {
         on(ShopPage.class);
     }
 
-    @When("user clicks on the Tokens Link")
-    public void user_clicks_on_Tokens_Link() {
-        on(ShopPage.class).getTokens().click();
+    @When("user clicks on the Rename Account Link")
+    public void user_clicks_on_Rename_Account_Link() {
+        on(ShopPage.class).getRenameAccount().click();
     }
 
     @Then("user in Autorization Page")
     public void user_in_Autorization_Page() {
     verify.verifyText("You are not on Autorization Page!!!", getCurrentBrowser().getDriver().getCurrentUrl(), "/login.bml");
     }
-
+    
 }

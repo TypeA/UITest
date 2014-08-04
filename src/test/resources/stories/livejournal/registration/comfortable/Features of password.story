@@ -22,7 +22,7 @@ Meta:
 @tags execution:auto,component:Registration,attributes:Comfortable
 
 Given unlogged user on Registration Form
-When user enter password <password> 
+When user enter123 password <password> 
 Then user see Password Bubble which contains text <text> and URL <URL>
 
 Examples:

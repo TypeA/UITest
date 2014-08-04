@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests;
+package com.livejournal.uitests.registration.comfortable.features_of_password;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 

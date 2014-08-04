@@ -1,6 +1,6 @@
-package com.livejournal.uitests.authorization;
+package com.livejournal.uitests.authorization.comfortable.features_of_autorization_form;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
 import com.livejournal.uitests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;

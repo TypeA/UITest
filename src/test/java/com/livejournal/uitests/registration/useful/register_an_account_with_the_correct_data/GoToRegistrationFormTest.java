@@ -1,6 +1,6 @@
 package com.livejournal.uitests.registration.useful.register_an_account_with_the_correct_data;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;

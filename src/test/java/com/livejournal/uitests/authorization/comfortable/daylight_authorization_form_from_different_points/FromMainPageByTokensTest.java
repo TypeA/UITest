@@ -1,6 +1,6 @@
-package com.livejournal.uitests.authorization;
+package com.livejournal.uitests.authorization.comfortable.daylight_authorization_form_from_different_points;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
 import com.livejournal.uitests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;

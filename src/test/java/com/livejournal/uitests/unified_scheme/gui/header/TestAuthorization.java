@@ -1,6 +1,6 @@
 package com.livejournal.uitests.unified_scheme.gui.header;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
 import org.jbehave.core.annotations.Then;

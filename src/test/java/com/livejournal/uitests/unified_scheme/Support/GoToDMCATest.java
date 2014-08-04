@@ -1,7 +1,7 @@
 
 package com.livejournal.uitests.unified_scheme.Support;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
 import com.livejournal.uitests.utility.Verificate;

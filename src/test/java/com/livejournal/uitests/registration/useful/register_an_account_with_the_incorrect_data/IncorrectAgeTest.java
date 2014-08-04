@@ -1,6 +1,6 @@
 package com.livejournal.uitests.registration.useful.register_an_account_with_the_incorrect_data;
 
-import com.livejournal.uisteps.thucydides.tests.WebTest;
+import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.Verificate;
