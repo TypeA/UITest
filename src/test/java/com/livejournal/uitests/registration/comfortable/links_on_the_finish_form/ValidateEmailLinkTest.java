@@ -35,13 +35,15 @@ public class ValidateEmailLinkTest extends WebTest {
 
     @When("user click Validate Email Link")
     public void user_click_Сhange_Email_Link() {
-        //on(CreateAccountPage.class).getSuccessfulFinishForm().getValidateEmail().click();
+        on(CreateAccountPage.class).getSuccessfulFinishForm().getValidateEmail().click();
 
     }
 
     @Then("user in Validate Email Page")
     public void user_in_Сhange_Email_Page() {
-        verify.verifyText("You are not in Validate Email Page", getCurrentBrowser().getDriver().getCurrentUrl(), "/register.bml");
+        verify().expectedResult("Validate Email link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/register.bml"))
+                .showMessageIfVerificationFailed("You are not in Validate Emai Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /register.bml").finish();
+ 
     }
     
 }

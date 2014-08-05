@@ -34,13 +34,15 @@ public class СhangeEmailLinkTest extends WebTest {
 
     @When("user click Сhange Email Link")
     public void user_click_Сhange_Email_Link() {
-       // on(CreateAccountPage.class).getSuccessfulFinishForm().getChangeEmail().click();
+        on(CreateAccountPage.class).getSuccessfulFinishForm().getChangeEmail().click();
 
     }
 
     @Then("user in Сhange Email Page")
     public void user_in_Сhange_Email_Page() {
-        verify.verifyText("You are not in Сhange Email Page", getCurrentBrowser().getDriver().getCurrentUrl(), "/changeemail.bml");
+        verify().expectedResult("Сhange Email link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/changeemail.bml"))
+                .showMessageIfVerificationFailed("You are not in Сhange Email Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /changeemail.bml").finish();
+
     }
 
 }

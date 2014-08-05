@@ -1,4 +1,3 @@
-
 package com.livejournal.uitests.registration.comfortable.links_on_the_finish_form;
 
 import com.livejournal.uisteps.thucydides.WebTest;
@@ -17,9 +16,6 @@ import org.jbehave.core.annotations.When;
  */
 public class EditProfileLinkTest extends WebTest {
 
-    @Steps
-    Verificate verify;
-
     @Given("new user on Finish Form (data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender)")
     public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
@@ -35,13 +31,14 @@ public class EditProfileLinkTest extends WebTest {
 
     @When("user click Edit Profile Link")
     public void user_click_Edit_Profile_Link() {
-        //on(CreateAccountPage.class).getSuccessfulFinishForm().getEditProfile().click();
+        on(CreateAccountPage.class).getSuccessfulFinishForm().getEditProfile().click();
 
     }
 
     @Then("user in Edit Profile Page")
     public void user_in_Сhange_Email_Page() {
-        verify.verifyText("You are not in Edit Profile Page", getCurrentBrowser().getDriver().getCurrentUrl(), "/manage/profile");
+        verify().expectedResult("Edit Profile link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/manage/profile"))
+                .showMessageIfVerificationFailed("You are not in Edit Profile Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /manage/profile").finish();
     }
-    
+
 }

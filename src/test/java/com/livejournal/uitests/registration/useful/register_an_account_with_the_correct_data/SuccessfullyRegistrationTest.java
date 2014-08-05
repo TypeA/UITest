@@ -16,9 +16,6 @@ import org.jbehave.core.annotations.When;
  */
 public class SuccessfullyRegistrationTest extends WebTest {
 
-    @Steps
-    Verificate verify;
-
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
@@ -34,14 +31,15 @@ public class SuccessfullyRegistrationTest extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify.verifyStatus("Button is disabled!", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
+        verify().expectedResult("Create Account Button", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .showMessageIfVerificationFailed("Button is disabled!").finish();
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        //String finishText = on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText();
-       // verify.verifyText("Incorrect text on Finish Registration Form!", finishText, message);
+        verify().expectedResult("Text on Finish Registration Form", on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form! Current text: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct text contains: " + message).finish();
     }
 
 }

@@ -2,8 +2,6 @@ package com.livejournal.uitests.registration.comfortable.features_of_password;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.utility.Verificate;
-import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -13,10 +11,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class DisplaysPasswordTest extends WebTest {
-
-    @Steps
-    Verificate verify;
-
+    
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
@@ -28,9 +23,11 @@ public class DisplaysPasswordTest extends WebTest {
     }
 
     @Then("the password is hidden")
-    public void the_password_is_hidden() {
-        verify.verifyStatus("Incorrect icon display password!", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed());
-        verify.verifyStatus("Incorrect icon display password!", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed());
+    public void the_password_is_hidden() {      
+        verify().expectedResult("Display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
+                .showMessageIfVerificationFailed("Incorrect icon display password!").and()
+                .expectedResult("Display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
+                .showMessageIfVerificationFailed("Incorrect icon display password!").finish();
     }
 
     @When("user clicks Mapping Button")
@@ -40,7 +37,9 @@ public class DisplaysPasswordTest extends WebTest {
 
     @Then("the password is displayed")
     public void the_password_is_displayed() {
-        verify.verifyStatus("Incorrect icon display password!", (!on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed()));
-        verify.verifyStatus("Incorrect icon display password!", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed());
+        verify().expectedResult("Display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
+                .showMessageIfVerificationFailed("Incorrect icon display password!").and()
+                .expectedResult("Display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
+                .showMessageIfVerificationFailed("Incorrect icon display password!").finish();
     }
 }

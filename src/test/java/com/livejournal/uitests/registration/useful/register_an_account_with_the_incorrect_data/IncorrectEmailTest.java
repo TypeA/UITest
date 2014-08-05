@@ -41,9 +41,12 @@ public class IncorrectEmailTest extends WebTest {
     @Then("button Create Account is not active and user see message $message on popup")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getEmailField().click();
-        verify.verifyStatus("Popup is not displyed!", on(PopupsBlock.class).getPopupBlock().isDisplayed()); 
-        verify.verifyText("Incorrect text on Popup!", on(PopupsBlock.class).getPopupText().getText(), message);
-        verify.verifyStatus("Button is enabled!", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled());
+        verify().expectedResult("Displyed popup", on(PopupsBlock.class).getPopupBlock().isDisplayed())
+                .showMessageIfVerificationFailed("Popup is not displyed!").and()
+                .expectedResult("Text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Popup! Current text: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text: " + message).and()
+                .expectedResult("Create account Button", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .showMessageIfVerificationFailed("Button is enabled!").finish();
     }
 
 }

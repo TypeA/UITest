@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.registration.comfortable.features_of_password;
+package com.livejournal.uitests.registration.useful.register_an_account_with_the_incorrect_data;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 
