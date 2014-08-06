@@ -33,10 +33,10 @@ public class CreateAccountForm extends UIBlock {
     @FindBy(id = "createpage_create")
     private Button createAccountButton;
 
-    @FindBy(xpath = ".//*[@href[contains(.,'legal/tos-russian-translation.bml')]]")
+    @FindBy(css = "a[href*='legal/tos-russian-translation.bml']")
     private Link tosRusLink;
 
-    @FindBy(xpath = ".//*[@href[contains(.,'/legal/privacy-russian-translation.bml')]]")
+    @FindBy(css = "a[href*='/legal/privacy-russian-translation.bml']")
     private Link privacyRusLink;
 
     @StepGroup

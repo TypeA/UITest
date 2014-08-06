@@ -17,6 +17,7 @@ public class LoginPage extends ServicePage {
     @FindBy(css = ".b-bubble-noarrow")
     private TextBlock errorText;
 
+    @FindBy(css= ".s-body .b-loginform")
     private LoginForm loginForm;
 
     @StepGroup

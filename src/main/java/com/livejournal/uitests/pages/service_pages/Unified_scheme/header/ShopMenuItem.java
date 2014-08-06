@@ -25,7 +25,7 @@ public class ShopMenuItem extends UIBlock {
     @FindBy(css = ".s-nav-item-promo")
     private Link promo;
 
-    @FindBy(css = ".s-nav-item-tokens")
+    @FindBy(css = ".s-nav-item-tokens a")
     private Link tokens;
 
     public Link getShop() {

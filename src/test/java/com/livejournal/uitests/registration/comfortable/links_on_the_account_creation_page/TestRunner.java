@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.registration.useful.register_an_account_with_the_incorrect_data;
+package com.livejournal.uitests.registration.comfortable.links_on_the_account_creation_page;
 
 import net.thucydides.jbehave.ThucydidesJUnitStories;
 
