@@ -33,7 +33,7 @@ public class GoToDMCATest extends WebTest
                     .expectedResult(DEFAULT_STORY_NAME, true).showMessageIfVerificationFailed(DEFAULT_STORY_NAME)
                     .and()
                     .expectedResult(DEFAULT_STORY_NAME, true).showMessageIfVerificationFailed(DEFAULT_STORY_NAME)
-                    .finish();da
+                    .finish();
             String dmcaURL = "/legal/dmca.bml";
             String currentURL = this.getCurrentBrowser().getDriver().getCurrentUrl();
             verify.verifyText("Incorrect URL!", currentURL, dmcaURL);
