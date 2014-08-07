@@ -16,10 +16,10 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author m.prytkova
  */
 @Block(
-        @FindBy(css = ".b-passview"))
-public class FieldPasswordBlock extends UIBlock {
+        @FindBy(css = ".b-createpage-input-password"))
+public class PasswordBlock extends UIBlock {
 
-    @FindBy(id = "password")
+    @FindBy(css = "#password")
     private TextField passwordField;
 
     @FindBy(css = ".b-passview-icon-show")

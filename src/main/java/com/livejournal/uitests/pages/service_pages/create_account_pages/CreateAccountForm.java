@@ -17,20 +17,20 @@ import ru.yandex.qatools.htmlelements.element.Select;
         @FindBy(css = "form.b-ljform"))
 public class CreateAccountForm extends UIBlock {
 
-    @FindBy(id = "username")
+    @FindBy(css = "#username")
     private TextField userNameField;
 
-    @FindBy(id = "email")
+    @FindBy(css = "#email")
     private TextField emailField;
 
-    private FieldPasswordBlock passwordBlock;
+    private PasswordBlock passwordBlock;
 
     private BirthDateForm birthDateForm;
 
-    @FindBy(id = "gender")
+    @FindBy(css = "#gender")
     private Select genderDropDownMenu;
 
-    @FindBy(id = "createpage_create")
+    @FindBy(css = "#createpage_create")
     private Button createAccountButton;
 
     @FindBy(css = "a[href*='legal/tos-russian-translation.bml']")
@@ -58,7 +58,7 @@ public class CreateAccountForm extends UIBlock {
         return elem(emailField);
     }
 
-    public FieldPasswordBlock getPasswordBlock() {
+    public PasswordBlock getPasswordBlock() {
         return elem(passwordBlock);
     }
 
