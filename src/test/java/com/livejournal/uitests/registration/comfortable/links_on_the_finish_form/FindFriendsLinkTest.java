@@ -9,8 +9,6 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.RandomName;
-import com.livejournal.uitests.utility.Verificate;
-import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;

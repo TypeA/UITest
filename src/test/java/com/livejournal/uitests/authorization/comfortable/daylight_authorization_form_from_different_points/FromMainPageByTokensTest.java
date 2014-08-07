@@ -1,7 +1,6 @@
 package com.livejournal.uitests.authorization.comfortable.daylight_authorization_form_from_different_points;
 
 import com.livejournal.uisteps.thucydides.WebTest;
-import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.ShopMenuItem;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;

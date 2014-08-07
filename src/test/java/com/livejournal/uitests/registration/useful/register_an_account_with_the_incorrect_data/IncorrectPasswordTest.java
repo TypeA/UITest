@@ -1,4 +1,4 @@
-package com.livejournal.uitests.registration.useful.register_an_account_with_the_incorrect_data.one;
+package com.livejournal.uitests.registration.useful.register_an_account_with_the_incorrect_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -6,8 +6,6 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBl
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.NumberOfSymbols;
 import com.livejournal.uitests.utility.RandomName;
-import com.livejournal.uitests.utility.Verificate;
-import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -17,9 +15,6 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class IncorrectPasswordTest extends WebTest {
-
-    @Steps
-    Verificate verify;
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {

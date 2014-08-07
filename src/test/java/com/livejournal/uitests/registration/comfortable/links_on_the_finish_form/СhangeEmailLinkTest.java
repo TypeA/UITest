@@ -4,8 +4,6 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.RandomName;
-import com.livejournal.uitests.utility.Verificate;
-import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -15,9 +13,6 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class СhangeEmailLinkTest extends WebTest {
-
-    @Steps
-    Verificate verify;
 
     @Given("new user on Finish Form (data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender)")
     public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
