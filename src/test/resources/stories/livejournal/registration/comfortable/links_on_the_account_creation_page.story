@@ -1,7 +1,7 @@
 Scenario: TOS and Privacy links
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Comfortable
+@categories registration comfortable
 
 Given unlogged user on Registration Form
 When user click TOS Link

@@ -1,4 +1,4 @@
-package com.livejournal.uitests.registration.comfortable.links_on_the_account_creation_page;
+package com.livejournal.uitests.registration.comfortable;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -16,10 +16,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  *
  * @author m.prytkova
  */
-public class TosAndPrivacyLinksTest extends WebTest {
+public class LinksOnTheAccountCreationPage extends WebTest {
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
+        getCurrentBrowser().clearCache();
         on(CreateAccountPage.class);
     }
 
