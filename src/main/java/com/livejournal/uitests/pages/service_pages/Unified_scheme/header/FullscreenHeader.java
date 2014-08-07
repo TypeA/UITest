@@ -19,8 +19,9 @@ public class FullscreenHeader extends UIBlock {
     private Link ljMagazine;
 
     private HelpMenuItem helpMenuItem;
-
-    private FeedbackMenuItem feedback;
+    
+    @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
+    private FeedbackMenuItem feedbackMenuItem;
 
     private SearchMenuItem searchMenuItem;
 
@@ -37,7 +38,7 @@ public class FullscreenHeader extends UIBlock {
     }
 
     public FeedbackMenuItem getFeedback() {
-        return elem(feedback);
+        return elem(feedbackMenuItem);
     }
 
     public SearchMenuItem getSearchMenuItem() {
