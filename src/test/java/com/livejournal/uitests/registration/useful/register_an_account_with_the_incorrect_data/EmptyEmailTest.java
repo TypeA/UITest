@@ -34,7 +34,6 @@ public class EmptyEmailTest extends WebTest {
     @Then("in Email Popup user see message $message and button Create Account is not active")
     public void user_see_message_on_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getEmailField().type("");
-
         verify().expectedResult("Displyed popup", on(PopupsBlock.class).getPopupBlock().isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!").and()
                 .expectedResult("Text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))

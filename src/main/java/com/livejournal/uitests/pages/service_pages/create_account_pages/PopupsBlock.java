@@ -14,13 +14,13 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
 @FindBy(css = "body"))
 public class PopupsBlock extends UIBlock {
 
-    @FindBy(xpath = ".//*[@class='b-popup bubble-node b-createpage-bubble b-popup-noclosecontrol' and @style[not(contains(.,'display: none'))]]")
+    @FindBy(css = ".b-popup-noclosecontrol:not([style*='display: none'])")
     private Link popupBlock;
     
-    @FindBy(xpath = ".//*[@class='b-popup bubble-node b-createpage-bubble b-popup-noclosecontrol' and @style[not(contains(.,'display: none'))]]//div[@style='display: block;']")
+    @FindBy(css = ".b-popup-noclosecontrol:not([style*='display: none']) [style*='display: block;']")
     private TextBlock popupText;
 
-    @FindBy(xpath = ".//*[@class[contains(.,'b-popup-outer')]] //a[@target='_blank' and @href[contains(.,'/support/faqbrowse.bml')]]")
+    @FindBy(css = ".b-popup-outer a[href*='/support/faqbrowse.bml']")
     private Link learnMoreLink;
 
     public TextBlock getPopupText() {
