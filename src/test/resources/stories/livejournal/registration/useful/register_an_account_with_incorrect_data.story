@@ -2,7 +2,7 @@
 Scenario: Incorrect name
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -24,7 +24,7 @@ Examples:
 Scenario: Incorrect email
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -47,7 +47,7 @@ Examples:
 Scenario: Incorrect password
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -71,7 +71,7 @@ Examples:
 Scenario: Incorrect age
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data except for the age: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
@@ -85,7 +85,7 @@ Examples:
 Scenario: Empty name
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data leave name field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -103,7 +103,7 @@ Examples:
 Scenario: Empty email
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data leave email field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -121,7 +121,7 @@ Examples:
 Scenario: Empty password
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data leave password field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -137,7 +137,7 @@ Examples:
 Scenario: Empty age
 
 Meta: 
-@tags execution:auto,component:Registration,attributes:Useful
+@categories registration useful test
 
 Given unlogged user on Registration Form1
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
