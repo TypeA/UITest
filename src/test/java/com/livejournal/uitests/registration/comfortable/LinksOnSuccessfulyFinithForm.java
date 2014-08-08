@@ -24,6 +24,8 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
+        verify().expectedResult("Create Account Button is enabled", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .showMessageIfVerificationFailed("Button is disabled!").finish();
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
 
     }
