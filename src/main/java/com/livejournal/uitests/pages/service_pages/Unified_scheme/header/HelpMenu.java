@@ -9,7 +9,8 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author s.savinykh
  */
-public class HelpMenu extends UIBlock {
+public class HelpMenu extends UIBlock 
+{
 
     @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support")
     private Help help;

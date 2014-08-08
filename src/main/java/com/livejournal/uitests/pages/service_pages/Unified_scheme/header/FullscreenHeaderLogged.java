@@ -9,8 +9,8 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = HeaderLocator.CSS))
-public class FullscreenHeaderLogged extends FullscreenHeader {
-
+public class FullscreenHeaderLogged extends FullscreenHeader 
+{
     public FriendsFeedMenuItem friendsFiedMenuItem;
 
     public MyJournalMenuItem myJournalMenuItem;
