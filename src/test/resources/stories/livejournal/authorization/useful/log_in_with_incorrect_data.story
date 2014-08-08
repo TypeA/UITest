@@ -1,7 +1,7 @@
 Scenario: Unsuccessfully autorization
 
 Meta: 
-@categories authorization useful test
+@categories authorization useful
 
 Given unlogged user on Login Form
 When user enter incorrect data: name <name>, password <password> and clicks LogIn

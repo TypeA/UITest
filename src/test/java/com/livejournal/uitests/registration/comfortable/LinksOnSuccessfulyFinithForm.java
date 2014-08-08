@@ -72,48 +72,48 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
 
     @Then("user in Edit Profile Page")
     public void user_in_Edit_Profile_Page() {
-        verify().expectedResult("Edit Profile link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/manage/profile"))
-                .showMessageIfVerificationFailed("You are not in Edit Profile Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /manage/profile").finish();
+        verify().expectedResult("You are in Edit Profile Page.\nURL contains: /manage/profile", getCurrentBrowser().getDriver().getCurrentUrl().contains("/manage/profile"))
+                .showMessageIfVerificationFailed("You are not in Edit Profile Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /manage/profile").finish();
     }
 
     @Then("user in Find Friends Page")
     public void user_in_Find_Friends_Page() {
-        verify().expectedResult("Find Friends link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/friends/find"))
-                .showMessageIfVerificationFailed("You are not in Find Friends Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /friends/find").finish();
+        verify().expectedResult("You are in Find Friends Page.\nURL contains: /friends/find", getCurrentBrowser().getDriver().getCurrentUrl().contains("/friends/find"))
+                .showMessageIfVerificationFailed("You are not in Find Friends Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /friends/find").finish();
     }
 
     @Then("user in Validate Email Page")
     public void user_in_Validate_Email_Page() {
-        verify().expectedResult("Validate Email link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/register.bml"))
-                .showMessageIfVerificationFailed("You are not in Validate Emai Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /register.bml").finish();
+        verify().expectedResult("You are in Validate Email Page.\nURL contains: /register.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/register.bml"))
+                .showMessageIfVerificationFailed("You are not in Validate Emai Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /register.bml").finish();
 
     }
 
     @Then("user in Сhange Email Page")
     public void user_in_Сhange_Email_Page() {
-        verify().expectedResult("Сhange Email link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/changeemail.bml"))
-                .showMessageIfVerificationFailed("You are not in Сhange Email Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /changeemail.bml").finish();
+        verify().expectedResult("You are in Сhange Email Page.\nURL contains: /changeemail.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/changeemail.bml"))
+                .showMessageIfVerificationFailed("You are not in Сhange Email Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /changeemail.bml").finish();
 
     }
 
     @Then("user in Select Journal Style Page")
     public void user_in_Select_Journal_Page() {
-        verify().expectedResult("Select Journal link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/customize"))
-                .showMessageIfVerificationFailed("You are not in Select Journal Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /customize").finish();
+        verify().expectedResult("You are in Select Journal Page.\nURL contains: /customize", getCurrentBrowser().getDriver().getCurrentUrl().contains("/customize"))
+                .showMessageIfVerificationFailed("You are not in Select Journal Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /customize").finish();
 
     }
 
     @Then("user in Friends Feed Page")
     public void user_in_Friends_Feed_Page() {
-        verify().expectedResult("Friends Feed link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/feed"))
-                .showMessageIfVerificationFailed("You are not in Friends Feed Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /feed").finish();
+        verify().expectedResult("You are in Friends Feed Page.\nURL contains: /feed", getCurrentBrowser().getDriver().getCurrentUrl().contains("/feed"))
+                .showMessageIfVerificationFailed("You are not in Friends Feed Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /feed").finish();
 
     }
 
     @Then("user in Ratings Page")
     public void user_in_Ratings_Page() {
-        verify().expectedResult("Ratings link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/ratings"))
-                .showMessageIfVerificationFailed("You are not in Ratings Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /ratings").finish();
+        verify().expectedResult("You are in Ratings Page.\nURL contains: /ratings", getCurrentBrowser().getDriver().getCurrentUrl().contains("/ratings"))
+                .showMessageIfVerificationFailed("You are not in Ratings Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /ratings").finish();
 
     }
 }

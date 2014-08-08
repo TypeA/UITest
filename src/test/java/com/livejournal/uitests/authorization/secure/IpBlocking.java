@@ -29,10 +29,10 @@ public class IpBlocking extends WebTest {
     @Then("user see message $message and can't enter with correct data: name $name, correct_password $correct_password")
     public void ip_is_blocked(String message, String name, String correct_password) {
         
-        verify().expectedResult("Error text on Autorization Page", on(LoginPage.class).getErrorText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect error text on Page! Current text: " + on(LoginPage.class).getErrorText().getText() + " Correct text contains:" + message).finish();
+        verify().expectedResult("Correct error text on Autorization Page.\nText contains:" + message, on(LoginPage.class).getErrorText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect error text on Page!\nCurrent text: " + on(LoginPage.class).getErrorText().getText() + "\nCorrect text contains:" + message).finish();
         on(LoginPage.class).getLoginForm().authorizeBy(name, correct_password);
-                verify().expectedResult("Blocking IP", getCurrentBrowser().getDriver().getCurrentUrl().contains("/login.bml"))
+                verify().expectedResult("IP is blocked", getCurrentBrowser().getDriver().getCurrentUrl().contains("/login.bml"))
                 .showMessageIfVerificationFailed("IP is not blocked!").finish();
     }
 

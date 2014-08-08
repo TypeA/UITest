@@ -49,14 +49,14 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Then("user see Autorization Form")
     public void user_see_Autorization_Form() {
-        verify().expectedResult("Autorization Form", on(LoginForm.class).isDisplayed())
+        verify().expectedResult("Autorization Form is displayed", on(LoginForm.class).isDisplayed())
                 .showMessageIfVerificationFailed("Autorization Form is not displayed!!!").finish();
     }
 
     @Then("user in Autorization Page")
     public void user_in_Autorization_Page() {
-        verify().expectedResult("Autorization Page", getCurrentBrowser().getDriver().getCurrentUrl().contains("/login.bml"))
-                .showMessageIfVerificationFailed("You are not on Autorization Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /login.bml").finish();
+        verify().expectedResult("You are on Autorization Page.\nURL contains: /login.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/login.bml"))
+                .showMessageIfVerificationFailed("You are not on Autorization Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /login.bml").finish();
 
     }
 

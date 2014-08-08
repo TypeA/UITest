@@ -25,8 +25,8 @@ public class LogInWithIncorrectData extends WebTest {
 
     @Then("user is not logged and see message $message")
     public void user_is_not_logged(String message) {
-        verify().expectedResult("Error text", on(LoginPage.class).getErrorText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect error text! Current text: " + on(LoginPage.class).getErrorText().getText() + " Cjrrecr text conyains: " + message).finish();
+        verify().expectedResult("Correct error text.\nText contains: " + message, on(LoginPage.class).getErrorText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect error text!\nCurrent text: " + on(LoginPage.class).getErrorText().getText() + "\nCorrecr text contains: " + message).finish();
 
     }
 }

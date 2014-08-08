@@ -40,21 +40,21 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify().expectedResult("Create Account Button", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+        verify().expectedResult("Create Account Button is enabled", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
                 .showMessageIfVerificationFailed("Button is disabled!").finish();
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
     @Then("user should be on Registration Form")
     public void user_should_be_on_Registration_Form() {
-        verify().expectedResult("Create Account link", getCurrentBrowser().getDriver().getCurrentUrl().contains("/create"))
-                .showMessageIfVerificationFailed("You are not in Create Account Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /create").finish();
+        verify().expectedResult("You are in Create Account Page.\nURL contains: /create", getCurrentBrowser().getDriver().getCurrentUrl().contains("/create"))
+                .showMessageIfVerificationFailed("You are not in Create Account Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /create").finish();
     }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        verify().expectedResult("Text on Finish Registration Form", on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form! Current text: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct text contains: " + message).finish();
+        verify().expectedResult("Correct text on Finish Registration Form.\nText contains: " + message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form!\nCurrent text: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect text contains: " + message).finish();
     }
 
 }

@@ -6,10 +6,6 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBl
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -35,17 +31,17 @@ public class FeaturesOfPassword extends WebTest {
 
     @Then("the password is hidden")
     public void the_password_is_hidden() {
-        verify().expectedResult("Display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
+        verify().expectedResult("Correct icon display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
                 .showMessageIfVerificationFailed("Incorrect icon display password!").and()
-                .expectedResult("Display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
+                .expectedResult("Correct icon display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
                 .showMessageIfVerificationFailed("Incorrect icon display password!").finish();
     }
 
     @Then("the password is displayed")
     public void the_password_is_displayed() {
-        verify().expectedResult("Display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
+        verify().expectedResult("Correct icon display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
                 .showMessageIfVerificationFailed("Incorrect icon display password!").and()
-                .expectedResult("Display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
+                .expectedResult("Correct icon display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
                 .showMessageIfVerificationFailed("Incorrect icon display password!").finish();
 
     }
@@ -53,14 +49,14 @@ public class FeaturesOfPassword extends WebTest {
     @Then("user see Password Bubble which contains text $text and URL $URL")
     public void password_Bubble_contains_text(String text, String URL) {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().click();
-        verify().expectedResult("Disply popup", on(PopupsBlock.class).isDisplayed())
+        verify().expectedResult("Popup is displyed", on(PopupsBlock.class).isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!")
-                .and().expectedResult("Text in Popup", on(PopupsBlock.class).getPopupText().getText().contains(text))
-                .showMessageIfVerificationFailed("Incorrect text on Popup! Text on popup: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text contains: " + text).finish();
+                .and().expectedResult("Correct text in Popup.\nText contains: " + text, on(PopupsBlock.class).getPopupText().getText().contains(text))
+                .showMessageIfVerificationFailed("Incorrect text on Popup!\nText on popup: " + on(PopupsBlock.class).getPopupText().getText() + "\nCorrect text contains: " + text).finish();
 
         on(PopupsBlock.class).getLearnMoreLink().click();
-        this.verify().expectedResult("URL", getCurrentBrowser().getDriver().getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed("Incorrect URL! CurrentUrl: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: " + URL).finish();
+        this.verify().expectedResult("Correct URL contains: " + URL, getCurrentBrowser().getDriver().getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed("Incorrect URL!\nCurrentUrl: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: " + URL).finish();
 
     }
 }

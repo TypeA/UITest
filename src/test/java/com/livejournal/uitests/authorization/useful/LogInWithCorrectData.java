@@ -28,7 +28,7 @@ public class LogInWithCorrectData extends WebTest {
     @Then("user logged in")
     public void user_logged_in() {
         on(FullscreenHeader.class).getLogo().getLogoPic().click();
-        verify().expectedResult("User logged", on(FullscreenHeaderLogged.class).myJournalMenuItem.myJournal.isDisplayed())
+        verify().expectedResult("User is logged", on(FullscreenHeaderLogged.class).myJournalMenuItem.myJournal.isDisplayed())
                 .showMessageIfVerificationFailed("The user is not logged!").finish();
     }
 

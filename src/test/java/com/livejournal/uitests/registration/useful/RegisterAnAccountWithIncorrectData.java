@@ -118,11 +118,11 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     @Then("in age Popup user see message $message and button Create Account is not active")
     public void user_see_message_on_age_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getBirthDateForm().getYearDropDownMenu().getWrappedElement().click();
-        verify().expectedResult("Displyed popup", on(PopupsBlock.class).getPopupBlock().isDisplayed())
+        verify().expectedResult("Popup is displyed", on(PopupsBlock.class).getPopupBlock().isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!").and()
-                .expectedResult("Text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Popup! Current text: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text: " + message).and()
-                .expectedResult("Create account Button", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .expectedResult("Correct text on Popup.\nText contains: " + message, on(PopupsBlock.class).getPopupText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Popup!\nCurrent text: " + on(PopupsBlock.class).getPopupText().getText() + "\nCorrect text contains: " + message).and()
+                .expectedResult("Create account Button is disabled", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
                 .showMessageIfVerificationFailed("Button is enabled!").finish();
 
     }
@@ -130,11 +130,11 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     @Then("in name Popup user see message $message and button Create Account is not active")
     public void user_see_message_on_name_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getUserNameField().type("");
-        verify().expectedResult("Displyed popup", on(PopupsBlock.class).getPopupBlock().isDisplayed())
+        verify().expectedResult("Popup is displyed", on(PopupsBlock.class).getPopupBlock().isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!").and()
-                .expectedResult("Text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Popup! Current text: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text: " + message).and()
-                .expectedResult("Create account Button", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .expectedResult("Correct text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Popup!\nCurrent text: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text contains: " + message).and()
+                .expectedResult("Create account Button  is disabled", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
                 .showMessageIfVerificationFailed("Button is enabled!").finish();
 
     }
@@ -142,11 +142,11 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     @Then("in email Popup user see message $message and button Create Account is not active")
     public void user_see_message_on_email_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getEmailField().type("");
-        verify().expectedResult("Displyed popup", on(PopupsBlock.class).getPopupBlock().isDisplayed())
+        verify().expectedResult("Popup is displyed", on(PopupsBlock.class).getPopupBlock().isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!").and()
-                .expectedResult("Text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Popup! Current text: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text: " + message).and()
-                .expectedResult("Create account Button", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .expectedResult("Correct text on Popup.\nText contains: " + message, on(PopupsBlock.class).getPopupText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Popup!\nCurrent text: " + on(PopupsBlock.class).getPopupText().getText() + "\nCorrect text contains: " + message).and()
+                .expectedResult("Create account Button  is disabled", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
                 .showMessageIfVerificationFailed("Button is enabled!").finish();
 
     }
@@ -154,19 +154,19 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     @Then("in password Popup user see message $message and button Create Account is not active")
     public void user_see_message_on_password_popup(String message) {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().type("");
-        verify().expectedResult("Displyed popup", on(PopupsBlock.class).getPopupBlock().isDisplayed())
+        verify().expectedResult("Popup is displyed", on(PopupsBlock.class).getPopupBlock().isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!").and()
-                .expectedResult("Text on Popup", on(PopupsBlock.class).getPopupText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Popup! Current text: " + on(PopupsBlock.class).getPopupText().getText() + " Correct text: " + message).and()
-                .expectedResult("Create account Button", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .expectedResult("Correct text on Popup.\nText contains: " + message, on(PopupsBlock.class).getPopupText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Popup!\nCurrent text: " + on(PopupsBlock.class).getPopupText().getText() + "\nCorrect text contains: " + message).and()
+                .expectedResult("Create account Button  is disabled", !on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
                 .showMessageIfVerificationFailed("Button is enabled!").finish();
 
     }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        verify().expectedResult("Text on Finish Registration Form", on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form! Current text: " + on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText() + " Correct text contains:" + message).finish();
+        verify().expectedResult("Correct text on Finish Registration Form.\nText contains:" + message, on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText().contains(message))
+                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form!\nCurrent text: " + on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText() + "\nCorrect text contains:" + message).finish();
 
     }
 

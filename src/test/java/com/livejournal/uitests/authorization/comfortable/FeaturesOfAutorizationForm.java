@@ -25,8 +25,8 @@ public class FeaturesOfAutorizationForm extends WebTest {
 
     @Then("user in Lost Information Page")
     public void user_in_Lost_Information_Page() {
-        verify().expectedResult("Lost Information Page", getCurrentBrowser().getDriver().getCurrentUrl().contains("/lostinfo.bml"))
-                .showMessageIfVerificationFailed("You are not in Lost Information Page! Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + " Correct URL contains: /lostinfo.bml").finish();
+        verify().expectedResult("You are in Lost Information Page.\nURL contains: /lostinfo.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/lostinfo.bml"))
+                .showMessageIfVerificationFailed("You are not in Lost Information Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /lostinfo.bml").finish();
 
     }
 }
