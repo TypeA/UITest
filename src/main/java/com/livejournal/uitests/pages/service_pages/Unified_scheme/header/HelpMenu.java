@@ -9,8 +9,8 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author s.savinykh
  */
-public class HelpMenu extends UIBlock 
-{
+public class HelpMenu extends UIBlock {
+
     @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support")
     private Help help;
 
@@ -32,91 +32,81 @@ public class HelpMenu extends UIBlock
     @FindBy(css = ".s-nav-item-search #SearchText")
     private SearchLine searchLine;
 
-    
-    public Help getHelp() 
-    {
+    public Help getHelp() {
         return elem(help);
     }
-    public About getAbout() 
-    {
+
+    public About getAbout() {
         return elem(about);
     }
-    public Faq getFaq() 
-    {
+
+    public Faq getFaq() {
         return elem(faq);
     }
-    public Tos getTos() 
-    {
+
+    public Tos getTos() {
         return elem(tos);
     }
-    public Privacy getPrivacy() 
-    {
+
+    public Privacy getPrivacy() {
         return elem(privacy);
     }
-    public Dmca getDmca() 
-    {
+
+    public Dmca getDmca() {
         return elem(dmca);
     }
-    public SearchLine getSearchLine() 
-    {
+
+    public SearchLine getSearchLine() {
         return elem(searchLine);
     }
 
-    
-    public class Help extends UIElement 
-    {
-        public Help(WebElement wrappedElement) 
-        {
-            super(wrappedElement);
-        }     
-    }
-        
-    public class About extends UIElement
-    {
-        public About(WebElement wrappedElement) 
-        {
+    public class Help extends UIElement {
+
+        public Help(WebElement wrappedElement) {
             super(wrappedElement);
         }
     }
-    
-    public class Faq extends UIElement 
-    {
-        public Faq(WebElement wrappedElement) 
-        {
+
+    public class About extends UIElement {
+
+        public About(WebElement wrappedElement) {
             super(wrappedElement);
-        }     
+        }
     }
-        
-    public class Tos extends UIElement 
-    {
-        public Tos(WebElement wrappedElement) 
-        {
+
+    public class Faq extends UIElement {
+
+        public Faq(WebElement wrappedElement) {
             super(wrappedElement);
-        }     
+        }
     }
-    
-    public class Privacy extends UIElement 
-    {
-        public Privacy(WebElement wrappedElement) 
-        {
+
+    public class Tos extends UIElement {
+
+        public Tos(WebElement wrappedElement) {
             super(wrappedElement);
-        }     
+        }
     }
-    
-    public class Dmca extends UIElement 
-    {
-        public Dmca(WebElement wrappedElement) 
-        {
+
+    public class Privacy extends UIElement {
+
+        public Privacy(WebElement wrappedElement) {
             super(wrappedElement);
-        }     
+        }
     }
-        
-    public class SearchLine extends UIElement 
-    {
-        public SearchLine(WebElement wrappedElement) 
-        {
+
+    public class Dmca extends UIElement {
+
+        public Dmca(WebElement wrappedElement) {
             super(wrappedElement);
-        }     
+        }
     }
-    
+
+    public class SearchLine extends UIElement {
+
+        public SearchLine(WebElement wrappedElement) {
+            super(wrappedElement);
+        }
+    }
+
 }
