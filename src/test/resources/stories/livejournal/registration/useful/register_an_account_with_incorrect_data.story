@@ -2,19 +2,19 @@
 Scenario: Incorrect name
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in name Popup user see message $message and button Create Account is not active
 
 Examples:
 |name|email|password|day|month|year|gender|message|
 |лоргшнеrnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
 |t.es,t1234rnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
 |te st1234rnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
-|_test1234rnd|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
-|test1234rnd_|test@test.ru|Test123|1|4|1990|M|Имя пользователя содержит недопустимые символы|
+|_test1234rnd|test@test.ru|Test123|1|4|1990|M|Извините, но это имя пользователя зарезервировано|
+|test1234rnd_|test@test.ru|Test123|1|4|1990|M|Извините, но это имя пользователя зарезервировано|
 |teNOSst1234rnd|test@test.ru|Test123|1|4|1990|M||
 
 
@@ -24,11 +24,11 @@ Examples:
 Scenario: Incorrect email
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in email Popup user see message $message and button Create Account is not active
 
 
 Examples:
@@ -47,11 +47,11 @@ Examples:
 Scenario: Incorrect password
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in password Popup user see message $message and button Create Account is not active
 
 
 Examples:
@@ -71,7 +71,7 @@ Examples:
 Scenario: Incorrect age
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data except for the age: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
@@ -85,11 +85,11 @@ Examples:
 Scenario: Empty name
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data leave name field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in name Popup user see message $message and button Create Account is not active
 
 Examples:
 |name|email|password|day|month|year|gender|message|
@@ -103,11 +103,11 @@ Examples:
 Scenario: Empty email
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data leave email field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in email Popup user see message $message and button Create Account is not active
 
 
 Examples:
@@ -121,11 +121,11 @@ Examples:
 Scenario: Empty password
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data leave password field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in password Popup user see message $message and button Create Account is not active
 
 Examples:
 |name|email|password|day|month|year|gender|message|
@@ -137,11 +137,11 @@ Examples:
 Scenario: Empty age
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form1
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then in Popup user see message $message and button Create Account is not active
+Then in age Popup user see message $message and button Create Account is not active
 
 Examples:
 |name|email|password|day|month|year|gender|message|

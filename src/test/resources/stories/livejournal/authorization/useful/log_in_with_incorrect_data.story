@@ -1,7 +1,7 @@
 Scenario: Unsuccessfully autorization
 
 Meta: 
-@tags execution:auto,component:Autorization,attributes:Useful
+@categories authorization useful test
 
 Given unlogged user on Login Form
 When user enter incorrect data: name <name>, password <password> and clicks LogIn

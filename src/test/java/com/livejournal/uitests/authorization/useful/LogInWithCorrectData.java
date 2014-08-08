@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.useful.log_in_with_correct_data;
+package com.livejournal.uitests.authorization.useful;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;
@@ -12,7 +12,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class SuccessfullyAutorizationTest extends WebTest {
+public class LogInWithCorrectData extends WebTest {
 
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {

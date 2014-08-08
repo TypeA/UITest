@@ -1,7 +1,7 @@
 Scenario: Displays password
 
 Meta: 
-@categories registration comfortable mytests
+@categories registration comfortable
 
 Given unlogged user on Registration Form
 When user enter password <password>
@@ -19,7 +19,7 @@ Examples:
 Scenario: Password description
 
 Meta: 
-@categories registration comfortable auto mytests
+@categories registration comfortable auto
 
 Given unlogged user on Registration Form
 When user enter password <password> 

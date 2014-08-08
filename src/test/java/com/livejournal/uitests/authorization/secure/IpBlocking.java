@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.secure.ip_blocking;
+package com.livejournal.uitests.authorization.secure;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
@@ -10,7 +10,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class CheckIpBlockingTest extends WebTest {
+public class IpBlocking extends WebTest {
 
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
@@ -18,9 +18,9 @@ public class CheckIpBlockingTest extends WebTest {
 
     }
 
-    @When("user 4 times enters incorrect data: name $name, incorrect_password $incorrect_password")
-    public void user_4_times_enters_incorrect_data(String name, String incorrect_password) {
-        for (int i = 0; i < 4; i++) {
+    @When("user 3 times enters incorrect data: name $name, incorrect_password $incorrect_password")
+    public void user_3_times_enters_incorrect_data(String name, String incorrect_password) {
+        for (int i = 0; i < 3; i++) {
             on(LoginPage.class).getLoginForm().authorizeBy(name, incorrect_password);
         }
 

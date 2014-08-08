@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.useful.log_in_with_incorrect_data;
+package com.livejournal.uitests.authorization.useful;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
@@ -10,7 +10,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class UnsuccessfullyAutorizationTest extends WebTest {
+public class LogInWithIncorrectData extends WebTest {
 
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
