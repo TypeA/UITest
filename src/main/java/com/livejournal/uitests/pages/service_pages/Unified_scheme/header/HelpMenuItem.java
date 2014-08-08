@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.UIElement;
@@ -17,18 +11,19 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block
         (@FindBy(css=".s-nav-rootlink.s-nav-rootlink-support"))
-public class HelpMenuItem extends UIElement {
+public class HelpMenuItem extends UIElement 
+{
 
-    public HelpMenuItem(WebElement wrappedElement) {
+    public HelpMenuItem(WebElement wrappedElement) 
+    {
         super(wrappedElement);
     }
 
     @Override
-    public HelpMenu moveMouseOver() {
+    public HelpMenu moveMouseOver() 
+    {
         super.moveMouseOver(); 
         return on(HelpMenu.class);
     }
     
-    
-
 }

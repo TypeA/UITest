@@ -11,8 +11,8 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = HeaderLocator.CSS))
-public class FullscreenHeader extends UIBlock {
-
+public class FullscreenHeader extends UIBlock 
+{
     private Logo logo;
 
     @FindBy(css = ".s-nav-rootlink-discovery")
