@@ -11,7 +11,6 @@ import org.openqa.selenium.support.FindBy;
  */
 public class HelpMenu extends UIBlock 
 {
-
     @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support")
     private Help help;
 
@@ -40,27 +39,27 @@ public class HelpMenu extends UIBlock
     }
     public About getAbout() 
     {
-        return about;
+        return elem(about);
     }
     public Faq getFaq() 
     {
-        return faq;
+        return elem(faq);
     }
     public Tos getTos() 
     {
-        return tos;
+        return elem(tos);
     }
     public Privacy getPrivacy() 
     {
-        return privacy;
+        return elem(privacy);
     }
     public Dmca getDmca() 
     {
-        return dmca;
+        return elem(dmca);
     }
     public SearchLine getSearchLine() 
     {
-        return searchLine;
+        return elem(searchLine);
     }
 
     
