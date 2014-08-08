@@ -19,7 +19,7 @@ Examples:
 Scenario: Password description
 
 Meta: 
-@categories registration comfortable auto
+@categories registration comfortable
 
 Given unlogged user on Registration Form
 When user enter password <password> 

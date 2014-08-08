@@ -26,45 +26,24 @@ public class LinksOnTheAccountCreationPage extends WebTest {
 
     @When("user click TOS Link")
     public void user_click_TOS_Link() {
-        on(CreateAccountPage.class);
-        verify().expectedResult("Initialized Create Account Page. URL: " + getUrl(), true).showMessageIfVerificationFailed(null).finish();
         on(CreateAccountPage.class).getCreateAccountForm().getTosRusLink().click();
-        verify().expectedResult("Click on TOS Link. URL: " + getUrl(), true).showMessageIfVerificationFailed(null).finish();
     }
 
     @Then("user in TOS Page")
     public void user_in_TOS_Page() {
-        on(TosRusPage.class);
-      //  verify.verifyText("Initialized TOS Page!!!   " + getUrl(), "", "");
+        verify().expectedResult("You in TOS Page.\n URL contains: /tos-russian-translation.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/tos-russian-translation.bml"))
+                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /tos-russian-translation.bml").finish();
     }
 
     @When("user click Privacy Link")
     public void user_click_Privacy_Link() {
-        on(CreateAccountPage.class);
-      //  verify.verifyText("Initialized Create Account Page!!!   " + getUrl(), "", "");
         on(CreateAccountPage.class).getCreateAccountForm().getPrivacyRusLink();
-      //  verify.verifyText("Click on Privacy Link!!!   " + getUrl(), "", "");
     }
 
     @Then("user in Privacy Page")
     public void user_in_Privacy_Page() {
-        on(PrivacyRusPage.class);
-      //  verify.verifyText("Initialized Privacy Page!!!   " + getUrl(), "", "");
-    }
-
-    private String getUrl() {
-        WebDriver driver = getCurrentBrowser().getDriver();
-        WebDriverWait wait = new WebDriverWait(driver, 10000);
-
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("return document.mpPageReloaded;");
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return js.executeScript("return window.bind('DOMContentReady', function(){});").equals("complete");
-            }
-        });
-        return driver.getCurrentUrl();
+               verify().expectedResult("You in Privacy Page.\n URL contains: /privacy-russian-translation.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/privacy-russian-translation.bml"))
+                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /privacy-russian-translation.bml").finish();
     }
 
 }
