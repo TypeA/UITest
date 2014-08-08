@@ -4,7 +4,6 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
-
 /**
  *
  * @author s.savinykh
@@ -18,6 +17,7 @@ public class FullscreenHeader extends UIBlock
     @FindBy(css = ".s-nav-rootlink-discovery")
     private Link ljMagazine;
 
+    @FindBy(css=".s-nav-rootlink.s-nav-rootlink-support")
     private HelpMenuItem helpMenuItem;
     
     @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
