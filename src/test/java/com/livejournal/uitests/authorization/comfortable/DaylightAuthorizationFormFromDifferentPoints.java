@@ -16,13 +16,13 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Given("unlogged user on Main Page")
     public void unlogged_user_on_Main_Page() {
-        getCurrentBrowser().clearCache();
+
         on(MainPageForUnsignedInUser.class);
     }
 
     @Given("unlogged user in Shop")
     public void unlogged_user_on_Shop_Page() {
-        getCurrentBrowser().clearCache();
+
         on(ShopPage.class);
     }
 
@@ -55,8 +55,8 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Then("user in Autorization Page")
     public void user_in_Autorization_Page() {
-        verify().expectedResult("You are on Autorization Page.\nURL contains: /login.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/login.bml"))
-                .showMessageIfVerificationFailed("You are not on Autorization Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /login.bml").finish();
+        verify().expectedResult("You are on Autorization Page.\nURL contains: /login.bml", getCurrentUrl().contains("/login.bml"))
+                .showMessageIfVerificationFailed("You are not on Autorization Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /login.bml").finish();
 
     }
 

@@ -18,7 +18,6 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     @Given("unlogged user on Registration Form1")
     public void unlogged_user_on_Registration_Form() {
-        getCurrentBrowser().clearCache();
         on(CreateAccountPage.class);
     }
 

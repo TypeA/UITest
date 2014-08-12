@@ -18,7 +18,6 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
-        getCurrentBrowser().clearCache();
         on(CreateAccountPage.class);
     }
 
@@ -47,14 +46,14 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
 
     @Then("user should be on Registration Form")
     public void user_should_be_on_Registration_Form() {
-        verify().expectedResult("You are in Create Account Page.\nURL contains: /create", getCurrentBrowser().getDriver().getCurrentUrl().contains("/create"))
-                .showMessageIfVerificationFailed("You are not in Create Account Page!\nCurrent URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /create").finish();
+        verify().expectedResult("You are in Create Account Page.\nURL contains: /create", getCurrentUrl().contains("/create"))
+                .showMessageIfVerificationFailed("You are not in Create Account Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /create").finish();
     }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
         verify().expectedResult("Correct text on Finish Registration Form.\nText contains: " + message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form!\nCurrent text: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect text contains: " + message).finish();
+                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form!\nCurrent text: " + getCurrentUrl() + "\nCorrect text contains: " + message).finish();
     }
 
 }

@@ -30,7 +30,7 @@ public class IpBlocking extends WebTest {
         verify().expectedResult("Correct error text on Autorization Page.\nText contains:" + message, on(LoginPage.class).getErrorText().getText().contains(message))
                 .showMessageIfVerificationFailed("Incorrect error text on Page!\nCurrent text: " + on(LoginPage.class).getErrorText().getText() + "\nCorrect text contains:" + message).finish();
         on(LoginPage.class).getLoginForm().authorizeBy(name, correct_password);
-        verify().expectedResult("IP is blocked", getCurrentBrowser().getDriver().getCurrentUrl().contains("/login.bml"))
+        verify().expectedResult("IP is blocked", getCurrentUrl().contains("/login.bml"))
                 .showMessageIfVerificationFailed("IP is not blocked!").finish();
     }
 

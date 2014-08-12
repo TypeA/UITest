@@ -20,7 +20,6 @@ public class LinksOnTheAccountCreationPage extends WebTest {
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
-        getCurrentBrowser().clearCache();
         on(CreateAccountPage.class);
     }
 
@@ -31,8 +30,8 @@ public class LinksOnTheAccountCreationPage extends WebTest {
 
     @Then("user in TOS Page")
     public void user_in_TOS_Page() {
-        verify().expectedResult("You in TOS Page.\n URL contains: /tos-russian-translation.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/tos-russian-translation.bml"))
-                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /tos-russian-translation.bml").finish();
+        verify().expectedResult("You in TOS Page.\n URL contains: /tos-russian-translation.bml", getCurrentUrl().contains("/tos-russian-translation.bml"))
+                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentUrl() + "\nCorrect URL contains: /tos-russian-translation.bml").finish();
     }
 
     @When("user click Privacy Link")
@@ -42,8 +41,8 @@ public class LinksOnTheAccountCreationPage extends WebTest {
 
     @Then("user in Privacy Page")
     public void user_in_Privacy_Page() {
-               verify().expectedResult("You in Privacy Page.\n URL contains: /privacy-russian-translation.bml", getCurrentBrowser().getDriver().getCurrentUrl().contains("/privacy-russian-translation.bml"))
-                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: /privacy-russian-translation.bml").finish();
+               verify().expectedResult("You in Privacy Page.\n URL contains: /privacy-russian-translation.bml", getCurrentUrl().contains("/privacy-russian-translation.bml"))
+                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentUrl() + "\nCorrect URL contains: /privacy-russian-translation.bml").finish();
     }
 
 }

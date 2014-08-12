@@ -15,7 +15,6 @@ public class FeaturesOfPassword extends WebTest {
 
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
-        getCurrentBrowser().clearCache();
         on(CreateAccountPage.class);
     }
 
@@ -55,8 +54,9 @@ public class FeaturesOfPassword extends WebTest {
                 .showMessageIfVerificationFailed("Incorrect text on Popup!\nText on popup: " + on(PopupsBlock.class).getPopupText().getText() + "\nCorrect text contains: " + text).finish();
 
         on(PopupsBlock.class).getLearnMoreLink().click();
-        this.verify().expectedResult("Correct URL contains: " + URL, getCurrentBrowser().getDriver().getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed("Incorrect URL!\nCurrentUrl: " + getCurrentBrowser().getDriver().getCurrentUrl() + "\nCorrect URL contains: " + URL).finish();
+        this.verify().expectedResult("Correct URL contains: " + URL, getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed("Incorrect URL!\nCurrentUrl: " + getCurrentUrl() + "\nCorrect URL contains: " + URL).finish();
+      
 
     }
 }
