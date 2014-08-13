@@ -16,7 +16,6 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Given("unlogged user on Main Page")
     public void unlogged_user_on_Main_Page() {
-
         on(MainPageForUnsignedInUser.class);
     }
 
