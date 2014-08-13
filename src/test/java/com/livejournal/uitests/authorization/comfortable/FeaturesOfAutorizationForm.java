@@ -23,10 +23,12 @@ public class FeaturesOfAutorizationForm extends WebTest {
         on(LoginPage.class).getLoginForm().getLostInfo().click();
     }
 
-    @Then("user in Lost Information Page")
-    public void user_in_Lost_Information_Page() {
-        verify().expectedResult("You are in Lost Information Page.\nURL contains: /lostinfo.bml", getCurrentUrl().contains("/lostinfo.bml"))
-                .showMessageIfVerificationFailed("You are not in Lost Information Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /lostinfo.bml").finish();
-
+    @Then("user in correct page <page> with URL <URL>")
+    public void user_in_Lost_Information_Page(String page, String URL) {
+        String ok_text = "You in " + page + "\n URL contains: " + URL;
+        String error_text = "You not in " + page + "!\n Current URL: ";
+        String correct_URL = "\nCorrect URL contains: " + URL;
+        verify().expectedResult(ok_text, getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(error_text + getCurrentUrl() + correct_URL).finish();
     }
 }

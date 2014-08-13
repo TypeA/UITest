@@ -2,15 +2,9 @@ package com.livejournal.uitests.registration.comfortable;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.PrivacyRusPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.TosRusPage;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -28,21 +22,18 @@ public class LinksOnTheAccountCreationPage extends WebTest {
         on(CreateAccountPage.class).getCreateAccountForm().getTosRusLink().click();
     }
 
-    @Then("user in TOS Page")
-    public void user_in_TOS_Page() {
-        verify().expectedResult("You in TOS Page.\n URL contains: /tos-russian-translation.bml", getCurrentUrl().contains("/tos-russian-translation.bml"))
-                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentUrl() + "\nCorrect URL contains: /tos-russian-translation.bml").finish();
-    }
-
     @When("user click Privacy Link")
     public void user_click_Privacy_Link() {
-        on(CreateAccountPage.class).getCreateAccountForm().getPrivacyRusLink();
+        on(CreateAccountPage.class).getCreateAccountForm().getPrivacyRusLink().click();
     }
 
-    @Then("user in Privacy Page")
-    public void user_in_Privacy_Page() {
-               verify().expectedResult("You in Privacy Page.\n URL contains: /privacy-russian-translation.bml", getCurrentUrl().contains("/privacy-russian-translation.bml"))
-                .showMessageIfVerificationFailed("You not in TOS Page!\n Current URL: " + getCurrentUrl() + "\nCorrect URL contains: /privacy-russian-translation.bml").finish();
+    @Then("user in correct page <page> with URL <URL>")
+    public void user_in_TOS_Page(String page, String URL) {
+        String ok_text = "You in " + page + "\n URL contains: " + URL;
+        String error_text = "You not in " + page + "!\n Current URL: ";
+        String correct_URL = "\nCorrect URL contains: " + URL;
+        verify().expectedResult(ok_text, getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(error_text + getCurrentUrl() + correct_URL).finish();
     }
 
 }

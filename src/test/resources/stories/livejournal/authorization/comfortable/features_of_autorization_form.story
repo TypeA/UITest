@@ -1,11 +1,15 @@
 Scenario: Forgot password
 
 Meta: 
-@categories authorization comfortable 
+@categories authorization comfortable
 
 Given unlogged user on Login Form
 When user click link Forgot Password
-Then user in Lost Information Page
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|page|URL|
+|Lost Information Page|/lostinfo.bml|
 
 
 

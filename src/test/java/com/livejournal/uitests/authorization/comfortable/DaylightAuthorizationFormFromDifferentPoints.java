@@ -21,7 +21,6 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Given("unlogged user in Shop")
     public void unlogged_user_on_Shop_Page() {
-
         on(ShopPage.class);
     }
 
@@ -48,15 +47,19 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Then("user see Autorization Form")
     public void user_see_Autorization_Form() {
-        verify().expectedResult("Autorization Form is displayed", on(LoginForm.class).isDisplayed())
-                .showMessageIfVerificationFailed("Autorization Form is not displayed!!!").finish();
+        String ok_text = "Autorization Form is displayed";
+        String error_text = "Autorization Form is not displayed!!!";
+        verify().expectedResult(ok_text, on(LoginForm.class).isDisplayed())
+                .showMessageIfVerificationFailed(error_text).finish();
     }
 
-    @Then("user in Autorization Page")
-    public void user_in_Autorization_Page() {
-        verify().expectedResult("You are on Autorization Page.\nURL contains: /login.bml", getCurrentUrl().contains("/login.bml"))
-                .showMessageIfVerificationFailed("You are not on Autorization Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /login.bml").finish();
-
+    @Then("user in correct page <page> with URL <URL>")
+    public void user_in_Autorization_Page(String page, String URL) {
+        String ok_text = "You in " + page + "\n URL contains: " + URL;
+        String error_text = "You not in " + page + "!\n Current URL: ";
+        String correct_URL = "\nCorrect URL contains: " + URL;
+        verify().expectedResult(ok_text, getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(error_text + getCurrentUrl() + correct_URL).finish();
     }
 
 }

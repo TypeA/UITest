@@ -5,7 +5,11 @@ Meta:
 
 Given unlogged user on Registration Form
 When user click TOS Link
-Then user in TOS Page
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|page|URL|
+|TOS Page|/tos-russian-translation.bml|
 
 
 
@@ -16,4 +20,8 @@ Meta:
 
 Given unlogged user on Registration Form
 When user click Privacy Link
-Then user in Privacy Page
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|page|URL|
+|Privacy Page|/privacy-russian-translation.bml|
