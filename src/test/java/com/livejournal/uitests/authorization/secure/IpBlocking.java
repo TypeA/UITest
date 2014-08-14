@@ -2,6 +2,7 @@ package com.livejournal.uitests.authorization.secure;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
+import com.livejournal.uitests.utility.VerifyText;
 import com.livejournal.uitests.utility.iterations.IterationsWithLoginForm;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -27,11 +28,12 @@ public class IpBlocking extends WebTest {
     @Then("user see message $message and can't enter with correct data: name $name, correct_password $correct_password")
     public void ip_is_blocked(String message, String name, String correct_password) {
 
-        verify().expectedResult("Correct error text on Autorization Page.\nText contains:" + message, on(LoginPage.class).getErrorText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect error text on Page!\nCurrent text: " + on(LoginPage.class).getErrorText().getText() + "\nCorrect text contains:" + message).finish();
+        verify().expectedResult(VerifyText.okTextForMessage(message), on(LoginPage.class).getErrorText().getText().contains(message))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(LoginPage.class).getErrorText().getText())).finish();
         on(LoginPage.class).getLoginForm().authorizeBy(name, correct_password);
         verify().expectedResult("IP is blocked", getCurrentUrl().contains("/login.bml"))
                 .showMessageIfVerificationFailed("IP is not blocked!").finish();
+               
     }
 
 }

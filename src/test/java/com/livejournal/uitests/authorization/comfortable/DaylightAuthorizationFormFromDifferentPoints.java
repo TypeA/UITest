@@ -4,7 +4,7 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
 import com.livejournal.uitests.pages.service_pages.shop_pages.ShopPage;
-import com.livejournal.uitests.utility.VerufyTextForURL;
+import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -56,8 +56,8 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Then("user in correct page <page> with URL <URL>")
     public void user_in_Autorization_Page(String page, String URL) {
-        verify().expectedResult(VerufyTextForURL.okText(page, URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(VerufyTextForURL.errorText(page, URL, getCurrentUrl())).finish();
+        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
 }
 
 }

@@ -45,7 +45,7 @@ Examples:
 Scenario: From Shop by Rename Account
 
 Meta: 
-@categories authorization comfortable test
+@categories authorization comfortable   test
 
 Given unlogged user in Shop
 When user clicks on the Rename Account Link

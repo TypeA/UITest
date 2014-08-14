@@ -3,6 +3,7 @@ package com.livejournal.uitests.registration.comfortable;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
+import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -50,11 +51,11 @@ public class FeaturesOfPassword extends WebTest {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().click();
         verify().expectedResult("Popup is displyed", on(PopupsBlock.class).isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!")
-                .and().expectedResult("Correct text in Popup.\nText contains: " + text, on(PopupsBlock.class).getPopupText().getText().contains(text))
-                .showMessageIfVerificationFailed("Incorrect text on Popup!\nText on popup: " + on(PopupsBlock.class).getPopupText().getText() + "\nCorrect text contains: " + text).finish();
+                .and().expectedResult(VerifyText.okTextForMessage(text), on(PopupsBlock.class).getPopupText().getText().contains(text))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(text, on(PopupsBlock.class).getPopupText().getText())).finish();
 
         on(PopupsBlock.class).getLearnMoreLink().click();
-        this.verify().expectedResult("Correct URL contains: " + URL, getCurrentUrl().contains(URL))
+        this.verify().expectedResult(VerifyText.okTextForURL("Learn More", URL), getCurrentUrl().contains(URL))
                 .showMessageIfVerificationFailed("Incorrect URL!\nCurrentUrl: " + getCurrentUrl() + "\nCorrect URL contains: " + URL).finish();
       
 
