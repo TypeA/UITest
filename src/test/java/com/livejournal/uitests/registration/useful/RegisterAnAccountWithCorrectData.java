@@ -6,6 +6,7 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAc
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.RandomName;
+import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -44,16 +45,17 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
-    @Then("user should be on Registration Form")
-    public void user_should_be_on_Registration_Form() {
-        verify().expectedResult("You are in Create Account Page.\nURL contains: /create", getCurrentUrl().contains("/create"))
-                .showMessageIfVerificationFailed("You are not in Create Account Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /create").finish();
-    }
+    @Then("user in correct page $page with URL $URL")
+    public void user_in_correct_Page(String page, String URL) {
+        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
+     }
 
-    @Then("user go to Finish Registration Form and see message $message")
+    @Then("user go to Finish Registration Form and see message &message and create First Post")
     public void user_go_to_Finish_Registration_Form(String message) {
-        verify().expectedResult("Correct text on Finish Registration Form.\nText contains: " + message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form!\nCurrent text: " + getCurrentUrl() + "\nCorrect text contains: " + message).finish();
+        verify().expectedResult(VerifyText.okTextForMessage(message), on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText())).finish();
+        on(CreateAccountPage.class).getSuccessfulFinishForm().getCreateFirstPostButton().click();
     }
 
 }

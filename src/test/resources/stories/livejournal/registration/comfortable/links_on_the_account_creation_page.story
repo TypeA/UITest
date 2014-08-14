@@ -1,7 +1,7 @@
 Scenario: TOS link
 
 Meta: 
-@categories registration comfortable test
+@categories registration comfortable
 
 Given unlogged user on Registration Form
 When user click TOS Link
@@ -16,7 +16,7 @@ Examples:
 Scenario: Privacy link
 
 Meta: 
-@categories registration comfortable test
+@categories registration comfortable
 
 Given unlogged user on Registration Form
 When user click Privacy Link

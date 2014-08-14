@@ -25,8 +25,8 @@ public class FeaturesOfAutorizationForm extends WebTest {
     }
 
     @Then("user in correct page <page> with URL <URL>")
-    public void user_in_Lost_Information_Page(String page, String URL) {
-        verify().expectedResult(new VerifyText().okTextForURL(page, URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(new VerifyText().errorTextForURL(page, URL, getCurrentUrl())).finish();
+    public void user_in_correct_Page(String page, String URL) {
+        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
     }
 }

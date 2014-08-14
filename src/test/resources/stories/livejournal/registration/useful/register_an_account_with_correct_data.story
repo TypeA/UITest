@@ -1,17 +1,21 @@
 Scenario: Go to registration form
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
-Then user should be on Registration Form
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|page|URL|
+|Create Account Page|/create|
 
 
 
 Scenario: Successfully registration
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account

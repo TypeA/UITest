@@ -56,8 +56,8 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
 
     @Then("user in correct page $page with URL $URL")
     public void user_in_Autorization_Page(String page, String URL) {
-        verify().expectedResult(new VerifyText().okTextForURL(page, URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(new VerifyText().errorTextForURL(page, URL, getCurrentUrl())).finish();
+        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
 }
 
 }
