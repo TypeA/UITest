@@ -4,7 +4,6 @@ package com.livejournal.uitests.unified_scheme.Support;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
-import com.livejournal.uitests.utility.Verificate;
 import net.thucydides.core.annotations.Steps;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -15,8 +14,7 @@ import org.jbehave.core.annotations.When;
  */
 public class GoToDMCATest extends WebTest
 {
-        @Steps
-        Verificate verify;
+
         
         @When("user on Main page moves cursor on Help menu item and user clicks on DMCA in dropdown menu")
         public void user_on_main_page_move_cursor_on_help_menu_item_and_click_dmca()
