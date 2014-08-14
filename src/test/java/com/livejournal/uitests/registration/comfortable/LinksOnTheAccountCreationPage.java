@@ -27,7 +27,7 @@ public class LinksOnTheAccountCreationPage extends WebTest {
         on(CreateAccountPage.class).getCreateAccountForm().getPrivacyRusLink().click();
     }
 
-    @Then("user in correct page <page> with URL <URL>")
+    @Then("user in correct page $page with URL $URL")
     public void user_in_TOS_Page(String page, String URL) {
         String ok_text = "You in " + page + "\n URL contains: " + URL;
         String error_text = "You not in " + page + "!\n Current URL: ";

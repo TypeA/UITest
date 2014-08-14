@@ -56,7 +56,7 @@ public class FeaturesOfPassword extends WebTest {
 
         on(PopupsBlock.class).getLearnMoreLink().click();
         this.verify().expectedResult(VerifyText.okTextForURL("Learn More", URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed("Incorrect URL!\nCurrentUrl: " + getCurrentUrl() + "\nCorrect URL contains: " + URL).finish();
+                .showMessageIfVerificationFailed(VerifyText.errorTextForURL("Learn More", URL, getCurrentUrl())).finish();
       
 
     }

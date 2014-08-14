@@ -71,50 +71,9 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
 
     }
 
-    @Then("user in Edit Profile Page")
-    public void user_in_Edit_Profile_Page() {
+    @Then("user in correct page $page with URL $URL")
+    public void user_in_Edit_Profile_Page(String page, String URL) {
         verify().expectedResult("You are in Edit Profile Page.\nURL contains: /manage/profile", getCurrentUrl().contains("/manage/profile"))
                 .showMessageIfVerificationFailed("You are not in Edit Profile Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /manage/profile").finish();
-    }
-
-    @Then("user in Find Friends Page")
-    public void user_in_Find_Friends_Page() {
-        verify().expectedResult("You are in Find Friends Page.\nURL contains: /friends/find", getCurrentUrl().contains("/friends/find"))
-                .showMessageIfVerificationFailed("You are not in Find Friends Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /friends/find").finish();
-    }
-
-    @Then("user in Validate Email Page")
-    public void user_in_Validate_Email_Page() {
-        verify().expectedResult("You are in Validate Email Page.\nURL contains: /register.bml", getCurrentUrl().contains("/register.bml"))
-                .showMessageIfVerificationFailed("You are not in Validate Emai Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /register.bml").finish();
-
-    }
-
-    @Then("user in Сhange Email Page")
-    public void user_in_Сhange_Email_Page() {
-        verify().expectedResult("You are in Сhange Email Page.\nURL contains: /changeemail.bml", getCurrentUrl().contains("/changeemail.bml"))
-                .showMessageIfVerificationFailed("You are not in Сhange Email Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /changeemail.bml").finish();
-
-    }
-
-    @Then("user in Select Journal Style Page")
-    public void user_in_Select_Journal_Page() {
-        verify().expectedResult("You are in Select Journal Page.\nURL contains: /customize", getCurrentUrl().contains("/customize"))
-                .showMessageIfVerificationFailed("You are not in Select Journal Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /customize").finish();
-
-    }
-
-    @Then("user in Friends Feed Page")
-    public void user_in_Friends_Feed_Page() {
-        verify().expectedResult("You are in Friends Feed Page.\nURL contains: /feed", getCurrentUrl().contains("/feed"))
-                .showMessageIfVerificationFailed("You are not in Friends Feed Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /feed").finish();
-
-    }
-
-    @Then("user in Ratings Page")
-    public void user_in_Ratings_Page() {
-        verify().expectedResult("You are in Ratings Page.\nURL contains: /ratings", getCurrentUrl().contains("/ratings"))
-                .showMessageIfVerificationFailed("You are not in Ratings Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /ratings").finish();
-
     }
 }

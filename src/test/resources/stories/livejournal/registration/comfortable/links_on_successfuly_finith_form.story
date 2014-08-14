@@ -5,11 +5,11 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Сhange Email Link
-Then user in Сhange Email Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Сhange Email|/changeemail.bml|
 
 
 
@@ -21,11 +21,11 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Validate Email Link
-Then user in Validate Email Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Validate Email|/register.bml|
 
 
 
@@ -36,11 +36,11 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Edit Profile Link
-Then user in Edit Profile Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Edit Profile|/manage/profile|
 
 
 
@@ -52,11 +52,11 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Find Friends Link
-Then user in Find Friends Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Find Friends|/friends/find|
 
 
 
@@ -68,11 +68,11 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Select Journal Style Link
-Then user in Select Journal Style Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Select Journal|/customize|
 
 
 
@@ -83,11 +83,11 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Friends Feed Link
-Then user in Friends Feed Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Friends Feed|/feed|
 
 
 
@@ -98,8 +98,8 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Ratings Link
-Then user in Ratings Page
+Then user in correct page <page> with URL <URL> 
 
 Examples:
-|name|email|password|day|month|year|gender|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|
+|name|email|password|day|month|year|gender|page|URL|
+|test1234rnd|test@test.ru|Test123|1|4|1990|M|Ratings|/ratings|
