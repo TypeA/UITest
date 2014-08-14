@@ -73,7 +73,7 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
 
     @Then("user in correct page $page with URL $URL")
     public void user_in_Edit_Profile_Page(String page, String URL) {
-        verify().expectedResult("You are in Edit Profile Page.\nURL contains: /manage/profile", getCurrentUrl().contains("/manage/profile"))
+        verify().expectedResult("You are in Edit Profile Page.\nURL contains: /manage/profile", getCurrentUrl().contains(URL))
                 .showMessageIfVerificationFailed("You are not in Edit Profile Page!\nCurrent URL: " + getCurrentUrl() + "\nCorrect URL contains: /manage/profile").finish();
     }
 }

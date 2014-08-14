@@ -1,6 +1,3 @@
-As a user of third side services
-I want to authorize to livejournal 
-
 
 Scenario: Authorization through Facebook 
 

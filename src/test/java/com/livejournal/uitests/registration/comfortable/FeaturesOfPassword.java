@@ -51,12 +51,12 @@ public class FeaturesOfPassword extends WebTest {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().click();
         verify().expectedResult("Popup is displyed", on(PopupsBlock.class).isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!")
-                .and().expectedResult(VerifyText.okTextForMessage(text), on(PopupsBlock.class).getPopupText().getText().contains(text))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(text, on(PopupsBlock.class).getPopupText().getText())).finish();
+                .and().expectedResult(new VerifyText().okTextForMessage(text), on(PopupsBlock.class).getPopupText().getText().contains(text))
+                .showMessageIfVerificationFailed(new VerifyText().errorTextForMessage(text, on(PopupsBlock.class).getPopupText().getText())).finish();
 
         on(PopupsBlock.class).getLearnMoreLink().click();
-        this.verify().expectedResult(VerifyText.okTextForURL("Learn More", URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForURL("Learn More", URL, getCurrentUrl())).finish();
+        this.verify().expectedResult(new VerifyText().okTextForURL("Learn More", URL), getCurrentUrl().contains(URL))
+                .showMessageIfVerificationFailed(new VerifyText().errorTextForURL("Learn More", URL, getCurrentUrl())).finish();
       
 
     }

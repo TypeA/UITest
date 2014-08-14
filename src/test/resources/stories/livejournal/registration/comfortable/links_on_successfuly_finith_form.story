@@ -5,7 +5,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Сhange Email Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
@@ -21,7 +21,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Validate Email Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
@@ -36,7 +36,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Edit Profile Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
@@ -52,7 +52,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Find Friends Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
@@ -68,7 +68,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Select Journal Style Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
@@ -83,7 +83,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Friends Feed Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
@@ -98,7 +98,7 @@ Meta:
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Ratings Link
-Then user in correct page <page> with URL <URL> 
+Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|email|password|day|month|year|gender|page|URL|
