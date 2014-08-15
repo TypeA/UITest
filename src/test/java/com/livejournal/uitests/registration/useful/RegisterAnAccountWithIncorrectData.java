@@ -141,8 +141,8 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form(String message) {
-        verify().expectedResult("Correct text on Finish Registration Form.\nText contains:" + message, on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText().contains(message))
-                .showMessageIfVerificationFailed("Incorrect text on Finish Registration Form!\nCurrent text: " + on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText() + "\nCorrect text contains:" + message).finish();
+        verify().expectedResult(VerifyText.okTextForMessage(message), on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText().contains(message))
+                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText())).finish();
 
     }
 
