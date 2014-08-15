@@ -23,7 +23,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data leave one age field empty: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_leave_one_age(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_data_leave_one_age_field_empty(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -36,7 +36,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data leave email field empty: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_leave_email(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_data_leave_email_field_empty(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -48,7 +48,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data leave name field empty: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_leave_name(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_data_leave_name_field_empty(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(name,
                 email,
                 password,
@@ -61,7 +61,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data leave password field empty: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_leave_password(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_data_leave_password_field_empty(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -74,7 +74,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data except for the age: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_except_age(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_correct_data_except_for_the_age(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -88,7 +88,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data except for the email: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_except_email(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_correct_data_except_for_the_email(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 NumberOfSymbols.get(email, 30),
                 password,
@@ -101,7 +101,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_except_name(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_correct_data_except_for_the_name(String name, String email, String password, String day, String month, String year, String gender) {
 
         on(CreateAccountPage.class).createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
                 email,
@@ -115,7 +115,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @When("user enter correct data except for the password: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_data_except_password(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_correct_data_except_for_the_password(String name, String email, String password, String day, String month, String year, String gender) {
 
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
@@ -129,7 +129,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @Then("in Popup user see message $message and button Create Account is not active")
-    public void user_see_message_on_age_popup(String message) {
+    public void in_Popup_user_see_message_and_button_Create_Account_is_not_active(String message) {
         verify().expectedResult("Popup is displyed", on(PopupsBlock.class).getPopupBlock().isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!").and()
                 .expectedResult(VerifyText.okTextForMessage(message), on(PopupsBlock.class).getPopupText().getText().contains(message))
@@ -140,7 +140,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     }
 
     @Then("user go to Finish Registration Form and see message $message")
-    public void user_go_to_Finish_Registration_Form(String message) {
+    public void user_go_to_Finish_Registration_Form_and_see_message(String message) {
         verify().expectedResult(VerifyText.okTextForMessage(message), on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText().contains(message))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getUnsuccessfulFinishForm().getFinishText().getText())).finish();
 

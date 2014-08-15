@@ -47,7 +47,7 @@ public class FeaturesOfPassword extends WebTest {
     }
 
     @Then("user see Password Bubble which contains text $text and URL $URL")
-    public void password_Bubble_contains_text(String text, String URL) {
+    public void user_see_Password_Bubble_which_contains_text_and_URL(String text, String URL) {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().click();
         verify().expectedResult("Popup is displyed", on(PopupsBlock.class).isDisplayed())
                 .showMessageIfVerificationFailed("Popup is not displyed!")

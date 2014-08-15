@@ -21,7 +21,7 @@ public class LogInWithCorrectData extends WebTest {
     }
 
     @When("user enter correct data: name $name, password $password and clicks LogIn")
-    public void user_login(String name, String password) {
+    public void user_enter_correct_data_and_clicks_LogIn(String name, String password) {
         on(LoginPage.class).getLoginForm().authorizeBy(name, password);
     }
 

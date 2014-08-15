@@ -25,8 +25,8 @@ public class IpBlocking extends WebTest {
         new IterationsWithLoginForm(on(LoginPage.class), 3, name, incorrect_password).run();
     }
 
-    @Then("user see message $message and can't enter with correct data: name $name, correct_password $correct_password")
-    public void ip_is_blocked(String message, String name, String correct_password) {
+    @Then("user see message $message and can not enter with correct data: name $name, correct_password $correct_password")
+    public void user_see_message_and_can_not_enter_with_correct_data(String message, String name, String correct_password) {
 
         verify().expectedResult(VerifyText.okTextForMessage(message), on(LoginPage.class).getErrorText().getText().contains(message))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(LoginPage.class).getErrorText().getText())).finish();

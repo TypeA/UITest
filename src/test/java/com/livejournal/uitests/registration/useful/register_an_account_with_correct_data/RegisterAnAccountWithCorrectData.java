@@ -23,7 +23,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     }
 
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
-    public void user_on_Main_Page_clicks_on_Login_Menu() {
+    public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
         on(MainPageForUnsignedInUser.class)
                 .getFullscreenHeaderUnlogged()
                 .getLoginMenuItem().click();
@@ -31,7 +31,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     }
 
     @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
-    public void user_enter_data(String name, String email, String password, String day, String month, String year, String gender) {
+    public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender) {
 
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
@@ -46,13 +46,13 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     }
 
     @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_Page(String page, String URL) {
+    public void user_in_correct_page_with_URL(String page, String URL) {
         verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
      }
 
     @Then("user go to Finish Registration Form and see message &message and create First Post")
-    public void user_go_to_Finish_Registration_Form(String message) {
+    public void user_go_to_Finish_Registration_Form_and_see_message_and_create_First_Post(String message) {
         verify().expectedResult(VerifyText.okTextForMessage(message), on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText())).finish();
         on(CreateAccountPage.class).getSuccessfulFinishForm().getCreateFirstPostButton().click();

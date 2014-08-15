@@ -29,7 +29,7 @@ public class LinksOnTheAccountCreationPage extends WebTest {
     }
 
     @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_Page(String page, String URL) {
+    public void user_in_correct_Page_with_URL(String page, String URL) {
         verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
      }

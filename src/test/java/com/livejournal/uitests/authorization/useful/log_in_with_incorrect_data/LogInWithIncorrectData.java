@@ -20,12 +20,12 @@ public class LogInWithIncorrectData extends WebTest {
     }
 
     @When("user enter incorrect data: name $name, password $password and clicks LogIn")
-    public void user_login(String name, String password) {
+    public void user_enter_incorrect_data_and_clicks_LogIn(String name, String password) {
         on(LoginPage.class).getLoginForm().authorizeBy(name, password);
     }
 
     @Then("user is not logged and see message $message")
-    public void user_is_not_logged(String message) {
+    public void user_is_not_logged_and_see_message(String message) {
         verify().expectedResult(VerifyText.okTextForMessage(message), on(LoginPage.class).getErrorText().getText().contains(message))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(LoginPage.class).getErrorText().getText())).finish();
 
