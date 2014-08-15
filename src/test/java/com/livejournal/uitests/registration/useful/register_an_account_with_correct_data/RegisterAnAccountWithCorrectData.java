@@ -32,7 +32,6 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
 
     @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
     public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender) {
-
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -51,10 +50,11 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
                 .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
      }
 
-    @Then("user go to Finish Registration Form and see message &message and create First Post")
+    @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form_and_see_message_and_create_First_Post(String message) {
+       
         verify().expectedResult(VerifyText.okTextForMessage(message), on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText())).finish();
+               .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText())).finish();
         on(CreateAccountPage.class).getSuccessfulFinishForm().getCreateFirstPostButton().click();
     }
 

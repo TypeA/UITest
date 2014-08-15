@@ -1,7 +1,7 @@
 Scenario: From Main Page by Login Button
 
 Meta: 
-@categories authorization comfortable test
+@categories authorization comfortable
 
 Given unlogged user on Main Page
 When user click on the Login Button in the Header
@@ -13,7 +13,7 @@ Then user see Autorization Form
 Scenario: From Main Page by Tokens
 
 Meta: 
-@categories authorization comfortable test
+@categories authorization comfortable
 
 Given unlogged user on Main Page
 When user click on the Tokens in the Header
@@ -29,7 +29,7 @@ Examples:
 Scenario: From Shop by Tokens
 
 Meta: 
-@categories authorization comfortable test
+@categories authorization comfortable
 
 Given unlogged user in Shop
 When user click on the Tokens Link
@@ -45,7 +45,7 @@ Examples:
 Scenario: From Shop by Rename Account
 
 Meta: 
-@categories authorization comfortable test
+@categories authorization comfortable
 
 Given unlogged user in Shop
 When user click on the Rename Account Link
