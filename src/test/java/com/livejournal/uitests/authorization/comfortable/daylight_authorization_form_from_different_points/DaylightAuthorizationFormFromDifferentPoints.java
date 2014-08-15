@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.comfortable;
+package com.livejournal.uitests.authorization.comfortable.daylight_authorization_form_from_different_points;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
@@ -21,28 +21,28 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     }
 
     @Given("unlogged user in Shop")
-    public void unlogged_user_on_Shop_Page() {
+    public void unlogged_user_in_Shop() {
         on(ShopPage.class);
     }
 
-    @When("user clicks on the Login Button in the Header")
-    public void user_clicks_Login_Button_in_Header() {
+    @When("user click on the Login Button in the Header")
+    public void user_click_on_the_Login_Button_in_the_Header() {
         on(MainPageForUnsignedInUser.class).getFullscreenHeaderUnlogged().getLoginMenuItem().click();
     }
 
-    @When("user clicks on the Tokens in the Header")
-    public void user_clicks_on_Tokens_in_Header() throws InterruptedException {
+    @When("user click on the Tokens in the Header")
+    public void user_click_on_the_Tokens_in_Header() throws InterruptedException {
         on(MainPageForUnsignedInUser.class).getFullscreenHeaderUnlogged().getShopMenuItem().getShopGeneralLink().moveMouseOver();
         on(MainPageForUnsignedInUser.class).getFullscreenHeaderUnlogged().getShopMenuItem().getTokens().click();
     }
 
-    @When("user clicks on the Rename Account Link")
-    public void user_clicks_on_Rename_Account_Link() {
+    @When("user click on the Rename Account Link")
+    public void user_click_on_the_Rename_Account_Link() {
         on(ShopPage.class).getRenameAccount().click();
     }
 
-    @When("user clicks on the Tokens Link")
-    public void user_clicks_on_Tokens_Link() {
+    @When("user click on the Tokens Link")
+    public void user_click_on_the_Tokens_Link() {
         on(ShopPage.class).getTokens().click();
     }
 
@@ -55,9 +55,10 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     }
 
     @Then("user in correct page $page with URL $URL")
-    public void user_in_Autorization_Page(String page, String URL) {
+    public void user_in_correct_page_with_URL(String page, String URL) {
         verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
-}
+    }
+
 
 }

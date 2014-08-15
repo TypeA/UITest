@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.secure;
+package com.livejournal.uitests.authorization.secure.ip_blocking;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;

@@ -1,4 +1,4 @@
-package com.livejournal.uitests.registration.useful;
+package com.livejournal.uitests.registration.useful.register_an_account_with_incorrect_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -13,11 +13,11 @@ import org.jbehave.core.annotations.When;
 
 /**
  *
- * @author Maxa
+ * @author m.prytkova
  */
 public class RegisterAnAccountWithIncorrectData extends WebTest {
 
-    @Given("unlogged user on Registration Form1")
+    @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
     }

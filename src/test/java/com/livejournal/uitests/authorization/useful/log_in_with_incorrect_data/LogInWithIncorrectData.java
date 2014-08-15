@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.useful;
+package com.livejournal.uitests.authorization.useful.log_in_with_incorrect_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;

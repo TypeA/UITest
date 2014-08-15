@@ -1,4 +1,4 @@
-package com.livejournal.uitests.authorization.useful;
+package com.livejournal.uitests.authorization.useful.log_in_with_correct_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeader;

@@ -1,4 +1,4 @@
-package com.livejournal.uitests.registration.comfortable;
+package com.livejournal.uitests.registration.comfortable.links_on_the_account_creation_page;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;

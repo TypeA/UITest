@@ -1,4 +1,4 @@
-package com.livejournal.uitests.registration.comfortable;
+package com.livejournal.uitests.registration.comfortable.links_on_successfuly_finith_form;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
@@ -74,7 +74,7 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
 
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_Page(String page, String URL) {
-        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
+          verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
                 .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
-    }
+      }
 }

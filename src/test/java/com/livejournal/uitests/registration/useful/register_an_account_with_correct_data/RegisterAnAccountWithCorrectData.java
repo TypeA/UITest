@@ -1,4 +1,4 @@
-package com.livejournal.uitests.registration.useful;
+package com.livejournal.uitests.registration.useful.register_an_account_with_correct_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
