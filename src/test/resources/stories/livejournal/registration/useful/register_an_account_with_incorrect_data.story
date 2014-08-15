@@ -139,7 +139,7 @@ Scenario: Empty age
 Meta: 
 @categories registration useful
 
-Given unlogged user on Registration Form1
+Given unlogged user on Registration Form
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
 Then in Popup user see message $message and button Create Account is not active
 
