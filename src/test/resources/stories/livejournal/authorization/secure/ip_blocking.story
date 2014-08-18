@@ -1,7 +1,8 @@
 Scenario: Check IP blocking
 
 Meta: 
-@categories authorization secure
+@categories authorization secure mytests
+@issue LJSUP-18010
 
 Given unlogged user on Login Form
 When user 3 times enters incorrect data: name <name>, incorrect_password <incorrect_password>

@@ -48,6 +48,7 @@ Scenario: Incorrect password
 
 Meta: 
 @categories registration useful
+@issue LJSUP-19183
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
