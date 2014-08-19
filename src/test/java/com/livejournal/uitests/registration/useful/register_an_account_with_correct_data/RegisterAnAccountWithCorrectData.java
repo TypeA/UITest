@@ -39,22 +39,28 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify().expectedResult("Create Account Button is enabled", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
-                .showMessageIfVerificationFailed("Button is disabled!").finish();
+        verify().that(on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .ifResultIsExpected("Create Account Button is enabled")
+                .ifElse("Button is disabled!")
+                .finish();
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_page_with_URL(String page, String URL) {
-        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
-     }
+        verify().that(getCurrentUrl().contains(URL))
+                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
+                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+                .finish();
+    }
 
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form_and_see_message_and_create_First_Post(String message) {
-       
-        verify().expectedResult(VerifyText.okTextForMessage(message), on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
-               .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText())).finish();
+
+        verify().that(on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText().contains(message))
+                .ifResultIsExpected(VerifyText.okTextForMessage(message))
+                .ifElse(VerifyText.errorTextForMessage(message, on(CreateAccountPage.class).getSuccessfulFinishForm().getFinishText().getText()))
+                .finish();
         on(CreateAccountPage.class).getSuccessfulFinishForm().getCreateFirstPostButton().click();
     }
 

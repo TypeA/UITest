@@ -24,8 +24,10 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify().expectedResult("Create Account Button is enabled", on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
-                .showMessageIfVerificationFailed("Button is disabled!").finish();
+        verify().that(on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
+                .ifResultIsExpected("Create Account Button is enabled")
+                .ifElse("Button is disabled!")
+                .finish();
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
 
     }
@@ -74,7 +76,9 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
 
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_Page_with_URL(String page, String URL) {
-          verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
-      }
+        verify().that(getCurrentUrl().contains(URL))
+                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
+                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+                .finish();
+    }
 }

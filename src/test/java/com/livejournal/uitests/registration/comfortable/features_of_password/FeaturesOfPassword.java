@@ -31,33 +31,46 @@ public class FeaturesOfPassword extends WebTest {
 
     @Then("the password is hidden")
     public void the_password_is_hidden() {
-        verify().expectedResult("Correct icon display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
-                .showMessageIfVerificationFailed("Incorrect icon display password!").and()
-                .expectedResult("Correct icon display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
-                .showMessageIfVerificationFailed("Incorrect icon display password!").finish();
+        verify().that(on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
+                .ifResultIsExpected("Correct icon display password")
+                .ifElse("Incorrect icon display password!")
+                .and()
+                .that(!on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
+                .ifResultIsExpected("Correct icon display password")
+                .ifElse("Incorrect icon display password!")
+                .finish();
     }
 
     @Then("the password is displayed")
     public void the_password_is_displayed() {
-        verify().expectedResult("Correct icon display password", !on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
-                .showMessageIfVerificationFailed("Incorrect icon display password!").and()
-                .expectedResult("Correct icon display password", on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
-                .showMessageIfVerificationFailed("Incorrect icon display password!").finish();
+        verify().that(!on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkHide().isDisplayed())
+                .ifResultIsExpected("Correct icon display password")
+                .ifElse("Incorrect icon display password!")
+                .and()
+                .that(on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordMappingLinkShow().isDisplayed())
+                .ifResultIsExpected("Correct icon display password")
+                .ifElse("Incorrect icon display password!")
+                .finish();
 
     }
 
     @Then("user see Password Bubble which contains text $text and URL $URL")
     public void user_see_Password_Bubble_which_contains_text_and_URL(String text, String URL) {
         on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().click();
-        verify().expectedResult("Popup is displyed", on(PopupsBlock.class).isDisplayed())
-                .showMessageIfVerificationFailed("Popup is not displyed!")
-                .and().expectedResult(VerifyText.okTextForMessage(text), on(PopupsBlock.class).getPopupText().getText().contains(text))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(text, on(PopupsBlock.class).getPopupText().getText())).finish();
+        verify().that(on(PopupsBlock.class).isDisplayed())
+                .ifResultIsExpected("Popup is displyed")
+                .ifElse("Popup is not displyed!")
+                .and()
+                .that(on(PopupsBlock.class).getPopupText().getText().contains(text))
+                .ifResultIsExpected(VerifyText.okTextForMessage(text))
+                .ifElse(VerifyText.errorTextForMessage(text, on(PopupsBlock.class).getPopupText().getText()))
+                .finish();
 
         on(PopupsBlock.class).getLearnMoreLink().click();
-        this.verify().expectedResult(VerifyText.okTextForURL("Learn More", URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForURL("Learn More", URL, getCurrentUrl())).finish();
-      
+        verify().that(getCurrentUrl().contains(URL))
+                .ifResultIsExpected("Learn More")
+                .ifElse(VerifyText.errorTextForURL("Learn More", URL, getCurrentUrl()))
+                .finish();
 
     }
 }

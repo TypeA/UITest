@@ -50,15 +50,18 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     public void user_see_Autorization_Form() {
         String ok_text = "Autorization Form is displayed";
         String error_text = "Autorization Form is not displayed!!!";
-        verify().expectedResult(ok_text, on(LoginForm.class).isDisplayed())
-                .showMessageIfVerificationFailed(error_text).finish();
+        verify().that(on(LoginForm.class).isDisplayed())
+                .ifResultIsExpected(ok_text)
+                .ifElse(error_text)
+                .finish();
     }
 
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_page_with_URL(String page, String URL) {
-        verify().expectedResult(VerifyText.okTextForURL(page, URL), getCurrentUrl().contains(URL))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
+        verify().that(getCurrentUrl().contains(URL))
+                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
+                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+                .finish();
     }
-
 
 }
