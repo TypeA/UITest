@@ -28,11 +28,15 @@ public class IpBlocking extends WebTest {
     @Then("user see message $message and can not enter with correct data: name $name, correct_password $correct_password")
     public void user_see_message_and_can_not_enter_with_correct_data(String message, String name, String correct_password) {
 
-        verify().expectedResult(VerifyText.okTextForMessage(message), on(LoginPage.class).getErrorText().getText().contains(message))
-                .showMessageIfVerificationFailed(VerifyText.errorTextForMessage(message, on(LoginPage.class).getErrorText().getText())).finish();
+        verify().that(on(LoginPage.class).getErrorText().getText().contains(message))
+                .ifResultIsExpected(VerifyText.okTextForMessage(message))
+                .ifElse(VerifyText.errorTextForMessage(message, on(LoginPage.class).getErrorText().getText()))
+                .finish();
         on(LoginPage.class).getLoginForm().authorizeBy(name, correct_password);
-        verify().expectedResult("IP is blocked", getCurrentUrl().contains("/login.bml"))
-                .showMessageIfVerificationFailed("IP is not blocked!").finish();
+        verify().that(getCurrentUrl().contains("/login.bml"))
+                .ifResultIsExpected("IP is blocked")
+                .ifElse("IP is not blocked!")
+                .finish();
                
     }
 
