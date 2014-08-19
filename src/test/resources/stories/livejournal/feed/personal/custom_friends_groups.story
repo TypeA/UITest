@@ -26,6 +26,19 @@ Examples:
 |test|test|Online Friends|Family|
 
 
+Scenario: Public group
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
+When user set the group <group> is public and save the changes
+Then unlogged user can see group <group>
+
+Examples:
+|name|password|group|
+|test|test|Online Friends|
+
+
 
 Scenario: Create new group
 Meta: 
@@ -89,7 +102,22 @@ Meta:
 
 Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
 When user delete users <users> in group <group> and save the changes
-Then in group <group> displayed users <users> posts
+Then in group <group> displayed correct posts
+
+Examples:
+|name|password|group|users|
+|test|test|test_group|testmaxapryg|
+|test|test|test_group|testmaxapryg, test001|
+
+
+
+Scenario: Delete users in group
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
+When user delete users <users> in group <group> and save the changes
+Then in group <group> displayed correct posts
 
 Examples:
 |name|password|group|users|
