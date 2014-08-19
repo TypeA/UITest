@@ -32,7 +32,7 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
-When user create new group <group> and sawe the changes
+When user create new group <group> and save the changes
 Then the changes displayed correctly on the Friends Feed
 Then there are no posts in the new group
 
@@ -48,7 +48,7 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
-When user delete group <group> and sawe the changes
+When user delete group <group> and save the changes
 Then the changes displayed correctly on the Friends Feed
 
 Examples:
@@ -61,7 +61,7 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
-When user rename group <group> name and sawe the changes
+When user rename group <group> name and save the changes
 Then the changes displayed correctly on the Friends Feed
 
 Examples:
@@ -69,15 +69,29 @@ Examples:
 |test|test|test_group|
 
 
-
 Scenario: Add users in group
 Meta: 
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
-When user add users <users> in group <group> and sawe the changes
+When user add users <users> in group <group> and save the changes
+Then in group <group> displayed correct posts
+
+Examples:
+|name|password|group|users|
+|test|test|test_group|testmaxapryg|
+|test|test|test_group|testmaxapryg, test001|
+
+
+Scenario: Delete users in group
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) on Edit Custom Friends Groups
+When user delete users <users> in group <group> and save the changes
 Then in group <group> displayed users <users> posts
 
 Examples:
 |name|password|group|users|
-|test|test|test_group|
+|test|test|test_group|testmaxapryg|
+|test|test|test_group|testmaxapryg, test001|
