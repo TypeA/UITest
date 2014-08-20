@@ -70,6 +70,7 @@ Examples:
 
 
 Scenario: Incorrect age
+@issue LJSUP-18873
 
 Meta: 
 @categories registration useful
@@ -136,6 +137,7 @@ Examples:
 
 
 Scenario: Empty age
+@issue LJSUP-18873
 
 Meta: 
 @categories registration useful

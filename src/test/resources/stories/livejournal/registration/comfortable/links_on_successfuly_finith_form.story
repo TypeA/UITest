@@ -2,6 +2,7 @@ Scenario: Сhange Email link
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Сhange Email Link
@@ -18,6 +19,7 @@ Scenario: Validate Email link
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Validate Email Link
@@ -30,6 +32,7 @@ Examples:
 
 
 Scenario: Edit Profile link
+@issue LJSUP-18873
 
 Meta: 
 @categories registration comfortable
@@ -46,6 +49,7 @@ Examples:
 
 
 Scenario: Find Friends link
+@issue LJSUP-18873
 
 Meta: 
 @categories registration comfortable
@@ -62,6 +66,7 @@ Examples:
 
 
 Scenario: Select Journal Style link
+@issue LJSUP-18873
 
 Meta: 
 @categories registration comfortable
@@ -77,6 +82,7 @@ Examples:
 
 
 Scenario: Friends Feed link
+@issue LJSUP-18873
 
 Meta: 
 @categories registration comfortable
@@ -92,6 +98,7 @@ Examples:
 
 
 Scenario: Ratings link
+@issue LJSUP-18873
 
 Meta: 
 @categories registration comfortable
