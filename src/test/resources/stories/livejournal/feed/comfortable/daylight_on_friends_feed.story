@@ -7,7 +7,7 @@ When user click on the Friend Feed in the Header
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|password||page|URL|
+|name|password|page|URL|
 |test|test|Friend Feed|/feed|
 
 
@@ -20,5 +20,31 @@ When user click on the Feed Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|password||page|URL|
+|name|password|page|URL|
 |test|test|Friend Feed|/feed|
+
+
+Scenario: Old user on feed
+Meta: 
+@categories feed comfortable
+
+Given old login user (name <name>, password <password>)on Main Page
+When user click on the Friend Feed in the Header
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|name|password|page|URL|
+|test|test|Friend Feed|/friends|
+
+
+Scenario: Unlogged user on feed
+Meta: 
+@categories feed comfortable
+
+Given unlogged user on Main Page
+When user do to users <friend> Friend Feed in the Header
+Then user in friends feed page <page> with URL <URL>
+
+Examples:
+|page|URL|friend|
+Friend Feed|/feed|test|

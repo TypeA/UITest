@@ -1,5 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
+import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.UnsuccessfulFinishForm;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;

@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.create_account_pages;
+package com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import org.openqa.selenium.support.FindBy;
