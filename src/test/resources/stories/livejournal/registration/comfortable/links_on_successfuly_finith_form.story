@@ -32,10 +32,11 @@ Examples:
 
 
 Scenario: Edit Profile link
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Edit Profile Link
@@ -49,10 +50,11 @@ Examples:
 
 
 Scenario: Find Friends link
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Find Friends Link
@@ -66,10 +68,11 @@ Examples:
 
 
 Scenario: Select Journal Style link
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Select Journal Style Link
@@ -82,10 +85,11 @@ Examples:
 
 
 Scenario: Friends Feed link
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Friends Feed Link
@@ -98,10 +102,11 @@ Examples:
 
 
 Scenario: Ratings link
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration comfortable
+@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Ratings Link

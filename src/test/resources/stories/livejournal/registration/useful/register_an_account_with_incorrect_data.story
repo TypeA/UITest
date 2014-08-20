@@ -70,10 +70,11 @@ Examples:
 
 
 Scenario: Incorrect age
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration useful
+@issue LJSUP-18873
 
 Given unlogged user on Registration Form
 When user enter correct data except for the age: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
@@ -137,10 +138,11 @@ Examples:
 
 
 Scenario: Empty age
-@issue LJSUP-18873
+
 
 Meta: 
 @categories registration useful
+@issue LJSUP-18873
 
 Given unlogged user on Registration Form
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
