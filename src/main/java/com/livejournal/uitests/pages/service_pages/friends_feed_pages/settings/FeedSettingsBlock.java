@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -15,9 +11,13 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".b-feedsettings-block-feed"))
-public class FeedSettingsBlock {
+public class FeedSettingsBlock extends UIBlock {
 
     @FindBy(css = ".b-feedsettings-action-bg-image")
     private Link backgroundImage;
+
+    public Link getBackgroundImage() {
+        return backgroundImage;
+    }
 
 }

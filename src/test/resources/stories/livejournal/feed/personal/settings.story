@@ -26,7 +26,7 @@ Examples:
 
 Scenario: Background image 
 Meta: 
-@categories feed personal
+@categories feed personal test1
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user load Background image <image> and set repeat <repeat> in Settings and save it
