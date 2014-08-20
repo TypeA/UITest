@@ -2,7 +2,7 @@ Scenario: Select privacy level
 Meta: 
 @categories feed social
 
-Given logged user (name <name>, password <password>) create new post <post> on Friends Feed
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
 When user  click Add to memories on that post <post>
 Then user see Edit privacy level and select parameter <parameter>
 Then other users see post <post> charges according to setting
@@ -18,7 +18,7 @@ Scenario: Full options
 Meta: 
 @categories feed social
 
-Given logged user (name <name>, password <password>) create new post <post> on Friends Feed
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
 When click Add to memories on that post <post> and click Full options
 Then user in correct page <page> with URL <URL>
 
@@ -31,7 +31,7 @@ Scenario: Remove privacy level
 Meta: 
 @categories feed social
 
-Given logged user (name <name>, password <password>) with privacy level post <post> on Friends Feed
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
 When user click Add to memories on that post <post>
 Then user see Remove Button and click there
 Then privacy level on post <post> is not installed
@@ -45,7 +45,7 @@ Scenario: Share
 Meta: 
 @categories feed social
 
-Given logged user (name <name>, password <password>) with post <post> on Friends Feed
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
 When user click Share on that post <post> and select resource <resource> 
 Then user in correct page <resource> with URL <URL>
 
@@ -65,7 +65,7 @@ Scenario: Track this
 Meta: 
 @categories feed social
 
-Given logged user (name <name>, password <password>) with post <post> on Friends Feed
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
 When user click Track this on that post <post>
 Then user in correct page <page> with URL <URL>
 
@@ -79,13 +79,39 @@ Scenario: Edit entry
 Meta: 
 @categories feed social
 
-Given logged user (name <name>, password <password>) with post <post> on Friends Feed
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
 When user click Edit entry on that post <post> and delete post <post>
 Then that post <post> is deleted
 
 Examples:
 |name|password|post|page|URL|
 |test|test|PostsGenerate|Edit Entry|/editjournal.bml|
+
+
+Scenario: Your post
+Meta: 
+@categories feed social
+
+Given logged user (name <name>, password <password>) with your post <post> on Friends Feed
+When user open toolbar on post <post>
+Then toolbar contains Buttons <buttons>
+
+Examples:
+|name|password|post|buttons|
+|test|test|PostsGenerate|4 кнопки|
+
+
+Scenario: Not your post
+Meta: 
+@categories feed social
+
+Given logged user (name <name>, password <password>) with not your post <post> on Friends Feed
+When user open toolbar on post <post>
+Then toolbar contains Buttons <buttons>
+
+Examples:
+|name|password|post|buttons|
+|test|test|PostsGenerate|2 кнопки|
 
 
 
