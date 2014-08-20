@@ -80,9 +80,7 @@ Meta:
 @categories feed social
 
 Given logged user (name <name>, password <password>) with post <post> on Friends Feed
-When user click Edit entry on that post <post>
-Then user in correct page <page> with URL <URL>
-When user delete post <post>
+When user click Edit entry on that post <post> and delete post <post>
 Then that post <post> is deleted
 
 Examples:
