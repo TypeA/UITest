@@ -27,8 +27,8 @@ public class Settings extends WebTest {
      public void user_load_Background_image_and_set_repeat_in_Settings_and_save_it(String repeat) throws InterruptedException{
          on(FriendsFeedLogged.class).getSupportButtonBlock().getSettings().click();
          on(FriendsFeedLogged.class).getSettingsBlock().getFeedSettingsBlock().getBackgroundImage().click();
-         on(SettingsBubbleBackgroundBlock.class).uploadBackgroundImage("C:\\Tests\\UITests\\src\\test\\java\\com\\livejournal\\uitests\\feed\\personal\\sittings\\загруженное.jpg");
-         Thread.sleep(5000);
+         //on(SettingsBubbleBackgroundBlock.class).uploadBackgroundImage("C:\\Tests\\UITests\\src\\test\\java\\com\\livejournal\\uitests\\feed\\personal\\sittings\\загруженное.jpg");
+      //   Thread.sleep(5000);
      }
 
 }

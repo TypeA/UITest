@@ -7,6 +7,8 @@ import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
+import ru.yandex.qatools.htmlelements.element.CheckBox;
+import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
  *
@@ -22,10 +24,15 @@ public class SettingsBubbleBackgroundBlock extends UIBlock {
     @FindBy(css = ".b-feedsettings-delete-icon")
     private Button deleteIcon;
 
-    @FindBy(css = "#pickfiles")
-    private UIElement backgroundImageFileInput;
-    
-    
+    @FindBy(css = "select[ng-model*='font_size']")
+    private Select position;
+
+    @FindBy(css = "input[ng-checked*='repeat_x']")
+    private CheckBox horizontalRepeat;
+
+    @FindBy(css = "input[ng-checked*='repeat_y']")
+    private CheckBox verticalRepeat;
+
     public Link getUploadImage() {
         return uploadImage;
     }
@@ -34,8 +41,27 @@ public class SettingsBubbleBackgroundBlock extends UIBlock {
         return deleteIcon;
     }
 
-    public void uploadBackgroundImage(String path) {
-         FileLoader fileLoader = new FileLoader(); 
-         fileLoader.upload(path, backgroundImageFileInput);
+    public Select getPosition() {
+        return position;
     }
+
+    public CheckBox getHorizontalRepeat() {
+        return horizontalRepeat;
+    }
+
+    public CheckBox getVerticalRepeat() {
+        return verticalRepeat;
+    }
+
+    public UIElement getBackgroundImageFileInput() {
+        return backgroundImageFileInput;
+    }
+
+    @FindBy(css = "#pickfiles")
+    private UIElement backgroundImageFileInput;
+
+  //  public void uploadBackgroundImage(String path) {
+    //    FileLoader fileLoader = new FileLoader();
+      //  fileLoader.upload(path, getBackgroundImageFileInput());
+  //  }
 }
