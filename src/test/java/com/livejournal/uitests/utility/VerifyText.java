@@ -16,7 +16,7 @@ public class VerifyText {
     }
 
     public static String okTextForMessage(String message) {
-        return "Correct text.\nText contains:" + message;
+        return "Correct text.\nText contains: " + message;
     }
 
     public static String errorTextForMessage(String message, String current_text) {

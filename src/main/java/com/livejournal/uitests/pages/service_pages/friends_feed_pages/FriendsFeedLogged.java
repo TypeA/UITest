@@ -1,8 +1,11 @@
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 /**
  *
@@ -11,14 +14,24 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/feed")
 public class FriendsFeedLogged extends ServicePageLogged {
 
-    private SupportButtonBlock supportButtonBlock;
-    private SettingsBlock settingsBlock;
+    //////////SUPPORT BUTTONS
+    @FindBy(css = "a[ng-class*='filters']")
+    private Button filtersButton;
 
-    public SupportButtonBlock getSupportButtonBlock() {
-        return supportButtonBlock;
+    @FindBy(css = "a[href*='/customize/#feed']")
+    private Button settingsButton;
+
+    public SettingsBlock openSettings() {
+        settingsButton.click();
+        return on(SettingsBlock.class);
     }
 
-    public SettingsBlock getSettingsBlock() {
-        return settingsBlock;
+    ////////////FEED
+    @FindBy(css = ".l-flatslide-intro-heads .b-lenta-head-title")
+    private TextBlock feedTitle;
+    
+    public String getFeedTitle() {
+        return feedTitle.getText();
     }
+
 }

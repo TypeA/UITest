@@ -10,6 +10,11 @@ import junit.framework.Assert;
  */
 @Root
 public class LJPage extends Page {
+    
+    public LJPage() {
+        getUrl().setUser("ljdev9c")
+                .setPassword("Ivie6oovai");
+    }
 
     public <T extends Object> T elem(T element) {
         if (element == null) {

@@ -10,10 +10,5 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/feed")
 public class FriendsFeedUnlogged extends ServicePageUnlogged {
 
-    private SupportButtonBlock supportButtonBlock;
-
-    public SupportButtonBlock getSupportButtonBlock() {
-        return supportButtonBlock;
-    }
 
 }

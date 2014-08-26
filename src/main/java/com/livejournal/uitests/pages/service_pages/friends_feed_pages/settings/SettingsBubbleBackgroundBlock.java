@@ -60,8 +60,5 @@ public class SettingsBubbleBackgroundBlock extends UIBlock {
     @FindBy(css = "#pickfiles")
     private UIElement backgroundImageFileInput;
 
-  //  public void uploadBackgroundImage(String path) {
-    //    FileLoader fileLoader = new FileLoader();
-      //  fileLoader.upload(path, getBackgroundImageFileInput());
-  //  }
+
 }

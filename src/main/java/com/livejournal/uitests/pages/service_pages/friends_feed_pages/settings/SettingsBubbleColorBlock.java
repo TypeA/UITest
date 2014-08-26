@@ -4,9 +4,9 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
+import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
-import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
  *
@@ -34,4 +34,54 @@ public class SettingsBubbleColorBlock extends UIBlock {
     @FindBy(css = ".b-flatbutton-simple[lj-ml*='choose']")
     private Button chooseButton;
 
+    public SettingsBubbleColorBlock enterCode(CharSequence... text) {
+        colorHex.enter(text);
+        return on(SettingsBubbleColorBlock.class);
+    }
+
+    public String getCode(CharSequence... text) {
+        return colorHex.getText();
+    }
+
+    public SettingsBlock clickChooseButton() {
+        chooseButton.click();
+        return on(SettingsBlock.class);
+    }
+
+    public SettingsBubbleColorBlock setColorBarByPoint(int barY) {
+        colorSelectorBar.clickOnPoint(1, barY);
+        return on(SettingsBubbleColorBlock.class);
+    }
+
+    public SettingsBubbleColorBlock setColorByPoint(int colorX, int colorY) {
+        colorSelector.clickOnPoint(colorX, colorY);
+        return on(SettingsBubbleColorBlock.class);
+    }
+
+    public SettingsBubbleColorBlock setCurrentColor() {
+        currentColor.click();
+        return on(SettingsBubbleColorBlock.class);
+    }
+
+    public String getCurrentColor() {
+       return currentColor.getWrappedElement().getAttribute("style");
+    }
+
+    public void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {
+        switch (type) {
+            case BY_POINT:
+                setColorBarByPoint(barY)
+                        .setColorByPoint(colorX, colorY)
+                        .clickChooseButton();
+                break;
+            case BY_CODE:
+                enterCode(code)
+                        .clickChooseButton();
+                break;
+            default:
+                Assert.fail("Incorrect color selector type " + type + "!");
+
+        }
+
+    }
 }

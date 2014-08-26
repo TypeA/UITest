@@ -1,7 +1,7 @@
 Scenario: Check IP blocking
 
 Meta: 
-@categories authorization secure mytests
+@categories authorization secure
 @issue LJSUP-18010
 
 Given unlogged user on Login Form

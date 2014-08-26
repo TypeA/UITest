@@ -1,32 +1,62 @@
-Scenario: Title
+Scenario: New Title
 Meta: 
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user change Title in Settings and save it
-Then Title is changed
+When user add new Title <title> in Settings and save it
+Then the Title is changed on correct title <correct_title>
 
 Examples:
-|name|password|
-|test|test|
+|name|password|title|correct_title|
+|test|test|new_title|NEW_TITLE|
+|test|test||ЛЕНТА|
 
 
-Scenario: Background color 
+Scenario: Change Title
 Meta: 
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Background color in Settings and save it
-Then  Background color is changed
+When user change Title <title> in Settings and save it
+Then the Title is changed on correct title <correct_title>
 
 Examples:
-|name|password|
-|test|test|
+|name|password|title|correct_title|
+|test|test|Test|TEST|
+
+
+
+Scenario: Set color 
+Meta: 
+@categories feed personal test
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
+Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>
+
+Examples:
+|name|password|color|type|code|barY|colorX|colorY|
+|test|test|color|BACKGROUND_COLOR|BY_POINT|0|50|50|50|
+|test|test|color|FOREGROUND_COLOR|BY_POINT|0|50|50|50|
+|test|test|color|SIDEBAR_BACKGROUND|BY_POINT|0|50|50|50|
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Scenario: Background image 
 Meta: 
-@categories feed personal test1
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user load Background image <image> and set repeat <repeat> in Settings and save it

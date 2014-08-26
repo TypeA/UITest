@@ -8,7 +8,7 @@ Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|password|page|URL|
-|test|test|Friend Feed|/feed|
+|test765765|Mary1992|Friend Feed|/feed|
 
 
 Scenario: New user From Journal
@@ -21,7 +21,7 @@ Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|password|page|URL|
-|test|test|Friend Feed|/feed|
+|test765765|Mary1992|Friend Feed|/feed|
 
 
 Scenario: Old user on feed
@@ -34,7 +34,7 @@ Then user in correct page <page> with URL <URL>
 
 Examples:
 |name|password|page|URL|
-|test|test|Friend Feed|/friends|
+|test765765|Mary1992|Friend Feed|/feed|
 
 
 Scenario: Unlogged user on feed
@@ -47,4 +47,4 @@ Then user in friends feed page <page> with URL <URL>
 
 Examples:
 |page|URL|friend|
-Friend Feed|/feed|test|
+|Friend Feed|/feed|test|
