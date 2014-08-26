@@ -36,9 +36,9 @@ Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <co
 
 Examples:
 |name|password|color|type|code|barY|colorX|colorY|
-|test|test|color|BACKGROUND_COLOR|BY_POINT|0|50|50|50|
-|test|test|color|FOREGROUND_COLOR|BY_POINT|0|50|50|50|
-|test|test|color|SIDEBAR_BACKGROUND|BY_POINT|0|50|50|50|
+|test|test|BACKGROUND_COLOR|BY_POINT|0|50|50|50|
+|test|test|FOREGROUND_COLOR|BY_POINT|0|50|50|50|
+|test|test|SIDEBAR_BACKGROUND|BY_POINT|0|50|50|50|
 
 
 
