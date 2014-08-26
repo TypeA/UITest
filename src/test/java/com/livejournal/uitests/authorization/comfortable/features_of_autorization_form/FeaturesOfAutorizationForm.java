@@ -13,17 +13,21 @@ import org.jbehave.core.annotations.When;
  */
 public class FeaturesOfAutorizationForm extends WebTest {
 
+    //Scenario: Forgot password(1/1)
+    //Scenario: Remember me(1/1)
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
         on(LoginPage.class);
 
     }
 
+    //Scenario: Forgot password(2/3)
     @When("user click link Forgot Password")
     public void user_click_link_Forgot_Password() {
         on(LoginPage.class).getLoginForm().getLostInfo().click();
     }
 
+    //Scenario: Forgot password(3/3)
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_page_with_URL(String page, String URL) {
         verify().that(getCurrentUrl().contains(URL))

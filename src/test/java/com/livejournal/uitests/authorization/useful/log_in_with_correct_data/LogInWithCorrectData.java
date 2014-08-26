@@ -14,17 +14,20 @@ import org.jbehave.core.annotations.When;
  */
 public class LogInWithCorrectData extends WebTest {
 
+    //Scenario: Successfully autorization(1/3)
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
         on(LoginPage.class);
 
     }
 
+    //Scenario: Successfully autorization(2/3)
     @When("user enter correct data: name $name, password $password and clicks LogIn")
     public void user_enter_correct_data_and_clicks_LogIn(String name, String password) {
         on(LoginPage.class).getLoginForm().authorizeBy(name, password);
     }
 
+    //Scenario: Successfully autorization(3/3)
     @Then("user logged in")
     public void user_logged_in() {
         on(FullscreenHeader.class).getLogo().getLogoPic().click();

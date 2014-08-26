@@ -17,11 +17,13 @@ import org.jbehave.core.annotations.When;
  */
 public class RegisterAnAccountWithCorrectData extends WebTest {
 
+    //Scenario: Successfull registration(1/3)
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
     }
 
+    //Scenario: Go to registration form(1/2)
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
         on(MainPageForUnsignedInUser.class)
@@ -30,6 +32,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
         on(LoginForm.class).getCreateAccountLink().click();
     }
 
+    //Scenario: Successfull registration(2/3)
     @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
     public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender) {
         on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
@@ -46,6 +49,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
         on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
     }
 
+    //Scenario: Go to registration form(2/2)
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_page_with_URL(String page, String URL) {
         verify().that(getCurrentUrl().contains(URL))
@@ -54,6 +58,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
                 .finish();
     }
 
+    //Scenario: Successfull registration(3/3)
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form_and_see_message_and_create_First_Post(String message) {
 

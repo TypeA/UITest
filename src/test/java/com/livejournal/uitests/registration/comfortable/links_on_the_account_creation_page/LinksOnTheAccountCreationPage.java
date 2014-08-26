@@ -13,21 +13,27 @@ import org.jbehave.core.annotations.When;
  */
 public class LinksOnTheAccountCreationPage extends WebTest {
 
+    //Scenario: TOS link(1/3)
+    //Scenario: Privacy link(1/3)
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         on(CreateAccountPage.class);
     }
 
+    //Scenario: TOS link(2/3)
     @When("user click TOS Link")
     public void user_click_TOS_Link() {
         on(CreateAccountPage.class).getCreateAccountForm().getTosRusLink().click();
     }
 
+    //Scenario: Privacy link(2/3)
     @When("user click Privacy Link")
     public void user_click_Privacy_Link() {
         on(CreateAccountPage.class).getCreateAccountForm().getPrivacyRusLink().click();
     }
 
+    //Scenario: TOS link(3/3)
+    //Scenario: Privacy link(3/3)
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_Page_with_URL(String page, String URL) {
         verify().that(getCurrentUrl().contains(URL))

@@ -51,7 +51,6 @@ Examples:
 
 Scenario: Find Friends link
 
-
 Meta: 
 @categories registration comfortable
 @issue LJSUP-18873

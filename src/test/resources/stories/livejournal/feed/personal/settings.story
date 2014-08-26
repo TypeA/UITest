@@ -26,7 +26,7 @@ Examples:
 
 
 
-Scenario: Set color 
+Scenario: Set color
 Meta: 
 @categories feed personal test
 
