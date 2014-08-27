@@ -6,6 +6,7 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSelectType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
@@ -55,7 +56,7 @@ public class Settings extends WebTest {
     public void user_change_color_by_type_and_save_it(String color, String type, String code, String barY, String colorX, String colorY) {
         on(FriendsFeedLogged.class)
                 .openSettings()
-                .setColor(ColorSettings.valueOf(color), ColorSelectType.valueOf(type), code, 1, 1, 1)
+                .setColor(ColorSettings.valueOf(color), ColorSelectType.valueOf(type), code, Integer.parseInt(barY), Integer.parseInt(colorX), Integer.parseInt(colorY))
                 .saveSettings();
     }
 
@@ -68,9 +69,24 @@ public class Settings extends WebTest {
 
     //Scenario: Set color(3/3)
     @Then("color $color is changed by parametrs: code $code, barY $barY, colorX $colorX, colorY $colorY")
-    public void color_is_changed_by_parametrs(ColorSettings color, String code, int barY, int colorX, int colorY) {
-        String current_color = on(FriendsFeedLogged.class).openSettings().getColor(color).getCurrentColor();
-        verify().that(true).ifResultIsExpected(current_color).ifElse(current_color);
+    public void color_is_changed_by_parametrs(String color, String type, String code, String barY, String colorX, String colorY) {
+        on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
+        verify().that(on(SettingsBubbleColorBlock.class).getCurrentColor().contains(hexToRGB(code)))
+                .ifResultIsExpected("Current color is correct.\n" + hexToRGB(code))
+                .ifElse("Current color is incorrect!\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
+                .and()
+                .that(on(SettingsBubbleColorBlock.class).getNewColor().contains(hexToRGB(code)))
+                .ifResultIsExpected("New color is correct.\n" + hexToRGB(code))
+                .ifElse("New color is incorrect!\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .and()
+                .that(on(SettingsBubbleColorBlock.class).getCode().equals(code))
+                .ifResultIsExpected("Color code is correct.\n" + code)
+                .ifElse("Color code is incorrect.\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .and()
+                .that(true)
+                .ifResultIsExpected(on(FriendsFeedLogged.class).lentaPreview.getWrappedElement().getAttribute(".p-lenta"))
+                .ifElse("Elements is incorrect.\n")
+                .finish();
     }
 
     private void verifyThatTitleIsCorrect(String correct_title) {
@@ -83,5 +99,9 @@ public class Settings extends WebTest {
                 .ifResultIsExpected(VerifyText.okTextForMessage(correct_title))
                 .ifElse(VerifyText.errorTextForMessage(correct_title, on(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
+    }
+
+    private String hexToRGB(String hex) {
+        return Integer.parseInt(hex.substring(0, 2), 16) + ", " + Integer.parseInt(hex.substring(2, 4), 16) + ", " + Integer.parseInt(hex.substring(4, 6), 16);
     }
 }

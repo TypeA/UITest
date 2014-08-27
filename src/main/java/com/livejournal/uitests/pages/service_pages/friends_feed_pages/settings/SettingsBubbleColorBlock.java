@@ -39,7 +39,7 @@ public class SettingsBubbleColorBlock extends UIBlock {
         return on(SettingsBubbleColorBlock.class);
     }
 
-    public String getCode(CharSequence... text) {
+    public String getCode() {
         return colorHex.getText();
     }
 
@@ -64,7 +64,11 @@ public class SettingsBubbleColorBlock extends UIBlock {
     }
 
     public String getCurrentColor() {
-       return currentColor.getWrappedElement().getAttribute("style");
+        return currentColor.getWrappedElement().getAttribute("style");
+    }
+
+    public String getNewColor() {
+        return newColor.getWrappedElement().getAttribute("style");
     }
 
     public void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {

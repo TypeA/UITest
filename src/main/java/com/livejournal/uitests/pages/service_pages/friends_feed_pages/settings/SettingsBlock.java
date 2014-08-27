@@ -80,7 +80,6 @@ public class SettingsBlock extends UIBlock {
 
     @FindBy(css = "a[ng-style*='url_visited_color']")
     private ColorPickerButton visitedLinkColor;
-    
 
     //////////////////////  UPLOAD RECORDINGS
     @FindBy(css = "select[ng-model*='paging_type']")
@@ -172,7 +171,6 @@ public class SettingsBlock extends UIBlock {
         }
     }
 
-    
     /////////////////////////////////////////////
     public ColorPickerButton getColorButton(ColorSettings button) {
         switch (button) {
@@ -207,7 +205,7 @@ public class SettingsBlock extends UIBlock {
     public SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
         getColorButton(button).click()
                 .setColor(type, code, barY, colorX, colorY);
-         return on(SettingsBlock.class);
+        return on(SettingsBlock.class);
     }
 
     public SettingsBubbleColorBlock getColor(ColorSettings button) {
