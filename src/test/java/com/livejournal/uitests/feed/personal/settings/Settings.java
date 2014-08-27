@@ -12,6 +12,7 @@ import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.By;
 
 /**
  *
@@ -83,9 +84,9 @@ public class Settings extends WebTest {
                 .ifResultIsExpected("Color code is correct.\n" + code)
                 .ifElse("Color code is incorrect.\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .and()
-                .that(true)
-                .ifResultIsExpected(on(FriendsFeedLogged.class).lentaPreview.getWrappedElement().getAttribute(".p-lenta"))
-                .ifElse("Elements is incorrect.\n")
+                .that(false)
+                .ifResultIsExpected(hexToRGB(code))
+                .ifElse(getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-content")).getCssValue("background-color"))
                 .finish();
     }
 
