@@ -12,6 +12,7 @@ import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 
 /**
@@ -27,7 +28,6 @@ public class Settings extends WebTest {
     //Scenario: Set color(1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
-        getCurrentBrowser().getDriver().manage().deleteAllCookies();
         on(LoginPage.class)
                 .authorizeBy(name, password);
         on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
@@ -73,20 +73,20 @@ public class Settings extends WebTest {
     public void color_is_changed_by_parametrs(String color, String type, String code, String barY, String colorX, String colorY) {
         on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
         verify().that(on(SettingsBubbleColorBlock.class).getCurrentColor().contains(hexToRGB(code)))
-                .ifResultIsExpected("Current color is correct.\n" + hexToRGB(code))
-                .ifElse("Current color is incorrect!\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
+                .ifResultIsExpected("Correct current color:\n" + hexToRGB(code))
+                .ifElse("Current color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
                 .and()
                 .that(on(SettingsBubbleColorBlock.class).getNewColor().contains(hexToRGB(code)))
-                .ifResultIsExpected("New color is correct.\n" + hexToRGB(code))
-                .ifElse("New color is incorrect!\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
                 .that(on(SettingsBubbleColorBlock.class).getCode().equals(code))
-                .ifResultIsExpected("Color code is correct.\n" + code)
-                .ifElse("Color code is incorrect.\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .ifResultIsExpected("Correct color code:\n" + code)
+                .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .and()
-                .that(false)
-                .ifResultIsExpected(hexToRGB(code))
-                .ifElse(getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-content")).getCssValue("background-color"))
+                .that(getElementColor(ColorSettings.valueOf(color)).contains(hexToRGB(code)))
+                .ifResultIsExpected("Correct element color:\n" + hexToRGB(code))
+                .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
     }
 
@@ -104,5 +104,35 @@ public class Settings extends WebTest {
 
     private String hexToRGB(String hex) {
         return Integer.parseInt(hex.substring(0, 2), 16) + ", " + Integer.parseInt(hex.substring(2, 4), 16) + ", " + Integer.parseInt(hex.substring(4, 6), 16);
+    }
+
+    private String getElementColor(ColorSettings button) {
+        switch (button) {
+            case BACKGROUND_COLOR:
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".s-schemius")).getCssValue("background-color");
+            case FOREGROUND_COLOR:
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-content")).getCssValue("background-color");
+            case SIDEBAR_BACKGROUND:
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-aside")).getCssValue("background-color");
+            case ELEMENTS_BACKGROUND:
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-menu-button")).getCssValue("background-color");
+            case ELEMENTS_COLOR:
+                return "ERROR!!!";
+            case BORDERS_COLOR:
+                return "ERROR!!!";
+            case MAIN_TEXT_COLOR:
+                return "ERROR!!!";
+            case SIDEBAR_TEXT_COLOR:
+                return "ERROR!!!";
+            case LINK_COLOR:
+                return "ERROR!!!";
+            case ON_HOVER_COLOR:
+                return "ERROR!!!";
+            case VISITED_LINK:
+                return "ERROR!!!";
+            default:
+                Assert.fail("Unknown button " + button + "!");
+        }
+        return "ERROR!!!";
     }
 }

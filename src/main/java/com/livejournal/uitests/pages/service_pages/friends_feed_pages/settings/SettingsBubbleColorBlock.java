@@ -40,7 +40,7 @@ public class SettingsBubbleColorBlock extends UIBlock {
     }
 
     public String getCode() {
-        return colorHex.getText();
+        return  colorHex.getWrappedElement().getAttribute("value");
     }
 
     public SettingsBlock clickChooseButton() {

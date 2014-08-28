@@ -36,21 +36,14 @@ Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <co
 
 Examples:
 |name|password|color|type|code|barY|colorX|colorY|
-|test|test|BACKGROUND_COLOR|BY_POINT|d9c8e3|60|30|30|
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+|test|test|BACKGROUND_COLOR|BY_POINT|d6c5e0|60|30|30|
+|test|test|BACKGROUND_COLOR|BY_CODE|43ed40|0|0|0|
+|test765765|Mary1992|FOREGROUND_COLOR|BY_POINT|d6c5e0|60|30|30|
+|test765765|Mary1992|FOREGROUND_COLOR|BY_CODE|43ed40|0|0|0|
+|test|test|SIDEBAR_BACKGROUND|BY_POINT|d6c5e0|60|30|30|
+|test|test|SIDEBAR_BACKGROUND|BY_CODE|43ed40|0|0|0|
+|test765765|Mary1992|ELEMENTS_BACKGROUND|BY_POINT|d6c5e0|60|30|30|
+|test765765|Mary1992|ELEMENTS_BACKGROUND|BY_CODE|43ed40|0|0|0|
 
 
 
@@ -69,58 +62,6 @@ Examples:
 |test|test|картинка|Vertical|
 
 
-Scenario: Foreground color 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Foreground color in Settings and save it
-Then  Foreground color is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-Scenario: Sidebar dackground 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Sidebar dackground in Settings and save it
-Then Sidebar dackground is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-Scenario: Elements dackground 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Elements dackground in Settings and save it
-Then Elements dackground is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-
-Scenario: Border color 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Border color in Settings and save it
-Then Border color is changed
-
-Examples:
-|name|password|
-|test|test|
-
 
 
 Scenario: Text settings 
@@ -135,73 +76,6 @@ Examples:
 |name|password|size|font|
 |test|test|TextSize|Verdana|
 
-
-Scenario: Main text color 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Main text color in Settings and save it
-Then Main text color is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-
-Scenario: Sidebar text color 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Sidebar text color in Settings and save it
-Then Sidebar text color is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-
-Scenario: Link color 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Link color in Settings and save it
-Then Link color is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-Scenario: On hover color 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  On hover color in Settings and save it
-Then On hover color is changed
-
-Examples:
-|name|password|
-|test|test|
-
-
-
-Scenario: Visited link 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) on Friends Feed
-When user change  Visited link in Settings and save it
-Then Visited link is changed
-
-Examples:
-|name|password|
-|test|test|
 
 
 
