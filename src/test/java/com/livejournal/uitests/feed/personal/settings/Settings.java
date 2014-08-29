@@ -117,15 +117,15 @@ public class Settings extends WebTest {
             case ELEMENTS_BACKGROUND:
                 return getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-menu-button")).getCssValue("background-color");
             case ELEMENTS_COLOR:
-                return "ERROR!!!";
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector("svg[class*='svgicon']")).getCssValue("color");
             case BORDERS_COLOR:
                 return "ERROR!!!";
             case MAIN_TEXT_COLOR:
-                return "ERROR!!!";
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-item-title a")).getCssValue("color");
             case SIDEBAR_TEXT_COLOR:
-                return "ERROR!!!";
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-todaylj-caption a")).getCssValue("color");
             case LINK_COLOR:
-                return "ERROR!!!";
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body A:link")).getCssValue("color");
             case ON_HOVER_COLOR:
                 return "ERROR!!!";
             case VISITED_LINK:
@@ -135,4 +135,4 @@ public class Settings extends WebTest {
         }
         return "ERROR!!!";
     }
-}
+}//.b-contextualhover

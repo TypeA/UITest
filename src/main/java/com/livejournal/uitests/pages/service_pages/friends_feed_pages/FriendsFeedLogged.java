@@ -1,13 +1,10 @@
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages;
 
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import net.thucydides.core.annotations.DefaultUrl;
-import org.junit.Assert;
-import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
