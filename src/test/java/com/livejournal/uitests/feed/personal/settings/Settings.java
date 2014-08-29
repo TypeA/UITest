@@ -76,15 +76,15 @@ public class Settings extends WebTest {
                 .ifResultIsExpected("Correct current color:\n" + hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
                 .and()
-                .that(on(SettingsBubbleColorBlock.class).getNewColor().contains(hexToRGB(code)))
+                .that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(on(SettingsBubbleColorBlock.class).getCode().equals(code))
+                .that(verifyColor(code, "("+hexToRGB(on(SettingsBubbleColorBlock.class).getCode())+")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .and()
-                .that(getElementColor(ColorSettings.valueOf(color)).contains(hexToRGB(code)))
+                .that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
                 .ifResultIsExpected("Correct element color:\n" + hexToRGB(code))
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
@@ -142,13 +142,14 @@ public class Settings extends WebTest {
         boolean resultR = true;
         boolean resultG = true;
         boolean resultB = true;
-        if (Integer.parseInt(rgb.substring(0, 3)) < Integer.parseInt(hex.substring(0, 2), 16) - 3 && Integer.parseInt(rgb.substring(0, 3)) > Integer.parseInt(hex.substring(0, 2), 16) + 3) {
+        if (Integer.parseInt(rgb.substring(0, 3)) < Integer.parseInt(hex.substring(0, 2), 16) - 2 && Integer.parseInt(rgb.substring(0, 3)) > Integer.parseInt(hex.substring(0, 2), 16) + 2) {
             resultR = !resultR;
         }
-        if (Integer.parseInt(rgb.substring(5, 8)) < Integer.parseInt(hex.substring(2, 4), 16) - 3 && Integer.parseInt(rgb.substring(5, 8)) > Integer.parseInt(hex.substring(2, 4), 16) + 3) {
+        if (Integer.parseInt(rgb.substring(5, 8)) < Integer.parseInt(hex.substring(2, 4), 16) - 2 && Integer.parseInt(rgb.substring(5, 8)) > Integer.parseInt(hex.substring(2, 4), 16) + 2) {
             resultG = !resultG;
         }
-        if (Integer.parseInt(rgb.substring(10, 13)) < Integer.parseInt(hex.substring(4, 6), 16) - 3 && Integer.parseInt(rgb.substring(10, 13)) > Integer.parseInt(hex.substring(4, 6), 16) + 3) {
+
+        if (Integer.parseInt(rgb.substring(10, 13)) < Integer.parseInt(hex.substring(4, 6), 16) - 2 && Integer.parseInt(rgb.substring(10, 13)) > Integer.parseInt(hex.substring(4, 6), 16) + 2) {
             resultB = !resultB;
         }
         return resultR & resultG & resultB;
