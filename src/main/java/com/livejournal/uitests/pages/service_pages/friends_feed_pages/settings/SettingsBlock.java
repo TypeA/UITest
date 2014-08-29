@@ -42,16 +42,6 @@ public class SettingsBlock extends UIBlock {
     @FindBy(css = "a[ng-style*='element_background_color']")
     private ColorPickerButton bordersColor;
 
-    public SettingsBlock enterTitle(String title) {
-        titleField.enter(title);
-        return on(SettingsBlock.class);
-    }
-
-    public SettingsBlock typeToTitle(String title) {
-        titleField.type(title);
-        return on(SettingsBlock.class);
-    }
-
     //////////////////// TEXT SETTINGS
     @FindBy(css = "select[ng-model*='font_size']")
     private Select textSize;
@@ -64,12 +54,6 @@ public class SettingsBlock extends UIBlock {
 
     @FindBy(css = "a[ng-style*='sidebar_font_color']")
     private ColorPickerButton sidebarTextColor;
-
-    public SettingsBlock setTextSettings(String size, String font) {
-        textSize.selectByValue(size);
-        textFont.deselectByValue(font);
-        return on(SettingsBlock.class);
-    }
 
     /////////////////////////// COLOR SETTINGS
     @FindBy(css = "a[ng-style*='url_color']")
@@ -88,11 +72,6 @@ public class SettingsBlock extends UIBlock {
     @FindBy(css = "input[ng-model*='paging_size']")
     private TextField pageSize;
 
-    public PageSize setPaging(String type) {
-        pageType.selectByValue(type);
-        return new PageSize(type);
-    }
-
     ////////////////////// BUTTONS
     @FindBy(css = ".b-feedsettings-save")
     private Button saveButton;
@@ -102,6 +81,28 @@ public class SettingsBlock extends UIBlock {
 
     @FindBy(css = ".b-feedsettings-restore")
     private Button restoreButton;
+
+    ////////////////////////////////////////
+    public SettingsBlock enterTitle(String title) {
+        titleField.enter(title);
+        return on(SettingsBlock.class);
+    }
+
+    public SettingsBlock typeToTitle(String title) {
+        titleField.type(title);
+        return on(SettingsBlock.class);
+    }
+
+    public SettingsBlock setTextSettings(String size, String font) {
+        textSize.selectByValue(size);
+        textFont.deselectByValue(font);
+        return on(SettingsBlock.class);
+    }
+
+    public PageSize setPaging(String type) {
+        pageType.selectByValue(type);
+        return new PageSize(type);
+    }
 
     public void saveSettings() {
         saveButton.click();
@@ -115,7 +116,48 @@ public class SettingsBlock extends UIBlock {
         restoreButton.click();
     }
 
-    ////////////////////////////////////////
+    public ColorPickerButton getColorButton(ColorSettings button) {
+        switch (button) {
+            case BACKGROUND_COLOR:
+                return backgroundColor;
+            case FOREGROUND_COLOR:
+                return foregroundColor;
+            case SIDEBAR_BACKGROUND:
+                return sidebarBackground;
+            case ELEMENTS_BACKGROUND:
+                return elementsBackground;
+            case ELEMENTS_COLOR:
+                return elementsColor;
+            case BORDERS_COLOR:
+                return bordersColor;
+            case MAIN_TEXT_COLOR:
+                return mainTextColor;
+            case SIDEBAR_TEXT_COLOR:
+                return sidebarTextColor;
+            case LINK_COLOR:
+                return linkColor;
+            case ON_HOVER_COLOR:
+                return onHoverColor;
+            case VISITED_LINK:
+                return visitedLinkColor;
+            default:
+                Assert.fail("Unknown button " + button + "!");
+        }
+        return null;
+    }
+
+    public SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
+        getColorButton(button).click()
+                .setColor(type, code, barY, colorX, colorY);
+        return on(SettingsBlock.class);
+    }
+
+    public SettingsBubbleColorBlock getColor(ColorSettings button) {
+        getColorButton(button).click();
+        return on(SettingsBubbleColorBlock.class);
+    }
+    
+    ////////////////////////////////////////////////
     public static class ColorPickerButton extends Button {
 
         public ColorPickerButton(WebElement wrappedElement) {
@@ -171,45 +213,4 @@ public class SettingsBlock extends UIBlock {
         }
     }
 
-    /////////////////////////////////////////////
-    public ColorPickerButton getColorButton(ColorSettings button) {
-        switch (button) {
-            case BACKGROUND_COLOR:
-                return backgroundColor;
-            case FOREGROUND_COLOR:
-                return foregroundColor;
-            case SIDEBAR_BACKGROUND:
-                return sidebarBackground;
-            case ELEMENTS_BACKGROUND:
-                return elementsBackground;
-            case ELEMENTS_COLOR:
-                return elementsColor;
-            case BORDERS_COLOR:
-                return bordersColor;
-            case MAIN_TEXT_COLOR:
-                return mainTextColor;
-            case SIDEBAR_TEXT_COLOR:
-                return sidebarTextColor;
-            case LINK_COLOR:
-                return linkColor;
-            case ON_HOVER_COLOR:
-                return onHoverColor;
-            case VISITED_LINK:
-                return visitedLinkColor;
-            default:
-                Assert.fail("Unknown button " + button + "!");
-        }
-        return null;
-    }
-
-    public SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
-        getColorButton(button).click()
-                .setColor(type, code, barY, colorX, colorY);
-        return on(SettingsBlock.class);
-    }
-
-    public SettingsBubbleColorBlock getColor(ColorSettings button) {
-        getColorButton(button).click();
-        return on(SettingsBubbleColorBlock.class);
-    }
 }

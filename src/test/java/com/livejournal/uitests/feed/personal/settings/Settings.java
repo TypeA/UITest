@@ -135,4 +135,4 @@ public class Settings extends WebTest {
         }
         return "ERROR!!!";
     }
-}//.b-contextualhover
+}
