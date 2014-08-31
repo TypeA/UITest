@@ -26,7 +26,7 @@ Examples:
 
 
 
-Scenario: Set color
+Scenario: Set new background color
 Meta: 
 @categories feed personal test
 
@@ -36,21 +36,52 @@ Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <co
 
 Examples:
 |name|password|color|type|code|barY|colorX|colorY|
-|test|test|SIDEBAR_BACKGROUND|BY_POINT|d6c5e0|60|30|30|
-|test|test|SIDEBAR_BACKGROUND|BY_CODE|dae3c8|0|0|0|
-|test765765|Mary1992|ELEMENTS_BACKGROUND|BY_POINT|d6c5e0|60|30|30|
-|test765765|Mary1992|ELEMENTS_BACKGROUND|BY_CODE|dae3c8|0|0|0|
-|test|test|ELEMENTS_COLOR|BY_POINT|d6c5e0|60|30|30|
-|test|test|ELEMENTS_COLOR|BY_CODE|dae3c8|0|0|0|
-|test765765|Mary1992|MAIN_TEXT_COLOR|BY_POINT|d6c5e0|60|30|30|
-|test765765|Mary1992|MAIN_TEXT_COLOR|BY_CODE|dae3c8|0|0|0|
-|test|test|SIDEBAR_TEXT_COLOR|BY_POINT|d6c5e0|60|30|30|
-|test|test|SIDEBAR_TEXT_COLOR|BY_CODE|dae3c8|0|0|0|
-|test765765|Mary1992|LINK_COLOR|BY_POINT|d6c5e0|60|30|30|
-|test765765|Mary1992|LINK_COLOR|BY_CODE|dae3c8|0|0|0|
-|test|test|LINK_COLOR|BY_POINT|d6c5e0|60|30|30|
-|test|test|LINK_COLOR|BY_CODE|dae3c8|0|0|
+|test|test|BACKGROUND_COLOR|BY_POINT|d6c5e0|60|30|30|
+|test|test|BACKGROUND_COLOR|BY_CODE|dae3c8|0|0|0|
 
+
+
+Scenario: Set new foreground color
+Meta: 
+@categories feed personal test
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
+Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>
+
+Examples:
+|name|password|color|type|code|barY|colorX|colorY|
+|test|test|FOREGROUND_COLOR|BY_POINT|d6c5e0|60|30|30|
+|test|test|FOREGROUND_COLOR|BY_CODE|dae3c8|0|0|0|
+
+
+
+Scenario: Set new sidebar background color
+Meta: 
+@categories feed personal test
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
+Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>
+
+Examples:
+|name|password|color|type|code|barY|colorX|colorY|
+|test765765|Mary1992|SIDEBAR_BACKGROUND|BY_POINT|d6c5e0|60|30|30|
+|test765765|Mary1992|SIDEBAR_BACKGROUND|BY_CODE|dae3c8|0|0|0|
+
+
+
+Scenario: Return the current color
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change color <color> (old code <code>) and return current color
+Then the color changed to the current code <code>
+
+Examples:
+|name|password|color|code|
+|test|test|SIDEBAR_BACKGROUND|dae3c8|
 
 
 
