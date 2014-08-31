@@ -8,6 +8,7 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.C
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
+import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -25,7 +26,7 @@ public class Settings extends WebTest {
 
     //Scenario: New Title(1/3)
     //Scenario: Change Title(1/3)
-    //Scenario: Set color(1/3)
+    //Scenario: Set new color(1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
         on(LoginPage.class)
@@ -52,13 +53,33 @@ public class Settings extends WebTest {
                 .saveSettings();
     }
 
-    //Scenario: Set color(2/3)
+    //Scenario: Set new color(2/3)
     @When("user change color $color by type $type (parametrs: code $code, barY $barY, colorX $colorX, colorY $colorY) and save it")
     public void user_change_color_by_type_and_save_it(String color, String type, String code, String barY, String colorX, String colorY) {
         on(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.valueOf(color), ColorSelectType.valueOf(type), code, Integer.parseInt(barY), Integer.parseInt(colorX), Integer.parseInt(colorY))
                 .saveSettings();
+    }
+
+    //Scenario: Return the current color(2/3)
+    @When("user change color $color (old code $code) and return current color")
+    public void user_change_color_and_return_current_color(String color, String code) {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setColor(ColorSettings.valueOf(color), ColorSelectType.BY_CODE, code, 0, 0, 0)
+                .saveSettings();
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .getColor(ColorSettings.valueOf(color))
+                .setColorBarByPoint(new RandomeValue(100).get())
+                .setColorByPoint(new RandomeValue(100).get(), new RandomeValue(100).get())
+                .getNewColor();
+        verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .finish();
+        on(SettingsBubbleColorBlock.class).setCurrentColor();
     }
 
     //Scenario: New Title(3/3)
@@ -68,7 +89,7 @@ public class Settings extends WebTest {
         verifyThatTitleIsCorrect(correct_title);
     }
 
-    //Scenario: Set color(3/3)
+    //Scenario: Set new color(3/3)
     @Then("color $color is changed by parametrs: code $code, barY $barY, colorX $colorX, colorY $colorY")
     public void color_is_changed_by_parametrs(String color, String type, String code, String barY, String colorX, String colorY) {
         on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
@@ -80,7 +101,7 @@ public class Settings extends WebTest {
                 .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "("+hexToRGB(on(SettingsBubbleColorBlock.class).getCode())+")"))
+                .that(verifyColor(code, "(" + hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .and()
@@ -89,6 +110,23 @@ public class Settings extends WebTest {
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
 
+    }
+
+    //Scenario: Return the current color(3/3)
+    @Then("the color changed to the current code $code")
+    public void the_color_changed_to_the_current(String code) {
+        verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .and()
+                .that(verifyColor(code, "(" + hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .ifResultIsExpected("Correct color code:\n" + code)
+                .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .and()
+                .that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .finish();
     }
 
     private void verifyThatTitleIsCorrect(String correct_title) {

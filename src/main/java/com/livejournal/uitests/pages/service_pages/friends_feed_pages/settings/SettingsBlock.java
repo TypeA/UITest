@@ -112,8 +112,9 @@ public class SettingsBlock extends UIBlock {
         cancelButton.click();
     }
 
-    public void restoreDefaultSettings() {
+    public SettingsBlock restoreDefaultSettings() {
         restoreButton.click();
+        return on(SettingsBlock.class);
     }
 
     public ColorPickerButton getColorButton(ColorSettings button) {
@@ -156,7 +157,7 @@ public class SettingsBlock extends UIBlock {
         getColorButton(button).click();
         return on(SettingsBubbleColorBlock.class);
     }
-    
+
     ////////////////////////////////////////////////
     public static class ColorPickerButton extends Button {
 
@@ -199,12 +200,12 @@ public class SettingsBlock extends UIBlock {
                 case "pages":
                     if (pageSize.isDisplayed()) {
                         pageSize.enter(size);
-                        break;
                     }
-                    Assert.fail("Page size input field is not displayed!");
+                    break;
                 case "endless":
                     if (pageSize.isDisplayed()) {
                         Assert.fail("Page size input field is displayed!");
+                        
                     }
                     break;
                 default:
