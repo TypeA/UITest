@@ -171,7 +171,7 @@ public class Settings extends WebTest {
             case VISITED_LINK:
                 on(FriendsFeedLogged.class).getUserName().click();
                // on(FriendsFeedLogged.class, new Url().setPrefix("test."));
-              //  return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body A:visited, .p-lenta .b-feedwidgets A:visited, .p-lenta .l-flatslide-intro-heads A:visited")).getCssValue("color");
+                //  return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body A:visited, .p-lenta .b-feedwidgets A:visited, .p-lenta .l-flatslide-intro-heads A:visited")).getCssValue("color");
                 return "(111,111,111)";
             default:
                 Assert.fail("Unknown button " + button + "!");
@@ -187,17 +187,14 @@ public class Settings extends WebTest {
         boolean resultB = true;
         if ((Integer.parseInt(mas[0]) < Integer.parseInt(hex.substring(0, 2), 16) - 5) || (Integer.parseInt(mas[0]) > Integer.parseInt(hex.substring(0, 2), 16) + 5)) {
             resultR = !resultR;
-            System.out.print("\nresultR======================================" + resultR);
         }
 
         if (Integer.parseInt(mas[1]) < Integer.parseInt(hex.substring(2, 4), 16) - 5 || Integer.parseInt(mas[1]) > Integer.parseInt(hex.substring(2, 4), 16) + 5) {
             resultG = !resultG;
-            System.out.print("\nresultG======================================" + resultG);
         }
 
         if (Integer.parseInt(mas[2]) < Integer.parseInt(hex.substring(4, 6), 16) - 5 || Integer.parseInt(mas[2]) > Integer.parseInt(hex.substring(4, 6), 16) + 5) {
             resultB = !resultB;
-            System.out.print("\nresultB======================================" + resultB);
         }
         return resultR & resultG & resultB;
     }
