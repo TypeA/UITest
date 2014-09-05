@@ -28,6 +28,21 @@ Examples:
 |test|test|comment|
 
 
+Scenario: Deploy comment
+
+Meta: 
+@categories commenting system useful
+
+Given logged user (name <name>, password <password>) 
+When user open any comment <comment> and click on Deploy button
+Then the comment is deployed
+
+
+Examples:
+|name|password|comment|
+|test|test|comment|
+
+
 Scenario: Manage comment
 
 Meta: 

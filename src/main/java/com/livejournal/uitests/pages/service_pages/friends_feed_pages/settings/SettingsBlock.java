@@ -200,14 +200,14 @@ public class SettingsBlock extends UIBlock {
                 case "pages":
                     if (pageSize.isDisplayed()) {
                         pageSize.enter(size);
-                    }
-                    break;
+                    
+                    break;}
                 case "endless":
                     if (pageSize.isDisplayed()) {
                         Assert.fail("Page size input field is displayed!");
                         
-                    }
-                    break;
+                    
+                    break;}
                 default:
                     Assert.fail("Incorrect page type!");
             }

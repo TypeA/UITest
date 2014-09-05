@@ -1,6 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
@@ -34,9 +35,15 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = ".l-flatslide-intro-heads .b-lenta-head-title")
     private TextBlock feedTitle;
 
+    @FindBy(css = ".l-flatslide-intro-heads .i-ljuser-type-P a:not([href*='profile']) b")
+    public Link userName;
+
     public String getFeedTitle() {
         return feedTitle.getText();
     }
 
+    public Link getUserName() {
+        return userName;
+    }
 
 }
