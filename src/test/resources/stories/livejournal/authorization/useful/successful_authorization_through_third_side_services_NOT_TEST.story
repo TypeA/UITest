@@ -25,8 +25,8 @@ When user autorizated through Twitter with correct data: login <login>, password
 Then user should be in LJ through Twitter 
 
 Examples:
-|login|password|
-|auto-test@rambler.ru|Test123|
+|login                  |password   |
+|auto-test@rambler.ru   |Test123    |
 
 
 
@@ -40,8 +40,8 @@ When user autorizated through VK with correct data: login <login>, password <pas
 Then user should be in LJ through VK
 
 Examples:
-|login|password|
-|auto-test@rambler.ru|Test123|
+|login                  |password   |
+|auto-test@rambler.ru   |Test123    |
 
 
 
@@ -57,8 +57,8 @@ When user autorizated through Google+ with correct data: login <login>, password
 Then user should be in LJ through Google+
 
 Examples:
-|login|password|
-|auto-test@gmail.com|Test123|
+|login                  |password   |
+|auto-test@gmail.com    |Test123    |
 
 
 
@@ -74,8 +74,8 @@ When user autorizated through Mail.ru with correct data: login <login>, password
 Then user should be in LJ through Mail.ru
 
 Examples:
-|login|password|
-|auto-test@mail.ru|Test123|
+|login              |password   |
+|auto-test@mail.ru  |Test123    |
 
 
 

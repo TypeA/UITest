@@ -9,5 +9,5 @@ Then user see message <message> and can not enter with correct data: name <name>
 
 
 Examples:
-|name|incorrect_password|correct_password|message|
-|testipblock|testrnd|test|Ваш адрес IP временно заблокирован, поскольку количество неудачных попыток входа превысило разумные пределы|
+|name           |incorrect_password |correct_password   |message                                                                                                        |
+|testipblock    |testrnd            |test               |Ваш адрес IP временно заблокирован, поскольку количество неудачных попыток входа превысило разумные пределы    |

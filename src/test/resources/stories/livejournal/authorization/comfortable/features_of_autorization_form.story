@@ -8,8 +8,8 @@ When user click link Forgot Password
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|Lost Information Page|/lostinfo.bml|
+|page                   |URL            |
+|Lost Information Page  |/lostinfo.bml  |
 
 
 
@@ -24,5 +24,5 @@ Then can not authenticate during 60 days
 
 
 Examples:
-|name|password|
-|test|test|
+|name   |password   |
+|test   |test       |

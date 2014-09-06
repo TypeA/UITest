@@ -9,6 +9,6 @@ Then user logged in
 
 
 Examples:
-|name|password|
-|test|test|
+|name   |password   |
+|test   |test       |
 

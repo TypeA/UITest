@@ -23,3 +23,7 @@ Meta:
 Given login user (name <name>, password <password>) on Friends Feed
 When click on Settings button
 Then Settings list is visible and Settings icone changed on Close icon
+
+Examples:
+|name       |password   |
+|test765765 |Mary1992   |

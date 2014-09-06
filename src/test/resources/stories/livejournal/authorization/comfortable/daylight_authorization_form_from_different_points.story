@@ -20,8 +20,8 @@ When user click on the Tokens in the Header
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|Authorization Page|/login.bml|
+|page               |URL        |
+|Authorization Page |/login.bml |
 
 
 
@@ -36,8 +36,8 @@ When user click on the Tokens Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|Authorization Page|/login.bml|
+|page               |URL        |
+|Authorization Page |/login.bml |
 
 
 
@@ -52,5 +52,5 @@ When user click on the Rename Account Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|Authorization Page|/login.bml|
+|page               |URL        |
+|Authorization Page |/login.bml |

@@ -8,6 +8,6 @@ When user set commenting system style <style>
 Then the commenting system in style <style>
 
 Examples:
-|name|password|style|
-|test|test|s1|
-|test|test|s2|
+|name   |password   |style  |
+|test   |test       |s1     |
+|test   |test       |s2     |

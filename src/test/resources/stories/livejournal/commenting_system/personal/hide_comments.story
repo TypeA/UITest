@@ -9,9 +9,9 @@ Then the all comment <comment> is not hided
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
 
 
 
@@ -26,9 +26,9 @@ Then the anonymous comment <comment> is hided
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
 
 
 
@@ -43,9 +43,9 @@ Then the comment <comment> are not from your friends is hided
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
 
 
 
@@ -60,6 +60,6 @@ Then all comments <comment> is hided
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |

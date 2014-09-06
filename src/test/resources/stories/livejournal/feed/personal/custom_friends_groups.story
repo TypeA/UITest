@@ -7,8 +7,8 @@ When user go to Edit Custom Friends Groups
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|password|page|URL|
-|test|test|Edit Custom Friends Groups|/friends/editgroups.bml|
+|name   |password   |page                       |URL                    |
+|test   |test       |Edit Custom Friends Groups |/friends/editgroups.bml|
 
 
 
@@ -22,8 +22,8 @@ When user save the changes
 Then the changes displayed correctly on the Friends Feed
 
 Examples:
-|name|password|group_up|group_down|
-|test|test|Online Friends|Family|
+|name   |password   |group_up       |group_down |
+|test   |test       |Online Friends |Family     |
 
 
 Scenario: Public group
@@ -35,8 +35,8 @@ When user set the group <group> is public and save the changes
 Then unlogged user can see group <group>
 
 Examples:
-|name|password|group|
-|test|test|Online Friends|
+|name   |password   |group          |
+|test   |test       |Online Friends |
 
 
 
@@ -50,10 +50,10 @@ Then the changes displayed correctly on the Friends Feed
 Then there are no posts in the new group
 
 Examples:
-|name|password|group|
-|test|test|test_group|
-|test|test|НОВАЯ ГРУППА|
-|test|test|111|
+|name   |password   |group          |
+|test   |test       |test_group     |
+|test   |test       |НОВАЯ ГРУППА   |
+|test   |test       |111            |   
 
 
 Scenario: Delete group
@@ -65,8 +65,8 @@ When user delete group <group> and save the changes
 Then the changes displayed correctly on the Friends Feed
 
 Examples:
-|name|password|group|
-|test|test|test_group|
+|name   |password   |group      |
+|test   |test       |test_group |
 
 
 Scenario: Rename group name
@@ -78,8 +78,8 @@ When user rename group <group> name and save the changes
 Then the changes displayed correctly on the Friends Feed
 
 Examples:
-|name|password|group|
-|test|test|test_group|
+|name   |password   |group      |
+|test   |test       |test_group |
 
 
 Scenario: Add users in group
@@ -91,9 +91,9 @@ When user add users <users> in group <group> and save the changes
 Then in group <group> displayed correct posts
 
 Examples:
-|name|password|group|users|
-|test|test|test_group|testmaxapryg|
-|test|test|test_group|testmaxapryg, test001|
+|name   |password   |group      |users                  |
+|test   |test       |test_group |testmaxapryg           |
+|test   |test       |test_group |testmaxapryg, test001  |
 
 
 Scenario: Delete users in group
@@ -105,9 +105,9 @@ When user delete users <users> in group <group> and save the changes
 Then in group <group> displayed correct posts
 
 Examples:
-|name|password|group|users|
-|test|test|test_group|testmaxapryg|
-|test|test|test_group|testmaxapryg, test001|
+|name   |password   |group      |users                  |
+|test   |test       |test_group |testmaxapryg           |
+|test   |test       |test_group |testmaxapryg, test001  |
 
 
 
@@ -120,6 +120,6 @@ When user delete users <users> in group <group> and save the changes
 Then in group <group> displayed correct posts
 
 Examples:
-|name|password|group|users|
-|test|test|test_group|testmaxapryg|
-|test|test|test_group|testmaxapryg, test001|
+|name   |password   |group      |users                  |
+|test   |test       |test_group |testmaxapryg           |
+|test   |test       |test_group |testmaxapryg, test001  |

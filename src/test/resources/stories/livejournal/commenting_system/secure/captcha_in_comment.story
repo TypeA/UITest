@@ -9,9 +9,9 @@ Then all user sees captcha when adding a comment <comment>
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
 
 
 
@@ -26,9 +26,9 @@ Then anonyms user sees captcha when adding a comment <comment>
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
 
 
 Scenario: All are not from your friends show captcha
@@ -42,9 +42,9 @@ Then all are not from your friends sees captcha when adding a comment <comment>
 
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
 
 
 
@@ -58,6 +58,6 @@ When set setting All users show captcha
 Then all users
 
 Examples:
-|name|password|comment|style|
-|test|test|comment|s1|
-|test|test|comment|s2|
+|name   |password   |comment    |style  |
+|test   |test       |comment    |s1     |
+|test   |test       |comment    |s2     |
