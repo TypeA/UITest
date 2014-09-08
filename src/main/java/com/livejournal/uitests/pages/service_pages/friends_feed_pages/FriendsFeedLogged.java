@@ -35,7 +35,7 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = ".l-flatslide-intro-heads .b-lenta-head-title")
     private TextBlock feedTitle;
 
-    @FindBy(css = ".l-flatslide-intro-heads .i-ljuser-type-P a:not([href*='profile']) b")
+    @FindBy(css = ".l-flatslide-intro-heads .i-ljuser-type-P a:not([href*='profile'])")
     public Link userName;
 
     public String getFeedTitle() {

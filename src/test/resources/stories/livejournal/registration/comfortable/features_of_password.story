@@ -1,3 +1,5 @@
+Features of password
+
 Scenario: Displays password
 
 Meta: 

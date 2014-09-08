@@ -1,3 +1,6 @@
+Register an account with correct data
+
+
 Scenario: Go to registration form
 
 Meta: 

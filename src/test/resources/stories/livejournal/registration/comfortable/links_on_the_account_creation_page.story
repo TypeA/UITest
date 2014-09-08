@@ -1,3 +1,5 @@
+Links on the account creation page
+
 Scenario: TOS link
 
 Meta: 
