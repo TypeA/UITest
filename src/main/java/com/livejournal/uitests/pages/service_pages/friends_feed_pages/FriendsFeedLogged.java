@@ -23,7 +23,7 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = "a[ng-class*='filters']")
     private Button filtersButton;
 
-    @FindBy(css = "a[href*='/customize/#feed']")
+    @FindBy(css = "a.l-flatslide-settingslink")
     private Button settingsButton;
 
     public SettingsBlock openSettings() {
