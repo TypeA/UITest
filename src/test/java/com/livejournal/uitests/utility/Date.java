@@ -61,7 +61,7 @@ public class Date {
         try {
             return parcseYear(year);
         } catch (Exception ex) {
-            return getCurrentYear();
+            return getCurrentYear()-14;
         }
     }
 }

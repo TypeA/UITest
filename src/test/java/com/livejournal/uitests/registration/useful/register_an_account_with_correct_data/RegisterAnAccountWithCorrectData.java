@@ -35,20 +35,16 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
 
     //Scenario: Successfull registration(2/3)
     @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
-    public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender) {
-        verify().that(on(CreateAccountPage.class)
-                      .createAccountData(new RandomName(name).get(),
-                                        email,
-                                        password,
-                                        Date.parceDayOrGetCurrent(day).toString(),
-                                        Date.parceMonthOrGetCurrent(month).toString(),
-                                        Date.parceYearOrGetCurrent(year).toString(),
-                                        gender)
-                       .createAccountButtonState())
-                .ifResultIsExpected("Create Account Button is enabled")
-                .ifElse("Button is disabled!")
-                .finish();
-        on(CreateAccountPage.class).clickOnCreateAccountButton();
+    public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender) throws InterruptedException {
+        on(CreateAccountPage.class)
+                .createAccountData(new RandomName(name).get(),
+                        email,
+                        password,
+                        Date.parceDayOrGetCurrent(day).toString(),
+                        Date.parceMonthOrGetCurrent(month).toString(),
+                        Date.parceYearOrGetCurrent(year).toString(),
+                        gender)
+                .clickOnCreateAccountButton();
     }
 
     //Scenario: Go to registration form(2/2)

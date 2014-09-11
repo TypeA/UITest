@@ -3,11 +3,16 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
+import junit.framework.Assert;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
@@ -90,14 +95,15 @@ public class CreateAccountPage extends ServicePage {
     }
 
     @StepGroup
-    public FinishForm clickOnCreateAccountButton() {
+    public FinishForm clickOnCreateAccountButton() throws InterruptedException{
+        Thread.sleep(300);
         createAccountButton.click();
         return on(FinishForm.class);
     }
 
     @StepGroup
     public boolean createAccountButtonState() {
-        return createAccountButton.isDisplayed();
+        return createAccountButton.isEnabled();
     }
 
 }

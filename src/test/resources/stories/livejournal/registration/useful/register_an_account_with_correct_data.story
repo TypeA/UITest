@@ -4,7 +4,7 @@ Register an account with correct data
 Scenario: Go to registration form
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
 Then user in correct page <page> with URL <URL>
@@ -18,7 +18,7 @@ Examples:
 Scenario: Successfull registration
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 @issue LJSUP-18873
 
 Given unlogged user on Registration Form
