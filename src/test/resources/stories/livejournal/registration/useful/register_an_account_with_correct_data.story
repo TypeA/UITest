@@ -4,21 +4,21 @@ Register an account with correct data
 Scenario: Go to registration form
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|Create Account Page|/create|
+|page                   |URL        |
+|Create Account Page    |/create    |
 
 
 
 Scenario: Successfull registration
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 @issue LJSUP-18873
 
 Given unlogged user on Registration Form
@@ -27,9 +27,9 @@ Then user go to Finish Registration Form and see message <message> and create Fi
 
 
 Examples:
-|name|email|password|day|month|year|gender|message|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Добро пожаловать|
-|TEST_TESTrnd|test@test.ru|Test123234|today|today|today|M|Добро|
+|name           |email          |password   |day    |month  |year   |gender |message            |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Добро пожаловать   |
+|TEST_TESTrnd   |test@test.ru   |Test123234 |today  |today  |today  |M      |Добро пожаловать   |
 
 
 

@@ -12,8 +12,8 @@ When user clicks Mapping Button
 Then the password is displayed
 
 Examples:
-|password|
-|Test123|
+|password   |
+|Test123    |
 
 
 
@@ -28,8 +28,8 @@ When user enter password <password>
 Then user see Password Bubble which contains text <text> and URL <URL>
 
 Examples:
-|password|text|URL|
-|Test123|Требования к паролю:|http://www.livejournal.com/support/faq/71.html|
+|password   |text                   |URL                                            |
+|Test123    |Требования к паролю:   |http://www.livejournal.com/support/faq/71.html |
 
 
 

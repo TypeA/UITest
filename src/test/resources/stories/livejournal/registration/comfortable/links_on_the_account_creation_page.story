@@ -10,8 +10,8 @@ When user click TOS Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|TOS Page|/tos-russian-translation.bml|
+|page       |URL                            |
+|TOS Page   |/tos-russian-translation.bml   |
 
 
 
@@ -25,5 +25,5 @@ When user click Privacy Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|page|URL|
-|Privacy Page|/privacy-russian-translation.bml|
+|page           |URL                                |
+|Privacy Page   |/privacy-russian-translation.bml   |

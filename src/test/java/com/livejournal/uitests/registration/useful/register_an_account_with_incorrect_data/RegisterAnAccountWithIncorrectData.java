@@ -16,7 +16,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class RegisterAnAccountWithIncorrectData extends WebTest {
-
+/*
     //Scenario: Incorrect name(1/3)
     //Scenario: Incorrect email(1/3)
     //Scenario: Incorrect password(1/3)
@@ -179,5 +179,5 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
                 .finish();
 
     }
-
+*/
 }

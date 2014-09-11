@@ -34,44 +34,48 @@ public class SettingsBubbleColorBlock extends UIBlock {
     @FindBy(css = ".b-flatbutton-simple[lj-ml*='choose']")
     private Button chooseButton;
 
-    public SettingsBubbleColorBlock enterCode(CharSequence... text) {
+    public synchronized SettingsBubbleColorBlock enterCode(CharSequence... text) {
         colorHex.enter(text);
-        return on(SettingsBubbleColorBlock.class);
+        return this;
+     //   return on(SettingsBubbleColorBlock.class);
     }
 
-    public String getCode() {
+    public synchronized String getCode() {
         return colorHex.getWrappedElement().getAttribute("value");
     }
 
-    public SettingsBlock clickChooseButton() {
+    public synchronized SettingsBlock clickChooseButton() {
         chooseButton.click();
         return on(SettingsBlock.class);
     }
 
-    public SettingsBubbleColorBlock setColorBarByPoint(int barY) {
+    public synchronized SettingsBubbleColorBlock setColorBarByPoint(int barY) {
         colorSelectorBar.clickOnPoint(1, barY);
-        return on(SettingsBubbleColorBlock.class);
+        return this;
+    //    return on(SettingsBubbleColorBlock.class);
     }
 
-    public SettingsBubbleColorBlock setColorByPoint(int colorX, int colorY) {
+    public synchronized SettingsBubbleColorBlock setColorByPoint(int colorX, int colorY) {
         colorSelector.clickOnPoint(colorX, colorY);
-        return on(SettingsBubbleColorBlock.class);
+        return this;
+   //     return on(SettingsBubbleColorBlock.class);
     }
 
-    public SettingsBubbleColorBlock setCurrentColor() {
+    public synchronized SettingsBubbleColorBlock setCurrentColor() {
         currentColor.click();
-        return on(SettingsBubbleColorBlock.class);
+        return this;
+  //      return on(SettingsBubbleColorBlock.class);
     }
 
-    public String getCurrentColor() {
+    public synchronized String getCurrentColor() {
         return currentColor.getWrappedElement().getAttribute("style");
     }
 
-    public String getNewColor() {
+    public synchronized String getNewColor() {
         return newColor.getWrappedElement().getAttribute("style");
     }
 
-    public void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {
+    public synchronized void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {
         switch (type) {
             case BY_POINT:
                 setColorBarByPoint(barY)

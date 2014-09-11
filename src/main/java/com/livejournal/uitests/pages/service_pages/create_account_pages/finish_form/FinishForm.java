@@ -16,8 +16,8 @@ public class FinishForm extends UIBlock {
     @FindBy(css = ".b-createpage-welcome")
     private WebElement finishText;
 
-    public WebElement getFinishText() {
-        return finishText;
+    public String getFinishText() {
+        return finishText.getText();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.main_pages;
+package com.livejournal.uitests.pages.service_pages.update;
 
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.DefaultUrl;
  *
  * @author m.prytkova
  */
-@DefaultUrl("/")
-public class MainPageForSignedInUser extends ServicePageLogged {
+@DefaultUrl("/update.bml")
+public class UpdateBmlPage extends ServicePageLogged {
 
 }

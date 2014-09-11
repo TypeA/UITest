@@ -14,7 +14,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class LinksOnSuccessfulyFinithForm extends WebTest {
-
+/*
     //Scenario: Сhange Email link(1/3)
     //Scenario: Validate Email link(1/3)
     //Scenario: Edit Profile link(1/3)
@@ -101,5 +101,5 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
                 .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
                 .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
                 .finish();
-    }
+    }*/
 }

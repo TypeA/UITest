@@ -28,7 +28,7 @@ Examples:
 
 Scenario: Set new color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
@@ -36,8 +36,24 @@ Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <co
 
 Examples:
 |name   |password   |color              |type           |code   |barY   |colorX |colorY |
-|test   |test       |VISITED_LINK     |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |VISITED_LINK     |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |BACKGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |BACKGROUND_COLOR   |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |FOREGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |FOREGROUND_COLOR   |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |SIDEBAR_BACKGROUND |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |SIDEBAR_BACKGROUND |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |ELEMENTS_BACKGROUND|BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |ELEMENTS_BACKGROUND|BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |ELEMENTS_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |ELEMENTS_COLOR     |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |MAIN_TEXT_COLOR    |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |MAIN_TEXT_COLOR    |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |SIDEBAR_TEXT_COLOR |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |SIDEBAR_TEXT_COLOR |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |LINK_COLOR         |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |LINK_COLOR         |BY_CODE        |dae3c8 |0      |0      |0      | 
+|test   |test       |ON_HOVER_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
+|test   |test       |ON_HOVER_COLOR     |BY_CODE        |dae3c8 |0      |0      |0      |
 
 
 

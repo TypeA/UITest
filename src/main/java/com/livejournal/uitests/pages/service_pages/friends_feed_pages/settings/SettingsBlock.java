@@ -83,41 +83,41 @@ public class SettingsBlock extends UIBlock {
     private Button restoreButton;
 
     ////////////////////////////////////////
-    public SettingsBlock enterTitle(String title) {
+    public synchronized SettingsBlock enterTitle(String title) {
         titleField.enter(title);
         return on(SettingsBlock.class);
     }
 
-    public SettingsBlock typeToTitle(String title) {
+    public synchronized SettingsBlock typeToTitle(String title) {
         titleField.type(title);
         return on(SettingsBlock.class);
     }
 
-    public SettingsBlock setTextSettings(String size, String font) {
+    public synchronized SettingsBlock setTextSettings(String size, String font) {
         textSize.selectByValue(size);
         textFont.deselectByValue(font);
         return on(SettingsBlock.class);
     }
 
-    public PageSize setPaging(String type) {
+    public synchronized PageSize setPaging(String type) {
         pageType.selectByValue(type);
         return new PageSize(type);
     }
 
-    public void saveSettings() {
+    public synchronized void saveSettings() {
         saveButton.click();
     }
 
-    public void cancelSettings() {
+    public synchronized void cancelSettings() {
         cancelButton.click();
     }
 
-    public SettingsBlock restoreDefaultSettings() {
+    public synchronized SettingsBlock restoreDefaultSettings() {
         restoreButton.click();
         return on(SettingsBlock.class);
     }
 
-    public ColorPickerButton getColorButton(ColorSettings button) {
+    public synchronized ColorPickerButton getColorButton(ColorSettings button) {
         switch (button) {
             case BACKGROUND_COLOR:
                 return backgroundColor;
@@ -147,15 +147,16 @@ public class SettingsBlock extends UIBlock {
         return null;
     }
 
-    public SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
+    public synchronized SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
         getColorButton(button).click()
                 .setColor(type, code, barY, colorX, colorY);
-        return on(SettingsBlock.class);
+        return this;
+//  return on(SettingsBlock.class);
     }
 
-    public SettingsBubbleColorBlock getColor(ColorSettings button) {
-        getColorButton(button).click();
-        return on(SettingsBubbleColorBlock.class);
+    public synchronized SettingsBubbleColorBlock getColor(ColorSettings button) {
+        return getColorButton(button).click();
+    //    return on(SettingsBubbleColorBlock.class);
     }
 
     ////////////////////////////////////////////////

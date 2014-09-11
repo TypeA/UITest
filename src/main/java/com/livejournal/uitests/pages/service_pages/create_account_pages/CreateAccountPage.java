@@ -1,10 +1,14 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
-import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.UnsuccessfulFinishForm;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
+import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uisteps.thucydides.elements.Link;
+import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
  *
@@ -13,27 +17,87 @@ import net.thucydides.core.annotations.StepGroup;
 @DefaultUrl("/create")
 public class CreateAccountPage extends ServicePage {
 
-    private CreateAccountForm createAccountForm;
+    @FindBy(css = "#username")
+    private TextField userNameField;
 
-    private SuccessfulFinishForm successfulFinishForm;
+    @FindBy(css = "#email")
+    private TextField emailField;
 
-    private UnsuccessfulFinishForm unsuccessfulFinishForm;
+    @FindBy(css = "#password")
+    private TextField passwordField;
+
+    @FindBy(css = ".b-passview-icon-show")
+    private Link passwordMappingLinkShow;
+
+    @FindBy(css = ".b-passview-icon-hide")
+    private Link passwordMappingLinkHide;
+
+    @FindBy(id = "day")
+    private Select dayDropDownMenu;
+
+    @FindBy(id = "month")
+    private Select monthDropDownMenu;
+
+    @FindBy(id = "year")
+    private Select yearDropDownMenu;
+
+    @FindBy(css = "#gender")
+    private Select genderDropDownMenu;
+
+    @FindBy(css = "#createpage_create")
+    private Button createAccountButton;
+
+    @FindBy(css = "a[href*='legal/tos-russian-translation.bml']")
+    private Link tosRusLink;
+
+    @FindBy(css = "a[href*='/legal/privacy-russian-translation.bml']")
+    private Link privacyRusLink;
 
     @StepGroup
-    public void createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
-        getCreateAccountForm().createAccountData(name, email, password, day, month, year, gender);
+    public CreateAccountPage createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
+        userNameField.enter(name);
+        emailField.enter(email);
+        passwordField.enter(password);
+        dayDropDownMenu.selectByValue(day);
+        monthDropDownMenu.selectByValue(month);
+        yearDropDownMenu.selectByValue(year);
+        genderDropDownMenu.selectByValue(gender);
+        return this;
     }
 
-    public CreateAccountForm getCreateAccountForm() {
-        return elem(createAccountForm);
+    @StepGroup
+    public PopupsBlock clickOnUserNameField() {
+        userNameField.type("");
+        return on(PopupsBlock.class);
     }
 
-    public SuccessfulFinishForm getSuccessfulFinishForm() {
-        return successfulFinishForm;
+    @StepGroup
+    public PopupsBlock clickOnEmailField() {
+        emailField.type("");
+        return on(PopupsBlock.class);
     }
 
-    public UnsuccessfulFinishForm getUnsuccessfulFinishForm() {
-        return unsuccessfulFinishForm;
+    @StepGroup
+    public PopupsBlock clickOnPasswordField() {
+        passwordField.type("");
+        return on(PopupsBlock.class);
+    }
+
+    @StepGroup
+    public PopupsBlock clickOnAgeField() {
+        yearDropDownMenu.getWrappedElement().click();
+        return on(PopupsBlock.class);
+    }
+
+    @StepGroup
+    public FinishForm clickOnCreateAccountButton() {
+        createAccountButton.click();
+        return on(FinishForm.class);
+    }
+
+    @StepGroup
+    public boolean createAccountButtonState() {
+        return createAccountButton.isDisplayed();
     }
 
 }

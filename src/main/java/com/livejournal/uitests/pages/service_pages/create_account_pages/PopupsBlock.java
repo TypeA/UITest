@@ -2,6 +2,8 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uisteps.thucydides.elements.UIElement;
+import com.livejournal.uitests.pages.service_pages.support_faq.LearnMorePage;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -11,27 +13,29 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  * @author m.prytkova
  */
 @Block(
-@FindBy(css = "body"))
+        @FindBy(css = "body"))
 public class PopupsBlock extends UIBlock {
 
     @FindBy(css = ".b-popup-noclosecontrol:not([style*='display: none'])")
-    private Link popupBlock;
-    
+    private UIElement popupBlock;
+
     @FindBy(css = ".b-popup-noclosecontrol:not([style*='display: none']) [style*='display: block;']")
     private TextBlock popupText;
 
     @FindBy(css = ".b-popup-outer a[href*='/support/faqbrowse.bml']")
     private Link learnMoreLink;
 
-    public TextBlock getPopupText() {
-        return elem(popupText);
+    public boolean displayingPopupBlock() {
+        return popupBlock.isDisplayed();
     }
 
-    public Link getLearnMoreLink() {
-        return elem(learnMoreLink);
+    public String getPopupText() {
+        return popupText.getText();
     }
 
-    public Link getPopupBlock() {
-        return elem(popupBlock);
+    public LearnMorePage getLearnMoreLink() {
+        learnMoreLink.click();
+        return on(LearnMorePage.class);
     }
+
 }

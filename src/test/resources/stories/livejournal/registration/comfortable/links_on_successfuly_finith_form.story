@@ -11,8 +11,8 @@ When user click Сhange Email Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Сhange Email|/changeemail.bml|
+|name           |email          |password   |day    |month  |year   |gender |page           |URL                |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Сhange Email   |/changeemail.bml   |
 
 
 
@@ -28,8 +28,8 @@ When user click Validate Email Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Validate Email|/register.bml|
+|name           |email          |password   |day    |month  |year   |gender |page           |URL            |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Validate Email |/register.bml  |
 
 
 
@@ -45,8 +45,8 @@ When user click Edit Profile Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Edit Profile|/manage/profile|
+|name           |email          |password   |day    |month  |year   |gender |page           |URL            |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Edit Profile   |/manage/profile|
 
 
 
@@ -62,8 +62,8 @@ When user click Find Friends Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Find Friends|/friends/find|
+|name           |email          |password   |day    |month  |year   |gender |page           |URL            |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Find Friends   |/friends/find  |
 
 
 
@@ -80,8 +80,8 @@ When user click Select Journal Style Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Select Journal|/customize|
+|name           |email          |password   |day    |month  |year   |gender |page           |URL        |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Select Journal |/customize |
 
 
 
@@ -97,8 +97,8 @@ When user click Friends Feed Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Friends Feed|/feed|
+|name           |email          |password   |day    |month  |year   |gender |page           |URL    |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Friends Feed   |/feed  |
 
 
 
@@ -114,5 +114,5 @@ When user click Ratings Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name|email|password|day|month|year|gender|page|URL|
-|test1234rnd|test@test.ru|Test123|1|4|1990|M|Ratings|/ratings|
+|name           |email          |password   |day    |month  |year   |gender |page       |URL        |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Ratings    |/ratings   |

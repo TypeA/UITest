@@ -13,7 +13,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class FeaturesOfPassword extends WebTest {
-
+/*
     //Scenario: Displays password(1/5)
     //Scenario: Password description(1/3)
     @Given("unlogged user on Registration Form")
@@ -80,5 +80,5 @@ public class FeaturesOfPassword extends WebTest {
                 .ifElse(VerifyText.errorTextForURL("Learn More", URL, getCurrentUrl()))
                 .finish();
 
-    }
+    }*/
 }

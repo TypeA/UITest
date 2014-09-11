@@ -2,7 +2,7 @@ package com.livejournal.uitests.authorization.comfortable.daylight_authorization
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPageForUnsignedInUser;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.shop_pages.ShopPage;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
@@ -19,7 +19,7 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     //Scenario: From Main Page by Tokens(1/3)
     @Given("unlogged user on Main Page")
     public void unlogged_user_on_Main_Page() {
-        on(MainPageForUnsignedInUser.class);
+        on(MainPageUnlogged.class);
     }
     
     //Scenario: From Shop by Tokens(1/3)
@@ -32,14 +32,14 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     //Scenario: From Main Page by Login Button(2/3)
     @When("user click on the Login Button in the Header")
     public void user_click_on_the_Login_Button_in_the_Header() {
-        on(MainPageForUnsignedInUser.class).getFullscreenHeaderUnlogged().getLoginMenuItem().click();
+        on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getLoginMenuItem().click();
     }
 
     //Scenario: From Main Page by Tokens(2/3)
     @When("user click on the Tokens in the Header")
     public void user_click_on_the_Tokens_in_Header() throws InterruptedException {
-        on(MainPageForUnsignedInUser.class).getFullscreenHeaderUnlogged().getShopMenuItem().getShopGeneralLink().moveMouseOver();
-        on(MainPageForUnsignedInUser.class).getFullscreenHeaderUnlogged().getShopMenuItem().getTokens().click();
+        on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getShopMenuItem().getShopGeneralLink().moveMouseOver();
+        on(MainPageUnlogged.class).getFullscreenHeaderUnlogged().getShopMenuItem().getTokens().click();
     }
 
     //Scenario: From Shop by Rename Account(2/3)

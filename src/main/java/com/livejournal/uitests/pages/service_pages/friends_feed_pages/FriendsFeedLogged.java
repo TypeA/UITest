@@ -26,11 +26,6 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = "a[href*='/customize/#feed']")
     private Button settingsButton;
 
-    public SettingsBlock openSettings() {
-        settingsButton.click();
-        return on(SettingsBlock.class);
-    }
-
     ////////////FEED
     @FindBy(css = ".l-flatslide-intro-heads .b-lenta-head-title")
     private TextBlock feedTitle;
@@ -38,11 +33,18 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = ".l-flatslide-intro-heads .i-ljuser-type-P a:not([href*='profile'])")
     public Link userName;
 
-    public String getFeedTitle() {
+    
+    
+    public synchronized SettingsBlock openSettings() {
+        settingsButton.click();
+        return on(SettingsBlock.class);
+    }
+
+    public synchronized String getFeedTitle() {
         return feedTitle.getText();
     }
 
-    public Link getUserName() {
+    public synchronized Link getUserName() {
         return userName;
     }
 

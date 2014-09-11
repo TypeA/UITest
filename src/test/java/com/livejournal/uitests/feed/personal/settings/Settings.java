@@ -129,7 +129,7 @@ public class Settings extends WebTest {
                 .finish();
     }
 
-    private void verifyThatTitleIsCorrect(String correct_title) {
+    private synchronized void verifyThatTitleIsCorrect(String correct_title) {
         refreshCurrentPage();
         String title = (String) ThucydidesUtils.getFromSession("feed_title");
         if (title != null) {
@@ -141,11 +141,11 @@ public class Settings extends WebTest {
                 .finish();
     }
 
-    private String hexToRGB(String hex) {
+    private synchronized String hexToRGB(String hex) {
         return Integer.parseInt(hex.substring(0, 2), 16) + ", " + Integer.parseInt(hex.substring(2, 4), 16) + ", " + Integer.parseInt(hex.substring(4, 6), 16);
     }
 
-    private String getElementColor(ColorSettings button) {
+    private synchronized String getElementColor(ColorSettings button) {
         switch (button) {
             case BACKGROUND_COLOR:
                 return getCurrentBrowser().getDriver().findElement(By.cssSelector(".s-schemius")).getCssValue("background-color");
@@ -179,7 +179,7 @@ public class Settings extends WebTest {
         return "ERROR!!!";
     }
 
-    private boolean verifyColor(String hex, String rgb) {
+    private synchronized boolean verifyColor(String hex, String rgb) {
         rgb = rgb.substring(rgb.indexOf('(') + 1, rgb.indexOf(')'));
         String[] mas = rgb.split(", ");
         boolean resultR = true;
