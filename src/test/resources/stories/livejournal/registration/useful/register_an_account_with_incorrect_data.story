@@ -94,7 +94,7 @@ Meta:
 @categories registration useful
 
 Given unlogged user on Registration Form
-When user enter correct data leave name field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
 Then in Popup user see message $message and button Create Account is not active
 
 Examples:
@@ -112,7 +112,7 @@ Meta:
 @categories registration useful
 
 Given unlogged user on Registration Form
-When user enter correct data leave email field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
 Then in Popup user see message $message and button Create Account is not active
 
 
@@ -130,7 +130,7 @@ Meta:
 @categories registration useful
 
 Given unlogged user on Registration Form
-When user enter correct data leave password field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
+When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
 Then in Popup user see message $message and button Create Account is not active
 
 Examples:

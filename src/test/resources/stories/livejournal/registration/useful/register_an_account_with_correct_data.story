@@ -18,7 +18,7 @@ Examples:
 Scenario: Successfull registration
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 @issue LJSUP-18873
 
 Given unlogged user on Registration Form

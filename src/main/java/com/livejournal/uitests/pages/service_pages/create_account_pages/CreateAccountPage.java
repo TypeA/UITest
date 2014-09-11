@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
+import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
@@ -94,11 +95,25 @@ public class CreateAccountPage extends ServicePage {
         return on(PopupsBlock.class);
     }
 
-    @StepGroup
-    public FinishForm clickOnCreateAccountButton() throws InterruptedException{
+    @StepGroup 
+    public FinishForm clickOnCreateAccountButton() throws InterruptedException{ 
+        /*System.out.print("===================================1111111" + getDriver() + "\n"); 
+        WebDriverWait wait = new WebDriverWait(getDriver(), 5); 
+        System.out.print("===================================2222222"); 
+            try { 
+                wait.until(new ExpectedCondition<Boolean>() { 
+                    @Override 
+                    public Boolean apply(WebDriver d) { 
+                        System.out.print("===================================@@@@"+createAccountButton.isEnabled()); 
+                        return createAccountButton.isEnabled(); 
+                    } 
+                }); 
+            } catch (Exception ex) { 
+                Assert.fail("Create account button is disabled" + ex); 
+            } */
         Thread.sleep(300);
-        createAccountButton.click();
-        return on(FinishForm.class);
+        createAccountButton.click(); 
+        return on(FinishForm.class); 
     }
 
     @StepGroup
