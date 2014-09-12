@@ -6,6 +6,7 @@ Scenario: Incorrect name
 
 Meta: 
 @categories registration useful 
+@issue LJSUP-19397
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -28,6 +29,7 @@ Scenario: Incorrect email
 
 Meta: 
 @categories registration useful
+@issue LJSUP-19397
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -52,6 +54,7 @@ Scenario: Incorrect password
 Meta: 
 @categories registration useful
 @issue LJSUP-19183
+@issue LJSUP-19397
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -77,7 +80,6 @@ Scenario: Incorrect age
 
 Meta: 
 @categories registration useful
-@issue LJSUP-18873
 
 Given unlogged user on Registration Form
 When user enter correct data except for the age: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
@@ -85,7 +87,7 @@ Then user go to Finish Registration Form and see message <message>
 
 Examples:
 |name           |email          |password   |day    |month  |year   |gender |message            |
-|test1234rnd    |test@test.ru   |Test123    |1      |4      |2010   |M      |Проверка возраста  |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |2010   |M      |Age Verification   |
 
 
 Scenario: Empty name
@@ -145,7 +147,6 @@ Scenario: Empty age
 
 Meta: 
 @categories registration useful
-@issue LJSUP-18873
 
 Given unlogged user on Registration Form
 When user enter correct data leave one age field empty: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
