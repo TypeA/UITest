@@ -25,7 +25,7 @@ public class FeaturesOfPassword extends WebTest {
     //Scenario: Password description(2/3)
     @When("user enter password $password")
     public void user_enter_password(String password) {
-        on(CreateAccountPage.class).getCreateAccountForm().getPasswordBlock().getPasswordField().enter(password);
+        on(CreateAccountPage.class).enterPassword(password);
     }
 
     //Scenario: Displays password(4/5)

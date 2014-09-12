@@ -4,7 +4,6 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
 import junit.framework.Assert;
@@ -90,30 +89,40 @@ public class CreateAccountPage extends ServicePage {
     }
 
     @StepGroup
+    public CreateAccountPage enterPassword(String password) {
+        passwordField.enter(password);
+        return this;
+    }
+
+    /*  @StepGroup
+     public void clickOnPasswordMappingLink(MappingLink icon) {
+     switch (icon) {
+     case HIDE:
+     passwordMappingLinkHide.click();
+     case SHOW:
+     passwordMappingLinkShow.click();
+     }*/
+    @StepGroup
     public PopupsBlock clickOnAgeField() {
         yearDropDownMenu.getWrappedElement().click();
         return on(PopupsBlock.class);
     }
 
-    @StepGroup 
-    public FinishForm clickOnCreateAccountButton() throws InterruptedException{ 
-        /*System.out.print("===================================1111111" + getDriver() + "\n"); 
-        WebDriverWait wait = new WebDriverWait(getDriver(), 5); 
-        System.out.print("===================================2222222"); 
-            try { 
-                wait.until(new ExpectedCondition<Boolean>() { 
-                    @Override 
-                    public Boolean apply(WebDriver d) { 
-                        System.out.print("===================================@@@@"+createAccountButton.isEnabled()); 
-                        return createAccountButton.isEnabled(); 
-                    } 
-                }); 
-            } catch (Exception ex) { 
-                Assert.fail("Create account button is disabled" + ex); 
-            } */
-        Thread.sleep(300);
-        createAccountButton.click(); 
-        return on(FinishForm.class); 
+    @StepGroup
+    public FinishForm clickOnCreateAccountButton() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), ThucydidesUtils.getImplementTimeoutInSec());
+        try {
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver d) {
+                    return createAccountButton.isEnabled();
+                }
+            });
+        } catch (Exception ex) {
+            Assert.fail("Create account button is disabled" + ex);
+        }
+        createAccountButton.click();
+        return on(FinishForm.class);
     }
 
     @StepGroup
