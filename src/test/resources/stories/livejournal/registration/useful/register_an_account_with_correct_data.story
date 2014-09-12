@@ -18,7 +18,7 @@ Examples:
 Scenario: Successfull registration
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 Given unlogged user on Registration Form
 When user enter correct data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account

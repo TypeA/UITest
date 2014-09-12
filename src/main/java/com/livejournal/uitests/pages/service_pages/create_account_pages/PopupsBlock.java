@@ -33,7 +33,7 @@ public class PopupsBlock extends UIBlock {
         return popupText.getText();
     }
 
-    public LearnMorePage getLearnMoreLink() {
+    public LearnMorePage clickOnLearnMoreLink() {
         learnMoreLink.click();
         return on(LearnMorePage.class);
     }

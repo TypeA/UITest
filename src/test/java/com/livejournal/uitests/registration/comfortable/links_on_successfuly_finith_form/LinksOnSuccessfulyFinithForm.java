@@ -2,6 +2,7 @@ package com.livejournal.uitests.registration.comfortable.links_on_successfuly_fi
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.VerifyText;
@@ -14,7 +15,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class LinksOnSuccessfulyFinithForm extends WebTest {
-/*
+
     //Scenario: Сhange Email link(1/3)
     //Scenario: Validate Email link(1/3)
     //Scenario: Edit Profile link(1/3)
@@ -31,60 +32,56 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
                 gender);
-        verify().that(on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().isEnabled())
-                .ifResultIsExpected("Create Account Button is enabled")
-                .ifElse("Button is disabled!")
-                .finish();
-        on(CreateAccountPage.class).getCreateAccountForm().getCreateAccountButton().click();
+        on(CreateAccountPage.class).clickOnCreateAccountButton();
 
     }
 
     //Scenario: Edit Profile link(2/3)
     @When("user click Edit Profile Link")
     public void user_click_Edit_Profile_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getEditProfile().click();
+        on(SuccessfulFinishForm.class).clickOnEditProfileLink();
 
     }
 
     //Scenario: Find Friends link(2/3)
     @When("user click Find Friends Link")
     public void user_click_Find_Friends_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getFindFiends().click();
+        on(SuccessfulFinishForm.class).clickOnFindFiendsLink();
 
     }
 
     //Scenario: Validate Email link(2/3)
     @When("user click Validate Email Link")
     public void user_click_Validate_Email_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getValidateEmail().click();
+        on(SuccessfulFinishForm.class).clickOnValidateEmailLink();
 
     }
 
     //Scenario: Сhange Email link(2/3)
     @When("user click Сhange Email Link")
     public void user_click_Сhange_Email_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getChangeEmail().click();
+        on(SuccessfulFinishForm.class).clickOnChangeEmailLink();
 
     }
 
     //Scenario: Select Journal Style link(2/3)
     @When("user click Select Journal Style Link")
     public void user_click_Select_Journal_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getCustomizeJournal().click();
+        on(SuccessfulFinishForm.class).clickOnCustomizeJournalLink();
 
     }
 
     //Scenario: Friends Feed link(2/3)
     @When("user click Friends Feed Link")
     public void user_click_Friends_Feed_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getFrendsFeed().click();
+        on(SuccessfulFinishForm.class).clickOnFrendsFeedLink();
 
     }
 
     //Scenario: Ratings link(2/3)
     @When("user click Ratings Link")
     public void user_click_Ratings_Link() {
-        on(CreateAccountPage.class).getSuccessfulFinishForm().getRatings().click();
+        on(SuccessfulFinishForm.class).clickOnRatingsLink();
 
     }
 
@@ -101,5 +98,5 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
                 .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
                 .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
                 .finish();
-    }*/
+    }
 }

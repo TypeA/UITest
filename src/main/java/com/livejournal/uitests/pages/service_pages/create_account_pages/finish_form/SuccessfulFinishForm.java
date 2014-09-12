@@ -72,7 +72,7 @@ public class SuccessfulFinishForm extends FinishForm {
         return on(FriendsFeedLogged.class);
     }
 
-    public MainPageLogged getRatings() {
+    public MainPageLogged clickOnRatingsLink() {
         ratingsLink.click();
         return on(MainPageLogged.class);
     }

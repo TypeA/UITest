@@ -48,7 +48,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     //Scenario: Incorrect age(2/3)
     @When("user enter correct data except for the age: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_correct_data_except_for_the_age(String name, String email, String password, String day, String month, String year, String gender) throws InterruptedException {
+    public void user_enter_correct_data_except_for_the_age(String name, String email, String password, String day, String month, String year, String gender){
         on(CreateAccountPage.class)
                 .createAccountData(new RandomName(name).get(),
                         email,

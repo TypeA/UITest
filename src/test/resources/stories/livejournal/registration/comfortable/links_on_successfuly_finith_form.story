@@ -4,7 +4,6 @@ Scenario: Сhange Email link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Сhange Email Link
@@ -21,7 +20,6 @@ Scenario: Validate Email link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Validate Email Link
@@ -38,7 +36,6 @@ Scenario: Edit Profile link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Edit Profile Link
@@ -55,7 +52,6 @@ Scenario: Find Friends link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Find Friends Link
@@ -73,7 +69,6 @@ Scenario: Select Journal Style link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Select Journal Style Link
@@ -90,7 +85,6 @@ Scenario: Friends Feed link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Friends Feed Link
@@ -107,12 +101,11 @@ Scenario: Ratings link
 
 Meta: 
 @categories registration comfortable
-@issue LJSUP-18873
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Ratings Link
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name           |email          |password   |day    |month  |year   |gender |page       |URL        |
-|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Ratings    |/ratings   |
+|name           |email          |password   |day    |month  |year   |gender |page       |URL            |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Ratings    |ivejournal.ru/ |

@@ -94,14 +94,34 @@ public class CreateAccountPage extends ServicePage {
         return this;
     }
 
-    /*  @StepGroup
-     public void clickOnPasswordMappingLink(MappingLink icon) {
-     switch (icon) {
-     case HIDE:
-     passwordMappingLinkHide.click();
-     case SHOW:
-     passwordMappingLinkShow.click();
-     }*/
+    @StepGroup
+    public CreateAccountPage clickOnPasswordMappingLink(MappingLink icon) {
+        switch (icon) {
+            case HIDE:
+                passwordMappingLinkHide.click();
+                return this;
+            case SHOW:
+                passwordMappingLinkShow.click();
+                return this;
+            default:
+                org.junit.Assert.fail("Unknown icon " + icon + "!");
+        }
+        return null;
+    }
+
+    @StepGroup
+    public boolean displayedPasswordMappingLink(MappingLink icon) {
+        switch (icon) {
+            case HIDE:
+                return passwordMappingLinkHide.isDisplayed();
+            case SHOW:
+                return passwordMappingLinkShow.isDisplayed();
+            default:
+                org.junit.Assert.fail("Unknown icon " + icon + "!");
+        }
+        return false;
+    }
+
     @StepGroup
     public PopupsBlock clickOnAgeField() {
         yearDropDownMenu.getWrappedElement().click();
@@ -109,7 +129,7 @@ public class CreateAccountPage extends ServicePage {
     }
 
     @StepGroup
-    public FinishForm clickOnCreateAccountButton() throws InterruptedException {
+    public FinishForm clickOnCreateAccountButton(){
         WebDriverWait wait = new WebDriverWait(getDriver(), ThucydidesUtils.getImplementTimeoutInSec());
         try {
             wait.until(new ExpectedCondition<Boolean>() {
@@ -119,7 +139,7 @@ public class CreateAccountPage extends ServicePage {
                 }
             });
         } catch (Exception ex) {
-            Assert.fail("Create account button is disabled" + ex);
+            Assert.fail("Create account button is disabled\n" + ex);
         }
         createAccountButton.click();
         return on(FinishForm.class);
