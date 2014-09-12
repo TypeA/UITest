@@ -109,3 +109,35 @@ Then user in correct page <page> with URL <URL>
 Examples:
 |name           |email          |password   |day    |month  |year   |gender |page       |URL            |
 |test1234rnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Ratings    |ivejournal.ru/ |
+
+
+
+
+Scenario: Underage Account link
+
+Meta: 
+@categories registration comfortable
+
+Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
+When user click Underage Account Link
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|name           |email          |password   |day    |month  |year   |gender |page               |URL                |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |2013   |M      |Underage Account   |/faq/244.html      |
+
+
+
+
+Scenario: LJ Anonymously link
+
+Meta: 
+@categories registration comfortable
+
+Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
+When user click LJ Anonymously Link
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|name           |email          |password   |day    |month  |year   |gender |page |URL                |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |2013   |M      |LJ   |livejournal.ru     |

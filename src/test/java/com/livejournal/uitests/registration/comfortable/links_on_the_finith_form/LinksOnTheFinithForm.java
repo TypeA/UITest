@@ -1,8 +1,9 @@
-package com.livejournal.uitests.registration.comfortable.links_on_successfuly_finith_form;
+package com.livejournal.uitests.registration.comfortable.links_on_the_finith_form;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.UnsuccessfulFinishForm;
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.VerifyText;
@@ -14,7 +15,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class LinksOnSuccessfulyFinithForm extends WebTest {
+public class LinksOnTheFinithForm extends WebTest {
 
     //Scenario: Сhange Email link(1/3)
     //Scenario: Validate Email link(1/3)
@@ -82,6 +83,20 @@ public class LinksOnSuccessfulyFinithForm extends WebTest {
     @When("user click Ratings Link")
     public void user_click_Ratings_Link() {
         on(SuccessfulFinishForm.class).clickOnRatingsLink();
+
+    }
+
+    //Scenario: Underage Account link(2/3)
+    @When("user click Underage Account Link")
+    public void user_click_Underage_Account_Link() {
+        on(UnsuccessfulFinishForm.class).clickOnUnderageAccountLink();
+
+    }
+
+    //Scenario: LJ Anonymously link(2/3)
+    @When("user click LJ Anonymously Link")
+    public void user_click_LJ_Anonymously_Link() {
+        on(UnsuccessfulFinishForm.class).clickOnLjAnonymouslyLink();
 
     }
 

@@ -5,6 +5,8 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.ServicePage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Links.PrivacyRusPage;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.Links.TosRusPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
 import junit.framework.Assert;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -129,7 +131,7 @@ public class CreateAccountPage extends ServicePage {
     }
 
     @StepGroup
-    public FinishForm clickOnCreateAccountButton(){
+    public FinishForm clickOnCreateAccountButton() {
         WebDriverWait wait = new WebDriverWait(getDriver(), ThucydidesUtils.getImplementTimeoutInSec());
         try {
             wait.until(new ExpectedCondition<Boolean>() {
@@ -148,6 +150,18 @@ public class CreateAccountPage extends ServicePage {
     @StepGroup
     public boolean createAccountButtonState() {
         return createAccountButton.isEnabled();
+    }
+
+    @StepGroup
+    public TosRusPage clickOnTOSLink() {
+        tosRusLink.click();
+        return on(TosRusPage.class);
+    }
+
+    @StepGroup
+    public PrivacyRusPage clickOnPrivacyLink() {
+        privacyRusLink.click();
+        return on(PrivacyRusPage.class);
     }
 
 }

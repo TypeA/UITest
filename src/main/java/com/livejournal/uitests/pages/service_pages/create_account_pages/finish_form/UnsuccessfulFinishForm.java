@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class UnsuccessfulFinishForm extends FinishForm {
 
-    @FindBy(css = "a[href*='/faq/224.html']")
+    @FindBy(css = "a[href*='/support/faq/244']")
     private Link underageAccount;
 
     @FindBy(css = ".b-createpage-nextsteps a:not([href*='/faq'])")

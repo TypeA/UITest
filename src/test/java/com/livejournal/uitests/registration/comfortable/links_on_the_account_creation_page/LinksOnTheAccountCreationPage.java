@@ -12,7 +12,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class LinksOnTheAccountCreationPage extends WebTest {
-/*
+
     //Scenario: TOS link(1/3)
     //Scenario: Privacy link(1/3)
     @Given("unlogged user on Registration Form")
@@ -23,13 +23,13 @@ public class LinksOnTheAccountCreationPage extends WebTest {
     //Scenario: TOS link(2/3)
     @When("user click TOS Link")
     public void user_click_TOS_Link() {
-        on(CreateAccountPage.class).getCreateAccountForm().getTosRusLink().click();
+        on(CreateAccountPage.class).clickOnTOSLink();
     }
 
     //Scenario: Privacy link(2/3)
     @When("user click Privacy Link")
     public void user_click_Privacy_Link() {
-        on(CreateAccountPage.class).getCreateAccountForm().getPrivacyRusLink().click();
+        on(CreateAccountPage.class).clickOnPrivacyLink();
     }
 
     //Scenario: TOS link(3/3)
@@ -40,5 +40,5 @@ public class LinksOnTheAccountCreationPage extends WebTest {
                 .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
                 .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
     }
-*/
+
 }
