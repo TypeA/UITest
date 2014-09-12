@@ -35,16 +35,16 @@ public class FriendsFeedLogged extends ServicePageLogged {
 
     
     
-    public synchronized SettingsBlock openSettings() {
+    public SettingsBlock openSettings() {
         settingsButton.click();
         return on(SettingsBlock.class);
     }
 
-    public synchronized String getFeedTitle() {
+    public String getFeedTitle() {
         return feedTitle.getText();
     }
 
-    public synchronized Link getUserName() {
+    public Link getUserName() {
         return userName;
     }
 

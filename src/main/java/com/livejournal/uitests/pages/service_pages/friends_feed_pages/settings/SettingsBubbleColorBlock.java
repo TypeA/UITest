@@ -34,48 +34,48 @@ public class SettingsBubbleColorBlock extends UIBlock {
     @FindBy(css = ".b-flatbutton-simple[lj-ml*='choose']")
     private Button chooseButton;
 
-    public synchronized SettingsBubbleColorBlock enterCode(CharSequence... text) {
+    public SettingsBubbleColorBlock enterCode(CharSequence... text) {
         colorHex.enter(text);
         return this;
      //   return on(SettingsBubbleColorBlock.class);
     }
 
-    public synchronized String getCode() {
+    public String getCode() {
         return colorHex.getWrappedElement().getAttribute("value");
     }
 
-    public synchronized SettingsBlock clickChooseButton() {
+    public SettingsBlock clickChooseButton() {
         chooseButton.click();
         return on(SettingsBlock.class);
     }
 
-    public synchronized SettingsBubbleColorBlock setColorBarByPoint(int barY) {
+    public SettingsBubbleColorBlock setColorBarByPoint(int barY) {
         colorSelectorBar.clickOnPoint(1, barY);
         return this;
     //    return on(SettingsBubbleColorBlock.class);
     }
 
-    public synchronized SettingsBubbleColorBlock setColorByPoint(int colorX, int colorY) {
+    public SettingsBubbleColorBlock setColorByPoint(int colorX, int colorY) {
         colorSelector.clickOnPoint(colorX, colorY);
         return this;
    //     return on(SettingsBubbleColorBlock.class);
     }
 
-    public synchronized SettingsBubbleColorBlock setCurrentColor() {
+    public SettingsBubbleColorBlock setCurrentColor() {
         currentColor.click();
         return this;
   //      return on(SettingsBubbleColorBlock.class);
     }
 
-    public synchronized String getCurrentColor() {
+    public String getCurrentColor() {
         return currentColor.getWrappedElement().getAttribute("style");
     }
 
-    public synchronized String getNewColor() {
+    public String getNewColor() {
         return newColor.getWrappedElement().getAttribute("style");
     }
 
-    public synchronized void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {
+    public void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {
         switch (type) {
             case BY_POINT:
                 setColorBarByPoint(barY)

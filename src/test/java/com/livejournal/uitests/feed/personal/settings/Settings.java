@@ -85,8 +85,16 @@ public class Settings extends WebTest {
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
-    public void title_is_changed_on_correct_title(String correct_title) {
-        verifyThatTitleIsCorrect(correct_title);
+    public void title_is_changed_on_correct_title(String correct_title) throws InterruptedException {
+        refreshCurrentPage();
+        String title = (String) ThucydidesUtils.getFromSession("feed_title");
+        if (title != null) {
+            correct_title = title + correct_title;
+        }
+        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
+                .ifResultIsExpected(VerifyText.okTextForMessage(correct_title))
+                .ifElse(VerifyText.errorTextForMessage(correct_title, on(FriendsFeedLogged.class).getFeedTitle()))
+                .finish();
     }
 
     //Scenario: Set new color(3/3)
@@ -129,23 +137,13 @@ public class Settings extends WebTest {
                 .finish();
     }
 
-    private synchronized void verifyThatTitleIsCorrect(String correct_title) {
-        refreshCurrentPage();
-        String title = (String) ThucydidesUtils.getFromSession("feed_title");
-        if (title != null) {
-            correct_title = title + correct_title;
-        }
-        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
-                .ifResultIsExpected(VerifyText.okTextForMessage(correct_title))
-                .ifElse(VerifyText.errorTextForMessage(correct_title, on(FriendsFeedLogged.class).getFeedTitle()))
-                .finish();
-    }
+    ///////////////////////////////////////////////////////////////////////////
 
-    private synchronized String hexToRGB(String hex) {
+    private String hexToRGB(String hex) {
         return Integer.parseInt(hex.substring(0, 2), 16) + ", " + Integer.parseInt(hex.substring(2, 4), 16) + ", " + Integer.parseInt(hex.substring(4, 6), 16);
     }
 
-    private synchronized String getElementColor(ColorSettings button) {
+    private String getElementColor(ColorSettings button) {
         switch (button) {
             case BACKGROUND_COLOR:
                 return getCurrentBrowser().getDriver().findElement(By.cssSelector(".s-schemius")).getCssValue("background-color");
@@ -179,7 +177,7 @@ public class Settings extends WebTest {
         return "ERROR!!!";
     }
 
-    private synchronized boolean verifyColor(String hex, String rgb) {
+    private boolean verifyColor(String hex, String rgb) {
         rgb = rgb.substring(rgb.indexOf('(') + 1, rgb.indexOf(')'));
         String[] mas = rgb.split(", ");
         boolean resultR = true;

@@ -39,21 +39,22 @@ Examples:
 |test   |test       |BACKGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
 |test   |test       |BACKGROUND_COLOR   |BY_CODE        |dae3c8 |0      |0      |0      |
 |test   |test       |FOREGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |FOREGROUND_COLOR   |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |FOREGROUND_COLOR   |BY_CODE        |232282 |0      |0      |0      |
 |test   |test       |SIDEBAR_BACKGROUND |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |SIDEBAR_BACKGROUND |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |SIDEBAR_BACKGROUND |BY_CODE        |f5e907 |0      |0      |0      |
 |test   |test       |ELEMENTS_BACKGROUND|BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |ELEMENTS_BACKGROUND|BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |ELEMENTS_BACKGROUND|BY_CODE        |1b4245 |0      |0      |0      |
 |test   |test       |ELEMENTS_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |ELEMENTS_COLOR     |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |ELEMENTS_COLOR     |BY_CODE        |f797ac |0      |0      |0      |
 |test   |test       |MAIN_TEXT_COLOR    |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |MAIN_TEXT_COLOR    |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |MAIN_TEXT_COLOR    |BY_CODE        |8f0096 |0      |0      |0      |
 |test   |test       |SIDEBAR_TEXT_COLOR |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |SIDEBAR_TEXT_COLOR |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |SIDEBAR_TEXT_COLOR |BY_CODE        |030100 |0      |0      |0      |
 |test   |test       |LINK_COLOR         |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |LINK_COLOR         |BY_CODE        |dae3c8 |0      |0      |0      | 
+|test   |test       |LINK_COLOR         |BY_CODE        |7fb816 |0      |0      |0      | 
 |test   |test       |ON_HOVER_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
-|test   |test       |ON_HOVER_COLOR     |BY_CODE        |dae3c8 |0      |0      |0      |
+|test   |test       |ON_HOVER_COLOR     |BY_CODE        |66b5ed |0      |0      |0      |
+
 
 
 
