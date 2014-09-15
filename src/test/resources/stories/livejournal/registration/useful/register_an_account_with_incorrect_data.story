@@ -2,7 +2,7 @@ Register an account with incorrect data
 
 
 
-Scenario: Incorrect name
+Scenario: Register an account with incorrect name
 
 Meta: 
 @categories registration useful 
@@ -25,7 +25,7 @@ Examples:
 
 
 
-Scenario: Incorrect email
+Scenario: Register an account with incorrect email
 
 Meta: 
 @categories registration useful
@@ -49,7 +49,7 @@ Examples:
 
 
 
-Scenario: Incorrect password
+Scenario: Register an account with incorrect password
 
 Meta: 
 @categories registration useful
@@ -75,7 +75,7 @@ Examples:
 
 
 
-Scenario: Incorrect age
+Scenario: Register an account with incorrect age
 
 
 Meta: 
@@ -90,7 +90,7 @@ Examples:
 |test1234rnd    |test@test.ru   |Test123    |1      |4      |2010   |M      |Age Verification   |
 
 
-Scenario: Empty name
+Scenario: Register an account with empty name
 
 Meta: 
 @categories registration useful
@@ -108,7 +108,7 @@ Examples:
 
 
 
-Scenario: Empty email
+Scenario: Register an account with empty email
 
 Meta: 
 @categories registration useful
@@ -126,7 +126,7 @@ Examples:
 
 
 
-Scenario: Empty password
+Scenario: Register an account with empty password
 
 Meta: 
 @categories registration useful
@@ -142,7 +142,7 @@ Examples:
 
 
 
-Scenario: Empty age
+Scenario: Register an account with empty age
 
 
 Meta: 

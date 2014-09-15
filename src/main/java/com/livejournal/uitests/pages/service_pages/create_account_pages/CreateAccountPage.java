@@ -132,7 +132,7 @@ public class CreateAccountPage extends ServicePage {
 
     @StepGroup
     public FinishForm clickOnCreateAccountButton() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), ThucydidesUtils.getImplementTimeoutInSec());
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         try {
             wait.until(new ExpectedCondition<Boolean>() {
                 @Override
