@@ -168,6 +168,27 @@ public class SettingsBlock extends UIBlock {
         return getColorButton(button).click();
     }
 
+    @StepGroup
+    public boolean verifyColor(String hex, String rgb) {
+        rgb = rgb.substring(rgb.indexOf('(') + 1, rgb.indexOf(')'));
+        String[] mas = rgb.split(", ");
+        boolean resultR = true;
+        boolean resultG = true;
+        boolean resultB = true;
+        if ((Integer.parseInt(mas[0]) < Integer.parseInt(hex.substring(0, 2), 16) - 5) || (Integer.parseInt(mas[0]) > Integer.parseInt(hex.substring(0, 2), 16) + 5)) {
+            resultR = !resultR;
+        }
+
+        if (Integer.parseInt(mas[1]) < Integer.parseInt(hex.substring(2, 4), 16) - 5 || Integer.parseInt(mas[1]) > Integer.parseInt(hex.substring(2, 4), 16) + 5) {
+            resultG = !resultG;
+        }
+
+        if (Integer.parseInt(mas[2]) < Integer.parseInt(hex.substring(4, 6), 16) - 5 || Integer.parseInt(mas[2]) > Integer.parseInt(hex.substring(4, 6), 16) + 5) {
+            resultB = !resultB;
+        }
+        return resultR & resultG & resultB;
+    }
+
     ////////////////////////////////////////////////
     public static class ColorPickerButton extends Button {
 
@@ -210,14 +231,15 @@ public class SettingsBlock extends UIBlock {
                 case "pages":
                     if (pageSize.isDisplayed()) {
                         pageSize.enter(size);
-                    
-                    break;}
+
+                        break;
+                    }
                 case "endless":
                     if (pageSize.isDisplayed()) {
                         Assert.fail("Page size input field is displayed!");
-                        
-                    
-                    break;}
+
+                        break;
+                    }
                 default:
                     Assert.fail("Incorrect page type!");
             }

@@ -69,7 +69,15 @@ Then the color changed to the current code <code>
 
 Examples:
 |name   |password   |color              |code   |
-|test   |test       |BACKGROUND_COLOR   |e76dfe |
+|test   |test       |BACKGROUND_COLOR   |030100 |
+|test   |test       |FOREGROUND_COLOR   |d6c5e0 |
+|test   |test       |SIDEBAR_BACKGROUND |e76dfe |
+|test   |test       |ELEMENTS_BACKGROUND|030100 |
+|test   |test       |ELEMENTS_COLOR     |f5e907 |
+|test   |test       |MAIN_TEXT_COLOR    |232282 |
+|test   |test       |SIDEBAR_TEXT_COLOR |66b5ed |
+|test   |test       |LINK_COLOR         |8f0096 |
+|test   |test       |ON_HOVER_COLOR     |1b4245 |
 
 
 
@@ -77,6 +85,7 @@ Examples:
 Scenario: Background image 
 Meta: 
 @categories feed personal
+@skip
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user load Background image <image> and set repeat <repeat> in Settings and save it
@@ -127,9 +136,22 @@ Scenario: Restore default settings
 Meta: 
 @categories feed personal
 
-Given logged user (name <name>, password <password>) on Friends Feed
+Given logged user (name <name>, password <password>) with its own settings on Friends Feed
 When user click Restore default settings Button in Settings and save it
 Then default settings is set
+
+Examples:
+|name   |password   |
+|test   |test       |
+
+
+Scenario: Cansel default settings 
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) with its own settings on Friends Feed
+When user click Restore default settings Button in Settings and cansel it
+Then users settings is set
 
 Examples:
 |name   |password   |
