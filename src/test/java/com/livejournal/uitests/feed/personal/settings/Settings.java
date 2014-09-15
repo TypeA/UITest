@@ -8,6 +8,7 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.C
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
+import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
@@ -102,19 +103,19 @@ public class Settings extends WebTest {
     public void color_is_changed_by_parametrs(String color, String type, String code, String barY, String colorX, String colorY) {
         on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
         verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getCurrentColor()))
-                .ifResultIsExpected("Correct current color:\n" + hexToRGB(code))
+                .ifResultIsExpected("Correct current color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
                 .and()
                 .that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "(" + hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .and()
                 .that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
-                .ifResultIsExpected("Correct element color:\n" + hexToRGB(code))
+                .ifResultIsExpected("Correct element color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
 
@@ -124,25 +125,20 @@ public class Settings extends WebTest {
     @Then("the color changed to the current code $code")
     public void the_color_changed_to_the_current(String code) {
         verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "(" + hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .and()
                 .that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color:\n" + hexToRGB(code))
+                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
     }
 
-    ///////////////////////////////////////////////////////////////////////////
-
-    private String hexToRGB(String hex) {
-        return Integer.parseInt(hex.substring(0, 2), 16) + ", " + Integer.parseInt(hex.substring(2, 4), 16) + ", " + Integer.parseInt(hex.substring(4, 6), 16);
-    }
-
+    //////////////////////////////////////////////////////////////////////////
     private String getElementColor(ColorSettings button) {
         switch (button) {
             case BACKGROUND_COLOR:
