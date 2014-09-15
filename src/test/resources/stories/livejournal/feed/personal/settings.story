@@ -28,7 +28,7 @@ Examples:
 
 Scenario: Set new color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
@@ -61,7 +61,7 @@ Examples:
 
 Scenario: Return the current color
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> (old code <code>) and return current color

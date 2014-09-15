@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -83,40 +84,48 @@ public class SettingsBlock extends UIBlock {
     private Button restoreButton;
 
     ////////////////////////////////////////
+    @StepGroup
     public SettingsBlock enterTitle(String title) {
         titleField.enter(title);
         return on(SettingsBlock.class);
     }
 
+    @StepGroup
     public SettingsBlock typeToTitle(String title) {
         titleField.type(title);
         return on(SettingsBlock.class);
     }
 
+    @StepGroup
     public SettingsBlock setTextSettings(String size, String font) {
         textSize.selectByValue(size);
         textFont.deselectByValue(font);
         return on(SettingsBlock.class);
     }
 
+    @StepGroup
     public PageSize setPaging(String type) {
         pageType.selectByValue(type);
         return new PageSize(type);
     }
 
+    @StepGroup
     public void saveSettings() {
         saveButton.click();
     }
 
+    @StepGroup
     public void cancelSettings() {
         cancelButton.click();
     }
 
+    @StepGroup
     public SettingsBlock restoreDefaultSettings() {
         restoreButton.click();
         return on(SettingsBlock.class);
     }
 
+    @StepGroup
     public ColorPickerButton getColorButton(ColorSettings button) {
         switch (button) {
             case BACKGROUND_COLOR:
@@ -147,16 +156,16 @@ public class SettingsBlock extends UIBlock {
         return null;
     }
 
+    @StepGroup
     public SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
         getColorButton(button).click()
                 .setColor(type, code, barY, colorX, colorY);
         return this;
-//  return on(SettingsBlock.class);
     }
 
+    @StepGroup
     public SettingsBubbleColorBlock getColor(ColorSettings button) {
         return getColorButton(button).click();
-    //    return on(SettingsBubbleColorBlock.class);
     }
 
     ////////////////////////////////////////////////

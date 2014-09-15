@@ -6,6 +6,7 @@ import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
@@ -34,16 +35,18 @@ public class FriendsFeedLogged extends ServicePageLogged {
     public Link userName;
 
     
-    
+    @StepGroup
     public SettingsBlock openSettings() {
         settingsButton.click();
         return on(SettingsBlock.class);
     }
 
+    @StepGroup
     public String getFeedTitle() {
         return feedTitle.getText();
     }
 
+    @StepGroup
     public Link getUserName() {
         return userName;
     }
