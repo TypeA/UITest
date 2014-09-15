@@ -3,12 +3,15 @@ package com.livejournal.uitests.feed.personal.settings;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.accounts.LJAccount;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSelectType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.TextParametrs;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
+import com.livejournal.uitests.utility.AccountGenerator;
 import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
@@ -104,6 +107,15 @@ public class Settings extends WebTest {
                 .cancelSettings();
     }
 
+    //Scenario: Text settings (2/3)
+    @When("user change text size $size and font $font in Settings and save it")
+    public void user_change_text_size_and_font_in_Settings_and_save_it(String size, String font) {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setTextSettings(size, font)
+                .saveSettings();
+    }
+
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
@@ -154,10 +166,10 @@ public class Settings extends WebTest {
                 .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
                 .finish();
     }
-    
+
     //Scenario: Cansel new color (3/3)
-    @Then ("users color $color is restore by code $code")
-        public void users_color_is_restore_by_code(String color, String code) {
+    @Then("users color $color is restore by code $code")
+    public void users_color_is_restore_by_code(String color, String code) {
         on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
         verify().that(on(SettingsBlock.class).verifyColor(code, on(SettingsBubbleColorBlock.class).getCurrentColor()))
                 .ifResultIsExpected("Correct current color:\n" + HexToRGB.hexToRGB(code))
@@ -176,7 +188,19 @@ public class Settings extends WebTest {
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
     }
-    
+
+    //Scenario: Text settings (3/3)
+    @Then("text settings is changed by size $size and font $font")
+    public void text_settings_is_changed_by_size_and_font(String size, String font) {
+        verify().that(getTextParametrs(TextParametrs.FONT).equals(font))
+                .ifResultIsExpected("Correct text font:\n" + font)
+                .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
+                .and()
+                .that(getTextParametrs(TextParametrs.SIZE).contains(size))
+                .ifResultIsExpected("Correct text size:\n" + size)
+                .ifElse("New text size is incorrect:\n" + getTextParametrs(TextParametrs.SIZE))
+                .finish();
+    }
 
     //////////////////////////////////////////////////////////////////////////
     private String getElementColor(ColorSettings button) {
@@ -207,6 +231,19 @@ public class Settings extends WebTest {
                 return "ERROR!!!";
             default:
                 Assert.fail("Unknown button " + button + "!");
+        }
+        return "ERROR!!!";
+    }
+
+    private String getTextParametrs(TextParametrs parametr) {
+        switch (parametr) {
+            case SIZE:
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .l-flatslide-content, .p-lenta .l-flatslide-aside")).getCssValue("font-size");
+            case FONT:
+                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .b-lenta-item-content")).getCssValue("font-family");
+
+            default:
+                Assert.fail("Unknown parametr " + parametr + "!");
         }
         return "ERROR!!!";
     }

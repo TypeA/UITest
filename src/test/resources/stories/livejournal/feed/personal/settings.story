@@ -59,7 +59,7 @@ Examples:
 
 Scenario: Cansel new color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> (old code <code>) and cansel it
@@ -122,18 +122,18 @@ Examples:
 
 Scenario: Text settings 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
-Then Text settings is changed
+Then text settings is changed by size <size> and font <font>
 
 Examples:
-|name   |password   |size       |font   |
-|test   |test       |TextSize   |Verdana|
-|test   |test       |TextSize   |Verdana|
-|test   |test       |TextSize   |Verdana|
-|test   |test       |TextSize   |Verdana|
+|name   |password   |size |font                 |
+|test   |test       |10   |ProximaNovaRegular   |
+|test   |test       |16   |Verdana              |
+|test   |test       |30   |Arial                |
+|test   |test       |36   |Helvetica            |
 
 
 
