@@ -57,11 +57,31 @@ Examples:
 
 
 
+Scenario: Cansel new color
+Meta: 
+@categories feed personal test
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change color <color> (old code <code>) and cansel it
+Then users color <color> is restore by code <code>
+
+Examples:
+|name   |password   |color              |code   |
+|test   |test       |BACKGROUND_COLOR   |030100 |
+|test   |test       |FOREGROUND_COLOR   |d6c5e0 |
+|test   |test       |SIDEBAR_BACKGROUND |e76dfe |
+|test   |test       |ELEMENTS_BACKGROUND|f797ac |
+|test   |test       |ELEMENTS_COLOR     |f5e907 |
+|test   |test       |MAIN_TEXT_COLOR    |232282 |
+|test   |test       |SIDEBAR_TEXT_COLOR |66b5ed |
+|test   |test       |LINK_COLOR         |8f0096 |
+|test   |test       |ON_HOVER_COLOR     |1b4245 |
+
 
 
 Scenario: Return the current color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> (old code <code>) and return current color

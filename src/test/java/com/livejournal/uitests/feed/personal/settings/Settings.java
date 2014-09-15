@@ -83,6 +83,27 @@ public class Settings extends WebTest {
         on(SettingsBubbleColorBlock.class).setCurrentColor();
     }
 
+    //Scenario: Cansel new color (2/3)
+    @When("user change color $color (old code $code) and cansel it")
+    public void user_change_color_and_cansel_it(String color, String code) {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setColor(ColorSettings.valueOf(color), ColorSelectType.BY_CODE, code, 0, 0, 0)
+                .saveSettings();
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .getColor(ColorSettings.valueOf(color))
+                .setColorBarByPoint(new RandomeValue(250).get())
+                .setColorByPoint(new RandomeValue(250).get(), new RandomeValue(250).get());
+        verify().that(!on(SettingsBlock.class).verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
+                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .finish();
+        on(SettingsBubbleColorBlock.class)
+                .clickChooseButton()
+                .cancelSettings();
+    }
+
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
@@ -131,12 +152,31 @@ public class Settings extends WebTest {
                 .that(on(SettingsBlock.class).verifyColor(code, "(" + HexToRGB.hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .finish();
+    }
+    
+    //Scenario: Cansel new color (3/3)
+    @Then ("users color $color is restore by code $code")
+        public void users_color_is_restore_by_code(String color, String code) {
+        on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
+        verify().that(on(SettingsBlock.class).verifyColor(code, on(SettingsBubbleColorBlock.class).getCurrentColor()))
+                .ifResultIsExpected("Correct current color:\n" + HexToRGB.hexToRGB(code))
+                .ifElse("Current color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
                 .and()
                 .that(on(SettingsBlock.class).verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .and()
+                .that(on(SettingsBlock.class).verifyColor(code, "(" + HexToRGB.hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .ifResultIsExpected("Correct color code:\n" + code)
+                .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .and()
+                .that(on(SettingsBlock.class).verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
+                .ifResultIsExpected("Correct element color:\n" + HexToRGB.hexToRGB(code))
+                .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
     }
+    
 
     //////////////////////////////////////////////////////////////////////////
     private String getElementColor(ColorSettings button) {
