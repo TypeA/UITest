@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.livejournal.uitests.pages.service_pages.Unified_scheme.footer;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.footer;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;

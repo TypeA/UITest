@@ -1,6 +1,6 @@
 package com.livejournal.uitests.pages.service_pages;
 
-import com.livejournal.uitests.pages.service_pages.Unified_scheme.header.FullscreenHeaderUnlogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderUnlogged;
 
 /**
  *

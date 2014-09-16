@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 /**
  *
  * @author m.prytkova
