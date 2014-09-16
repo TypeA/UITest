@@ -122,7 +122,7 @@ Examples:
 
 Scenario: Text settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it

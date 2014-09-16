@@ -6,7 +6,8 @@ import net.thucydides.core.annotations.DefaultUrl;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("/about")
-public class AboutMainPage extends ServicePage{
-    
+ */
+@DefaultUrl("/about")
+public class AboutMainPage extends ServicePage {
+
 }

@@ -11,7 +11,7 @@ public class ServicePageUnlogged extends ServicePage {
     private FullscreenHeaderUnlogged fullscreenHeaderUnlogged;
 
     public FullscreenHeaderUnlogged getFullscreenHeaderUnlogged() {
-        return elem(fullscreenHeaderUnlogged);
+        return fullscreenHeaderUnlogged;
     }
 
 }

@@ -11,7 +11,7 @@ public class ServicePageLogged extends ServicePage {
     private FullscreenHeaderLogged fullscreenHeaderLogged;
 
     public FullscreenHeaderLogged getFullscreenHeaderLogged() {
-        return elem(fullscreenHeaderLogged);
+        return fullscreenHeaderLogged;
     }
 
 }

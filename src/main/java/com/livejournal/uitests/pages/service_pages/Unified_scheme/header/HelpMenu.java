@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.Search.SearchPage;
+import com.livejournal.uitests.pages.service_pages.search.SearchPage;
 import com.livejournal.uitests.pages.service_pages.support_faq.AboutMainPage;
 import com.livejournal.uitests.pages.service_pages.support_faq.DMCAPage;
 import com.livejournal.uitests.pages.service_pages.support_faq.FaqMainPage;

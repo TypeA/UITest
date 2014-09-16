@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.Search;
+package com.livejournal.uitests.pages.service_pages.search;
 
 import com.livejournal.uitests.pages.service_pages.ServicePage;
 import net.thucydides.core.annotations.DefaultUrl;

@@ -14,7 +14,7 @@ import org.jbehave.core.annotations.When;
  * @author Maxa
  */
 public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
-
+/*
     //Scenario: From Main Page by Login Button(1/3)
     //Scenario: From Main Page by Tokens(1/3)
     @Given("unlogged user on Main Page")
@@ -75,5 +75,5 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
                 .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
                 .finish();
     }
-
+*/
 }

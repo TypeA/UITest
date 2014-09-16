@@ -17,12 +17,17 @@ public class LoginPageUnlogged extends ServicePage {
     @FindBy(css = ".b-bubble-noarrow")
     private TextBlock errorText;
 
-    @FindBy(css= ".s-body .b-loginform")
+    @FindBy(css = ".s-body .b-loginform")
     private LoginForm loginForm;
 
     @StepGroup
     public void authorizeBy(String login, String password) {
         getLoginForm().authorizeBy(login, password);
+    }
+
+    @StepGroup
+    public void clickOnLostInfoLink() {
+        getLoginForm().clickOnLostInfoLink();
     }
 
     public LoginForm getLoginForm() {

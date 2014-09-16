@@ -1,7 +1,6 @@
 package com.livejournal.uitests.registration.useful.register_an_account_with_correct_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
-import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
@@ -29,8 +28,8 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
         on(MainPageUnlogged.class)
                 .getFullscreenHeaderUnlogged()
-                .getLoginMenuItem().click();
-        on(LoginForm.class).getCreateAccountLink().click();
+                .clickOnLoginMenuItem()
+                .clickOnCreateAccountLink();
     }
 
     //Scenario: Successfull registration(2/3)
@@ -59,7 +58,6 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     //Scenario: Successfull registration(3/3)
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form_and_see_message_and_create_First_Post(String message) {
-
         verify().that(on(SuccessfulFinishForm.class).getFinishText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
                 .ifElse(VerifyText.errorTextForMessage(message, on(SuccessfulFinishForm.class).getFinishText()))

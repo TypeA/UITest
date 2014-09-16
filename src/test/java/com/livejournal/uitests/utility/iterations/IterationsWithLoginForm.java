@@ -1,6 +1,6 @@
 package com.livejournal.uitests.utility.iterations;
 
-import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 
 /**
  *
@@ -19,6 +19,6 @@ public class IterationsWithLoginForm extends IterationsWithObject {
 
     @Override
     protected void toRun() {
-        ((LoginPage) object).getLoginForm().authorizeBy(name, password);
+        ((LoginPageUnlogged) object).getLoginForm().authorizeBy(name, password);
     }
 }

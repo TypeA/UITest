@@ -4,7 +4,9 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.login_page.SocialNetworksBlock;
+import com.livejournal.uitests.pages.service_pages.lost_info.LostInfoPage;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -53,16 +55,14 @@ public class LoginForm extends UIBlock {
         return elem(submitButton);
     }
 
-    public Link getCreateAccountLink() {
-        return elem(createAccountLink);
+    public CreateAccountPage clickOnCreateAccountLink() {
+        createAccountLink.click();
+        return on(CreateAccountPage.class);
     }
 
-    public SocialNetworksBlock getSocialNetworksBlock() {
-        return elem(socialNetworksBlock);
-    }
-
-    public Link getLostInfo() {
-        return elem(lostInfo);
+    public LostInfoPage clickOnLostInfoLink() {
+        lostInfo.click();
+        return on(LostInfoPage.class);
     }
 
 }

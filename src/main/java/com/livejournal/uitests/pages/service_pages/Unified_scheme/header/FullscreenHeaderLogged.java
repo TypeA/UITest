@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -27,9 +28,9 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     @FindBy(css = ".s-do-item.s-do-item-message")
     public Link Messages;
 
-    public ServicePageLogged clickOnLogo() {
+    public MainPageLogged clickOnLogo() {
         logo.click();
-        return on(ServicePageLogged.class);
+        return on(MainPageLogged.class);
     }
 
     public LJMagazinePageLogged clickOnLjMagazineMenuItem() {

@@ -48,6 +48,11 @@
             <artifactId>uisteps</artifactId>
             <version>0.2.5-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>2.42.2</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

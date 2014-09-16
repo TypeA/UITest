@@ -3,15 +3,13 @@ package com.livejournal.uitests.feed.personal.settings;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
-import com.livejournal.uitests.accounts.LJAccount;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSelectType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.TextParametrs;
-import com.livejournal.uitests.pages.service_pages.login_page.LoginPage;
-import com.livejournal.uitests.utility.AccountGenerator;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
@@ -34,7 +32,7 @@ public class Settings extends WebTest {
     //Scenario: Set new color(1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
-        on(LoginPage.class)
+        on(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
         on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }

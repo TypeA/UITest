@@ -1,9 +1,9 @@
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
+import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageUnlogged;
-import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -31,9 +31,9 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
         return on(LJMagazinePageUnlogged.class);
     }
 
-    public LoginPageUnlogged clickOnLoginMenuItem() {
+    public LoginForm clickOnLoginMenuItem() {
         loginMenuItem.click();
-        return on(LoginPageUnlogged.class);
+        return on(LoginForm.class);
     }
 
     public ShopMenuUnlogged moveMouseOverShopMenuItem() {

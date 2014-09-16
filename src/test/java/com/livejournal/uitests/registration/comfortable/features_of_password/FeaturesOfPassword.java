@@ -26,13 +26,15 @@ public class FeaturesOfPassword extends WebTest {
     //Scenario: Password description(2/3)
     @When("user enter password $password")
     public void user_enter_password(String password) {
-        on(CreateAccountPage.class).enterPassword(password);
+        on(CreateAccountPage.class)
+                .enterPassword(password);
     }
 
     //Scenario: Displays password(4/5)
     @When("user clicks Mapping Button")
     public void user_clicks_Mapping_Button() {
-        on(CreateAccountPage.class).clickOnPasswordMappingLink(MappingLink.HIDE);
+        on(CreateAccountPage.class)
+                .clickOnPasswordMappingLink(MappingLink.HIDE);
     }
 
     //Scenario: Displays password(3/5)
