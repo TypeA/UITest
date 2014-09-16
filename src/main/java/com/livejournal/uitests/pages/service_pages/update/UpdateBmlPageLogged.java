@@ -8,6 +8,6 @@ import net.thucydides.core.annotations.DefaultUrl;
  * @author m.prytkova
  */
 @DefaultUrl("/update.bml")
-public class UpdateBmlPage extends ServicePageLogged {
+public class UpdateBmlPageLogged extends ServicePageLogged {
 
 }

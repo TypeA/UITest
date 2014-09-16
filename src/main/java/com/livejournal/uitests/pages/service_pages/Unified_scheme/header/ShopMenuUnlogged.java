@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".s-nav-item-shop"))
-public class ShopMenuItem extends UIBlock {
+public class ShopMenuUnlogged extends UIBlock {
 
     @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-shop")
     private Link shopGeneralLink;
@@ -27,25 +27,5 @@ public class ShopMenuItem extends UIBlock {
 
     @FindBy(css = ".s-nav-item-tokens a")
     private Link tokens;
-
-    public Link getShop() {
-        return elem(shop);
-    }
-
-    public Link getPaid() {
-        return elem(paid);
-    }
-
-    public Link getPromo() {
-        return elem(promo);
-    }
-
-    public Link getTokens() {
-        return elem(tokens);
-    }
-
-    public Link getShopGeneralLink() {
-        return elem(shopGeneralLink);
-    }
 
 }

@@ -7,8 +7,9 @@ import org.openqa.selenium.support.FindBy;
  *
  * @author s.savinykh
  */
-public class ShopLogged extends ShopMenuItem
-{
-    @FindBy(css=".s-nav-item-paid-history")
+public class ShopMenuLogged extends ShopMenuUnlogged {
+
+    @FindBy(css = ".s-nav-item-paid-history")
     public Link orderHistory;
+
 }

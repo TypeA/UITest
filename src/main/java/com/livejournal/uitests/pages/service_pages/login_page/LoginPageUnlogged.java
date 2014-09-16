@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  * @author ASolyankin
  */
 @DefaultUrl("/login.bml")
-public class LoginPage extends ServicePage {
+public class LoginPageUnlogged extends ServicePage {
 
     @FindBy(css = ".b-bubble-noarrow")
     private TextBlock errorText;

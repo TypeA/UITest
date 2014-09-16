@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 
 @Block
         (@FindBy(css=".s-nav-item-user"))
-public class MyJournalMenuItem extends UIBlock
+public class MyJournalMenu extends UIBlock
 {
     @FindBy(css="label[for='s-nav-body-user'] .s-userpic")
     public Link userPic;

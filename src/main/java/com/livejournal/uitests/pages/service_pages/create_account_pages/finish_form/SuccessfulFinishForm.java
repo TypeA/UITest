@@ -9,7 +9,7 @@ import com.livejournal.uitests.pages.service_pages.settings.EditProfilePage;
 import com.livejournal.uitests.pages.service_pages.settings.FindFriendsPage;
 import com.livejournal.uitests.pages.service_pages.settings.email.ChangeEmailPage;
 import com.livejournal.uitests.pages.service_pages.settings.email.ValidateEmailPage;
-import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPage;
+import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -77,9 +77,9 @@ public class SuccessfulFinishForm extends FinishForm {
         return on(MainPageLogged.class);
     }
 
-    public UpdateBmlPage createFirstPost() {
+    public UpdateBmlPageLogged createFirstPost() {
         createFirstPostButton.click();
-        return on(UpdateBmlPage.class);
+        return on(UpdateBmlPageLogged.class);
     }
 
 }

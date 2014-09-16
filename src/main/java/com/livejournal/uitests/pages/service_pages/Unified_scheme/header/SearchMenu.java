@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".i-iconus-search"))
-public class SearchMenuItem extends UIBlock {
+public class SearchMenu extends UIBlock {
 
     @FindBy(css = ".s-search #SearchText")
     public TextField searchLine;

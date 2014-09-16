@@ -99,7 +99,7 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public SettingsBlock setTextSettings(String size, String font) {
         textSize.selectByValue(size);
-        textFont.selectByValue(font);
+        textFont.deselectByValue(font);
         return on(SettingsBlock.class);
     }
 

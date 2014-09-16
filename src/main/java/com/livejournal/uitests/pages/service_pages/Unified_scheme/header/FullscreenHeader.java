@@ -4,45 +4,45 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
+
 /**
  *
  * @author s.savinykh
  */
 @Block(
         @FindBy(css = HeaderLocator.CSS))
-public class FullscreenHeader extends UIBlock 
-{
-    private Logo logo;
+public class FullscreenHeader extends UIBlock {
+
+    @FindBy(css = ".s-logo")
+    protected Link logo;
 
     @FindBy(css = ".s-nav-rootlink-discovery")
-    private Link ljMagazine;
+    protected Link ljMagazineMenuItem;
 
-    @FindBy(css=".s-nav-rootlink.s-nav-rootlink-support")
-    private HelpMenuItem helpMenuItem;
-    
+    @FindBy(css = ".s-nav-item-shop")
+    protected Link shopMenuItem;
+
     @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
-    private FeedbackMenuItem feedbackMenuItem;
+    private Link helpMenuItem;
 
-    private SearchMenuItem searchMenuItem;
+    @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
+    private Link feedbackMenuItem;
 
-    public Logo getLogo() {
-        return elem(logo);
+    @FindBy(css = ".s-do-item-search")
+    private Link searchMenuItem;
+
+    public HelpMenu moveMouseOverHelpMenuItem() {
+        helpMenuItem.moveMouseOver();
+        return on(HelpMenu.class);
     }
 
-    public Link getLjMagazine() {
-        return elem(ljMagazine);
+    public FeedbackMenu moveMouseOverFeedbackMenuItem() {
+        feedbackMenuItem.moveMouseOver();
+        return on(FeedbackMenu.class);
     }
 
-    public HelpMenuItem getHelpMenuItem() {
-        return elem(helpMenuItem);
+    public SearchMenu clickOnSearchMenuItem() {
+        searchMenuItem.click();
+        return on(SearchMenu.class);
     }
-
-    public FeedbackMenuItem getFeedback() {
-        return elem(feedbackMenuItem);
-    }
-
-    public SearchMenuItem getSearchMenuItem() {
-        return elem(searchMenuItem);
-    }
-
 }

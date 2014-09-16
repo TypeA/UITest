@@ -10,7 +10,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block
         (@FindBy(css=".s-do-item-feedback"))
-public class FeedbackMenuItem extends UIBlock 
+public class FeedbackMenu extends UIBlock 
 {
      
     @FindBy(css=".i-popup-close") 

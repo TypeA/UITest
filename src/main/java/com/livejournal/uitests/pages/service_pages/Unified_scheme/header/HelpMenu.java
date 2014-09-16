@@ -1,8 +1,17 @@
 package com.livejournal.uitests.pages.service_pages.Unified_scheme.header;
 
+import com.livejournal.uisteps.thucydides.elements.Link;
+import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uisteps.thucydides.elements.UIElement;
-import org.openqa.selenium.WebElement;
+import com.livejournal.uitests.pages.service_pages.Search.SearchPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.AboutMainPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.DMCAPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.FaqMainPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.PrivacyRusPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.SupportMainPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.TosRusPage;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -12,101 +21,60 @@ import org.openqa.selenium.support.FindBy;
 public class HelpMenu extends UIBlock {
 
     @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support")
-    private Help help;
+    private Link help;
 
     @FindBy(css = ".s-nav-item-about")
-    private About about;
+    private Link about;
 
     @FindBy(css = ".s-nav-item-faq")
-    private Faq faq;
+    private Link faq;
 
     @FindBy(css = ".s-nav-item-legal")
-    private Tos tos;
+    private Link tos;
 
     @FindBy(css = ".s-nav-item-privacy")
-    private Privacy privacy;
+    private Link privacy;
 
     @FindBy(css = ".s-nav-item-dmca")
-    private Dmca dmca;
+    private Link dmca;
 
     @FindBy(css = ".s-nav-item-search #SearchText")
-    private SearchLine searchLine;
+    private TextField searchLine;
 
-    public Help getHelp() {
-        return elem(help);
+    public SupportMainPage clickOnHelp() {
+        help.click();
+        return on(SupportMainPage.class);
     }
 
-    public About getAbout() {
-        return elem(about);
+    public AboutMainPage clickOnAbout() {
+        about.click();
+        return on(AboutMainPage.class);
     }
 
-    public Faq getFaq() {
-        return elem(faq);
+    public FaqMainPage clickOnFaq() {
+        faq.click();
+        return on(FaqMainPage.class);
     }
 
-    public Tos getTos() {
-        return elem(tos);
+    public TosRusPage clickOnTos() {
+        tos.click();
+        return on(TosRusPage.class);
     }
 
-    public Privacy getPrivacy() {
-        return elem(privacy);
+    public PrivacyRusPage clickOnPrivacy() {
+        privacy.click();
+        return on(PrivacyRusPage.class);
     }
 
-    public Dmca getDmca() {
-        return elem(dmca);
+    public DMCAPage clickOnDmca() {
+        dmca.click();
+        return on(DMCAPage.class);
     }
-
-    public SearchLine getSearchLine() {
-        return elem(searchLine);
+    
+    public SearchPage search(String text) {
+        searchLine.enter(text);
+        Actions actions=new Actions(this.getDriver());
+        actions.keyDown(Keys.ENTER).build().perform();
+        return on(SearchPage.class);
     }
-
-    public class Help extends UIElement {
-
-        public Help(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
-    public class About extends UIElement {
-
-        public About(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
-    public class Faq extends UIElement {
-
-        public Faq(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
-    public class Tos extends UIElement {
-
-        public Tos(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
-    public class Privacy extends UIElement {
-
-        public Privacy(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
-    public class Dmca extends UIElement {
-
-        public Dmca(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
-    public class SearchLine extends UIElement {
-
-        public SearchLine(WebElement wrappedElement) {
-            super(wrappedElement);
-        }
-    }
-
 }

@@ -11,21 +11,21 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block 
         (@FindBy(css=".s-nav-item-friends"))
-public class FriendsFeedMenuItem extends UIBlock 
+public class FriendsFeedMenu extends UIBlock 
 {
     @FindBy(css=".s-nav-rootlink-feed")
-    public Link friendsFeed; 
+    private Link friendsFeed; 
     
     @FindBy(css=".s-nav-item-editgroups")
-    public Link mngGroups;     
+    private Link mngGroups;     
     
     @FindBy(css=".s-nav-item-edit")
-    public Link mngFriends;   
+    private Link mngFriends;   
         
     @FindBy(css=".s-nav-item-manage")
-    public Link mngCommunities;     
+    private Link mngCommunities;     
     
     @FindBy(css=".s-nav-item-banusers")
-    public Link bannedUsers;     
+    private Link bannedUsers;     
     
 }
