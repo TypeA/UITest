@@ -50,10 +50,10 @@ public class AccountGenerator {
                 writer.write(message);
             }
             if (connection.getResponseCode() == HttpURLConnection.HTTP_OK) {
-                System.out.println("=======================================================1");
                 String response = readStreamToString(connection.getInputStream(), "UTF-8");
-                System.out.println(response);
-                System.out.println("=======================================================2");
+                if (response.contains("error")) {
+                    Assert.fail(response);
+                }
             } else {
                 Assert.fail("Connection is broken! Pesponse code: " + connection.getResponseCode());
             }
