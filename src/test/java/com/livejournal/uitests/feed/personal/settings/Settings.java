@@ -6,6 +6,7 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSelectType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.TextParametrs;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -30,6 +31,10 @@ public class Settings extends WebTest {
     //Scenario: New Title(1/3)
     //Scenario: Change Title(1/3)
     //Scenario: Set new color(1/3)
+    //Scenario: Cancel changing Title (1/3)
+    //Scenario: Cansel new color (1/3)
+    //Scenario: Return the current color (1/3)
+    //Scenario: Set text settings (1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
         on(LoginPageUnlogged.class)
@@ -56,6 +61,20 @@ public class Settings extends WebTest {
                 .saveSettings();
     }
 
+    //Scenario: Cancel changing Title(2/3)
+    @When("user change Title $title in Settings and cansel it")
+    public void user_change_Title_in_Settings_and_cansel_it(String title) {
+        ThucydidesUtils.putToSession("feed_title", on(FriendsFeedLogged.class).getFeedTitle());
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .typeToTitle(title);
+        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals((String)ThucydidesUtils.getFromSession("feed_title") + title))
+                .ifResultIsExpected(VerifyText.okTextForMessage((String)ThucydidesUtils.getFromSession("feed_title") + title))
+                .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()));
+        on(SettingsBlock.class)
+                .cancelSettings();
+    }
+
     //Scenario: Set new color(2/3)
     @When("user change color $color by type $type (parametrs: code $code, barY $barY, colorX $colorX, colorY $colorY) and save it")
     public void user_change_color_by_type_and_save_it(String color, String type, String code, String barY, String colorX, String colorY) {
@@ -63,6 +82,7 @@ public class Settings extends WebTest {
                 .openSettings()
                 .setColor(ColorSettings.valueOf(color), ColorSelectType.valueOf(type), code, Integer.parseInt(barY), Integer.parseInt(colorX), Integer.parseInt(colorY))
                 .saveSettings();
+
     }
 
     //Scenario: Return the current color(2/3)
@@ -105,7 +125,7 @@ public class Settings extends WebTest {
                 .cancelSettings();
     }
 
-    //Scenario: Text settings (2/3)
+    //Scenario: Set text settings (2/3)
     @When("user change text size $size and font $font in Settings and save it")
     public void user_change_text_size_and_font_in_Settings_and_save_it(String size, String font) {
         on(FriendsFeedLogged.class)
@@ -125,7 +145,16 @@ public class Settings extends WebTest {
         }
         verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
                 .ifResultIsExpected(VerifyText.okTextForMessage(correct_title))
-                .ifElse(VerifyText.errorTextForMessage(correct_title, on(FriendsFeedLogged.class).getFeedTitle()))
+                .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
+                .finish();
+    }
+
+    //Scenario: Cancel changing Title (3/3)
+    @Then("the Title is not changed")
+    public void the_Title_is_not_changed() {
+        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals((String)ThucydidesUtils.getFromSession("feed_title")))
+                .ifResultIsExpected(VerifyText.okTextForMessage((String)ThucydidesUtils.getFromSession("feed_title")))
+                .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
     }
 
@@ -189,7 +218,7 @@ public class Settings extends WebTest {
                 .finish();
     }
 
-    //Scenario: Text settings (3/3)
+    //Scenario: Set text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) {
         verify().that(getTextParametrs(TextParametrs.FONT).equals(font))

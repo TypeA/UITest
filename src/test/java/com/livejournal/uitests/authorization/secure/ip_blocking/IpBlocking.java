@@ -32,7 +32,7 @@ public class IpBlocking extends WebTest {
     public void user_see_message_and_can_not_enter_with_correct_data(String message, String name, String correct_password) {
         verify().that(on(LoginPageUnlogged.class).getErrorText().getText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(message, on(LoginPageUnlogged.class).getErrorText().getText()))
+                .ifElse(VerifyText.errorTextForMessage(on(LoginPageUnlogged.class).getErrorText().getText()))
                 .finish();
         on(LoginPageUnlogged.class)
                 .authorizeBy(name, correct_password);

@@ -19,7 +19,7 @@ public class VerifyText {
         return "Correct text.\nText contains: " + message;
     }
 
-    public static String errorTextForMessage(String message, String current_text) {
+    public static String errorTextForMessage(String current_text) {
         return "Incorrect text!\nCurrent text: " + current_text;
     }
 

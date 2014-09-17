@@ -125,7 +125,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
                 .and()
                 .that(on(PopupsBlock.class).getPopupText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(message, on(PopupsBlock.class).getPopupText()))
+                .ifElse(VerifyText.errorTextForMessage(on(PopupsBlock.class).getPopupText()))
                 .and()
                 .that(!on(CreateAccountPage.class).createAccountButtonState())
                 .ifResultIsExpected("Create account Button is disabled")
@@ -139,7 +139,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     public void user_go_to_Finish_Registration_Form_and_see_message(String message) {
         verify().that(on(UnsuccessfulFinishForm.class).getFinishText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(message, on(UnsuccessfulFinishForm.class).getFinishText()))
+                .ifElse(VerifyText.errorTextForMessage(on(UnsuccessfulFinishForm.class).getFinishText()))
                 .finish();
 
     }
