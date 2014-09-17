@@ -132,7 +132,9 @@ public class Settings extends WebTest {
     //Scenario: Set new color(3/3)
     @Then("color $color is changed by parametrs: code $code, barY $barY, colorX $colorX, colorY $colorY")
     public void color_is_changed_by_parametrs(String color, String type, String code, String barY, String colorX, String colorY) {
-        on(FriendsFeedLogged.class).openSettings().getColor(ColorSettings.valueOf(color));
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .getColor(ColorSettings.valueOf(color));
         verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getCurrentColor()))
                 .ifResultIsExpected("Correct current color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())

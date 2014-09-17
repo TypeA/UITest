@@ -41,7 +41,7 @@ public class SettingsBubbleColorBlock extends UIBlock {
         return this;
     }
 
-    @StepGroup
+    
     public String getCode() {
         return colorHex.getWrappedElement().getAttribute("value");
     }
@@ -70,12 +70,12 @@ public class SettingsBubbleColorBlock extends UIBlock {
         return this;
     }
 
-    @StepGroup
+   
     public String getCurrentColor() {
         return currentColor.getWrappedElement().getAttribute("style");
     }
 
-    @StepGroup
+    
     public String getNewColor() {
         return newColor.getWrappedElement().getAttribute("style");
     }
