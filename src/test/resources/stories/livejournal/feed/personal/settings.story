@@ -25,10 +25,23 @@ Examples:
 |test   |test       |Test   |TEST           |
 
 
+Scenario: Cancel changing Title
+Meta: 
+@categories feed personal test
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change Title <title> in Settings and cansel it
+Then the Title is not changed
+
+Examples:
+|name   |password   |title |
+|test   |test       |rnd   |
+
+
 
 Scenario: Set new color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
@@ -120,7 +133,7 @@ Examples:
 
 
 
-Scenario: Text settings 
+Scenario: Set text settings 
 Meta: 
 @categories feed personal
 

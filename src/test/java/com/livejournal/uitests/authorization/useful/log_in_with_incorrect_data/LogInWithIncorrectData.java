@@ -32,7 +32,7 @@ public class LogInWithIncorrectData extends WebTest {
     public void user_is_not_logged_and_see_message(String message) {
         verify().that(on(LoginPageUnlogged.class).getErrorText().getText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(message, on(LoginPageUnlogged.class).getErrorText().getText()))
+                .ifElse(VerifyText.errorTextForMessage(on(LoginPageUnlogged.class).getErrorText().getText()))
                 .finish();
 
     }

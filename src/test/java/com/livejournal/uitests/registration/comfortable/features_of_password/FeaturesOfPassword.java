@@ -74,7 +74,7 @@ public class FeaturesOfPassword extends WebTest {
                 .and()
                 .that(on(PopupsBlock.class).getPopupText().contains(text))
                 .ifResultIsExpected(VerifyText.okTextForMessage(text))
-                .ifElse(VerifyText.errorTextForMessage(text, on(PopupsBlock.class).getPopupText()))
+                .ifElse(VerifyText.errorTextForMessage(on(PopupsBlock.class).getPopupText()))
                 .finish();
 
         on(PopupsBlock.class).clickOnLearnMoreLink();
