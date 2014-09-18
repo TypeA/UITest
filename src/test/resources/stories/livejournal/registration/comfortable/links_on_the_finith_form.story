@@ -141,3 +141,18 @@ Then user in correct page <page> with URL <URL>
 Examples:
 |name           |email          |password   |day    |month  |year   |gender |page |URL                |
 |test1234rnd    |test@test.ru   |Test123    |1      |4      |2013   |M      |LJ   |livejournal.ru     |
+
+
+
+Scenario: First post
+
+Meta: 
+@categories registration comfortable
+
+Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
+When user click on Create First Post button
+Then user in correct page <page> with URL <URL>
+
+Examples:
+|name           |email          |password   |day    |month  |year   |gender |page               |URL             |
+|test1234rnd    |test@test.ru   |Test123    |1      |4      |2000   |M      |Create Post Page   |/update.bml     |

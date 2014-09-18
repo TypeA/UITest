@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Cancel changing Title
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change Title <title> in Settings and cansel it
@@ -45,7 +45,7 @@ Meta:
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
-Then color <color> is changed by parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>
+Then the color <color> corresponds to correct code <code>
 
 Examples:
 |name   |password   |color              |type           |code   |barY   |colorX |colorY |
@@ -70,13 +70,15 @@ Examples:
 
 
 
+
+
 Scenario: Cansel new color
 Meta: 
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change color <color> (old code <code>) and cansel it
-Then users color <color> is restore by code <code>
+Then the color <color> corresponds to correct code <code>
 
 Examples:
 |name   |password   |color              |code   |
@@ -89,6 +91,7 @@ Examples:
 |test   |test       |SIDEBAR_TEXT_COLOR |66b5ed |
 |test   |test       |LINK_COLOR         |8f0096 |
 |test   |test       |ON_HOVER_COLOR     |1b4245 |
+
 
 
 
@@ -115,10 +118,11 @@ Examples:
 
 
 
-Scenario: Background image 
+
+Scenario: Add background image 
 Meta: 
 @categories feed personal
-@skip
+
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user load Background image <image> and set repeat <repeat> in Settings and save it
@@ -129,6 +133,23 @@ Examples:
 |test   |test       |картинка   |Horizontal and Vertical|
 |test   |test       |картинка   |Horizontal             |
 |test   |test       |картинка   |Vertical               |
+
+
+
+
+Scenario: Delete background image 
+Meta: 
+@categories feed personal
+
+
+Given logged user (name <name>, password <password>) with Background image on Friends Feed
+When user delete Background image and save it
+Then  Background image is deleted
+
+Examples:
+|name   |password   |
+|test   |test       |
+
 
 
 
@@ -150,7 +171,24 @@ Examples:
 
 
 
-Scenario: Paging type 
+Scenario: Cancel text settings 
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user change text size <size> and font <font> in Settings and cansel it
+Then text settings is not changed
+
+Examples:
+|name   |password   |size |font                 |
+|test   |test       |10   |ProximaNovaRegular   |
+|test   |test       |16   |Verdana              |
+|test   |test       |30   |Arial                |
+|test   |test       |36   |Helvetica            |
+
+
+
+Scenario: Set paging type 
 Meta: 
 @categories feed personal
 
@@ -163,6 +201,25 @@ Examples:
 |test   |test       |постоянная                 |
 |test   |test       |постраничная(1 страница)   |
 |test   |test       |постраничная(-3 страницы)  |
+|test   |test       |постраничная(0 страниц)    |
+|test   |test       |постраничная(100 страниц)  |
+
+
+
+Scenario: Cancel paging type 
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) on Friends Feed
+When user set Paging type <type>  in Settings and cansel it
+Then Paging type is not changed
+
+Examples:
+|name   |password   |type                       |
+|test   |test       |постоянная                 |
+|test   |test       |постраничная(1 страница)   |
+
+
 
 
 Scenario: Restore default settings 
@@ -176,6 +233,7 @@ Then default settings is set
 Examples:
 |name   |password   |
 |test   |test       |
+
 
 
 Scenario: Cansel default settings 

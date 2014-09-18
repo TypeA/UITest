@@ -80,7 +80,6 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     //Scenario: Register an account with empty name(2/3)
     @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_correct_data_except_for_the_name(String name, String email, String password, String day, String month, String year, String gender) {
-
         on(CreateAccountPage.class)
                 .createAccountData(NumberOfSymbols.get(new RandomName(name).get(), 30),
                         email,
@@ -97,7 +96,6 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     //Scenario: Register an account with empty password(2/3)
     @When("user enter correct data except for the password: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_correct_data_except_for_the_password(String name, String email, String password, String day, String month, String year, String gender) {
-
         on(CreateAccountPage.class)
                 .createAccountData(new RandomName(name).get(),
                         email,

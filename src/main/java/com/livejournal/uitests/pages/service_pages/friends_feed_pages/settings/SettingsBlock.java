@@ -3,10 +3,15 @@ package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.Select;
 
@@ -110,18 +115,42 @@ public class SettingsBlock extends UIBlock {
     }
 
     @StepGroup
-    public void saveSettings() {
+    public FriendsFeedLogged saveSettings() {
         saveButton.click();
+        return on(FriendsFeedLogged.class);
     }
 
     @StepGroup
-    public void cancelSettings() {
+    public SettingsBlock cancelSettings() {
         cancelButton.click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        try {
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver d) {
+                    return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
+                }
+            });
+        } catch (Exception ex) {
+            junit.framework.Assert.fail("Settings block is not closed\n");
+        }
+        return on(SettingsBlock.class);
     }
 
     @StepGroup
     public SettingsBlock restoreDefaultSettings() {
         restoreButton.click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        try {
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver d) {
+                    return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
+                }
+            });
+        } catch (Exception ex) {
+            junit.framework.Assert.fail("Settings block is not closed\n");
+        }
         return on(SettingsBlock.class);
     }
 
@@ -166,6 +195,7 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public SettingsBubbleColorBlock getColor(ColorSettings button) {
         return getColorButton(button).click();
+
     }
 
     ////////////////////////////////////////////////
