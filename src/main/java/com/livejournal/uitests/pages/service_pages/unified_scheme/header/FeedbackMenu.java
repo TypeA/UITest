@@ -9,7 +9,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block
-        (@FindBy(css=".s-do-item-feedback"))
+        (@FindBy(css=".b-popup-withclosecontrol[style*='visible']"))
 public class FeedbackMenu extends UIBlock 
 {
      

@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block(
-        @FindBy(css = ".s-nav-item-shop"))
+        @FindBy(css = ".s-nav-item-shop .s-drop"))
 public class ShopMenuUnlogged extends UIBlock {
 
     @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-shop")

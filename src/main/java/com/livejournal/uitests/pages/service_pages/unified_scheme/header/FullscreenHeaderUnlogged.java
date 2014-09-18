@@ -15,7 +15,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = HeaderLocator.CSS))
 public class FullscreenHeaderUnlogged extends FullscreenHeader {
 
-    @FindBy(css = ".s-nav-item.s-nav-item-login a")
+    @FindBy(css = ".s-nav-item .s-nav-item-login a")
     private Link loginMenuItem;
 
     @FindBy(css=".s-nav-item-lang-open")
