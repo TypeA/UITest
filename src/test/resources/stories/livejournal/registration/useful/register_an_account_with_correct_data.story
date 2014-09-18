@@ -4,7 +4,7 @@ Register an account with correct data
 Scenario: Go to registration form
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
 Then user in correct page <page> with URL <URL>

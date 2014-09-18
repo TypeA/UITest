@@ -3,7 +3,7 @@ Links on the account creation page
 Scenario: TOS link
 
 Meta: 
-@categories registration comfortable test
+@categories registration comfortable
 
 Given unlogged user on Registration Form
 When user click TOS Link

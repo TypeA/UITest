@@ -35,6 +35,7 @@ public class Settings extends WebTest {
     //Scenario: Cansel new color (1/3)
     //Scenario: Return the current color (1/3)
     //Scenario: Set text settings (1/3)
+    //Scenario: Set paging type
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
         on(LoginPageUnlogged.class)
@@ -149,6 +150,11 @@ public class Settings extends WebTest {
                 .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
     }
+    
+    
+    //Scenario: Set paging type
+    @When ("user set Paging type $type  in Settings and save it")
+    public void user_set_Paging_type_in_Settings_and_save_it(){}
 
     //Scenario: Cancel changing Title (3/3)
     @Then("the Title is not changed")
