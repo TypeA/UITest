@@ -150,12 +150,15 @@ public class Settings extends WebTest {
                 .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
     }
-    
+
     
     //Scenario: Set paging type
-    @When ("user set Paging type $type  in Settings and save it")
-    public void user_set_Paging_type_in_Settings_and_save_it(){}
+    @When("user set Paging type <type> (number <number>)  in Settings and save it")
+    public void user_set_Paging_type_in_Settings_and_save_it() {
+    }
 
+    
+    
     //Scenario: Cancel changing Title (3/3)
     @Then("the Title is not changed")
     public void the_Title_is_not_changed() {

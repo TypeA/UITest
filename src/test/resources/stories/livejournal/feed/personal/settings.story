@@ -193,16 +193,16 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user set Paging type <type>  in Settings and save it
+When user set Paging type <type> (number <number>)  in Settings and save it
 Then Paging type is changed
 
 Examples:
-|name   |password   |type                       |
-|test   |test       |постоянная                 |
-|test   |test       |постраничная(1 страница)   |
-|test   |test       |постраничная(-3 страницы)  |
-|test   |test       |постраничная(0 страниц)    |
-|test   |test       |постраничная(100 страниц)  |
+|name   |password   |type       |number |
+|test   |test       |endless    |0      |
+|test   |test       |pages      |1      |
+|test   |test       |pages      |-3     |
+|test   |test       |pages      |0      |
+|test   |test       |pages      |100    |
 
 
 
