@@ -41,12 +41,12 @@ public class FeaturesOfPassword extends WebTest {
     @Then("the password is hidden")
     public void the_password_is_hidden() {
         verify().that(on(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.HIDE))
-                .ifResultIsExpected("Correct icon display password")
-                .ifElse("Incorrect icon display password!")
+                .ifResultIsExpected("Correct icon is displayed: hide icon")
+                .ifElse("Hide icon is hidden!")
                 .and()
                 .that(!on(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.SHOW))
-                .ifResultIsExpected("Correct icon display password")
-                .ifElse("Incorrect icon display password!")
+                .ifResultIsExpected("Correct icon is hidden: show icon")
+                .ifElse("Show icon is displayed!")
                 .finish();
     }
 
@@ -54,12 +54,12 @@ public class FeaturesOfPassword extends WebTest {
     @Then("the password is displayed")
     public void the_password_is_displayed() {
         verify().that(!on(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.HIDE))
-                .ifResultIsExpected("Correct icon display password")
-                .ifElse("Incorrect icon display password!")
+                .ifResultIsExpected("Correct icon is hidden: hide icon")
+                .ifElse("Hide icon is displayed!")
                 .and()
                 .that(on(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.SHOW))
-                .ifResultIsExpected("Correct icon display password")
-                .ifElse("Incorrect icon display password!")
+                .ifResultIsExpected("Correct icon is displayed: show icon")
+                .ifElse("Show icon is hidden!")
                 .finish();
 
     }

@@ -24,8 +24,8 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = "a[ng-class*='filters']")
     private Button filtersButton;
 
-    @FindBy(css = "a.l-flatslide-settingslink")
-    private Button settingsButton;
+    @FindBy(css = "a:not(.l-flatslide-settingslink-opened).l-flatslide-settingslink")
+    public Button settingsButton;
 
     ////////////FEED
     @FindBy(css = ".l-flatslide-intro-heads .b-lenta-head-title")

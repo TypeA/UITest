@@ -57,12 +57,11 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
 
     //Scenario: Successfull registration(3/3)
     @Then("user go to Finish Registration Form and see message $message")
-    public void user_go_to_Finish_Registration_Form_and_see_message_and_create_First_Post(String message) {
+    public void user_go_to_Finish_Registration_Form_and_see_message(String message) {
         verify().that(on(SuccessfulFinishForm.class).getFinishText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
                 .ifElse(VerifyText.errorTextForMessage(on(SuccessfulFinishForm.class).getFinishText()))
                 .finish();
-        on(SuccessfulFinishForm.class).createFirstPost();
     }
 
 }
