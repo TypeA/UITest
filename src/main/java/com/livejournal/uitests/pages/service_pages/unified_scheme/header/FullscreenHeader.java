@@ -1,7 +1,11 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks.SearchMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks.FeedbackMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks.HelpMenu;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -31,16 +35,19 @@ public class FullscreenHeader extends UIBlock {
     @FindBy(css = ".s-do-item-search")
     private Link searchMenuItem;
 
+    @StepGroup
     public HelpMenu moveMouseOverHelpMenuItem() {
         helpMenuItem.moveMouseOver();
         return on(HelpMenu.class);
     }
 
+    @StepGroup
     public FeedbackMenu moveMouseOverFeedbackMenuItem() {
         feedbackMenuItem.moveMouseOver();
         return on(FeedbackMenu.class);
     }
 
+    @StepGroup
     public SearchMenu clickOnSearchMenuItem() {
         searchMenuItem.click();
         return on(SearchMenu.class);

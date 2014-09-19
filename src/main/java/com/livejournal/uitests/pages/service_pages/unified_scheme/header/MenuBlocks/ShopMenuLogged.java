@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import org.openqa.selenium.support.FindBy;

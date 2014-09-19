@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
@@ -17,6 +17,7 @@ import com.livejournal.uitests.pages.service_pages.tools.RecentCommentsPage;
 import com.livejournal.uitests.pages.service_pages.tools.StatisticsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -73,76 +74,91 @@ public class MyJournalMenu extends UIBlock {
     @FindBy(css = ".s-nav-item-logout")
     public Link logOut;
 
+    @StepGroup
     public MyJournalPage clickOnAuthotizedAs() {
         authorizedAs.click();
         return on(MyJournalPage.class);
     }
 
+    @StepGroup
     public UpdateBmlPageLogged clickOnNewPost() {
         newPost.click();
         return on(UpdateBmlPageLogged.class);
     }
 
+    @StepGroup
     public ProfilePage clickOnProfile() {
         profile.click();
         return on(ProfilePage.class);
     }
 
+    @StepGroup
     public EditProfilePage clickOnEditProfie() {
         editProfile.click();
         return on(EditProfilePage.class);
     }
 
+    @StepGroup
     public EditPicsPage clickOnEditPics() {
         editPics.click();
         return on(EditPicsPage.class);
     }
 
+    @StepGroup
     public InboxMainPage clickOnMessagesInMenu() {
         messagesInMenu.click();
         return on(InboxMainPage.class);
     }
 
+    @StepGroup
     public SheduledEntriesPage clickOnSheduledEntries() {
         sheduledEntries.click();
         return on(SheduledEntriesPage.class);
     }
 
+    @StepGroup
     public RecentCommentsPage clickOnRecentComments() {
         recentComments.click();
         return on(RecentCommentsPage.class);
     }
 
+    @StepGroup
     public StatisticsMainPage clickOnStatistics() {
         statistics.click();
         return on(StatisticsMainPage.class);
     }
 
+    @StepGroup
     public ScrapBookMainPage clickOnScrapbook() {
         scrapbook.click();
         return on(ScrapBookMainPage.class);
     }
 
+    @StepGroup
     public TagsPage clickOnTags() {
         tags.click();
         return on(TagsPage.class);
     }
 
+    @StepGroup
     public MemoriesPage clickOnMemories() {
         memories.click();
         return on(MemoriesPage.class);
     }
 
+    @StepGroup
     public CustomizeJournalPage clickOnJournalStyle() {
         journalStyle.click();
         return on(CustomizeJournalPage.class);
     }
 
+    @StepGroup
     public SettingsMainPage clickOnSettings() {
         settings.click();
         return on(SettingsMainPage.class);
     }
 
+    @StepGroup
     public ServicePageUnlogged clickOnLogOut() {
         logOut.click();
         return on(ServicePageUnlogged.class);
