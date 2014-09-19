@@ -6,7 +6,9 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSelectType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.PagingType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock.PageSize;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.TextParametrs;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -136,6 +138,17 @@ public class Settings extends WebTest {
                 .saveSettings();
     }
 
+    //Scenario: Set paging type (2/3)
+    @When("user set Paging type $type (number $number)  in Settings and save it")
+    public void user_set_Paging_type_in_Settings_and_save_it(String type, String number) {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setPaging(type)
+                .setSize(number)
+                .saveSettings();
+        getCurrentBrowser().getDriver().navigate().refresh();
+    }
+
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
@@ -151,14 +164,6 @@ public class Settings extends WebTest {
                 .finish();
     }
 
-    
-    //Scenario: Set paging type
-    @When("user set Paging type <type> (number <number>)  in Settings and save it")
-    public void user_set_Paging_type_in_Settings_and_save_it() {
-    }
-
-    
-    
     //Scenario: Cancel changing Title (3/3)
     @Then("the Title is not changed")
     public void the_Title_is_not_changed() {
@@ -217,6 +222,16 @@ public class Settings extends WebTest {
                 .ifResultIsExpected("Correct text size:\n" + size)
                 .ifElse("New text size is incorrect:\n" + getTextParametrs(TextParametrs.SIZE))
                 .finish();
+    }
+
+    //Scenario: Set paging type (3/3)
+    @Then("Paging type is changed by type $type (number $number)")
+    public void paging_type_is_changed_by_type(String type, String number) {
+        verify().that(verifyPagingType(PagingType.valueOf(type), number))
+                .ifResultIsExpected("Correct paging type:\n" + type)
+                .ifElse("Incorrect paging type!\n" + type)
+                .finish();
+
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -284,5 +299,20 @@ public class Settings extends WebTest {
             resultB = !resultB;
         }
         return resultR & resultG & resultB;
+    }
+
+    @StepGroup
+    public boolean verifyPagingType(PagingType type, String size) {
+        switch (type) {
+            case PAGES:
+                return on(FriendsFeedLogged.class).displaySwitchPagesButtons();
+
+            case ENDLESS:
+                return !on(FriendsFeedLogged.class).displaySwitchPagesButtons();
+
+            default:
+                Assert.fail("Unknown type " + type + "!");
+        }
+        return false;
     }
 }

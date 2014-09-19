@@ -3,10 +3,10 @@ package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -110,8 +110,8 @@ public class SettingsBlock extends UIBlock {
 
     @StepGroup
     public PageSize setPaging(String type) {
-        pageType.selectByValue(type);
-        return new PageSize(type);
+        pageType.selectByValue(type.toLowerCase());
+        return new PageSize(PagingType.valueOf(type));
     }
 
     @StepGroup
@@ -229,29 +229,35 @@ public class SettingsBlock extends UIBlock {
 
     public class PageSize {
 
-        private final String type;
+        private final PagingType type;
 
-        public PageSize(String type) {
+        public PageSize(PagingType type) {
             this.type = type;
         }
 
-        public void setSize(String size) {
+        @StepGroup
+        public SettingsBlock setSize(String size) {
             switch (type) {
-                case "pages":
-                    if (pageSize.isDisplayed()) {
+                case PAGES:
+                    try {
                         pageSize.enter(size);
 
-                        break;
+                    } catch (NoSuchElementException ex) {
+                        Assert.fail("Page size input field is not displayed!" + ex);
                     }
-                case "endless":
-                    if (pageSize.isDisplayed()) {
-                        Assert.fail("Page size input field is displayed!");
+                    break;
 
-                        break;
+                case ENDLESS:
+                    try {
+                        Assert.assertFalse("Page size input field is displayed!", pageSize.isDisplayed());
+                    } catch (NoSuchElementException ex) {
+
                     }
+                    break;
                 default:
                     Assert.fail("Incorrect page type!");
             }
+            return on(SettingsBlock.class);
         }
     }
 
