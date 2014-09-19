@@ -1,4 +1,4 @@
-Scenario: Check IP blocking
+Scenario: IP blocking, when you spent login attempts
 
 Meta: 
 @categories authorization secure

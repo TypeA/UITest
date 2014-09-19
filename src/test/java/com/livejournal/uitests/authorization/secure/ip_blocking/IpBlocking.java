@@ -14,20 +14,20 @@ import org.jbehave.core.annotations.When;
  */
 public class IpBlocking extends WebTest {
     
-    //Scenario: Check IP blocking(1/3)
+    //Scenario: IP blocking, when you spent login attempts(1/3)
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
         on(LoginPageUnlogged.class);
 
     }
 
-    //Scenario: Check IP blocking(2/3)
+    //Scenario: IP blocking, when you spent login attempts(2/3)
     @When("user 3 times enters incorrect data: name $name, incorrect_password $incorrect_password")
     public void user_3_times_enters_incorrect_data(String name, String incorrect_password) {
         new IterationsWithLoginForm(on(LoginPageUnlogged.class), 3, name, incorrect_password).run();
     }
 
-    //Scenario: Check IP blocking(3/3)
+    //Scenario: IP blocking, when you spent login attempts(3/3)
     @Then("user see message $message and can not enter with correct data: name $name, correct_password $correct_password")
     public void user_see_message_and_can_not_enter_with_correct_data(String message, String name, String correct_password) {
         verify().that(on(LoginPageUnlogged.class).getErrorText().getText().contains(message))

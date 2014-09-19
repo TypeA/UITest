@@ -199,7 +199,9 @@ Then Paging type is changed by type <type> (number <number>)
 Examples:
 |name   |password   |type       |number |
 |test   |test       |ENDLESS    |0      |
-|test   |test       |PAGES    |1      |
+|test   |test       |PAGES      |1      |
+|test   |test       |PAGES      |-3     |
+|test   |test       |PAGES      |100    |
 
 
 

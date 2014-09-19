@@ -23,7 +23,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
         on(CreateAccountPage.class);
     }
 
-    //Scenario: Go to registration form(1/2)
+    //Scenario: User go to registration form(1/2)
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
         on(MainPageUnlogged.class)
@@ -46,7 +46,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
                 .clickOnCreateAccountButton();
     }
 
-    //Scenario: Go to registration form(2/2)
+    //Scenario: User go to registration form(2/2)
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_page_with_URL(String page, String URL) {
         verify().that(getCurrentUrl().contains(URL))
