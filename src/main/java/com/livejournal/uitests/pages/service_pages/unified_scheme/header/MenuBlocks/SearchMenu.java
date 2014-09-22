@@ -2,7 +2,7 @@ package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBl
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.search.SearchPage;
+import com.livejournal.uitests.pages.service_pages.search.SearchPageUnlogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -21,10 +21,10 @@ public class SearchMenu extends UIBlock {
     public TextField searchLine;
 
     @StepGroup
-    public SearchPage search(String text) {
+    public SearchPageUnlogged search(String text) {
         searchLine.enter(text);
         Actions actions = new Actions(this.getDriver());
         actions.keyDown(Keys.ENTER).build().perform();
-        return on(SearchPage.class);
+        return on(SearchPageUnlogged.class);
     }
 }

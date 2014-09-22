@@ -10,7 +10,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */@Block
         (@FindBy(css=".s-nav-item-lang-open"))
-public class LangSwitch extends UIBlock
+public class LangSwitchMenu extends UIBlock
 {
     @FindBy(xpath=".//*[@data-lang='en_LJ'][2]")
     public Link langEn;
