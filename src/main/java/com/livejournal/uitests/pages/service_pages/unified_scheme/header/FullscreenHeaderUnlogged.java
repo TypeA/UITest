@@ -15,7 +15,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block(
-        @FindBy(css = HeaderLocator.CSS))
+        @FindBy(css = FullscreenHeader.CSS))
 public class FullscreenHeaderUnlogged extends FullscreenHeader {
 
     @FindBy(css = ".s-nav-item.s-nav-item-login")

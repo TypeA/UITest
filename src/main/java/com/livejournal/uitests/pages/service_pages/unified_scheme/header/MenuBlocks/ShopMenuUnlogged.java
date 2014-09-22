@@ -1,8 +1,9 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
 
-import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.PaidAccountPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.PromoPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.ShopPageUnlogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -10,22 +11,28 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 /**
  *
  * @author s.savinykh
- */
-@Block(
-        @FindBy(css = ".s-nav-item-shop .s-drop"))
-public class ShopMenuUnlogged extends UIBlock {
+ */@Block(
+        @FindBy(css = ShopMenu.CSS))
+public class ShopMenuUnlogged  extends ShopMenu{
 
-    @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-shop")
-    private Link shop;
 
-    @FindBy(css = ".s-nav-item-paid-account")
-    private Link paid;
+    @StepGroup
+    public ShopPageUnlogged clickOnShop() {
+        shop.click();
+        return on(ShopPageUnlogged.class);
+    }
 
-    @FindBy(css = ".s-nav-item-promo")
-    private Link promo;
+    @StepGroup
+    public PaidAccountPageUnlogged clickOnPaid() {
+        paid.click();
+        return on(PaidAccountPageUnlogged.class);
+    }
 
-    @FindBy(css = ".s-nav-item-tokens a")
-    private Link tokens;
+    @StepGroup
+    public PromoPageUnlogged clickOnPromo() {
+        promo.click();
+        return on(PromoPageUnlogged.class);
+    }
 
     @StepGroup
     public LoginPageUnlogged clickOnTokensLink() {

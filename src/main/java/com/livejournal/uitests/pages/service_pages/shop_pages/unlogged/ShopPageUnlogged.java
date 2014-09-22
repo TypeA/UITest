@@ -1,7 +1,7 @@
-package com.livejournal.uitests.pages.service_pages.shop_pages;
+package com.livejournal.uitests.pages.service_pages.shop_pages.unlogged;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
+import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.support.FindBy;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.FindBy;
  * @author m.prytkova
  */
 @DefaultUrl("/shop")
-public class ShopPageUnlogged extends ServicePageUnlogged {
+public class ShopPageUnlogged extends ServicePageLogged {
 
     @FindBy(css = ".m-section-list a[href*='/tokens.bml']")
     private Link tokensLink;
