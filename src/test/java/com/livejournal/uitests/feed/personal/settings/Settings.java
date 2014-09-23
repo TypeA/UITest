@@ -8,19 +8,20 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.C
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.PagingType;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock.PageSize;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.TextParametrs;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
+import java.util.Objects;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 
 /**
  *
@@ -37,7 +38,8 @@ public class Settings extends WebTest {
     //Scenario: Cansel new color (1/3)
     //Scenario: Return the current color (1/3)
     //Scenario: Set text settings (1/3)
-    //Scenario: Set paging type
+    //Scenario: Set paging type (1/3)
+    //Scenario: Cancel paging type (1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
         on(LoginPageUnlogged.class)
@@ -149,6 +151,21 @@ public class Settings extends WebTest {
         getCurrentBrowser().getDriver().navigate().refresh();
     }
 
+    //Scenario: Cancel paging type (2/3)
+    @When("user set Paging type $new_type (old type $type, number $number) in Settings and cansel it")
+    public void user_set_Paging_type_in_Settings_and_cansel_it(String new_type, String type, String number) {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setPaging(type)
+                .setSize(number)
+                .saveSettings()
+                .openSettings()
+                .setPaging(new_type)
+                .setSize(number)
+                .cancelSettings();
+        getCurrentBrowser().getDriver().navigate().refresh();
+    }
+
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
@@ -225,11 +242,12 @@ public class Settings extends WebTest {
     }
 
     //Scenario: Set paging type (3/3)
+    //Scenario: Cancel paging type (3/3)
     @Then("Paging type is changed by type $type (number $number)")
-    public void paging_type_is_changed_by_type(String type, String number) {
+    public void paging_type_is_changed_by_type(String type, String number) throws InterruptedException {
         verify().that(verifyPagingType(PagingType.valueOf(type), number))
-                .ifResultIsExpected("Correct paging type:\n" + type)
-                .ifElse("Incorrect paging type!\n" + type)
+                .ifResultIsExpected("Correct paging type:" + type)// + "\nThere are " + number + " posts in the feed")
+                .ifElse("Incorrect paging type:" + type + "\nThere are ") //+  ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript("return jQuery('article.b-lenta-item').size()") + " posts in the feed")
                 .finish();
 
     }
@@ -248,7 +266,7 @@ public class Settings extends WebTest {
             case ELEMENTS_COLOR:
                 return getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-menu-button, .l-flatslide-menu-button:link, .l-flatslide-menu-button:visited, .l-flatslide-menu-button:active, .l-flatslide-menu-button:hover, .l-flatslide-settingslink, .l-flatslide-settingslink:link, .l-flatslide-settingslink:visited, .l-flatslide-settingslink:active, .l-flatslide-settingslink:hover, .b-lenta-uparr, .j-e-actions-icon, .b-feedwidgets-move, .b-feedwidgets-close, .b-item-type-security-icon, .b-item-type-repost-icon, .j-e-nav-item-comments-icon, .j-e-nav-item-reply-icon, .b-mysocial-item-icon, .b-mysocial-item-dorepost .b-mysocial-item-icon, .b-mysocial-refresh, .b-mysocial-footer-logout-icon, .b-myupdates-item-remove, .b-todaylj-comments-icon, .ljcut-link-icon, .sbar-cal-nav-arr, .b-lenta-item-date, .b-lenta-item-journal, .b-selectus .label, .svgpreloader-background")).getCssValue("color");
             case BORDERS_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .l-flatslide-content, .b-mainpage-intro, .b-lenta-item, .l-flatslide-aside, .l-flatslide-intro, .j-e-actions, .b-myupdates, .b-lenta-calendar TABLE TD, .b-lenta-calendar TABLE TH, .b-lenta-calendar, .b-todaylj, .b-mysocial, .b-mysocial-item, .b-mysocial-loadmore, .b-myupdates-item, .b-mylinks, .b-feedsettings, .ljcut-link:after, .ljcut-pseudolink:after, .ljcut-link:before, .ljcut-pseudolink:before, .b-sticky-cut-decor:before, .b-sticky-cut-decor:after, .b-sticky-cut-link-wrap:before, .j-e-actions-tooltip, .b-feedwidgets-options, .b-feedwidgets-options .b-selectus")).getCssValue("border-color");
+                return "ERROR!!!";
             case MAIN_TEXT_COLOR:
                 return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body .b-lenta-item-title A:link")).getCssValue("color");
             case SIDEBAR_TEXT_COLOR:
@@ -302,13 +320,19 @@ public class Settings extends WebTest {
     }
 
     @StepGroup
-    public boolean verifyPagingType(PagingType type, String size) {
+    public boolean verifyPagingType(PagingType type, String size) throws InterruptedException {
+        //String script = "jQuery('article.b-lenta-item').size()";
+       // String script = "document.getElementsByTagName('article').length";
+       // Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript("return jQuery('article.b-lenta-item').size()");
+        //System.out.println("+++++++++++++" + feedSize);
         switch (type) {
             case PAGES:
-                return on(FriendsFeedLogged.class).displaySwitchPagesButtons();
+               // System.out.println("+++++++++++++========" + feedSize);
+                return on(FriendsFeedLogged.class).displaySwitchPagesButtons();// && (Objects.equals(feedSize, Integer.valueOf(size)));
 
             case ENDLESS:
-                return !on(FriendsFeedLogged.class).displaySwitchPagesButtons();
+               // ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(window.scrollBy(0,1000000));
+                return !on(FriendsFeedLogged.class).displaySwitchPagesButtons(); //&& feedSize>20;
 
             default:
                 Assert.fail("Unknown type " + type + "!");

@@ -190,18 +190,19 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it
 Then Paging type is changed by type <type> (number <number>)
 
 Examples:
-|name   |password   |type       |number |
-|test   |test       |ENDLESS    |0      |
-|test   |test       |PAGES      |1      |
-|test   |test       |PAGES      |-3     |
-|test   |test       |PAGES      |100    |
+|name   |password  |type     |number |
+|test   |test      |ENDLESS  |0      |
+|test   |test      |PAGES    |1      |
+|test   |test      |PAGES    |-3     |
+|test   |test      |PAGES    |100    |
+
 
 
 
@@ -210,13 +211,13 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user set Paging type <type>  in Settings and cansel it
-Then Paging type is not changed
+When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cansel it
+Then Paging type is changed by type <type> (number <number>)
 
 Examples:
-|name   |password   |type                       |
-|test   |test       |постоянная                 |
-|test   |test       |постраничная(1 страница)   |
+|name   |password   |new_type |type     |number |
+|test   |test       |PAGES    |ENDLESS  |10     |
+|test   |test       |ENDLESS  |PAGES    |10     |
 
 
 
