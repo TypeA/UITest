@@ -246,8 +246,8 @@ public class Settings extends WebTest {
     @Then("Paging type is changed by type $type (number $number)")
     public void paging_type_is_changed_by_type(String type, String number) throws InterruptedException {
         verify().that(verifyPagingType(PagingType.valueOf(type), number))
-                .ifResultIsExpected("Correct paging type:" + type)// + "\nThere are " + number + " posts in the feed")
-                .ifElse("Incorrect paging type:" + type + "\nThere are ") //+  ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript("return jQuery('article.b-lenta-item').size()") + " posts in the feed")
+                .ifResultIsExpected("Correct paging type:" + type + "\nThere are " + number + " posts in the feed")
+                .ifElse("Incorrect paging type:" + type + "\nThere are " +  ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript("return jQuery('article.b-lenta-item').size()") + " posts in the feed")
                 .finish();
 
     }
@@ -321,14 +321,14 @@ public class Settings extends WebTest {
 
     @StepGroup
     public boolean verifyPagingType(PagingType type, String size) throws InterruptedException {
-        //String script = "jQuery('article.b-lenta-item').size()";
+        String script = "jQuery('article.b-lenta-item').size()";
        // String script = "document.getElementsByTagName('article').length";
-       // Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript("return jQuery('article.b-lenta-item').size()");
-        //System.out.println("+++++++++++++" + feedSize);
+        Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
+        System.out.println("+++++++++++++" + feedSize);
         switch (type) {
             case PAGES:
-               // System.out.println("+++++++++++++========" + feedSize);
-                return on(FriendsFeedLogged.class).displaySwitchPagesButtons();// && (Objects.equals(feedSize, Integer.valueOf(size)));
+                System.out.println("+++++++++++++========" + feedSize);
+                return on(FriendsFeedLogged.class).displaySwitchPagesButtons() && (Objects.equals(Integer.valueOf(feedSize.toString()), Integer.valueOf(size)));
 
             case ENDLESS:
                // ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(window.scrollBy(0,1000000));
