@@ -3,7 +3,7 @@ package com.livejournal.uitests.authorization.comfortable.daylight_authorization
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.shop_pages.ShopPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.ShopPageUnlogged;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -32,16 +32,14 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     //Scenario: From Main Page by Login Button(2/3)
     @When("user click on the Login Button in the Header")
     public void user_click_on_the_Login_Button_in_the_Header() {
-        on(MainPageUnlogged.class)
-                .getFullscreenHeaderUnlogged()
-                .clickOnLoginMenuItem();
+        on(MainPageUnlogged.class).
+                clickOnLoginMenuItem();
     }
 
     //Scenario: From Main Page by Tokens(2/3)
     @When("user click on the Tokens in the Header")
     public void user_click_on_the_Tokens_in_Header() throws InterruptedException {
         on(MainPageUnlogged.class)
-                .getFullscreenHeaderUnlogged()
                 .moveMouseOverShopMenuItem()
                 .clickOnTokensLink();
     }

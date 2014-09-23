@@ -2,7 +2,7 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages.finish_
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.support_faq.UnderageAccountPage;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.UnderageAccountPageUnlogged;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -17,9 +17,9 @@ public class UnsuccessfulFinishForm extends FinishForm {
     @FindBy(css = ".b-createpage-nextsteps a:not([href*='/faq'])")
     private Link ljAnonymously;
 
-    public UnderageAccountPage clickOnUnderageAccountLink() {
+    public UnderageAccountPageUnlogged clickOnUnderageAccountLink() {
         underageAccount.click();
-        return on(UnderageAccountPage.class);
+        return on(UnderageAccountPageUnlogged.class);
     }
 
     public MainPageUnlogged clickOnLjAnonymouslyLink() {

@@ -14,8 +14,10 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block(
-        @FindBy(css = HeaderLocator.CSS))
+        @FindBy(css = FullscreenHeader.CSS))
 public class FullscreenHeader extends UIBlock {
+
+    final static String CSS = ".s-header";
 
     @FindBy(css = ".s-logo")
     protected Link logo;

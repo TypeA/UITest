@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.login_page;
+package com.livejournal.uitests.pages.service_pages.shop_pages.logged;
 
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("/login.bml")
-public class LoginPageLogged extends ServicePageLogged{
+ */@DefaultUrl("/shop/tokens.bml")
+public class TokensPageLogged extends ServicePageLogged{
     
 }

@@ -4,10 +4,10 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uitests.pages.service_pages.ServicePage;
-import com.livejournal.uitests.pages.service_pages.support_faq.PrivacyRusPage;
-import com.livejournal.uitests.pages.service_pages.support_faq.TosRusPage;
+import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyRusPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosRusPageUnlogged;
 import junit.framework.Assert;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
@@ -22,7 +22,7 @@ import ru.yandex.qatools.htmlelements.element.Select;
  * @author m.prytkova
  */
 @DefaultUrl("/create")
-public class CreateAccountPage extends ServicePage {
+public class CreateAccountPage extends LJPage {
 
     @FindBy(css = "#username")
     private TextField userNameField;
@@ -153,15 +153,15 @@ public class CreateAccountPage extends ServicePage {
     }
 
     @StepGroup
-    public TosRusPage clickOnTOSLink() {
+    public TosRusPageUnlogged clickOnTOSLink() {
         tosRusLink.click();
-        return on(TosRusPage.class);
+        return on(TosRusPageUnlogged.class);
     }
 
     @StepGroup
-    public PrivacyRusPage clickOnPrivacyLink() {
+    public PrivacyRusPageUnlogged clickOnPrivacyLink() {
         privacyRusLink.click();
-        return on(PrivacyRusPage.class);
+        return on(PrivacyRusPageUnlogged.class);
     }
 
 }

@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
-import com.livejournal.uitests.pages.service_pages.support_faq.LearnMorePage;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.LearnMorePageUnlogged;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -33,9 +33,9 @@ public class PopupsBlock extends UIBlock {
         return popupText.getText();
     }
 
-    public LearnMorePage clickOnLearnMoreLink() {
+    public LearnMorePageUnlogged clickOnLearnMoreLink() {
         learnMoreLink.click();
-        return on(LearnMorePage.class);
+        return on(LearnMorePageUnlogged.class);
     }
 
 }

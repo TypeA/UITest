@@ -1,6 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.login_page.ThirdSideServiceAuthorizationBlock;
 
 import com.livejournal.uitests.pages.service_pages.ServicePage;
+import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
 
 /**
@@ -8,7 +9,7 @@ import net.thucydides.core.annotations.DefaultUrl;
  * @author m.prytkova
  */
 @DefaultUrl("/identity/login.bml")
-public class IdentityPage extends ServicePage {
+public class IdentityPage extends ServicePageUnlogged {
 
     private FacebookAuthorizationBlock facebookAutorizationBlock;
     private GoogleAuthorizationBlock googleAutorizationBlock;
