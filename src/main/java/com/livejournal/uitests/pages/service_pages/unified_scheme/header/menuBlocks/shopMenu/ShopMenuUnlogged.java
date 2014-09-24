@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu;
 
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.PaidAccountPageUnlogged;

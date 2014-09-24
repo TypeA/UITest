@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.feedbackMenu;
 
 import com.livejournal.uitests.pages.service_pages.support_faq.feedbackBlock.FeedbackBlockLogged;
 import net.thucydides.core.annotations.StepGroup;

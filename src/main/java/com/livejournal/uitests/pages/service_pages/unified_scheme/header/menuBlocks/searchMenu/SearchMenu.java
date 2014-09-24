@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.searchMenu;
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
@@ -14,17 +14,12 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author s.savinykh
  */
 @Block(
-        @FindBy(css = ".i-iconus-search"))
+        @FindBy(css = SearchMenu.CSS))
 public class SearchMenu extends UIBlock {
+
+    final static String CSS = ".i-iconus-search";
 
     @FindBy(css = ".s-search #SearchText")
     public TextField searchLine;
 
-    @StepGroup
-    public SearchPageUnlogged search(String text) {
-        searchLine.enter(text);
-        Actions actions = new Actions(this.getDriver());
-        actions.keyDown(Keys.ENTER).build().perform();
-        return on(SearchPageUnlogged.class);
-    }
 }

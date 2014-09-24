@@ -22,12 +22,14 @@ public class HeaderNavigation extends WebTest {
     }
 
     //Scenario: Navigation for logged user (2/3)
+    //Scenario: Navigation for unlogged user (2/3)
     @When("user goes to page $page using link $link")
     public void user_goes_to_page_using_link(String page, String link) {
         goToLink(page, HeaderLinksList.valueOf(link));
     }
 
     //Scenario: Navigation for logged user (3/3)
+    //Scenario: Navigation for unlogged user (3/3)
     @Then("user in correct page $correct_page with URL $URL")
     public void user_in_correct_Page_with_URL(String correct_page, String URL) {
         verify().that(getCurrentUrl().contains(URL))

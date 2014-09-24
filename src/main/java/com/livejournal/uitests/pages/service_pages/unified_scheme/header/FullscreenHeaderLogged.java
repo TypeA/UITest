@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks.ShopMenuLogged;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks.FriendsFeedMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;

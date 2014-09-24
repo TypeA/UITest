@@ -1,8 +1,5 @@
-package com.livejournal.uitests.pages.service_pages.unified_scheme.header.MenuBlocks;
+package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu;
 
-import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.search.SearchPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.AboutMainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.DMCAPageUnlogged;
@@ -14,34 +11,15 @@ import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
 
 /**
  *
  * @author s.savinykh
  */
-@FindBy(css = ".s-nav-item-help .s-drop")
-public class HelpMenu extends UIBlock {
-
-    @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support")
-    private Link help;
-
-    @FindBy(css = ".s-nav-item-about")
-    private Link about;
-
-    @FindBy(css = ".s-nav-item-faq")
-    private Link faq;
-
-    @FindBy(css = ".s-nav-item-legal")
-    private Link tos;
-
-    @FindBy(css = ".s-nav-item-privacy")
-    private Link privacy;
-
-    @FindBy(css = ".s-nav-item-dmca")
-    private Link dmca;
-
-    @FindBy(css = ".s-nav-item-search #SearchText")
-    private TextField searchLine;
+@Block(
+        @FindBy(css = HelpMenu.CSS))
+public class HelpMenuUnlogged extends HelpMenu {
 
     @StepGroup
     public SupportMainPageUnlogged clickOnHelp() {
@@ -85,5 +63,6 @@ public class HelpMenu extends UIBlock {
         Actions actions = new Actions(this.getDriver());
         actions.keyDown(Keys.ENTER).build().perform();
         return on(SearchPageUnlogged.class);
+
     }
 }
