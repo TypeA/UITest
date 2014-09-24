@@ -42,6 +42,27 @@ public class HeaderNavigation extends WebTest {
                 break;
             case LJMAGAZINE:
                 page.clickOnLjMagazineMenuItem();
+                break;
+            case FEED:
+                page.moveMouseOverFriendsFeedMenuItem()
+                        .clickOnFriendsFeed();
+                break;
+            case FRIENDSGROUP:
+                page.moveMouseOverFriendsFeedMenuItem()
+                        .clickOnMngGroups();
+                break;
+            case MNGGROUP:
+                page.moveMouseOverFriendsFeedMenuItem()
+                        .clickOnMngFriends();
+                break;
+            case MNGCOMMUNITIES:
+                page.moveMouseOverFriendsFeedMenuItem()
+                        .clickOnMngCommunities();
+                break;
+            case BANNEDUSERS:
+                page.moveMouseOverFriendsFeedMenuItem()
+                        .clickOnBannedUsers();
+                break;
         }
     }
 }

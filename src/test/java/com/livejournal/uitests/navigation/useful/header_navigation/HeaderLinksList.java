@@ -7,6 +7,6 @@ package com.livejournal.uitests.navigation.useful.header_navigation;
  */
 public enum HeaderLinksList {
     
-   LOGO, LJMAGAZINE; 
+   LOGO, LJMAGAZINE, FEED, FRIENDSGROUP, MNGGROUP, MNGCOMMUNITIES, BANNEDUSERS; 
     
 }
