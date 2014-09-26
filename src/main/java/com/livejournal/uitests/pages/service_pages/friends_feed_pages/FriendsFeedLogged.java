@@ -9,7 +9,10 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 /**
@@ -45,6 +48,17 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @StepGroup
     public SettingsBlock openSettings() {
         settingsButton.click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        try {
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver d) {
+                    return on(SettingsBlock.class).isDisplayed();
+                }
+            });
+        } catch (Exception ex) {
+            junit.framework.Assert.fail("Settings block is not closed\n");
+        }
         return on(SettingsBlock.class);
     }
 

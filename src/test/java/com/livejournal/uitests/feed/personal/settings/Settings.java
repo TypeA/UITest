@@ -149,6 +149,7 @@ public class Settings extends WebTest {
                 .setSize(number)
                 .saveSettings();
         getCurrentBrowser().getDriver().navigate().refresh();
+
     }
 
     //Scenario: Cancel paging type (2/3)
@@ -245,9 +246,13 @@ public class Settings extends WebTest {
     //Scenario: Cancel paging type (3/3)
     @Then("Paging type is changed by type $type (number $number)")
     public void paging_type_is_changed_by_type(String type, String number) throws InterruptedException {
+        String strNumber = number;
+        if (type.equals("ENDLESS")) {
+             strNumber = "more then 20";
+        }
         verify().that(verifyPagingType(PagingType.valueOf(type), number))
-                .ifResultIsExpected("Correct paging type:" + type + "\nThere are " + number + " posts in the feed")
-                .ifElse("Incorrect paging type:" + type + "\nThere are " +  ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript("return jQuery('article.b-lenta-item').size()") + " posts in the feed")
+                .ifResultIsExpected("Correct paging type:" + type + "\nMust be " + strNumber + " posts in the feed")
+                .ifElse("Incorrect paging type:" + type + "\nThere are " + ThucydidesUtils.getFromSession("feed_size") + " posts in the feed")
                 .finish();
 
     }
@@ -256,26 +261,26 @@ public class Settings extends WebTest {
     private String getElementColor(ColorSettings button) {
         switch (button) {
             case BACKGROUND_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta")).getCssValue("background-color");
+                return getNecessaryValue(".p-lenta", "background-color");
             case FOREGROUND_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .l-flatslide-content, .ljcut-link:after, .ljcut-pseudolink:after")).getCssValue("background-color");
+                return getNecessaryValue(".p-lenta .l-flatslide-content, .ljcut-link:after, .ljcut-pseudolink:after", "background-color");
             case SIDEBAR_BACKGROUND:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .l-flatslide-container:after, .p-lenta .l-flatslide-aside, .p-lenta .b-feedwidgets-item")).getCssValue("background-color");
+                return getNecessaryValue(".p-lenta .l-flatslide-container:after, .p-lenta .l-flatslide-aside, .p-lenta .b-feedwidgets-item", "background-color");
             case ELEMENTS_BACKGROUND:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".j-e-actions, .b-lenta-calendar TABLE TH, .l-flatslide-settingslink, .l-flatslide-menu-button, .l-flatslide-menu-button:link, .b-lenta-up DIV, .b-lenta-new DIV, .b-feedwidgets-options .b-selectus, .b-mysocial-dummy-content, .b-mysocial-dummy-content:after, .b-myupdates-dummy-content, .b-myupdates-dummy-content:after, .b-todaylj-dummy-content, .b-todaylj-dummy-content:after, .b-mylinks-dummy-content, .b-mylinks-dummy-content:after")).getCssValue("background-color");
+                return getNecessaryValue(".j-e-actions, .b-lenta-calendar TABLE TH, .l-flatslide-settingslink, .l-flatslide-menu-button, .l-flatslide-menu-button:link, .b-lenta-up DIV, .b-lenta-new DIV, .b-feedwidgets-options .b-selectus, .b-mysocial-dummy-content, .b-mysocial-dummy-content:after, .b-myupdates-dummy-content, .b-myupdates-dummy-content:after, .b-todaylj-dummy-content, .b-todaylj-dummy-content:after, .b-mylinks-dummy-content, .b-mylinks-dummy-content:after", "background-color");
             case ELEMENTS_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".l-flatslide-menu-button, .l-flatslide-menu-button:link, .l-flatslide-menu-button:visited, .l-flatslide-menu-button:active, .l-flatslide-menu-button:hover, .l-flatslide-settingslink, .l-flatslide-settingslink:link, .l-flatslide-settingslink:visited, .l-flatslide-settingslink:active, .l-flatslide-settingslink:hover, .b-lenta-uparr, .j-e-actions-icon, .b-feedwidgets-move, .b-feedwidgets-close, .b-item-type-security-icon, .b-item-type-repost-icon, .j-e-nav-item-comments-icon, .j-e-nav-item-reply-icon, .b-mysocial-item-icon, .b-mysocial-item-dorepost .b-mysocial-item-icon, .b-mysocial-refresh, .b-mysocial-footer-logout-icon, .b-myupdates-item-remove, .b-todaylj-comments-icon, .ljcut-link-icon, .sbar-cal-nav-arr, .b-lenta-item-date, .b-lenta-item-journal, .b-selectus .label, .svgpreloader-background")).getCssValue("color");
+                return getNecessaryValue(".l-flatslide-menu-button, .l-flatslide-menu-button:link, .l-flatslide-menu-button:visited, .l-flatslide-menu-button:active, .l-flatslide-menu-button:hover, .l-flatslide-settingslink, .l-flatslide-settingslink:link, .l-flatslide-settingslink:visited, .l-flatslide-settingslink:active, .l-flatslide-settingslink:hover, .b-lenta-uparr, .j-e-actions-icon, .b-feedwidgets-move, .b-feedwidgets-close, .b-item-type-security-icon, .b-item-type-repost-icon, .j-e-nav-item-comments-icon, .j-e-nav-item-reply-icon, .b-mysocial-item-icon, .b-mysocial-item-dorepost .b-mysocial-item-icon, .b-mysocial-refresh, .b-mysocial-footer-logout-icon, .b-myupdates-item-remove, .b-todaylj-comments-icon, .ljcut-link-icon, .sbar-cal-nav-arr, .b-lenta-item-date, .b-lenta-item-journal, .b-selectus .label, .svgpreloader-background", "color");
             case BORDERS_COLOR:
                 return "ERROR!!!";
             case MAIN_TEXT_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body .b-lenta-item-title A:link")).getCssValue("color");
+                return getNecessaryValue(".b-lenta-body .b-lenta-item-title A:link", "color");
             case SIDEBAR_TEXT_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .l-flatslide-aside, .b-lenta-calendar TABLE TD, .b-lenta-calendar TABLE TH, .p-lenta .b-myupdates-emptiness, .p-lenta .b-feedwidgets .b-todaylj-caption A, .p-lenta .b-feedwidgets .b-todaylj-caption A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content A:link, .sbar-cal-month, .sbar-cal-year, .p-lenta .b-mysocial-item-retweet .b-mysocial-item-rt")).getCssValue("color");
+                return getNecessaryValue(".p-lenta .l-flatslide-aside, .b-lenta-calendar TABLE TD, .b-lenta-calendar TABLE TH, .p-lenta .b-myupdates-emptiness, .p-lenta .b-feedwidgets .b-todaylj-caption A, .p-lenta .b-feedwidgets .b-todaylj-caption A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content A:link, .sbar-cal-month, .sbar-cal-year, .p-lenta .b-mysocial-item-retweet .b-mysocial-item-rt", "color");
             case LINK_COLOR:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body A:link, .b-lenta .b-mysocial-footer-logout-text, .b-lenta .b-mysocial-footer-refresh, .p-lenta .b-feedwidgets A:link, .p-lenta .l-flatslide-intro-heads A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:link, .b-translation-pseudo:link, .b-translation-pseudo:visited")).getCssValue("color");
+                return getNecessaryValue(".b-lenta-body A:link, .b-lenta .b-mysocial-footer-logout-text, .b-lenta .b-mysocial-footer-refresh, .p-lenta .b-feedwidgets A:link, .p-lenta .l-flatslide-intro-heads A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:link, .b-translation-pseudo:link, .b-translation-pseudo:visited", "color");
             case ON_HOVER_COLOR:
                 on(FriendsFeedLogged.class).getUserName().moveMouseOver();
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".b-lenta-body A:hover, .p-lenta .b-feedwidgets A:hover, .p-lenta .b-feedwidgets .b-todaylj-caption A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:hover, .b-translation-pseudo:hover, .p-lenta .l-flatslide-intro-heads A:hover")).getCssValue("color");
+                return getNecessaryValue(".b-lenta-body A:hover, .p-lenta .b-feedwidgets A:hover, .p-lenta .b-feedwidgets .b-todaylj-caption A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:hover, .b-translation-pseudo:hover, .p-lenta .l-flatslide-intro-heads A:hover", "color");
             case VISITED_LINK:
                 on(FriendsFeedLogged.class).getUserName().click();
                 return "ERROR!!!";
@@ -288,9 +293,9 @@ public class Settings extends WebTest {
     private String getTextParametrs(TextParametrs parametr) {
         switch (parametr) {
             case SIZE:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .l-flatslide-content, .p-lenta .l-flatslide-aside")).getCssValue("font-size");
+                return getNecessaryValue(".p-lenta .l-flatslide-content, .p-lenta .l-flatslide-aside", "font-size");
             case FONT:
-                return getCurrentBrowser().getDriver().findElement(By.cssSelector(".p-lenta .b-lenta-item-content")).getCssValue("font-family");
+                return getNecessaryValue(".p-lenta .b-lenta-item-content", "font-family");
 
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
@@ -321,22 +326,42 @@ public class Settings extends WebTest {
 
     @StepGroup
     public boolean verifyPagingType(PagingType type, String size) throws InterruptedException {
-        String script = "jQuery('article.b-lenta-item').size()";
-       // String script = "document.getElementsByTagName('article').length";
-        Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-        System.out.println("+++++++++++++" + feedSize);
+        Integer intSize = Integer.valueOf(size);
+        String script = "return jQuery('article.b-lenta-item').size()";
+
         switch (type) {
             case PAGES:
-                System.out.println("+++++++++++++========" + feedSize);
-                return on(FriendsFeedLogged.class).displaySwitchPagesButtons() && (Objects.equals(Integer.valueOf(feedSize.toString()), Integer.valueOf(size)));
+                Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
+                Integer intFeedSize = Integer.valueOf(feedSize.toString());
+                ThucydidesUtils.putToSession("feed_size", feedSize);
+                Integer correctSize;
+                if (intSize < 1 || intSize > 20) {
+                    correctSize = 20;
+                } else {
+                    correctSize = intSize;
+                }
+                return on(FriendsFeedLogged.class).displaySwitchPagesButtons() && Objects.equals(intFeedSize, correctSize);
 
             case ENDLESS:
-               // ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(window.scrollBy(0,1000000));
-                return !on(FriendsFeedLogged.class).displaySwitchPagesButtons(); //&& feedSize>20;
+                ((JavascriptExecutor) getCurrentBrowser().getDriver())
+                        .executeScript("window.scrollBy(0,1000000)");
+                Thread.sleep(10000);
+                feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
+                intFeedSize = Integer.valueOf(feedSize.toString());
+                ThucydidesUtils.putToSession("feed_size", feedSize);
+                System.out.println("===========" + feedSize + "\n");
+                return !on(FriendsFeedLogged.class).displaySwitchPagesButtons() && intFeedSize > 20;
 
             default:
                 Assert.fail("Unknown type " + type + "!");
         }
         return false;
+    }
+
+    private String getNecessaryValue(String selector, String value) {
+        return getCurrentBrowser()
+                .getDriver()
+                .findElement(By.cssSelector(selector))
+                .getCssValue(value);
     }
 }

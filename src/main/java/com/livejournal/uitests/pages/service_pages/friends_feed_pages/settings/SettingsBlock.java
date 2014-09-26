@@ -117,6 +117,17 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public FriendsFeedLogged saveSettings() {
         saveButton.click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        try {
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver d) {
+                    return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
+                }
+            });
+        } catch (Exception ex) {
+            junit.framework.Assert.fail("Settings block is not closed\n");
+        }
         return on(FriendsFeedLogged.class);
     }
 
