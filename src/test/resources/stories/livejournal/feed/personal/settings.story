@@ -35,7 +35,7 @@ Then the Title is not changed
 
 Examples:
 |name   |password   |title |
-|test   |test       |rnd   |
+|test   |test       |RND   |
 
 
 
