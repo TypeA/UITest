@@ -29,7 +29,7 @@ public class FullscreenHeader extends UIBlock {
     protected Link shopMenuItem;
 
     @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
-    private Link helpMenuItem;
+    protected Link helpMenuItem;
 
     @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
     private Link feedbackMenuItem;
@@ -37,15 +37,10 @@ public class FullscreenHeader extends UIBlock {
     @FindBy(css = ".s-do-item-search")
     private Link searchMenuItem;
 
-    @StepGroup
-    public HelpMenu moveMouseOverHelpMenuItem() {
-        helpMenuItem.moveMouseOver();
-        return on(HelpMenu.class);
-    }
 
     @StepGroup
-    public FeedbackMenu moveMouseOverFeedbackMenuItem() {
-        feedbackMenuItem.moveMouseOver();
+    public FeedbackMenu clickOnFeedbackMenuItem() {
+        feedbackMenuItem.click();
         return on(FeedbackMenu.class);
     }
 

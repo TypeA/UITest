@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.DefaultUrl;
  *
  * @author m.prytkova
  */
-@DefaultUrl("/privacy-russian-translation.bml")
+@DefaultUrl("/legal/privacy-russian-translation.bml")
 public class PrivacyRusPageUnlogged extends ServicePageUnlogged {
 
 }

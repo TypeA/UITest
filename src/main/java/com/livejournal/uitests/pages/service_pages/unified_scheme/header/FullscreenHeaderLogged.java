@@ -1,11 +1,12 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuLogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
@@ -55,13 +56,19 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     }
 
     @StepGroup
+    public HelpMenuLogged moveMouseOverHelpMenuItem() {
+        helpMenuItem.moveMouseOver();
+        return on(HelpMenuLogged.class);
+    }
+
+    @StepGroup
     public UpdateBmlPageLogged clickOnPostNewEntry() {
         postNewEntry.click();
         return on(UpdateBmlPageLogged.class);
     }
 
     @StepGroup
-    public InboxMainPage clickOnLjMessagesMenuItem() {
+    public InboxMainPage clickOnMessagesMenuItem() {
         messagesMenuItem.click();
         return on(InboxMainPage.class);
     }

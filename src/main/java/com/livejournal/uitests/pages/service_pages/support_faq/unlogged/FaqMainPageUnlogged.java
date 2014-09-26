@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("support/faq/")
+ */@DefaultUrl("/support/faq/")
 public class FaqMainPageUnlogged extends ServicePageUnlogged{
     
 }

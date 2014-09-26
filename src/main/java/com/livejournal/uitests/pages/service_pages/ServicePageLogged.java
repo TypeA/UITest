@@ -5,6 +5,7 @@ import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePa
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
@@ -43,12 +44,17 @@ public class ServicePageLogged extends ServicePage {
     }
 
     @StepGroup
+    public HelpMenuLogged moveMouseOverHelpMenuItem() {
+        return getFullscreenHeader().moveMouseOverHelpMenuItem();
+    }
+
+    @StepGroup
     public UpdateBmlPageLogged clickOnPostNewEntry() {
         return getFullscreenHeader().clickOnPostNewEntry();
     }
 
     @StepGroup
-    public InboxMainPage clickOnLjMessagesMenuItem() {
-        return getFullscreenHeader().clickOnLjMessagesMenuItem();
+    public InboxMainPage clickOnMessagesMenuItem() {
+        return getFullscreenHeader().clickOnMessagesMenuItem();
     }
 }

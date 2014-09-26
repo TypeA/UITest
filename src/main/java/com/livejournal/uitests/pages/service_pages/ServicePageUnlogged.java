@@ -5,6 +5,7 @@ import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePa
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderUnlogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.LangSwitchMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuUnlogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuUnlogged;
 import net.thucydides.core.annotations.StepGroup;
 
@@ -39,6 +40,11 @@ public class ServicePageUnlogged extends ServicePage {
     @StepGroup
     public ShopMenuUnlogged moveMouseOverShopMenuItem() {
         return getFullscreenHeader().moveMouseOverShopMenuItem();
+    }
+
+    @StepGroup
+    public HelpMenuUnlogged moveMouseOverHelpMenuItem() {
+        return getFullscreenHeader().moveMouseOverHelpMenuItem();
     }
 
     @StepGroup

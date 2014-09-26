@@ -17,14 +17,10 @@ public abstract class ServicePage extends LJPage {
 
     public abstract FullscreenHeader getFullscreenHeader();
 
-    @StepGroup
-    public HelpMenu moveMouseOverHelpMenuItem() {
-        return getFullscreenHeader().moveMouseOverHelpMenuItem();
-    }
 
     @StepGroup
     public FeedbackMenu moveMouseOverFeedbackMenuItem() {
-        return getFullscreenHeader().moveMouseOverFeedbackMenuItem();
+        return getFullscreenHeader().clickOnFeedbackMenuItem();
     }
 
     @StepGroup

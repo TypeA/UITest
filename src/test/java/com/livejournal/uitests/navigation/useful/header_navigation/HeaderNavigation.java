@@ -2,11 +2,14 @@ package com.livejournal.uitests.navigation.useful.header_navigation;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.Cookie;
 
 /**
  *
@@ -17,15 +20,28 @@ public class HeaderNavigation extends WebTest {
     //Scenario: Navigation for logged user (1/3)
     @Given("logged user (name $name, password $password) on Main Page")
     public void logged_user_on_Main_Page(String name, String password) {
+        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
         on(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
     }
 
+    //Scenario: Navigation for unlogged user (1/3)   
+    @Given("unlogged user on Main Page")
+    public void unlogged_user_on_Main_Page() {
+        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
+        on(MainPageUnlogged.class);
+    }
+
     //Scenario: Navigation for logged user (2/3)
-    //Scenario: Navigation for unlogged user (2/3)
-    @When("user goes to page $page using link $link")
-    public void user_goes_to_page_using_link(String page, String link) {
+    @When("user goes from page $page using link $link")
+    public void user_goes_from_page_using_link(String page, String link) {
         goToLink(page, HeaderLinksList.valueOf(link));
+    }
+
+    //Scenario: Navigation for unlogged user (2/3)
+    @When("unlogged user goes from page $page using link $link")
+    public void unlogged_user_goes_from_page_using_link(String page, String link) {
+        goToLinkUnlogged(page, HeaderLinksList.valueOf(link));
     }
 
     //Scenario: Navigation for logged user (3/3)
@@ -36,6 +52,58 @@ public class HeaderNavigation extends WebTest {
                 .ifResultIsExpected(VerifyText.okTextForURL(correct_page, URL))
                 .ifElse(VerifyText.errorTextForURL(correct_page, URL, getCurrentUrl()))
                 .finish();
+    }
+
+    private void goToLinkUnlogged(String pageName, HeaderLinksList link) {
+        ServicePageUnlogged page = on(ServicePageUnlogged.class, pageName);
+        switch (link) {
+            case LOGO:
+                page.clickOnLogo();
+                break;
+            case LJMAGAZINE:
+                page.clickOnLjMagazineMenuItem();
+                break;
+            case SHOP:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnShop();
+                break;
+            case PAID:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnPaid();
+                break;
+            case PROMO:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnPromo();
+                break;
+            case TOKENS:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnTokensLink();
+                break;
+            case HELP:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnHelp();
+                break;
+            case ABOUT:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnAbout();
+                break;
+            case FAQ:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnFaq();
+                break;
+            case TOS:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnTos();
+                break;
+            case PRIVACY:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnPrivacy();
+                break;
+            case DMCA:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnDmca();
+                break;
+        }
     }
 
     private void goToLink(String pageName, HeaderLinksList link) {
@@ -67,6 +135,15 @@ public class HeaderNavigation extends WebTest {
                 page.moveMouseOverFriendsFeedMenuItem()
                         .clickOnBannedUsers();
                 break;
+            case SHOP:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnShop();
+                break;
+            case PAID:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnPaid();
+                break;
+
         }
     }
 }
