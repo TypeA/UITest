@@ -1,10 +1,15 @@
 package com.livejournal.uitests.navigation.useful.header_navigation;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.profile.ProfilePage;
+import com.livejournal.uitests.pages.service_pages.scrapbook.ScrapBookMainPage;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -18,6 +23,7 @@ import org.openqa.selenium.Cookie;
 public class HeaderNavigation extends WebTest {
 
     //Scenario: Navigation for logged user (1/3)
+    //Scenario: Logged user goes to pages with his username(1/3)
     @Given("logged user (name $name, password $password) on Main Page")
     public void logged_user_on_Main_Page(String name, String password) {
         this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
@@ -29,13 +35,14 @@ public class HeaderNavigation extends WebTest {
     @Given("unlogged user on Main Page")
     public void unlogged_user_on_Main_Page() {
         this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
+        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
         on(MainPageUnlogged.class);
     }
 
     //Scenario: Navigation for logged user (2/3)
     @When("user goes from page $page using link $link")
     public void user_goes_from_page_using_link(String page, String link) {
-        goToLink(page, HeaderLinksList.valueOf(link));
+        goToLinkLogged(page, HeaderLinksList.valueOf(link));
     }
 
     //Scenario: Navigation for unlogged user (2/3)
@@ -44,14 +51,47 @@ public class HeaderNavigation extends WebTest {
         goToLinkUnlogged(page, HeaderLinksList.valueOf(link));
     }
 
+    //Scenario: Logged user goes to pages with his username (2/3)
+    @When("user goes from page $page using link $link that contains his name $name")
+    public void user_goes_from_page_using_link_that_contains_is_name(String page, String link, String name) {
+        goToLinkWithName(page, HeaderLinksList.valueOf(link), name);
+    }
+
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
-    @Then("user in correct page $correct_page with URL $URL")
+    //Scenario: Logged user goes to pages with his username (3/3)
+    @Then("user on correct page $correct_page with URL $URL")
     public void user_in_correct_Page_with_URL(String correct_page, String URL) {
         verify().that(getCurrentUrl().contains(URL))
                 .ifResultIsExpected(VerifyText.okTextForURL(correct_page, URL))
                 .ifElse(VerifyText.errorTextForURL(correct_page, URL, getCurrentUrl()))
                 .finish();
+    }
+
+    private void goToLinkWithName(String pageName, HeaderLinksList link, String name) {
+        ServicePageLogged page = on(ServicePageLogged.class, pageName);
+        switch (link) {
+            case JOURNAL:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnAuthotizedAs(name);
+                on(MyJournalPage.class, new Url().setPrefix(name + "."));
+                break;
+            case PROFILE:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnProfile(name);
+                on(ProfilePage.class, new Url().setPrefix(name + "."));
+                break;
+            case ALBUM:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnScrapbook(name);
+                on(ScrapBookMainPage.class, new Url().setPrefix(name + "."));
+                break;
+            case FEED:
+                page.moveMouseOverFriendsFeedMenuItem()
+                        .clickOnFriendsFeed(name);
+                on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
+                break;
+        }
     }
 
     private void goToLinkUnlogged(String pageName, HeaderLinksList link) {
@@ -106,7 +146,7 @@ public class HeaderNavigation extends WebTest {
         }
     }
 
-    private void goToLink(String pageName, HeaderLinksList link) {
+    private void goToLinkLogged(String pageName, HeaderLinksList link) {
         ServicePageLogged page = on(ServicePageLogged.class, pageName);
         switch (link) {
             case LOGO:
@@ -114,10 +154,6 @@ public class HeaderNavigation extends WebTest {
                 break;
             case LJMAGAZINE:
                 page.clickOnLjMagazineMenuItem();
-                break;
-            case FEED:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnFriendsFeed();
                 break;
             case FRIENDSGROUP:
                 page.moveMouseOverFriendsFeedMenuItem()
@@ -143,7 +179,91 @@ public class HeaderNavigation extends WebTest {
                 page.moveMouseOverShopMenuItem()
                         .clickOnPaid();
                 break;
+            case PROMO:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnPromo();
+                break;
+            case HISTORY:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnOrderHistory();
+                break;
+            case TOKENS:
+                page.moveMouseOverShopMenuItem()
+                        .clickOnTokensLink();
+                break;
+            case HELP:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnHelp();
+                break;
+            case ABOUT:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnAbout();
+                break;
+            case FAQ:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnFaq();
+                break;
+            case TOS:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnTos();
+                break;
+            case PRIVACY:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnPrivacy();
+                break;
+            case DMCA:
+                page.moveMouseOverHelpMenuItem()
+                        .clickOnDmca();
+                break;
+            case NEWENTRYINMENU:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnNewPost();
+                break;
+            case EDITPROFILE:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnEditProfie();
+                break;
+            case MANAGEUSERPICS:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnEditPics();
+                break;
+            case MESSAGESINMENU:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnMessagesInMenu();
+                break;
+            case SHEDULED:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnSheduledEntries();
+                break;
+            case RECENTCOMMENTS:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnRecentComments();
+                break;
+            case STATISTICS:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnStatistics();
+                break;
+            case TAGS:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnTags();
+                break;
+            case MEMORIES:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnMemories();
+                break;
+            case JOURNALSTYLE:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnJournalStyle();
+                break;
+            case SETTINGS:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnSettings();
+                break;
+            case LOGOUT:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnLogOut();
 
         }
     }
+
 }

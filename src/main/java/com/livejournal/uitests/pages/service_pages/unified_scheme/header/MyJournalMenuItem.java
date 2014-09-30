@@ -15,21 +15,4 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ".s-nav-item-user"))
 public class MyJournalMenuItem extends UIBlock {
 
-    @FindBy(css = "label[for='s-nav-body-user'] .s-userpic")
-    public Link userPic;
-
-    @FindBy(css = ".s-nav-rootlink-blog")
-    public Link myJournal;
-
-    @StepGroup
-    public MyJournalMenu moveMouseOverUserPic() {
-        userPic.moveMouseOver();
-        return on(MyJournalMenu.class);
-    }
-
-    @StepGroup
-    public MyJournalMenu moveMouseMyJournal() {
-        myJournal.moveMouseOver();
-        return on(MyJournalMenu.class);
-    }
 }

@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
@@ -17,6 +18,10 @@ import com.livejournal.uitests.pages.service_pages.tools.RecentCommentsPage;
 import com.livejournal.uitests.pages.service_pages.tools.StatisticsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -29,7 +34,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ".s-nav-item-user .s-drop"))
 public class MyJournalMenu extends UIBlock {
 
-    @FindBy(css = ".s-nav-item-you")
+    @FindBy(css = ".s-nav-item-you a")
     public Link authorizedAs;
 
     @FindBy(css = ".s-nav-item-post")
@@ -62,7 +67,7 @@ public class MyJournalMenu extends UIBlock {
     @FindBy(css = ".s-nav-item-tags")
     public Link tags;
 
-    @FindBy(css = ".s-nav-item-memorie")
+    @FindBy(css = ".s-nav-item-memories")
     public Link memories;
 
     @FindBy(css = ".s-nav-item-customize")
@@ -75,9 +80,16 @@ public class MyJournalMenu extends UIBlock {
     public Link logOut;
 
     @StepGroup
-    public MyJournalPage clickOnAuthotizedAs() {
+    public MyJournalPage clickOnAuthotizedAs(String name) {
         authorizedAs.click();
-        return on(MyJournalPage.class);
+       /* String pageSource = getDriver().getPageSource();
+        Pattern pattern = Pattern.compile("lj:user=\"(.*)\" >.*");
+        Matcher matcher = pattern.matcher(pageSource);
+        String name = "";     
+        if (matcher.find()) {
+            name = matcher.group(0);
+        }
+        */return on(MyJournalPage.class, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
@@ -87,9 +99,9 @@ public class MyJournalMenu extends UIBlock {
     }
 
     @StepGroup
-    public ProfilePage clickOnProfile() {
+    public ProfilePage clickOnProfile(String name) {
         profile.click();
-        return on(ProfilePage.class);
+        return on(ProfilePage.class, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
@@ -129,9 +141,9 @@ public class MyJournalMenu extends UIBlock {
     }
 
     @StepGroup
-    public ScrapBookMainPage clickOnScrapbook() {
+    public ScrapBookMainPage clickOnScrapbook(String name) {
         scrapbook.click();
-        return on(ScrapBookMainPage.class);
+        return on(ScrapBookMainPage.class, new Url().setPrefix(name + "."));
     }
 
     @StepGroup

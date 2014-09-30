@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
@@ -35,9 +36,9 @@ public class FriendsFeedMenu extends UIBlock {
     private Link bannedUsers;
 
     @StepGroup
-    public FriendsFeedLogged clickOnFriendsFeed() {
+    public FriendsFeedLogged clickOnFriendsFeed(String name) {
         friendsFeed.click();
-        return on(FriendsFeedLogged.class);
+        return on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
