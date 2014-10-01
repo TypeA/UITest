@@ -17,27 +17,27 @@ public class ShopMenuUnlogged  extends ShopMenu{
 
 
     @StepGroup
-    public ShopPageUnlogged clickOnShop() {
+    public void clickOnShop() {
         shop.click();
-        return on(ShopPageUnlogged.class);
+        //return on(ShopPageUnlogged.class);
     }
 
     @StepGroup
-    public PaidAccountPageUnlogged clickOnPaid() {
+    public void clickOnPaid() {
         paid.click();
-        return on(PaidAccountPageUnlogged.class);
+        //return on(PaidAccountPageUnlogged.class);
     }
 
     @StepGroup
-    public PromoPageUnlogged clickOnPromo() {
+    public void clickOnPromo() {
         promo.click();
-        return on(PromoPageUnlogged.class);
+        //return on(PromoPageUnlogged.class);
     }
 
     @StepGroup
-    public LoginPageUnlogged clickOnTokensLink() {
+    public void clickOnTokensLink() {
         tokens.click();
-        return on(LoginPageUnlogged.class);
+        //return on(LoginPageUnlogged.class);
     }
 
 }

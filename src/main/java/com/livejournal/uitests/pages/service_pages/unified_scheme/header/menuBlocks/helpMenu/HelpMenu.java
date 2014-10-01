@@ -27,22 +27,22 @@ public class HelpMenu extends UIBlock {
 
     final static String CSS = ".s-nav-item-help .s-drop";
 
-    @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support")
+    @FindBy(css = ".s-nav-item-mobile.s-nav-rootlink-support a")
     protected Link help;
 
-    @FindBy(css = ".s-nav-item-about")
+    @FindBy(css = ".s-nav-item-about a")
     protected Link about;
 
-    @FindBy(css = ".s-nav-item-faq")
+    @FindBy(css = ".s-nav-item-faq a")
     protected Link faq;
 
-    @FindBy(css = ".s-nav-item-legal")
+    @FindBy(css = ".s-nav-item-legal a")
     protected Link tos;
 
-    @FindBy(css = ".s-nav-item-privacy")
+    @FindBy(css = ".s-nav-item-privacy a")
     protected Link privacy;
 
-    @FindBy(css = ".s-nav-item-dmca")
+    @FindBy(css = ".s-nav-item-dmca a")
     protected Link dmca;
 
     @FindBy(css = ".s-nav-item-search #SearchText")

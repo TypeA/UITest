@@ -31,8 +31,8 @@ public class ServicePageLogged extends ServicePage {
     }
 
     @StepGroup
-    public LJMagazinePageLogged clickOnLjMagazineMenuItem() {
-        return getFullscreenHeader().clickOnLjMagazineMenuItem();
+    public void clickOnLjMagazineMenuItem() {
+        getFullscreenHeader().clickOnLjMagazineMenuItem();
     }
 
     @StepGroup
@@ -61,12 +61,12 @@ public class ServicePageLogged extends ServicePage {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged clickOnPostNewEntry() {
-        return getFullscreenHeader().clickOnPostNewEntry();
+    public void clickOnPostNewEntry() {
+        getFullscreenHeader().clickOnPostNewEntry();
     }
 
     @StepGroup
-    public InboxMainPage clickOnMessagesMenuItem() {
-        return getFullscreenHeader().clickOnMessagesMenuItem();
+    public void clickOnMessagesMenuItem() {
+        getFullscreenHeader().clickOnMessagesMenuItem();
     }
 }

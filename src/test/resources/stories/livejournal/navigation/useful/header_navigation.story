@@ -1,7 +1,7 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful
+@categories navigation useful test
 
 Given logged user (name <name>, password <password>) on Main Page
 When user goes from page <page> using link <link>
@@ -11,6 +11,7 @@ Examples:
 |name |password     |link           |page                                                                       |correct_page                   |URL                                        |
 |test |test         |LOGO           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Main Page                      |livejournal.ru                             |
 |test |test         |LJMAGAZINE     |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |LJMagazine Page                |/magazine/                                 |
+|test |test         |FEED           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Friends Feed Page              |/feed                                      |
 |test |test         |FRIENDSGROUP   |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Manage Friends group Page      |/friends/editgroups.bml                    |
 |test |test         |MNGGROUP       |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Manage Friends Page            |/friends/edit.bml                          |
 |test |test         |MNGCOMMUNITIES |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Manage Communities Page        |/community/manage.bml                      |
@@ -26,12 +27,15 @@ Examples:
 |test |test         |TOS            |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |TOS Page                       |/legal/tos-russian-translation.bml         |
 |test |test         |PRIVACY        |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Privacy Page                   |/legal/privacy-russian-translation.bml     |
 |test |test         |DMCA           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |DMCA Page                      |/legal/dmca.bml                            |
+|test |test         |JOURNAL        |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |My Journal Page                |test.                                      |
+|test |test         |PROFILE        |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |My Profile Page                |/profile                                   |
 |test |test         |NEWENTRYINMENU |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |New Entry Page                 |/update.bml                                |
 |test |test         |EDITPROFILE    |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Edit Profile Page              |/manage/profile/                           |
 |test |test         |MANAGEUSERPICS |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Edit Userpics Page             |/editpics.bml                              |
 |test |test         |MESSAGESINMENU |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Inbox Page                     |/inbox/                                    |
 |test |test         |SHEDULED       |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Sheduled Entries Page          |/manage/scheduled_posts.bml                |
 |test |test         |RECENTCOMMENTS |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Recent Comments Page           |/tools/recent_comments.bml                 |
+|test |test         |ALBUM          |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |My Albums Page                 |/pics/catalog                              |
 |test |test         |STATISTICS     |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Statics Page                   |/statistics/                               |
 |test |test         |TAGS           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Tags Page                      |/account/settings/tags/                    |
 |test |test         |MEMORIES       |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Memories Page                  |/tools/memories.bml                        |
@@ -41,29 +45,10 @@ Examples:
 
 
 
-
-Scenario: Logged user goes to pages with his username
-
-Meta: 
-@categories navigation useful test
-
-Given logged user (name <name>, password <password>) on Main Page
-When user goes from page <page> using link <link> that contains his name <name>
-Then user on correct page <correct_page> with URL <URL>
-
-Examples:
-|name |password     |link           |page                                                                       |correct_page                   |URL                                        |
-|test |test         |JOURNAL        |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |My Journal Page                |test.                                      |
-|test |test         |PROFILE        |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |My Profile Page                |/profile                                   |
-|test |test         |ALBUM          |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |My Albums Page                 |/pics/catalog                              |
-|test |test         |FEED           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged      |Friends Feed Page              |/feed                                      |
-
-
-
 Scenario: Navigation for unlogged user
 
 Meta: 
-@categories navigation useful
+@categories navigation useful test
 
 Given unlogged user on Main Page
 When unlogged user goes from page <page> using link <link>
@@ -73,7 +58,7 @@ Examples:
 |link           |page                                                                        |correct_page                   |URL                                       |
 |LOGO           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Main Page                      |livejournal.ru                            |
 |LJMAGAZINE     |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |LJMagazine Page                |/magazine/                                |
-|SHOP           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Shop Page                      |/shop                                   |
+|SHOP           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Shop Page                      |/shop                                     |
 |PAID           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Paid Account Page              |/shop/paidaccount.bml                     |
 |PROMO          |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Promo Page                     |/shop/selfpromo.bml                       |
 |TOKENS         |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Login Page                     |/login.bml                                |

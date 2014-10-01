@@ -18,37 +18,37 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ShopMenu.CSS))
 public class ShopMenuLogged extends ShopMenu {
 
-    @FindBy(css = ".s-nav-item-paid-history")
+    @FindBy(css = ".s-nav-item-paid-history a")
     public Link orderHistory;
 
     @StepGroup
-    public ShopPageLogged clickOnShop() {
+    public void clickOnShop() {
         shop.click();
-        return on(ShopPageLogged.class);
+        //return on(ShopPageLogged.class);
     }
 
     @StepGroup
-    public PaidAccountPageLogged clickOnPaid() {
+    public void clickOnPaid() {
         paid.click();
-        return on(PaidAccountPageLogged.class);
+        //return on(PaidAccountPageLogged.class);
     }
 
     @StepGroup
-    public PromoPageLogged clickOnPromo() {
+    public void clickOnPromo() {
         promo.click();
-        return on(PromoPageLogged.class);
+        //return on(PromoPageLogged.class);
     }
 
     @StepGroup
-    public OrderHistoryLoggedPage clickOnOrderHistory() {
+    public void clickOnOrderHistory() {
         orderHistory.click();
-        return on(OrderHistoryLoggedPage.class);
+        //return on(OrderHistoryLoggedPage.class);
     }
 
     @StepGroup
-    public TokensPageLogged clickOnTokensLink() {
+    public void clickOnTokensLink() {
         tokens.click();
-        return on(TokensPageLogged.class);
+        //return on(TokensPageLogged.class);
     }
 
 }

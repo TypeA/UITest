@@ -32,9 +32,9 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
     }
 
     @StepGroup
-    public LJMagazinePageUnlogged clickOnLjMagazineMenuItem() {
+    public void clickOnLjMagazineMenuItem() {
         ljMagazineMenuItem.click();
-        return on(LJMagazinePageUnlogged.class);
+        //return on(LJMagazinePageUnlogged.class);
     }
 
     @StepGroup

@@ -37,50 +37,50 @@ public class MyJournalMenu extends UIBlock {
     @FindBy(css = ".s-nav-item-you a")
     public Link authorizedAs;
 
-    @FindBy(css = ".s-nav-item-post")
+    @FindBy(css = ".s-nav-item-post a")
     public Link newPost;
 
-    @FindBy(css = ".s-nav-item-profile")
+    @FindBy(css = ".s-nav-item-profile a")
     public Link profile;
 
-    @FindBy(css = ".s-nav-item-prodile-edit")
+    @FindBy(css = ".s-nav-item-prodile-edit a")
     public Link editProfile;
 
-    @FindBy(css = ".s-nav-item-edit-pics")
+    @FindBy(css = ".s-nav-item-edit-pics a")
     public Link editPics;
 
-    @FindBy(css = ".s-nav-item-counter")
+    @FindBy(css = ".s-nav-item-counter a")
     public Link messagesInMenu;
 
-    @FindBy(css = ".s-nav-item-scheduled")
+    @FindBy(css = ".s-nav-item-scheduled a")
     public Link sheduledEntries;
 
-    @FindBy(css = ".s-nav-item-comments")
+    @FindBy(css = ".s-nav-item-comments a")
     public Link recentComments;
 
-    @FindBy(css = ".s-nav-item-statistics")
+    @FindBy(css = ".s-nav-item-statistics a")
     public Link statistics;
 
-    @FindBy(css = ".s-nav-item-scrapbook")
+    @FindBy(css = ".s-nav-item-scrapbook a")
     public Link scrapbook;
 
-    @FindBy(css = ".s-nav-item-tags")
+    @FindBy(css = ".s-nav-item-tags a")
     public Link tags;
 
-    @FindBy(css = ".s-nav-item-memories")
+    @FindBy(css = ".s-nav-item-memories a")
     public Link memories;
 
-    @FindBy(css = ".s-nav-item-customize")
+    @FindBy(css = ".s-nav-item-customize a")
     public Link journalStyle;
 
-    @FindBy(css = ".s-nav-item-settings")
+    @FindBy(css = ".s-nav-item-settings a")
     public Link settings;
 
-    @FindBy(css = ".s-nav-item-logout")
+    @FindBy(css = ".s-nav-item-logout a")
     public Link logOut;
 
     @StepGroup
-    public MyJournalPage clickOnAuthotizedAs(String name) {
+    public void clickOnAuthotizedAs() {
         authorizedAs.click();
        /* String pageSource = getDriver().getPageSource();
         Pattern pattern = Pattern.compile("lj:user=\"(.*)\" >.*");
@@ -89,90 +89,90 @@ public class MyJournalMenu extends UIBlock {
         if (matcher.find()) {
             name = matcher.group(0);
         }
-        */return on(MyJournalPage.class, new Url().setPrefix(name + "."));
+        *///return on(MyJournalPage.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public UpdateBmlPageLogged clickOnNewPost() {
+    public void clickOnNewPost() {
         newPost.click();
-        return on(UpdateBmlPageLogged.class);
+        //return on(UpdateBmlPageLogged.class);
     }
 
     @StepGroup
-    public ProfilePage clickOnProfile(String name) {
+    public void clickOnProfile() {
         profile.click();
-        return on(ProfilePage.class, new Url().setPrefix(name + "."));
+       // return on(ProfilePage.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public EditProfilePage clickOnEditProfie() {
+    public void clickOnEditProfie() {
         editProfile.click();
-        return on(EditProfilePage.class);
+        //return on(EditProfilePage.class);
     }
 
     @StepGroup
-    public EditPicsPage clickOnEditPics() {
+    public void clickOnEditPics() {
         editPics.click();
-        return on(EditPicsPage.class);
+        //return on(EditPicsPage.class);
     }
 
     @StepGroup
-    public InboxMainPage clickOnMessagesInMenu() {
+    public void clickOnMessagesInMenu() {
         messagesInMenu.click();
-        return on(InboxMainPage.class);
+        //return on(InboxMainPage.class);
     }
 
     @StepGroup
-    public SheduledEntriesPage clickOnSheduledEntries() {
+    public void clickOnSheduledEntries() {
         sheduledEntries.click();
-        return on(SheduledEntriesPage.class);
+        //return on(SheduledEntriesPage.class);
     }
 
     @StepGroup
-    public RecentCommentsPage clickOnRecentComments() {
+    public void clickOnRecentComments() {
         recentComments.click();
-        return on(RecentCommentsPage.class);
+        //return on(RecentCommentsPage.class);
     }
 
     @StepGroup
-    public StatisticsMainPage clickOnStatistics() {
+    public void clickOnStatistics() {
         statistics.click();
-        return on(StatisticsMainPage.class);
+        //return on(StatisticsMainPage.class);
     }
 
     @StepGroup
-    public ScrapBookMainPage clickOnScrapbook(String name) {
+    public void clickOnScrapbook() {
         scrapbook.click();
-        return on(ScrapBookMainPage.class, new Url().setPrefix(name + "."));
+       // return on(ScrapBookMainPage.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public TagsPage clickOnTags() {
+    public void clickOnTags() {
         tags.click();
-        return on(TagsPage.class);
+        //return on(TagsPage.class);
     }
 
     @StepGroup
-    public MemoriesPage clickOnMemories() {
+    public void clickOnMemories() {
         memories.click();
-        return on(MemoriesPage.class);
+        //return on(MemoriesPage.class);
     }
 
     @StepGroup
-    public CustomizeJournalPage clickOnJournalStyle() {
+    public void clickOnJournalStyle() {
         journalStyle.click();
-        return on(CustomizeJournalPage.class);
+        //return on(CustomizeJournalPage.class);
     }
 
     @StepGroup
-    public SettingsMainPage clickOnSettings() {
+    public void clickOnSettings() {
         settings.click();
-        return on(SettingsMainPage.class);
+        //return on(SettingsMainPage.class);
     }
 
     @StepGroup
-    public ServicePageUnlogged clickOnLogOut() {
+    public void clickOnLogOut() {
         logOut.click();
-        return on(ServicePageUnlogged.class);
+        //return on(ServicePageUnlogged.class);
     }
 }
