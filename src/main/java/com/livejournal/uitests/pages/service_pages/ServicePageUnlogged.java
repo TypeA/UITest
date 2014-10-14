@@ -28,8 +28,8 @@ public class ServicePageUnlogged extends ServicePage {
     }
 
     @StepGroup
-    public LJMagazinePageUnlogged clickOnLjMagazineMenuItem() {
-        return getFullscreenHeader().clickOnLjMagazineMenuItem();
+    public void clickOnLjMagazineMenuItem() {
+        getFullscreenHeader().clickOnLjMagazineMenuItem();
     }
 
     @StepGroup

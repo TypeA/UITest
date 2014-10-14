@@ -1,10 +1,12 @@
 package com.livejournal.uitests.pages.service_pages;
 
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.MyJournalMenu;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -29,8 +31,8 @@ public class ServicePageLogged extends ServicePage {
     }
 
     @StepGroup
-    public LJMagazinePageLogged clickOnLjMagazineMenuItem() {
-        return getFullscreenHeader().clickOnLjMagazineMenuItem();
+    public void clickOnLjMagazineMenuItem() {
+        getFullscreenHeader().clickOnLjMagazineMenuItem();
     }
 
     @StepGroup
@@ -49,12 +51,22 @@ public class ServicePageLogged extends ServicePage {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged clickOnPostNewEntry() {
-        return getFullscreenHeader().clickOnPostNewEntry();
+    public MyJournalMenu moveMouseOverMyJournalMenuItem() {
+        return getFullscreenHeader().moveMouseOverMyJournalMenuItem();
     }
 
     @StepGroup
-    public InboxMainPage clickOnMessagesMenuItem() {
-        return getFullscreenHeader().clickOnMessagesMenuItem();
+    public MyJournalMenu moveMouseOverUserPicMenuItem() {
+        return getFullscreenHeader().moveMouseOverUserPicMenuIem();
+    }
+
+    @StepGroup
+    public void clickOnPostNewEntry() {
+        getFullscreenHeader().clickOnPostNewEntry();
+    }
+
+    @StepGroup
+    public void clickOnMessagesMenuItem() {
+        getFullscreenHeader().clickOnMessagesMenuItem();
     }
 }

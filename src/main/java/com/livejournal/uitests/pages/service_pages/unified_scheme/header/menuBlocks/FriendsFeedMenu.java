@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
@@ -22,45 +23,45 @@ public class FriendsFeedMenu extends UIBlock {
     @FindBy(css = ".s-nav-rootlink-feed")
     private Link friendsFeed;
 
-    @FindBy(css = ".s-nav-item-editgroups")
+    @FindBy(css = ".s-nav-item-editgroups a")
     private Link mngGroups;
 
-    @FindBy(css = ".s-nav-item-edit")
+    @FindBy(css = ".s-nav-item-edit a")
     private Link mngFriends;
 
-    @FindBy(css = ".s-nav-item-manage")
+    @FindBy(css = ".s-nav-item-manage a")
     private Link mngCommunities;
 
-    @FindBy(css = ".s-nav-item-banusers")
+    @FindBy(css = ".s-nav-item-banusers a")
     private Link bannedUsers;
 
     @StepGroup
-    public FriendsFeedLogged clickOnFriendsFeed() {
+    public void clickOnFriendsFeed() {
         friendsFeed.click();
-        return on(FriendsFeedLogged.class);
+      //return on(FriendsFeedLogged.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public ManageGroupsPage clickOnMngGroups() {
+    public void clickOnMngGroups() {
         mngGroups.click();
-        return on(ManageGroupsPage.class);
+       //return on(ManageGroupsPage.class);
     }
 
     @StepGroup
-    public ManageFriendsPage clickOnMngFriends() {
+    public void clickOnMngFriends() {
         mngFriends.click();
-        return on(ManageFriendsPage.class);
+       // return on(ManageFriendsPage.class);
     }
 
     @StepGroup
-    public ManageCommunitiesPage clickOnMngCommunities() {
+    public void clickOnMngCommunities() {
         mngCommunities.click();
-        return on(ManageCommunitiesPage.class);
+       // return on(ManageCommunitiesPage.class);
     }
 
     @StepGroup
-    public BannedUsersPage clickOnBannedUsers() {
+    public void clickOnBannedUsers() {
         bannedUsers.click();
-        return on(BannedUsersPage.class);
+        //return on(BannedUsersPage.class);
     }
 }
