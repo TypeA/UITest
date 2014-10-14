@@ -132,7 +132,7 @@ public class CreateAccountPage extends LJPage {
 
     @StepGroup
     public FinishForm clickOnCreateAccountButton() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 15);
         try {
             wait.until(new ExpectedCondition<Boolean>() {
                 @Override

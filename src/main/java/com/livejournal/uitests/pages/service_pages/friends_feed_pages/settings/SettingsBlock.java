@@ -85,7 +85,7 @@ public class SettingsBlock extends UIBlock {
     @FindBy(css = ".b-feedsettings-cancel")
     private Button cancelButton;
 
-    @FindBy(css = ".b-feedsettings-restore")
+    @FindBy(css = "a.b-feedsettings-restore")
     private Button restoreButton;
 
     ////////////////////////////////////////
@@ -117,52 +117,34 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public FriendsFeedLogged saveSettings() {
         saveButton.click();
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-        try {
-            wait.until(new ExpectedCondition<Boolean>() {
-                @Override
-                public Boolean apply(WebDriver d) {
-                    return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
-                }
-            });
-        } catch (Exception ex) {
-            junit.framework.Assert.fail("Settings block is not closed\n");
-        }
+        waitThatSettingsBlockClose();
         return on(FriendsFeedLogged.class);
     }
 
     @StepGroup
-    public SettingsBlock cancelSettings() {
+    public FriendsFeedLogged cancelSettings() {
         cancelButton.click();
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-        try {
-            wait.until(new ExpectedCondition<Boolean>() {
-                @Override
-                public Boolean apply(WebDriver d) {
-                    return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
-                }
-            });
-        } catch (Exception ex) {
-            junit.framework.Assert.fail("Settings block is not closed\n");
-        }
-        return on(SettingsBlock.class);
+        waitThatSettingsBlockClose();
+        return on(FriendsFeedLogged.class);
     }
 
     @StepGroup
-    public SettingsBlock restoreDefaultSettings() {
+    public FriendsFeedLogged restoreDefaultSettings() throws InterruptedException {
         restoreButton.click();
+        waitThatSettingsBlockClose();
+        return on(FriendsFeedLogged.class);
+    }
+
+    @StepGroup
+    public void waitThatSettingsBlockClose() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-        try {
-            wait.until(new ExpectedCondition<Boolean>() {
-                @Override
-                public Boolean apply(WebDriver d) {
-                    return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
-                }
-            });
-        } catch (Exception ex) {
-            junit.framework.Assert.fail("Settings block is not closed\n");
-        }
-        return on(SettingsBlock.class);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
+            }
+        });
+
     }
 
     @StepGroup
@@ -206,6 +188,19 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public SettingsBubbleColorBlock getColor(ColorSettings button) {
         return getColorButton(button).click();
+
+    }
+
+    @StepGroup
+    public SettingsBlock getCurrentColor(ColorSettings button) {
+        getColor(button)
+                .getCurrentColor();
+        return this;
+    }
+
+    @StepGroup
+    public String getCurrentColorCode(ColorSettings button) {
+        return getColor(button).getCode();
 
     }
 
@@ -253,7 +248,7 @@ public class SettingsBlock extends UIBlock {
                     try {
                         pageSize.enter(size);
 
-                    } catch (NoSuchElementException ex) {
+                    } catch (Exception ex) {
                         Assert.fail("Page size input field is not displayed!" + ex);
                     }
                     break;

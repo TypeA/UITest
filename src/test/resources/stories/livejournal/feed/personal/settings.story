@@ -30,12 +30,12 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user change Title <title> in Settings and cansel it
+When user change Title <title> in Settings and cancel it
 Then the Title is not changed
 
 Examples:
 |name   |password   |title |
-|test   |test       |rnd   |
+|test   |test       |RND   |
 
 
 
@@ -124,7 +124,7 @@ Meta:
 @categories feed personal
 
 
-Given logged user (name <name>, password <password>) on Friends Feed
+Given logged user (name <name>, password <password>) on Friends Feed 1
 When user load Background image <image> and set repeat <repeat> in Settings and save it
 Then  Background image is loaded and displayed
 
@@ -156,7 +156,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
@@ -176,15 +176,15 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user change text size <size> and font <font> in Settings and cansel it
-Then text settings is not changed
+When user change text size <new_size> and font <new_font> in Settings and cancel it (old size <size>, old font <font>)
+Then text settings is changed by size <size> and font <font>
 
 Examples:
-|name   |password   |size |font                 |
-|test   |test       |10   |ProximaNovaRegular   |
-|test   |test       |16   |Verdana              |
-|test   |test       |30   |Arial                |
-|test   |test       |36   |Helvetica            |
+|name   |password   |size |font                 |new_size   |new_font           |
+|test   |test       |10   |ProximaNovaRegular   |16         |Arial              |    
+|test   |test       |16   |Verdana              |10         |ProximaNovaRegular |
+|test   |test       |30   |Arial                |36         |Helvetica          |
+|test   |test       |36   |Helvetica            |30         |Verdana            |
 
 
 
@@ -198,10 +198,11 @@ Then Paging type is changed by type <type> (number <number>)
 
 Examples:
 |name   |password  |type     |number |
-|test   |test      |ENDLESS  |0      |
 |test   |test      |PAGES    |1      |
 |test   |test      |PAGES    |-3     |
 |test   |test      |PAGES    |100    |
+|test   |test      |PAGES    |0      |
+|test   |test      |ENDLESS  |0      |
 
 
 
@@ -211,7 +212,7 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
-When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cansel it
+When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cancel it
 Then Paging type is changed by type <type> (number <number>)
 
 Examples:
@@ -225,25 +226,13 @@ Examples:
 Scenario: Restore default settings 
 Meta: 
 @categories feed personal
+@issue LJSUP-19537
 
-Given logged user (name <name>, password <password>) with its own settings on Friends Feed
-When user click Restore default settings Button in Settings and save it
-Then default settings is set
-
-Examples:
-|name   |password   |
-|test   |test       |
-
-
-
-Scenario: Cansel default settings 
-Meta: 
-@categories feed personal
-
-Given logged user (name <name>, password <password>) with its own settings on Friends Feed
-When user click Restore default settings Button in Settings and cansel it
-Then users settings is set
+Given logged user (name <name>, password <password>) with own settings on Friends Feed
+When user click Restore default settings Button and save it
+Then default settings are set
 
 Examples:
 |name   |password   |
 |test   |test       |
+

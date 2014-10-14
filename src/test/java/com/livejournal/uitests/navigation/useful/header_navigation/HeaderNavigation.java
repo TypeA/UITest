@@ -29,6 +29,7 @@ public class HeaderNavigation extends WebTest {
     @Given("unlogged user on Main Page")
     public void unlogged_user_on_Main_Page() {
         this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
+        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
         on(MainPageUnlogged.class);
     }
 

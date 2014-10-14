@@ -24,7 +24,7 @@ Examples:
 Scenario: Navigation for unlogged user
 
 Meta: 
-@categories navigation useful test
+@categories navigation useful
 
 Given unlogged user on Main Page
 When unlogged user goes from page <page> using link <link>
@@ -34,7 +34,7 @@ Examples:
 |link           |page                                                                        |correct_page                   |URL                                       |
 |LOGO           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Main Page                      |livejournal.ru                            |
 |LJMAGAZINE     |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |LJMagazine Page                |/magazine/                                |
-|SHOP           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Shop Page                      |/shop/                                    |
+|SHOP           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Shop Page                      |/shop                                     |
 |PAID           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Paid Account Page              |/shop/paidaccount.bml                     |
 |PROMO          |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Promo Page                     |/shop/selfpromo.bml                       |
 |TOKENS         |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Login Page                     |/login.bml                                |

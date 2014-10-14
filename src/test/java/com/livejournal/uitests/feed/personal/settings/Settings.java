@@ -14,6 +14,7 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
+import java.util.ArrayList;
 import java.util.Objects;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
@@ -29,8 +30,6 @@ import org.openqa.selenium.JavascriptExecutor;
  */
 public class Settings extends WebTest {
 
-    public String feed_title;
-
     //Scenario: New Title(1/3)
     //Scenario: Change Title(1/3)
     //Scenario: Set new color(1/3)
@@ -40,11 +39,22 @@ public class Settings extends WebTest {
     //Scenario: Set text settings (1/3)
     //Scenario: Set paging type (1/3)
     //Scenario: Cancel paging type (1/3)
+    //Scenario: Cancel text settings (1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
         on(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
         on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
+    }
+
+    //Scenario: Restore default settings (1/3)
+    @Given("logged user (name $name, password $password) with own settings on Friends Feed")
+    public void logged_user_with_own_settings_on_Friends_Feed(String name, String password) {
+        on(LoginPageUnlogged.class)
+                .authorizeBy(name, password);
+        on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
+        setRandomSettings();
+        // getCurrentBrowser().getDriver().navigate().refresh();
     }
 
     //Scenario: New Title(2/3)
@@ -67,7 +77,7 @@ public class Settings extends WebTest {
     }
 
     //Scenario: Cancel changing Title(2/3)
-    @When("user change Title $title in Settings and cansel it")
+    @When("user change Title $title in Settings and cancel it")
     public void user_change_Title_in_Settings_and_cansel_it(String title) {
         ThucydidesUtils.putToSession("feed_title", on(FriendsFeedLogged.class).getFeedTitle());
         on(FriendsFeedLogged.class)
@@ -140,6 +150,20 @@ public class Settings extends WebTest {
                 .saveSettings();
     }
 
+    //Scenario: Cancel text settings (2/3)
+    @When("user change text size $new_size and font $new_font in Settings and cancel it (old size $size, old font $font)")
+    public void user_change_text_size_and_font_in_Settings_and_cancel_it(String new_size, String new_font, String size, String font) {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setTextSettings(size, font)
+                .saveSettings();
+        getCurrentBrowser().getDriver().navigate().refresh();
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setTextSettings(new_size, new_font)
+                .cancelSettings();
+    }
+
     //Scenario: Set paging type (2/3)
     @When("user set Paging type $type (number $number)  in Settings and save it")
     public void user_set_Paging_type_in_Settings_and_save_it(String type, String number) {
@@ -149,11 +173,10 @@ public class Settings extends WebTest {
                 .setSize(number)
                 .saveSettings();
         getCurrentBrowser().getDriver().navigate().refresh();
-
     }
 
     //Scenario: Cancel paging type (2/3)
-    @When("user set Paging type $new_type (old type $type, number $number) in Settings and cansel it")
+    @When("user set Paging type $new_type (old type $type, number $number) in Settings and cancel it")
     public void user_set_Paging_type_in_Settings_and_cansel_it(String new_type, String type, String number) {
         on(FriendsFeedLogged.class)
                 .openSettings()
@@ -165,6 +188,14 @@ public class Settings extends WebTest {
                 .setSize(number)
                 .cancelSettings();
         getCurrentBrowser().getDriver().navigate().refresh();
+    }
+
+    //Scenario: Restore default settings (2/3)
+    @When("user click Restore default settings Button and save it")
+    public void user_click_Restore_default_settings_Button_and_save_it() throws InterruptedException {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .restoreDefaultSettings();
     }
 
     //Scenario: New Title(3/3)
@@ -230,6 +261,7 @@ public class Settings extends WebTest {
     }
 
     //Scenario: Set text settings (3/3)
+    //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) {
         verify().that(getTextParametrs(TextParametrs.FONT).equals(font))
@@ -246,13 +278,24 @@ public class Settings extends WebTest {
     //Scenario: Cancel paging type (3/3)
     @Then("Paging type is changed by type $type (number $number)")
     public void paging_type_is_changed_by_type(String type, String number) throws InterruptedException {
+        getCurrentBrowser().getDriver().navigate().refresh();
         String strNumber = number;
         if (type.equals("ENDLESS")) {
-             strNumber = "more then 20";
+            strNumber = "more then 20";
         }
         verify().that(verifyPagingType(PagingType.valueOf(type), number))
                 .ifResultIsExpected("Correct paging type:" + type + "\nMust be " + strNumber + " posts in the feed")
                 .ifElse("Incorrect paging type:" + type + "\nThere are " + ThucydidesUtils.getFromSession("feed_size") + " posts in the feed")
+                .finish();
+
+    }
+
+    //Scenario: Restore default settings (3/3)
+    @Then("default settings are set")
+    public void default_settings_are_set() {
+        verify().that(rememberColors().containsAll(defaultSettings()))
+                .ifResultIsExpected("Default settings are set")
+                .ifElse("Default settings are not set!")
                 .finish();
 
     }
@@ -286,8 +329,8 @@ public class Settings extends WebTest {
                 return "ERROR!!!";
             default:
                 Assert.fail("Unknown button " + button + "!");
+                return "ERROR!!!";
         }
-        return "ERROR!!!";
     }
 
     private String getTextParametrs(TextParametrs parametr) {
@@ -295,7 +338,7 @@ public class Settings extends WebTest {
             case SIZE:
                 return getNecessaryValue(".p-lenta .l-flatslide-content, .p-lenta .l-flatslide-aside", "font-size");
             case FONT:
-                return getNecessaryValue(".p-lenta .b-lenta-item-content", "font-family");
+                return getNecessaryValue("div.b-lenta-item-content", "font-family");
 
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
@@ -344,12 +387,11 @@ public class Settings extends WebTest {
 
             case ENDLESS:
                 ((JavascriptExecutor) getCurrentBrowser().getDriver())
-                        .executeScript("window.scrollBy(0,1000000)");
+                        .executeScript("window.scrollBy(0,10000000)");
                 Thread.sleep(10000);
                 feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);
-                System.out.println("===========" + feedSize + "\n");
                 return !on(FriendsFeedLogged.class).displaySwitchPagesButtons() && intFeedSize > 20;
 
             default:
@@ -363,5 +405,54 @@ public class Settings extends WebTest {
                 .getDriver()
                 .findElement(By.cssSelector(selector))
                 .getCssValue(value);
+    }
+
+    private String getColorCode(ColorSettings button) {
+        return on(SettingsBlock.class)
+                .getCurrentColorCode(button);
+    }
+
+    private ArrayList<String> rememberColors() {
+        on(FriendsFeedLogged.class)
+                .openSettings();
+        ArrayList<String> colors = new ArrayList<>();
+        for (ColorSettings colorSetting : ColorSettings.values()) {
+            String a = getColorCode(colorSetting);
+            colors.add(a);
+        }
+        return colors;
+    }
+
+    private ArrayList<String> defaultSettings() {
+        ArrayList<String> colors = new ArrayList<>();
+        colors.add("ffffff");
+        colors.add("ffffff");
+        colors.add("ffffff");
+        colors.add("f8f9fb");
+        colors.add("7a9199");
+        colors.add("dae3e6");
+        colors.add("242f33");
+        colors.add("242f33");
+        colors.add("00a3d9");
+        colors.add("0086b3");
+        colors.add("007399");
+        return colors;
+    }
+
+    private void setRandomSettings() {
+        on(FriendsFeedLogged.class)
+                .openSettings()
+                .setColor(ColorSettings.BACKGROUND_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.BORDERS_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.ELEMENTS_BACKGROUND, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.ELEMENTS_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.FOREGROUND_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.LINK_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.MAIN_TEXT_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.ON_HOVER_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.SIDEBAR_BACKGROUND, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.SIDEBAR_TEXT_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.VISITED_LINK, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .saveSettings();
     }
 }
