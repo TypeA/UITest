@@ -7,9 +7,9 @@ When user add new Title <title> in Settings and save it
 Then the Title is changed on correct title <correct_title>
 
 Examples:
-|name   |password   |title      |correct_title  |
-|test   |test       |new_title  |NEW_TITLE      |
-|test   |test       |           |ЛЕНТА          |
+|name   |password   |title      |correct_title   |
+|test   |test       |new_title  |NEW_TITLE       |
+|test   |test       |           |ЛЕНТА           |
 
 
 Scenario: Change Title
@@ -156,7 +156,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
@@ -190,7 +190,7 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it

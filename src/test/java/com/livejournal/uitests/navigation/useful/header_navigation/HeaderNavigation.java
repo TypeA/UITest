@@ -262,6 +262,7 @@ public class HeaderNavigation extends WebTest {
             case LOGOUT:
                 page.moveMouseOverMyJournalMenuItem()
                         .clickOnLogOut();
+                break;
             case JOURNAL:
                 page.moveMouseOverMyJournalMenuItem()
                         .clickOnAuthotizedAs();
