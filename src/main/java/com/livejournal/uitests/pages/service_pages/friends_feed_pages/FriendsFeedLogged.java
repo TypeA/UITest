@@ -106,7 +106,6 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @StepGroup
     public FriendsFeedLogged closeSettings() {
         closeSettingsButton.moveMouseOver();
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         on(SettingsBlock.class).waitThatSettingsBlockClose();
         return this;
     }

@@ -264,6 +264,7 @@ public class Settings extends WebTest {
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) {
+        refreshCurrentPage();
         verify().that(getTextParametrs(TextParametrs.FONT).equals(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
                 .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
@@ -338,7 +339,7 @@ public class Settings extends WebTest {
             case SIZE:
                 return getNecessaryValue(".p-lenta .l-flatslide-content, .p-lenta .l-flatslide-aside", "font-size");
             case FONT:
-                return getNecessaryValue("div.b-lenta-item-content", "font-family");
+                return startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')").toString();
 
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
