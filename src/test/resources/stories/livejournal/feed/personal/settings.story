@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Cancel changing Title
 Meta: 
-@categories feed personal
+@categories feed personalзф
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change Title <title> in Settings and cancel it
@@ -130,9 +130,9 @@ Then  Background image is loaded and displayed
 
 Examples:
 |name   |password   |image      |repeat                 |
-|test   |test       |картинка   |Horizontal and Vertical|
-|test   |test       |картинка   |Horizontal             |
-|test   |test       |картинка   |Vertical               |
+|test   |test       |РєР°СЂС‚РёРЅРєР°   |Horizontal and Vertical|
+|test   |test       |РєР°СЂС‚РёРЅРєР°   |Horizontal             |
+|test   |test       |РєР°СЂС‚РёРЅРєР°   |Vertical               |
 
 
 
@@ -209,7 +209,7 @@ Examples:
 
 Scenario: Cancel paging type 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cancel it

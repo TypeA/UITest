@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages.finish_
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.UnderageAccountPageUnlogged;
+import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -25,6 +26,11 @@ public class UnsuccessfulFinishForm extends FinishForm {
     public MainPageUnlogged clickOnLjAnonymouslyLink() {
         ljAnonymously.click();
         return on(MainPageUnlogged.class);
+    }
+
+    @WhenPageOpens
+    public void waitBlock() throws InterruptedException {
+        Thread.sleep(1500);
     }
 
 }

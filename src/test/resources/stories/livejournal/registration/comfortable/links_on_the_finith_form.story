@@ -3,7 +3,7 @@ Links on successfuly finish form
 Scenario: Сhange Email link
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Сhange Email Link
@@ -19,7 +19,7 @@ Examples:
 Scenario: Validate Email link
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Validate Email Link
@@ -35,7 +35,7 @@ Scenario: Edit Profile link
 
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Edit Profile Link
@@ -51,7 +51,7 @@ Examples:
 Scenario: Find Friends link
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Find Friends Link
@@ -68,7 +68,7 @@ Scenario: Select Journal Style link
 
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Select Journal Style Link
@@ -84,7 +84,7 @@ Scenario: Friends Feed link
 
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Friends Feed Link
@@ -100,7 +100,7 @@ Scenario: Ratings link
 
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Ratings Link
@@ -116,7 +116,7 @@ Examples:
 Scenario: Underage Account link
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click Underage Account Link
@@ -132,7 +132,7 @@ Examples:
 Scenario: LJ Anonymously link
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click LJ Anonymously Link

@@ -5,6 +5,7 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.WhenPageOpens;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -105,6 +106,8 @@ public class SettingsBlock extends UIBlock {
     public SettingsBlock setTextSettings(String size, String font) {
         textSize.selectByValue(size);
         textFont.selectByValue(font);
+        System.out.println("++++ ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
+   
         return on(SettingsBlock.class);
     }
 
@@ -137,7 +140,7 @@ public class SettingsBlock extends UIBlock {
 
     @StepGroup
     public void waitThatSettingsBlockClose() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 15);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
@@ -265,6 +268,11 @@ public class SettingsBlock extends UIBlock {
             }
             return on(SettingsBlock.class);
         }
+    }
+    
+    @WhenPageOpens
+    public void waitBlock() throws InterruptedException {
+        Thread.sleep(1500);
     }
 
 }

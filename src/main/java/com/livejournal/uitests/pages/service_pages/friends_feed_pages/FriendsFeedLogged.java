@@ -98,7 +98,7 @@ public class FriendsFeedLogged extends ServicePageLogged {
     /////////////////////////////////////
     @StepGroup
 
-    public SettingsBlock openSettings() {
+    public SettingsBlock openSettings(){
         settingsButton.click();
         return on(SettingsBlock.class);
     }

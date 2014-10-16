@@ -54,7 +54,6 @@ public class Settings extends WebTest {
                 .authorizeBy(name, password);
         on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         setRandomSettings();
-        // getCurrentBrowser().getDriver().navigate().refresh();
     }
 
     //Scenario: New Title(2/3)
@@ -148,6 +147,7 @@ public class Settings extends WebTest {
                 .openSettings()
                 .setTextSettings(size, font)
                 .saveSettings();
+        System.out.println("===== ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
     }
 
     //Scenario: Cancel text settings (2/3)
@@ -157,7 +157,7 @@ public class Settings extends WebTest {
                 .openSettings()
                 .setTextSettings(size, font)
                 .saveSettings();
-        getCurrentBrowser().getDriver().navigate().refresh();
+        refreshCurrentPage();
         on(FriendsFeedLogged.class)
                 .openSettings()
                 .setTextSettings(new_size, new_font)
@@ -172,7 +172,7 @@ public class Settings extends WebTest {
                 .setPaging(type)
                 .setSize(number)
                 .saveSettings();
-        getCurrentBrowser().getDriver().navigate().refresh();
+        refreshCurrentPage();
     }
 
     //Scenario: Cancel paging type (2/3)
@@ -187,7 +187,7 @@ public class Settings extends WebTest {
                 .setPaging(new_type)
                 .setSize(number)
                 .cancelSettings();
-        getCurrentBrowser().getDriver().navigate().refresh();
+
     }
 
     //Scenario: Restore default settings (2/3)
@@ -201,7 +201,7 @@ public class Settings extends WebTest {
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
-    public void title_is_changed_on_correct_title(String correct_title) throws InterruptedException {
+    public void title_is_changed_on_correct_title(String correct_title) {
         refreshCurrentPage();
         String title = (String) ThucydidesUtils.getFromSession("feed_title");
         if (title != null) {
@@ -264,8 +264,8 @@ public class Settings extends WebTest {
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) {
-        refreshCurrentPage();
-        verify().that(getTextParametrs(TextParametrs.FONT).equals(font))
+        System.out.println("===== ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
+        verify().that(getTextParametrs(TextParametrs.FONT).contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
                 .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
                 .and()
@@ -279,7 +279,8 @@ public class Settings extends WebTest {
     //Scenario: Cancel paging type (3/3)
     @Then("Paging type is changed by type $type (number $number)")
     public void paging_type_is_changed_by_type(String type, String number) throws InterruptedException {
-        getCurrentBrowser().getDriver().navigate().refresh();
+        refreshCurrentPage();
+        Thread.sleep(10000);
         String strNumber = number;
         if (type.equals("ENDLESS")) {
             strNumber = "more then 20";
@@ -337,7 +338,7 @@ public class Settings extends WebTest {
     private String getTextParametrs(TextParametrs parametr) {
         switch (parametr) {
             case SIZE:
-                return getNecessaryValue(".p-lenta .l-flatslide-content, .p-lenta .l-flatslide-aside", "font-size");
+                return startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')").toString();
             case FONT:
                 return startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')").toString();
 
@@ -389,7 +390,7 @@ public class Settings extends WebTest {
             case ENDLESS:
                 ((JavascriptExecutor) getCurrentBrowser().getDriver())
                         .executeScript("window.scrollBy(0,10000000)");
-                Thread.sleep(10000);
+                Thread.sleep(5000);
                 feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);

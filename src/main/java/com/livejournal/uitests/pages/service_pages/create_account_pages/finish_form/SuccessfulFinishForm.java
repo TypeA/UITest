@@ -10,6 +10,7 @@ import com.livejournal.uitests.pages.service_pages.settings.FindFriendsPage;
 import com.livejournal.uitests.pages.service_pages.settings.email.ChangeEmailPage;
 import com.livejournal.uitests.pages.service_pages.settings.email.ValidateEmailPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -80,6 +81,11 @@ public class SuccessfulFinishForm extends FinishForm {
     public UpdateBmlPageLogged createFirstPost() {
         createFirstPostButton.click();
         return on(UpdateBmlPageLogged.class);
+    }
+
+    @WhenPageOpens
+    public void waitBlock() throws InterruptedException {
+        Thread.sleep(1500);
     }
 
 }
