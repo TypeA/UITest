@@ -24,37 +24,37 @@ public class HelpMenuUnlogged extends HelpMenu {
     @StepGroup
     public SupportMainPageUnlogged clickOnHelp() {
         help.click();
-        return on(SupportMainPageUnlogged.class);
+        return onOpened(SupportMainPageUnlogged.class);
     }
 
     @StepGroup
     public AboutMainPageUnlogged clickOnAbout() {
         about.click();
-        return on(AboutMainPageUnlogged.class);
+        return onOpened(AboutMainPageUnlogged.class);
     }
 
     @StepGroup
     public FaqMainPageUnlogged clickOnFaq() {
         faq.click();
-        return on(FaqMainPageUnlogged.class);
+        return onOpened(FaqMainPageUnlogged.class);
     }
 
     @StepGroup
     public TosRusPageUnlogged clickOnTos() {
         tos.click();
-        return on(TosRusPageUnlogged.class);
+        return onOpened(TosRusPageUnlogged.class);
     }
 
     @StepGroup
     public PrivacyRusPageUnlogged clickOnPrivacy() {
         privacy.click();
-        return on(PrivacyRusPageUnlogged.class);
+        return onOpened(PrivacyRusPageUnlogged.class);
     }
 
     @StepGroup
     public DMCAPageUnlogged clickOnDmca() {
         dmca.click();
-        return on(DMCAPageUnlogged.class);
+        return onOpened(DMCAPageUnlogged.class);
     }
 
     @StepGroup
@@ -62,7 +62,7 @@ public class HelpMenuUnlogged extends HelpMenu {
         searchLine.enter(text);
         Actions actions = new Actions(this.getDriver());
         actions.keyDown(Keys.ENTER).build().perform();
-        return on(SearchPageUnlogged.class);
+        return onOpened(SearchPageUnlogged.class);
 
     }
 }

@@ -75,19 +75,19 @@ public class CreateAccountPage extends LJPage {
     @StepGroup
     public PopupsBlock clickOnUserNameField() {
         userNameField.type("");
-        return on(PopupsBlock.class);
+        return onDisplayed(PopupsBlock.class);
     }
 
     @StepGroup
     public PopupsBlock clickOnEmailField() {
         emailField.type("");
-        return on(PopupsBlock.class);
+        return onDisplayed(PopupsBlock.class);
     }
 
     @StepGroup
     public PopupsBlock clickOnPasswordField() {
         passwordField.type("");
-        return on(PopupsBlock.class);
+        return onDisplayed(PopupsBlock.class);
     }
 
     @StepGroup
@@ -127,7 +127,7 @@ public class CreateAccountPage extends LJPage {
     @StepGroup
     public PopupsBlock clickOnAgeField() {
         yearDropDownMenu.getWrappedElement().click();
-        return on(PopupsBlock.class);
+        return onDisplayed(PopupsBlock.class);
     }
 
     @StepGroup
@@ -144,7 +144,7 @@ public class CreateAccountPage extends LJPage {
             Assert.fail("Create account button is disabled\n" + ex);
         }
         createAccountButton.click();
-        return on(FinishForm.class);
+        return onDisplayed(FinishForm.class);
     }
 
     @StepGroup
@@ -155,13 +155,13 @@ public class CreateAccountPage extends LJPage {
     @StepGroup
     public TosRusPageUnlogged clickOnTOSLink() {
         tosRusLink.click();
-        return on(TosRusPageUnlogged.class);
+        return onOpened(TosRusPageUnlogged.class);
     }
 
     @StepGroup
     public PrivacyRusPageUnlogged clickOnPrivacyLink() {
         privacyRusLink.click();
-        return on(PrivacyRusPageUnlogged.class);
+        return onOpened(PrivacyRusPageUnlogged.class);
     }
 
 }

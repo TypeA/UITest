@@ -21,9 +21,9 @@ public class Sidebar extends WebTest {
     //Scenario: Add widget (1/3)
     @Given("logged user (name $name, password $password) without widgets in sidebar on Friends Feed")
     public void logged_user_without_widgets_in_sidebar_on_Friends_Feed(String name, String password) {
-        on(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
-        on(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .deleteAllWidgets();
 
     }
@@ -34,23 +34,23 @@ public class Sidebar extends WebTest {
     //Scenario: Up and Down Buttons (1/3)
     @Given("logged user (name $name, password $password) with complete set of widgets in sidebar on Friends Feed")
     public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name, String password) {
-        on(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
-        on(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .addAllWidgets();
     }
 
     //Scenario: Add widget (2/3)
     @When("user click Add widget and select widget $widget")
     public void user_click_Add_widget_and_select_widget(String widget) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .addWidget(widget);
     }
 
     //Scenario: Delete widget(2/3)
     @When("user click Delete widget $widget")
     public void user_click_Delete_widget(String widget) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .closeWidget(widget);
     }
 
@@ -59,7 +59,7 @@ public class Sidebar extends WebTest {
     public void user_click_Up_Button_many_time_on_lower_widget() {
         String widget = selectWidget(WidgetsType.LOWER);
         ThucydidesUtils.putToSession("widget", widget);
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .moveMouseOnWidget(widget);
         String script = "return jQuery('.b-feedwidgets-move-down')"
                 + ".slice((jQuery('.b-feedwidgets-move-down').size()-1),(jQuery('.b-feedwidgets-move-down').size()))"
@@ -70,7 +70,7 @@ public class Sidebar extends WebTest {
                 .finish();
         Integer steps = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
         for (int i = 0; i < steps - 1; i++) {
-            on(FriendsFeedLogged.class)
+            onOpened(FriendsFeedLogged.class)
                     .upWidget(widget);
         }
     }
@@ -80,7 +80,7 @@ public class Sidebar extends WebTest {
     public void user_click_Down_Button_on_top_widget() {
         String widget = selectWidget(WidgetsType.UPPER);
         ThucydidesUtils.putToSession("widget", widget);
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .moveMouseOnWidget(widget);
         String script = "return jQuery('.b-feedwidgets-move-up')"
                 + ".slice(0,1)"
@@ -91,7 +91,7 @@ public class Sidebar extends WebTest {
                 .finish();
         Integer steps = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
         for (int i = 0; i < steps - 1; i++) {
-            on(FriendsFeedLogged.class)
+            onOpened(FriendsFeedLogged.class)
                     .downWidget(widget);
         }
 
@@ -102,14 +102,14 @@ public class Sidebar extends WebTest {
     public void user_move_mouse_on_middle_widget() {
         String widget = selectWidget(WidgetsType.MIDDLE);
         ThucydidesUtils.putToSession("widget", widget);
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .moveMouseOnWidget(widget);
     }
 
     //Scenario: Add widget (3/3)
     @Then("widget $widget added in sidebar")
     public void widget_added_in_sidebar(String widget) {
-        verify().that(on(FriendsFeedLogged.class).displayingWidget(widget))
+        verify().that(onOpened(FriendsFeedLogged.class).displayingWidget(widget))
                 .ifResultIsExpected("Necessary widget '" + widget + "' is displayed")
                 .ifElse("Necessary widget '" + widget + "' is not displayed!")
                 .finish();
@@ -154,11 +154,11 @@ public class Sidebar extends WebTest {
     @Then("Up and Down Buttons are displayed")
     public void Up_and_Down_Buttons_are_displayed() {
         String widget = ThucydidesUtils.getFromSession("widget").toString();
-        verify().that(on(FriendsFeedLogged.class).buttonUpDisplaying(widget))
+        verify().that(onOpened(FriendsFeedLogged.class).buttonUpDisplaying(widget))
                 .ifResultIsExpected("Up button is displayed")
                 .ifElse("Up button is not displayed")
                 .and()
-                .that(on(FriendsFeedLogged.class).buttonDownDisplaying(widget))
+                .that(onOpened(FriendsFeedLogged.class).buttonDownDisplaying(widget))
                 .ifResultIsExpected("Down button is displayed")
                 .ifElse("Down button is not displayed")
                 .finish();

@@ -37,13 +37,13 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     @StepGroup
     public MyJournalMenu moveMouseOverUserPicMenuIem() {
         userPicMenuItem.moveMouseOver();
-        return on(MyJournalMenu.class);
+        return onDisplayed(MyJournalMenu.class);
     }
 
     @StepGroup
     public MyJournalMenu moveMouseOverMyJournalMenuItem() {
         myJournalMenuItem.moveMouseOver();
-        return on(MyJournalMenu.class);
+        return onDisplayed(MyJournalMenu.class);
     }
 
     @FindBy(css = ".s-do-item .s-do-item-post")
@@ -55,31 +55,31 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     @StepGroup
     public MainPageLogged clickOnLogo() {
         logo.click();
-        return on(MainPageLogged.class);
+        return onOpened(MainPageLogged.class);
     }
 
     @StepGroup
     public void clickOnLjMagazineMenuItem() {
         ljMagazineMenuItem.click();
-       // return on(LJMagazinePageLogged.class);
+      //  return onOpened(LJMagazinePageLogged.class);
     }
 
     @StepGroup
     public FriendsFeedMenu moveMouseOverFriendsFeedMenuItem() {
         friendsFeedMenuItem.moveMouseOver();
-        return on(FriendsFeedMenu.class);
+        return onDisplayed(FriendsFeedMenu.class);
     }
 
     @StepGroup
     public ShopMenuLogged moveMouseOverShopMenuItem() {
         shopMenuItem.moveMouseOver();
-        return on(ShopMenuLogged.class);
+        return onDisplayed(ShopMenuLogged.class);
     }
 
     @StepGroup
     public HelpMenuLogged moveMouseOverHelpMenuItem() {
         helpMenuItem.moveMouseOver();
-        return on(HelpMenuLogged.class);
+        return onDisplayed(HelpMenuLogged.class);
     }
 
     @StepGroup

@@ -27,74 +27,74 @@ public class LinksOnTheFinithForm extends WebTest {
     //Scenario: First post (1/3)
     @Given("new user on Finish Form (data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender)")
     public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
-        on(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
+        open(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
                 Date.parceDayOrGetCurrent(day).toString(),
                 Date.parceMonthOrGetCurrent(month).toString(),
                 Date.parceYearOrGetCurrent(year).toString(),
-                gender);
-        on(CreateAccountPage.class).clickOnCreateAccountButton();
+                gender)
+                .clickOnCreateAccountButton();
     }
 
     //Scenario: Edit Profile link(2/3)
     @When("user click Edit Profile Link")
     public void user_click_Edit_Profile_Link() {
-        on(SuccessfulFinishForm.class).clickOnEditProfileLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnEditProfileLink();
     }
 
     //Scenario: Find Friends link(2/3)
     @When("user click Find Friends Link")
     public void user_click_Find_Friends_Link() {
-        on(SuccessfulFinishForm.class).clickOnFindFiendsLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnFindFiendsLink();
     }
 
     //Scenario: Validate Email link(2/3)
     @When("user click Validate Email Link")
     public void user_click_Validate_Email_Link() {
-        on(SuccessfulFinishForm.class).clickOnValidateEmailLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnValidateEmailLink();
     }
 
     //Scenario: Сhange Email link(2/3)
     @When("user click Сhange Email Link")
     public void user_click_Сhange_Email_Link() {
-        on(SuccessfulFinishForm.class).clickOnChangeEmailLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnChangeEmailLink();
     }
 
     //Scenario: Select Journal Style link(2/3)
     @When("user click Select Journal Style Link")
     public void user_click_Select_Journal_Link() {
-        on(SuccessfulFinishForm.class).clickOnCustomizeJournalLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnCustomizeJournalLink();
     }
 
     //Scenario: Friends Feed link(2/3)
     @When("user click Friends Feed Link")
     public void user_click_Friends_Feed_Link() {
-        on(SuccessfulFinishForm.class).clickOnFrendsFeedLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnFrendsFeedLink();
     }
 
     //Scenario: Ratings link(2/3)
     @When("user click Ratings Link")
     public void user_click_Ratings_Link() {
-        on(SuccessfulFinishForm.class).clickOnRatingsLink();
+        onDisplayed(SuccessfulFinishForm.class).clickOnRatingsLink();
     }
 
     //Scenario: Underage Account link(2/3)
     @When("user click Underage Account Link")
     public void user_click_Underage_Account_Link() {
-        on(UnsuccessfulFinishForm.class).clickOnUnderageAccountLink();
+        onDisplayed(UnsuccessfulFinishForm.class).clickOnUnderageAccountLink();
     }
 
     //Scenario: LJ Anonymously link(2/3)
     @When("user click LJ Anonymously Link")
     public void user_click_LJ_Anonymously_Link() {
-        on(UnsuccessfulFinishForm.class).clickOnLjAnonymouslyLink();
+        onDisplayed(UnsuccessfulFinishForm.class).clickOnLjAnonymouslyLink();
     }
 
     //Scenario: First post(2/3)
     @When("user click on Create First Post button")
     public void user_click_on_Create_First_Post_button() {
-        on(SuccessfulFinishForm.class).createFirstPost();
+        onDisplayed(SuccessfulFinishForm.class).createFirstPost();
     }
 
     //Scenario: Сhange Email link(3/3)

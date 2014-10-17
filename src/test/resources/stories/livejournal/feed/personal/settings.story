@@ -209,7 +209,7 @@ Examples:
 
 Scenario: Cancel paging type 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cancel it

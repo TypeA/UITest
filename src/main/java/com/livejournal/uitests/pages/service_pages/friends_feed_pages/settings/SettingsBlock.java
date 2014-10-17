@@ -93,13 +93,13 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public SettingsBlock enterTitle(String title) {
         titleField.enter(title);
-        return on(SettingsBlock.class);
+        return this;
     }
 
     @StepGroup
     public SettingsBlock typeToTitle(String title) {
         titleField.type(title);
-        return on(SettingsBlock.class);
+        return this;
     }
 
     @StepGroup
@@ -107,8 +107,7 @@ public class SettingsBlock extends UIBlock {
         textSize.selectByValue(size);
         textFont.selectByValue(font);
         System.out.println("++++ ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
-   
-        return on(SettingsBlock.class);
+        return this;
     }
 
     @StepGroup
@@ -121,21 +120,21 @@ public class SettingsBlock extends UIBlock {
     public FriendsFeedLogged saveSettings() {
         saveButton.click();
         waitThatSettingsBlockClose();
-        return on(FriendsFeedLogged.class);
+        return onOpened(FriendsFeedLogged.class);
     }
 
     @StepGroup
     public FriendsFeedLogged cancelSettings() {
         cancelButton.click();
         waitThatSettingsBlockClose();
-        return on(FriendsFeedLogged.class);
+        return onOpened(FriendsFeedLogged.class);
     }
 
     @StepGroup
     public FriendsFeedLogged restoreDefaultSettings() throws InterruptedException {
         restoreButton.click();
         waitThatSettingsBlockClose();
-        return on(FriendsFeedLogged.class);
+        return onOpened(FriendsFeedLogged.class);
     }
 
     @StepGroup
@@ -144,7 +143,7 @@ public class SettingsBlock extends UIBlock {
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
-                return on(FriendsFeedLogged.class).settingsButton.isDisplayed();
+                return onOpened(FriendsFeedLogged.class).settingsButton.isDisplayed();
             }
         });
 
@@ -217,7 +216,7 @@ public class SettingsBlock extends UIBlock {
         @Override
         public SettingsBubbleColorBlock click() {
             super.click();
-            return on(SettingsBubbleColorBlock.class);
+            return onDisplayed(SettingsBubbleColorBlock.class);
         }
 
     }
@@ -231,7 +230,7 @@ public class SettingsBlock extends UIBlock {
         @Override
         public SettingsBubbleBackgroundBlock click() {
             super.click();
-            return on(SettingsBubbleBackgroundBlock.class);
+            return onDisplayed(SettingsBubbleBackgroundBlock.class);
         }
 
     }
@@ -266,7 +265,7 @@ public class SettingsBlock extends UIBlock {
                 default:
                     Assert.fail("Incorrect page type!");
             }
-            return on(SettingsBlock.class);
+            return onDisplayed(SettingsBlock.class);
         }
     }
     

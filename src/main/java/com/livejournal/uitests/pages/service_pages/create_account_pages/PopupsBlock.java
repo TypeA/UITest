@@ -35,7 +35,7 @@ public class PopupsBlock extends UIBlock {
 
     public LearnMorePageUnlogged clickOnLearnMoreLink() {
         learnMoreLink.click();
-        return on(LearnMorePageUnlogged.class);
+        return onOpened(LearnMorePageUnlogged.class);
     }
 
 }

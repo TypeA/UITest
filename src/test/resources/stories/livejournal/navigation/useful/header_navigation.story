@@ -67,4 +67,5 @@ Examples:
 |FAQ            |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |FAQ Page                       |/support/faq/                             |
 |TOS            |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |TOS Page                       |/legal/tos-russian-translation.bml        |
 |PRIVACY        |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |Privacy Page                   |/legal/privacy-russian-translation.bml    |
-|DMCA           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |DMCA Page                      |/legal/dmca.bml                           |
+|DMCA           |com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged     |DMCA Page                      |/legal/dmca.bml                           |                    |livejournal.ru                            |
+

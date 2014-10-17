@@ -23,11 +23,11 @@ public class ShopPageUnlogged extends ServicePageLogged {
 
     public LoginPageUnlogged clickOnTokensLink() {
         tokensLink.click();
-        return on(LoginPageUnlogged.class);
+        return onOpened(LoginPageUnlogged.class);
     }
 
     public LoginPageUnlogged clickOnRenameAccountLink() {
         renameAccountLink.click();
-        return on(LoginPageUnlogged.class);
+        return onOpened(LoginPageUnlogged.class);
     }
 }

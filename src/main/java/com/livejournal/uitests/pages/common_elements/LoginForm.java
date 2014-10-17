@@ -38,31 +38,21 @@ public class LoginForm extends UIBlock {
 
     @StepGroup
     public void authorizeBy(String login, String password) {
-        getLoginField().enter(login);
-        getPasswordField().enter(password);
-        getSubmitButton().click();
+        loginField.enter(login);
+        passwordField.enter(password);
+        submitButton.click();
     }
 
-    public TextField getLoginField() {
-        return elem(loginField);
-    }
 
-    public TextField getPasswordField() {
-        return elem(passwordField);
-    }
-
-    public Button getSubmitButton() {
-        return elem(submitButton);
-    }
 
     public CreateAccountPage clickOnCreateAccountLink() {
         createAccountLink.click();
-        return on(CreateAccountPage.class);
+        return onOpened(CreateAccountPage.class);
     }
 
     public LostInfoPage clickOnLostInfoLink() {
         lostInfo.click();
-        return on(LostInfoPage.class);
+        return onOpened(LostInfoPage.class);
     }
 
 }

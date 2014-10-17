@@ -17,7 +17,7 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  * @author m.prytkova
  */
 
-111
+
 @DefaultUrl("/feed")
 public class FriendsFeedLogged extends ServicePageLogged {
 
@@ -101,13 +101,13 @@ public class FriendsFeedLogged extends ServicePageLogged {
 
     public SettingsBlock openSettings(){
         settingsButton.click();
-        return on(SettingsBlock.class);
+        return onDisplayed(SettingsBlock.class);
     }
 
     @StepGroup
     public FriendsFeedLogged closeSettings() {
         closeSettingsButton.moveMouseOver();
-        on(SettingsBlock.class).waitThatSettingsBlockClose();
+        onDisplayed(SettingsBlock.class).waitThatSettingsBlockClose();
         return this;
     }
 

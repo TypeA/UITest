@@ -1,15 +1,10 @@
 package com.livejournal.uitests.navigation.useful.header_navigation;
 
-import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.profile.ProfilePage;
-import com.livejournal.uitests.pages.service_pages.scrapbook.ScrapBookMainPage;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -26,17 +21,19 @@ public class HeaderNavigation extends WebTest {
     //Scenario: Logged user goes to pages with his username(1/3)
     @Given("logged user (name $name, password $password) on Main Page")
     public void logged_user_on_Main_Page(String name, String password) {
-        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
-        on(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class);
+        getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
+        open(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
     @Given("unlogged user on Main Page")
     public void unlogged_user_on_Main_Page() {
+        open(LoginPageUnlogged.class);
         this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
         this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
-        on(MainPageUnlogged.class);
+        open(MainPageUnlogged.class);
     }
 
     //Scenario: Navigation for logged user (2/3)
@@ -53,10 +50,9 @@ public class HeaderNavigation extends WebTest {
 
     //Scenario: Logged user goes to pages with his username (2/3)
    /* @When("user goes from page $page using link $link that contains his name $name")
-    public void user_goes_from_page_using_link_that_contains_is_name(String page, String link, String name) {
-        goToLinkWithName(page, HeaderLinksList.valueOf(link), name);
-    }*/
-
+     public void user_goes_from_page_using_link_that_contains_is_name(String page, String link, String name) {
+     goToLinkWithName(page, HeaderLinksList.valueOf(link), name);
+     }*/
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
     //Scenario: Logged user goes to pages with his username (3/3)
@@ -69,7 +65,7 @@ public class HeaderNavigation extends WebTest {
     }
 
     private void goToLinkWithName(String pageName, HeaderLinksList link, String name) {
-        ServicePageLogged page = on(ServicePageLogged.class, pageName);
+        ServicePageLogged page = onOpened(ServicePageLogged.class, pageName);
         switch (link) {
             case JOURNAL:
                 page.moveMouseOverMyJournalMenuItem()
@@ -95,7 +91,7 @@ public class HeaderNavigation extends WebTest {
     }
 
     private void goToLinkUnlogged(String pageName, HeaderLinksList link) {
-        ServicePageUnlogged page = on(ServicePageUnlogged.class, pageName);
+        ServicePageUnlogged page = onOpened(ServicePageUnlogged.class, pageName);
         switch (link) {
             case LOGO:
                 page.clickOnLogo();
@@ -147,7 +143,7 @@ public class HeaderNavigation extends WebTest {
     }
 
     private void goToLinkLogged(String pageName, HeaderLinksList link) {
-        ServicePageLogged page = on(ServicePageLogged.class, pageName);
+        ServicePageLogged page = onOpened(ServicePageLogged.class, pageName);
         switch (link) {
             case LOGO:
                 page.clickOnLogo();

@@ -17,14 +17,14 @@ public class FeaturesOfAutorizationForm extends WebTest {
     //Scenario: Remember me(1/1)
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
-        on(LoginPageUnlogged.class);
+        open(LoginPageUnlogged.class);
 
     }
 
     //Scenario: Forgot password(2/3)
     @When("user click link Forgot Password")
     public void user_click_link_Forgot_Password() {
-        on(LoginPageUnlogged.class)
+        onOpened(LoginPageUnlogged.class)
                 .clickOnLostInfoLink();
     }
 

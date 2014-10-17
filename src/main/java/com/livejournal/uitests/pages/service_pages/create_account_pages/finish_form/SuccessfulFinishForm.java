@@ -12,11 +12,14 @@ import com.livejournal.uitests.pages.service_pages.settings.email.ValidateEmailP
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
 
 /**
  *
  * @author m.prytkova
  */
+@Block(
+        @FindBy(css = ".b-panel-step2"))
 public class SuccessfulFinishForm extends FinishForm {
 
     @FindBy(css = "a[href*='/changeemail.bml']")
@@ -45,42 +48,42 @@ public class SuccessfulFinishForm extends FinishForm {
 
     public ChangeEmailPage clickOnChangeEmailLink() {
         changeEmailLink.click();
-        return on(ChangeEmailPage.class);
+        return onOpened(ChangeEmailPage.class);
     }
 
     public ValidateEmailPage clickOnValidateEmailLink() {
         validateEmailLink.click();
-        return on(ValidateEmailPage.class);
+        return onOpened(ValidateEmailPage.class);
     }
 
     public EditProfilePage clickOnEditProfileLink() {
         editProfileLink.click();
-        return on(EditProfilePage.class);
+        return onOpened(EditProfilePage.class);
     }
 
     public FindFriendsPage clickOnFindFiendsLink() {
         findFiendsLink.click();
-        return on(FindFriendsPage.class);
+        return onOpened(FindFriendsPage.class);
     }
 
     public CustomizeJournalPage clickOnCustomizeJournalLink() {
         customizeJournalLink.click();
-        return on(CustomizeJournalPage.class);
+        return onOpened(CustomizeJournalPage.class);
     }
 
     public FriendsFeedLogged clickOnFrendsFeedLink() {
         frendsFeedLink.click();
-        return on(FriendsFeedLogged.class);
+        return onOpened(FriendsFeedLogged.class);
     }
 
     public MainPageLogged clickOnRatingsLink() {
         ratingsLink.click();
-        return on(MainPageLogged.class);
+        return onOpened(MainPageLogged.class);
     }
 
     public UpdateBmlPageLogged createFirstPost() {
         createFirstPostButton.click();
-        return on(UpdateBmlPageLogged.class);
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     @WhenPageOpens

@@ -49,7 +49,7 @@ public class SettingsBubbleColorBlock extends UIBlock {
     @StepGroup
     public SettingsBlock clickChooseButton() {
         chooseButton.click();
-        return on(SettingsBlock.class);
+        return onDisplayed(SettingsBlock.class);
     }
 
     @StepGroup

@@ -1,6 +1,5 @@
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
 
-import com.livejournal.uisteps.core.FileLoader;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;

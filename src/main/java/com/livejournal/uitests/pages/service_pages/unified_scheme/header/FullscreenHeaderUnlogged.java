@@ -28,7 +28,7 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
     @StepGroup
     public MainPageUnlogged clickOnLogo() {
         logo.click();
-        return on(MainPageUnlogged.class);
+        return onOpened(MainPageUnlogged.class);
     }
 
     @StepGroup
@@ -40,24 +40,24 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
     @StepGroup
     public LoginForm clickOnLoginMenuItem() {
         loginMenuItem.click();
-        return on(LoginForm.class);
+        return onDisplayed(LoginForm.class);
     }
 
     @StepGroup
     public ShopMenuUnlogged moveMouseOverShopMenuItem() {
         shopMenuItem.moveMouseOver();
-        return on(ShopMenuUnlogged.class);
+        return onDisplayed(ShopMenuUnlogged.class);
     }
 
     @StepGroup
     public HelpMenuUnlogged moveMouseOverHelpMenuItem() {
         helpMenuItem.moveMouseOver();
-        return on(HelpMenuUnlogged.class);
+        return onDisplayed(HelpMenuUnlogged.class);
     }
 
     @StepGroup
     public LangSwitchMenu moveMouseOverLangSwitch() {
         langSwitch.moveMouseOver();
-        return on(LangSwitchMenu.class);
+        return onDisplayed(LangSwitchMenu.class);
     }
 }

@@ -15,7 +15,7 @@ public class FeedbackMenuUnlogged extends FeedbackMenu {
     @StepGroup
     public FeedbackBlockUnlogged clickSendFeedback() {
         sendFeedback.click();
-        return on(FeedbackBlockUnlogged.class);
+        return onDisplayed(FeedbackBlockUnlogged.class);
     }
 
 }

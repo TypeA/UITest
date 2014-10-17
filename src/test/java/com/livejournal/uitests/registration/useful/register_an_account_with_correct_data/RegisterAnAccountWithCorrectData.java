@@ -20,21 +20,21 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     //Scenario: Successfull registration(1/3)
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
-        on(CreateAccountPage.class);
+        open(CreateAccountPage.class);
     }
 
     //Scenario: User go to registration form(1/2)
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
-        on(MainPageUnlogged.class)
+        onOpened(MainPageUnlogged.class)
                 .clickOnLoginMenuItem()
                 .clickOnCreateAccountLink();
     }
 
     //Scenario: Successfull registration(2/3)
     @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
-    public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender){
-        on(CreateAccountPage.class)
+    public void user_enter_data_and_clicks_Create_Account(String name, String email, String password, String day, String month, String year, String gender) {
+        onOpened(CreateAccountPage.class)
                 .createAccountData(new RandomName(name).get(),
                         email,
                         password,
@@ -57,9 +57,9 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     //Scenario: Successfull registration(3/3)
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form_and_see_message(String message) {
-        verify().that(on(SuccessfulFinishForm.class).getFinishText().contains(message))
+        verify().that(onDisplayed(SuccessfulFinishForm.class).getFinishText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(on(SuccessfulFinishForm.class).getFinishText()))
+                .ifElse(VerifyText.errorTextForMessage(onDisplayed(SuccessfulFinishForm.class).getFinishText()))
                 .finish();
     }
 

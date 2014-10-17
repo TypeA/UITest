@@ -14,7 +14,7 @@ public class TestAuthorization extends WebTest {
 
     @When("I submit authorization form with correct login $login and password $password")
     public void submit_authorization_form_with_correct(String login, String password) {
-        on(LoginPageUnlogged.class).authorizeBy(login, password);
+        open(LoginPageUnlogged.class).authorizeBy(login, password);
     }
 
     @Then("I should be authorized")

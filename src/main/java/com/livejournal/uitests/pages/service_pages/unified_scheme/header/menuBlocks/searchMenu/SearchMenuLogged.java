@@ -20,7 +20,7 @@ public class SearchMenuLogged extends SearchMenu {
         searchLine.enter(text);
         Actions actions = new Actions(this.getDriver());
         actions.keyDown(Keys.ENTER).build().perform();
-        return on(SearchPageLogged.class);
+        return onOpened(SearchPageLogged.class);
 
     }
 

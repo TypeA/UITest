@@ -17,19 +17,19 @@ public class LinksOnTheAccountCreationPage extends WebTest {
     //Scenario: Privacy link(1/3)
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
-        on(CreateAccountPage.class);
+        open(CreateAccountPage.class);
     }
 
     //Scenario: TOS link(2/3)
     @When("user click TOS Link")
     public void user_click_TOS_Link() {
-        on(CreateAccountPage.class).clickOnTOSLink();
+        onOpened(CreateAccountPage.class).clickOnTOSLink();
     }
 
     //Scenario: Privacy link(2/3)
     @When("user click Privacy Link")
     public void user_click_Privacy_Link() {
-        on(CreateAccountPage.class).clickOnPrivacyLink();
+        onOpened(CreateAccountPage.class).clickOnPrivacyLink();
     }
 
     //Scenario: TOS link(3/3)

@@ -41,12 +41,12 @@ public class FullscreenHeader extends UIBlock {
     @StepGroup
     public FeedbackMenu clickOnFeedbackMenuItem() {
         feedbackMenuItem.click();
-        return on(FeedbackMenu.class);
+        return onDisplayed(FeedbackMenu.class);
     }
 
     @StepGroup
     public SearchMenu clickOnSearchMenuItem() {
         searchMenuItem.click();
-        return on(SearchMenu.class);
+        return onDisplayed(SearchMenu.class);
     }
 }

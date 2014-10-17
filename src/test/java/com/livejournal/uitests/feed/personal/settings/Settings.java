@@ -42,24 +42,24 @@ public class Settings extends WebTest {
     //Scenario: Cancel text settings (1/3)
     @Given("logged user (name $name, password $password) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name, String password) {
-        on(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
-        on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 
     //Scenario: Restore default settings (1/3)
     @Given("logged user (name $name, password $password) with own settings on Friends Feed")
     public void logged_user_with_own_settings_on_Friends_Feed(String name, String password) {
-        on(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(name, password);
-        on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         setRandomSettings();
     }
 
     //Scenario: New Title(2/3)
     @When("user add new Title $title in Settings and save it")
     public void user_add_new_Title_in_Settings_and_save_it(String title) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .enterTitle(title)
                 .saveSettings();
@@ -68,8 +68,8 @@ public class Settings extends WebTest {
     //Scenario: Change Title(2/3)
     @When("user change Title $title in Settings and save it")
     public void user_change_Title_in_Settings_and_save_it(String title) {
-        ThucydidesUtils.putToSession("feed_title", on(FriendsFeedLogged.class).getFeedTitle());
-        on(FriendsFeedLogged.class)
+        ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class).getFeedTitle());
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .typeToTitle(title)
                 .saveSettings();
@@ -78,22 +78,22 @@ public class Settings extends WebTest {
     //Scenario: Cancel changing Title(2/3)
     @When("user change Title $title in Settings and cancel it")
     public void user_change_Title_in_Settings_and_cansel_it(String title) {
-        ThucydidesUtils.putToSession("feed_title", on(FriendsFeedLogged.class).getFeedTitle());
-        on(FriendsFeedLogged.class)
+        ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class).getFeedTitle());
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .typeToTitle(title);
-        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title") + title))
+        verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title") + title))
                 .ifResultIsExpected(VerifyText.okTextForMessage((String) ThucydidesUtils.getFromSession("feed_title") + title))
-                .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
+                .ifElse(VerifyText.errorTextForMessage(onOpened(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
-        on(SettingsBlock.class)
+        onDisplayed(SettingsBlock.class)
                 .cancelSettings();
     }
 
     //Scenario: Set new color(2/3)
     @When("user change color $color by type $type (parametrs: code $code, barY $barY, colorX $colorX, colorY $colorY) and save it")
     public void user_change_color_by_type_and_save_it(String color, String type, String code, String barY, String colorX, String colorY) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.valueOf(color), ColorSelectType.valueOf(type), code, Integer.parseInt(barY), Integer.parseInt(colorX), Integer.parseInt(colorY))
                 .saveSettings();
@@ -102,40 +102,38 @@ public class Settings extends WebTest {
     //Scenario: Return the current color(2/3)
     @When("user change color $color (old code $code) and return current color")
     public void user_change_color_and_return_current_color(String color, String code) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.valueOf(color), ColorSelectType.BY_CODE, code, 0, 0, 0)
-                .saveSettings();
-        on(FriendsFeedLogged.class)
+                .saveSettings()
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color))
                 .setColorBarByPoint(new RandomeValue(250).get())
                 .setColorByPoint(new RandomeValue(250).get(), new RandomeValue(250).get());
-        verify().that(!verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+        verify().that(!verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
-                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
-        on(SettingsBubbleColorBlock.class)
+        onDisplayed(SettingsBubbleColorBlock.class)
                 .setCurrentColor();
     }
 
     //Scenario: Cansel new color (2/3)
     @When("user change color $color (old code $code) and cansel it")
     public void user_change_color_and_cansel_it(String color, String code) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.valueOf(color), ColorSelectType.BY_CODE, code, 0, 0, 0)
-                .saveSettings();
-        on(FriendsFeedLogged.class)
+                .saveSettings()
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color))
                 .setColorBarByPoint(new RandomeValue(250).get())
                 .setColorByPoint(new RandomeValue(250).get(), new RandomeValue(250).get());
-        verify().that(!verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+        verify().that(!verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color :\n" + HexToRGB.hexToRGB(code))
-                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
-        on(SettingsBubbleColorBlock.class)
+        onDisplayed(SettingsBubbleColorBlock.class)
                 .clickChooseButton()
                 .cancelSettings();
     }
@@ -143,7 +141,7 @@ public class Settings extends WebTest {
     //Scenario: Set text settings (2/3)
     @When("user change text size $size and font $font in Settings and save it")
     public void user_change_text_size_and_font_in_Settings_and_save_it(String size, String font) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setTextSettings(size, font)
                 .saveSettings();
@@ -153,12 +151,12 @@ public class Settings extends WebTest {
     //Scenario: Cancel text settings (2/3)
     @When("user change text size $new_size and font $new_font in Settings and cancel it (old size $size, old font $font)")
     public void user_change_text_size_and_font_in_Settings_and_cancel_it(String new_size, String new_font, String size, String font) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setTextSettings(size, font)
                 .saveSettings();
         refreshCurrentPage();
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setTextSettings(new_size, new_font)
                 .cancelSettings();
@@ -167,7 +165,7 @@ public class Settings extends WebTest {
     //Scenario: Set paging type (2/3)
     @When("user set Paging type $type (number $number)  in Settings and save it")
     public void user_set_Paging_type_in_Settings_and_save_it(String type, String number) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(type)
                 .setSize(number)
@@ -178,7 +176,7 @@ public class Settings extends WebTest {
     //Scenario: Cancel paging type (2/3)
     @When("user set Paging type $new_type (old type $type, number $number) in Settings and cancel it")
     public void user_set_Paging_type_in_Settings_and_cansel_it(String new_type, String type, String number) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(type)
                 .setSize(number)
@@ -193,7 +191,7 @@ public class Settings extends WebTest {
     //Scenario: Restore default settings (2/3)
     @When("user click Restore default settings Button and save it")
     public void user_click_Restore_default_settings_Button_and_save_it() throws InterruptedException {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .restoreDefaultSettings();
     }
@@ -207,18 +205,18 @@ public class Settings extends WebTest {
         if (title != null) {
             correct_title = title + correct_title;
         }
-        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
+        verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
                 .ifResultIsExpected(VerifyText.okTextForMessage(correct_title))
-                .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
+                .ifElse(VerifyText.errorTextForMessage(onOpened(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
     }
 
     //Scenario: Cancel changing Title (3/3)
     @Then("the Title is not changed")
     public void the_Title_is_not_changed() {
-        verify().that(on(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title")))
+        verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title")))
                 .ifResultIsExpected(VerifyText.okTextForMessage((String) ThucydidesUtils.getFromSession("feed_title")))
-                .ifElse(VerifyText.errorTextForMessage(on(FriendsFeedLogged.class).getFeedTitle()))
+                .ifElse(VerifyText.errorTextForMessage(onOpened(FriendsFeedLogged.class).getFeedTitle()))
                 .finish();
     }
 
@@ -226,20 +224,20 @@ public class Settings extends WebTest {
     //Scenario: Cansel new color (3/3)
     @Then("the color $color corresponds to correct code $code")
     public void the_color_corresponds_to_correct_code(String color, String code) {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color));
-        verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getCurrentColor()))
+        verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor()))
                 .ifResultIsExpected("Correct current color:\n" + HexToRGB.hexToRGB(code))
-                .ifElse("Current color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCurrentColor())
+                .ifElse("Current color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor())
                 .and()
-                .that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+                .that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
-                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
-                .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
                 .and()
                 .that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
                 .ifResultIsExpected("Correct element color:\n" + HexToRGB.hexToRGB(code))
@@ -250,13 +248,13 @@ public class Settings extends WebTest {
     //Scenario: Return the current color(3/3)
     @Then("the color changed to the current code $code")
     public void the_color_changed_to_the_current(String code) {
-        verify().that(verifyColor(code, on(SettingsBubbleColorBlock.class).getNewColor()))
+        verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
-                .ifElse("New color is incorrect:\n" + on(SettingsBubbleColorBlock.class).getNewColor())
+                .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(on(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
-                .ifElse("Color code is incorrect:\n" + on(SettingsBubbleColorBlock.class).getCode())
+                .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
                 .finish();
     }
 
@@ -324,10 +322,10 @@ public class Settings extends WebTest {
             case LINK_COLOR:
                 return getNecessaryValue(".b-lenta-body A:link, .b-lenta .b-mysocial-footer-logout-text, .b-lenta .b-mysocial-footer-refresh, .p-lenta .b-feedwidgets A:link, .p-lenta .l-flatslide-intro-heads A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:link, .b-translation-pseudo:link, .b-translation-pseudo:visited", "color");
             case ON_HOVER_COLOR:
-                on(FriendsFeedLogged.class).getUserName().moveMouseOver();
+                onOpened(FriendsFeedLogged.class).getUserName().moveMouseOver();
                 return getNecessaryValue(".b-lenta-body A:hover, .p-lenta .b-feedwidgets A:hover, .p-lenta .b-feedwidgets .b-todaylj-caption A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:hover, .b-translation-pseudo:hover, .p-lenta .l-flatslide-intro-heads A:hover", "color");
             case VISITED_LINK:
-                on(FriendsFeedLogged.class).getUserName().click();
+                onOpened(FriendsFeedLogged.class).getUserName().click();
                 return "ERROR!!!";
             default:
                 Assert.fail("Unknown button " + button + "!");
@@ -385,7 +383,7 @@ public class Settings extends WebTest {
                 } else {
                     correctSize = intSize;
                 }
-                return on(FriendsFeedLogged.class).displaySwitchPagesButtons() && Objects.equals(intFeedSize, correctSize);
+                return onOpened(FriendsFeedLogged.class).displaySwitchPagesButtons() && Objects.equals(intFeedSize, correctSize);
 
             case ENDLESS:
                 ((JavascriptExecutor) getCurrentBrowser().getDriver())
@@ -394,7 +392,7 @@ public class Settings extends WebTest {
                 feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);
-                return !on(FriendsFeedLogged.class).displaySwitchPagesButtons() && intFeedSize > 20;
+                return !onOpened(FriendsFeedLogged.class).displaySwitchPagesButtons() && intFeedSize > 20;
 
             default:
                 Assert.fail("Unknown type " + type + "!");
@@ -410,12 +408,12 @@ public class Settings extends WebTest {
     }
 
     private String getColorCode(ColorSettings button) {
-        return on(SettingsBlock.class)
+        return onDisplayed(SettingsBlock.class)
                 .getCurrentColorCode(button);
     }
 
     private ArrayList<String> rememberColors() {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings();
         ArrayList<String> colors = new ArrayList<>();
         for (ColorSettings colorSetting : ColorSettings.values()) {
@@ -442,7 +440,7 @@ public class Settings extends WebTest {
     }
 
     private void setRandomSettings() {
-        on(FriendsFeedLogged.class)
+        onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.BACKGROUND_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
                 .setColor(ColorSettings.BORDERS_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
