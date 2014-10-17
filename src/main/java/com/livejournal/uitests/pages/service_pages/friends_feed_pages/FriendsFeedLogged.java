@@ -10,13 +10,14 @@ import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 /**
  *
  * @author m.prytkova
  */
+
+111
 @DefaultUrl("/feed")
 public class FriendsFeedLogged extends ServicePageLogged {
 
