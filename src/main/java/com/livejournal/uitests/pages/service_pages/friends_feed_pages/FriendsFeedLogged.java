@@ -107,8 +107,7 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @StepGroup
     public FriendsFeedLogged closeSettings() {
         closeSettingsButton.moveMouseOver();
-        onDisplayed(SettingsBlock.class).waitThatSettingsBlockClose();
-        return this;
+        return onDisplayed(SettingsBlock.class).waitThatSettingsBlockClose();
     }
 
     @StepGroup

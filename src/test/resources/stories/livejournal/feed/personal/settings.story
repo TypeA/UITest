@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Cancel changing Title
 Meta: 
-@categories feed personalзф
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user change Title <title> in Settings and cancel it
@@ -190,7 +190,7 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it

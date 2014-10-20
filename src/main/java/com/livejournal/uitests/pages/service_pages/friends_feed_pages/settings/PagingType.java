@@ -6,6 +6,7 @@ package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
  */
 public enum PagingType {
 
-    PAGES, ENDLESS;
+    PAGES, 
+    ENDLESS;
 
 }

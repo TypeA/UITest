@@ -21,39 +21,39 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 public class HelpMenuLogged extends HelpMenu {
      
     @StepGroup
-    public void clickOnHelp() {
+    public SupportMainPageLogged clickOnHelp() {
         help.click();
-        //return on(SupportMainPageLogged.class);
+        return onOpened(SupportMainPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnAbout() {
+    public AboutMainPageLogged clickOnAbout() {
         about.click();
-        //return on(AboutMainPageLogged.class);
+        return onOpened(AboutMainPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnFaq() {
+    public FaqMainPageLogged clickOnFaq() {
         faq.click();
-        //return on(FaqMainPageLogged.class);
+        return onOpened(FaqMainPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnTos() {
+    public TosRusPageLogged clickOnTos() {
         tos.click();
-        //return on(TosRusPageLogged.class);
+        return onOpened(TosRusPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnPrivacy() {
+    public PrivacyRusPageLogged clickOnPrivacy() {
         privacy.click();
-        //return on(PrivacyRusPageLogged.class);
+        return onOpened(PrivacyRusPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnDmca() {
+    public DMCAPageLogged clickOnDmca() {
         dmca.click();
-        //return on(DMCAPageLogged.class);
+        return onOpened(DMCAPageLogged.class);
     }
 
     @StepGroup

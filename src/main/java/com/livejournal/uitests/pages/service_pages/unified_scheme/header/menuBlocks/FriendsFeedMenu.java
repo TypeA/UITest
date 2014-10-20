@@ -36,32 +36,32 @@ public class FriendsFeedMenu extends UIBlock {
     private Link bannedUsers;
 
     @StepGroup
-    public void clickOnFriendsFeed() {
+    public FriendsFeedLogged clickOnFriendsFeed() {
         friendsFeed.click();
-      //return on(FriendsFeedLogged.class);//, new Url().setPrefix(name + "."));
+      return onOpened(FriendsFeedLogged.class);
     }
 
     @StepGroup
-    public void clickOnMngGroups() {
+    public ManageGroupsPage clickOnMngGroups() {
         mngGroups.click();
-       //return on(ManageGroupsPage.class);
+       return onOpened(ManageGroupsPage.class);
     }
 
     @StepGroup
-    public void clickOnMngFriends() {
+    public ManageFriendsPage clickOnMngFriends() {
         mngFriends.click();
-       // return on(ManageFriendsPage.class);
+        return onOpened(ManageFriendsPage.class);
     }
 
     @StepGroup
-    public void clickOnMngCommunities() {
+    public ManageCommunitiesPage clickOnMngCommunities() {
         mngCommunities.click();
-       // return on(ManageCommunitiesPage.class);
+        return onOpened(ManageCommunitiesPage.class);
     }
 
     @StepGroup
-    public void clickOnBannedUsers() {
+    public BannedUsersPage clickOnBannedUsers() {
         bannedUsers.click();
-        //return on(BannedUsersPage.class);
+        return onOpened(BannedUsersPage.class);
     }
 }

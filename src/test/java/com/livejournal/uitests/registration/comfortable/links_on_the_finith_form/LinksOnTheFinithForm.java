@@ -7,9 +7,11 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_f
 import com.livejournal.uitests.utility.Date;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.VerifyText;
+import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 
 /**
  *
@@ -17,16 +19,12 @@ import org.jbehave.core.annotations.When;
  */
 public class LinksOnTheFinithForm extends WebTest {
 
-    //Scenario: Сhange Email link(1/3)
-    //Scenario: Validate Email link(1/3)
-    //Scenario: Edit Profile link(1/3)
-    //Scenario: Find Friends link(1/3)
-    //Scenario: Select Journal Style link(1/3)
-    //Scenario: Friends Feed link(1/3)
-    //Scenario: Ratings link(1/3)
-    //Scenario: First post (1/3)
+    //Scenario: Links on successfuly finish form (1/3)
+    //Scenario: Links on unsuccessfuly finish form (1/3)
     @Given("new user on Finish Form (data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender)")
     public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
+        open(CreateAccountPage.class);
+        getCurrentBrowser().deleteCookies();
         open(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,
@@ -37,74 +35,20 @@ public class LinksOnTheFinithForm extends WebTest {
                 .clickOnCreateAccountButton();
     }
 
-    //Scenario: Edit Profile link(2/3)
-    @When("user click Edit Profile Link")
-    public void user_click_Edit_Profile_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnEditProfileLink();
+    //Scenario: Links on successfuly finish form (2/3)
+    @When("user click link $page on successfuly Finish Form")
+    public void user_click_link_on_successfuly_Finish_Form(String page) {
+        clickOnSuccessfulLink(page);
     }
 
-    //Scenario: Find Friends link(2/3)
-    @When("user click Find Friends Link")
-    public void user_click_Find_Friends_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnFindFiendsLink();
+    //Scenario: Links on unsuccessfuly finish form (2/3)
+    @When("user click link $page on unsuccessfuly Finish Form")
+    public void user_click_link_on_unsuccessfuly_Finish_Form(String page) {
+        clickOnUnuccessfulLink(page);
     }
 
-    //Scenario: Validate Email link(2/3)
-    @When("user click Validate Email Link")
-    public void user_click_Validate_Email_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnValidateEmailLink();
-    }
-
-    //Scenario: Сhange Email link(2/3)
-    @When("user click Сhange Email Link")
-    public void user_click_Сhange_Email_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnChangeEmailLink();
-    }
-
-    //Scenario: Select Journal Style link(2/3)
-    @When("user click Select Journal Style Link")
-    public void user_click_Select_Journal_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnCustomizeJournalLink();
-    }
-
-    //Scenario: Friends Feed link(2/3)
-    @When("user click Friends Feed Link")
-    public void user_click_Friends_Feed_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnFrendsFeedLink();
-    }
-
-    //Scenario: Ratings link(2/3)
-    @When("user click Ratings Link")
-    public void user_click_Ratings_Link() {
-        onDisplayed(SuccessfulFinishForm.class).clickOnRatingsLink();
-    }
-
-    //Scenario: Underage Account link(2/3)
-    @When("user click Underage Account Link")
-    public void user_click_Underage_Account_Link() {
-        onDisplayed(UnsuccessfulFinishForm.class).clickOnUnderageAccountLink();
-    }
-
-    //Scenario: LJ Anonymously link(2/3)
-    @When("user click LJ Anonymously Link")
-    public void user_click_LJ_Anonymously_Link() {
-        onDisplayed(UnsuccessfulFinishForm.class).clickOnLjAnonymouslyLink();
-    }
-
-    //Scenario: First post(2/3)
-    @When("user click on Create First Post button")
-    public void user_click_on_Create_First_Post_button() {
-        onDisplayed(SuccessfulFinishForm.class).createFirstPost();
-    }
-
-    //Scenario: Сhange Email link(3/3)
-    //Scenario: Validate Email link(3/3)
-    //Scenario: Edit Profile link(3/3)
-    //Scenario: Find Friends link(3/3)
-    //Scenario: Select Journal Style link(3/3)
-    //Scenario: Friends Feed link(3/3)
-    //Scenario: Ratings link(3/3)
-    //Scenario: First post(3/3)
+    //Scenario: Links on successfuly finish form (3/3)
+    //Scenario: Links on unsuccessfuly finish form (3/3)
     @Then("user in correct page $page with URL $URL")
     public void user_in_correct_Page_with_URL(String page, String URL) {
         verify().that(getCurrentUrl().contains(URL))
@@ -112,4 +56,69 @@ public class LinksOnTheFinithForm extends WebTest {
                 .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
                 .finish();
     }
+
+    @StepGroup
+    public void clickOnSuccessfulLink(String link) {
+        switch (SuccessfulFormLinks.valueOf(stringToEnum(link))) {
+            case СHANGE_EMAIL:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnChangeEmailLink();
+                break;
+            case VALIDATE_EMAIL:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnValidateEmailLink();
+                break;
+            case EDIT_PROFILE:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnEditProfileLink();
+                break;
+            case FIND_FRIENDS:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnFindFiendsLink();
+                break;
+            case SELECT_JOURNAL:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnCustomizeJournalLink();
+                break;
+            case FRIENDS_FEED:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnFrendsFeedLink();
+                break;
+            case RATINGS:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .clickOnRatingsLink();
+                break;
+            case CREATE_POST_PAGE:
+                onDisplayed(SuccessfulFinishForm.class)
+                        .createFirstPost();
+                break;
+
+            default:
+                Assert.fail("Unknown link " + link + "!");
+        }
+    }
+
+    @StepGroup
+    public void clickOnUnuccessfulLink(String link) {
+        switch (UnsuccessfulFormLinks.valueOf(stringToEnum(link))) {
+            case MAIN_PAGE:
+                onDisplayed(UnsuccessfulFinishForm.class)
+                        .clickOnLjAnonymouslyLink();
+                break;
+            case UNDERAGE_ACCOUNT:
+                onDisplayed(UnsuccessfulFinishForm.class)
+                        .clickOnUnderageAccountLink();
+                break;
+
+            default:
+                Assert.fail("Unknown link " + link + "!");
+        }
+    }
+
+    private String stringToEnum(String link) {
+        return link.replace(" ", "_")
+                .toUpperCase();
+    }
+
+   
 }

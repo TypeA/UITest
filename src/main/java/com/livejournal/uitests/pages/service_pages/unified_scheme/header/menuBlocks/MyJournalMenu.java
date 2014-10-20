@@ -1,6 +1,5 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks;
 
-import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
@@ -18,10 +17,6 @@ import com.livejournal.uitests.pages.service_pages.tools.RecentCommentsPage;
 import com.livejournal.uitests.pages.service_pages.tools.StatisticsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -80,99 +75,99 @@ public class MyJournalMenu extends UIBlock {
     public Link logOut;
 
     @StepGroup
-    public void clickOnAuthotizedAs() {
+    public MyJournalPage clickOnAuthotizedAs() {
         authorizedAs.click();
-       /* String pageSource = getDriver().getPageSource();
-        Pattern pattern = Pattern.compile("lj:user=\"(.*)\" >.*");
-        Matcher matcher = pattern.matcher(pageSource);
-        String name = "";     
-        if (matcher.find()) {
-            name = matcher.group(0);
-        }
-        *///return on(MyJournalPage.class);//, new Url().setPrefix(name + "."));
+        /* String pageSource = getDriver().getPageSource();
+         Pattern pattern = Pattern.compile("lj:user=\"(.*)\" >.*");
+         Matcher matcher = pattern.matcher(pageSource);
+         String name = "";     
+         if (matcher.find()) {
+         name = matcher.group(0);
+         }*/
+        return onOpened(MyJournalPage.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public void clickOnNewPost() {
+    public UpdateBmlPageLogged clickOnNewPost() {
         newPost.click();
-        //return on(UpdateBmlPageLogged.class);
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnProfile() {
+    public ProfilePage clickOnProfile() {
         profile.click();
-       // return on(ProfilePage.class);//, new Url().setPrefix(name + "."));
+         return onOpened(ProfilePage.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public void clickOnEditProfie() {
+    public EditProfilePage clickOnEditProfie() {
         editProfile.click();
-        //return on(EditProfilePage.class);
+        return onOpened(EditProfilePage.class);
     }
 
     @StepGroup
-    public void clickOnEditPics() {
+    public EditPicsPage clickOnEditPics() {
         editPics.click();
-        //return on(EditPicsPage.class);
+        return onOpened(EditPicsPage.class);
     }
 
     @StepGroup
-    public void clickOnMessagesInMenu() {
+    public InboxMainPage clickOnMessagesInMenu() {
         messagesInMenu.click();
-        //return on(InboxMainPage.class);
+        return onOpened(InboxMainPage.class);
     }
 
     @StepGroup
-    public void clickOnSheduledEntries() {
+    public SheduledEntriesPage clickOnSheduledEntries() {
         sheduledEntries.click();
-        //return on(SheduledEntriesPage.class);
+        return onOpened(SheduledEntriesPage.class);
     }
 
     @StepGroup
-    public void clickOnRecentComments() {
+    public RecentCommentsPage clickOnRecentComments() {
         recentComments.click();
-        //return on(RecentCommentsPage.class);
+        return onOpened(RecentCommentsPage.class);
     }
 
     @StepGroup
-    public void clickOnStatistics() {
+    public StatisticsMainPage clickOnStatistics() {
         statistics.click();
-        //return on(StatisticsMainPage.class);
+        return onOpened(StatisticsMainPage.class);
     }
 
     @StepGroup
-    public void clickOnScrapbook() {
+    public ScrapBookMainPage clickOnScrapbook() {
         scrapbook.click();
-       // return on(ScrapBookMainPage.class);//, new Url().setPrefix(name + "."));
+         return onOpened(ScrapBookMainPage.class);//, new Url().setPrefix(name + "."));
     }
 
     @StepGroup
-    public void clickOnTags() {
+    public TagsPage clickOnTags() {
         tags.click();
-        //return on(TagsPage.class);
+        return onOpened(TagsPage.class);
     }
 
     @StepGroup
-    public void clickOnMemories() {
+    public MemoriesPage clickOnMemories() {
         memories.click();
-        //return on(MemoriesPage.class);
+        return onOpened(MemoriesPage.class);
     }
 
     @StepGroup
-    public void clickOnJournalStyle() {
+    public CustomizeJournalPage clickOnJournalStyle() {
         journalStyle.click();
-        //return on(CustomizeJournalPage.class);
+        return onOpened(CustomizeJournalPage.class);
     }
 
     @StepGroup
-    public void clickOnSettings() {
+    public SettingsMainPage clickOnSettings() {
         settings.click();
-        //return on(SettingsMainPage.class);
+        return onOpened(SettingsMainPage.class);
     }
 
     @StepGroup
-    public void clickOnLogOut() {
+    public ServicePageUnlogged clickOnLogOut() {
         logOut.click();
-        //return on(ServicePageUnlogged.class);
+        return onOpened(ServicePageUnlogged.class);
     }
 }

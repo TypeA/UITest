@@ -22,33 +22,33 @@ public class ShopMenuLogged extends ShopMenu {
     public Link orderHistory;
 
     @StepGroup
-    public void clickOnShop() {
+    public ShopPageLogged clickOnShop() {
         shop.click();
-        //return on(ShopPageLogged.class);
+        return onOpened(ShopPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnPaid() {
+    public PaidAccountPageLogged clickOnPaid() {
         paid.click();
-        //return on(PaidAccountPageLogged.class);
+        return onOpened(PaidAccountPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnPromo() {
+    public PromoPageLogged clickOnPromo() {
         promo.click();
-        //return on(PromoPageLogged.class);
+        return onOpened(PromoPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnOrderHistory() {
+    public OrderHistoryLoggedPage clickOnOrderHistory() {
         orderHistory.click();
-        //return on(OrderHistoryLoggedPage.class);
+        return onOpened(OrderHistoryLoggedPage.class);
     }
 
     @StepGroup
-    public void clickOnTokensLink() {
+    public TokensPageLogged clickOnTokensLink() {
         tokens.click();
-        //return on(TokensPageLogged.class);
+        return onOpened(TokensPageLogged.class);
     }
 
 }

@@ -119,26 +119,23 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public FriendsFeedLogged saveSettings() {
         saveButton.click();
-        waitThatSettingsBlockClose();
-        return onOpened(FriendsFeedLogged.class);
+        return waitThatSettingsBlockClose();
     }
 
     @StepGroup
     public FriendsFeedLogged cancelSettings() {
         cancelButton.click();
-        waitThatSettingsBlockClose();
-        return onOpened(FriendsFeedLogged.class);
+        return waitThatSettingsBlockClose();
     }
 
     @StepGroup
     public FriendsFeedLogged restoreDefaultSettings() throws InterruptedException {
         restoreButton.click();
-        waitThatSettingsBlockClose();
-        return onOpened(FriendsFeedLogged.class);
+        return waitThatSettingsBlockClose();
     }
 
     @StepGroup
-    public void waitThatSettingsBlockClose() {
+    public FriendsFeedLogged waitThatSettingsBlockClose() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 15);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
@@ -146,7 +143,7 @@ public class SettingsBlock extends UIBlock {
                 return onOpened(FriendsFeedLogged.class).settingsButton.isDisplayed();
             }
         });
-
+        return onOpened(FriendsFeedLogged.class);
     }
 
     @StepGroup
@@ -268,7 +265,7 @@ public class SettingsBlock extends UIBlock {
             return onDisplayed(SettingsBlock.class);
         }
     }
-    
+
     @WhenPageOpens
     public void waitBlock() throws InterruptedException {
         Thread.sleep(1500);

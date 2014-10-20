@@ -59,9 +59,9 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     }
 
     @StepGroup
-    public void clickOnLjMagazineMenuItem() {
+    public LJMagazinePageLogged clickOnLjMagazineMenuItem() {
         ljMagazineMenuItem.click();
-      //  return onOpened(LJMagazinePageLogged.class);
+        return onOpened(LJMagazinePageLogged.class);
     }
 
     @StepGroup
@@ -83,14 +83,14 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     }
 
     @StepGroup
-    public void clickOnPostNewEntry() {
+    public UpdateBmlPageLogged clickOnPostNewEntry() {
         postNewEntry.click();
-        //return on(UpdateBmlPageLogged.class);
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     @StepGroup
-    public void clickOnMessagesMenuItem() {
+    public InboxMainPage clickOnMessagesMenuItem() {
         messagesMenuItem.click();
-        //return on(InboxMainPage.class);
+        return onOpened(InboxMainPage.class);
     }
 }

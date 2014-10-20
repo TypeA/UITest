@@ -1,11 +1,11 @@
 package com.livejournal.uitests.pages.service_pages.create_account_pages;
 
-import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyRusPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosRusPageUnlogged;
 import junit.framework.Assert;
@@ -133,16 +133,12 @@ public class CreateAccountPage extends LJPage {
     @StepGroup
     public FinishForm clickOnCreateAccountButton() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 15);
-        try {
-            wait.until(new ExpectedCondition<Boolean>() {
-                @Override
-                public Boolean apply(WebDriver d) {
-                    return createAccountButton.isEnabled();
-                }
-            });
-        } catch (Exception ex) {
-            Assert.fail("Create account button is disabled\n" + ex);
-        }
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return createAccountButton.isEnabled();
+            }
+        });
         createAccountButton.click();
         return onDisplayed(FinishForm.class);
     }
