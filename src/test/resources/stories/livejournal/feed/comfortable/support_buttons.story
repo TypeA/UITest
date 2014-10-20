@@ -26,4 +26,4 @@ Then Settings list is visible and Settings icone changed on Close icon
 
 Examples:
 |name       |password   |
-|test765765 |Mary1992   |
+|test765765 |test       |

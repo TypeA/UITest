@@ -145,7 +145,6 @@ public class Settings extends WebTest {
                 .openSettings()
                 .setTextSettings(size, font)
                 .saveSettings();
-        System.out.println("===== ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
     }
 
     //Scenario: Cancel text settings (2/3)
@@ -262,7 +261,6 @@ public class Settings extends WebTest {
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) {
-        System.out.println("===== ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
         verify().that(getTextParametrs(TextParametrs.FONT).contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
                 .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
