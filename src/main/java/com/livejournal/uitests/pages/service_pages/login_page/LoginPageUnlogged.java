@@ -18,21 +18,18 @@ public class LoginPageUnlogged extends ServicePageUnlogged {
     private TextBlock errorText;
 
     @FindBy(css = ".s-body .b-loginform")
-    private LoginForm loginForm;
+    public LoginForm loginForm;
 
     @StepGroup
     public void authorizeBy(String login, String password) {
-        getLoginForm().authorizeBy(login, password);
+        loginForm.authorizeBy(login, password);
     }
 
     @StepGroup
     public void clickOnLostInfoLink() {
-        getLoginForm().clickOnLostInfoLink();
+        loginForm.clickOnLostInfoLink();
     }
 
-    public LoginForm getLoginForm() {
-        return elem(loginForm);
-    }
 
     public TextBlock getErrorText() {
         return errorText;

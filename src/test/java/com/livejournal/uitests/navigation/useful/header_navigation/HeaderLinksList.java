@@ -10,7 +10,7 @@ public enum HeaderLinksList {
    LOGO, 
    LJMAGAZINE, 
    FEED, 
-   FRIENDSGROUP, 
+   MNGFRIENDS, 
    MNGGROUP, 
    MNGCOMMUNITIES, 
    BANNEDUSERS, 

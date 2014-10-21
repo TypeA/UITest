@@ -25,11 +25,11 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter password <password> 
-Then user see Password Bubble which contains text <text> and URL <URL> (page <page>)
+Then user see Password Bubble which contains text <text> (link <page>)
 
 Examples:
-|password   |text                   |page       |URL                  |                                            |
-|Test123    |Требования к паролю:   |Learn more |/support/faq/71.html |
+|password   |text                   |page                   |
+|Test123    |Требования к паролю:   |LearnMorePageUnlogged  |
 
 
 

@@ -19,6 +19,6 @@ public class IterationsWithLoginForm extends IterationsWithObject {
 
     @Override
     protected void toRun() {
-        ((LoginPageUnlogged) object).getLoginForm().authorizeBy(name, password);
+        ((LoginPageUnlogged) object).loginForm.authorizeBy(name, password);
     }
 }

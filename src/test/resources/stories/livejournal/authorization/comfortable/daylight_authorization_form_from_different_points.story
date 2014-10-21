@@ -17,11 +17,11 @@ Meta:
 
 Given unlogged user on Main Page
 When user click on the Tokens in the Header
-Then user in correct page <page> with URL <URL>
+Then user in correct page <page>
 
 Examples:
-|page               |URL        |
-|Authorization Page |/login.bml |
+|page              |
+|LoginPageUnlogged |
 
 
 
@@ -33,11 +33,11 @@ Meta:
 
 Given unlogged user in Shop
 When user click on the Tokens Link
-Then user in correct page <page> with URL <URL>
+Then user in correct page <page>
 
 Examples:
-|page               |URL        |
-|Authorization Page |/login.bml |
+|page              |
+|LoginPageUnlogged |
 
 
 
@@ -49,8 +49,8 @@ Meta:
 
 Given unlogged user in Shop
 When user click on the Rename Account Link
-Then user in correct page <page> with URL <URL>
+Then user in correct page <page>
 
 Examples:
-|page               |URL        |
-|Authorization Page |/login.bml |
+|page              |
+|LoginPageUnlogged |

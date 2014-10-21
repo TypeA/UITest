@@ -1,6 +1,7 @@
 package com.livejournal.uitests.registration.comfortable.links_on_the_finith_form;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.UnsuccessfulFinishForm;
@@ -36,30 +37,28 @@ public class LinksOnTheFinithForm extends WebTest {
     }
 
     //Scenario: Links on successfuly finish form (2/3)
-    @When("user click link $page on successfuly Finish Form")
-    public void user_click_link_on_successfuly_Finish_Form(String page) {
-        clickOnSuccessfulLink(page);
+    @When("user click link $link on successfuly Finish Form")
+    public void user_click_link_on_successfuly_Finish_Form(String link) {
+        clickOnSuccessfulLink(link);
     }
 
     //Scenario: Links on unsuccessfuly finish form (2/3)
-    @When("user click link $page on unsuccessfuly Finish Form")
-    public void user_click_link_on_unsuccessfuly_Finish_Form(String page) {
-        clickOnUnuccessfulLink(page);
+    @When("user click link $link on unsuccessfuly Finish Form")
+    public void user_click_link_on_unsuccessfuly_Finish_Form(String link) {
+        clickOnUnuccessfulLink(link);
     }
 
     //Scenario: Links on successfuly finish form (3/3)
     //Scenario: Links on unsuccessfuly finish form (3/3)
-    @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_Page_with_URL(String page, String URL) {
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
-                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+    @Then("user in correct page $page")
+    public void user_in_correct_Page(String page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
     }
 
     @StepGroup
     public void clickOnSuccessfulLink(String link) {
-        switch (SuccessfulFormLinks.valueOf(stringToEnum(link))) {
+        switch (SuccessfulFormLinks.valueOf(link)) {
             case СHANGE_EMAIL:
                 onDisplayed(SuccessfulFinishForm.class)
                         .clickOnChangeEmailLink();
@@ -100,7 +99,7 @@ public class LinksOnTheFinithForm extends WebTest {
 
     @StepGroup
     public void clickOnUnuccessfulLink(String link) {
-        switch (UnsuccessfulFormLinks.valueOf(stringToEnum(link))) {
+        switch (UnsuccessfulFormLinks.valueOf(link)) {
             case MAIN_PAGE:
                 onDisplayed(UnsuccessfulFinishForm.class)
                         .clickOnLjAnonymouslyLink();
@@ -115,10 +114,4 @@ public class LinksOnTheFinithForm extends WebTest {
         }
     }
 
-    private String stringToEnum(String link) {
-        return link.replace(" ", "_")
-                .toUpperCase();
-    }
-
-   
 }

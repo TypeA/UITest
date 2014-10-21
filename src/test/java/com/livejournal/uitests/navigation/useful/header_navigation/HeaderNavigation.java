@@ -1,11 +1,11 @@
 package com.livejournal.uitests.navigation.useful.header_navigation;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -56,11 +56,9 @@ public class HeaderNavigation extends WebTest {
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
     //Scenario: Logged user goes to pages with his username (3/3)
-    @Then("user on correct page $correct_page with URL $URL")
-    public void user_in_correct_Page_with_URL(String correct_page, String URL) {
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(correct_page, URL))
-                .ifElse(VerifyText.errorTextForURL(correct_page, URL, getCurrentUrl()))
+    @Then("user on correct page $page")
+    public void user_in_correct_Page(String page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
     }
 
@@ -91,6 +89,7 @@ public class HeaderNavigation extends WebTest {
     }
 
     private void goToLinkUnlogged(String pageName, HeaderLinksList link) {
+        pageName = "com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged";
         ServicePageUnlogged page = onOpened(ServicePageUnlogged.class, pageName);
         switch (link) {
             case LOGO:
@@ -143,7 +142,8 @@ public class HeaderNavigation extends WebTest {
     }
 
     private void goToLinkLogged(String pageName, HeaderLinksList link) {
-        ServicePageLogged page = onOpened(ServicePageLogged.class, pageName);
+        pageName = "com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged";
+        ServicePageLogged page = open(ServicePageLogged.class, pageName);
         switch (link) {
             case LOGO:
                 page.clickOnLogo();
@@ -151,11 +151,11 @@ public class HeaderNavigation extends WebTest {
             case LJMAGAZINE:
                 page.clickOnLjMagazineMenuItem();
                 break;
-            case FRIENDSGROUP:
+            case MNGGROUP:
                 page.moveMouseOverFriendsFeedMenuItem()
                         .clickOnMngGroups();
                 break;
-            case MNGGROUP:
+            case MNGFRIENDS:
                 page.moveMouseOverFriendsFeedMenuItem()
                         .clickOnMngFriends();
                 break;

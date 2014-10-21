@@ -5,11 +5,11 @@ Meta:
 
 Given unlogged user on Login Form
 When user click link Forgot Password
-Then user in correct page <page> with URL <URL>
+Then user in correct page <page>
 
 Examples:
-|page                   |URL            |
-|Lost Information Page  |/lostinfo.bml  |
+|page          |
+|LostInfoPage  |
 
 
 

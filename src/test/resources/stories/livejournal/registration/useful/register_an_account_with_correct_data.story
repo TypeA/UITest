@@ -4,14 +4,14 @@ Register an account with correct data
 Scenario: User go to registration form
 
 Meta: 
-@categories registration useful serega
+@categories registration useful test
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
-Then user in correct page <page> with URL <URL>
+Then user in correct page <page>
 
 Examples:
-|page                   |URL        |
-|Create Account Page    |/create    |
+|page                 |
+|CreateAccountPage    |
 
 
 

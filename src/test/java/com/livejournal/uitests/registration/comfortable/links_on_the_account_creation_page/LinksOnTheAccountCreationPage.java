@@ -1,8 +1,8 @@
 package com.livejournal.uitests.registration.comfortable.links_on_the_account_creation_page;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -34,11 +34,10 @@ public class LinksOnTheAccountCreationPage extends WebTest {
 
     //Scenario: TOS link(3/3)
     //Scenario: Privacy link(3/3)
-    @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_Page_with_URL(String page, String URL) {
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
-                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl())).finish();
+    @Then("user in correct page $page")
+    public void user_in_correct_Page(String page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
+                .finish();
     }
 
 }

@@ -43,8 +43,6 @@ public class LoginForm extends UIBlock {
         submitButton.click();
     }
 
-
-
     public CreateAccountPage clickOnCreateAccountLink() {
         createAccountLink.click();
         return onOpened(CreateAccountPage.class);

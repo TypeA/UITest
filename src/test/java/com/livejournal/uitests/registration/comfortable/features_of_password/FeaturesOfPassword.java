@@ -1,6 +1,7 @@
 package com.livejournal.uitests.registration.comfortable.features_of_password;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.MappingLink;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
@@ -65,8 +66,8 @@ public class FeaturesOfPassword extends WebTest {
     }
 
     //Scenario: Password description(3/3)
-    @Then("user see Password Bubble which contains text $text and URL $URL (page $page)")
-    public void user_see_Password_Bubble_which_contains_text_and_URL(String text, String URL, String page) {
+    @Then("user see Password Bubble which contains text $text (link $page)")
+    public void user_see_Password_Bubble_which_contains_text_and_URL(String text, String page) {
         onOpened(CreateAccountPage.class).clickOnPasswordField();
         verify().that(onDisplayed(PopupsBlock.class).isDisplayed())
                 .ifResultIsExpected("Popup is displyed")
@@ -76,11 +77,8 @@ public class FeaturesOfPassword extends WebTest {
                 .ifResultIsExpected(VerifyText.okTextForMessage(text))
                 .ifElse(VerifyText.errorTextForMessage(onDisplayed(PopupsBlock.class).getPopupText()))
                 .finish();
-
         onDisplayed(PopupsBlock.class).clickOnLearnMoreLink();
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
-                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
 
     }

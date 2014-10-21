@@ -1,6 +1,7 @@
 package com.livejournal.uitests.authorization.comfortable.features_of_autorization_form;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
@@ -29,11 +30,9 @@ public class FeaturesOfAutorizationForm extends WebTest {
     }
 
     //Scenario: Forgot password(3/3)
-    @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_page_with_URL(String page, String URL) {
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
-                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+    @Then("user in correct page $page")
+    public void user_in_correct_page(String page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
     }
 }

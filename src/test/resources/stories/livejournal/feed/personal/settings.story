@@ -132,9 +132,9 @@ Then  Background image is loaded and displayed
 
 Examples:
 |name   |password   |image      |repeat                 |
-|test   |test       |РєР°СЂС‚РёРЅРєР°   |Horizontal and Vertical|
-|test   |test       |РєР°СЂС‚РёРЅРєР°   |Horizontal             |
-|test   |test       |РєР°СЂС‚РёРЅРєР°   |Vertical               |
+|test   |test       |картинка   |Horizontal and Vertical|
+|test   |test       |картинка   |Horizontal             |
+|test   |test       |картинка   |Vertical               |
 
 
 

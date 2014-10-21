@@ -1,6 +1,7 @@
 package com.livejournal.uitests.registration.useful.register_an_account_with_correct_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
@@ -26,7 +27,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     //Scenario: User go to registration form(1/2)
     @When("user on Main Page clicks on Login Menu and clicks Create New Account")
     public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
-        onOpened(MainPageUnlogged.class)
+        open(MainPageUnlogged.class)
                 .clickOnLoginMenuItem()
                 .clickOnCreateAccountLink();
     }
@@ -46,13 +47,12 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     }
 
     //Scenario: User go to registration form(2/2)
-    @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_page_with_URL(String page, String URL) {
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
-                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+    @Then("user in correct page $page")
+    public void user_in_correct_Page(String page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
     }
+
 
     //Scenario: Successfull registration(3/3)
     @Then("user go to Finish Registration Form and see message $message")

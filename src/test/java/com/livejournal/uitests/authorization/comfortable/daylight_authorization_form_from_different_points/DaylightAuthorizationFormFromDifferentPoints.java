@@ -1,6 +1,7 @@
 package com.livejournal.uitests.authorization.comfortable.daylight_authorization_form_from_different_points;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.ShopPageUnlogged;
@@ -70,11 +71,9 @@ public class DaylightAuthorizationFormFromDifferentPoints extends WebTest {
     //Scenario: From Main Page by Tokens(3/3)
     //Scenario: From Shop by Tokens(3/3)
     //Scenario: From Shop by Rename Account(3/3)
-    @Then("user in correct page $page with URL $URL")
-    public void user_in_correct_page_with_URL(String page, String URL) {
-        verify().that(getCurrentUrl().contains(URL))
-                .ifResultIsExpected(VerifyText.okTextForURL(page, URL))
-                .ifElse(VerifyText.errorTextForURL(page, URL, getCurrentUrl()))
+    @Then("user in correct page $page")
+    public void user_in_correct_page(String page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
     }
 
