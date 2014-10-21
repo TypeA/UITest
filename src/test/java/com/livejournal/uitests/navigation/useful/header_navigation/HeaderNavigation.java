@@ -18,7 +18,6 @@ import org.openqa.selenium.Cookie;
 public class HeaderNavigation extends WebTest {
 
     //Scenario: Navigation for logged user (1/3)
-    //Scenario: Logged user goes to pages with his username(1/3)
     @Given("logged user (name $name, password $password) on Main Page")
     public void logged_user_on_Main_Page(String name, String password) {
         open(LoginPageUnlogged.class);
@@ -48,44 +47,13 @@ public class HeaderNavigation extends WebTest {
         goToLinkUnlogged(page, HeaderLinksList.valueOf(link));
     }
 
-    //Scenario: Logged user goes to pages with his username (2/3)
-   /* @When("user goes from page $page using link $link that contains his name $name")
-     public void user_goes_from_page_using_link_that_contains_is_name(String page, String link, String name) {
-     goToLinkWithName(page, HeaderLinksList.valueOf(link), name);
-     }*/
+
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
-    //Scenario: Logged user goes to pages with his username (3/3)
     @Then("user on correct page $page")
     public void user_in_correct_Page(String page) {
         verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
-    }
-
-    private void goToLinkWithName(String pageName, HeaderLinksList link, String name) {
-        ServicePageLogged page = onOpened(ServicePageLogged.class, pageName);
-        switch (link) {
-            case JOURNAL:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnAuthotizedAs();
-                //    on(MyJournalPage.class, new Url().setPrefix(name + "."));
-                break;
-            case PROFILE:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnProfile();
-                //  on(ProfilePage.class, new Url().setPrefix(name + "."));
-                break;
-            case ALBUM:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnScrapbook();
-                // on(ScrapBookMainPage.class, new Url().setPrefix(name + "."));
-                break;
-            case FEED:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnFriendsFeed();
-                // on(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
-                break;
-        }
     }
 
     private void goToLinkUnlogged(String pageName, HeaderLinksList link) {
