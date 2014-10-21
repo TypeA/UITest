@@ -50,15 +50,14 @@ public class HeaderNavigation extends WebTest {
 
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
-    @Then("user on correct page $page")
-    public void user_in_correct_Page(String page) {
-        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
+    @Then("user on correct page $correct_page")
+    public void user_in_correct_Page(String correct_page) {
+        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(correct_page))
                 .finish();
     }
 
     private void goToLinkUnlogged(String pageName, HeaderLinksList link) {
-        pageName = "com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged";
-        ServicePageUnlogged page = onOpened(ServicePageUnlogged.class, pageName);
+        ServicePageUnlogged page = open((Class<ServicePageUnlogged>) this.getPageClassByName(pageName));
         switch (link) {
             case LOGO:
                 page.clickOnLogo();
@@ -110,8 +109,7 @@ public class HeaderNavigation extends WebTest {
     }
 
     private void goToLinkLogged(String pageName, HeaderLinksList link) {
-        pageName = "com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged";
-        ServicePageLogged page = open(ServicePageLogged.class, pageName);
+        ServicePageLogged page = open((Class<ServicePageLogged>) this.getPageClassByName(pageName));
         switch (link) {
             case LOGO:
                 page.clickOnLogo();
