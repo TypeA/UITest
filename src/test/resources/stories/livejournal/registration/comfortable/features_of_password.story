@@ -23,9 +23,9 @@ Scenario: Password description
 Meta: 
 @categories registration comfortable
 
-Given unlogged user on Registration Form
-When user enter password <password> 
-Then user see Password Bubble which contains text <text> (link <page>)
+Given unlogged user on Registration Form 1
+When user enter password <password>  1
+Then user see Password Bubble which contains text <text> (link <page>) 1
 
 Examples:
 |password   |text                   |page                   |
