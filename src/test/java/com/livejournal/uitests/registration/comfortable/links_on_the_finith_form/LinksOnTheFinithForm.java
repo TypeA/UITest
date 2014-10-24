@@ -13,6 +13,7 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
+import org.openqa.selenium.Cookie;
 
 /**
  *
@@ -26,6 +27,7 @@ public class LinksOnTheFinithForm extends WebTest {
     public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
         open(CreateAccountPage.class);
         getCurrentBrowser().deleteCookies();
+        getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
         open(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,

@@ -20,9 +20,9 @@ Scenario: Privacy link
 Meta: 
 @categories registration comfortable
 
-Given unlogged user on Registration Form
-When user click Privacy Link
-Then user in correct page <page>
+Given unlogged user on Registration Form 
+When user click Privacy Link 
+Then user in correct page <page> 
 
 Examples:
 |page                       |

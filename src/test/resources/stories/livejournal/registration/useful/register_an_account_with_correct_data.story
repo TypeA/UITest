@@ -1,6 +1,5 @@
 Register an account with correct data
 
-
 Scenario: User go to registration form
 
 Meta: 
