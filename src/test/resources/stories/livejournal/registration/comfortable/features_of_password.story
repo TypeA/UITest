@@ -3,7 +3,7 @@ Features of password
 Scenario: Displays password
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable test
 
 Given unlogged user on Registration Form
 When user enter password <password>
@@ -19,7 +19,7 @@ Examples:
 Scenario: Password description
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable test
 
 Given unlogged user on Registration Form
 When user enter password <password>
