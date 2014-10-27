@@ -48,6 +48,7 @@ public class Settings extends WebTest {
     }
 
     //Scenario: Restore default settings (1/3)
+    //Scenario: Scenario: Save settings after user logged out (1/3)
     @Given("logged user (name $name, password $password) with own settings on Friends Feed")
     public void logged_user_with_own_settings_on_Friends_Feed(String name, String password) {
         open(LoginPageUnlogged.class)
@@ -438,6 +439,16 @@ public class Settings extends WebTest {
     }
 
     private void setRandomSettings() {
+        Integer text_size = new RandomeValue(26).get() + 10;
+        String paging_type;
+        String text_font;
+        if (new RandomeValue(20).get() > 1) {
+            paging_type = "PAGES";
+            text_font = "Arial";
+        } else {
+            paging_type = "ENDLESS";
+            text_font = "ProximaNovaRegular";
+        }
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.BACKGROUND_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
@@ -451,6 +462,9 @@ public class Settings extends WebTest {
                 .setColor(ColorSettings.SIDEBAR_BACKGROUND, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
                 .setColor(ColorSettings.SIDEBAR_TEXT_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
                 .setColor(ColorSettings.VISITED_LINK, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setTextSettings(text_size.toString(), text_font)
+                .setPaging(paging_type)
+                .setSize(new RandomeValue(20).get().toString())
                 .saveSettings();
     }
 }

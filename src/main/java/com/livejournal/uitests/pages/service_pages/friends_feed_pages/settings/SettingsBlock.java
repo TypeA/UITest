@@ -106,7 +106,6 @@ public class SettingsBlock extends UIBlock {
     public SettingsBlock setTextSettings(String size, String font) {
         textSize.selectByValue(size);
         textFont.selectByValue(font);
-        System.out.println("++++ ok: " + size + ", " + font + "\nset: " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')") + ", " + startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')"));
         return this;
     }
 

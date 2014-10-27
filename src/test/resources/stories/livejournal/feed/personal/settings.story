@@ -9,7 +9,7 @@ Then the Title is changed on correct title <correct_title>
 Examples:
 |name   |password   |title      |correct_title   |
 |test   |test       |new_title  |NEW_TITLE       |
-|test   |test       |           |ЛЕНТА           |
+|test   |test       |           |Р›Р•РќРўРђ           |
 
 
 Scenario: Change Title
@@ -126,15 +126,15 @@ Meta:
 @categories feed personal
 
 
-Given logged user (name <name>, password <password>) on Friends Feed 1
+Given logged user (name <name>, password <password>) on Friends Feed
 When user load Background image <image> and set repeat <repeat> in Settings and save it
 Then  Background image is loaded and displayed
 
 Examples:
 |name   |password   |image      |repeat                 |
-|test   |test       |картинка   |Horizontal and Vertical|
-|test   |test       |картинка   |Horizontal             |
-|test   |test       |картинка   |Vertical               |
+|test   |test       |РєР°СЂС‚РёРЅРєР°   |Horizontal and Vertical|
+|test   |test       |РєР°СЂС‚РёРЅРєР°   |Horizontal             |
+|test   |test       |РєР°СЂС‚РёРЅРєР°   |Vertical               |
 
 
 
@@ -238,3 +238,16 @@ Examples:
 |name   |password   |
 |test   |test       |
 
+
+
+Scenario: Save settings after user logged out
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>, password <password>) with own settings on Friends Feed
+When user logged out and logged in again
+Then user's settings is applied
+
+Examples:
+|name   |password   |
+|test   |test       |

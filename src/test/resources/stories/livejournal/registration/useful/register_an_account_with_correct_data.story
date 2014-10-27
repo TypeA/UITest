@@ -3,7 +3,7 @@ Register an account with correct data
 Scenario: User go to registration form
 
 Meta: 
-@categories registration useful test
+@categories registration useful
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
 Then user in correct page <page>
@@ -17,7 +17,7 @@ Examples:
 Scenario: Successfull registration
 
 Meta: 
-@categories registration useful
+@categories registration useful test
 
 Given unlogged user on Registration Form
 When user enter correct data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
