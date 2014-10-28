@@ -32,6 +32,7 @@ public class Sidebar extends WebTest {
     //Scenario: Up Button on widget (1/3)
     //Scenario: Down Button (1/3)
     //Scenario: Up and Down Buttons (1/3)
+    //Scenario: Saving a layout of widgets (1/3)
     @Given("logged user (name $name, password $password) with complete set of widgets in sidebar on Friends Feed")
     public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name, String password) {
         open(LoginPageUnlogged.class)
@@ -106,6 +107,17 @@ public class Sidebar extends WebTest {
                 .moveMouseOnWidget(widget);
     }
 
+    //Scenario: Saving a layout of widgets (2/3)
+    @When("user logged out and logged in again (name $name, password $password)")
+    public void user_logged_out_and_logged_in_again(String name, String password) {
+        ThucydidesUtils.putToSession("all_widgets", compositionOfWidgets());
+        onOpened(FriendsFeedLogged.class)
+                .moveMouseOverMyJournalMenuItem()
+                .clickOnLogOut()
+                .clickOnLoginMenuItem()
+                .authorizeBy(name, password);
+    }
+
     //Scenario: Add widget (3/3)
     @Then("widget $widget added in sidebar")
     public void widget_added_in_sidebar(String widget) {
@@ -151,6 +163,7 @@ public class Sidebar extends WebTest {
                 .finish();
     }
 
+    //Scenario: Up and Down Buttons on widget (3/3)
     @Then("Up and Down Buttons are displayed")
     public void Up_and_Down_Buttons_are_displayed() {
         String widget = ThucydidesUtils.getFromSession("widget").toString();
@@ -161,6 +174,16 @@ public class Sidebar extends WebTest {
                 .that(onOpened(FriendsFeedLogged.class).buttonDownDisplaying(widget))
                 .ifResultIsExpected("Down button is displayed")
                 .ifElse("Down button is not displayed")
+                .finish();
+    }
+
+    //Scenario: Saving a layout of widgets (3/3)
+    @Then("user's layout of widgets is applied")
+    public void user_layout_of_widgets_is_applied() {
+        ArrayList<String> old_widgets = (ArrayList<String>) ThucydidesUtils.getFromSession("all_widgets");
+        verify().that(compositionOfWidgets().equals(old_widgets))
+                .ifResultIsExpected("User's layout of widgets is applied")
+                .ifElse("User's layout of widgets is not applied!")
                 .finish();
     }
 
@@ -204,7 +227,7 @@ public class Sidebar extends WebTest {
         return widget;
     }
 
-    private String correctWidget(String text) {
+    private ArrayList<String> allWidgets() {
         ArrayList<String> widgets = new ArrayList<>();
         widgets.add("Twitter Feed");
         widgets.add("Facebook Feed");
@@ -218,7 +241,11 @@ public class Sidebar extends WebTest {
         widgets.add("Comments");
         widgets.add("Guests");
         widgets.add("Entries");
+        return widgets;
+    }
 
+    private String correctWidget(String text) {
+        ArrayList<String> widgets = allWidgets();
         String widget = "";
         for (String value : widgets) {
             if (text.contains(value)) {
@@ -226,6 +253,21 @@ public class Sidebar extends WebTest {
             }
         }
         return widget;
+    }
+
+    private ArrayList<String> compositionOfWidgets() {
+        ArrayList<String> widgets = allWidgets();
+        ArrayList<String> correct_widgets = new ArrayList<>();
+        Integer size = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
+        for (int i = 0; i < size; i++) {
+            for (String value : widgets) {
+                String text = startScript("return jQuery('div[ng-switch-when]')[" + i + "].textContent").toString();
+                if (text.contains(value)) {
+                    correct_widgets.add(value);
+                }
+            }
+        }
+        return correct_widgets;
     }
 
 }

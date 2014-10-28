@@ -245,8 +245,8 @@ Meta:
 @categories feed personal
 
 Given logged user (name <name>, password <password>) with own settings on Friends Feed
-When user logged out and logged in again
-Then user's settings is applied
+When user logged out and logged in again (name <name>, password <password>)
+Then user's settings are applied
 
 Examples:
 |name   |password   |

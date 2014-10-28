@@ -196,6 +196,17 @@ public class Settings extends WebTest {
                 .restoreDefaultSettings();
     }
 
+    //Scenario: Save settings after user logged out (2/3)
+    @When("user logged out and logged in again (name $name, password $password)")
+    public void user_logged_out_and_logged_in_again(String name, String password) {
+        ThucydidesUtils.putToSession("all_settings", rememberSettings());
+        onOpened(FriendsFeedLogged.class)
+                .moveMouseOverMyJournalMenuItem()
+                .clickOnLogOut()
+                .clickOnLoginMenuItem()
+                .authorizeBy(name, password);
+    }
+
     //Scenario: New Title(3/3)
     //Scenario: Change Title(3/3)
     @Then("the Title is changed on correct title $correct_title")
@@ -297,6 +308,16 @@ public class Settings extends WebTest {
                 .ifElse("Default settings are not set!")
                 .finish();
 
+    }
+
+    //Scenario: Save settings after user logged out (3/3)
+    @Then("user's settings are applied")
+    public void users_settings_are_applied() {
+        ArrayList<String> old_settings = (ArrayList<String>) ThucydidesUtils.getFromSession("all_settings");
+        verify().that(rememberSettings().containsAll(old_settings))
+                .ifResultIsExpected("User's settings are applied")
+                .ifElse("User's settings are not applied!")
+                .finish();
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -420,6 +441,12 @@ public class Settings extends WebTest {
             colors.add(a);
         }
         return colors;
+    }
+
+    private ArrayList<String> rememberSettings() {
+        ArrayList<String> settings = rememberColors();
+        settings.add(getTextParametrs(TextParametrs.FONT) + ", " + getTextParametrs(TextParametrs.SIZE));
+        return settings;
     }
 
     private ArrayList<String> defaultSettings() {

@@ -91,6 +91,18 @@ Examples:
 
 
 
+Scenario: Saving a layout of widgets
+Meta: 
+@categories feed personal test
+
+
+Given logged user (name <name>, password <password>) with complete set of widgets in sidebar on Friends Feed
+When user logged out and logged in again (name <name>, password <password>)
+Then user's layout of widgets is applied
+
+Examples:
+|name   |password   |
+|test   |test       |
 
 
 

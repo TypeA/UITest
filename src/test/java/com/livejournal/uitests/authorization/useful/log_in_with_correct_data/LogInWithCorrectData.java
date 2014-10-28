@@ -17,7 +17,6 @@ public class LogInWithCorrectData extends WebTest {
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
         open(LoginPageUnlogged.class);
-
     }
 
     //Scenario: Successfully autorization(2/3)
