@@ -1,4 +1,4 @@
-Scenario: Change the position of the group
+Scenario: Change the position of the group 1
 Meta: 
 @categories feed personal
 
