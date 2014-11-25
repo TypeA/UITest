@@ -93,7 +93,7 @@ Examples:
 
 Scenario: Saving a layout of widgets
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 
 Given logged user (name <name>, password <password>) with complete set of widgets in sidebar on Friends Feed

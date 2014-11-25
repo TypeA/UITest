@@ -10,5 +10,5 @@ Then user logged in
 
 Examples:
 |name           |password   |
-|test765765     |test       |
+|test7677ttteee |test       |
 

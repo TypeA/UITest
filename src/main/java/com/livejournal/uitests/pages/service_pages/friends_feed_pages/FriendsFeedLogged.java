@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.filters.FiltersBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
@@ -16,8 +17,6 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  *
  * @author m.prytkova
  */
-
-
 @DefaultUrl("/feed")
 public class FriendsFeedLogged extends ServicePageLogged {
 
@@ -96,10 +95,14 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = ".b-feedwidgets-item .b-feedwidgets-close")
     private Button widgetCloseButton;
 
+    ////////////////BLOCKS
+    @FindBy(css = ".l-flatslide-menu-items")
+    private UIElement filtersBlock;
+
     /////////////////////////////////////
     @StepGroup
 
-    public SettingsBlock openSettings(){
+    public SettingsBlock openSettings() {
         settingsButton.click();
         return onDisplayed(SettingsBlock.class);
     }
@@ -295,6 +298,17 @@ public class FriendsFeedLogged extends ServicePageLogged {
                 + " }});"
                 + "return jQuery('.b-feedwidgets-move-down').slice(i,i+1).css('visibility')=='visible'";
         return Boolean.valueOf(startScript(script).toString());
+    }
+
+    @StepGroup
+    public FiltersBlock openFilters() {
+        filtersButton.click();
+        return onDisplayed(FiltersBlock.class);
+    }
+    
+        @StepGroup
+    public boolean filtersDisplaying() {
+        return filtersBlock.isDisplayed();
     }
 
     public void addAllWidgets() {

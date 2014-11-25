@@ -9,7 +9,7 @@ Then the Title is changed on correct title <correct_title>
 Examples:
 |name   |password   |title      |correct_title   |
 |test   |test       |new_title  |NEW_TITLE       |
-|test   |test       |           |Р›Р•РќРўРђ           |
+|test   |test       |           |ЛЕНТА           |
 
 
 Scenario: Change Title

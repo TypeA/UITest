@@ -6,7 +6,7 @@ import net.thucydides.core.annotations.DefaultUrl;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("/friends/editgroups.bml/")
+ */@DefaultUrl("/friends/editgroups.bml")
 public class ManageGroupsPage extends ServicePageLogged{
     
 }
