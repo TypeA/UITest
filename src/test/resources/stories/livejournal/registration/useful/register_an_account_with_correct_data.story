@@ -1,6 +1,6 @@
 Register an account with correct data
 
-Scenario: User go to registration form
+Scenario: User go to registration form 
 
 Meta: 
 @categories registration useful

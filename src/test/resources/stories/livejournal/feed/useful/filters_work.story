@@ -3,7 +3,7 @@ Meta:
 @categories feed useful
 
 Given user, which exists friends posts on the feed
-When logged user (name <name>, password <password>) go to his Friends Feed
+When logged user (name <name>, password <password>) go to his Friends Feed and set All friends filter
 When user set All friends filter
 Then necessary posts displayed on the feed
 
