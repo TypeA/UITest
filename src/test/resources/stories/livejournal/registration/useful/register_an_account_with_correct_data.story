@@ -3,7 +3,7 @@ Register an account with correct data
 Scenario: User go to registration form 
 
 Meta: 
-@categories registration useful
+@categories registration useful blabla
 
 When user on Main Page clicks on Login Menu and clicks Create New Account 
 Then user in correct page <page>

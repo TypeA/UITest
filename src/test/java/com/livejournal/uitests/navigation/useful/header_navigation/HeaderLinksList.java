@@ -8,7 +8,8 @@ package com.livejournal.uitests.navigation.useful.header_navigation;
 public enum HeaderLinksList {
     
    LOGO, 
-   LJMAGAZINE, 
+   LJMAGAZINE,
+   BROWSE,
    FEED, 
    MNGFRIENDS, 
    MNGGROUP, 

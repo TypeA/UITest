@@ -33,6 +33,11 @@ public class ServicePageUnlogged extends ServicePage {
     }
 
     @StepGroup
+    public void clickOnbrowseMenuItem() {
+        getFullscreenHeader().clickOnbrowseMenuItem();
+    }
+
+    @StepGroup
     public LoginForm clickOnLoginMenuItem() {
         return getFullscreenHeader().clickOnLoginMenuItem();
     }

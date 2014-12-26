@@ -24,6 +24,9 @@ public class FullscreenHeader extends UIBlock {
 
     @FindBy(css = ".s-nav-rootlink-discovery")
     protected Link ljMagazineMenuItem;
+    
+    @FindBy(css = ".s-nav-rootlink-browse")
+    protected Link browseMenuItem;
 
     @FindBy(css = ".s-nav-item-shop")
     protected Link shopMenuItem;
@@ -34,19 +37,10 @@ public class FullscreenHeader extends UIBlock {
     @FindBy(css = ".s-nav-rootlink.s-nav-rootlink-support")
     private Link feedbackMenuItem;
 
-    @FindBy(css = ".s-do-item-search")
-    private Link searchMenuItem;
-
-
     @StepGroup
     public FeedbackMenu clickOnFeedbackMenuItem() {
         feedbackMenuItem.click();
         return onDisplayed(FeedbackMenu.class);
     }
 
-    @StepGroup
-    public SearchMenu clickOnSearchMenuItem() {
-        searchMenuItem.click();
-        return onDisplayed(SearchMenu.class);
-    }
 }

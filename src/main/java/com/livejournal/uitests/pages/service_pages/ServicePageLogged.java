@@ -35,6 +35,10 @@ public class ServicePageLogged extends ServicePage {
         getFullscreenHeader().clickOnLjMagazineMenuItem();
     }
 
+    public void clickOnbrowseMenuItem() {
+        getFullscreenHeader().clickOnbrowseMenuItem();
+    }
+
     @StepGroup
     public FriendsFeedMenu moveMouseOverFriendsFeedMenuItem() {
         return getFullscreenHeader().moveMouseOverFriendsFeedMenuItem();
