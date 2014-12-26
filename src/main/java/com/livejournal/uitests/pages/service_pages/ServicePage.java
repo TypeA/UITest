@@ -17,15 +17,9 @@ public abstract class ServicePage extends LJPage {
 
     public abstract FullscreenHeader getFullscreenHeader();
 
-
     @StepGroup
     public FeedbackMenu moveMouseOverFeedbackMenuItem() {
         return getFullscreenHeader().clickOnFeedbackMenuItem();
     }
 
-    @StepGroup
-    public SearchMenu clickOnSearchMenuItem() {
-        return getFullscreenHeader().clickOnSearchMenuItem();
-
-    }
 }

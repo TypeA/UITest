@@ -1,47 +1,48 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful
+@categories navigation useful testrun
 
 Given logged user (name <name>, password <password>) on Main Page
 When user goes from page <page> using link <link>
 Then user on correct page <correct_page>
 
 Examples:
-|name       |password     |link           |correct_page                   |page          |
-|test765765 |test         |LOGO           |MainPageLogged                 |MainPageLogged|
-|test765765 |test         |LJMAGAZINE     |LJMagazinePageLogged           |MainPageLogged|
-|test765765 |test         |FEED           |FriendsFeedLogged              |MainPageLogged|
-|test765765 |test         |MNGGROUP       |ManageGroupsPage               |MainPageLogged|
-|test765765 |test         |MNGFRIENDS     |ManageFriendsPage              |MainPageLogged|
-|test765765 |test         |MNGCOMMUNITIES |ManageCommunitiesPage          |MainPageLogged|
-|test765765 |test         |BANNEDUSERS    |BannedUsersPage                |MainPageLogged|
-|test765765 |test         |SHOP           |ShopPageLogged                 |MainPageLogged|
-|test765765 |test         |PAID           |PaidAccountPageLogged          |MainPageLogged|
-|test765765 |test         |PROMO          |PromoPageLogged                |MainPageLogged|
-|test765765 |test         |HISTORY        |OrderHistoryLoggedPage         |MainPageLogged|
-|test765765 |test         |TOKENS         |TokensPageLogged               |MainPageLogged|
-|test765765 |test         |HELP           |SupportMainPageLogged          |MainPageLogged|
-|test765765 |test         |ABOUT          |AboutMainPageLogged            |MainPageLogged|
-|test765765 |test         |FAQ            |FaqMainPageLogged              |MainPageLogged|
-|test765765 |test         |TOS            |TosRusPageLogged               |MainPageLogged|
-|test765765 |test         |PRIVACY        |PrivacyRusPageLogged           |MainPageLogged|
-|test765765 |test         |DMCA           |DMCAPageLogged                 |MainPageLogged|
-|test765765 |test         |JOURNAL        |MyJournalPage                  |MainPageLogged|
-|test765765 |test         |PROFILE        |ProfilePage                    |MainPageLogged|
-|test765765 |test         |NEWENTRYINMENU |UpdateBmlPageLogged            |MainPageLogged|
-|test765765 |test         |EDITPROFILE    |EditProfilePage                |MainPageLogged|
-|test765765 |test         |MANAGEUSERPICS |EditPicsPage                   |MainPageLogged|
-|test765765 |test         |MESSAGESINMENU |InboxMainPage                  |MainPageLogged|
-|test765765 |test         |SHEDULED       |SheduledEntriesPage            |MainPageLogged|
-|test765765 |test         |RECENTCOMMENTS |RecentCommentsPage             |MainPageLogged|
-|test765765 |test         |ALBUM          |ScrapBookMainPage              |MainPageLogged|
-|test765765 |test         |STATISTICS     |StatisticsMainPage             |MainPageLogged|
-|test765765 |test         |TAGS           |TagsPage                       |MainPageLogged|
-|test765765 |test         |MEMORIES       |MemoriesPage                   |MainPageLogged|
-|test765765 |test         |JOURNALSTYLE   |CustomizeJournalPage           |MainPageLogged|
-|test765765 |test         |SETTINGS       |SettingsMainPage               |MainPageLogged|
-|test765765 |test         |LOGOUT         |ServicePageLogged              |MainPageLogged|
+|name           |password       |link           |correct_page                   |page          |
+|cyr_test_cyr   |cyr_test_cyr   |LOGO           |MainPageLogged                 |MainPageLogged|
+|ncyr_test_ncyr |ncyr_test_ncyr |BROWSE         |BrowseMainPageLogged           |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |LJMAGAZINE     |LJMagazinePageLogged           |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |FEED           |FriendsFeedLogged              |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |MNGGROUP       |ManageGroupsPage               |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |MNGFRIENDS     |ManageFriendsPage              |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |MNGCOMMUNITIES |ManageCommunitiesPage          |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |BANNEDUSERS    |BannedUsersPage                |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |SHOP           |ShopPageLogged                 |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |PAID           |PaidAccountPageLogged          |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |PROMO          |PromoPageLogged                |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |HISTORY        |OrderHistoryLoggedPage         |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |TOKENS         |TokensPageLogged               |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |HELP           |SupportMainPageLogged          |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |ABOUT          |AboutMainPageLogged            |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |FAQ            |FaqMainPageLogged              |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |TOS            |TosRusPageLogged               |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |PRIVACY        |PrivacyRusPageLogged           |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |DMCA           |DMCAPageLogged                 |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |JOURNAL        |MyJournalPage                  |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |PROFILE        |ProfilePage                    |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |NEWENTRYINMENU |UpdateBmlPageLogged            |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |EDITPROFILE    |EditProfilePage                |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |MANAGEUSERPICS |EditPicsPage                   |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |MESSAGESINMENU |InboxMainPage                  |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |SHEDULED       |SheduledEntriesPage            |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |RECENTCOMMENTS |RecentCommentsPage             |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |ALBUM          |ScrapBookMainPage              |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |STATISTICS     |StatisticsMainPage             |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |TAGS           |TagsPage                       |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |MEMORIES       |MemoriesPage                   |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |JOURNALSTYLE   |CustomizeJournalPage           |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |SETTINGS       |SettingsMainPage               |MainPageLogged|
+|cyr_test_cyr   |cyr_test_cyr   |LOGOUT         |ServicePageLogged              |MainPageLogged|
 
 
 
@@ -50,24 +51,25 @@ Examples:
 Scenario: Navigation for unlogged user
 
 Meta: 
-@categories navigation useful
+@categories navigation useful testrun
 
-Given unlogged user on Main Page
+Given unlogged user from region <region> on Main Page
 When unlogged user goes from page <page> using link <link>
 Then user on correct page <correct_page>
 
 Examples:
-|link           |correct_page            |page            |
-|LOGO           |MainPageUnlogged        |MainPageUnlogged|
-|LJMAGAZINE     |LJMagazinePageUnlogged  |MainPageUnlogged|
-|SHOP           |ShopPageUnlogged        |MainPageUnlogged|
-|PAID           |PaidAccountPageUnlogged |MainPageUnlogged|
-|PROMO          |PromoPageUnlogged       |MainPageUnlogged|
-|TOKENS         |LoginPageUnlogged       |MainPageUnlogged|
-|HELP           |SupportMainPageUnlogged |MainPageUnlogged|
-|ABOUT          |AboutMainPageUnlogged   |MainPageUnlogged|
-|FAQ            |FaqMainPageUnlogged     |MainPageUnlogged|
-|TOS            |TosRusPageUnlogged      |MainPageUnlogged|
-|PRIVACY        |PrivacyRusPageUnlogged  |MainPageUnlogged|
-|DMCA           |DMCAPageUnlogged        |MainPageUnlogged|
+|link           |region |correct_page            |page            |
+|LOGO           |cyr    |MainPageUnlogged        |MainPageUnlogged|
+|BROWSE         |noncyr |BrowseMainPageUnlogged  |MainPageUnlogged|
+|LJMAGAZINE     |cyr    |LJMagazinePageUnlogged  |MainPageUnlogged|
+|SHOP           |cyr    |ShopPageUnlogged        |MainPageUnlogged|
+|PAID           |cyr    |PaidAccountPageUnlogged |MainPageUnlogged|
+|PROMO          |cyr    |PromoPageUnlogged       |MainPageUnlogged|
+|TOKENS         |cyr    |LoginPageUnlogged       |MainPageUnlogged|
+|HELP           |cyr    |SupportMainPageUnlogged |MainPageUnlogged|
+|ABOUT          |cyr    |AboutMainPageUnlogged   |MainPageUnlogged|
+|FAQ            |cyr    |FaqMainPageUnlogged     |MainPageUnlogged|
+|TOS            |cyr    |TosRusPageUnlogged      |MainPageUnlogged|
+|PRIVACY        |cyr    |PrivacyRusPageUnlogged  |MainPageUnlogged|
+|DMCA           |cyr    |DMCAPageUnlogged        |MainPageUnlogged|
 

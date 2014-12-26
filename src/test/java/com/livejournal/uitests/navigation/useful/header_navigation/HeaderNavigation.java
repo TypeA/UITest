@@ -27,11 +27,13 @@ public class HeaderNavigation extends WebTest {
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
-    @Given("unlogged user on Main Page")
-    public void unlogged_user_on_Main_Page() {
+    @Given("unlogged user from region $region on Main Page")
+    public void unlogged_user_from_region_on_Main_Page(String region) {
         open(LoginPageUnlogged.class);
-        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
-        this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
+        if (region.equals("cyr")) {
+            this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
+            this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
+        }         
         open(MainPageUnlogged.class);
     }
 
@@ -46,7 +48,6 @@ public class HeaderNavigation extends WebTest {
     public void unlogged_user_goes_from_page_using_link(String page, String link) {
         goToLinkUnlogged(page, HeaderLinksList.valueOf(link));
     }
-
 
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
@@ -64,6 +65,9 @@ public class HeaderNavigation extends WebTest {
                 break;
             case LJMAGAZINE:
                 page.clickOnLjMagazineMenuItem();
+                break;
+            case BROWSE:
+                page.clickOnbrowseMenuItem();
                 break;
             case SHOP:
                 page.moveMouseOverShopMenuItem()
@@ -116,6 +120,9 @@ public class HeaderNavigation extends WebTest {
                 break;
             case LJMAGAZINE:
                 page.clickOnLjMagazineMenuItem();
+                break;
+            case BROWSE:
+                page.clickOnbrowseMenuItem();
                 break;
             case MNGGROUP:
                 page.moveMouseOverFriendsFeedMenuItem()
