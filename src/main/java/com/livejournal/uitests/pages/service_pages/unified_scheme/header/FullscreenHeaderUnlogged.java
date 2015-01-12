@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.browse.BrowseMainPageUnlogged;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
+import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.search.SearchPageUnlogged;
@@ -31,6 +32,9 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
 
     @FindBy(css = ".s-inline-search-input")
     public TextField searchMenuItem;
+
+    @FindBy(css = ".s-nav-item-signup")
+    public TextField signupMenuItem;
 
     @StepGroup
     public MainPageUnlogged clickOnLogo() {
@@ -78,5 +82,11 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
         searchMenuItem.enter(text);
         sendKeys(Keys.ENTER);
         return onOpened(SearchPageUnlogged.class);
+    }
+
+    @StepGroup
+    public CreateAccountPage clicOnkSignUpMenuItem() {
+        signupMenuItem.click();
+        return onOpened(CreateAccountPage.class);
     }
 }

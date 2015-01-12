@@ -109,6 +109,9 @@ public class HeaderNavigation extends WebTest {
                 page.moveMouseOverHelpMenuItem()
                         .clickOnDmca();
                 break;
+            case REGISTRATION:
+                page.clicOnkSignUpMenuItem();
+                break;
         }
     }
 
