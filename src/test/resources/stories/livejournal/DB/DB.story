@@ -1,4 +1,4 @@
-Scenario: Navigation for logged user 2
+Scenario: Navigation for logged user
 
 Meta: 
 @categories DB
