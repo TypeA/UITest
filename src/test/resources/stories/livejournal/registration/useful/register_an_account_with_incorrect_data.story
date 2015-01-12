@@ -6,6 +6,7 @@ Scenario: Register an account with incorrect name
 
 Meta: 
 @categories registration useful 
+@issue LJSUP-19183
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
