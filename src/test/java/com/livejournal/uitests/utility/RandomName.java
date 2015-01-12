@@ -18,8 +18,7 @@ public class RandomName {
 
     public String get() {
         return name
-                .replace("rnd", "" + random.nextInt(2000000))
-                .replace("rnd", "" + random.nextInt(9000000));
+                .replace("rnd", "" + random.nextInt(900000000));
     }
 
 }

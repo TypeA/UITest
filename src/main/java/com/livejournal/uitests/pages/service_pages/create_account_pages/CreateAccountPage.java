@@ -77,6 +77,11 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
+    public Integer getNOSinName() {
+        return userNameField.getText().length();
+    }
+
+    @StepGroup
     public PopupsBlock clickOnEmailField() {
         emailField.type("");
         return onDisplayed(PopupsBlock.class);

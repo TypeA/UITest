@@ -48,7 +48,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     //Scenario: Register an account with incorrect age(2/3)
     @When("user enter correct data except for the age: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
-    public void user_enter_correct_data_except_for_the_age(String name, String email, String password, String day, String month, String year, String gender){
+    public void user_enter_correct_data_except_for_the_age(String name, String email, String password, String day, String month, String year, String gender) {
         onOpened(CreateAccountPage.class)
                 .createAccountData(new RandomName(name).get(),
                         email,
@@ -129,6 +129,14 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
                 .ifResultIsExpected("Create account Button is disabled")
                 .ifElse("Button is enabled!")
                 .finish();
+
+    }
+
+    @Then("there is $symbols symbols in name field")
+    public void there_is_symbols_in_name_field(String symbols) {
+        verify().that(onOpened(CreateAccountPage.class).getNOSinName().equals(Integer.parseInt(symbols)))
+                .ifResultIsExpected("The number of symbolsame in name is correct")
+                .ifElse("The number of symbolsame in name is incorrect!");
 
     }
 
