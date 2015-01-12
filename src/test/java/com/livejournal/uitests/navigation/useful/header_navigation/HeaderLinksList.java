@@ -40,6 +40,7 @@ public enum HeaderLinksList {
    MEMORIES,
    JOURNALSTYLE,
    SETTINGS,
-   LOGOUT; 
+   LOGOUT,
+   REGISTRATION; 
     
 }
