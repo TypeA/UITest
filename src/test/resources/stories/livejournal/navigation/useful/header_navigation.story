@@ -1,7 +1,7 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful testrun
+@categories navigation useful 
 
 Given logged user (name <name>, password <password>) on Main Page
 When user goes from page <page> using link <link>
@@ -51,7 +51,7 @@ Examples:
 Scenario: Navigation for unlogged user
 
 Meta: 
-@categories navigation useful testrun
+@categories navigation useful 
 
 Given unlogged user from region <region> on Main Page
 When unlogged user goes from page <page> using link <link>

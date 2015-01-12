@@ -1,29 +1,15 @@
-Links on the account creation page
-
-Scenario: TOS link
+Scenario: Links on the account creation page
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable test
 
 Given unlogged user on Registration Form
-When user click TOS Link
+When user click link <link>
 Then user in correct page <page>
 
 Examples:
-|page                 |
-|TosRusPageUnlogged   |
+|page                       |link   |
+|TosRusPageUnlogged         |TOS    |
+|PrivacyRusPageUnlogged     |Privacy|
 
 
-
-Scenario: Privacy link
-
-Meta: 
-@categories registration comfortable
-
-Given unlogged user on Registration Form 
-When user click Privacy Link 
-Then user in correct page <page> 
-
-Examples:
-|page                       |
-|PrivacyRusPageUnlogged     |

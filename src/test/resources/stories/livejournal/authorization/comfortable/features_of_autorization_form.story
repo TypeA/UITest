@@ -25,4 +25,4 @@ Then can not authenticate during 60 days
 
 Examples:
 |name           |password   |
-|test7677ttteee |test       |
+|testautotest   |test       |

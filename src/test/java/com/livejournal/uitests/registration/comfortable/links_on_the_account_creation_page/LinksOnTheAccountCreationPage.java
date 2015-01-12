@@ -6,6 +6,7 @@ import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAc
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 
 /**
  *
@@ -21,15 +22,9 @@ public class LinksOnTheAccountCreationPage extends WebTest {
     }
 
     //Scenario: TOS link(2/3)
-    @When("user click TOS Link")
-    public void user_click_TOS_Link() {
-        onOpened(CreateAccountPage.class).clickOnTOSLink();
-    }
-
-    //Scenario: Privacy link(2/3)
-    @When("user click Privacy Link")
-    public void user_click_Privacy_Link() {
-        onOpened(CreateAccountPage.class).clickOnPrivacyLink();
+    @When("user click link $link")
+    public void user_click_TOS_Link(String link) {
+        clickOnLink(link);
     }
 
     //Scenario: TOS link(3/3)
@@ -40,4 +35,18 @@ public class LinksOnTheAccountCreationPage extends WebTest {
                 .finish();
     }
 
+    private void clickOnLink(String link) {
+
+        switch (RegistrationLinks.valueOf(link.toUpperCase())) {
+            case TOS:
+                onOpened(CreateAccountPage.class)
+                        .clickOnTOSLink();
+            case PRIVACY:
+                onOpened(CreateAccountPage.class)
+                        .clickOnPrivacyLink();
+            default:
+                Assert.fail("Unknown link " + link + "!");
+        }
+
+    }
 }

@@ -5,7 +5,7 @@ Register an account with incorrect data
 Scenario: Register an account with incorrect name
 
 Meta: 
-@categories registration useful testmaxa 
+@categories registration useful 
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -28,6 +28,7 @@ Scenario: Register an account with incorrect email
 
 Meta: 
 @categories registration useful
+@issue LJSUP-19397
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -51,7 +52,7 @@ Scenario: Register an account with incorrect password
 
 Meta: 
 @categories registration useful
-@issue LJSUP-19183
+@issue LJSUP-19397
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
