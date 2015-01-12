@@ -24,13 +24,6 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
         open(CreateAccountPage.class);
     }
 
-    //Scenario: User go to registration form(1/2)
-    @When("user on Main Page clicks on Login Menu and clicks Create New Account")
-    public void user_on_Main_Page_clicks_on_Login_Menu_and_clicks_Create_New_Account() {
-        open(MainPageUnlogged.class)
-                .clickOnLoginMenuItem()
-                .clickOnCreateAccountLink();
-    }
 
     //Scenario: Successfull registration(2/3)
     @When("user enter correct data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender and clicks Create Account")
@@ -45,14 +38,6 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
                         gender)
                 .clickOnCreateAccountButton();
     }
-
-    //Scenario: User go to registration form(2/2)
-    @Then("user in correct page $page")
-    public void user_in_correct_Page(String page) {
-        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
-                .finish();
-    }
-
 
     //Scenario: Successfull registration(3/3)
     @Then("user go to Finish Registration Form and see message $message")

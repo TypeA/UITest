@@ -26,6 +26,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     //Scenario: Register an account with empty email(1/3)
     //Scenario: Register an account with empty password(1/3)
     //Scenario: Register an account with empty age(1/3)
+    //Scenario: Register an account with long name(1/3)
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         open(CreateAccountPage.class);
@@ -78,6 +79,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     //Scenario: Register an account with incorrect name(2/3)
     //Scenario: Register an account with empty name(2/3)
+    //Scenario: Register an account with long name(2/3)
     @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_correct_data_except_for_the_name(String name, String email, String password, String day, String month, String year, String gender) {
         onOpened(CreateAccountPage.class)
@@ -132,6 +134,7 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     }
 
+    //Scenario: Register an account with long name(3/3)
     @Then("there is $symbols symbols in name field")
     public void there_is_symbols_in_name_field(String symbols) {
         verify().that(onOpened(CreateAccountPage.class).getNOSinName().equals(Integer.parseInt(symbols)))
