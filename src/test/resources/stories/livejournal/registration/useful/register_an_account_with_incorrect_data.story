@@ -12,12 +12,13 @@ When user enter correct data except for the name: name <name>, email <email>, pa
 Then in Popup user see message $message and button Create Account is not active
 
 Examples:
-|name           |email          |password   |day    |month  |year   |gender |message                                            |
-|лоргшне333     |test@test.ru   |Pass123    |1      |4      |1990   |M      |Имя пользователя содержит недопустимые символы     |
-|t.es,t1234rnd  |test@test.ru   |Pass123    |1      |4      |1990   |M      |Имя пользователя содержит недопустимые символы     |
-|te st1234rnd   |test@test.ru   |Pass123    |1      |4      |1990   |M      |Имя пользователя содержит недопустимые символы     |
-|_test1234rnd   |test@test.ru   |Pass123    |1      |4      |1990   |M      |Извините, но это имя пользователя зарезервировано  |
-|test1234_      |test@test.ru   |Pass123    |1      |4      |1990   |M      |Извините, но это имя пользователя зарезервировано  |
+|name           |email          |password   |day    |month  |year   |gender |message                                  |
+|лоргшне333     |test@test.ru   |Pass123    |1      |4      |1990   |M      |Username contains invalid characters     |
+|t.es,t1234rnd  |test@test.ru   |Pass123    |1      |4      |1990   |M      |Username contains invalid characters     |
+|te st1234rnd   |test@test.ru   |Pass123    |1      |4      |1990   |M      |Username contains invalid characters     |
+|te(st1234rnd   |test@test.ru   |Pass123    |1      |4      |1990   |M      |Username contains invalid characters     |
+|_test1234rnd   |test@test.ru   |Pass123    |1      |4      |1990   |M      |Sorry, that is a reserved username.      |
+|test1234_      |test@test.ru   |Pass123    |1      |4      |1990   |M      |Sorry, that is a reserved username.      |
 
 
 
@@ -46,14 +47,14 @@ When user enter correct data except for the email: name <name>, email <email>, p
 Then in Popup user see message $message and button Create Account is not active
 
 Examples:
-|name           |email              |password   |day    |month  |year   |gender |message                                        |
-|test1234rnd    |te"st@test.ru      |Pass123    |1      |4      |1990   |M      |Ваш адрес email содержит недопустимые символы  |
-|test1234rnd    |tes,t@test.ru      |Pass123    |1      |4      |1990   |M      |Ваш адрес email содержит недопустимые символы  |
-|test1234rnd    |te st@test.ru      |Pass123    |1      |4      |1990   |M      |Ваш адрес email содержит недопустимые символы  |
-|test1234rnd    |testtest.ru        |Pass123    |1      |4      |1990   |M      |Вы указали неверный адрес email                |
-|test1234rnd    |test@@test.ru      |Pass123    |1      |4      |1990   |M      |Вы указали неверный адрес email                |
-|test1234rnd    |test@test.r'u      |Pass123    |1      |4      |1990   |M      |Неверный домен адреса email                    |
-|test1234rnd    |test@test.r()u     |Pass123    |1      |4      |1990   |M      |Неверный домен адреса email                    |
+|name           |email              |password   |day    |month  |year   |gender |message                                                      |
+|test1234rnd    |te"st@test.ru      |Pass123    |1      |4      |1990   |M      |You have invalid characters in your email address username.  |
+|test1234rnd    |tes,t@test.ru      |Pass123    |1      |4      |1990   |M      |You have invalid characters in your email address username.  |
+|test1234rnd    |te st@test.ru      |Pass123    |1      |4      |1990   |M      |You have invalid characters in your email address username.  |
+|test1234rnd    |testtest.ru        |Pass123    |1      |4      |1990   |M      |You did not give a valid email address.                      |
+|test1234rnd    |test@@test.ru      |Pass123    |1      |4      |1990   |M      |You did not give a valid email address.                      |
+|test1234rnd    |test@test.r'u      |Pass123    |1      |4      |1990   |M      |Your email address domain is invalid.                        |
+|test1234rnd    |test@test.r()u     |Pass123    |1      |4      |1990   |M      |Your email address domain is invalid.                        |
 
 
 
@@ -69,15 +70,15 @@ Then in Popup user see message $message and button Create Account is not active
 
 
 Examples:
-|name           |email          |password       |day    |month  |year   |gender |message                                                                                                |
-|test1234rnd    |test@test.ru   |1QqytNOS       |1      |4      |1990   |M      |                                                                                                       |
-|test1234rnd    |test@test.ru   |rRtTyYiI       |1      |4      |1990   |M      |Пароль, помимо букв алфавита, должен включать в себя не менее 1 цифры или символа.                     |
-|test1234rnd    |test@test.ru   |ytrytr123      |1      |4      |1990   |M      |Пароль должен содержать хотя бы одну заглавную букву (A-Z)                                             |
-|test1234rnd    |test@test.ru   |RTYFGH123      |1      |4      |1990   |M      |Пароль должен содержать хотя бы одну прописную букву (a-z)                                             |
-|test1234rnd    |test@test.ru   |Rr1Rr1Rr1Rr1   |1      |4      |1990   |M      |Пароль должен содержать как минимум 4 разных символа.                                                  |
-|test1234rnd    |test@test.ru   |1Qqk           |1      |4      |1990   |M      |Пароль не должен быть меньше 6 символов.                                                               |
-|test1234rnd    |test@test.ru   |Ешка123        |1      |4      |1990   |M      |Пароль должен состоять только из символов, входящих в ASCII. В частности, русские буквы не годятся.    |
-|test1234R      |test@test.ru   |test1234R      |1      |4      |1990   |M      |Ваш пароль не должен основываться на вашем имени пользователя.                                         |
+|name           |email          |password       |day    |month  |year   |gender |message                                                     |
+|test1234rnd    |test@test.ru   |1QqytNOS       |1      |4      |1990   |M      |Password may not exceed 30 characters                       |
+|test1234rnd    |test@test.ru   |rRtTyYiI       |1      |4      |1990   |M      |Your password must contain at least one number or symbol    |
+|test1234rnd    |test@test.ru   |ytrytr123      |1      |4      |1990   |M      |The password should contain at least one upper case letter  |
+|test1234rnd    |test@test.ru   |RTYFGH123      |1      |4      |1990   |M      |The password should contain at least one lower case letter  |
+|test1234rnd    |test@test.ru   |Rr1Rr1Rr1Rr1   |1      |4      |1990   |M      |Your password must have at least four different characters. |
+|test1234rnd    |test@test.ru   |1Qqk           |1      |4      |1990   |M      |Your password must be at least six characters long.         |
+|test1234rnd    |test@test.ru   |Ешка123        |1      |4      |1990   |M      |Your password can only be comprised of ASCII characters.    |
+|test1234R      |test@test.ru   |test1234R      |1      |4      |1990   |M      |Your password cannot be based on your username.             |
 
 
 
@@ -108,8 +109,8 @@ When user enter correct data except for the name: name <name>, email <email>, pa
 Then in Popup user see message $message and button Create Account is not active
 
 Examples:
-|name   |email          |password   |day    |month  |year   |gender |message                                                                                                |
-|       |test@test.ru   |Pass123    |1      |4      |1990   |M      |Используйте строчные латинские буквы a-z, цифры 0-9 и знак подчёркивания _ (не в начале и не в конце). |
+|name   |email          |password   |day    |month  |year   |gender |message                                          |
+|       |test@test.ru   |Pass123    |1      |4      |1990   |M      |Use latin letters a..z, digits 0..9 and single _ |
 
 
 

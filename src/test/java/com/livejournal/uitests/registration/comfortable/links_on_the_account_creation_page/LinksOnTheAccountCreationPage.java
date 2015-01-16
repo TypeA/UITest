@@ -41,11 +41,14 @@ public class LinksOnTheAccountCreationPage extends WebTest {
             case TOS:
                 onOpened(CreateAccountPage.class)
                         .clickOnTOSLink();
+                break;
             case PRIVACY:
                 onOpened(CreateAccountPage.class)
                         .clickOnPrivacyLink();
+                break;
             default:
                 Assert.fail("Unknown link " + link + "!");
+                break;
         }
 
     }
