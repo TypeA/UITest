@@ -15,7 +15,7 @@ public class RandomText {
         int chi1, chn1, chi2, chn2, chi3, chn3;
         String randomtext = "";
         Random rnd = new Random();
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 25; i++) {
             chi1 = rnd.nextInt(26);
             chn1 = rnd.nextInt(26);
             chi2 = rnd.nextInt(26);
