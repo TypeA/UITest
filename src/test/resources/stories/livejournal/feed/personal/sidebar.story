@@ -2,7 +2,7 @@
 
 Scenario: Add widget
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) without widgets in sidebar on Friends Feed
 When user click Add widget and select widget <widget>
@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Delete widget
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 
 Given logged user (name <name>, password <password>) with complete set of widgets in sidebar on Friends Feed
@@ -53,7 +53,7 @@ Examples:
 
 Scenario: Up Button on widget
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>, password <password>) with complete set of widgets in sidebar on Friends Feed
 When user click Up Button many time on lower widget

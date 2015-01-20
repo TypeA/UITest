@@ -11,9 +11,9 @@ Then user go to Finish Registration Form and see message <message>
 
 
 Examples:
-|name       |email          |password   |day    |month  |year   |gender |message            |
-|testrnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Добро пожаловать   |
-|TEST_rnd   |test@test.ru   |Test123234 |today  |today  |today  |M      |Добро пожаловать   |
+|name       |email          |password   |day    |month  |year   |gender |message   |
+|testrnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Welcome   |
+|TEST_rnd   |test@test.ru   |Test123234 |today  |today  |today  |M      |Welcome   |
 
 
 

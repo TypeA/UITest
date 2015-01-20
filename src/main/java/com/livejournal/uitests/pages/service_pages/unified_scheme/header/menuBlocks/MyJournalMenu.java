@@ -15,7 +15,7 @@ import com.livejournal.uitests.pages.service_pages.settings.TagsPage;
 import com.livejournal.uitests.pages.service_pages.tools.MemoriesPage;
 import com.livejournal.uitests.pages.service_pages.tools.RecentCommentsPage;
 import com.livejournal.uitests.pages.service_pages.tools.StatisticsMainPage;
-import com.livejournal.uitests.pages.service_pages.update.SheduledEntriesPage;
+import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;

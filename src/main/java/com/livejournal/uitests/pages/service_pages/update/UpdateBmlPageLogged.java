@@ -1,7 +1,14 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uisteps.thucydides.elements.TextField;
+import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.StepGroup;
+import org.junit.Assert;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
  *
@@ -10,4 +17,67 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/update.bml")
 public class UpdateBmlPageLogged extends ServicePageLogged {
 
+    @FindBy(id = "subject")
+    private TextField subjectField;
+
+    @FindBy(css = "[.lj-main-body")
+    private TextField postVisualField;
+
+    @FindBy(css = ".b-updateform-textarea")
+    private TextField postHtmlField;
+
+    @FindBy(name = "privacy")
+    private Select privacySelect;
+
+    @FindBy(name = "action:update")
+    private Button addPostButton;
+
+    @FindBy(css = ".b-updatepage-tab-visual")
+    private Button visualEditButton;
+
+    @FindBy(css = ".b-updatepage-tab-html")
+    private Button htmlEditButton;
+
+    /////////////////////////// draft
+    @FindBy(css = ".b-popup.b-popupus.b-popupus-blue.b-popupus-confirm[style*='position'] .i-popup-close")
+    private UIElement closeDraftButton;
+
+    @StepGroup
+    public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
+        subjectField.enter(subject);
+        switch (EditPostType.valueOf(editorType.toUpperCase())) {
+            case VISUAL:
+                visualEditButton.click();
+                postVisualField.enter(text);
+                break;
+            case HTML:
+                htmlEditButton.click();
+                postHtmlField.enter(text);
+                break;
+            default:
+                Assert.fail("Unknown edit type " + editorType + "!");
+        }
+        return onOpened(UpdateBmlPageLogged.class);
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setPrivacy(String privacy) {
+        privacySelect.selectByVisibleText(privacy);
+        return onOpened(UpdateBmlPageLogged.class);  
+    }
+
+    @StepGroup
+    public void postEntry() {
+        addPostButton.click();
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged closeDraft() {
+        try {
+            closeDraftButton.click();
+            return onOpened(UpdateBmlPageLogged.class);
+        } catch (Exception ex) {
+            return onOpened(UpdateBmlPageLogged.class);
+        }
+    }
 }
