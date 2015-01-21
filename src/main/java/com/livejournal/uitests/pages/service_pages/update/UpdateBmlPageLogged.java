@@ -61,9 +61,12 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy) {
+    public UpdateBmlPageLogged setPrivacy(String privacy, String group) {
         privacySelect.selectByVisibleText(privacy);
-        return onOpened(UpdateBmlPageLogged.class);  
+        if (privacy.equals("Custom")) {
+            this.startScript("jQuery(\"label:contains('" + group + "')\").click()");
+        }
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     @StepGroup

@@ -30,15 +30,16 @@ public class UsersPost extends WebTest {
     }
 
     //Scenario: Create post (2/4)
-    @When("user create new post with privacy $privacy")
-    public void user_create_new_post_with_privacy(String privacy) {
-        String postText = RandomText.getRandomText();
+    @When("user create new post with privacy $privacy (group $group)")
+    public void user_create_new_post_with_privacy(String privacy, String group) {
+        //String postText = RandomText.getRandomText();
+        String postText = new RandomName("test post rnd").get();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
-                .setPrivacy(privacy)
+                .setPrivacy(privacy, group)
                 .postEntry();
-        
+        selectScriptForStyle();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
@@ -48,7 +49,7 @@ public class UsersPost extends WebTest {
     //Scenario: Create post (3/4)
     @Then("user $name_1 can read the post")
     public void user_can_read_post(String name_1) throws InterruptedException {
-        selectScriptForStyle();
+        
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
@@ -95,6 +96,8 @@ public class UsersPost extends WebTest {
         }
     }
 
+    
+    /////////////////////////////////////////////////////////////////////
     private void selectScriptForStyle() {
         String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
         try {

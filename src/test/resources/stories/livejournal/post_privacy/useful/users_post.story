@@ -3,14 +3,16 @@ Meta:
 @categories feed privacy test
 
 Given logged user <name> on Create Post page
-When user create new post with privacy <privacy>
+When user create new post with privacy <privacy> (group <group>)
 Then user <name_1> can read the post
 Then user <name_2> cannot read the post
 
 Examples:
-|name           |name_1         |name_2        |post           |privacy     | 
-|testautotest   |test           |              |PostsGenerate  |Public      | 
-
+|name           |name_1         |name_2        |post           |privacy     |group     | 
+|testautotest   |test           |              |PostsGenerate  |Public      |          |
+|testautotest   |test_infriend  |test          |PostsGenerate  |Friends     |          |
+|testautotest   |test_fgroup    |test          |PostsGenerate  |Custom      |test_group|
+|testautotest   |testautotest   |test_fgroup   |PostsGenerate  |Private     |          |
 
          
 
