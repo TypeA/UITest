@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.utility;
 
 import java.util.Calendar;
@@ -28,9 +23,7 @@ public class Date {
             return getCurrentDay();
         }
     }
-    
-    
-    
+
     public static Integer parcseMonth(String month) throws Exception {
         return Integer.parseInt(month);
     }
@@ -43,12 +36,10 @@ public class Date {
         try {
             return parcseMonth(month);
         } catch (Exception ex) {
-            return getCurrentMonth()+1;
+            return getCurrentMonth() + 1;
         }
     }
-    
-    
-    
+
     public static Integer parcseYear(String year) throws Exception {
         return Integer.parseInt(year);
     }
@@ -61,7 +52,7 @@ public class Date {
         try {
             return parcseYear(year);
         } catch (Exception ex) {
-            return getCurrentYear()-14;
+            return getCurrentYear() - 14;
         }
     }
 }

@@ -20,10 +20,10 @@ import org.openqa.selenium.JavascriptExecutor;
 public class UsersPost extends WebTest {
 
     //Scenario: Create post (1/4)
-    @Given("logged user (name $name, password $password) on Create Post page")
-    public void logged_user_on_Create_Post_page(String name, String password) {
+    @Given("logged user $name on Create Post page")
+    public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, getUserPassword(name));
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
     }
@@ -37,46 +37,42 @@ public class UsersPost extends WebTest {
                 .createPost("", "html", postText)
                 .setPrivacy(privacy)
                 .postEntry();
+        
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
-        ThucydidesUtils.putToSession("post_text", postText);
+        ThucydidesUtils.putToSession("post_text", postText);  
     }
 
     //Scenario: Create post (3/4)
-    @Then("user (name $name_1, password $password_1) can read the post")
-    public void user_can_read_post(String name_1, String password_1) throws InterruptedException {
-        String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
-        try {
-            ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-            ThucydidesUtils.putToSession("script", script);
-        } catch (Exception ex) {
-            ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
-        }
+    @Then("user $name_1 can read the post")
+    public void user_can_read_post(String name_1) throws InterruptedException {
+        selectScriptForStyle();
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         if (name_1.isEmpty()) {
         } else {
             open(LoginPageUnlogged.class)
-                    .authorizeBy(name_1, password_1);}
-            open(MyJournalPage.class, new Url()
-                    .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                    .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-            String postText = ThucydidesUtils.getFromSession("post_text").toString();
-            verify().that(postText.equals(startScript(ThucydidesUtils.getFromSession("script").toString()).toString().trim()))
-                    .ifResultIsExpected("User can see post '" + postText + "'")
-                    .ifElse("User cannot see post '" + postText + "', but see '" + startScript(ThucydidesUtils.getFromSession("script").toString()).toString() + "'")
-                    .finish();
-            open(MainPageLogged.class)
-                    .moveMouseOverMyJournalMenuItem()
-                    .clickOnLogOut();
-        
+                    .authorizeBy(name_1, getUserPassword(name_1));
+        }
+        open(MyJournalPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        String postText = ThucydidesUtils.getFromSession("post_text").toString();
+        verify().that(postText.equals(startScript(ThucydidesUtils.getFromSession("script").toString()).toString().trim()))
+                .ifResultIsExpected("User can see post '" + postText + "'")
+                .ifElse("User cannot see post '" + postText + "', but see '" + startScript(ThucydidesUtils.getFromSession("script").toString()).toString() + "'")
+                .finish();
+        open(MainPageLogged.class)
+                .moveMouseOverMyJournalMenuItem()
+                .clickOnLogOut();
+
     }
 
     //Scenario: Create post (4/4)
-    @Then("user (name $name_2, password $password_2) cannot read the post")
-    public void user_cannot_read_post(String name_2, String password_2) throws InterruptedException {
+    @Then("user $name_2 cannot read the post")
+    public void user_cannot_read_post(String name_2) throws InterruptedException {
         if (name_2.isEmpty()) {
             verify().that(true)
                     .ifResultIsExpected("All user can see post")
@@ -84,7 +80,7 @@ public class UsersPost extends WebTest {
                     .finish();
         } else {
             open(LoginPageUnlogged.class)
-                    .authorizeBy(name_2, password_2);
+                    .authorizeBy(name_2, getUserPassword(name_2));
             open(MyJournalPage.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -92,10 +88,19 @@ public class UsersPost extends WebTest {
                     .getDriver()
                     .getTitle();
             verify().that(error.contains("Access is closed"))
-                    .ifResultIsExpected("User can see error '" + error + "'")
+                    .ifResultIsExpected("User can see error 'Access is closed'")
                     .ifElse("User cannot see error 'Access is closed!', but see '" + error + "'")
                     .finish();
         }
     }
 
+    private void selectScriptForStyle() {
+        String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
+        try {
+            ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
+            ThucydidesUtils.putToSession("script", script);
+        } catch (Exception ex) {
+            ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
+        }
+    }
 }

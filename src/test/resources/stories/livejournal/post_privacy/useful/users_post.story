@@ -2,16 +2,16 @@ Scenario: Create post
 Meta: 
 @categories feed privacy test
 
-Given logged user (name <name>, password <password>) on Create Post page
+Given logged user <name> on Create Post page
 When user create new post with privacy <privacy>
-Then user (name <name_1>, password <password_1>) can read the post
-Then user (name <name_2>, password <password_2>) cannot read the post
+Then user <name_1> can read the post
+Then user <name_2> cannot read the post
 
 Examples:
-|name           |password   |name_1         |password_1   |name_2        |password_2   |post           |privacy            | 
-|testautotest   |test       |test           |test         |              |             |PostsGenerate  |Public             | 
-|testautotest   |test       |test_infriend  |Test123      |test          |test         |PostsGenerate  |Friends            |
-|testautotest   |test       |testautotest   |test         |test_infgroup |Mary1992     |PostsGenerate  |Private            |
+|name           |name_1         |name_2        |post           |privacy     | 
+|testautotest   |test           |              |PostsGenerate  |Public      | 
+|testautotest   |test_infriend  |test          |PostsGenerate  |Friends     |
+|testautotest   |testautotest   |test_fgroup   |PostsGenerate  |Private     |
 
          
 
