@@ -7,8 +7,9 @@ import java.util.Random;
  * @author s.savinykh
  */
 public class RandomText {
+    
+    public static String getRandomText(int n) {
 
-    public static String getRandomText() {
         char ch1[] = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'};
         char ch2[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
         char ch3[] = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '`', '~', '!', '@', '#', '$', '%', '^', '&', '*', '(', ')', '-', '_', '=', '+', ',', '.', ' ', '/', '?', '[', ']'};
@@ -27,6 +28,7 @@ public class RandomText {
             String s3 = new String(ch3, chi3, chn3);
             randomtext =randomtext + s1 + " " + s2 + " " + s3;
         }
+        randomtext=randomtext.substring(0,n);
         return randomtext;
 
     }
