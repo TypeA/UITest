@@ -8,6 +8,7 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomName;
+import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -31,7 +32,7 @@ public class UsersPost extends WebTest {
     //Scenario: Create post (2/4)
     @When("user create new post with privacy $privacy")
     public void user_create_new_post_with_privacy(String privacy) {
-        String postText = new RandomName("post test rnd").get();
+        String postText = RandomText.getRandomText();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)

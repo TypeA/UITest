@@ -10,8 +10,7 @@ Then user <name_2> cannot read the post
 Examples:
 |name           |name_1         |name_2        |post           |privacy     | 
 |testautotest   |test           |              |PostsGenerate  |Public      | 
-|testautotest   |test_infriend  |test          |PostsGenerate  |Friends     |
-|testautotest   |testautotest   |test_fgroup   |PostsGenerate  |Private     |
+
 
          
 
