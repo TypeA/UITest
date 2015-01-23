@@ -33,4 +33,8 @@ public class RandomText {
 
     }
 
+    public RandomText(String test_post_rnd) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

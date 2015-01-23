@@ -7,7 +7,6 @@ import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -33,7 +32,7 @@ public class UsersPost extends WebTest {
     @When("user create new post with privacy $privacy (group $group)")
     public void user_create_new_post_with_privacy(String privacy, String group) {
         //String postText = RandomText.getRandomText();
-        String postText = new RandomName("test post rnd").get();
+        String postText = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
@@ -62,7 +61,7 @@ public class UsersPost extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         String postText = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(postText.equals(startScript(ThucydidesUtils.getFromSession("script").toString()).toString().trim()))
+        verify().that(postText.contains(startScript(ThucydidesUtils.getFromSession("script").toString()).toString().trim()))
                 .ifResultIsExpected("User can see post '" + postText + "'")
                 .ifElse("User cannot see post '" + postText + "', but see '" + startScript(ThucydidesUtils.getFromSession("script").toString()).toString() + "'")
                 .finish();
