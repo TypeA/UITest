@@ -4,14 +4,13 @@ Meta:
 
 Given logged user <name> on Security page 
 When user set min security <security>
-Then user can set only allowed security <security>
+Then user can set only allowed security <security> when create post
 
 Examples:
-|name           |name_1         |name_2        |privacy     |group     | 
-|testautotest   |test           |              |Public      |          |
-|testautotest   |test_infriend  |test          |Friends     |          |
-|testautotest   |test_fgroup    |test          |Custom      |test_group|
-|testautotest   |testautotest   |test_fgroup   |Private     |          |
+|name           |security    | 
+|testautotest   |Public      |
+|testautotest   |Friends     |
+|testautotest   |Private     |
 
          
 

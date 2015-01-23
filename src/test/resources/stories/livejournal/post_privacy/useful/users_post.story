@@ -1,6 +1,6 @@
 Scenario: Create post
 Meta: 
-@categories feed privacy test
+@categories feed privacy
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)

@@ -4,9 +4,13 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
+import java.util.ArrayList;
+import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
 
@@ -82,5 +86,14 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         } catch (Exception ex) {
             return onOpened(UpdateBmlPageLogged.class);
         }
+    }
+
+    public ArrayList<String> getAllPrivacy() {
+        List<WebElement> allSecurity = privacySelect.getOptions();
+        ArrayList<String> privasy = new ArrayList<>();
+        for (int i = 0; i < allSecurity.size(); i++) {
+            privasy.add(allSecurity.get(i).getText());
+        }
+        return privasy;
     }
 }
