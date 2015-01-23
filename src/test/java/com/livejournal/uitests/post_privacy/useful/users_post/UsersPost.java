@@ -3,6 +3,7 @@ package com.livejournal.uitests.post_privacy.useful.users_post;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
@@ -20,6 +21,7 @@ import org.openqa.selenium.JavascriptExecutor;
 public class UsersPost extends WebTest {
 
     //Scenario: Create post (1/4)
+    //Scenario: Privacy in editing (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -29,9 +31,9 @@ public class UsersPost extends WebTest {
     }
 
     //Scenario: Create post (2/4)
+    //Scenario: Privacy in editing(2/3)
     @When("user create new post with privacy $privacy (group $group)")
     public void user_create_new_post_with_privacy(String privacy, String group) {
-        //String postText = RandomText.getRandomText();
         String postText = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -42,13 +44,13 @@ public class UsersPost extends WebTest {
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
-        ThucydidesUtils.putToSession("post_text", postText);  
+        ThucydidesUtils.putToSession("post_text", postText);
     }
 
     //Scenario: Create post (3/4)
     @Then("user $name_1 can read the post")
     public void user_can_read_post(String name_1) throws InterruptedException {
-        
+
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
@@ -68,6 +70,16 @@ public class UsersPost extends WebTest {
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
+    }
+
+    //Scenario: Privacy in editing(3/3)
+    @Then("user see correct privacy &privacy when edit this post")
+    public void user_see_correct_privacy_when_edit_this_post(String privacy) throws InterruptedException {
+
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        
 
     }
 
@@ -95,7 +107,6 @@ public class UsersPost extends WebTest {
         }
     }
 
-    
     /////////////////////////////////////////////////////////////////////
     private void selectScriptForStyle() {
         String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";

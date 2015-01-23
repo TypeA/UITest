@@ -8,31 +8,29 @@ Then user <name_1> can read the post
 Then user <name_2> cannot read the post
 
 Examples:
-|name           |name_1         |name_2        |post           |privacy     |group     | 
-|testautotest   |test           |              |PostsGenerate  |Public      |          |
-|testautotest   |test_infriend  |test          |PostsGenerate  |Friends     |          |
-|testautotest   |test_fgroup    |test          |PostsGenerate  |Custom      |test_group|
-|testautotest   |testautotest   |test_fgroup   |PostsGenerate  |Private     |          |
+|name           |name_1         |name_2        |privacy     |group     | 
+|testautotest   |test           |              |Public      |          |
+|testautotest   |test_infriend  |test          |Friends     |          |
+|testautotest   |test_fgroup    |test          |Custom      |test_group|
+|testautotest   |testautotest   |test_fgroup   |Private     |          |
 
          
 
 
-
-
 Scenario: Privacy in editing
 Meta: 
-@categories feed privacy
+@categories feed privacy dbdb
 
-Given logged user (name <name>, password <password>) on Create Post page
-When user create new public post <post> with privacy <privacy>
-Then user see privacy <privacy> when edit what post
+Given logged user <name> on Create Post page
+When user create new post with privacy <privacy> (group <group>)
+Then user see correct privacy <privacy> when edit this post
 
 Examples:
-|name           |password   |post           |privacy            |
-|testautotest   |test       |PostsGenerate  |public             |
-|testautotest   |test       |PostsGenerate  |friends            |
-|testautotest   |test       |PostsGenerate  |custom PostPrivacy |
-|testautotest   |test       |PostsGenerate  |private            |
+|name           |privacy     |group     |
+|testautotest   |Public      |          |
+|testautotest   |Friends     |          |
+|testautotest   |Custom      |test_group|
+|testautotest   |Private     |          |
 
 
 
