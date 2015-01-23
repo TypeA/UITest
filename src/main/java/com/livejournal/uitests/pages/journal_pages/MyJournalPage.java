@@ -5,7 +5,8 @@ import net.thucydides.core.annotations.DefaultUrl;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("/")
+ */
+@DefaultUrl("/")
 public class MyJournalPage extends JournalPage{
     
 }

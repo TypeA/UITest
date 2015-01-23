@@ -12,7 +12,6 @@ import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.JavascriptExecutor;
 
 /**
  *
@@ -40,7 +39,6 @@ public class UsersPost extends WebTest {
                 .createPost("", "html", postText)
                 .setPrivacy(privacy, group)
                 .postEntry();
-        selectScriptForStyle();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
@@ -50,7 +48,6 @@ public class UsersPost extends WebTest {
     //Scenario: Create post (3/4)
     @Then("user $name_1 can read the post")
     public void user_can_read_post(String name_1) throws InterruptedException {
-
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
@@ -59,28 +56,17 @@ public class UsersPost extends WebTest {
             open(LoginPageUnlogged.class)
                     .authorizeBy(name_1, getUserPassword(name_1));
         }
-        open(MyJournalPage.class, new Url()
+        open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         String postText = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(postText.contains(startScript(ThucydidesUtils.getFromSession("script").toString()).toString().trim()))
+        verify().that(postText.contains(onOpened(EntryPage.class).getPostText()))
                 .ifResultIsExpected("User can see post '" + postText + "'")
-                .ifElse("User cannot see post '" + postText + "', but see '" + startScript(ThucydidesUtils.getFromSession("script").toString()).toString() + "'")
+                .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPage.class).getPostText() + "'")
                 .finish();
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
-    }
-
-    //Scenario: Privacy in editing(3/3)
-    @Then("user see correct privacy &privacy when edit this post")
-    public void user_see_correct_privacy_when_edit_this_post(String privacy) throws InterruptedException {
-
-        open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        
-
     }
 
     //Scenario: Create post (4/4)
@@ -107,14 +93,12 @@ public class UsersPost extends WebTest {
         }
     }
 
-    /////////////////////////////////////////////////////////////////////
-    private void selectScriptForStyle() {
-        String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
-        try {
-            ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-            ThucydidesUtils.putToSession("script", script);
-        } catch (Exception ex) {
-            ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
-        }
+    //Scenario: Privacy in editing(3/3)
+    @Then("user see correct privacy &privacy when edit this post")
+    public void user_see_correct_privacy_when_edit_this_post(String privacy) throws InterruptedException {
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
     }
+
 }
