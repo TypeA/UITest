@@ -105,8 +105,6 @@ public class UsersPost extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-
-        // Thread.sleep(10000);
         System.out.println("=============" + getCurrentUrl());
         verify().that(onOpened(EditJournalbml.class).getCurrentPrivacy().equals(privacy))
                 .ifResultIsExpected("User see correct privacy " + privacy)
