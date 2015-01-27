@@ -20,7 +20,6 @@ public class EditJournalbml extends ServicePageLogged {
     public String getCurrentPrivacy() {
         
         String text = privacySelect.getFirstSelectedOption().getText();
-        System.out.println("====================" + text);
         return text;
     }
 
