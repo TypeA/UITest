@@ -19,7 +19,7 @@ Examples:
 
 Scenario: Privacy in editing
 Meta: 
-@categories feed privacy dbdb
+@categories feed privacy 
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
