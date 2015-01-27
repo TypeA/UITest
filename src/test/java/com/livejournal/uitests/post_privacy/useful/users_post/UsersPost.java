@@ -21,6 +21,7 @@ public class UsersPost extends WebTest {
 
     //Scenario: Create post (1/4)
     //Scenario: Privacy in editing (1/3)
+    //Scenario: Restore privacy from draft (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -43,6 +44,14 @@ public class UsersPost extends WebTest {
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
         ThucydidesUtils.putToSession("post_text", postText);
+    }
+
+    //Scenario: Restore privacy from draft (1/3)
+    @When("user write new post with privacy $privacy (group $group)")
+    public void user_write_new_post_with_privacy(String privacy, String group) {
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .setPrivacy(privacy, group);
     }
 
     //Scenario: Create post (3/4)
@@ -99,6 +108,13 @@ public class UsersPost extends WebTest {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+    }
+
+    //Scenario: Restore privacy from draft (3/3)
+    @Then("user can restore this post with privacy <privacy> from draft")
+    public void user_can_restore_this_post_with_privacy_from_draft() {
+        onOpened(UpdateBmlPageLogged.class)
+                .restoreFromDraft();
     }
 
 }

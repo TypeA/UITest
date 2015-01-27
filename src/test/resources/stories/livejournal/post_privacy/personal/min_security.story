@@ -1,4 +1,4 @@
-Scenario: Min security in createing post
+Scenario: Min security in creating post
 Meta: 
 @categories feed privacy test
 

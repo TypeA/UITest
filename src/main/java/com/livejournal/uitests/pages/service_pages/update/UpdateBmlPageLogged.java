@@ -46,6 +46,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @FindBy(css = ".b-popup.b-popupus.b-popupus-blue.b-popupus-confirm[style*='position'] .i-popup-close")
     private UIElement closeDraftButton;
 
+    @FindBy(name = "dialog-ok")
+    private Button restoreDraft;
+
     @StepGroup
     public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
         subjectField.enter(subject);
@@ -86,6 +89,13 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         } catch (Exception ex) {
             return onOpened(UpdateBmlPageLogged.class);
         }
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged restoreFromDraft() {
+        restoreDraft.click();
+        return onOpened(UpdateBmlPageLogged.class);
+
     }
 
     public ArrayList<String> getAllPrivacy() {

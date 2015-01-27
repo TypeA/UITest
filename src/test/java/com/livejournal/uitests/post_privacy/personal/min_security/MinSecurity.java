@@ -17,7 +17,7 @@ import org.junit.Assert;
  */
 public class MinSecurity extends WebTest {
 
-    //Scenario: Min security in createing post (1/3)
+    //Scenario: Min security in creating post (1/3)
     @Given("logged user $name on Security page")
     public void logged_user_on_Security_page(String name) {
         open(LoginPageUnlogged.class)
@@ -25,7 +25,7 @@ public class MinSecurity extends WebTest {
         open(SettingsMainPage.class, new Url().setPostfix("?cat=privacy"));
     }
 
-    //Scenario: Min security in createing post (2/3)
+    //Scenario: Min security in creating post (2/3)
     @When("user set min security $security")
     public void user_set_min_security(String security) {
         onOpened(SettingsMainPage.class)
@@ -33,7 +33,7 @@ public class MinSecurity extends WebTest {
                 .saveSettings();
     }
 
-    //Scenario: Min security in createing post (3/3)
+    //Scenario: Min security in creating post (3/3)
     @Then("user can set only allowed security $security when create post")
     public void user_can_set_only_allowed_security_when_create_post(String security) {
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
@@ -45,7 +45,8 @@ public class MinSecurity extends WebTest {
                 .finish();
     }
 
-    
+
+
     ////////////////////////////////////////////
     private ArrayList<String> correctPrivacy(String privacy) {
         ArrayList<String> okPrivacy = new ArrayList<>();

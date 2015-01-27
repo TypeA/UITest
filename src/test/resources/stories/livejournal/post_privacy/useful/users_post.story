@@ -48,3 +48,22 @@ Examples:
 |testautotest   |test       |PostsGenerate  |private            |public             |
 
 
+
+Scenario: Restore privacy from draft
+Meta: 
+@categories feed privacy
+
+Given logged user <name> on Create Post page
+When user write new post with privacy <privacy> (group <group>) 
+Then user can restore this post with privacy <privacy> from draft
+
+Examples:
+|name           |privacy     |group     | 
+|testautotest   |Public      |          |
+|testautotest   |Friends     |          |
+|testautotest   |Custom      |test_group|
+|testautotest   |Private     |          |
+
+
+
+
