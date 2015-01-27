@@ -7,6 +7,7 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
@@ -103,11 +104,29 @@ public class UsersPost extends WebTest {
     }
 
     //Scenario: Privacy in editing(3/3)
-    @Then("user see correct privacy &privacy when edit this post")
-    public void user_see_correct_privacy_when_edit_this_post(String privacy) throws InterruptedException {
+    @Then("user see correct privacy $privacy (group $group) when edit this post")
+    public void user_see_correct_privacy_when_edit_this_post(String privacy, String group) throws InterruptedException {
+
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        onOpened(EntryPage.class).clickOnEditButton();
+        System.out.println("=============" + getCurrentUrl());
+        verify().that(onOpened(EditJournalbml.class).getCurrentPrivacy().equals(privacy))
+                .ifResultIsExpected("User see correct privacy " + privacy)
+                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+                .finish();
+    }
+
+    /////////////////////////////////////////////////////////////////////
+    private void selectScriptForStyle() {
+        String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
+        try {
+            ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
+            ThucydidesUtils.putToSession("script", script);
+        } catch (Exception ex) {
+            ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
+        }
     }
 
     //Scenario: Restore privacy from draft (3/3)

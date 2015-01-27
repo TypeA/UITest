@@ -17,11 +17,11 @@ Examples:
          
 Scenario: Privacy in editing
 Meta: 
-@categories feed privacy
+@categories feed privacy 
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
-Then user see correct privacy <privacy> when edit this post
+Then user see correct privacy <privacy> (group <group>) when edit this post
 
 Examples:
 |name           |privacy     |group     |

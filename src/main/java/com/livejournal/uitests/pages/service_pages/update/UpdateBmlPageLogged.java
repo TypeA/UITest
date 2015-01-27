@@ -76,6 +76,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return onOpened(UpdateBmlPageLogged.class);
     }
 
+
     @StepGroup
     public void postEntry() {
         addPostButton.click();
