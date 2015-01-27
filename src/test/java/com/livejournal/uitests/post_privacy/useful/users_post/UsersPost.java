@@ -7,6 +7,7 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
@@ -72,17 +73,6 @@ public class UsersPost extends WebTest {
                 .clickOnLogOut();
     }
 
-    //Scenario: Privacy in editing(3/3)
-    @Then("user see correct privacy &privacy when edit this post")
-    public void user_see_correct_privacy_when_edit_this_post(String privacy) throws InterruptedException {
-
-        open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        
-
-    }
-
     //Scenario: Create post (4/4)
     @Then("user $name_2 cannot read the post")
     public void user_cannot_read_post(String name_2) throws InterruptedException {
@@ -107,6 +97,23 @@ public class UsersPost extends WebTest {
         }
     }
 
+    //Scenario: Privacy in editing(3/3)
+    @Then("user see correct privacy $privacy (group $group) when edit this post")
+    public void user_see_correct_privacy_when_edit_this_post(String privacy, String group) throws InterruptedException {
+
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        onOpened(EntryPage.class).clickOnEditButton();
+
+        // Thread.sleep(10000);
+        System.out.println("=============" + getCurrentUrl());
+        verify().that(onOpened(EditJournalbml.class).getCurrentPrivacy().equals(privacy))
+                .ifResultIsExpected("User see correct privacy " + privacy)
+                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+                .finish();
+    }
+
     /////////////////////////////////////////////////////////////////////
     private void selectScriptForStyle() {
         String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
@@ -117,4 +124,5 @@ public class UsersPost extends WebTest {
             ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
         }
     }
+
 }
