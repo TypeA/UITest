@@ -47,7 +47,7 @@ public class UsersPost extends WebTest {
         ThucydidesUtils.putToSession("post_text", postText);
     }
 
-    //Scenario: Restore privacy from draft (1/3)
+    //Scenario: Restore privacy from draft (2/3)
     @When("user write new post with privacy $privacy (group $group)")
     public void user_write_new_post_with_privacy(String privacy, String group) {
         onOpened(UpdateBmlPageLogged.class)
@@ -106,34 +106,25 @@ public class UsersPost extends WebTest {
     //Scenario: Privacy in editing(3/3)
     @Then("user see correct privacy $privacy (group $group) when edit this post")
     public void user_see_correct_privacy_when_edit_this_post(String privacy, String group) throws InterruptedException {
-
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        System.out.println("=============" + getCurrentUrl());
         verify().that(onOpened(EditJournalbml.class).getCurrentPrivacy().equals(privacy))
                 .ifResultIsExpected("User see correct privacy " + privacy)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
                 .finish();
     }
 
-    /////////////////////////////////////////////////////////////////////
-    private void selectScriptForStyle() {
-        String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
-        try {
-            ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-            ThucydidesUtils.putToSession("script", script);
-        } catch (Exception ex) {
-            ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
-        }
-    }
-
     //Scenario: Restore privacy from draft (3/3)
-    @Then("user can restore this post with privacy <privacy> from draft")
-    public void user_can_restore_this_post_with_privacy_from_draft() {
-        onOpened(UpdateBmlPageLogged.class)
+    @Then("user can restore this post with privacy $privacy (group $group) from draft")
+    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group) {
+        open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
+        verify().that(onOpened(UpdateBmlPageLogged.class).getCurrentPrivacy().equals(privacy))
+                .ifResultIsExpected("User see correct privacy " + privacy)
+                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+                .finish();
     }
 
 }

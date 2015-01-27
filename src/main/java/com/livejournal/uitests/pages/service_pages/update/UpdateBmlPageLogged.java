@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
+import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import java.util.ArrayList;
@@ -76,10 +77,10 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return onOpened(UpdateBmlPageLogged.class);
     }
 
-
     @StepGroup
-    public void postEntry() {
+    public EntryPage postEntry() {
         addPostButton.click();
+        return onOpened(EntryPage.class);
     }
 
     @StepGroup
@@ -96,7 +97,11 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged restoreFromDraft() {
         restoreDraft.click();
         return onOpened(UpdateBmlPageLogged.class);
+    }
 
+    @StepGroup
+    public String getCurrentPrivacy() {
+        return privacySelect.getFirstSelectedOption().getText();
     }
 
     public ArrayList<String> getAllPrivacy() {

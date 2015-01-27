@@ -1,8 +1,11 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import java.util.ArrayList;
+import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
 
@@ -18,9 +21,16 @@ public class EditJournalbml extends ServicePageLogged {
 
     @StepGroup
     public String getCurrentPrivacy() {
-        
-        String text = privacySelect.getFirstSelectedOption().getText();
-        return text;
+        return privacySelect.getFirstSelectedOption().getText();
+    }
+
+    public ArrayList<String> getAllPrivacy() {
+        List<WebElement> allSecurity = privacySelect.getOptions();
+        ArrayList<String> privasy = new ArrayList<>();
+        for (int i = 0; i < allSecurity.size(); i++) {
+            privasy.add(allSecurity.get(i).getText());
+        }
+        return privasy;
     }
 
 }

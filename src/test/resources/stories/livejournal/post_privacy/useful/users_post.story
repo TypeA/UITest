@@ -55,7 +55,7 @@ Meta:
 
 Given logged user <name> on Create Post page
 When user write new post with privacy <privacy> (group <group>) 
-Then user can restore this post with privacy <privacy> from draft
+Then user can restore this post with privacy <privacy> (group <group>) from draft
 
 Examples:
 |name           |privacy     |group     | 
