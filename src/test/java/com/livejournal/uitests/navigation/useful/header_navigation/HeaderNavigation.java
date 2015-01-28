@@ -18,12 +18,12 @@ import org.openqa.selenium.Cookie;
 public class HeaderNavigation extends WebTest {
 
     //Scenario: Navigation for logged user (1/3)
-    @Given("logged user (name $name, password $password) on Main Page")
-    public void logged_user_on_Main_Page(String name, String password) {
+    @Given("logged user (name $name) on Main Page")
+    public void logged_user_on_Main_Page(String name) {
         open(LoginPageUnlogged.class);
         getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name,workWithDB().getUserPassword(name));
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
@@ -188,8 +188,8 @@ public class HeaderNavigation extends WebTest {
                         .clickOnDmca();
                 break;
             case NEWENTRYINMENU:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnNewPost();
+                page.clickOnPostNewEntry();
+                        
                 break;
             case EDITPROFILE:
                 page.moveMouseOverUserPicMenuItem()
@@ -200,8 +200,7 @@ public class HeaderNavigation extends WebTest {
                         .clickOnEditPics();
                 break;
             case MESSAGESINMENU:
-                page.moveMouseOverUserPicMenuItem()
-                        .clickOnMessagesInMenu();
+                page.clickOnMessagesMenuItem();
                 break;
             case SHEDULED:
                 page.moveMouseOverMyJournalMenuItem()

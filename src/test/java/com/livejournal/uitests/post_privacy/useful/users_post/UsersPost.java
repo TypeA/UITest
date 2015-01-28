@@ -25,7 +25,7 @@ public class UsersPost extends WebTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, getUserPassword(name));
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
     }
@@ -57,7 +57,7 @@ public class UsersPost extends WebTest {
         if (name_1.isEmpty()) {
         } else {
             open(LoginPageUnlogged.class)
-                    .authorizeBy(name_1, getUserPassword(name_1));
+                    .authorizeBy(name_1, workWithDB().getUserPassword(name_1));
         }
         open(MyJournalPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
@@ -93,7 +93,7 @@ public class UsersPost extends WebTest {
                     .finish();
         } else {
             open(LoginPageUnlogged.class)
-                    .authorizeBy(name_2, getUserPassword(name_2));
+                    .authorizeBy(name_2, workWithDB().getUserPassword(name_2));
             open(MyJournalPage.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));

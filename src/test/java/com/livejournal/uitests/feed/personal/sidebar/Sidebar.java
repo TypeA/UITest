@@ -19,10 +19,10 @@ import org.jbehave.core.annotations.When;
 public class Sidebar extends WebTest {
 
     //Scenario: Add widget (1/3)
-    @Given("logged user (name $name, password $password) without widgets in sidebar on Friends Feed")
-    public void logged_user_without_widgets_in_sidebar_on_Friends_Feed(String name, String password) {
+    @Given("logged user (name $name) without widgets in sidebar on Friends Feed")
+    public void logged_user_without_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .deleteAllWidgets();
 
@@ -33,10 +33,10 @@ public class Sidebar extends WebTest {
     //Scenario: Down Button (1/3)
     //Scenario: Up and Down Buttons (1/3)
     //Scenario: Saving a layout of widgets (1/3)
-    @Given("logged user (name $name, password $password) with complete set of widgets in sidebar on Friends Feed")
-    public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name, String password) {
+    @Given("logged user (name $name) with complete set of widgets in sidebar on Friends Feed")
+    public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .addAllWidgets();
     }
@@ -108,14 +108,14 @@ public class Sidebar extends WebTest {
     }
 
     //Scenario: Saving a layout of widgets (2/3)
-    @When("user logged out and logged in again (name $name, password $password)")
-    public void user_logged_out_and_logged_in_again(String name, String password) {
+    @When("user logged out and logged in again (name $name)")
+    public void user_logged_out_and_logged_in_again(String name) {
         ThucydidesUtils.putToSession("all_widgets", compositionOfWidgets());
         onOpened(FriendsFeedLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut()
                 .clickOnLoginMenuItem()
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
     }
 
     //Scenario: Add widget (3/3)

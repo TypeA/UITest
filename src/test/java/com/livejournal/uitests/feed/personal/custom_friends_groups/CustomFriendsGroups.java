@@ -17,10 +17,10 @@ public class CustomFriendsGroups extends WebTest {
 
     //Scenario: Go to Edit Custom Friends Groups (1/3)
     //Scenario: Replacement blocks (1/3)
-    @Given("logged user (name $name, password $password) on Friends Feed")
-    public void logged_user_on_Friends_Feed(String name, String password) {
+    @Given("logged user (name $name) on Friends Feed")
+    public void logged_user_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 

@@ -53,10 +53,10 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
         return onDisplayed(MyJournalMenu.class);
     }
 
-    @FindBy(css = ".s-do-item .s-do-item-post")
+    @FindBy(css = ".s-do-item.s-do-item-post")
     public Link postNewEntry;
 
-    @FindBy(css = ".s-do-item .s-do-item-message")
+    @FindBy(css = ".s-do-item.s-do-item-message")
     public Link messagesMenuItem;
 
     @StepGroup

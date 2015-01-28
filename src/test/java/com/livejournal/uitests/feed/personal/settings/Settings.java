@@ -40,19 +40,19 @@ public class Settings extends WebTest {
     //Scenario: Set paging type (1/3)
     //Scenario: Cancel paging type (1/3)
     //Scenario: Cancel text settings (1/3)
-    @Given("logged user (name $name, password $password) on Friends Feed")
-    public void logged_user_on_Friends_Feed(String name, String password) {
+    @Given("logged user (name $name) on Friends Feed")
+    public void logged_user_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 
     //Scenario: Restore default settings (1/3)
     //Scenario: Scenario: Save settings after user logged out (1/3)
-    @Given("logged user (name $name, password $password) with own settings on Friends Feed")
-    public void logged_user_with_own_settings_on_Friends_Feed(String name, String password) {
+    @Given("logged user (name $name) with own settings on Friends Feed")
+    public void logged_user_with_own_settings_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         setRandomSettings();
     }
@@ -197,14 +197,14 @@ public class Settings extends WebTest {
     }
 
     //Scenario: Save settings after user logged out (2/3)
-    @When("user logged out and logged in again (name $name, password $password)")
-    public void user_logged_out_and_logged_in_again(String name, String password) {
+    @When("user logged out and logged in again (name $name)")
+    public void user_logged_out_and_logged_in_again(String name) {
         ThucydidesUtils.putToSession("all_settings", rememberSettings());
         onOpened(FriendsFeedLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut()
                 .clickOnLoginMenuItem()
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
     }
 
     //Scenario: New Title(3/3)

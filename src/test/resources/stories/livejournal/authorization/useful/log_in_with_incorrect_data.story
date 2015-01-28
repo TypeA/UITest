@@ -4,7 +4,7 @@ Meta:
 @categories authorization useful
 
 Given unlogged user on Login Form
-When user enter incorrect data: name <name>, password <password> and clicks LogIn
+When user enter incorrect data: name <name> and clicks LogIn
 Then user is not logged and see message <message>
 
 

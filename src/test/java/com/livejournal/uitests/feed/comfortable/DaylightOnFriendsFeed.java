@@ -9,7 +9,7 @@ import org.jbehave.core.annotations.Given;
  */
 public class DaylightOnFriendsFeed extends WebTest {
 
-    @Given("new login user (name $name, password $password)on Main Page")
+    @Given("new login user (name $name)on Main Page")
     public void new_login_user_on_Main_Page(String name, String password){
     }
 

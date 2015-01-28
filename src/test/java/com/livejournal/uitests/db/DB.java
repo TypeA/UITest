@@ -18,7 +18,7 @@ public class DB extends WebTest {
 
         System.out.println("!!!!!!!!!!!!! test start");
 
-        String ans = getUserPassword("testautotest");
+        String ans = workWithDB().getUserPassword("testautotest");
         System.out.println(ans);
 
         //String password = this.getUserPassword("testautotest");

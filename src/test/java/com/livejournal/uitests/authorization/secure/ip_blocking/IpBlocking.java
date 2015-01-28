@@ -29,13 +29,13 @@ public class IpBlocking extends WebTest {
 
     //Scenario: IP blocking, when you spent login attempts(3/3)
     @Then("user see message $message and can not enter with correct data: name $name, correct_password $correct_password")
-    public void user_see_message_and_can_not_enter_with_correct_data(String message, String name, String correct_password) {
+    public void user_see_message_and_can_not_enter_with_correct_data(String message, String name) {
         verify().that(onOpened(LoginPageUnlogged.class).getErrorText().getText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
                 .ifElse(VerifyText.errorTextForMessage(onOpened(LoginPageUnlogged.class).getErrorText().getText()))
                 .finish();
         onOpened(LoginPageUnlogged.class)
-                .authorizeBy(name, correct_password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         verify().that(getCurrentUrl().contains("/login.bml"))
                 .ifResultIsExpected("IP is blocked")
                 .ifElse("IP is not blocked!")
