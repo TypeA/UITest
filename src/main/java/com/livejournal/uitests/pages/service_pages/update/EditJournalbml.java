@@ -1,6 +1,8 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +17,14 @@ public class EditJournalbml extends ServicePageLogged {
 
     @FindBy(name = "privacy")
     private Select privacySelect;
+
+    @FindBy(name = "action:update")
+    private Button saveButton;
+
+    @StepGroup
+    public void saveEntry() {
+        saveButton.click();
+    }
 
     @StepGroup
     public String getCurrentPrivacy() {
@@ -31,6 +41,17 @@ public class EditJournalbml extends ServicePageLogged {
             return text;
         }
         return text;
+    }
+
+    @StepGroup
+    public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) {
+        privacySelect.selectByVisibleText(privacy);
+        if (privacy.equals("Custom")) {
+            for (int i = 0; i < group.size(); i++) {
+                this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
+            }
+        }
+        return this;
     }
 
 }

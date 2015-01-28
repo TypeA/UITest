@@ -64,17 +64,17 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
             default:
                 Assert.fail("Unknown edit type " + editorType + "!");
         }
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(ArrayList<String> incoming) {
-        privacySelect.selectByVisibleText(incoming.get(0));
-        if (incoming.get(0).equals("Custom")) {
-            for(int i=1;i<incoming.size();i++)
-            this.startScript("jQuery(\"label:contains('" + incoming.get(i) + "')\").click()");
+    public UpdateBmlPageLogged setPrivacy(String privacy,ArrayList<String> group) {
+        privacySelect.selectByVisibleText(privacy);
+        if (privacy.equals("Custom")) {
+            for(int i=0;i<group.size();i++)
+            this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
         }
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
@@ -86,16 +86,16 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged closeDraft() {
         try {
             closeDraftButton.click();
-            return onOpened(UpdateBmlPageLogged.class);
+            return this;
         } catch (Exception ex) {
-            return onOpened(UpdateBmlPageLogged.class);
+            return this;
         }
     }
 
     @StepGroup
     public UpdateBmlPageLogged restoreFromDraft() {
         restoreDraft.click();
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
 
     }
 

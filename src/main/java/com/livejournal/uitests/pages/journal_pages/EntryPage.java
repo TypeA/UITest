@@ -2,6 +2,7 @@ package com.livejournal.uitests.pages.journal_pages;
 
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.JavascriptExecutor;
 
 /**
@@ -11,6 +12,7 @@ import org.openqa.selenium.JavascriptExecutor;
 @DefaultUrl("/")
 public class EntryPage extends JournalPage {
 
+    @StepGroup
     public EditJournalbml clickOnEditButton() {
         String script = "jQuery('.b-linkbar-item a[href*=\"editjournal\"]')[0].click()";
         try {
@@ -22,6 +24,7 @@ public class EntryPage extends JournalPage {
         return onOpened(EditJournalbml.class);
     }
 
+    @StepGroup
     public String getPostText() {
         String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
         try {
