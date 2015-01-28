@@ -13,10 +13,10 @@ import org.jbehave.core.annotations.Given;
  */
 public class Loading extends WebTest{
     
-    @Given ("user (name $name, password $password) with underscope in name on the Friends Feed")
-    public void user_with_underscope_in_name_on_the_Friends_Feed (String name, String password){
+    @Given ("user (name $name) with underscope in name on the Friends Feed")
+    public void user_with_underscope_in_name_on_the_Friends_Feed (String name){
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(name)

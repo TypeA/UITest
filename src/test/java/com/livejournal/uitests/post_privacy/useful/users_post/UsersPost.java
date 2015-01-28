@@ -80,18 +80,25 @@ public class UsersPost extends WebTest {
     //Scenario: Create post (4/4)
     @Then("user $name_2 cannot read the post")
     public void user_cannot_read_post(String name_2) throws InterruptedException {
-        open(LoginPageUnlogged.class)
-                .authorizeBy(name_2, workWithDB().getUserPassword(name_2));
-        open(MyJournalPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        String error = getCurrentBrowser()
-                .getDriver()
-                .getTitle();
-        verify().that(error.contains("Access is closed"))
-                .ifResultIsExpected("User can see error 'Access is closed'")
-                .ifElse("User cannot see error 'Access is closed!', but see '" + error + "'")
-                .finish();
+        if (name_2.isEmpty()) {
+            verify().that(true)
+                    .ifResultIsExpected("All user can see post")
+                    .ifElse("")
+                    .finish();
+        } else {
+            open(LoginPageUnlogged.class)
+                    .authorizeBy(name_2, workWithDB().getUserPassword(name_2));
+            open(MyJournalPage.class, new Url()
+                    .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                    .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+            String error = getCurrentBrowser()
+                    .getDriver()
+                    .getTitle();
+            verify().that(error.contains("Access is closed"))
+                    .ifResultIsExpected("User can see error 'Access is closed'")
+                    .ifElse("User cannot see error 'Access is closed!', but see '" + error + "'")
+                    .finish();
+        }
     }
 
     //Scenario: Privacy in editing(3/3)

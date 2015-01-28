@@ -20,10 +20,10 @@ public class LogInWithCorrectData extends WebTest {
     }
 
     //Scenario: Successfully autorization(2/3)
-    @When("user enter correct data: name $name, password $password and clicks LogIn")
-    public void user_enter_correct_data_and_clicks_LogIn(String name, String password) {
+    @When("user enter correct data: name $name and clicks LogIn")
+    public void user_enter_correct_data_and_clicks_LogIn(String name) {
         onOpened(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, workWithDB().getUserPassword(name));
     }
 
     //Scenario: Successfully autorization(3/3)

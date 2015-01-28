@@ -2,13 +2,13 @@ Scenario: New user From Main Page
 Meta: 
 @categories feed comfortable
 
-Given new login user (name <name>, password <password>)on Main Page
+Given new login user (name <name>)on Main Page
 When user click on the Friend Feed in the Header
 Then user in correct page <page> with URL <URL>
 
 Examples:
-|name       |password   |page           |URL    |
-|test765765 |test       |Friend Feed    |/feed  |
+|name       |page           |URL    |
+|test765765 |Friend Feed    |/feed  |
 
 
 Scenario: New user From Journal
