@@ -9,7 +9,10 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
+import static com.livejournal.uitests.utility.iterations.EqualityOfArrayLists.isEqual;
+import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -111,22 +114,12 @@ public class UsersPost extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        System.out.println("=============" + getCurrentUrl());
-        verify().that(onOpened(EditJournalbml.class).getCurrentPrivacy().equals(privacy))
-                .ifResultIsExpected("User see correct privacy " + privacy)
-                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
-                .finish();
-    }
-
-    /////////////////////////////////////////////////////////////////////
-    private void selectScriptForStyle() {
-        String script = "return jQuery('.b-singlepost-body.entry-content.e-content')[0].textContent";
-        try {
-            ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-            ThucydidesUtils.putToSession("script", script);
-        } catch (Exception ex) {
-            ThucydidesUtils.putToSession("script", "return jQuery('.j-e-text')[0].textContent");
-        }
+        ArrayList<String> privacyParsed = getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n");
+        ArrayList<String> privacyIncoming = getParsedString(privacy + ";" + group,";");
+         verify().that(isEqual(privacyParsed, privacyIncoming))
+         .ifResultIsExpected("User see correct privacy " + privacy +" "+ group)
+         .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+         .finish();
     }
 
     //Scenario: Restore privacy from draft (3/3)

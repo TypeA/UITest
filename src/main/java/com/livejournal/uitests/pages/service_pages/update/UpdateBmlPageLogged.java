@@ -76,7 +76,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return onOpened(UpdateBmlPageLogged.class);
     }
 
-
     @StepGroup
     public void postEntry() {
         addPostButton.click();
@@ -106,5 +105,22 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
             privasy.add(allSecurity.get(i).getText());
         }
         return privasy;
+    }
+
+    @StepGroup
+    public String getCurrentPrivacy() {
+
+        String text = privacySelect.getFirstSelectedOption().getText();
+        if (text.equals("Custom")) {
+            Integer size = Integer.valueOf(startScript("return jQuery('.privacy-item.ng-scope label input').size()").toString());
+            for (Integer i = 1; i < size; i++) {
+                if (startScript("return jQuery(\".privacy-item.ng-scope label input\").eq(" + i.toString() + ").is(':checked')").toString().equals("true")) {
+                    text = text + "\n" + startScript("return jQuery(\".privacy-item.ng-scope label span\").eq(" + i.toString() + ").text()").toString();
+                }
+            }
+        } else {
+            return text;
+        }
+        return text;
     }
 }
