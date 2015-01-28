@@ -16,6 +16,7 @@ public class DB extends WebTest {
         List<ArrayList<String>> ans = workWithDB().findAllFriendsInGroups("testautotest");
 
         for (int i = 0; i < ans.size(); i++) {
+            System.out.println(" ");
             ArrayList<String> dop = ans.get(i);
             for (int j = 0; j < dop.size(); j++) {
                 System.out.println(dop.get(j));
