@@ -39,10 +39,11 @@ public class UsersPost extends WebTest {
     @When("user create new post with privacy $privacy (group $group)")
     public void user_create_new_post_with_privacy(String privacy, String group) {
         String postText = RandomText.getRandomText(30);
+        ArrayList<String> privacyIncoming = getParsedString(privacy + ";" + group,";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
-                .setPrivacy(privacy, group)
+                .setPrivacy(privacyIncoming)
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
@@ -53,9 +54,10 @@ public class UsersPost extends WebTest {
     //Scenario: Restore privacy from draft (1/3)
     @When("user write new post with privacy $privacy (group $group)")
     public void user_write_new_post_with_privacy(String privacy, String group) {
+        ArrayList<String> privacyIncoming = getParsedString(privacy + ";" + group,";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setPrivacy(privacy, group);
+                .setPrivacy(privacyIncoming);
     }
 
     //Scenario: Create post (3/4)

@@ -15,7 +15,7 @@ Examples:
 |testautotest   |testautotest   |test_fgroup   |Private     |          |
 
          
-Scenario: Privacy in editing
+Scenario: Privacy in editing 
 Meta: 
 @categories feed privacy
 
@@ -24,11 +24,11 @@ When user create new post with privacy <privacy> (group <group>)
 Then user see correct privacy <privacy> (group <group>) when edit this post
 
 Examples:
-|name           |privacy     |group     |
-|testautotest   |Public      |          |
-|testautotest   |Friends     |          |
-|testautotest   |Custom      |test_group|
-|testautotest   |Private     |          |
+|name           |privacy     |group                         |
+|testautotest   |Public      |                              |
+|testautotest   |Friends     |                              |
+|testautotest   |Custom      |test_group;Work;Local Friends |
+|testautotest   |Private     |                              |
 
 
 
@@ -63,7 +63,3 @@ Examples:
 |testautotest   |Friends     |          |
 |testautotest   |Custom      |test_group|
 |testautotest   |Private     |          |
-
-
-
-
