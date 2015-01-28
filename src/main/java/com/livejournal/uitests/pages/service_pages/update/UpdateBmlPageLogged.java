@@ -65,16 +65,17 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
             default:
                 Assert.fail("Unknown edit type " + editorType + "!");
         }
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy, String group) {
+    public UpdateBmlPageLogged setPrivacy(String privacy,ArrayList<String> group) {
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
-            this.startScript("jQuery(\"label:contains('" + group + "')\").click()");
+            for(int i=0;i<group.size();i++)
+            this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
         }
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
@@ -87,17 +88,16 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged closeDraft() {
         try {
             closeDraftButton.click();
-            return onOpened(UpdateBmlPageLogged.class);
+            return this;
         } catch (Exception ex) {
-            return onOpened(UpdateBmlPageLogged.class);
+            return this;
         }
     }
 
     @StepGroup
     public UpdateBmlPageLogged restoreFromDraft() {
         restoreDraft.click();
-        return onOpened(UpdateBmlPageLogged.class);
-    }
+        return this;
 
     @StepGroup
     public String getCurrentPrivacy() {
@@ -111,5 +111,22 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
             privasy.add(allSecurity.get(i).getText());
         }
         return privasy;
+    }
+
+    @StepGroup
+    public String getCurrentPrivacy() {
+
+        String text = privacySelect.getFirstSelectedOption().getText();
+        if (text.equals("Custom")) {
+            Integer size = Integer.valueOf(startScript("return jQuery('.privacy-item.ng-scope label input').size()").toString());
+            for (Integer i = 1; i < size; i++) {
+                if (startScript("return jQuery(\".privacy-item.ng-scope label input\").eq(" + i.toString() + ").is(':checked')").toString().equals("true")) {
+                    text = text + "\n" + startScript("return jQuery(\".privacy-item.ng-scope label span\").eq(" + i.toString() + ").text()").toString();
+                }
+            }
+        } else {
+            return text;
+        }
+        return text;
     }
 }

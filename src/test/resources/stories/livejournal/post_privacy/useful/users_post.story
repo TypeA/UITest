@@ -15,20 +15,20 @@ Examples:
 |testautotest   |testautotest    |friend        |Private     |          |
 
          
-Scenario: Privacy in editing
+Scenario: Privacy in editing 
 Meta: 
-@categories feed privacy 
+@categories feed privacy
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
-Then user see correct privacy <privacy> (group <group>) when edit this post
+Then user see correct privacy <privacy_1> (group <group_1>) when edit this post
 
 Examples:
-|name           |privacy     |group     |
-|testautotest   |Public      |          |
-|testautotest   |Friends     |          |
-|testautotest   |Custom      |test_group|
-|testautotest   |Private     |          |
+|name           |privacy     |group                         |privacy_1     |group_1                       |
+|testautotest   |Public      |                              |Public        |                              |
+|testautotest   |Friends     |                              |Friends       |                              |
+|testautotest   |Custom      |test_group;Work;Local Friends |Custom        |test_group;Work;Local Friends |
+|testautotest   |Private     |                              |Private       |                              |
 
 
 
@@ -36,16 +36,17 @@ Scenario: Edit post
 Meta: 
 @categories feed privacy
 
-Given logged user (name <name>, password <password>) with post <post> with privacy <privacy>
-When user edit privacy <privacy_1> in post
-Then user see privacy <privacy_1> in post <post>
+Given logged user <name> on Create Post page
+When user create new post with privacy <privacy> (group <group>)
+When user edit privacy <privacy_1> (group <group_1>) and save post
+Then user see correct privacy <privacy_1> (group <group_1>) when edit this post
 
 Examples:
-|name           |password   |post           |privacy            |privacy_1          |
-|testautotest   |test       |PostsGenerate  |public             |friends            |
-|testautotest   |test       |PostsGenerate  |friends            |custom PostPrivacy |
-|testautotest   |test       |PostsGenerate  |custom PostPrivacy |private            |
-|testautotest   |test       |PostsGenerate  |private            |public             |
+|name           |privacy     |group                         |privacy_1      |group_1                       |
+|testautotest   |Public      |                              |Private        |                              |
+|testautotest   |Friends     |                              |Public         |                              |
+|testautotest   |Custom      |test_group;Work;Local Friends |Friends        |                              |
+|testautotest   |Private     |                              |Custom         |test_group;Work;Local Friends |                            |
 
 
 
@@ -63,7 +64,3 @@ Examples:
 |testautotest   |Friends     |          |
 |testautotest   |Custom      |test_group|
 |testautotest   |Private     |          |
-
-
-
-

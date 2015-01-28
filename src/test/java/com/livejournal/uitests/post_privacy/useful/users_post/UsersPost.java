@@ -9,7 +9,10 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
+import static com.livejournal.uitests.utility.iterations.EqualityOfArrayLists.isEqual;
+import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -24,6 +27,7 @@ public class UsersPost extends WebTest {
     //Scenario: Create post (1/4)
     //Scenario: Privacy in editing (1/3)
     //Scenario: Restore privacy from draft (1/3)
+    //Scenario: Edit post(1/4)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -34,13 +38,14 @@ public class UsersPost extends WebTest {
 
     //Scenario: Create post (2/4)
     //Scenario: Privacy in editing(2/3)
+    //Scenario: Edit post(2/4)
     @When("user create new post with privacy $privacy (group $group)")
     public void user_create_new_post_with_privacy(String privacy, String group) {
         String postText = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
-                .setPrivacy(privacy, group)
+                .setPrivacy(privacy,getParsedString(group, ";"))
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
@@ -48,12 +53,25 @@ public class UsersPost extends WebTest {
         ThucydidesUtils.putToSession("post_text", postText);
     }
 
-    //Scenario: Restore privacy from draft (2/3)
+    //Scenario: Edit post(3/4)
+    @When("user edit privacy $privacy_1 (group $group_1) and save post")
+    public void user_edit_privacy_and_save_post(String privacy_1, String group_1) {
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        onOpened(EntryPage.class).clickOnEditButton();
+        onOpened(EditJournalbml.class).setPrivacy(privacy_1,getParsedString(group_1, ";"))
+                .saveEntry();
+        
+
+    }
+
+    //Scenario: Restore privacy from draft (1/3)
     @When("user write new post with privacy $privacy (group $group)")
     public void user_write_new_post_with_privacy(String privacy, String group) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setPrivacy(privacy, group);
+                .setPrivacy(privacy,getParsedString(group, ";"));
     }
 
     //Scenario: Create post (3/4)
@@ -102,14 +120,17 @@ public class UsersPost extends WebTest {
     }
 
     //Scenario: Privacy in editing(3/3)
-    @Then("user see correct privacy $privacy (group $group) when edit this post")
-    public void user_see_correct_privacy_when_edit_this_post(String privacy, String group) throws InterruptedException {
+    //Scenario: Edit post(4/4)
+    @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
+    public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) throws InterruptedException {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        verify().that(onOpened(EditJournalbml.class).getCurrentPrivacy().equals(privacy))
-                .ifResultIsExpected("User see correct privacy " + privacy)
+      //  ArrayList<String> privacyParsed = getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n");
+      //  ArrayList<String> privacyIncoming = getParsedString(privacy + ";" + group, ";");
+        verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
+                .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
                 .finish();
     }
