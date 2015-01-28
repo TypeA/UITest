@@ -8,11 +8,11 @@ Then user <name_1> can read the post
 Then user <name_2> cannot read the post
 
 Examples:
-|name           |name_1         |name_2        |privacy     |group     | 
-|testautotest   |test           |              |Public      |          |
-|testautotest   |test_infriend  |test          |Friends     |          |
-|testautotest   |test_fgroup    |test          |Custom      |test_group|
-|testautotest   |testautotest   |test_fgroup   |Private     |          |
+|name           |name_1          |name_2        |privacy     |group     | 
+|testautotest   |test            |not_friend    |Public      |          |
+|testautotest   |friend          |not_friend    |Friends     |          |
+|testautotest   |friend_in_group |friend        |Custom      |test_group|
+|testautotest   |testautotest    |friend        |Private     |          |
 
          
 Scenario: Privacy in editing

@@ -13,6 +13,7 @@ import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 
 /**
  *
@@ -26,7 +27,7 @@ public class UsersPost extends WebTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, getUserPassword(name));
+                .authorizeBy(name, workWithDB().getUserPassword(name));
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
     }
@@ -61,11 +62,8 @@ public class UsersPost extends WebTest {
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
-        if (name_1.isEmpty()) {
-        } else {
-            open(LoginPageUnlogged.class)
-                    .authorizeBy(name_1, getUserPassword(name_1));
-        }
+        open(LoginPageUnlogged.class)
+                .authorizeBy(name_1, workWithDB().getUserPassword(name_1));
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -82,25 +80,18 @@ public class UsersPost extends WebTest {
     //Scenario: Create post (4/4)
     @Then("user $name_2 cannot read the post")
     public void user_cannot_read_post(String name_2) throws InterruptedException {
-        if (name_2.isEmpty()) {
-            verify().that(true)
-                    .ifResultIsExpected("All user can see post")
-                    .ifElse("")
-                    .finish();
-        } else {
-            open(LoginPageUnlogged.class)
-                    .authorizeBy(name_2, getUserPassword(name_2));
-            open(MyJournalPage.class, new Url()
-                    .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                    .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-            String error = getCurrentBrowser()
-                    .getDriver()
-                    .getTitle();
-            verify().that(error.contains("Access is closed"))
-                    .ifResultIsExpected("User can see error 'Access is closed'")
-                    .ifElse("User cannot see error 'Access is closed!', but see '" + error + "'")
-                    .finish();
-        }
+        open(LoginPageUnlogged.class)
+                .authorizeBy(name_2, workWithDB().getUserPassword(name_2));
+        open(MyJournalPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        String error = getCurrentBrowser()
+                .getDriver()
+                .getTitle();
+        verify().that(error.contains("Access is closed"))
+                .ifResultIsExpected("User can see error 'Access is closed'")
+                .ifElse("User cannot see error 'Access is closed!', but see '" + error + "'")
+                .finish();
     }
 
     //Scenario: Privacy in editing(3/3)
@@ -125,6 +116,21 @@ public class UsersPost extends WebTest {
                 .ifResultIsExpected("User see correct privacy " + privacy)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
                 .finish();
+    }
+
+    ////////////////////////////////////////////////////////
+    private String selectFriend(String user, String type) {
+        switch (SelectUser.valueOf(type.toUpperCase())) {
+            case NOT_FRIEND:
+                return type;
+            case FRIEND:
+                return workWithDB().findFriend(user);
+            case FRIEND_IN_GROUP:
+                return type;
+            default:
+                return type;
+        }
+
     }
 
 }

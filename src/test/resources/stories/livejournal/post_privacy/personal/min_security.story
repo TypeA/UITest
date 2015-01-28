@@ -1,6 +1,6 @@
 Scenario: Min security in creating post
 Meta: 
-@categories feed privacy
+@categories feed privacy test
 
 Given logged user <name> on Security page 
 When user set min security <security>
