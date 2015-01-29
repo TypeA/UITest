@@ -11,7 +11,7 @@ public class DB extends WebTest {
     @Given("data from DB")
     public void db() throws SQLException {
 
-        System.out.println("!!!!!!!!!!!!! test start");
+   /*     System.out.println("!!!!!!!!!!!!! test start");
 
         List<ArrayList<String>> ans = workWithDB().findAllFriendsInGroups("testautotest");
 
@@ -21,7 +21,9 @@ public class DB extends WebTest {
                 System.out.println(dop.get(j));
             }
         }
-        System.out.println("!!!!!!!!!!!!! test stop");
+        System.out.println("!!!!!!!!!!!!! test stop");*/
+        
+        //this.workWithDB().findNotFriend(DEFAULT_STORY_NAME)
 
     }
 }
