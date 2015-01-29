@@ -20,8 +20,6 @@ public class DB extends WebTest {
     @Given("data from DB")
     public void db() throws SQLException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-      
-
         List<ArrayList<String>> ans = workWithDB().findAllFriendsInGroups("testautotest");
 
         for (int i = 0; i < ans.size(); i++) {
