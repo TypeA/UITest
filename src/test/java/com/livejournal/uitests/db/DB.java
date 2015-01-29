@@ -20,22 +20,7 @@ public class DB extends WebTest {
     @Given("data from DB")
     public void db() throws SQLException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-        open(LoginPageUnlogged.class)
-                .authorizeBy("test001", getUserPassword("test001"));
-        open(EntryPage.class, new Url()
-                .setPrefix("test001.")
-                .setPostfix("29731.html"));
-        onOpened(EntryPage.class).clickOnEditButton();
-        ArrayList<String> privacyParsed = getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n");
-        String privacy = "Custom";
-        String group = "Online Friends;Work;Local Friends";
-        String privacyStr = privacy + ";" + group;
-        ArrayList<String> privacyIncoming = getParsedString(privacyStr, ";");
-
-        boolean flag = isEqual(privacyParsed, privacyIncoming);
-        for (int i = 0; i < privacyParsed.size(); i++) {
-            System.out.println("<=== " + privacyParsed.get(i));
-        }
+      
 
         List<ArrayList<String>> ans = workWithDB().findAllFriendsInGroups("testautotest");
 

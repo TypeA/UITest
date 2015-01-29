@@ -48,10 +48,11 @@ public class MinSecurity extends WebTest {
     //Scenario: Min security in editing post (2/3)
     @When("user create new post with privacy $security")
     public void user_create_new_post_with_privacy(String security) {
+        ArrayList<String> g = new ArrayList<String>();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", RandomText.getRandomText(30))
-                .setPrivacy(security, "")
+                .setPrivacy(security, g)
                 .postEntry();
     }
 

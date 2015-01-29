@@ -98,10 +98,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged restoreFromDraft() {
         restoreDraft.click();
         return this;
-
-    @StepGroup
-    public String getCurrentPrivacy() {
-        return privacySelect.getFirstSelectedOption().getText();
     }
 
     public ArrayList<String> getAllPrivacy() {
