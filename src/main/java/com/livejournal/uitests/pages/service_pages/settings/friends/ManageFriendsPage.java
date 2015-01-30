@@ -56,43 +56,34 @@ public class ManageFriendsPage extends ServicePageLogged {
     private TextField selectField(int index) {
         switch (index) {
             case 1:
-                //  friend_1.enter(users.get(0));
                 return friend_1;
             case 2:
-                //     friend_2.enter(users.get(1));
                 return friend_2;
             case 3:
-                //     friend_3.enter(users.get(2));
                 return friend_3;
             case 4:
-                //     friend_4.enter(users.get(3));
                 return friend_4;
             case 5:
-                //  friend_5.enter(users.get(4));
                 return friend_5;
             case 6:
-                //     friend_6.enter(users.get(5));
                 return friend_6;
             case 7:
-                //     friend_7.enter(users.get(6));
                 return friend_7;
             case 8:
-                //     friend_8.enter(users.get(7));
                 return friend_8;
             case 9:
-                //     friend_9.enter(users.get(8));
                 return friend_9;
             case 10:
-                //     friend_10.enter(users.get(9));
                 return friend_10;
             default: return friend_1;
         }
     }
-public void typeName(ArrayList<String> users)
+public ManageFriendsPage typeName(ArrayList<String> users)
 {
     for(int i=1;i<users.size()+1;i++)
     {
         selectField(i).enter(users.get(i-1));
     }
+    return this;
 }
 }

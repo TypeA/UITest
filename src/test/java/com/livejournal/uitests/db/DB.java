@@ -20,7 +20,7 @@ public class DB extends WebTest {
     @Given("data from DB")
     public void db() throws SQLException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-        List<ArrayList<String>> answer = workWithDB().findAllFriendsInGroups("testautotest");
+      /*  List<ArrayList<String>> answer = workWithDB().findAllFriendsInGroups("testautotest");
 
         System.out.println("ans в тесте");
         for (int i = 0; i < answer.size(); i++) {
@@ -30,7 +30,7 @@ public class DB extends WebTest {
                 System.out.println(dop.get(j));
             }
         }
-
+*/
         System.out.println("!!!!!!!!!!!!! test stop");
 
     }

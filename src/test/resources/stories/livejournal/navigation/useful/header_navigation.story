@@ -1,7 +1,7 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful dbdb
+@categories navigation useful
 
 Given logged user (name <name>) on Main Page
 When user goes from page <page> using link <link>
