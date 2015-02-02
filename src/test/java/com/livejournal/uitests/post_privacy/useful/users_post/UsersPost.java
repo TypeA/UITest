@@ -13,10 +13,10 @@ import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
 import static com.livejournal.uitests.utility.iterations.EqualityOfArrayLists.isEqual;
 import java.util.ArrayList;
+import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.junit.Assert;
 
 /**
  *
@@ -45,12 +45,13 @@ public class UsersPost extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
-                .setPrivacy(privacy,getParsedString(group, ";"))
+                .setPrivacy(privacy, getParsedString(group, ";"))
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
         ThucydidesUtils.putToSession("post_text", postText);
+        ThucydidesUtils.putToSession("friend_group", group);
     }
 
     //Scenario: Edit post(3/4)
@@ -60,10 +61,8 @@ public class UsersPost extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        onOpened(EditJournalbml.class).setPrivacy(privacy_1,getParsedString(group_1, ";"))
+        onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
                 .saveEntry();
-        
-
     }
 
     //Scenario: Restore privacy from draft (1/3)
@@ -71,17 +70,18 @@ public class UsersPost extends WebTest {
     public void user_write_new_post_with_privacy(String privacy, String group) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setPrivacy(privacy,getParsedString(group, ";"));
+                .setPrivacy(privacy, getParsedString(group, ";"));
     }
 
     //Scenario: Create post (3/4)
     @Then("user $name_1 can read the post")
-    public void user_can_read_post(String name_1) throws InterruptedException {
+    public void user_can_read_post(String name_1) {
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
+        String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
-                .authorizeBy(name_1, workWithDB().getUserPassword(name_1));
+                .authorizeBy(user, workWithDB().getUserPassword(user));
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -104,8 +104,9 @@ public class UsersPost extends WebTest {
                     .ifElse("")
                     .finish();
         } else {
+            String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
-                    .authorizeBy(name_2, workWithDB().getUserPassword(name_2));
+                    .authorizeBy(user, workWithDB().getUserPassword(user));
             open(MyJournalPage.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -127,8 +128,6 @@ public class UsersPost extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-      //  ArrayList<String> privacyParsed = getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n");
-      //  ArrayList<String> privacyIncoming = getParsedString(privacy + ";" + group, ";");
         verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
@@ -147,16 +146,26 @@ public class UsersPost extends WebTest {
     }
 
     ////////////////////////////////////////////////////////
-    private String selectFriend(String user, String type) {
+    @StepGroup
+    private String selectFriend(String user, String type, String group) {
         switch (SelectUser.valueOf(type.toUpperCase())) {
             case NOT_FRIEND:
-                return type;
+                return workWithDB().findNotFriend(user);
             case FRIEND:
-                return workWithDB().findFriend(user);
+                return workWithDB().findFriendWithoutGroup(user);
             case FRIEND_IN_GROUP:
-                return type;
+                ArrayList<String> in_group = workWithDB().findFriendInGroup(user, group);
+                String user_in_group = workWithDB().findFriendInGroup(user, group).get(0);
+                for (int i = 0; i < in_group.size(); i++) {
+                    if (in_group.get(i).contains("test")) {
+                        user_in_group = in_group.get(i);
+                    }
+                }
+                return user_in_group;
+            case CURRENT_USER:
+                return user;
             default:
-                return type;
+                return user;
         }
 
     }

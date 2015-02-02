@@ -8,5 +8,6 @@ package com.livejournal.uitests.post_privacy.useful.users_post;
 public enum SelectUser {
     NOT_FRIEND,
     FRIEND,
-    FRIEND_IN_GROUP;
+    FRIEND_IN_GROUP,
+    CURRENT_USER;
 }

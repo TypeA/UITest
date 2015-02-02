@@ -20,17 +20,14 @@ public class DB extends WebTest {
     @Given("data from DB")
     public void db() throws SQLException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-       // ArrayList<String> answer = workWithDB().findNotFriends("test", 50);
 
-
-        System.out.println(workWithDB().findNotFriend("test"));
-
-/*
-            for (int j = 0; j < answer.size(); j++) {
-                System.out.println(answer.get(j));
-            }*/
-      
-
+     //   ArrayList<String> ans = workWithDB().findFriendInGroup("testautotest", "Work");
+        System.out.println(workWithDB().findFriendWithoutGroup("testautotest"));
+        /*
+         for (int j = 0; j < ans.size(); j++) {
+         System.out.println(ans.get(j));
+         }
+         */
         System.out.println("!!!!!!!!!!!!! test stop");
 
     }
