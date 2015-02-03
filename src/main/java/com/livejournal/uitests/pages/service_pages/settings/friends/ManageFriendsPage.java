@@ -48,6 +48,12 @@ public class ManageFriendsPage extends ServicePageLogged {
     @FindBy(css = ".b-standout .b-flatbutton")
     private Button saveChanges;
 
+    @FindBy(name = "filter")
+    private TextField filterByName;
+
+    @FindBy(css = "form[method=get] .b-flatbutton")
+    private Button filterButton;
+
     public FinishForm clickSaveChangesButton() {
         saveChanges.click();
         return onDisplayed(FinishForm.class);
@@ -75,15 +81,31 @@ public class ManageFriendsPage extends ServicePageLogged {
                 return friend_9;
             case 10:
                 return friend_10;
-            default: return friend_1;
+            default:
+                return friend_1;
         }
     }
-public ManageFriendsPage typeName(ArrayList<String> users)
-{
-    for(int i=1;i<users.size()+1;i++)
-    {
-        selectField(i).enter(users.get(i-1));
+
+    public ManageFriendsPage typeName(ArrayList<String> users) {
+        for (int i = 1; i < users.size() + 1; i++) {
+            selectField(i).enter(users.get(i - 1));
+        }
+        return this;
     }
-    return this;
-}
+
+    public ManageFriendsPage applyFilter(String user) {
+        filterByName.enter(user);
+        filterButton.click();
+        return this;
+    }
+
+    public ArrayList<String> getFriendsOnPage() {
+        Integer i = 0;
+        Integer n = Integer.valueOf(startScript("return jQuery(\"table[id='editfriends'] tbody tr td b\").size()").toString());
+        ArrayList<String> friendsOnPage = new ArrayList();
+        for (i = 0; i < n; i++) {
+            friendsOnPage.add(startScript("return jQuery(\"table[id='editfriends'] tbody tr td b\").eq(" + i.toString() + ").text()").toString());
+        }
+        return friendsOnPage;
+    }
 }

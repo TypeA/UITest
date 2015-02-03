@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageFriendsPage;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
-import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -32,9 +31,26 @@ public class AddFriend extends WebTest {
 
     @Then("user $users should be added as a friend")
     public void user_should_be_added_as_a_friend(String users) {
-        boolean flag=this.workWithDB().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users,";"));
-        System.out.println("======================= "+flag);
-        
-        
+        open(ManageFriendsPage.class);
+        verify().that(workWithDB().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
+                .ifResultIsExpected("Users " + users + " are successfuly added as a friends in DB")
+                .ifElse("Users " + users + " are not successfuly added as a friends in DB")
+                .and()
+                .that(onPageVerification(users))
+                .ifResultIsExpected("Users "+users+" are displayed on the page")
+                .ifElse("Users "+users+" are not displayed on the page")
+                .finish();
+
+    }
+
+    private boolean onPageVerification(String users) {
+        boolean flag = true;
+        for (int i = 0; i < getParsedString(users, ";").size(); i++) {
+            boolean f = onOpened(ManageFriendsPage.class).applyFilter(getParsedString(users, ";").get(i))
+                    .getFriendsOnPage()
+                    .contains(getParsedString(users, ";").get(i));
+            flag = flag & f;
+        }
+        return flag;
     }
 }
