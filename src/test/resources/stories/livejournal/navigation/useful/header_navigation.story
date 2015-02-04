@@ -51,7 +51,7 @@ Examples:
 Scenario: Navigation for unlogged user
 
 Meta: 
-@categories navigation useful
+@categories navigation useful dbdb
 
 Given unlogged user from region <region> on Main Page
 When unlogged user goes from page <page> using link <link>
