@@ -1,8 +1,8 @@
 Scenario: Add friend
 Meta: 
-@categories friends useful
+@categories friends useful dbdb
 
-Given logged user (name <name>, password <password>) on ManageFriendsPage
+Given logged user (name <name>) on ManageFriendsPage
 When user type user <users> and save changes
 Then user <users> should be added as a friend
 
