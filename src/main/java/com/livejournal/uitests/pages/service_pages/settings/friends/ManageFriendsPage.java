@@ -108,4 +108,16 @@ public class ManageFriendsPage extends ServicePageLogged {
         }
         return friendsOnPage;
     }
+    
+    public ManageFriendsPage removeFriend(ArrayList<String> users)
+    {
+        for (int i=0;i<users.size();i++)
+        {
+            applyFilter(users.get(i));
+            this.startScript("jQuery(\"td input[id='editfriend_keep_"+users.get(i)+"']\").click()");
+            clickSaveChangesButton();
+            open(ManageFriendsPage.class);
+        }
+        return this;
+    }
 }

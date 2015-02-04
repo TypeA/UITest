@@ -5,6 +5,7 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.settings.friends.ManageFriendsPage;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
@@ -20,18 +21,13 @@ public class DB extends WebTest {
     @Given("data from DB")
     public void db() throws SQLException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-      /*  List<ArrayList<String>> answer = workWithDB().findAllFriendsInGroups("testautotest");
-
-        System.out.println("ans в тесте");
-        for (int i = 0; i < answer.size(); i++) {
-            System.out.println(" ");
-            ArrayList<String> dop = answer.get(i);
-            for (int j = 0; j < dop.size(); j++) {
-                System.out.println(dop.get(j));
-            }
-        }
-*/
-        System.out.println("!!!!!!!!!!!!! test stop");
+        open(LoginPageUnlogged.class)
+                .authorizeBy("testautotest", workWithDB().getUserPassword("testautotest"));
+        ArrayList<String> users = new ArrayList<String>();
+        users.add("wwwasserman");
+        users.add("manyfriends");
+        open(ManageFriendsPage.class)
+                .removeFriend(users);
 
     }
 }
