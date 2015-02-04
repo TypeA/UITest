@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.login_page;
 
+import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -21,8 +22,9 @@ public class LoginPageUnlogged extends ServicePageUnlogged {
     public LoginForm loginForm;
 
     @StepGroup
-    public void authorizeBy(String login, String password) {
+    public LJPage authorizeBy(String login, String password) {
         loginForm.authorizeBy(login, password);
+        return onOpened(LJPage.class);
     }
 
     @StepGroup

@@ -69,7 +69,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy,ArrayList<String> group) {
+    public UpdateBmlPageLogged setPrivacy(String privacy,ArrayList<String> group) throws InterruptedException {
+        Thread.sleep(2500);
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
             for(int i=0;i<group.size();i++)
@@ -95,8 +96,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged restoreFromDraft() {
+    public UpdateBmlPageLogged restoreFromDraft() throws InterruptedException {
         restoreDraft.click();
+       // Thread.sleep(10000);
         return this;
     }
 

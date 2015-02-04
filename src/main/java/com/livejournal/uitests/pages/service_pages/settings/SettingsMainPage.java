@@ -16,8 +16,22 @@ import ru.yandex.qatools.htmlelements.element.Select;
 @DefaultUrl("/manage/settings/")
 public class SettingsMainPage extends ServicePageLogged {
 
-    @FindBy(css = "[value='Save']")
+    @FindBy(css = "div[id*='settings_save'] button")
     private Button saveSettings;
+
+    public SettingsMainPage saveSettings() {
+        saveSettings.click();
+        return this;
+    }
+
+    //////////////////////////display
+    @FindBy(name = "LJ__Setting__Language_lang")
+    private Select language;
+
+    public SettingsMainPage setLanguage(String lang) {
+        language.selectByValue(lang);
+        return this;
+    }
 
     //////////////////////////privacy
     @FindBy(id = "LJ__Setting__MinSecurity_minsecurity")
@@ -28,8 +42,4 @@ public class SettingsMainPage extends ServicePageLogged {
         return this;
     }
 
-    public SettingsMainPage saveSettings() {
-        saveSettings.click();
-        return this;
-    }
 }

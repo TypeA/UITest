@@ -5,6 +5,8 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
+import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
@@ -21,13 +23,18 @@ public class DB extends WebTest {
     public void db() throws SQLException {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
 
-     //   ArrayList<String> ans = workWithDB().findFriendInGroup("testautotest", "Work");
-        System.out.println(workWithDB().findFriendWithoutGroup("testautotest"));
-        /*
-         for (int j = 0; j < ans.size(); j++) {
-         System.out.println(ans.get(j));
-         }
-         */
+        ArrayList<String> ans = workWithDB().findNotFriends("testautotest", 50);
+        System.out.println("-------- all");
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.println(ans.get(i));
+        }
+
+      /*  ans = workWithDB().findFriendWithoutGroup("testautotest");
+        System.out.println("-------- users");
+        for (int i = 0; i < ans.size(); i++) {
+            System.out.println(ans.get(i));
+        }*/
+
         System.out.println("!!!!!!!!!!!!! test stop");
 
     }

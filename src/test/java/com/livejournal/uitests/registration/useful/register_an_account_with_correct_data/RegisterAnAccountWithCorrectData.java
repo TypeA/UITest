@@ -22,6 +22,7 @@ public class RegisterAnAccountWithCorrectData extends WebTest {
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         open(CreateAccountPage.class);
+       // this.addCookie(DEFAULT_STORY_NAME, DEFAULT_STORY_NAME);
     }
 
 

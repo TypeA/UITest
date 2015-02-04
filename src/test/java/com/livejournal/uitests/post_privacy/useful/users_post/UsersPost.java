@@ -31,7 +31,9 @@ public class UsersPost extends WebTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .defoultLanguage(name)
+                .defoultMinSecurity(name);
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
     }
@@ -40,7 +42,7 @@ public class UsersPost extends WebTest {
     //Scenario: Privacy in editing(2/3)
     //Scenario: Edit post(2/4)
     @When("user create new post with privacy $privacy (group $group)")
-    public void user_create_new_post_with_privacy(String privacy, String group) {
+    public void user_create_new_post_with_privacy(String privacy, String group) throws InterruptedException {
         String postText = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -67,9 +69,10 @@ public class UsersPost extends WebTest {
 
     //Scenario: Restore privacy from draft (1/3)
     @When("user write new post with privacy $privacy (group $group)")
-    public void user_write_new_post_with_privacy(String privacy, String group) {
+    public void user_write_new_post_with_privacy(String privacy, String group) throws InterruptedException {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .createPost("Test for privacy", "html", "privacy " + privacy)
                 .setPrivacy(privacy, getParsedString(group, ";"));
     }
 
@@ -81,7 +84,8 @@ public class UsersPost extends WebTest {
                 .clickOnLogOut();
         String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, workWithDB().getUserPassword(user));
+                .authorizeBy(user, workWithDB().getUserPassword(user))
+                .defoultLanguage(user);
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -106,7 +110,8 @@ public class UsersPost extends WebTest {
         } else {
             String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, workWithDB().getUserPassword(user));
+                    .authorizeBy(user, workWithDB().getUserPassword(user))
+                    .defoultLanguage(user);
             open(MyJournalPage.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -136,7 +141,7 @@ public class UsersPost extends WebTest {
 
     //Scenario: Restore privacy from draft (3/3)
     @Then("user can restore this post with privacy $privacy (group $group) from draft")
-    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group) {
+    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group) throws InterruptedException {
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
         verify().that(onOpened(UpdateBmlPageLogged.class).getCurrentPrivacy().equals(privacy))
