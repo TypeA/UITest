@@ -96,9 +96,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged restoreFromDraft() throws InterruptedException {
+    public UpdateBmlPageLogged restoreFromDraft(){
         restoreDraft.click();
-       // Thread.sleep(10000);
         return this;
     }
 

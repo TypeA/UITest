@@ -141,7 +141,7 @@ public class UsersPost extends WebTest {
 
     //Scenario: Restore privacy from draft (3/3)
     @Then("user can restore this post with privacy $privacy (group $group) from draft")
-    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group) throws InterruptedException {
+    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group){
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
         verify().that(onOpened(UpdateBmlPageLogged.class).getCurrentPrivacy().equals(privacy))
