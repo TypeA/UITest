@@ -9,7 +9,6 @@ import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.Cookie;
 
 /**
  *
@@ -20,8 +19,6 @@ public class HeaderNavigation extends WebTest {
     //Scenario: Navigation for logged user (1/3)
     @Given("logged user (name $name) on Main Page")
     public void logged_user_on_Main_Page(String name) {
-        open(LoginPageUnlogged.class);
-        getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
         open(LoginPageUnlogged.class)
                 .authorizeBy(name,workWithDB().getUserPassword(name));
     }
@@ -29,12 +26,7 @@ public class HeaderNavigation extends WebTest {
     //Scenario: Navigation for unlogged user (1/3)   
     @Given("unlogged user from region $region on Main Page")
     public void unlogged_user_from_region_on_Main_Page(String region) {
-        open(LoginPageUnlogged.class);
-        if (region.equals("cyr")) {
-            this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("fake_ipclass", "russia"));
-            this.getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
-        }         
-        open(MainPageUnlogged.class);
+        open(MainPageUnlogged.class).regionSwitch(region);
     }
 
     //Scenario: Navigation for logged user (2/3)

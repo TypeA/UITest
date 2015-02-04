@@ -4,6 +4,7 @@ import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.Root;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import junit.framework.Assert;
 
 /**
@@ -78,4 +79,16 @@ public class LJPage extends Page {
         return this;
     }
 
+    public void regionSwitch(String reg) {
+        switch (reg) {
+            case "cyr":
+                addCookie("fake_ipclass", "russia");
+                open(MainPageUnlogged.class);
+                break;
+            case "noncyr":
+                addCookie("fake_ipclass", "US");
+                open(MainPageUnlogged.class);
+                break;
+        }
+    }
 }
