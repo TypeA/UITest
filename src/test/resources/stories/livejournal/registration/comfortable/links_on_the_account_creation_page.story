@@ -8,8 +8,8 @@ When user click link <link>
 Then user in correct page <page>
 
 Examples:
-|page                       |link   |
-|TosRusPageUnlogged         |TOS    |
-|PrivacyRusPageUnlogged     |Privacy|
+|page                    |link   |
+|TosPageUnlogged         |TOS    |
+|PrivacyPageUnlogged     |Privacy|
 
 

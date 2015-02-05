@@ -62,7 +62,6 @@ Scenario: Register an account with incorrect password
 
 Meta: 
 @categories registration useful
-@issue LJSUP-19397
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -128,8 +127,8 @@ Then in Popup user see message $message and button Create Account is not active
 
 
 Examples:
-|name           |email  |password   |day    |month  |year   |gender |message                                                        |
-|test654rnd     |       |Pass123    |1      |4      |1990   |M      |Нужен для подтверждения регистрации и восстановления пароля    |
+|name           |email  |password   |day    |month  |year   |gender |message                                   |
+|test654rnd     |       |Pass123    |1      |4      |1990   |M      |For verification and password recovery    |
 
 
 
@@ -146,7 +145,7 @@ Then in Popup user see message $message and button Create Account is not active
 
 Examples:
 |name       |email          |password   |day    |month  |year   |gender |message                |
-|test654rnd |test@test.ru   |           |1      |4      |1990   |M      |Требования к паролю:   |
+|test654rnd |test@test.ru   |           |1      |4      |1990   |M      |Password requirements  |
 
 
 
@@ -162,9 +161,9 @@ When user enter correct data leave one age field empty: name <name>, email <emai
 Then in Popup user see message $message and button Create Account is not active
 
 Examples:
-|name       |email          |password   |day    |month  |year   |gender |message                                                                                                |
-|test654rnd |test@test.ru   |Pass123    |-1     |4      |1990   |M      |Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц    |
-|test654rnd |test@test.ru   |Pass123    |1      |-1     |1990   |M      |Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц    |
-|test654rnd |test@test.ru   |Pass123    |1      |4      |-1     |M      |Мы обязаны спрашивать вашу дату рождения по закону. По умолчанию будут показаны только день и месяц    |
+|name       |email          |password   |day    |month  |year   |gender |message                                                         |                                       |
+|test654rnd |test@test.ru   |Pass123    |-1     |4      |1990   |M      |Required by law. Only month and day are displayed by default.   |
+|test654rnd |test@test.ru   |Pass123    |1      |-1     |1990   |M      |Required by law. Only month and day are displayed by default.   |
+|test654rnd |test@test.ru   |Pass123    |1      |4      |-1     |M      |Required by law. Only month and day are displayed by default.   |
 
 

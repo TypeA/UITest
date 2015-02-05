@@ -27,7 +27,7 @@ Then user see Password Bubble which contains text <text> (link <page>)
 
 Examples:
 |password   |text                   |page                   |
-|Test123    |Требования к паролю:   |LearnMorePageUnlogged  |
+|Test123    |Password requirements  |LearnMorePageUnlogged  |
 
 
 

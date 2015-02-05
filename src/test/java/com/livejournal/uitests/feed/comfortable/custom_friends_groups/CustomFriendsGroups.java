@@ -1,4 +1,4 @@
-package com.livejournal.uitests.feed.personal.custom_friends_groups;
+package com.livejournal.uitests.feed.comfortable.custom_friends_groups;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;

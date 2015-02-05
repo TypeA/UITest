@@ -5,8 +5,8 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
-import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyRusPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosRusPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosPageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
@@ -52,11 +52,11 @@ public class CreateAccountPage extends LJPage {
     @FindBy(css = "#createpage_create")
     private Button createAccountButton;
 
-    @FindBy(css = "a[href*='legal/tos-russian-translation.bml']")
-    private Link tosRusLink;
+    @FindBy(css = "a[href*='legal/tos.bml']")
+    private Link tosLink;
 
-    @FindBy(css = "a[href*='/legal/privacy-russian-translation.bml']")
-    private Link privacyRusLink;
+    @FindBy(css = "a[href*='/legal/privacy.bml']")
+    private Link privacyLink;
 
     @StepGroup
     public CreateAccountPage createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
@@ -152,15 +152,15 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
-    public TosRusPageUnlogged clickOnTOSLink() {
-        tosRusLink.click();
-        return onOpened(TosRusPageUnlogged.class);
+    public TosPageUnlogged clickOnTOSLink() {
+        tosLink.click();
+        return onOpened(TosPageUnlogged.class);
     }
 
     @StepGroup
-    public PrivacyRusPageUnlogged clickOnPrivacyLink() {
-        privacyRusLink.click();
-        return onOpened(PrivacyRusPageUnlogged.class);
+    public PrivacyPageUnlogged clickOnPrivacyLink() {
+        privacyLink.click();
+        return onOpened(PrivacyPageUnlogged.class);
     }
 
 }

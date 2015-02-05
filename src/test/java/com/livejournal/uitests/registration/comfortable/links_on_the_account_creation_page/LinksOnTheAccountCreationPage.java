@@ -19,6 +19,8 @@ public class LinksOnTheAccountCreationPage extends WebTest {
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         open(CreateAccountPage.class);
+        addCookie("langpref", "en_LJ");
+        open(CreateAccountPage.class);
     }
 
     //Scenario: TOS link(2/3)

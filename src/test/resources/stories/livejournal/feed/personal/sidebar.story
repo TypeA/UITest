@@ -9,19 +9,19 @@ When user click Add widget and select widget <widget>
 Then widget <widget> added in sidebar
 
 Examples:
-|name   |widget             |
-|test   |Twitter Feed       |
-|test   |Facebook Feed      |
-|test   |Instagram Feed     |
-|test   |Tumblr Feed        |
-|test   |Календарь          |
-|test   |Discovery Today    |
-|test   |LiveJournal Today  |
-|test   |Interesting links  |
-|test   |Events             |
-|test   |Comments           |
-|test   |Guests             |
-|test   |Entries            |
+|name           |widget             |
+|testautotest   |Twitter Feed       |
+|testautotest   |Facebook Feed      |
+|testautotest   |Instagram Feed     |
+|testautotest   |Tumblr Feed        |
+|testautotest   |Calendar           |
+|testautotest   |Discovery Today    |
+|testautotest   |LiveJournal Today  |
+|testautotest   |Interesting links  |
+|testautotest   |Events             |
+|testautotest   |Comments           |
+|testautotest   |Guests             |
+|testautotest   |Entries            |
 
 
 
@@ -35,19 +35,19 @@ When user click Delete widget <widget>
 Then widget <widget> deleted in sidebar
 
 Examples:
-|name   |widget             |
-|test   |Twitter Feed       |
-|test   |Facebook Feed      |
-|test   |Instagram Feed     |
-|test   |Tumblr Feed        |
-|test   |Календарь          |
-|test   |Discovery Today    |
-|test   |LiveJournal Today  |
-|test   |Interesting links  |
-|test   |Events             |
-|test   |Comments           |
-|test   |Guests             |
-|test   |Entries            |
+|name           |widget             |
+|testautotest   |Twitter Feed       |
+|testautotest   |Facebook Feed      |
+|testautotest   |Instagram Feed     |
+|testautotest   |Tumblr Feed        |
+|testautotest   |Calendar           |
+|testautotest   |Discovery Today    |
+|testautotest   |LiveJournal Today  |
+|testautotest   |Interesting links  |
+|testautotest   |Events             |
+|testautotest   |Comments           |
+|testautotest   |Guests             |
+|testautotest   |Entries            |
 
 
 
@@ -60,8 +60,8 @@ When user click Up Button many time on lower widget
 Then this widget is upper
 
 Examples:
-|name   |
-|test   |
+|name           |
+|testautotest   |
 
 
 
@@ -74,8 +74,8 @@ When user click Down Button many time on top widget
 Then this widget is lower
 
 Examples:
-|name   |
-|test   |
+|name           |
+|testautotest   |
 
 
 
@@ -88,8 +88,8 @@ When user move mouse on middle widget
 Then Up and Down Buttons are displayed
 
 Examples:
-|name   |
-|test   |
+|name           |
+|testautotest   |
 
 
 
@@ -103,7 +103,7 @@ When user logged out and logged in again (name <name>, password <password>)
 Then user's layout of widgets is applied
 
 Examples:
-|name   |
-|test   |
+|name           |
+|testautotest   |
 
 

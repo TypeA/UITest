@@ -30,6 +30,8 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
     @Given("unlogged user on Registration Form")
     public void unlogged_user_on_Registration_Form() {
         open(CreateAccountPage.class);
+        addCookie("langpref", "en_LJ");
+        open(CreateAccountPage.class);
     }
 
     //Scenario: Register an account with empty age(2/3)

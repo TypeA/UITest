@@ -24,10 +24,12 @@ public class LinksOnTheFinithForm extends WebTest {
     //Scenario: Links on successfuly finish form (1/3)
     //Scenario: Links on unsuccessfuly finish form (1/3)
     @Given("new user on Finish Form (data: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender)")
-    public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {
+    public void new_user_on_Finish_Form(String name, String email, String password, String day, String month, String year, String gender) {  
         open(CreateAccountPage.class);
-        getCurrentBrowser().deleteCookies();
-        getCurrentBrowser().getDriver().manage().addCookie(new Cookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D"));
+        getCurrentBrowser().getDriver().manage().deleteAllCookies();
+        open(CreateAccountPage.class);
+        addCookie("prop_friendsfeed_tour", "%7B%22regionalrating%22%3A0%7D");
+        addCookie("langpref", "en_LJ");
         open(CreateAccountPage.class).createAccountData(new RandomName(name).get(),
                 email,
                 password,

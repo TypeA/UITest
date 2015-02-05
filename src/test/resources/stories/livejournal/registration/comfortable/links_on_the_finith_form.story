@@ -30,6 +30,7 @@ Then user in correct page <page>
 
 Examples:
 |name          |email          |password   |day    |month  |year   |gender |link               |page                          |
-|test134rnd    |test@test.ru   |Rnds123    |1      |4      |2012   |M      |MAIN_PAGE          |MainPageUnlogged              |
 |test134rnd    |test@test.ru   |Rnds123    |1      |4      |2012   |M      |UNDERAGE_ACCOUNT   |UnderageAccountPageUnlogged   |
+|test134rnd    |test@test.ru   |Rnds123    |1      |4      |2012   |M      |MAIN_PAGE          |MainPageUnlogged              |
+
 
