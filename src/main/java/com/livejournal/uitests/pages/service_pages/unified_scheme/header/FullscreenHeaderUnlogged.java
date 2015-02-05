@@ -27,7 +27,7 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
     @FindBy(css = ".s-nav-item.s-nav-item-login")
     private Link loginMenuItem;
 
-    @FindBy(css = ".s-nav-item-lang-open")
+    @FindBy(css = ".s-drop-master.s-nav-item-lang")
     private Link langSwitch;
 
     @FindBy(css = ".s-inline-search-input")
