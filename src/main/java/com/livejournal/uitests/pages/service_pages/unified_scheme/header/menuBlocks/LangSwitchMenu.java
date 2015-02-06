@@ -45,31 +45,31 @@ public class LangSwitchMenu extends UIBlock {
         switch (language.toUpperCase()) {
             case "EN":
                 langEn.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "RU":
                 langRu.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "UK":
                 langUk.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "FR":
                 langFr.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "PT":
                 langPt.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "ES":
                 langEs.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "DE":
                 langDe.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "IT":
                 langIt.click();
-                break;
+                return(ServicePageUnlogged.class);
             case "BE":
                 langBe.click();
-                break;
+                return(ServicePageUnlogged.class);
         }
         return(ServicePageUnlogged.class);
     }

@@ -16,10 +16,10 @@ import ru.yandex.qatools.htmlelements.element.Select;
 @DefaultUrl("/manage/settings/")
 public class SettingsMainPage extends ServicePageLogged {
 
-    @FindBy(css = "[value='Save']")
+    @FindBy(css = "#settings_left .b-flatbutton")
     private Button saveSettings;
 
-    //////////////////////////privacy
+    //////////////////////////privacy page
     @FindBy(id = "LJ__Setting__MinSecurity_minsecurity")
     private Select minSecurity;
 
@@ -32,4 +32,11 @@ public class SettingsMainPage extends ServicePageLogged {
         saveSettings.click();
         return this;
     }
+
+    //////////////////////////display page
+    public SettingsMainPage changeCyrServices() {
+    startScript("jQuery(\"tr td input[id='LJ__Setting__CyrillicServices_cyrillicservices']\").click()");
+    return this;
+    }
+
 }

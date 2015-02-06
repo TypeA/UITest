@@ -5,6 +5,7 @@ import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -17,10 +18,11 @@ import org.jbehave.core.annotations.When;
 public class HeaderNavigation extends WebTest {
 
     //Scenario: Navigation for logged user (1/3)
-    @Given("logged user (name $name) on Main Page")
-    public void logged_user_on_Main_Page(String name) {
+    @Given("logged user (name $name,region $region) on Main Page")
+    public void logged_user_on_Main_Page(String name,String region) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name,workWithDB().getUserPassword(name));
+        open(MainPageLogged.class).regionSwitch(name, region);
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
