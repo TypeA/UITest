@@ -46,7 +46,7 @@ public class SettingsBlock extends UIBlock {
     @FindBy(css = "a[ng-style*='element_color']")
     private ColorPickerButton elementsColor;
 
-    @FindBy(css = "a[ng-style*='element_background_color']")
+    @FindBy(css = "a[ng-style*='element_border_color']")
     private ColorPickerButton bordersColor;
 
     //////////////////// TEXT SETTINGS

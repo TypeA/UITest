@@ -43,7 +43,8 @@ public class Settings extends WebTest {
     @Given("logged user (name $name) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .defoultLanguage(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 
@@ -52,7 +53,8 @@ public class Settings extends WebTest {
     @Given("logged user (name $name) with own settings on Friends Feed")
     public void logged_user_with_own_settings_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .defoultLanguage(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         setRandomSettings();
     }
@@ -321,36 +323,75 @@ public class Settings extends WebTest {
     }
 
     //////////////////////////////////////////////////////////////////////////
-    private String getElementColor(ColorSettings button) {
+    private ArrayList<String> getElementColor(ColorSettings button) {
+        ArrayList<String> ans = new ArrayList<String>();
         switch (button) {
             case BACKGROUND_COLOR:
-                return getNecessaryValue(".p-lenta", "background-color");
+                ans.add(startScript("return jQuery('.p-lenta').css('backgroundColor')").toString());
+                return ans;
             case FOREGROUND_COLOR:
-                return getNecessaryValue(".p-lenta .l-flatslide-content, .ljcut-link:after, .ljcut-pseudolink:after", "background-color");
+                ans.add(startScript("return jQuery('.p-lenta .l-flatslide-content').css('backgroundColor')").toString());
+                return ans;
             case SIDEBAR_BACKGROUND:
-                return getNecessaryValue(".p-lenta .l-flatslide-container:after, .p-lenta .l-flatslide-aside, .p-lenta .b-feedwidgets-item", "background-color");
+                ans.add(startScript("return jQuery('.p-lenta .l-flatslide-aside').css('backgroundColor')").toString());
+                return ans;
             case ELEMENTS_BACKGROUND:
-                return getNecessaryValue(".j-e-actions, .b-lenta-calendar TABLE TH, .l-flatslide-settingslink, .l-flatslide-menu-button, .l-flatslide-menu-button:link, .b-lenta-up DIV, .b-lenta-new DIV, .b-feedwidgets-options .b-selectus, .b-mysocial-dummy-content, .b-mysocial-dummy-content:after, .b-myupdates-dummy-content, .b-myupdates-dummy-content:after, .b-todaylj-dummy-content, .b-todaylj-dummy-content:after, .b-mylinks-dummy-content, .b-mylinks-dummy-content:after", "background-color");
+                ans.add(startScript("return jQuery('.js-elem-bgcolor').css('backgroundColor')").toString());
+                ans.add(startScript("return jQuery('.b-lenta-calendar TABLE TH').css('backgroundColor')").toString());
+                ans.add(startScript("return jQuery('.b-feedwidgets-options .b-selectus').css('backgroundColor')").toString());
+                return ans;
             case ELEMENTS_COLOR:
-                return getNecessaryValue(".l-flatslide-menu-button, .l-flatslide-menu-button:link, .l-flatslide-menu-button:visited, .l-flatslide-menu-button:active, .l-flatslide-menu-button:hover, .l-flatslide-settingslink, .l-flatslide-settingslink:link, .l-flatslide-settingslink:visited, .l-flatslide-settingslink:active, .l-flatslide-settingslink:hover, .b-lenta-uparr, .j-e-actions-icon, .b-feedwidgets-move, .b-feedwidgets-close, .b-item-type-security-icon, .b-item-type-repost-icon, .j-e-nav-item-comments-icon, .j-e-nav-item-reply-icon, .b-mysocial-item-icon, .b-mysocial-item-dorepost .b-mysocial-item-icon, .b-mysocial-refresh, .b-mysocial-footer-logout-icon, .b-myupdates-item-remove, .b-todaylj-comments-icon, .ljcut-link-icon, .sbar-cal-nav-arr, .b-lenta-item-date, .b-lenta-item-journal, .b-selectus .label, .svgpreloader-background", "color");
+                ans.add(startScript("return jQuery('.js-elem-color--svgicon .svgicon').css('color')").toString());
+                ans.add(startScript("return jQuery('.b-selectus .label').css('color')").toString());
+                ans.add(startScript("return jQuery('.svgpreloader-background').css('color')").toString());
+                ans.add(startScript("return jQuery('.js-elem-color').css('color')").toString());
+                ans.add(startScript("return jQuery('.b-lenta-sidebar-title').css('color')").toString());
+                return ans;
             case BORDERS_COLOR:
-                return "ERROR!!!";
+                ans.add(startScript("return jQuery('.js-elem-bordercolor').css('borderTopColor')").toString());
+                ans.add(startScript("return jQuery('.js-elem-bordercolor--table TD').css('borderTopColor')").toString());
+                ans.add(startScript("return jQuery('.js-elem-bordercolor--table TH').css('borderTopColor')").toString());
+                ans.add(startScript("return jQuery('.b-feedwidgets-options').css('borderTopColor')").toString());
+                ans.add(startScript("return jQuery('.b-feedwidgets-options .b-selectus').css('borderTopColor')").toString());
+                return ans;
             case MAIN_TEXT_COLOR:
-                return getNecessaryValue(".b-lenta-body .b-lenta-item-title A:link", "color");
+                ans.add(startScript("return jQuery('.js-font-color').css('color')").toString());
+                return ans;
             case SIDEBAR_TEXT_COLOR:
-                return getNecessaryValue(".p-lenta .l-flatslide-aside, .b-lenta-calendar TABLE TD, .b-lenta-calendar TABLE TH, .p-lenta .b-myupdates-emptiness, .p-lenta .b-feedwidgets .b-todaylj-caption A, .p-lenta .b-feedwidgets .b-todaylj-caption A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content A:link, .sbar-cal-month, .sbar-cal-year, .p-lenta .b-mysocial-item-retweet .b-mysocial-item-rt", "color");
+                ans.add(startScript("return jQuery('.js-sidebar-color').css('color')").toString());
+                ans.add(startScript("return jQuery('.js-sidebar-color TH').css('color')").toString());
+                ans.add(startScript("return jQuery('.js-sidebar-color TD').css('color')").toString());
+                ans.add(startScript("return jQuery('.sbar-cal-month').css('color')").toString());
+                ans.add(startScript("return jQuery('.sbar-cal-year').css('color')").toString());
+                return ans;
             case LINK_COLOR:
-                return getNecessaryValue(".b-lenta-body A:link, .b-lenta .b-mysocial-footer-logout-text, .b-lenta .b-mysocial-footer-refresh, .p-lenta .b-feedwidgets A:link, .p-lenta .l-flatslide-intro-heads A:link, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:link, .b-translation-pseudo:link, .b-translation-pseudo:visited", "color");
+                ans.add(startScript("return jQuery('.js-link-color').css('color')").toString());
+                ans.add(startScript("return jQuery('.js-link-color:link').css('color')").toString());
+                ans.add(startScript("return jQuery('.js-link-color--a A:link').css('color')").toString());
+                ans.add(startScript("return jQuery('.js-link-color--a-novisited A:link').css('color')").toString());
+                ans.add(startScript("return jQuery('.b-translation-pseudo:link').css('color')").toString());
+                return ans;
             case ON_HOVER_COLOR:
                 onOpened(FriendsFeedLogged.class).getUserName().moveMouseOver();
-                return getNecessaryValue(".b-lenta-body A:hover, .p-lenta .b-feedwidgets A:hover, .p-lenta .b-feedwidgets .b-todaylj-caption A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content A:hover, .p-lenta .b-feedwidgets .b-myupdates-item-content .i-ljuser A:hover, .b-translation-pseudo:hover, .p-lenta .l-flatslide-intro-heads A:hover", "color");
+                ans.add(getNecessaryValue(".p-lenta .l-flatslide-intro-heads A:hover", "color"));
+                return ans;
             case VISITED_LINK:
                 onOpened(FriendsFeedLogged.class).getUserName().click();
-                return "ERROR!!!";
+                ans.add("ERROR!!!");
+                return ans;
             default:
                 Assert.fail("Unknown button " + button + "!");
-                return "ERROR!!!";
+                ans.add("ERROR!!!");
+                return ans;
         }
+    }
+    
+    
+    private String getNecessaryValue(String selector, String value) {
+        return getCurrentBrowser()
+                .getDriver()
+                .findElement(By.cssSelector(selector))
+                .getCssValue(value);
     }
 
     private String getTextParametrs(TextParametrs parametr) {
@@ -364,6 +405,15 @@ public class Settings extends WebTest {
                 Assert.fail("Unknown parametr " + parametr + "!");
         }
         return "ERROR!!!";
+    }
+
+    @StepGroup
+    public boolean verifyColor(String hex, ArrayList<String> rgbArray) {
+        boolean result = true;
+        for (int i = 0; i < rgbArray.size(); i++) {
+            result = result & verifyColor(hex, rgbArray.get(i));
+        }
+        return result;
     }
 
     @StepGroup
@@ -418,13 +468,6 @@ public class Settings extends WebTest {
                 Assert.fail("Unknown type " + type + "!");
         }
         return false;
-    }
-
-    private String getNecessaryValue(String selector, String value) {
-        return getCurrentBrowser()
-                .getDriver()
-                .findElement(By.cssSelector(selector))
-                .getCssValue(value);
     }
 
     private String getColorCode(ColorSettings button) {

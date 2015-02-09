@@ -27,7 +27,7 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @FindBy(css = "a[ng-class*='filters']")
     private Button filtersButton;
 
-    @FindBy(css = "a:not(.l-flatslide-settingslink-opened).l-flatslide-settingslink")
+    @FindBy(css = ".l-flatslide-settingslink-open")
     public Button settingsButton;
 
     @FindBy(css = "a .l-flatslide-settingslink-close svg")
@@ -101,7 +101,6 @@ public class FriendsFeedLogged extends ServicePageLogged {
 
     /////////////////////////////////////
     @StepGroup
-
     public SettingsBlock openSettings() {
         settingsButton.click();
         return onDisplayed(SettingsBlock.class);
@@ -329,6 +328,5 @@ public class FriendsFeedLogged extends ServicePageLogged {
         return SidebarWidgets.valueOf(widget.replace("Календарь", "CALENDAR")
                 .replace(" ", "_")
                 .toUpperCase());
-
     }
 }
