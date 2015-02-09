@@ -8,6 +8,7 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFee
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
+import com.livejournal.uitests.pages.service_pages.settings.friends.ManageFriendsPage;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;

@@ -13,8 +13,10 @@ import org.jbehave.core.annotations.When;
  *
  * @author IKasatkin
  */
-public class AddFriend extends WebTest {
+public class ManageFriends extends WebTest {
 
+    //Scenario: Add friend (1/3)
+    //Scenario: Delete friend(1/3)
     @Given("logged user (name $name) on ManageFriendsPage")
     public void logged_user_on_ManageFriendsPage(String name) {
         ThucydidesUtils.putToSession("user", name);
@@ -23,12 +25,21 @@ public class AddFriend extends WebTest {
         open(ManageFriendsPage.class);
     }
 
+    //Scenario: Add friend (2/3)
     @When("user type user $users and save changes")
     public void user_type_user_and_save_changes(String users) {
         onOpened(ManageFriendsPage.class).typeName(getParsedString(users, ";"))
                 .clickSaveChangesButton();
     }
+    
+    //Scenario: Delete friend(2/3)
+    @When("user disable checkbox for user $users and save changes")
+    public void user_disable_checkbox_for_users_and_save_changes(String users)
+    {
+        onOpened(ManageFriendsPage.class).removeFriend(getParsedString(users,";"));
+    }
 
+    //Scenario: Add friend (3/3)
     @Then("user $users should be added as a friend")
     public void user_should_be_added_as_a_friend(String users) {
         open(ManageFriendsPage.class);
@@ -39,6 +50,21 @@ public class AddFriend extends WebTest {
                 .that(onPageVerification(users))
                 .ifResultIsExpected("Users "+users+" are displayed on the page")
                 .ifElse("Users "+users+" are not displayed on the page")
+                .finish();
+
+    }
+    
+    //Scenario: Delete friend(3/3)
+     @Then("user $users should be removed from friends")
+    public void users_should_be_removed_from_friends(String users) {
+        open(ManageFriendsPage.class);
+        verify().that(!workWithDB().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
+                .ifResultIsExpected("Users " + users + " are successfuly deleted from a friends in DB")
+                .ifElse("Users " + users + " are not successfully deleted from friends in DB")
+                .and()
+                .that(!onPageVerification(users))
+                .ifResultIsExpected("Users "+users+" are not displayed on the page")
+                .ifElse("Users "+users+" are displayed on the page")
                 .finish();
 
     }
