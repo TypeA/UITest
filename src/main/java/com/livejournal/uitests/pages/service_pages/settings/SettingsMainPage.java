@@ -24,12 +24,17 @@ public class SettingsMainPage extends ServicePageLogged {
         return this;
     }
 
-    //////////////////////////display
+    //////////////////////////display page
     @FindBy(name = "LJ__Setting__Language_lang")
     private Select language;
 
     public SettingsMainPage setLanguage(String lang) {
         language.selectByValue(lang);
+        return this;
+    }
+
+    public SettingsMainPage changeCyrServices() {
+        startScript("jQuery(\"tr td input[id='LJ__Setting__CyrillicServices_cyrillicservices']\").click()");
         return this;
     }
 

@@ -155,7 +155,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
