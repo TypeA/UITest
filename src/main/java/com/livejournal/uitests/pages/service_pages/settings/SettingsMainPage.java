@@ -16,7 +16,7 @@ import ru.yandex.qatools.htmlelements.element.Select;
 @DefaultUrl("/manage/settings/")
 public class SettingsMainPage extends ServicePageLogged {
 
-    @FindBy(css = "div[id*='settings_save'] button")
+    @FindBy(css = "#settings_left .b-flatbutton")
     private Button saveSettings;
 
     public SettingsMainPage saveSettings() {
@@ -33,7 +33,7 @@ public class SettingsMainPage extends ServicePageLogged {
         return this;
     }
 
-    //////////////////////////privacy
+    //////////////////////////privacy page
     @FindBy(id = "LJ__Setting__MinSecurity_minsecurity")
     private Select minSecurity;
 

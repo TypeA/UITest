@@ -1,9 +1,11 @@
 package com.livejournal.uitests.pages.service_pages;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
+import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.MyJournalMenu;
@@ -72,5 +74,22 @@ public class ServicePageLogged extends ServicePage {
     @StepGroup
     public void clickOnMessagesMenuItem() {
         getFullscreenHeader().clickOnMessagesMenuItem();
+    }
+
+    @StepGroup
+    public ServicePageLogged regionSwitch(String user, String region) {
+        switch (region.toUpperCase()) {
+            case "CYR":
+                if (workWithDB().getCyrSetting(user).equals("NONCYR")) {
+                    open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
+                }
+                break;
+            case "NONCYR":
+                if (workWithDB().getCyrSetting(user).equals("CYR")) {
+                    open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
+                }
+                break;
+        }
+        return this;
     }
 }
