@@ -31,12 +31,11 @@ public class ManageFriends extends WebTest {
         onOpened(ManageFriendsPage.class).typeName(getParsedString(users, ";"))
                 .clickSaveChangesButton();
     }
-    
+
     //Scenario: Delete friend(2/3)
     @When("user disable checkbox for user $users and save changes")
-    public void user_disable_checkbox_for_users_and_save_changes(String users)
-    {
-        onOpened(ManageFriendsPage.class).removeFriend(getParsedString(users,";"));
+    public void user_disable_checkbox_for_users_and_save_changes(String users) {
+        onOpened(ManageFriendsPage.class).removeFriend(getParsedString(users, ";"));
     }
 
     //Scenario: Add friend (3/3)
@@ -48,14 +47,14 @@ public class ManageFriends extends WebTest {
                 .ifElse("Users " + users + " are not successfuly added as a friends in DB")
                 .and()
                 .that(onPageVerification(users))
-                .ifResultIsExpected("Users "+users+" are displayed on the page")
-                .ifElse("Users "+users+" are not displayed on the page")
+                .ifResultIsExpected("Users " + users + " are displayed on the page")
+                .ifElse("Users " + users + " are not displayed on the page")
                 .finish();
 
     }
-    
+
     //Scenario: Delete friend(3/3)
-     @Then("user $users should be removed from friends")
+    @Then("user $users should be removed from friends")
     public void users_should_be_removed_from_friends(String users) {
         open(ManageFriendsPage.class);
         verify().that(!workWithDB().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
@@ -63,8 +62,8 @@ public class ManageFriends extends WebTest {
                 .ifElse("Users " + users + " are not successfully deleted from friends in DB")
                 .and()
                 .that(!onPageVerification(users))
-                .ifResultIsExpected("Users "+users+" are not displayed on the page")
-                .ifElse("Users "+users+" are displayed on the page")
+                .ifResultIsExpected("Users " + users + " are not displayed on the page")
+                .ifElse("Users " + users + " are displayed on the page")
                 .finish();
 
     }
