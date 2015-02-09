@@ -155,18 +155,18 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
 Then text settings is changed by size <size> and font <font>
 
 Examples:
-|name   |size |font                 |
-|test   |10   |ProximaNovaRegular   |
-|test   |16   |Verdana              |
-|test   |30   |Arial                |
-|test   |36   |Helvetica            |
+|name           |size |font                 |
+|testautotest   |10   |ProximaNovaRegular   |
+|testautotest   |16   |Verdana              |
+|testautotest   |30   |Arial                |
+|testautotest   |36   |Helvetica            |
 
 
 
@@ -179,11 +179,11 @@ When user change text size <new_size> and font <new_font> in Settings and cancel
 Then text settings is changed by size <size> and font <font>
 
 Examples:
-|name   |size |font                 |new_size   |new_font           |
-|test   |10   |ProximaNovaRegular   |16         |Arial              |    
-|test   |16   |Verdana              |10         |ProximaNovaRegular |
-|test   |30   |Arial                |36         |Helvetica          |
-|test   |36   |Helvetica            |30         |Verdana            |
+|name           |size |font                 |new_size   |new_font           |
+|testautotest   |10   |ProximaNovaRegular   |16         |Arial              |    
+|testautotest   |16   |Verdana              |10         |ProximaNovaRegular |
+|testautotest   |30   |Arial                |36         |Helvetica          |
+|testautotest   |36   |Helvetica            |30         |Verdana            |
 
 
 
@@ -196,12 +196,12 @@ When user set Paging type <type> (number <number>)  in Settings and save it
 Then Paging type is changed by type <type> (number <number>)
 
 Examples:
-|name   |type     |number |
-|test   |PAGES    |1      |
-|test   |PAGES    |-3     |
-|test   |PAGES    |100    |
-|test   |PAGES    |0      |
-|test   |ENDLESS  |0      |
+|name           |type     |number |
+|testautotest   |PAGES    |1      |
+|testautotest   |PAGES    |-3     |
+|testautotest   |PAGES    |100    |
+|testautotest   |PAGES    |0      |
+|testautotest   |ENDLESS  |0      |
 
 
 
@@ -215,16 +215,16 @@ When user set Paging type <new_type> (old type <type>, number <number>) in Setti
 Then Paging type is changed by type <type> (number <number>)
 
 Examples:
-|name   |new_type |type     |number |
-|test   |PAGES    |ENDLESS  |10     |
-|test   |ENDLESS  |PAGES    |10     |
+|name           |new_type |type     |number |
+|testautotest   |PAGES    |ENDLESS  |10     |
+|testautotest   |ENDLESS  |PAGES    |10     |
 
 
 
 
 Scenario: Restore default settings 
 Meta: 
-@categories feed personal
+@categories feed personal test
 @issue LJSUP-19537
 
 Given logged user (name <name>) with own settings on Friends Feed
@@ -232,8 +232,8 @@ When user click Restore default settings Button and save it
 Then default settings are set
 
 Examples:
-|name   |
-|test   |
+|name           |
+|testautotest   |
 
 
 
@@ -246,5 +246,5 @@ When user logged out and logged in again (name <name>)
 Then user's settings are applied
 
 Examples:
-|name   |
-|test   |
+|name           |
+|testautotest   |

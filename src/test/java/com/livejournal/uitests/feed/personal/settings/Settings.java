@@ -274,7 +274,8 @@ public class Settings extends WebTest {
     //Scenario: Set text settings (3/3)
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
-    public void text_settings_is_changed_by_size_and_font(String size, String font) {
+    public void text_settings_is_changed_by_size_and_font(String size, String font) throws InterruptedException {
+        Thread.sleep(100);
         verify().that(getTextParametrs(TextParametrs.FONT).contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
                 .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
@@ -397,9 +398,9 @@ public class Settings extends WebTest {
     private String getTextParametrs(TextParametrs parametr) {
         switch (parametr) {
             case SIZE:
-                return startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-size')").toString();
+                return startScript("return jQuery('.p-lenta .entryunit__text').css('font-size')").toString();
             case FONT:
-                return startScript("return jQuery('.p-lenta .b-lenta-item-content').css('font-family')").toString();
+                return startScript("return jQuery('.p-lenta .entryunit__text').css('font-family')").toString();
 
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
@@ -440,7 +441,7 @@ public class Settings extends WebTest {
     @StepGroup
     public boolean verifyPagingType(PagingType type, String size) throws InterruptedException {
         Integer intSize = Integer.valueOf(size);
-        String script = "return jQuery('article.b-lenta-item').size()";
+        String script = "return jQuery('.entryunit__text').size()";
 
         switch (type) {
             case PAGES:
