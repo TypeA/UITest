@@ -50,7 +50,6 @@ public class ManageFriends extends WebTest {
                 .ifResultIsExpected("Users " + users + " are displayed on the page")
                 .ifElse("Users " + users + " are not displayed on the page")
                 .finish();
-
     }
 
     //Scenario: Delete friend(3/3)
