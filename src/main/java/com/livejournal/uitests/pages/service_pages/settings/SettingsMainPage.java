@@ -2,10 +2,7 @@ package com.livejournal.uitests.pages.service_pages.settings;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import java.util.ArrayList;
-import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
 
@@ -18,6 +15,11 @@ public class SettingsMainPage extends ServicePageLogged {
 
     @FindBy(css = "#settings_left .b-flatbutton")
     private Button saveSettings;
+
+    public SettingsMainPage selectWorkAsUser(String user) {
+        workAsUser.selectByValue(user);
+        return this;
+    }
 
     public SettingsMainPage saveSettings() {
         saveSettings.click();
@@ -42,8 +44,22 @@ public class SettingsMainPage extends ServicePageLogged {
     @FindBy(id = "LJ__Setting__MinSecurity_minsecurity")
     private Select minSecurity;
 
+    @FindBy(name = "authas")
+    private Select workAsUser;
+
+    @FindBy(css = "[value='Switch']")
+    private Button switcwJournalType;
+
     public SettingsMainPage setMinSecurity(String security) {
+        if (security.equals("Members")) {
+            security = "Friends";
+        }
         minSecurity.selectByValue(security.toLowerCase());
+        return this;
+    }
+
+    public SettingsMainPage clickSwitchJournalType() {
+        switcwJournalType.click();
         return this;
     }
 
