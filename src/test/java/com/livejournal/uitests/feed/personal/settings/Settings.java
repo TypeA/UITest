@@ -276,6 +276,7 @@ public class Settings extends WebTest {
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) throws InterruptedException {
         Thread.sleep(100);
+        Integer titleSize = (Integer.valueOf(size)*7)/4;
         verify().that(getTextParametrs(TextParametrs.FONT).contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
                 .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
@@ -283,6 +284,10 @@ public class Settings extends WebTest {
                 .that(getTextParametrs(TextParametrs.SIZE).contains(size))
                 .ifResultIsExpected("Correct text size:\n" + size)
                 .ifElse("New text size is incorrect:\n" + getTextParametrs(TextParametrs.SIZE))
+                .and()
+                .that(getTitleParametrs(TextParametrs.SIZE).contains(titleSize.toString()))
+                .ifResultIsExpected("Correct text size:\n" + titleSize)
+                .ifElse("New text size is incorrect:\n" + getTitleParametrs(TextParametrs.SIZE))
                 .finish();
     }
 
@@ -386,8 +391,7 @@ public class Settings extends WebTest {
                 return ans;
         }
     }
-    
-    
+
     private String getNecessaryValue(String selector, String value) {
         return getCurrentBrowser()
                 .getDriver()
@@ -401,11 +405,22 @@ public class Settings extends WebTest {
                 return startScript("return jQuery('.p-lenta .entryunit__text').css('font-size')").toString();
             case FONT:
                 return startScript("return jQuery('.p-lenta .entryunit__text').css('font-family')").toString();
-
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
         }
-        return "ERROR!!!";
+        return "ERROR!!!!!";
+    }
+
+    private String getTitleParametrs(TextParametrs parametr) {
+        switch (parametr) {
+            case SIZE:
+                return startScript("return jQuery('.p-lenta .entryunit__title').css('font-size')").toString();
+            case FONT:
+                return startScript("return jQuery('.p-lenta .entryunit__title').css('font-family')").toString();
+            default:
+                Assert.fail("Unknown parametr " + parametr + "!");
+        }
+        return "ERROR!!!!!";
     }
 
     @StepGroup

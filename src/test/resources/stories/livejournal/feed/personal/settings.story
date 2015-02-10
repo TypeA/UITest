@@ -155,7 +155,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
@@ -172,7 +172,7 @@ Examples:
 
 Scenario: Cancel text settings 
 Meta: 
-@categories feed personal
+@categories feed personal test
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <new_size> and font <new_font> in Settings and cancel it (old size <size>, old font <font>)
@@ -224,7 +224,7 @@ Examples:
 
 Scenario: Restore default settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 @issue LJSUP-19537
 
 Given logged user (name <name>) with own settings on Friends Feed
