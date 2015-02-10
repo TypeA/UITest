@@ -34,4 +34,28 @@ public class EntryPage extends JournalPage {
         }
         return startScript(script).toString().trim();
     }
+    
+     @StepGroup
+    public String getPostTextInCommunity() {
+        String script = "return jQuery('.entry-content')[0].textContent";
+        try {
+            ((JavascriptExecutor) getDriver()).executeScript(script);
+        } catch (Exception ex) {
+            script = "return jQuery('.j-e-text')[0].textContent";
+        }
+        return startScript(script).toString().trim();
+    }
+       @StepGroup
+    public EditJournalbml clickOnEditButtonInCommunity() {
+        String script = "jQuery('.entry-linkbar-inner a[href*=\"editjournal\"]')[0].click()";
+        try {
+            ((JavascriptExecutor) getDriver()).executeScript(script);
+        } catch (Exception ex) {
+            script = "jQuery('.j-e-buttons-item-edit_entry')[0].click()";
+            ((JavascriptExecutor) getDriver()).executeScript(script);
+        }
+        return onOpened(EditJournalbml.class);
+    }
+    
+    
 }

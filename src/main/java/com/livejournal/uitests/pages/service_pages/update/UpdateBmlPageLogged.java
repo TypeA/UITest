@@ -33,6 +33,12 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(name = "privacy")
     private Select privacySelect;
+    
+    @FindBy(name="community")
+    private Select communitySelect;
+     
+    @FindBy(css = "label[for=\"community\"]")
+    private UIElement postToCommunity; 
 
     @FindBy(name = "action:update")
     private Button addPostButton;
@@ -82,6 +88,17 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public EntryPage postEntry() {
         addPostButton.click();
         return onOpened(EntryPage.class);
+    }
+    
+    @StepGroup
+    public UpdateBmlPageLogged postInCommunity(){
+       postToCommunity.click();
+       return this;
+    }
+    
+    public UpdateBmlPageLogged selectCommunity(String community){
+       communitySelect.selectByValue(community);
+       return this;
     }
 
     @StepGroup

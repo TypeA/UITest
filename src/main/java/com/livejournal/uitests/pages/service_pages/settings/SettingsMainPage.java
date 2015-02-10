@@ -22,8 +22,17 @@ public class SettingsMainPage extends ServicePageLogged {
     //////////////////////////privacy
     @FindBy(id = "LJ__Setting__MinSecurity_minsecurity")
     private Select minSecurity;
+    
+    @FindBy(name = "authas")
+    private Select workAsUser;
+    
+    @FindBy(css="[value='Switch']")
+    private Button buttonSwitch;
 
     public SettingsMainPage setMinSecurity(String security) {
+        if(security.equals("Members")){
+        security="Friends";
+        }
         minSecurity.selectByValue(security.toLowerCase());
         return this;
     }
@@ -32,4 +41,14 @@ public class SettingsMainPage extends ServicePageLogged {
         saveSettings.click();
         return this;
     }
+    public SettingsMainPage selectWorkAsUser(String user) {
+        workAsUser.selectByValue(user);
+        return this;
+    }
+    
+     public SettingsMainPage clickSwitch() {
+        buttonSwitch.click();
+        return this;
+    }
+    
 }
