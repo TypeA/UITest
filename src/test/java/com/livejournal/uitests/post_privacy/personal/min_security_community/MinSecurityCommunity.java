@@ -33,7 +33,8 @@ public class MinSecurityCommunity extends WebTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, workWithDB().getUserPassword(name));
         open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"))
-                .setMinSecurity(security);
+                .setMinSecurity(security)
+                .saveSettings();
         open(UpdateBmlPageLogged.class);
     }
 
@@ -61,10 +62,12 @@ public class MinSecurityCommunity extends WebTest {
     }
 
     //Scenario: Min security in creating post in community (3/3)
-    @Then("user can set only allowed security $security when create post")
-    public void user_can_set_only_allowed_security_when_create_post(String security) {
+    @Then("user can set only allowed security $security when create post in community $community")
+    public void user_can_set_only_allowed_security_when_create_post(String security, String community) {
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .postInCommunity()
+                .selectCommunity(community)
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy(security).get(0))
