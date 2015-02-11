@@ -1,6 +1,6 @@
 Scenario: Create post in community
 Meta: 
-@categories feed privacy
+@categories privacy useful
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>) in community
@@ -16,7 +16,7 @@ Examples:
 
 Scenario: Edit post in community
 Meta:
-@categories feed privacy
+@categories privacy useful
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>) in community

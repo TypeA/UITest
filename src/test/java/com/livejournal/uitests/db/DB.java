@@ -31,11 +31,14 @@ public class DB extends WebTest {
                 .authorizeBy(name, workWithDB().getUserPassword(name))
                 .defoultLanguage(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
-        Thread.sleep(10000);
-        System.out.println(startScript("return jQuery('.js-elem-bordercolor').css('borderTopColor')").toString());
+        open(UpdateBmlPageLogged.class)
+                .closeDraft();
+             //   .createPost("", "VISUAL", "db test 1");
+        Thread.sleep(5000);
+        onOpened(UpdateBmlPageLogged.class)
+                .createPost("", "html", "db test 2")
+                .postEntry();
 
-       // String color = startScript("return jQuery('.js-elem-bordercolor').css('backgroundColor')").toString();
-        //  System.out.println("==" + color);
         System.out.println("!!!!!!!!!!!!! test stop");
 
     }

@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import java.util.ArrayList;
 import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -25,7 +24,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @FindBy(id = "subject")
     private TextField subjectField;
 
-    @FindBy(css = "[.lj-main-body")
+    @FindBy(css = "body[class=lj-main-body]")
     private TextField postVisualField;
 
     @FindBy(css = ".b-updateform-textarea")
@@ -62,7 +61,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         switch (EditPostType.valueOf(editorType.toUpperCase())) {
             case VISUAL:
                 visualEditButton.click();
-                postVisualField.enter(text);
+                postVisualField.click();
+              //  postVisualField.enter(text);
                 break;
             case HTML:
                 htmlEditButton.click();

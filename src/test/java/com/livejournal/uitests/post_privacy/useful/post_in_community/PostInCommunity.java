@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.livejournal.uitests.post_privacy.useful.post_community;
+package com.livejournal.uitests.post_privacy.useful.post_in_community;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
@@ -14,12 +14,10 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.post_privacy.useful.users_post.SelectUser;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
 import static com.livejournal.uitests.utility.iterations.EqualityOfArrayLists.isEqual;
 import java.util.ArrayList;
-import java.util.Random;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -30,19 +28,20 @@ import org.jbehave.core.annotations.When;
  * @author m.panferova
  */
 public class PostInCommunity extends WebTest {
-//Scenario: Create post in community
-//Scenario: Edit post in community
 
+    //Scenario: Create post in community (1/4)
+    //Scenario: Edit post in community (1/4)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .defoultLanguage(name);
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
     }
 
-    //Scenario: Create post in community
-
+    //Scenario: Create post in community (2/4)
+    //Scenario: Edit post in community (2/4)
     @When("user create new post with privacy $privacy (group $group) in community")
     public void user_create_new_post_with_privacy_in_community(String privacy, String group) throws InterruptedException {
         String postText = RandomText.getRandomText(30);
@@ -62,8 +61,7 @@ public class PostInCommunity extends WebTest {
         ThucydidesUtils.putToSession("friend_group", group);
     }
 
-    //Scenario: Edit post in community
-
+    //Scenario: Edit post in community (3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post in community")
     public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1) {
         open(EntryPage.class, new Url()
@@ -73,9 +71,8 @@ public class PostInCommunity extends WebTest {
         onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
                 .saveEntry();
     }
-//Scenario: Create post in community
-    //Scenario: Edit post in community
-
+    
+    //Scenario: Create post in community (3/4)
     @Then("user $name_1 can read the post in community")
     public void user_can_read_the_post(String name_1) {
         open(MainPageLogged.class)
@@ -96,9 +93,8 @@ public class PostInCommunity extends WebTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
     }
-//Scenario: Create post in community
-    //Scenario: Edit post in community
-
+    
+    //Scenario: Create post in community (4/4)
     @Then("user $name_2 cannot read the post in community")
     public void user_cannot_read_post_in_comminuty(String name_2) throws InterruptedException {
         if (name_2.isEmpty()) {
@@ -123,6 +119,7 @@ public class PostInCommunity extends WebTest {
         }
     }
 
+    //Scenario: Edit post in community (4/4)
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post in community")
     public void user_see_correct_privacy_when_edit_this_post_in_community(String privacy_1, String group_1) throws InterruptedException {
         open(EntryPage.class, new Url()

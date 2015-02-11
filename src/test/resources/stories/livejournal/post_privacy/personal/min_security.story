@@ -1,6 +1,6 @@
 Scenario: Min security in creating post
 Meta: 
-@categories feed privacy
+@categories privacy personal
 
 Given logged user <name> on Security page 
 When user set min security <security>
@@ -16,7 +16,7 @@ Examples:
 
 Scenario: Min security in editing post
 Meta: 
-@categories feed privacy
+@categories privacy personal
 
 Given logged user <name> with min security <security> on Create Post page
 When user create new post with privacy <security>

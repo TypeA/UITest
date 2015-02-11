@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.post_privacy.personal.min_security_community;
 
 import com.livejournal.uisteps.core.Url;
@@ -11,7 +6,6 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.post_privacy.personal.min_security.AllowPrivacy;
 import com.livejournal.uitests.utility.RandomText;
 import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
@@ -26,8 +20,7 @@ import org.junit.Assert;
 public class MinSecurityCommunity extends WebTest {
 
     //Scenario: Min security in creating post in community (1/3)
-
-    @Given("logged user $name on Security page for community")
+    @Given("logged user $name on Security page for community $community")
     public void logged_user_on_Security_page(String name, String community) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, workWithDB().getUserPassword(name));
@@ -45,7 +38,7 @@ public class MinSecurityCommunity extends WebTest {
     }
 
     //Scenario: Min security in creating post in community (2/3)
-    @When("user set min security $security in community")
+    @When("user set min security $security in the community")
     public void user_set_min_security(String security, String community) {
         onOpened(SettingsMainPage.class)
                 .selectWorkAsUser(community)
@@ -54,7 +47,7 @@ public class MinSecurityCommunity extends WebTest {
                 .saveSettings();
     }
 
-    //Scenario: Min security in creating post in community (2/3)
+    //Min security in editing post in community (2/3)
     @When("user create new post with privacy $security in community $community")
     public void user_create_new_post_with_privacy(String security, String community) throws InterruptedException {
         ArrayList<String> g = new ArrayList<String>();
