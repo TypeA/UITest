@@ -1,6 +1,6 @@
 Scenario: Min security in creating post in community
 Meta: 
-@categories privacy personal 
+@categories privacy personal test
 
 Given logged user <name> on Security page for community <community>
 When user set min security <security> in the community

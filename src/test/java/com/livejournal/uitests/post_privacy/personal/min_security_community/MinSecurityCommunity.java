@@ -67,8 +67,8 @@ public class MinSecurityCommunity extends WebTest {
                 .closeDraft()
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))
-                .ifResultIsExpected("Privacy is correct")
-                .ifElse("Privacy is in correct")
+                .ifResultIsExpected("Privacy is correct " + correctPrivacy(security).get(0))
+                .ifElse("Privacy is in correct " + privacy.get(0))
                 .finish();
     }
 
@@ -79,8 +79,8 @@ public class MinSecurityCommunity extends WebTest {
                 .clickOnEditButtonInCommunity()
                 .getAllPrivacy();
         verify().that(correctPrivacy("public").equals(privacy))
-                .ifResultIsExpected("Privacy is correct")
-                .ifElse("Privacy is in correct")
+                .ifResultIsExpected("Privacy is correct " + correctPrivacy("public").get(0))
+                .ifElse("Privacy is in correct " + privacy.get(0))
                 .finish();
     }
 
