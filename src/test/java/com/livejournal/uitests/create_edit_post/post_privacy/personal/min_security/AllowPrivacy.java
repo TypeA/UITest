@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.post_privacy.personal.min_security;
+package com.livejournal.uitests.create_edit_post.post_privacy.personal.min_security;
 
 /**
  *

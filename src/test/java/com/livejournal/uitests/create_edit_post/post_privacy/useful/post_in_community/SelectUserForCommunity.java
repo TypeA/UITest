@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.livejournal.uitests.post_privacy.useful.post_in_community;
+package com.livejournal.uitests.create_edit_post.post_privacy.useful.post_in_community;
 
 /**
  *

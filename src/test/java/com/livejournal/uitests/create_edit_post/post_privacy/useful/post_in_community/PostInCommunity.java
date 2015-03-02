@@ -1,4 +1,4 @@
-package com.livejournal.uitests.post_privacy.useful.post_in_community;
+package com.livejournal.uitests.create_edit_post.post_privacy.useful.post_in_community;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;

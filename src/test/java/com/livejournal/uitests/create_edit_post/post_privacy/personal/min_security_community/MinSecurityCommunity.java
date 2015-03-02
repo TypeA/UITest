@@ -1,4 +1,4 @@
-package com.livejournal.uitests.post_privacy.personal.min_security_community;
+package com.livejournal.uitests.create_edit_post.post_privacy.personal.min_security_community;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;
