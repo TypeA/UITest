@@ -1,10 +1,14 @@
-Scenario: Deferred post
+Scenario: Scheduled post
 Meta: 
-@categories feed useful
+@categories feed useful test
 
-Open update.bml
-Change date
-Post entry to your journal
-See it become scheduled
+Given logged user <name> on Create Post page
+When user create new post and change parameter <parameter> by value <value>
+Then the post is scheduled
 
 Examples:
+|name         |parameter |value |
+|testautotest |hour      |3     |
+|testautotest |day       |3     |
+|testautotest |month     |3     |
+|testautotest |year      |3     |

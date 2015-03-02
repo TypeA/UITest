@@ -6,7 +6,8 @@ import net.thucydides.core.annotations.DefaultUrl;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("/statistics/promo/journal")
-public class StatisticsMainPage extends ServicePageLogged{
-    
+ */
+@DefaultUrl("/statistics/promo/journal")
+public class StatisticsMainPage extends ServicePageLogged {
+
 }

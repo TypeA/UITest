@@ -1,6 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +24,19 @@ public class EditJournalbml extends ServicePageLogged {
     @FindBy(name = "action:update")
     private Button saveButton;
 
+    @FindBy(name = "action:delete")
+    private Button deleteButton;
+
     @StepGroup
     public void saveEntry() {
         saveButton.click();
+    }
+
+    @StepGroup
+    public MyJournalPage deleteEntry() {
+        deleteButton.click();
+        getDriver().switchTo().alert().accept();
+        return onOpened(MyJournalPage.class);
     }
 
     public ArrayList<String> getAllPrivacy() {

@@ -32,12 +32,12 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(name = "privacy")
     private Select privacySelect;
-    
-    @FindBy(name="community")
+
+    @FindBy(name = "community")
     private Select communitySelect;
-     
+
     @FindBy(css = "label[for=\"community\"]")
-    private UIElement postToCommunity; 
+    private UIElement postToCommunity;
 
     @FindBy(name = "action:update")
     private Button addPostButton;
@@ -47,6 +47,16 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(css = ".b-updatepage-tab-html")
     private Button htmlEditButton;
+
+    /////////////////////////// date
+    @FindBy(css = ".b-updatepage-date-current a")
+    private Button changeDate;
+
+    @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-date input")
+    private TextField dateField;
+
+    @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-time input")
+    private TextField timeField;
 
     /////////////////////////// draft
     @FindBy(css = ".b-popup.b-popupus.b-popupus-blue.b-popupus-confirm[style*='position'] .i-popup-close")
@@ -61,8 +71,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         switch (EditPostType.valueOf(editorType.toUpperCase())) {
             case VISUAL:
                 visualEditButton.click();
-                postVisualField.click();
-              //  postVisualField.enter(text);
+                postVisualField.enter(text);
                 break;
             case HTML:
                 htmlEditButton.click();
@@ -75,12 +84,13 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy,ArrayList<String> group) throws InterruptedException {
+    public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
         Thread.sleep(2500);
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
-            for(int i=0;i<group.size();i++)
-            this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
+            for (int i = 0; i < group.size(); i++) {
+                this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
+            }
         }
         return this;
     }
@@ -90,16 +100,16 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         addPostButton.click();
         return onOpened(EntryPage.class);
     }
-    
+
     @StepGroup
-    public UpdateBmlPageLogged postInCommunity(){
-       postToCommunity.click();
-       return this;
+    public UpdateBmlPageLogged postInCommunity() {
+        postToCommunity.click();
+        return this;
     }
-    
-    public UpdateBmlPageLogged selectCommunity(String community){
-       communitySelect.selectByValue(community);
-       return this;
+
+    public UpdateBmlPageLogged selectCommunity(String community) {
+        communitySelect.selectByValue(community);
+        return this;
     }
 
     @StepGroup
@@ -113,12 +123,13 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged restoreFromDraft(){
+    public UpdateBmlPageLogged restoreFromDraft() {
         restoreDraft.click();
         return this;
     }
 
-    public ArrayList<String> getAllPrivacy() {
+    public ArrayList<String> getAllPrivacy() throws InterruptedException {
+        Thread.sleep(100);
         List<WebElement> allSecurity = privacySelect.getOptions();
         ArrayList<String> privasy = new ArrayList<>();
         for (int i = 0; i < allSecurity.size(); i++) {
@@ -142,5 +153,13 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
             return text;
         }
         return text;
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setDateAndTime(String date, String time) {
+        changeDate.click();
+        dateField.enter(date);
+        timeField.enter(time);
+        return this;
     }
 }

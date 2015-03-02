@@ -5,7 +5,7 @@ import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.SuccessfulFinishForm;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.utility.Date;
+import com.livejournal.uitests.utility.date.Date;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;

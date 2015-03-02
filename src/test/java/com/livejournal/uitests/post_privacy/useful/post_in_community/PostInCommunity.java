@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.post_privacy.useful.post_in_community;
 
 import com.livejournal.uisteps.core.Url;
@@ -71,7 +66,7 @@ public class PostInCommunity extends WebTest {
         onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
                 .saveEntry();
     }
-    
+
     //Scenario: Create post in community (3/4)
     @Then("user $name_1 can read the post in community")
     public void user_can_read_the_post(String name_1) {
@@ -93,7 +88,7 @@ public class PostInCommunity extends WebTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
     }
-    
+
     //Scenario: Create post in community (4/4)
     @Then("user $name_2 cannot read the post in community")
     public void user_cannot_read_post_in_comminuty(String name_2) throws InterruptedException {

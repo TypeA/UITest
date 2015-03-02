@@ -4,7 +4,7 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.UnsuccessfulFinishForm;
-import com.livejournal.uitests.utility.Date;
+import com.livejournal.uitests.utility.date.Date;
 import com.livejournal.uitests.utility.NumberOfSymbols;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.VerifyText;
