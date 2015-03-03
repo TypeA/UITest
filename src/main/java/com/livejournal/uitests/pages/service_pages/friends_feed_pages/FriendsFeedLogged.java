@@ -9,6 +9,7 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.S
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -24,7 +25,7 @@ public class FriendsFeedLogged extends ServicePageLogged {
     public UIElement lentaPreview;
 
     //////////SUPPORT BUTTONS
-    @FindBy(css = "a[ng-class*='filters']")
+    @FindBy(css = "button[ng-class*='filters']")
     private Button filtersButton;
 
     @FindBy(css = ".l-flatslide-settingslink-open")
@@ -45,6 +46,9 @@ public class FriendsFeedLogged extends ServicePageLogged {
 
     @FindBy(css = ".l-flatslide-intro-heads .i-ljuser-type-P a:not([href*='profile'])")
     private Link userName;
+
+    @FindBy(css = ".b-lenta-emptiness")
+    private TextBlock feedEmpty;
 
     //////////////SIDEBAR
     @FindBy(css = ".b-feedwidgets .b-selectus")
@@ -130,6 +134,17 @@ public class FriendsFeedLogged extends ServicePageLogged {
         } catch (NoSuchElementException ex) {
             return false;
         }
+    }
+
+    @StepGroup
+    public String getGroups() {
+        String script = "return jQuery('ul.l-flatslide-menu-items.l-flatslide-menu-items-active li a').text()";
+        try {
+            ((JavascriptExecutor) getDriver()).executeScript(script);
+        } catch (Exception ex) {
+            script = "return jQuery('ul.l-flatslide-menu-items.l-flatslide-menu-items-active li a').text()";
+        }
+        return startScript(script).toString().trim();
     }
 
     @StepGroup
@@ -304,10 +319,21 @@ public class FriendsFeedLogged extends ServicePageLogged {
         filtersButton.click();
         return onDisplayed(FiltersBlock.class);
     }
-    
-        @StepGroup
+
+    @StepGroup
+    public FriendsFeedLogged clickFilter() {
+        filtersButton.click();
+        return this;
+    }
+
+    @StepGroup
     public boolean filtersDisplaying() {
         return filtersBlock.isDisplayed();
+    }
+
+    @StepGroup
+    public boolean feedIsEmpty() {
+        return feedEmpty.isDisplayed();
     }
 
     public void addAllWidgets() {
