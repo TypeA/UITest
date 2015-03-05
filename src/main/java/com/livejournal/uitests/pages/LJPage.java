@@ -45,7 +45,7 @@ public class LJPage extends Page {
                     .finish()
                     .get(0)
                     .get(0);
-            open(SettingsMainPage.class, new Url().setPostfix("?cat=privacy"))
+            open(SettingsMainPage.class, new Url().setPostfix("?authas="+user+"&cat=privacy"))
                     .setMinSecurity("Public")
                     .saveSettings();
         } catch (Exception ex) {
