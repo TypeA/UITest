@@ -35,17 +35,18 @@ public class PostInCommunity extends WebTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, workWithDB().getUserPassword(name))
-                .defoultLanguage(name);
-        open(UpdateBmlPageLogged.class);
+                .defoultLanguage(name);        
         ThucydidesUtils.putToSession("user", name);
     }
 
     //Scenario: Create post in community (2/4)
     //Scenario: Edit post in community (2/4)
-    @When("user create new post with privacy $privacy (group $group) in community")
-    public void user_create_new_post_with_privacy_in_community(String privacy, String group) throws InterruptedException {
+    @When("user create new post with privacy $privacy (group $group) in community $community")
+    public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws InterruptedException {
         String postText = RandomText.getRandomText(30);
-        String community = "test_comm";
+        open(LoginPageUnlogged.class)
+                .defoultMinSecurity(community);
+        open(UpdateBmlPageLogged.class);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .postInCommunity()
