@@ -1,4 +1,9 @@
-package com.livejournal.uitests.create_edit_post.post_privacy.useful.post_in_community;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.livejournal.uitests.post_privacy.useful.post_in_community;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
@@ -30,17 +35,18 @@ public class PostInCommunity extends WebTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, workWithDB().getUserPassword(name))
-                .defoultLanguage(name);
-        open(UpdateBmlPageLogged.class);
+                .defoultLanguage(name);        
         ThucydidesUtils.putToSession("user", name);
     }
 
     //Scenario: Create post in community (2/4)
     //Scenario: Edit post in community (2/4)
-    @When("user create new post with privacy $privacy (group $group) in community")
-    public void user_create_new_post_with_privacy_in_community(String privacy, String group) throws InterruptedException {
+    @When("user create new post with privacy $privacy (group $group) in community $community")
+    public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws InterruptedException {
         String postText = RandomText.getRandomText(30);
-        String community = "test_comm";
+        open(LoginPageUnlogged.class)
+                .defoultMinSecurity(community);
+        open(UpdateBmlPageLogged.class);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .postInCommunity()
@@ -66,7 +72,7 @@ public class PostInCommunity extends WebTest {
         onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
                 .saveEntry();
     }
-
+    
     //Scenario: Create post in community (3/4)
     @Then("user $name_1 can read the post in community")
     public void user_can_read_the_post(String name_1) {
@@ -88,7 +94,7 @@ public class PostInCommunity extends WebTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
     }
-
+    
     //Scenario: Create post in community (4/4)
     @Then("user $name_2 cannot read the post in community")
     public void user_cannot_read_post_in_comminuty(String name_2) throws InterruptedException {
