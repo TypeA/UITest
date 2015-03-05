@@ -22,7 +22,7 @@ Examples:
 Scenario: Links on unsuccessfuly finish form
 
 Meta: 
-@categories registration comfortable
+@categories registration comfortable 
 
 Given new user on Finish Form (data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>)
 When user click link <link> on unsuccessfuly Finish Form

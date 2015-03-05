@@ -1,6 +1,6 @@
 Scenario: Scheduled post
 Meta: 
-@categories feed useful
+@categories post_time useful
 
 Given logged user <name> on Create Post page
 When user create new post and change parameter <parameter> by value <value>

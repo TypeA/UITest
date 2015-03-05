@@ -1,6 +1,6 @@
 Scenario: Change the position of the group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user moves the group <group_up> up and moves the group <group_down> down
@@ -14,7 +14,7 @@ Examples:
 
 Scenario: Public group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user set the group <group> is public and save the changes
@@ -28,7 +28,7 @@ Examples:
 
 Scenario: Create new group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user create new group <group> and save the changes
@@ -44,7 +44,7 @@ Examples:
 
 Scenario: Delete group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user delete group <group> and save the changes
@@ -57,7 +57,7 @@ Examples:
 
 Scenario: Rename group name
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user rename group <group> name and save the changes
@@ -70,7 +70,7 @@ Examples:
 
 Scenario: Add users in group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user add users <users> in group <group> and save the changes
@@ -84,7 +84,7 @@ Examples:
 
 Scenario: Delete users in group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user delete users <users> in group <group> and save the changes
@@ -99,7 +99,7 @@ Examples:
 
 Scenario: Delete users in group
 Meta: 
-@categories feed personal
+@categories maxa
 
 Given logged user (name <name>, password <password>) on Manage Groups Page
 When user delete users <users> in group <group> and save the changes

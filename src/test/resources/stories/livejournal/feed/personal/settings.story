@@ -123,7 +123,7 @@ Meta:
 @categories feed personal
 
 
-Given logged user (name <name>) on Friends Feed
+Given logged user (name <name>) on Friends Feed (pic)
 When user load Background image <image> and set repeat <repeat> in Settings and save it
 Then  Background image is loaded and displayed
 

@@ -1,6 +1,6 @@
 Scenario: Add friend
 Meta: 
-@categories friends useful dbdb
+@categories friends useful
 
 Given logged user (name <name>) on ManageFriendsPage
 When user type user <users> and save changes
@@ -12,7 +12,7 @@ Examples:
 
 Scenario: Delete friend
 Meta: 
-@categories friends useful dbdb
+@categories friends useful
 
 Given logged user (name <name>) on ManageFriendsPage
 When user disable checkbox for user <users> and save changes
