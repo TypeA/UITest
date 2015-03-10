@@ -68,7 +68,8 @@ public class PostInCommunity extends WebTest {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        onOpened(EntryPage.class).clickOnEditButtonInCommunity();
+        onOpened(EntryPage.class)
+                .clickOnEditButton();
         onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
                 .saveEntry();
     }
@@ -86,9 +87,9 @@ public class PostInCommunity extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         String postText = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(postText.contains(onOpened(EntryPage.class).getPostTextInCommunity()))
+        verify().that(postText.contains(onOpened(EntryPage.class).getPostText()))
                 .ifResultIsExpected("User can see post '" + postText + "'")
-                .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPage.class).getPostTextInCommunity() + "'")
+                .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPage.class).getPostText() + "'")
                 .finish();
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
@@ -126,7 +127,7 @@ public class PostInCommunity extends WebTest {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        onOpened(EntryPage.class).clickOnEditButtonInCommunity();
+        onOpened(EntryPage.class).clickOnEditButton();
         verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())

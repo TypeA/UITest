@@ -81,7 +81,7 @@ public class MinSecurityCommunity extends WebTest {
     @Then("user see all privacy when edit this post (security $security)")
     public void user_see_all_privacy_when_edit_this_post(String security) {
         ArrayList<String> privacy = onOpened(EntryPage.class)
-                .clickOnEditButtonInCommunity()
+                .clickOnEditButton()
                 .getAllPrivacy();
         verify().that(correctPrivacy("public").equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy("public").get(0))

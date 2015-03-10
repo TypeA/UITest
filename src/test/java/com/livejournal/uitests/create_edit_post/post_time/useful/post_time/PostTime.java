@@ -2,6 +2,7 @@ package com.livejournal.uitests.create_edit_post.post_time.useful.post_time;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.FinishPostForm;
@@ -50,9 +51,25 @@ public class PostTime extends WebTest {
         String post_text = onDisplayed(FinishPostForm.class)
                 .clickToScheduledLink()
                 .getPostByText(ThucydidesUtils.getFromSession("post_text").toString().trim());
-        verify().that(post_text.contains(convertPostTime(ThucydidesUtils.getFromSession("post_date").toString())))
-                .ifResultIsExpected("Post is scheduled, whis correct date: " + convertPostTime(ThucydidesUtils.getFromSession("post_date").toString()))
+        verify().that(post_text.contains(convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "24")))
+                .ifResultIsExpected("Post is scheduled, whis correct date: " + convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "24"))
                 .ifElse("There is no post " + post_text + " in scheduled, with correct date")
+                .finish();
+    }
+
+    @Then("the post is in journal")
+    public void the_post_is_in_journal() {
+        String post_text = onOpened(EntryPage.class)
+                .getPostText().trim();
+        String post_time = onOpened(EntryPage.class)
+                .getPostTime();
+        verify().that(post_time.contains(convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "12")))
+                .ifResultIsExpected("Post is in journal, whis correct date: \n'" + convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "12") + "'")
+                .ifElse("There is correct date \n'" + post_time + "'\n in post")
+                .and()
+                .that(post_text.contains(ThucydidesUtils.getFromSession("post_text").toString().trim()))
+                .ifResultIsExpected("Post with text \n'" + ThucydidesUtils.getFromSession("post_text").toString() + "'\n is in journal")
+                .ifElse("Post with incorrect text \n'" + post_text + "'\n is in journal")
                 .finish();
     }
 
@@ -127,10 +144,45 @@ public class PostTime extends WebTest {
         return dop_month + month + "/" + dop_day + day + "/" + year + ";" + hour + ":" + dop_min + min;
     }
 
-    private String convertPostTime(String time) {
-        return Date.getManthByIndex(time.substring(0, 2))
-                + " " + time.substring(3, 5)
-                + ", " + time.substring(6, 10)
-                + ", " + time.substring(11, 16);
+    private String convertPostTime(String time, String format) {
+        String ands = "th";
+        if (Integer.valueOf(time.substring(3, 5)) == 1) {
+            ands = "st";
+        }
+        if (Integer.valueOf(time.substring(3, 5)) == 2) {
+            ands = "nd";
+        }
+        if (Integer.valueOf(time.substring(3, 5)) == 3) {
+            ands = "rd";
+        }
+        switch (format) {
+            case "12":
+                String hour = time.substring(11, 16);
+                if (Integer.valueOf(time.substring(11, 13)) > 12) {
+                    Integer dop = Integer.valueOf(time.substring(11, 13)) - 12;
+                    if (dop < 10) {
+                        hour = "0" + dop;
+                    }
+                    hour = hour + time.substring(13, 16);
+                }
+                if (Integer.valueOf(time.substring(11, 13)) < 12) {
+                    hour = hour + " am";
+                } else {
+                    hour = hour + " pm";
+                }
+                return Date.getManthByIndex(time.substring(0, 2))
+                        + " " + Integer.valueOf(time.substring(3, 5)) + ands
+                        + ", " + time.substring(6, 10)
+                        + ", " + hour;
+            case "24":
+                return Date.getManthByIndex(time.substring(0, 2))
+                        + " " + time.substring(3, 5)
+                        + ", " + time.substring(6, 10)
+                        + ", " + time.substring(11, 16);
+            default:
+                return time;
+        }
+
     }
+
 }
