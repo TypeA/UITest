@@ -1,6 +1,6 @@
 Scenario: Create post in community
 Meta: 
-@categories privacy community useful
+@categories privacy create_edit_post useful
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>) in community <community>
@@ -16,7 +16,7 @@ Examples:
 
 Scenario: Edit post in community
 Meta:
-@categories privacy community useful
+@categories privacy create_edit_post useful
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>) in community <community>

@@ -15,7 +15,7 @@ Examples:
          
 Scenario: Min security in editing post in community
 Meta: 
-@categories create_edit_post feed privacy
+@categories create_edit_post privacy personal
 
 Given logged user <name> with min security <security> on Create Post page in community <community>
 When user create new post with privacy <security> in community <community>
