@@ -34,7 +34,7 @@ public class PostInCommunity extends WebTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defoultLanguage(name);        
         ThucydidesUtils.putToSession("user", name);
     }
@@ -82,7 +82,7 @@ public class PostInCommunity extends WebTest {
                 .clickOnLogOut();
         String user = selectUserForComminuty(ThucydidesUtils.getFromSession("community").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, workWithDB().getUserPassword(user));
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user));
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -107,7 +107,7 @@ public class PostInCommunity extends WebTest {
         } else {
             String user = selectUserForComminuty(ThucydidesUtils.getFromSession("community").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, workWithDB().getUserPassword(user));
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user));
             open(MyJournalPage.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -139,13 +139,13 @@ public class PostInCommunity extends WebTest {
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectUserForCommunity.valueOf(name.toUpperCase())) {
             case MEMBERS:
-                String ans = workWithDB().findMemberInCommunityNotInGroup(community);
+                String ans = getDBDate().community().findMemberInCommunityNotInGroup(community);
                 return ans;
             case MAINTAINERS:
-                return workWithDB().findMaintainerInComminuty(community);
+                return getDBDate().community().findMaintainerInComminuty(community);
             case USER_IN_GROUP:
-                ArrayList<String> in_group = workWithDB().findFriendInGroup(community, group);
-                String user_in_group = workWithDB().findFriendInGroup(community, group).get(0);
+                ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(community, group);
+                String user_in_group = getDBDate().friends().findFriendInGroup(community, group).get(0);
                 for (int i = 0; i < in_group.size(); i++) {
                     if (in_group.get(i).contains("test")) {
                         user_in_group = in_group.get(i);
@@ -153,7 +153,7 @@ public class PostInCommunity extends WebTest {
                 }
                 return user_in_group;
             case OTHER_USER:
-                return workWithDB().findNotFriend(community);
+                return getDBDate().friends().findNotFriend(community);
             default:
                 String user2 = ThucydidesUtils.getFromSession("user").toString();
                 return user2;

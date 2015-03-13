@@ -31,7 +31,7 @@ public class UsersPost extends WebTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defoultLanguage(name)
                 .defoultMinSecurity(name);
         open(UpdateBmlPageLogged.class);
@@ -84,7 +84,7 @@ public class UsersPost extends WebTest {
                 .clickOnLogOut();
         String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, workWithDB().getUserPassword(user))
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defoultLanguage(user);
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
@@ -110,7 +110,7 @@ public class UsersPost extends WebTest {
         } else {
             String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, workWithDB().getUserPassword(user))
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                     .defoultLanguage(user);
             open(MyJournalPage.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
@@ -155,12 +155,12 @@ public class UsersPost extends WebTest {
     private String selectFriend(String user, String type, String group) {
         switch (SelectUser.valueOf(type.toUpperCase())) {
             case NOT_FRIEND:
-                return workWithDB().findNotFriend(user);
+                return getDBDate().friends().findNotFriend(user);
             case FRIEND:
-                return workWithDB().findFriendWithoutGroup(user);
+                return getDBDate().friends().findFriendWithoutGroup(user);
             case FRIEND_IN_GROUP:
-                ArrayList<String> in_group = workWithDB().findFriendInGroup(user, group);
-                String user_in_group = workWithDB().findFriendInGroup(user, group).get(0);
+                ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(user, group);
+                String user_in_group = getDBDate().friends().findFriendInGroup(user, group).get(0);
                 for (int i = 0; i < in_group.size(); i++) {
                     if (in_group.get(i).contains("test")) {
                         user_in_group = in_group.get(i);

@@ -7,6 +7,9 @@ import net.thucydides.core.annotations.DefaultUrl;
  * @author s.savinykh
  */
 @DefaultUrl("/")
-public class MyJournalPage extends JournalPage{
-    
+public class MyJournalPage extends JournalPage {
+
+    public void findPostByText(String text) {
+    }
+
 }

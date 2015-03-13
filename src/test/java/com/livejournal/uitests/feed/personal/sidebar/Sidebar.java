@@ -22,7 +22,7 @@ public class Sidebar extends WebTest {
     @Given("logged user (name $name) without widgets in sidebar on Friends Feed")
     public void logged_user_without_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defoultLanguage(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .deleteAllWidgets();
@@ -37,7 +37,7 @@ public class Sidebar extends WebTest {
     @Given("logged user (name $name) with complete set of widgets in sidebar on Friends Feed")
     public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defoultLanguage(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .addAllWidgets();
@@ -117,7 +117,7 @@ public class Sidebar extends WebTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut()
                 .clickOnLoginMenuItem()
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
     }
 
     //Scenario: Add widget (3/3)

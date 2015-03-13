@@ -21,7 +21,7 @@ public class ManageFriends extends WebTest {
     public void logged_user_on_ManageFriendsPage(String name) {
         ThucydidesUtils.putToSession("user", name);
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(ManageFriendsPage.class);
     }
 
@@ -42,7 +42,7 @@ public class ManageFriends extends WebTest {
     @Then("user $users should be added as a friend")
     public void user_should_be_added_as_a_friend(String users) {
         open(ManageFriendsPage.class);
-        verify().that(workWithDB().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
+        verify().that(getDBDate().friends().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
                 .ifResultIsExpected("Users " + users + " are successfuly added as a friends in DB")
                 .ifElse("Users " + users + " are not successfuly added as a friends in DB")
                 .and()
@@ -56,7 +56,7 @@ public class ManageFriends extends WebTest {
     @Then("user $users should be removed from friends")
     public void users_should_be_removed_from_friends(String users) {
         open(ManageFriendsPage.class);
-        verify().that(!workWithDB().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
+        verify().that(!getDBDate().friends().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(getParsedString(users, ";")))
                 .ifResultIsExpected("Users " + users + " are successfuly deleted from a friends in DB")
                 .ifElse("Users " + users + " are not successfully deleted from friends in DB")
                 .and()

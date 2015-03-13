@@ -35,7 +35,7 @@ public class IpBlocking extends WebTest {
                 .ifElse(VerifyText.errorTextForMessage(onOpened(LoginPageUnlogged.class).getErrorText().getText()))
                 .finish();
         onOpened(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         verify().that(getCurrentUrl().contains("/login.bml"))
                 .ifResultIsExpected("IP is blocked")
                 .ifElse("IP is not blocked!")

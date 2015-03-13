@@ -45,7 +45,7 @@ public class ManageFriendsGroups extends WebTest {
     @Given("logged user (name $name) on Manage Groups Page")
     public void logged_user_on_Manage_Groups_Page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(ManageGroupsPage.class);
         ThucydidesUtils.putToSession("user", name);
     }
@@ -104,9 +104,9 @@ public class ManageFriendsGroups extends WebTest {
                 .clickOnLogOut();
         String user = ThucydidesUtils.getFromSession("user").toString();
         String publicGroup = ThucydidesUtils.getFromSession("publicGroup").toString();
-        String userNotFriend = workWithDB().findFriendWithoutGroup(user);
+        String userNotFriend = getDBDate().friends().findFriendWithoutGroup(user);
         open(LoginPageUnlogged.class)
-                .authorizeBy(userNotFriend, workWithDB().getUserPassword(userNotFriend));
+                .authorizeBy(userNotFriend, getDBDate().userData().getUserPassword(userNotFriend));
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."))
                 .openFilters();
         String nameOfGroup = onOpened(FriendsFeedLogged.class).getGroups();

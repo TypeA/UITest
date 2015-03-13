@@ -20,7 +20,7 @@ public class CustomFriendsGroups extends WebTest {
     @Given("logged user (name $name) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 

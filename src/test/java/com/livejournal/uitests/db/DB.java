@@ -5,6 +5,8 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.utility.date.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import org.jbehave.core.annotations.Given;
 
 public class DB extends WebTest {
@@ -14,34 +16,44 @@ public class DB extends WebTest {
 
         String name = "testautotest";
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-        System.out.println(convertPostTime("03/12/2015;14:30", "12"));
+        System.out.println(getDBDate().userData().getUserPassword(name));
         System.out.println("!!!!!!!!!!!!! test stop");
     }
 
-    private String convertPostTime(String time, String format) {
-        switch (format) {
-            case "12":
-                String hour = null;
-                if (Integer.valueOf(time.substring(11, 13)) < 12) {
-                    hour = time.substring(11, 16) + " am";
-                } else {
-                    hour = (Integer.valueOf(time.substring(11, 13)) - 12)
-                            + time.substring(13, 16)
-                            + " pm";
-                }
-                return Date.getManthByIndex(time.substring(0, 2))
-                        + " " + time.substring(3, 5) + "th"
-                        + ", " + time.substring(6, 10)
-                        + ", " + hour;
-            case "24":
-                return Date.getManthByIndex(time.substring(0, 2))
-                        + " " + time.substring(3, 5)
-                        + ", " + time.substring(6, 10)
-                        + ", " + time.substring(11, 16);
-            default:
-                return time;
-        }
+    /*   private String defoultStyle(String user) {
 
-    }
+     ArrayList<ArrayList<String>> user_atr = (ArrayList<ArrayList<String>>) workWithDB().conect()
+     .select("select * from user where user = 'testautotest';", "userid")
+     .select("select * from user where user = 'testautotest';", "clusterid")
+     .finish();
+        
+     System.out.println("========== userid " + user_atr.get(0).get(0));
+     System.out.println("========== clusterid " + user_atr.get(1).get(0));
 
+     String script1 = "select * from lj_c" + user_atr.get(1).get(0) + ".userproplite2 "
+     + "where userid = '" + user_atr.get(0).get(0) + "'"
+     + "and upropid = (select upropid from userproplist where name = 's2_style');";
+        
+     String styleid = workWithDB().conect()
+     .select(script1, "value")
+     .finish()
+     .get(0)
+     .get(0);
+
+     System.out.println("========== userid " + user_atr.get(0).get(0));
+     System.out.println("========== styleid " + styleid);
+
+     String script2 = "select name from s2styles "
+     + "where userid= '" + user_atr.get(0).get(0)
+     + "' and styleid = '" + styleid + "';";
+        
+     String style = workWithDB().conect()
+     .select(script2, "name")
+     .finish()
+     .get(0)
+     .get(0);
+
+     System.out.println("========== " + style);
+     return style;
+     }*/
 }

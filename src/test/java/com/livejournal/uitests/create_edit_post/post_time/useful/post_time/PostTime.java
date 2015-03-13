@@ -23,7 +23,7 @@ public class PostTime extends WebTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, workWithDB().getUserPassword(name))
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defoultLanguage(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();

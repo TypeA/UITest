@@ -21,7 +21,7 @@ public class HeaderNavigation extends WebTest {
     @Given("logged user (name $name,region $region) on Main Page")
     public void logged_user_on_Main_Page(String name,String region) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name,workWithDB().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(MainPageLogged.class).regionSwitch(name, region);
     }
 
