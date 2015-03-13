@@ -16,7 +16,9 @@ public class DB extends WebTest {
 
         String name = "testautotest";
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-        System.out.println(getDBDate().userData().getUserPassword(name));
+        open(LoginPageUnlogged.class)
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .defoultStyle(name);
         System.out.println("!!!!!!!!!!!!! test stop");
     }
 

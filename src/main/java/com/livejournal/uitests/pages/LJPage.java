@@ -89,11 +89,8 @@ public class LJPage extends Page {
                 .select("select * from user where user = '" + user + "';", "clusterid")
                 .finish();
 
-        String userid = user_atr.get(0).get(0);
-        String clusterid = user_atr.get(1).get(0);
-
-        String script1 = "select * from lj_c" + clusterid + ".userproplite2 "
-                + "where userid = '" + userid + "'"
+        String script1 = "select * from lj_c" + user_atr.get(1).get(0) + ".userproplite2 "
+                + "where userid = '" + user_atr.get(0).get(0) + "'"
                 + "and upropid = (select upropid from userproplist where name = 's2_style');";
 
         String styleid = workWithDB().conect()
@@ -102,9 +99,8 @@ public class LJPage extends Page {
                 .get(0)
                 .get(0);
         
-
         String script2 = "select name from s2styles "
-                + "where userid= '" + userid
+                + "where userid= '" + user_atr.get(0).get(0)
                 + "' and styleid = '" + styleid + "';";
 
         String style = workWithDB().conect()

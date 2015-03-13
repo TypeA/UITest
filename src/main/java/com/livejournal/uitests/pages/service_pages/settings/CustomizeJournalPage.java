@@ -25,7 +25,7 @@ public class CustomizeJournalPage extends ServicePageLogged {
     public CustomizeJournalPage findStyle(String style) throws InterruptedException {
         searchStyleField.enter(style);
         searchStyleButton.click();
-        Thread.sleep(3000);
+        Thread.sleep(2000);
         return this;
     }
 
