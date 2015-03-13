@@ -1,4 +1,4 @@
-Scenario: Scheduled post
+Scenario: Create scheduled post
 Meta: 
 @categories post_time useful
 

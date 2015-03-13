@@ -20,6 +20,8 @@ import org.jbehave.core.annotations.When;
  */
 public class PostTime extends WebTest {
 
+    //Scenario: Create scheduled post (1/3)
+    //Scenario: Old post (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -30,6 +32,8 @@ public class PostTime extends WebTest {
         open(UpdateBmlPageLogged.class);
     }
 
+    //Scenario: Create scheduled post (2/3)
+    //Scenario: Old post (2/3)
     @When("user create new post and change parameter $parameter by value $value")
     public void user_create_new_post_and_change_date(String parameter, String value) {
         ThucydidesUtils.putToSession("post_date", getCorrectDate(parameter, value));
@@ -46,6 +50,7 @@ public class PostTime extends WebTest {
         ThucydidesUtils.putToSession("post_text", post_text);
     }
 
+    //Scenario: Create scheduled post (2/3)
     @Then("the post is scheduled")
     public void the_post_is_scheduled() {
         String post_text = onDisplayed(FinishPostForm.class)
@@ -57,6 +62,7 @@ public class PostTime extends WebTest {
                 .finish();
     }
 
+    //Scenario: Old post (3/3)
     @Then("the post is in journal")
     public void the_post_is_in_journal() {
         String post_text = onOpened(EntryPage.class)
