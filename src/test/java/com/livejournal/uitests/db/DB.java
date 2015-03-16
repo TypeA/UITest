@@ -16,46 +16,22 @@ public class DB extends WebTest {
 
         String name = "testautotest";
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-        open(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultStyle(name);
+        convertPostTime("03/16/2015;9:15");
         System.out.println("!!!!!!!!!!!!! test stop");
     }
 
-    /*   private String defoultStyle(String user) {
+    public static String convertPostTime(String time) {
 
-     ArrayList<ArrayList<String>> user_atr = (ArrayList<ArrayList<String>>) workWithDB().conect()
-     .select("select * from user where user = 'testautotest';", "userid")
-     .select("select * from user where user = 'testautotest';", "clusterid")
-     .finish();
-        
-     System.out.println("========== userid " + user_atr.get(0).get(0));
-     System.out.println("========== clusterid " + user_atr.get(1).get(0));
+        if (time.length() < 16) {
+            time = time.replaceAll(";", ";0");
+        }
+       
+        time = time.substring(6, 10) + "-"
+                + time.substring(3, 5) + "-"
+                + time.substring(0, 2) + " "
+                + time.substring(11, 16) + ":00";
 
-     String script1 = "select * from lj_c" + user_atr.get(1).get(0) + ".userproplite2 "
-     + "where userid = '" + user_atr.get(0).get(0) + "'"
-     + "and upropid = (select upropid from userproplist where name = 's2_style');";
-        
-     String styleid = workWithDB().conect()
-     .select(script1, "value")
-     .finish()
-     .get(0)
-     .get(0);
-
-     System.out.println("========== userid " + user_atr.get(0).get(0));
-     System.out.println("========== styleid " + styleid);
-
-     String script2 = "select name from s2styles "
-     + "where userid= '" + user_atr.get(0).get(0)
-     + "' and styleid = '" + styleid + "';";
-        
-     String style = workWithDB().conect()
-     .select(script2, "name")
-     .finish()
-     .get(0)
-     .get(0);
-
-     System.out.println("========== " + style);
-     return style;
-     }*/
+        return time;
+        //time.replaceAll("/", "-").replaceAll(";", " ") + ":00";
+    }
 }

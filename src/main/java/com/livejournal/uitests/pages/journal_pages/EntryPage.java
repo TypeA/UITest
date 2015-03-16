@@ -37,8 +37,7 @@ public class EntryPage extends JournalPage {
 
     @StepGroup
     public String getPostTime() {
-        return startScript("return jQuery('.j-e-date-day').text()").toString() 
-                +", "
-                + startScript("return jQuery('.j-e-date-time').text()").toString();
+        return startScript("return jQuery('.b-singlepost-author-date.published.dt-published')[0].textContent")
+                .toString();
     }
 }

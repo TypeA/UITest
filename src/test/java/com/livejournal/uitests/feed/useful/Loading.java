@@ -1,5 +1,3 @@
-
-
 package com.livejournal.uitests.feed.useful;
 
 import com.livejournal.uisteps.thucydides.WebTest;
