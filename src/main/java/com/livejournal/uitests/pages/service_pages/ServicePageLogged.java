@@ -76,20 +76,6 @@ public class ServicePageLogged extends ServicePage {
         getFullscreenHeader().clickOnMessagesMenuItem();
     }
 
-    @StepGroup
-    public ServicePageLogged regionSwitch(String user, String region) {
-        switch (region.toUpperCase()) {
-            case "CYR":
-                if (getDBDate().userSettings().getCyrSetting(user).equals("NONCYR")) {
-                    open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
-                }
-                break;
-            case "NONCYR":
-                if (getDBDate().userSettings().getCyrSetting(user).equals("CYR")) {
-                    open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
-                }
-                break;
-        }
-        return this;
-    }
+    
+
 }

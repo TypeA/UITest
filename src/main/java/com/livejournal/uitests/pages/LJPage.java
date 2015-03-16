@@ -3,7 +3,6 @@ package com.livejournal.uitests.pages;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.Root;
 import com.livejournal.uisteps.thucydides.elements.Page;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.CustomizeJournalPage;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class LJPage extends Page {
         return element;
     }
 
-    public LJPage defoultMinSecurity(String user) {
+    public LJPage defaultMinSecurity(String user) {
         String script1 = "select clusterid, user from user "
                 + "where user = '" + user + "';";
         String clusterid = workWithDB().conect()
@@ -56,7 +55,7 @@ public class LJPage extends Page {
         return this;
     }
 
-    public LJPage defoultLanguage(String user) {
+    public LJPage defaultLanguageLogged(String user) {
         String script1 = "select clusterid, user from user "
                 + "where user = '" + user + "';";
         String clusterid = workWithDB().conect()
@@ -79,10 +78,15 @@ public class LJPage extends Page {
                     .setLanguage("en_LJ")
                     .saveSettings();
         }
-        return this;
+        return onOpened(LJPage.class);
     }
 
-    public LJPage defoultStyle(String user) throws InterruptedException {
+    public LJPage defaultLanguageUnlogged() {
+        addCookie("langpref", "en_LJ");
+        return onOpened(LJPage.class);
+    }
+
+    public LJPage defaultStyle(String user) throws InterruptedException {
 
         List<ArrayList<String>> user_atr = workWithDB().conect()
                 .select("select * from user where user = '" + user + "';", "userid")
@@ -101,7 +105,6 @@ public class LJPage extends Page {
                 .finish()
                 .get(0)
                 .get(0);
-        
 
         String script2 = "select name from s2styles "
                 + "where userid= '" + userid
@@ -122,16 +125,32 @@ public class LJPage extends Page {
         return this;
     }
 
-    public void regionSwitch(String reg) {
-        switch (reg) {
-            case "cyr":
-                addCookie("fake_ipclass", "russia");
-                open(MainPageUnlogged.class);
+    public LJPage regionSwitchLogged(String user, String region) {
+        switch (region.toUpperCase()) {
+            case "CYR":
+                if (getDBDate().userSettings().getCyrSetting(user).equals("NONCYR")) {
+                    open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
+                }
                 break;
-            case "noncyr":
-                addCookie("fake_ipclass", "US");
-                open(MainPageUnlogged.class);
+            case "NONCYR":
+                if (getDBDate().userSettings().getCyrSetting(user).equals("CYR")) {
+                    open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
+                }
                 break;
         }
+        return onOpened(LJPage.class);
     }
+
+    public LJPage regionSwitchUnlogged(String reg) {
+        switch (reg.toUpperCase()) {
+            case "CYR":
+                addCookie("fake_ipclass", "russia");
+                break;
+            case "NONCYR":
+                addCookie("fake_ipclass", "US");
+                break;
+        }
+        return onOpened(LJPage.class);
+    }
+
 }
