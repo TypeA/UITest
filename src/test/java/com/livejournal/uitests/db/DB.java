@@ -16,7 +16,12 @@ public class DB extends WebTest {
 
         String name = "testautotest";
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
-        convertPostTime("03/16/2015;9:15");
+        open(LoginPageUnlogged.class)
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .defoultLanguage(name)
+                .defoultStyle(name);
+        open(SheduledEntriesPage.class)
+                .deleteAllSheduledEntries();
         System.out.println("!!!!!!!!!!!!! test stop");
     }
 

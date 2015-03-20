@@ -30,6 +30,30 @@ public class ScheduledPost extends WebTest {
         open(UpdateBmlPageLogged.class);
     }
 
+    //Scenario: Delete scheduled post (1/3)
+    @Given("logged user $name with scheduled post on Scheduled post Page")
+    public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name) throws InterruptedException {
+        open(LoginPageUnlogged.class)
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .defoultLanguage(name)
+                .defoultStyle(name);
+        String post_text = RandomText.getRandomText(30);
+        Integer number_of_entryes = open(SheduledEntriesPage.class)
+                .getNumberOfEntryes();
+        if (number_of_entryes < 1) {
+            String[] date = PostTime.getCorrectDate("day", "1")
+                    .split(";");
+            open(UpdateBmlPageLogged.class)
+                    .closeDraft()
+                    .createPost("Sheduled post for deleting", "html", RandomText.getRandomText(30))
+                    .setDateAndTime(date[0], date[1])
+                    .postEntry();
+            open(SheduledEntriesPage.class);
+            number_of_entryes = number_of_entryes + 1;
+        }
+        ThucydidesUtils.putToSession("number_of_entryes", number_of_entryes);
+    }
+
     //Scenario: Create scheduled post (2/3)
     @When("user create new post and change parameter $parameter by value $value")
     public void user_create_new_post_and_change_date(String parameter, String value) {
@@ -47,6 +71,13 @@ public class ScheduledPost extends WebTest {
         ThucydidesUtils.putToSession("post_text", post_text);
     }
 
+    //Scenario: Delete scheduled post (2/3)
+    @When("user delete the scheduled post")
+    public void user_delete_the_scheduled_post() {
+        onOpened(SheduledEntriesPage.class)
+                .deletFirstSheduledEntry();
+    }
+
     //Scenario: Create scheduled post (2/3)
     @Then("the post is scheduled")
     public void the_post_is_scheduled() {
@@ -56,6 +87,17 @@ public class ScheduledPost extends WebTest {
         verify().that(post_text.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "24")))
                 .ifResultIsExpected("Post is scheduled, whis correct date: " + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "24"))
                 .ifElse("There is no post " + post_text + " in scheduled, with correct date")
+                .finish();
+    }
+
+    //Scenario: Delete scheduled post (3/3)
+    @Then("the scheduled post is deleted")
+    public void scheduled_post_is_deleted() {
+        Integer number_of_entries = open(SheduledEntriesPage.class)
+                .getNumberOfEntryes()+1;
+        verify().that(number_of_entries.equals(ThucydidesUtils.getFromSession("number_of_entryes")))
+                .ifResultIsExpected("The scheduled post is deleted, I see " + ThucydidesUtils.getFromSession("number_of_entryes") + " scheduled posts")
+                .ifElse("The scheduled post is not deleted, I see " + number_of_entries + " scheduled posts")
                 .finish();
     }
 

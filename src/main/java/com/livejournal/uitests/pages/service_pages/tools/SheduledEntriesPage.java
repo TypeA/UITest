@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.tools;
 
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -16,15 +17,25 @@ public class SheduledEntriesPage extends ServicePageLogged {
                 .toString();
     }
 
-    public void deleteAllSheduledEntries() {
-        String size = startScript("return jQuery('.b-editentry a').size()").toString();
-        while (Integer.valueOf(size) > 6) {
+    public SheduledEntriesPage deleteAllSheduledEntries() {
+        while (getNumberOfEntryes() > 6) {
             startScript("jQuery('.b-editentry a')[0].click()");
             onOpened(EditJournalbml.class)
                     .deleteEntry();
             open(SheduledEntriesPage.class);
-            size = startScript("return jQuery('.b-editentry a').size()").toString();
         }
+        return this;
+    }
 
+    public MyJournalPage deletFirstSheduledEntry() {
+        startScript("jQuery('.b-editentry a')[0].click()");
+        onOpened(EditJournalbml.class)
+                .deleteEntry();
+        return onOpened(MyJournalPage.class);
+    }
+
+    public Integer getNumberOfEntryes() {
+        String size = startScript("return jQuery('.b-editentry a').size()").toString();
+        return Integer.valueOf(size);
     }
 }
