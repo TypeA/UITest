@@ -35,7 +35,7 @@ public class PostInCommunity extends WebTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);        
+                .defaultLanguageLogged(name);        
         ThucydidesUtils.putToSession("user", name);
     }
 
@@ -45,7 +45,7 @@ public class PostInCommunity extends WebTest {
     public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws InterruptedException {
         String postText = RandomText.getRandomText(30);
         open(LoginPageUnlogged.class)
-                .defoultMinSecurity(community);
+                .defaultMinSecurity(community);
         open(UpdateBmlPageLogged.class);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()

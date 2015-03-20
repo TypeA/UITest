@@ -25,8 +25,8 @@ Examples:
 |cyr_test_cyr   |cyr    |HELP           |SupportMainPageLogged          |MainPageLogged|
 |cyr_test_cyr   |cyr    |ABOUT          |AboutMainPageLogged            |MainPageLogged|
 |cyr_test_cyr   |cyr    |FAQ            |FaqMainPageLogged              |MainPageLogged|
-|cyr_test_cyr   |cyr    |TOS            |TosRusPageLogged               |MainPageLogged|
-|cyr_test_cyr   |cyr    |PRIVACY        |PrivacyRusPageLogged           |MainPageLogged|
+|cyr_test_cyr   |cyr    |TOS            |TosPageLogged                  |MainPageLogged|
+|cyr_test_cyr   |cyr    |PRIVACY        |PrivacyPageLogged              |MainPageLogged|
 |cyr_test_cyr   |cyr    |DMCA           |DMCAPageLogged                 |MainPageLogged|
 |cyr_test_cyr   |cyr    |JOURNAL        |MyJournalPage                  |MainPageLogged|
 |cyr_test_cyr   |cyr    |PROFILE        |ProfilePage                    |MainPageLogged|
@@ -58,18 +58,18 @@ When unlogged user goes from page <page> using link <link>
 Then user on correct page <correct_page>
 
 Examples:
-|link           |region |correct_page            |page            |
-|LOGO           |cyr    |MainPageUnlogged        |MainPageUnlogged|
-|BROWSE         |noncyr |BrowseMainPageUnlogged  |MainPageUnlogged|
-|LJMAGAZINE     |cyr    |LJMagazinePageUnlogged  |MainPageUnlogged|
-|SHOP           |cyr    |ShopPageUnlogged        |MainPageUnlogged|
-|PAID           |cyr    |PaidAccountPageUnlogged |MainPageUnlogged|
-|PROMO          |cyr    |PromoPageUnlogged       |MainPageUnlogged|
-|TOKENS         |cyr    |LoginPageUnlogged       |MainPageUnlogged|
-|HELP           |cyr    |SupportMainPageUnlogged |MainPageUnlogged|
-|ABOUT          |cyr    |AboutMainPageUnlogged   |MainPageUnlogged|
-|FAQ            |cyr    |FaqMainPageUnlogged     |MainPageUnlogged|
-|TOS            |cyr    |TosRusPageUnlogged      |MainPageUnlogged|
-|PRIVACY        |cyr    |PrivacyRusPageUnlogged  |MainPageUnlogged|
-|DMCA           |cyr    |DMCAPageUnlogged        |MainPageUnlogged|
-|REGISTRATION   |cyr    |CreateAccountPage       |MainPageUnlogged|
+|region |link           |correct_page            |page            |
+|cyr    |LOGO           |MainPageUnlogged        |MainPageUnlogged|
+|noncyr |BROWSE         |BrowseMainPageUnlogged  |MainPageUnlogged|
+|cyr    |LJMAGAZINE     |LJMagazinePageUnlogged  |MainPageUnlogged|
+|cyr    |SHOP           |ShopPageUnlogged        |MainPageUnlogged|
+|cyr    |PAID           |PaidAccountPageUnlogged |MainPageUnlogged|
+|cyr    |PROMO          |PromoPageUnlogged       |MainPageUnlogged|
+|cyr    |TOKENS         |LoginPageUnlogged       |MainPageUnlogged|
+|cyr    |HELP           |SupportMainPageUnlogged |MainPageUnlogged|
+|cyr    |ABOUT          |AboutMainPageUnlogged   |MainPageUnlogged|
+|cyr    |FAQ            |FaqMainPageUnlogged     |MainPageUnlogged|
+|cyr    |TOS            |TosPageUnlogged         |MainPageUnlogged|
+|cyr    |PRIVACY        |PrivacyPageUnlogged     |MainPageUnlogged|
+|cyr    |DMCA           |DMCAPageUnlogged        |MainPageUnlogged|
+|cyr    |REGISTRATION   |CreateAccountPage       |MainPageUnlogged|

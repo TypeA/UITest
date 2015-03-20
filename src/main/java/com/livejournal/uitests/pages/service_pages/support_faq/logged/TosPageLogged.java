@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.DefaultUrl;
  *
  * @author s.savinykh
  */
-@DefaultUrl("/legal/tos-russian-translation.bml")
-public class TosRusPageLogged extends ServicePageLogged{
+@DefaultUrl("/legal/tos")
+public class TosPageLogged extends ServicePageLogged{
 
 }

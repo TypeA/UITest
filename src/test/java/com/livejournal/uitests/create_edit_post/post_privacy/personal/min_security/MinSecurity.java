@@ -24,7 +24,7 @@ public class MinSecurity extends WebTest {
     public void logged_user_on_Security_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(SettingsMainPage.class, new Url().setPostfix("?cat=privacy"));
     }
 
@@ -33,7 +33,7 @@ public class MinSecurity extends WebTest {
     public void logged_user_with_min_security_on_Create_Post_page(String name, String security) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(SettingsMainPage.class, new Url().setPostfix("?cat=privacy"))
                 .setMinSecurity(security)
                 .saveSettings();

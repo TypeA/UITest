@@ -23,7 +23,7 @@ public class Sidebar extends WebTest {
     public void logged_user_without_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .deleteAllWidgets();
 
@@ -38,7 +38,7 @@ public class Sidebar extends WebTest {
     public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .addAllWidgets();
     }

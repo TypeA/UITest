@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -19,16 +18,19 @@ public class HeaderNavigation extends WebTest {
 
     //Scenario: Navigation for logged user (1/3)
     @Given("logged user (name $name,region $region) on Main Page")
-    public void logged_user_on_Main_Page(String name,String region) {
+    public void logged_user_on_Main_Page(String name, String region) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
-        open(MainPageLogged.class).regionSwitch(name, region);
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .defaultLanguageLogged(name)
+                .regionSwitchLogged(name, region);
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
     @Given("unlogged user from region $region on Main Page")
     public void unlogged_user_from_region_on_Main_Page(String region) {
-        open(MainPageUnlogged.class).regionSwitch(region);
+        open(MainPageUnlogged.class)
+                .regionSwitchUnlogged(region)
+                .defaultLanguageUnlogged();
     }
 
     //Scenario: Navigation for logged user (2/3)
@@ -183,7 +185,7 @@ public class HeaderNavigation extends WebTest {
                 break;
             case NEWENTRYINMENU:
                 page.clickOnPostNewEntry();
-                        
+
                 break;
             case EDITPROFILE:
                 page.moveMouseOverUserPicMenuItem()

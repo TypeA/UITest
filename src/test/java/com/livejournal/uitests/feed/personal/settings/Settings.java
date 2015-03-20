@@ -44,7 +44,7 @@ public class Settings extends WebTest {
     public void logged_user_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
     }
 
@@ -54,7 +54,7 @@ public class Settings extends WebTest {
     public void logged_user_with_own_settings_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         setRandomSettings();
     }

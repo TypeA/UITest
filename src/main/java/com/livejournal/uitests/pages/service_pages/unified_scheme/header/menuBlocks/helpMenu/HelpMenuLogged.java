@@ -4,9 +4,9 @@ import com.livejournal.uitests.pages.service_pages.search.SearchPageLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.logged.AboutMainPageLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.logged.DMCAPageLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.logged.FaqMainPageLogged;
-import com.livejournal.uitests.pages.service_pages.support_faq.logged.PrivacyRusPageLogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.logged.PrivacyPageLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.logged.SupportMainPageLogged;
-import com.livejournal.uitests.pages.service_pages.support_faq.logged.TosRusPageLogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.logged.TosPageLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.interactions.Actions;
@@ -39,15 +39,15 @@ public class HelpMenuLogged extends HelpMenu {
     }
 
     @StepGroup
-    public TosRusPageLogged clickOnTos() {
+    public TosPageLogged clickOnTos() {
         tos.click();
-        return onOpened(TosRusPageLogged.class);
+        return onOpened(TosPageLogged.class);
     }
 
     @StepGroup
-    public PrivacyRusPageLogged clickOnPrivacy() {
+    public PrivacyPageLogged clickOnPrivacy() {
         privacy.click();
-        return onOpened(PrivacyRusPageLogged.class);
+        return onOpened(PrivacyPageLogged.class);
     }
 
     @StepGroup

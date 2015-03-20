@@ -21,7 +21,7 @@ public class CreatePost extends WebTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name);
+                .defaultLanguageLogged(name);
         open(UpdateBmlPageLogged.class);
     }
 

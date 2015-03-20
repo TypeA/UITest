@@ -6,7 +6,7 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFee
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.CustomizeJournalPage;
 import com.livejournal.uitests.pages.service_pages.settings.EditProfilePage;
-import com.livejournal.uitests.pages.service_pages.settings.FindFriendsPage;
+import com.livejournal.uitests.pages.service_pages.tools.FindFriendsPage;
 import com.livejournal.uitests.pages.service_pages.settings.email.ChangeEmailPage;
 import com.livejournal.uitests.pages.service_pages.settings.email.ValidateEmailPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
