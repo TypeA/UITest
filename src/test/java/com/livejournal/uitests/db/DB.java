@@ -18,8 +18,8 @@ public class DB extends WebTest {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start");
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name)
-                .defoultStyle(name);
+                .defaultLanguageLogged(name)
+                .defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         System.out.println("!!!!!!!!!!!!! test stop");

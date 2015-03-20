@@ -23,8 +23,8 @@ public class OldPost extends WebTest{
     public void logged_user_on_Create_Post_page(String name) throws InterruptedException {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defoultLanguage(name)
-                .defoultStyle(name);
+                .defaultLanguageLogged(name)
+                .defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
