@@ -58,7 +58,7 @@ public class UsersPost extends WebTest {
 
     //Scenario: Edit post(3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post")
-    public void user_edit_privacy_and_save_post(String privacy_1, String group_1) {
+    public void user_edit_privacy_and_save_post(String privacy_1, String group_1) throws InterruptedException {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));

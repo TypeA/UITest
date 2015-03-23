@@ -1,8 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.searchMenu.SearchMenu;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.feedbackMenu.FeedbackMenu;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenu;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import net.thucydides.core.annotations.StepGroup;

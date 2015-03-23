@@ -6,11 +6,8 @@ import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import java.util.ArrayList;
-import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
-import org.junit.Assert;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
 
@@ -21,17 +18,7 @@ import ru.yandex.qatools.htmlelements.element.Select;
 @DefaultUrl("/update.bml")
 public class UpdateBmlPageLogged extends ServicePageLogged {
 
-    @FindBy(id = "subject")
-    private TextField subjectField;
-
-    @FindBy(css = "body[class=lj-main-body]")
-    private TextField postVisualField;
-
-    @FindBy(css = ".b-updateform-textarea")
-    private TextField postHtmlField;
-
-    @FindBy(name = "privacy")
-    private Select privacySelect;
+    private PostContentBlock postContentBlock;
 
     @FindBy(name = "community")
     private Select communitySelect;
@@ -41,12 +28,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(name = "action:update")
     private Button addPostButton;
-
-    @FindBy(css = ".b-updatepage-tab-visual")
-    private Button visualEditButton;
-
-    @FindBy(css = ".b-updatepage-tab-html")
-    private Button htmlEditButton;
 
     /////////////////////////// date
     @FindBy(css = ".b-updatepage-date-current a")
@@ -66,53 +47,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private Button restoreDraft;
 
     @StepGroup
-    public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
-        subjectField.enter(subject);
-        switch (EditPostType.valueOf(editorType.toUpperCase())) {
-            case VISUAL:
-                visualEditButton.click();
-                postVisualField.enter(text);
-                break;
-            case HTML:
-                htmlEditButton.click();
-                postHtmlField.enter(text);
-                break;
-            default:
-                Assert.fail("Unknown edit type " + editorType + "!");
-        }
-        return this;
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
-        Thread.sleep(2500);
-        privacySelect.selectByVisibleText(privacy);
-        if (privacy.equals("Custom")) {
-            for (int i = 0; i < group.size(); i++) {
-                this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
-            }
-        }
-        return this;
-    }
-
-    @StepGroup
-    public EntryPage postEntry() {
-        addPostButton.click();
-        return onOpened(EntryPage.class);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged postInCommunity() {
-        postToCommunity.click();
-        return this;
-    }
-
-    public UpdateBmlPageLogged selectCommunity(String community) {
-        communitySelect.selectByValue(community);
-        return this;
-    }
-
-    @StepGroup
     public UpdateBmlPageLogged closeDraft() {
         try {
             closeDraftButton.click();
@@ -128,31 +62,10 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return this;
     }
 
-    public ArrayList<String> getAllPrivacy() throws InterruptedException {
-        Thread.sleep(100);
-        List<WebElement> allSecurity = privacySelect.getOptions();
-        ArrayList<String> privasy = new ArrayList<>();
-        for (int i = 0; i < allSecurity.size(); i++) {
-            privasy.add(allSecurity.get(i).getText());
-        }
-        return privasy;
-    }
-
     @StepGroup
-    public String getCurrentPrivacy() {
-
-        String text = privacySelect.getFirstSelectedOption().getText();
-        if (text.equals("Custom")) {
-            Integer size = Integer.valueOf(startScript("return jQuery('.privacy-item.ng-scope label input').size()").toString());
-            for (Integer i = 1; i < size; i++) {
-                if (startScript("return jQuery(\".privacy-item.ng-scope label input\").eq(" + i.toString() + ").is(':checked')").toString().equals("true")) {
-                    text = text + "\n" + startScript("return jQuery(\".privacy-item.ng-scope label span\").eq(" + i.toString() + ").text()").toString();
-                }
-            }
-        } else {
-            return text;
-        }
-        return text;
+    public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
+        postContentBlock.createPost(subject, editorType, text);
+        return this;
     }
 
     @StepGroup
@@ -161,5 +74,38 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         dateField.enter(date);
         timeField.enter(time);
         return this;
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
+        Thread.sleep(2500);
+        postContentBlock.setPrivacy(privacy, group);
+        return this;
+    }
+
+    public UpdateBmlPageLogged selectCommunity(String community) {
+        communitySelect.selectByValue(community);
+        return this;
+    }
+
+    @StepGroup
+    public EntryPage postEntry() {
+        addPostButton.click();
+        return onOpened(EntryPage.class);
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged postInCommunity() {
+        postToCommunity.click();
+        return this;
+    }
+
+    public ArrayList<String> getAllPrivacy() {
+        return postContentBlock.getAllPrivacy();
+    }
+
+    @StepGroup
+    public String getCurrentPrivacy() {
+        return postContentBlock.getCurrentPrivacy();
     }
 }

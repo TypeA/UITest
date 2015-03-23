@@ -22,13 +22,17 @@ public class CreatePost extends WebTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name);
+        System.out.println("==================1");
         open(UpdateBmlPageLogged.class);
+        System.out.println("==================2");
     }
 
     //Scenario: Logged user create new post (2/3)
     @When("user create new post")
     public void user_create_new_post_and_change_date(String parameter, String value) {
+        System.out.println("==================3");
         String post_text = RandomText.getRandomText(30);
+        System.out.println("==================4");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("New post", "html", post_text)

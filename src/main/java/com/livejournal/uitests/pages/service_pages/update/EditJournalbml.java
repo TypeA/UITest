@@ -9,7 +9,6 @@ import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
  *
@@ -18,14 +17,35 @@ import ru.yandex.qatools.htmlelements.element.Select;
 @DefaultUrl("/editjournal.bml")
 public class EditJournalbml extends ServicePageLogged {
 
-    @FindBy(name = "privacy")
-    private Select privacySelect;
+    public PostContentBlock postContentBlock;
 
     @FindBy(name = "action:update")
     private Button saveButton;
 
     @FindBy(name = "action:delete")
     private Button deleteButton;
+
+    @StepGroup
+    public EditJournalbml createPost(String subject, String editorType, String text) {
+        postContentBlock.createPost(subject, editorType, text);
+        return this;
+    }
+
+    @StepGroup
+    public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
+        Thread.sleep(2500);
+        postContentBlock.setPrivacy(privacy, group);
+        return this;
+    }
+
+    public ArrayList<String> getAllPrivacy() {
+        return postContentBlock.getAllPrivacy();
+    }
+
+    @StepGroup
+    public String getCurrentPrivacy() {
+        return postContentBlock.getCurrentPrivacy();
+    }
 
     @StepGroup
     public void saveEntry() {
@@ -37,42 +57,6 @@ public class EditJournalbml extends ServicePageLogged {
         deleteButton.click();
         getDriver().switchTo().alert().accept();
         return onOpened(MyJournalPage.class);
-    }
-
-    public ArrayList<String> getAllPrivacy() {
-        List<WebElement> allSecurity = privacySelect.getOptions();
-        ArrayList<String> privasy = new ArrayList<>();
-        for (int i = 0; i < allSecurity.size(); i++) {
-            privasy.add(allSecurity.get(i).getText());
-        }
-        return privasy;
-    }
-
-    @StepGroup
-    public String getCurrentPrivacy() {
-        String text = privacySelect.getFirstSelectedOption().getText();
-        if (text.equals("Custom")) {
-            Integer size = Integer.valueOf(startScript("return jQuery('.privacy-item.ng-scope label input').size()").toString());
-            for (Integer i = 1; i < size; i++) {
-                if (startScript("return jQuery(\".privacy-item.ng-scope label input\").eq(" + i.toString() + ").is(':checked')").toString().equals("true")) {
-                    text = text + "\n" + startScript("return jQuery(\".privacy-item.ng-scope label span\").eq(" + i.toString() + ").text()").toString();
-                }
-            }
-        } else {
-            return text;
-        }
-        return text;
-    }
-
-    @StepGroup
-    public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) {
-        privacySelect.selectByVisibleText(privacy);
-        if (privacy.equals("Custom")) {
-            for (int i = 0; i < group.size(); i++) {
-                this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
-            }
-        }
-        return this;
     }
 
 }

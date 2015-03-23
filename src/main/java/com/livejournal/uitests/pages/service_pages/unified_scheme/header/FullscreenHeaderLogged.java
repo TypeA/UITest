@@ -1,10 +1,8 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
-import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.browse.BrowseMainPageLogged;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
@@ -14,8 +12,6 @@ import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlo
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;

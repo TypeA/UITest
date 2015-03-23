@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.livejournal.uitests.create_edit_post.post_privacy.useful.post_in_community;
 
 import com.livejournal.uisteps.core.Url;
@@ -64,7 +60,7 @@ public class PostInCommunity extends WebTest {
 
     //Scenario: Edit post in community (3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post in community")
-    public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1) {
+    public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1) throws InterruptedException {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));

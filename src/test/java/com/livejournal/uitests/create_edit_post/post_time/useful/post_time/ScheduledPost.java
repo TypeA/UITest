@@ -30,6 +30,7 @@ public class ScheduledPost extends WebTest {
         open(UpdateBmlPageLogged.class);
     }
 
+    //Scenario: Edit scheduled post (1/3)
     //Scenario: Delete scheduled post (1/3)
     @Given("logged user $name with scheduled post on Scheduled post Page")
     public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name) throws InterruptedException {
@@ -71,14 +72,19 @@ public class ScheduledPost extends WebTest {
         ThucydidesUtils.putToSession("post_text", post_text);
     }
 
+    //Scenario: Edit scheduled post (1/3)
+    @When("user edit the scheduled post")
+    public void user_edit_the_scheduled_post() {
+    }
+
     //Scenario: Delete scheduled post (2/3)
     @When("user delete the scheduled post")
     public void user_delete_the_scheduled_post() {
         onOpened(SheduledEntriesPage.class)
-                .deletFirstSheduledEntry();
+                .deleteFirstSheduledEntry();
     }
 
-    //Scenario: Create scheduled post (2/3)
+    //Scenario: Create scheduled post (3/3)
     @Then("the post is scheduled")
     public void the_post_is_scheduled() {
         String post_text = onDisplayed(FinishPostForm.class)
@@ -94,7 +100,7 @@ public class ScheduledPost extends WebTest {
     @Then("the scheduled post is deleted")
     public void scheduled_post_is_deleted() {
         Integer number_of_entries = open(SheduledEntriesPage.class)
-                .getNumberOfEntryes()+1;
+                .getNumberOfEntryes() + 1;
         verify().that(number_of_entries.equals(ThucydidesUtils.getFromSession("number_of_entryes")))
                 .ifResultIsExpected("The scheduled post is deleted, I see " + ThucydidesUtils.getFromSession("number_of_entryes") + " scheduled posts")
                 .ifElse("The scheduled post is not deleted, I see " + number_of_entries + " scheduled posts")

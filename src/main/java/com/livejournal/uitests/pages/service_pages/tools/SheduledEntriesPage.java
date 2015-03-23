@@ -27,12 +27,22 @@ public class SheduledEntriesPage extends ServicePageLogged {
         return this;
     }
 
-    public MyJournalPage deletFirstSheduledEntry() {
+    public MyJournalPage deleteFirstSheduledEntry() {
         startScript("jQuery('.b-editentry a')[0].click()");
         onOpened(EditJournalbml.class)
                 .deleteEntry();
         return onOpened(MyJournalPage.class);
     }
+
+  /*  public MyJournalPage editFirstSheduledEntry() {
+        startScript("jQuery('.b-editentry a')[0].click()");
+        onOpened(EditJournalbml.class);
+                
+                
+                
+              
+        return onOpened(MyJournalPage.class);
+    }*/
 
     public Integer getNumberOfEntryes() {
         String size = startScript("return jQuery('.b-editentry a').size()").toString();
