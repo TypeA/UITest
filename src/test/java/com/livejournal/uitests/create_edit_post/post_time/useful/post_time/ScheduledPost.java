@@ -69,7 +69,7 @@ public class ScheduledPost extends WebTest {
                 .createPost("New scheduled post", "html", post_text)
                 .setDateAndTime(date[0], date[1])
                 .postEntry();
-        ThucydidesUtils.putToSession("post_text", post_text);
+        ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
 
     //Scenario: Edit scheduled post (1/3)
@@ -86,12 +86,13 @@ public class ScheduledPost extends WebTest {
 
     //Scenario: Create scheduled post (3/3)
     @Then("the post is scheduled")
-    public void the_post_is_scheduled() {
+    public void the_post_is_scheduled(){
         String post_text = onDisplayed(FinishPostForm.class)
                 .clickToScheduledLink()
-                .getPostByText(ThucydidesUtils.getFromSession("post_text").toString().trim());
-        verify().that(post_text.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "24")))
-                .ifResultIsExpected("Post is scheduled, whis correct date: " + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "24"))
+                .getPostByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .trim();
+        verify().that(post_text.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "scheduled post")))
+                .ifResultIsExpected("Post is scheduled, whis correct date: " + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "scheduled post"))
                 .ifElse("There is no post " + post_text + " in scheduled, with correct date")
                 .finish();
     }

@@ -77,15 +77,25 @@ public class PostTime {
     }
 
     public static String convertPostTime(String time, String format) {
+        switch (format) {
+            case "post":
+                if (time.length() < 16) {
+                    time = time.replaceAll(";", ";0");
+                }
+                time = time.substring(6, 10) + "-"
+                        + time.substring(0, 2) + "-"
+                        + time.substring(3, 5) + " "
+                        + time.substring(11, 16) + ":00";
+                return time;
+            case "scheduled post":
+                return Date.getManthByIndex(time.substring(0, 2))
+                        + " " + time.substring(3, 5)
+                        + ", " + time.substring(6, 10)
+                        + ", " + time.substring(11, 16);
+            default:
+                return time;
 
-        if (time.length() < 16) {
-            time = time.replaceAll(";", ";0");
         }
-        time = time.substring(6, 10) + "-"
-                + time.substring(0, 2) + "-"
-                + time.substring(3, 5) + " "
-                + time.substring(11, 16) + ":00";
-        return time;
     }
 
 }

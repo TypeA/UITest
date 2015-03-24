@@ -54,8 +54,8 @@ public class OldPost extends WebTest{
                 .getPostText().trim();
         String post_time = onOpened(EntryPage.class)
                 .getPostTime();
-        verify().that(post_time.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "12")))
-                .ifResultIsExpected("Post is in journal, whis correct date: \n'" + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "12") + "'")
+        verify().that(post_time.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post")))
+                .ifResultIsExpected("Post is in journal, whis correct date: \n'" + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post") + "'")
                 .ifElse("There is correct date \n'" + post_time + "'\n in post")
                 .and()
                 .that(post_text.contains(ThucydidesUtils.getFromSession("post_text").toString().trim()))

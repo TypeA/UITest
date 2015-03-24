@@ -31,7 +31,7 @@ Examples:
 
 Scenario: Delete scheduled post
 Meta: 
-@categories create_edit_post post_time useful test
+@categories create_edit_post post_time useful
 
 Given logged user <name> with scheduled post on Scheduled post Page
 When user delete the scheduled post
