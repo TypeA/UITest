@@ -108,4 +108,11 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public String getCurrentPrivacy() {
         return postContentBlock.getCurrentPrivacy();
     }
+
+    @StepGroup
+    public UpdateBmlPageLogged openLJUserBubble() {
+        postContentBlock.openLJUserBubble();
+        return this;
+    }
+    
 }
