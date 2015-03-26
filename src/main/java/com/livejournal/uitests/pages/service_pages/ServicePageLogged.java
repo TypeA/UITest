@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages;
 
+import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
@@ -14,11 +15,18 @@ import net.thucydides.core.annotations.StepGroup;
  */
 public class ServicePageLogged extends ServicePage {
 
-    public FullscreenHeaderLogged fullscreenHeaderLogged;
+    private FullscreenHeaderLogged fullscreenHeaderLogged;
+
+    private ErrorStrip errorStrip;
 
     @Override
     public FullscreenHeaderLogged getFullscreenHeader() {
         return fullscreenHeaderLogged;
+    }
+
+    @Override
+    public ErrorStrip getErrorStrip() {
+        return errorStrip;
     }
 
     @StepGroup
@@ -69,7 +77,5 @@ public class ServicePageLogged extends ServicePage {
     public void clickOnMessagesMenuItem() {
         getFullscreenHeader().clickOnMessagesMenuItem();
     }
-
-    
 
 }

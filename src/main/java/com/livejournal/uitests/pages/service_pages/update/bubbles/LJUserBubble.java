@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update.bubbles;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
 import com.livejournal.uitests.pages.service_pages.update.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
@@ -23,15 +24,17 @@ public class LJUserBubble extends UIBlock {
     private Button submitButton;
 
     @StepGroup
-    public LJUserBubble enterUsername(String ljuser) {
+    public PostContentBlock enterCorrectUsername(String ljuser) throws InterruptedException {
         username.enter(ljuser);
-        return onDisplayed(LJUserBubble.class);
-    }
-
-    @StepGroup
-    public PostContentBlock clickSubmitButton() throws InterruptedException {
         startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
         Thread.sleep(500);
         return onDisplayed(PostContentBlock.class);
+    }
+
+    @StepGroup
+    public ErrorStrip enterIncorrectUsername(String ljuser) {
+        username.enter(ljuser);
+        startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
+        return onDisplayed(ErrorStrip.class);
     }
 }
