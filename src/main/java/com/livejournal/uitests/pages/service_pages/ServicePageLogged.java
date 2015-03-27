@@ -1,17 +1,12 @@
 package com.livejournal.uitests.pages.service_pages;
 
-import com.livejournal.uisteps.core.Url;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
-import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
-import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
+import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
-import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.MyJournalMenu;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
-import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
 
 /**
@@ -20,11 +15,18 @@ import net.thucydides.core.annotations.StepGroup;
  */
 public class ServicePageLogged extends ServicePage {
 
-    public FullscreenHeaderLogged fullscreenHeaderLogged;
+    private FullscreenHeaderLogged fullscreenHeaderLogged;
+
+    private ErrorStrip errorStrip;
 
     @Override
     public FullscreenHeaderLogged getFullscreenHeader() {
         return fullscreenHeaderLogged;
+    }
+
+    @Override
+    public ErrorStrip getErrorStrip() {
+        return errorStrip;
     }
 
     @StepGroup
@@ -75,7 +77,5 @@ public class ServicePageLogged extends ServicePage {
     public void clickOnMessagesMenuItem() {
         getFullscreenHeader().clickOnMessagesMenuItem();
     }
-
-    
 
 }

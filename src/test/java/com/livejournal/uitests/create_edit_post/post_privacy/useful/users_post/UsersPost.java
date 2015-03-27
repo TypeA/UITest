@@ -129,9 +129,6 @@ public class UsersPost extends WebTest {
     //Scenario: Edit post(4/4)
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
     public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) throws InterruptedException {
-        open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
         verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)

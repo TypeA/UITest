@@ -40,4 +40,24 @@ public class EntryPage extends JournalPage {
         return startScript("return jQuery('.b-singlepost-author-date.published.dt-published')[0].textContent")
                 .toString();
     }
+
+    @StepGroup
+    public Boolean containsLjUser(String ljuser) {
+        Boolean fl1 = false;
+        Boolean fl2 = false;
+        String res = startScript("return jQuery(\".e-content span\").is(\"[lj\\\\:user='" + ljuser + "']\")").toString();
+        switch (res.toUpperCase()) {
+            case "TRUE":
+                fl1 = true;
+                break;
+            case "FALSE":
+                fl1 = false;
+                break;
+        }
+        if (startScript("return jQuery(\".e-content span\")[0].textContent").toString().equals(ljuser)) {
+            fl2 = true;
+        }
+        return fl1 && fl2;
+    }
+
 }
