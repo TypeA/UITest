@@ -17,16 +17,16 @@ Examples:
 
 Scenario: Edit scheduled post
 Meta: 
-@categories create_edit_post post_time useful
+@categories create_edit_post post_time useful test
 
 Given logged user <name> with scheduled post on Scheduled post Page
-When user edit the scheduled post
+When user edit element <element> in the scheduled post
 Then the scheduled post is editing
 
 Examples:
-|name         |
-|testautotest |
-
+|name         |element |
+|testautotest |subject |
+|testautotest |text    |
 
 
 Scenario: Delete scheduled post

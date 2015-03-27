@@ -56,6 +56,27 @@ public class PostContentBlock extends UIBlock {
     }
 
     @StepGroup
+    public void setSubject(String subject) {
+        subjectField.enter(subject);
+    }
+
+    @StepGroup
+    public void setText(String text, String editorType) {
+        switch (EditPostType.valueOf(editorType.toUpperCase())) {
+            case VISUAL:
+                visualEditButton.click();
+                postVisualField.enter(text);
+                break;
+            case HTML:
+                htmlEditButton.click();
+                postHtmlField.enter(text);
+                break;
+            default:
+                Assert.fail("Unknown edit type " + editorType + "!");
+        }
+    }
+
+    @StepGroup
     public void setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
         Thread.sleep(2500);
         privacySelect.selectByVisibleText(privacy);

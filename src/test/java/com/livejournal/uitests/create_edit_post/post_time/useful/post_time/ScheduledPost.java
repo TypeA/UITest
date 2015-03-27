@@ -38,7 +38,6 @@ public class ScheduledPost extends WebTest {
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
                 .defaultStyle(name);
-        String post_text = RandomText.getRandomText(30);
         Integer number_of_entryes = open(SheduledEntriesPage.class)
                 .getNumberOfEntryes();
         if (number_of_entryes < 1) {
@@ -73,8 +72,12 @@ public class ScheduledPost extends WebTest {
     }
 
     //Scenario: Edit scheduled post (1/3)
-    @When("user edit the scheduled post")
-    public void user_edit_the_scheduled_post() {
+    @When("user edit element $element in the scheduled post")
+    public void user_edit_the_scheduled_post(String element) throws InterruptedException {
+        String post_text = RandomText.getRandomText(10); 
+        ThucydidesUtils.putToSession("post_text", post_text.trim());
+        onOpened(SheduledEntriesPage.class)
+                .editFirstSheduledEntry(element, post_text);
     }
 
     //Scenario: Delete scheduled post (2/3)
@@ -86,7 +89,7 @@ public class ScheduledPost extends WebTest {
 
     //Scenario: Create scheduled post (3/3)
     @Then("the post is scheduled")
-    public void the_post_is_scheduled(){
+    public void the_post_is_scheduled() {
         String post_text = onDisplayed(FinishPostForm.class)
                 .clickToScheduledLink()
                 .getPostByText(ThucydidesUtils.getFromSession("post_text").toString())
@@ -94,6 +97,24 @@ public class ScheduledPost extends WebTest {
         verify().that(post_text.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "scheduled post")))
                 .ifResultIsExpected("Post is scheduled, whis correct date: " + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "scheduled post"))
                 .ifElse("There is no post " + post_text + " in scheduled, with correct date")
+                .finish();
+    }
+
+    //Scenario: Edit scheduled post (1/3)
+    @Then("the scheduled post is editing")
+    public void scheduled_post_is_editing() {
+        Integer entries_number = open(SheduledEntriesPage.class)
+                .getNumberOfEntryes();
+        String entry_text = open(SheduledEntriesPage.class)
+                .getFirstPostText()
+                .trim();
+        verify().that(entries_number.equals(ThucydidesUtils.getFromSession("number_of_entryes")))
+                .ifResultIsExpected("The correct amount of scheduled posts: " + ThucydidesUtils.getFromSession("number_of_entryes"))
+                .ifElse("The incorrect amount of scheduled posts: " + entries_number)
+                .and()
+                .that(entry_text.contains(ThucydidesUtils.getFromSession("post_text").toString()))
+                .ifResultIsExpected("The post is editing by value: " + entry_text)
+                .ifElse("The post is not editing by value: " + entry_text)
                 .finish();
     }
 

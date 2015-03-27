@@ -1,13 +1,13 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import java.util.ArrayList;
-import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
-import org.openqa.selenium.WebElement;
+import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -57,6 +57,26 @@ public class EditJournalbml extends ServicePageLogged {
         deleteButton.click();
         getDriver().switchTo().alert().accept();
         return onOpened(MyJournalPage.class);
+    }
+
+    @StepGroup
+    public EntryPage editPostContent(String content, String text) throws InterruptedException {
+        switch (PostElement.valueOf(content.toUpperCase())) {
+            case SUBJECT:
+                postContentBlock.setSubject(text);
+                break;
+            case TEXT:
+                postContentBlock.setText(text, "html");
+                break;
+            case PRIVACY:
+                ArrayList<String> group = null;
+                postContentBlock.setPrivacy(text, group);
+                break;
+            default:
+                Assert.fail("Unknown post element " + content + "!");
+        }
+        saveButton.click();
+        return onOpened(EntryPage.class);
     }
 
 }

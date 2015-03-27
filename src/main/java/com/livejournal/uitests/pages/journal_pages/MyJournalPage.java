@@ -9,7 +9,5 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/")
 public class MyJournalPage extends JournalPage {
 
-    public void findPostByText(String text) {
-    }
 
 }
