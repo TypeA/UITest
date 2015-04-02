@@ -37,6 +37,9 @@ public class PostContentBlock extends UIBlock {
     @FindBy(css = ".b-updatepage-tab-html")
     public Button htmlEditButton;
 
+    @FindBy(id = "tags")
+    public TextField tagsField;
+
     @FindBy(name = "privacy")
     public Select privacySelect;
 
@@ -88,10 +91,15 @@ public class PostContentBlock extends UIBlock {
         Thread.sleep(2500);
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
-            for (int i = 0; i < group.size(); i++) {
-                this.startScript("jQuery(\"label:contains('" + group.get(i) + "')\").click()");
+            for (String group1 : group) {
+                this.startScript("jQuery(\"label:contains('" + group1 + "')\").click()");
             }
         }
+    }
+
+    @StepGroup
+    public void setTags(String tags) {
+        tagsField.enter(tags);
     }
 
     public ArrayList<String> getAllPrivacy() {
@@ -124,6 +132,5 @@ public class PostContentBlock extends UIBlock {
         ljUserBubbleButton.click();
         return onDisplayed(LJUserBubble.class);
     }
-    
 
 }

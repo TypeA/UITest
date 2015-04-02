@@ -27,6 +27,8 @@ Examples:
 |name         |element |
 |testautotest |subject |
 |testautotest |text    |
+|testautotest |tags    |
+
 
 
 Scenario: Delete scheduled post

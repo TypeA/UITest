@@ -16,49 +16,49 @@ import org.openqa.selenium.support.FindBy;
  */
 @DefaultUrl("/editjournal.bml")
 public class EditJournalbml extends ServicePageLogged {
-
+    
     public PostContentBlock postContentBlock;
-
+    
     @FindBy(name = "action:update")
     private Button saveButton;
-
+    
     @FindBy(name = "action:delete")
     private Button deleteButton;
-
+    
     @StepGroup
     public EditJournalbml createPost(String subject, String editorType, String text) {
         postContentBlock.createPost(subject, editorType, text);
         return this;
     }
-
+    
     @StepGroup
     public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
         Thread.sleep(2500);
         postContentBlock.setPrivacy(privacy, group);
         return this;
     }
-
+    
     public ArrayList<String> getAllPrivacy() {
         return postContentBlock.getAllPrivacy();
     }
-
+    
     @StepGroup
     public String getCurrentPrivacy() {
         return postContentBlock.getCurrentPrivacy();
     }
-
+    
     @StepGroup
     public void saveEntry() {
         saveButton.click();
     }
-
+    
     @StepGroup
     public MyJournalPage deleteEntry() {
         deleteButton.click();
         getDriver().switchTo().alert().accept();
         return onOpened(MyJournalPage.class);
     }
-
+    
     @StepGroup
     public EntryPage editPostContent(String content, String text) throws InterruptedException {
         switch (PostElement.valueOf(content.toUpperCase())) {
@@ -72,11 +72,14 @@ public class EditJournalbml extends ServicePageLogged {
                 ArrayList<String> group = null;
                 postContentBlock.setPrivacy(text, group);
                 break;
+            case TAGS:
+                postContentBlock.setTags(text);
+                break;
             default:
                 Assert.fail("Unknown post element " + content + "!");
         }
         saveButton.click();
         return onOpened(EntryPage.class);
     }
-
+    
 }

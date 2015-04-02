@@ -7,6 +7,7 @@ package com.livejournal.uitests.pages.service_pages.update;
 public enum PostElement {
     SUBJECT,
     TEXT,
-    PRIVACY;
+    PRIVACY,
+    TAGS;
 
 }
