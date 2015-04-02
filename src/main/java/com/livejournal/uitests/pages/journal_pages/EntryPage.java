@@ -1,9 +1,12 @@
 package com.livejournal.uitests.pages.journal_pages;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 /**
  *
@@ -11,6 +14,16 @@ import org.openqa.selenium.JavascriptExecutor;
  */
 @DefaultUrl("/")
 public class EntryPage extends JournalPage {
+
+    @FindBy(css = ".b-msgsystem-error.b-msgsystem-error-banned ")
+    private TextBlock errorTextBanned;
+
+    @FindBy(css = "b-ljbutton b-ljbutton-submit.b-ljbutton-disabled")
+    private Button addCommnetDisabled;
+
+    public boolean errorTextBannedIsPresent() {
+        return errorTextBanned.isDisplayed();
+    }
 
     @StepGroup
     public EditJournalbml clickOnEditButton() {
@@ -22,6 +35,17 @@ public class EntryPage extends JournalPage {
             ((JavascriptExecutor) getDriver()).executeScript(script);
         }
         return onOpened(EditJournalbml.class);
+    }
+
+    public boolean buttonAddCommentIsDisabled() {
+        boolean button = addCommnetDisabled.isEnabled();
+        boolean result = false;
+        if (button) {
+            result = false;
+        } else if (button) {
+            result = true;
+        }
+        return result;
     }
 
     @StepGroup
