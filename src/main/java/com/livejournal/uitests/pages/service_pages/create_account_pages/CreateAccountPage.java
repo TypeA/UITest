@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
+import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyPageUnlogged;
@@ -58,6 +59,9 @@ public class CreateAccountPage extends LJPage {
 
     @FindBy(css = "a[href*='/legal/privacy.bml']")
     private Link privacyLink;
+
+    @FindBy(css = ".b-panel-step2")
+    private UIElement finishForm;
 
     @StepGroup
     public CreateAccountPage createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
@@ -136,7 +140,7 @@ public class CreateAccountPage extends LJPage {
 
     @StepGroup
     public MyJournalPage clickOnCreateAccountButton() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 20);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
@@ -164,12 +168,12 @@ public class CreateAccountPage extends LJPage {
         return onOpened(PrivacyPageUnlogged.class);
     }
 
-    public String getFinishText() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+    public String getFinishText(){
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
-                return createAccountButton.isEnabled();
+                return finishForm.isDisplayed();
             }
         });
         return startScript("return jQuery('.b-panel.b-panel-step2').text()").toString();
