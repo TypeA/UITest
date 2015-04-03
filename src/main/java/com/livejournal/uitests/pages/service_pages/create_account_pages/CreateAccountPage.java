@@ -4,7 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.LJPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.finish_form.FinishForm;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosPageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -134,7 +134,7 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
-    public FinishForm clickOnCreateAccountButton() {
+    public MyJournalPage clickOnCreateAccountButton() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 30);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
@@ -143,7 +143,7 @@ public class CreateAccountPage extends LJPage {
             }
         });
         createAccountButton.click();
-        return onDisplayed(FinishForm.class);
+        return onOpened(MyJournalPage.class);
     }
 
     @StepGroup

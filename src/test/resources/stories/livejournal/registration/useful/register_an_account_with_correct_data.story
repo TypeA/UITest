@@ -7,13 +7,13 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
-Then user go to Finish Registration Form and see message <message>
+Then user in correct page <page> (journal name <name>)
 
 
 Examples:
-|name       |email          |password   |day    |month  |year   |gender |message   |
-|testrnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |Welcome   |
-|TEST_rnd   |test@test.ru   |Test123234 |today  |today  |today  |M      |Welcome   |
+|name       |email          |password   |day    |month  |year   |gender |page          |
+|testrnd    |test@test.ru   |Test123    |1      |4      |1990   |M      |MyJournalPage |
+|TEST_rnd   |test@test.ru   |Test123234 |today  |today  |today  |M      |MyJournalPage |
 
 
 
