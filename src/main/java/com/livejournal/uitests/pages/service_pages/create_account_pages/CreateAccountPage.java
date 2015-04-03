@@ -10,6 +10,7 @@ import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosPageU
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -135,7 +136,7 @@ public class CreateAccountPage extends LJPage {
 
     @StepGroup
     public MyJournalPage clickOnCreateAccountButton() {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 30);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 50);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
@@ -161,6 +162,17 @@ public class CreateAccountPage extends LJPage {
     public PrivacyPageUnlogged clickOnPrivacyLink() {
         privacyLink.click();
         return onOpened(PrivacyPageUnlogged.class);
+    }
+
+    public String getFinishText() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 50);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return createAccountButton.isEnabled();
+            }
+        });
+        return startScript("return jQuery('.b-panel.b-panel-step2').text()").toString();
     }
 
 }

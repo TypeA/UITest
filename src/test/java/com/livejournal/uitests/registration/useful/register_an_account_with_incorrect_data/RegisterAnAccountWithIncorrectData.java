@@ -146,12 +146,11 @@ public class RegisterAnAccountWithIncorrectData extends WebTest {
 
     //Scenario: Register an account with incorrect age(3/3)
     @Then("user go to Finish Registration Form and see message $message")
-    public void user_go_to_Finish_Registration_Form_and_see_message(String message) {
-        /* verify().that(onDisplayed(UnsuccessfulFinishForm.class).getFinishText().contains(message))
+    public void user_go_to_Finish_Registration_Form_and_see_message(String message) throws InterruptedException {
+         verify().that(onOpened(CreateAccountPage.class).getFinishText().contains(message))
                 .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(onDisplayed(UnsuccessfulFinishForm.class).getFinishText()))
+                .ifElse(VerifyText.errorTextForMessage(onOpened(CreateAccountPage.class).getFinishText()))
                 .finish();
-*/
     }
 
 }
