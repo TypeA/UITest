@@ -18,9 +18,10 @@ public class PostSubject extends WebTest {
     //Logged user create new post with subject(1/3)
     //Logged user restore post with subject from draft(1/3)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_create_post_page(String name) {
+    public void logged_user_on_create_post_page(String name) throws InterruptedException {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .defaultStyle(name);
     }
 
     //Logged user create new post with subject(2/3)  
@@ -43,7 +44,7 @@ public class PostSubject extends WebTest {
     //Logged user create new post with subject(3/3)
     @Then("the post in journal has correct subject $subject")
     public void the_post_in_journal_has_correct_subject(String subject) {
-        verify().that(onOpened(EntryPage.class).getPostSubject().toUpperCase().equals(subject.toUpperCase()))
+        verify().that(onOpened(EntryPage.class).getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject '" + subject + "'")
                 .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
@@ -56,7 +57,7 @@ public class PostSubject extends WebTest {
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
         Thread.sleep(3000);
-        verify().that(onOpened(UpdateBmlPageLogged.class).getPostSubject().toUpperCase().equals(subject.toUpperCase()))
+        verify().that(onOpened(UpdateBmlPageLogged.class).getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in draft '" + subject + "'")
                 .ifElse("User see incorrect post subject in draft '" + onOpened(UpdateBmlPageLogged.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
