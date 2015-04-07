@@ -52,7 +52,7 @@ public class MinSecurityCommunity extends WebTest {
 
     //Min security in editing post in community (2/3)
     @When("user create new post with privacy $security in community $community")
-    public void user_create_new_post_with_privacy(String security, String community) throws InterruptedException {
+    public void user_create_new_post_with_privacy(String security, String community) {
         ArrayList<String> g = new ArrayList<String>();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -65,7 +65,7 @@ public class MinSecurityCommunity extends WebTest {
 
     //Scenario: Min security in creating post in community (3/3)
     @Then("user can set only allowed security $security when create post in community $community")
-    public void user_can_set_only_allowed_security_when_create_post(String security, String community) throws InterruptedException {
+    public void user_can_set_only_allowed_security_when_create_post(String security, String community){
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .postInCommunity()

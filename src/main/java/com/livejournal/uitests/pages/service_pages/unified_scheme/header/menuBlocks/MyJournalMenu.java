@@ -77,14 +77,7 @@ public class MyJournalMenu extends UIBlock {
     @StepGroup
     public MyJournalPage clickOnAuthotizedAs() {
         authorizedAs.click();
-        /* String pageSource = getDriver().getPageSource();
-         Pattern pattern = Pattern.compile("lj:user=\"(.*)\" >.*");
-         Matcher matcher = pattern.matcher(pageSource);
-         String name = "";     
-         if (matcher.find()) {
-         name = matcher.group(0);
-         }*/
-        return onOpened(MyJournalPage.class);//, new Url().setPrefix(name + "."));
+        return onOpened(MyJournalPage.class);
     }
 
     @StepGroup
@@ -96,7 +89,7 @@ public class MyJournalMenu extends UIBlock {
     @StepGroup
     public ProfilePage clickOnProfile() {
         profile.click();
-         return onOpened(ProfilePage.class);//, new Url().setPrefix(name + "."));
+         return onOpened(ProfilePage.class);
     }
 
     @StepGroup
@@ -138,7 +131,7 @@ public class MyJournalMenu extends UIBlock {
     @StepGroup
     public ScrapBookMainPage clickOnScrapbook() {
         scrapbook.click();
-         return onOpened(ScrapBookMainPage.class);//, new Url().setPrefix(name + "."));
+         return onOpened(ScrapBookMainPage.class);
     }
 
     @StepGroup

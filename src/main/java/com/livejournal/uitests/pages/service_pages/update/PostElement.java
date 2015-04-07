@@ -9,5 +9,4 @@ public enum PostElement {
     TEXT,
     PRIVACY,
     TAGS;
-
 }

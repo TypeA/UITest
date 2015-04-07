@@ -50,7 +50,7 @@ public class MinSecurity extends WebTest {
 
     //Scenario: Min security in editing post(2/3)
     @When("user create new post with privacy $security")
-    public void user_create_new_post_with_privacy(String security) throws InterruptedException {
+    public void user_create_new_post_with_privacy(String security) {
         ArrayList<String> g = new ArrayList<String>();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -61,7 +61,7 @@ public class MinSecurity extends WebTest {
 
     //Scenario: Min security in creating post(3/3)
     @Then("user can set only allowed security $security when create post")
-    public void user_can_set_only_allowed_security_when_create_post(String security) throws InterruptedException {
+    public void user_can_set_only_allowed_security_when_create_post(String security){
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .getAllPrivacy();

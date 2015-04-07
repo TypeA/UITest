@@ -7,5 +7,4 @@ package com.livejournal.uitests.pages.service_pages.create_account_pages;
 public enum MappingLink {
     HIDE, 
     SHOW;
-
 }

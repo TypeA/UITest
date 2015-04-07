@@ -8,6 +8,5 @@ package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
  */
 public enum TextParametrs {
     SIZE, 
-    FONT;
-    
+    FONT;  
 }

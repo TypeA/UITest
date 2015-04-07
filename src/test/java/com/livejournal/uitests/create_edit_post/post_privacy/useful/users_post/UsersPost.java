@@ -42,7 +42,7 @@ public class UsersPost extends WebTest {
     //Scenario: Privacy in editing(2/3)
     //Scenario: Edit post(2/4)
     @When("user create new post with privacy $privacy (group $group)")
-    public void user_create_new_post_with_privacy(String privacy, String group) throws InterruptedException {
+    public void user_create_new_post_with_privacy(String privacy, String group)  {
         String postText = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -58,7 +58,7 @@ public class UsersPost extends WebTest {
 
     //Scenario: Edit post(3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post")
-    public void user_edit_privacy_and_save_post(String privacy_1, String group_1) throws InterruptedException {
+    public void user_edit_privacy_and_save_post(String privacy_1, String group_1){
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -67,13 +67,14 @@ public class UsersPost extends WebTest {
                 .saveEntry();
     }
 
-    //Scenario: Restore privacy from draft (1/3)
+    //Scenario: Restore privacy from draft (2/3)
     @When("user write new post with privacy $privacy (group $group)")
-    public void user_write_new_post_with_privacy(String privacy, String group) throws InterruptedException {
+    public void user_write_new_post_with_privacy(String privacy, String group) throws InterruptedException{
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("Test for privacy", "html", "privacy " + privacy)
                 .setPrivacy(privacy, getParsedString(group, ";"));
+        Thread.sleep(5000);
     }
 
     //Scenario: Create post (3/4)
@@ -101,7 +102,7 @@ public class UsersPost extends WebTest {
 
     //Scenario: Create post (4/4)
     @Then("user $name_2 cannot read the post")
-    public void user_cannot_read_post(String name_2) throws InterruptedException {
+    public void user_cannot_read_post(String name_2) {
         if (name_2.isEmpty()) {
             verify().that(true)
                     .ifResultIsExpected("All user can see post")
@@ -128,7 +129,7 @@ public class UsersPost extends WebTest {
     //Scenario: Privacy in editing(3/3)
     //Scenario: Edit post(4/4)
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
-    public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) throws InterruptedException {
+    public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) {
         onOpened(EntryPage.class).clickOnEditButton();
         verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)

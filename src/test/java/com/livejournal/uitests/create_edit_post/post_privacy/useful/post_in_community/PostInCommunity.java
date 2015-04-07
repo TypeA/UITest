@@ -1,4 +1,3 @@
-
 package com.livejournal.uitests.create_edit_post.post_privacy.useful.post_in_community;
 
 import com.livejournal.uisteps.core.Url;
@@ -31,19 +30,18 @@ public class PostInCommunity extends WebTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);        
+                .defaultLanguageLogged(name);
         ThucydidesUtils.putToSession("user", name);
     }
 
     //Scenario: Create post in community (2/4)
     //Scenario: Edit post in community (2/4)
     @When("user create new post with privacy $privacy (group $group) in community $community")
-    public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws InterruptedException {
+    public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) {
         String postText = RandomText.getRandomText(30);
-        open(LoginPageUnlogged.class)
+        onOpened(LoginPageUnlogged.class)
                 .defaultMinSecurity(community);
-        open(UpdateBmlPageLogged.class);
-        onOpened(UpdateBmlPageLogged.class)
+        open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .postInCommunity()
                 .selectCommunity(community)
@@ -60,7 +58,7 @@ public class PostInCommunity extends WebTest {
 
     //Scenario: Edit post in community (3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post in community")
-    public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1) throws InterruptedException {
+    public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1) {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -69,7 +67,7 @@ public class PostInCommunity extends WebTest {
         onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
                 .saveEntry();
     }
-    
+
     //Scenario: Create post in community (3/4)
     @Then("user $name_1 can read the post in community")
     public void user_can_read_the_post(String name_1) {
@@ -91,10 +89,10 @@ public class PostInCommunity extends WebTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
     }
-    
+
     //Scenario: Create post in community (4/4)
     @Then("user $name_2 cannot read the post in community")
-    public void user_cannot_read_post_in_comminuty(String name_2) throws InterruptedException {
+    public void user_cannot_read_post_in_comminuty(String name_2) {
         if (name_2.isEmpty()) {
             verify().that(true)
                     .ifResultIsExpected("All user can see post")
@@ -119,7 +117,7 @@ public class PostInCommunity extends WebTest {
 
     //Scenario: Edit post in community (4/4)
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post in community")
-    public void user_see_correct_privacy_when_edit_this_post_in_community(String privacy_1, String group_1) throws InterruptedException {
+    public void user_see_correct_privacy_when_edit_this_post_in_community(String privacy_1, String group_1) {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -142,11 +140,11 @@ public class PostInCommunity extends WebTest {
             case USER_IN_GROUP:
                 ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(community, group);
                 String user_in_group = getDBDate().friends().findFriendInGroup(community, group).get(0);
-                for (int i = 0; i < in_group.size(); i++) {
-                    if (in_group.get(i).contains("test")) {
-                        user_in_group = in_group.get(i);
-                    }
-                }
+        for (String in_group1 : in_group) {
+            if (in_group1.contains("test")) {
+                user_in_group = in_group1;
+            }
+        }
                 return user_in_group;
             case OTHER_USER:
                 return getDBDate().friends().findNotFriend(community);

@@ -3,11 +3,7 @@ package com.livejournal.uitests.pages.service_pages.settings.friends;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.finish_form.FinishFormGroupPage;
-import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
-import net.thucydides.core.annotations.StepGroup;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
 

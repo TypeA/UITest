@@ -111,10 +111,9 @@ public class ManageFriendsPage extends ServicePageLogged {
     
     public ManageFriendsPage removeFriend(ArrayList<String> users)
     {
-        for (int i=0;i<users.size();i++)
-        {
-            applyFilter(users.get(i));
-            this.startScript("jQuery(\"td input[id='editfriend_keep_"+users.get(i)+"']\").click()");
+        for (String user : users) {
+            applyFilter(user);
+            this.startScript("jQuery(\"td input[id='editfriend_keep_" + user + "']\").click()");
             clickSaveChangesButton();
             open(ManageFriendsPage.class);
         }

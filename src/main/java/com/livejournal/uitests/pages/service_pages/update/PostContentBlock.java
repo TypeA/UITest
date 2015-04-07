@@ -87,8 +87,7 @@ public class PostContentBlock extends UIBlock {
     }
 
     @StepGroup
-    public void setPrivacy(String privacy, ArrayList<String> group) throws InterruptedException {
-        Thread.sleep(2500);
+    public void setPrivacy(String privacy, ArrayList<String> group){
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
             for (String group1 : group) {

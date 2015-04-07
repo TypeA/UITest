@@ -10,5 +10,4 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/feed")
 public class FriendsFeedUnlogged extends ServicePageUnlogged {
 
-
 }
