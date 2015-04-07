@@ -119,4 +119,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return this;
     }
 
+    @StepGroup
+    public String getPostSubject() {
+
+        return postContentBlock.getPostSubject();
+    }
 }

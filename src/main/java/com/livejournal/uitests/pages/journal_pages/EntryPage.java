@@ -17,6 +17,9 @@ public class EntryPage extends JournalPage {
     @FindBy(css = ".b-msgsystem-error.b-msgsystem-error-banned ")
     private TextBlock errorTextBanned;
 
+    @FindBy(css = ".entry-title")
+    private TextBlock postSubject;
+
     public boolean errorTextBannedIsPresent() {
         return errorTextBanned.isDisplayed();
     }
@@ -52,21 +55,22 @@ public class EntryPage extends JournalPage {
 
     @StepGroup
     public Boolean containsLjUser(String ljuser) {
-        Boolean fl1 = false;
         Boolean fl2 = false;
-        String res = startScript("return jQuery(\".e-content span\").is(\"[lj\\\\:user='" + ljuser + "']\")").toString();
-        switch (res.toUpperCase()) {
-            case "TRUE":
-                fl1 = true;
-                break;
-            case "FALSE":
-                fl1 = false;
-                break;
+        Boolean fl1 = Boolean.valueOf(startScript("return jQuery('.e-content span').is(\"[lj\\\\:user='" + ljuser + "']\")").toString());
+        if (fl1) {
+            fl2 = startScript("return jQuery('.e-content span')[0].textContent").toString().equals(ljuser);
         }
-        if (startScript("return jQuery(\".e-content span\")[0].textContent").toString().equals(ljuser)) {
-            fl2 = true;
+        return fl2;
+    }
+
+    @StepGroup
+    public String getPostSubject() {
+        String subject ="No subject";
+        try {
+            subject = postSubject.getText();
+        } catch (Exception ex) {
         }
-        return fl1 && fl2;
+        return subject;
     }
 
 }

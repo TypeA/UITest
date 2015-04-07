@@ -50,7 +50,11 @@ public class PostContentBlock extends UIBlock {
 
     @StepGroup
     public void createPost(String subject, String editorType, String text) {
-        subjectField.enter(subject);
+        if (subject.toUpperCase().equals("NO SUBJECT")) {
+            subjectField.enter("");
+        } else {
+            subjectField.enter(subject);
+        }
         switch (EditPostType.valueOf(editorType.toUpperCase())) {
             case VISUAL:
                 visualEditButton.click();
@@ -67,7 +71,10 @@ public class PostContentBlock extends UIBlock {
 
     @StepGroup
     public void setSubject(String subject) {
-        subjectField.enter(subject);
+        if (subject.toUpperCase().equals("NO TITLE")) {
+        } else {
+            subjectField.enter(subject);
+        }
     }
 
     @StepGroup
@@ -132,4 +139,12 @@ public class PostContentBlock extends UIBlock {
         return onDisplayed(LJUserBubble.class);
     }
 
+    @StepGroup
+    public String getPostSubject() {
+        String subject = startScript("return jQuery('#subject').val()").toString();
+        if (subject.equals("")) {
+            subject = "No subject";
+        }
+        return subject;
+    }
 }

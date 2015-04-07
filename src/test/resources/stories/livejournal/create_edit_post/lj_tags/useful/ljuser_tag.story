@@ -1,6 +1,6 @@
 Scenario: Logged user create new post with correct lj-user tag
 Meta: 
-@categories create_edit_post lj_tags comfortable
+@categories create_edit_post lj_tags useful
 
 Given logged user <name> on Create Post page
 When user enter correct username <ljuser> in ljuser bubble and create new post
@@ -13,7 +13,7 @@ Examples:
 
 Scenario: Logged user create new post with uncorrect lj-user tag
 Meta: 
-@categories create_edit_post lj_tags comfortable
+@categories create_edit_post lj_tags useful
 
 Given logged user <name> on Create Post page
 When user enter incorrect username <ljuser> in ljuser bubble and try to post new entry

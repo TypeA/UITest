@@ -10,6 +10,6 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".friends-edit-success"))
-public class FinishForm extends UIBlock {
+public class FinishFormManageFriends extends UIBlock {
     
 }

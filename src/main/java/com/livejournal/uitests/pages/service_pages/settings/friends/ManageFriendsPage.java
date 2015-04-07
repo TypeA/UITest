@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.settings.friends;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.settings.friends.finish_form.FinishForm;
+import com.livejournal.uitests.pages.service_pages.settings.friends.finish_form.FinishFormManageFriends;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
 import org.openqa.selenium.support.FindBy;
@@ -54,9 +54,9 @@ public class ManageFriendsPage extends ServicePageLogged {
     @FindBy(css = "form[method=get] .b-flatbutton")
     private Button filterButton;
 
-    public FinishForm clickSaveChangesButton() {
+    public FinishFormManageFriends clickSaveChangesButton() {
         saveChanges.click();
-        return onDisplayed(FinishForm.class);
+        return onDisplayed(FinishFormManageFriends.class);
     }
 
     private TextField selectField(int index) {

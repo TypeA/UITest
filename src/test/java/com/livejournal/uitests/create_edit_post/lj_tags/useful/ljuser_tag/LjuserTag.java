@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.lj_tags.comfortable.ljuser_tag;
+package com.livejournal.uitests.create_edit_post.lj_tags.useful.ljuser_tag;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;

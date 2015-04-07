@@ -2,7 +2,6 @@ package com.livejournal.uitests.create_edit_post.create_post.useful.create_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
@@ -31,13 +30,14 @@ public class CreatePost extends WebTest {
     @When("user create new post")
     public void user_create_new_post_and_change_date(String parameter, String value) {
         System.out.println("==================3");
-        String post_text = RandomText.getRandomText(30);
+        ThucydidesUtils.putToSession("post_text", RandomText.getRandomText(30));
+   
         System.out.println("==================4");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("New post", "html", post_text)
+                .createPost("New post", "html", ThucydidesUtils.getFromSession("post_text").toString())
                 .postEntry();
-        ThucydidesUtils.putToSession("post_text", post_text);
+        
     }
 
     //Scenario: Logged user create new post (3/3)
