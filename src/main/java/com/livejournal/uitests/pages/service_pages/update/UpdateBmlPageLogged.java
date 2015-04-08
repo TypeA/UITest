@@ -5,16 +5,10 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
@@ -122,7 +116,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public String getPostSubject() {
-
         return postContentBlock.getPostSubject();
     }
 }
