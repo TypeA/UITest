@@ -14,6 +14,22 @@ Examples:
 |testautotest |year      |3     |
 
 
+Scenario: Create scheduled post with several privacy
+Meta: 
+@categories create_edit_post post_time useful
+
+Given logged user <name> on Create Post page
+When user create new scheduled post with privacy <privacy> (group <group>)
+Then the post is scheduled with privacy <privacy>
+
+Examples:
+|name           |privacy     |group      |
+|testautotest   |Public      |           |
+|testautotest   |Friends     |           |
+|testautotest   |Custom      |test_group |
+|testautotest   |Private     |           |
+
+
 
 Scenario: Edit scheduled post
 Meta: 
@@ -24,11 +40,10 @@ When user edit element <element> in the scheduled post
 Then the scheduled post is editing
 
 Examples:
-|name         |element |
-|testautotest |subject |
-|testautotest |text    |
-|testautotest |tags    |
-
+|name         |element           |
+|testautotest |subject           |
+|testautotest |text              |
+|testautotest |tags              |
 
 
 Scenario: Delete scheduled post

@@ -23,6 +23,19 @@ public class SheduledEntriesPage extends ServicePageLogged {
                 .toString();
     }
 
+    public String getPrivacyByText(String post_text) {
+        String privacy;
+        try {
+            privacy = startScript("return jQuery('.b-editentry:contains(\"" + post_text + "\") img:eq(1)').attr('src')")
+                    .toString();
+            privacy = privacy.substring(privacy.indexOf('_') + 1, privacy.indexOf('?') - 4);
+        }  catch (Exception ex) {
+            privacy = "Public";
+        }
+        return privacy.replaceAll("protected", "friends")
+                .replaceAll("groups", "custom");
+    }
+
     public SheduledEntriesPage deleteAllSheduledEntries() {
         while (getNumberOfEntryes() > 6) {
             startScript("jQuery('.b-editentry a')[0].click()");

@@ -56,9 +56,10 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged closeDraft() {
         try {
             closeDraftButton.click();
+            return this;
         } catch (Exception ex) {
+            return this;
         }
-        return this;
     }
 
     @StepGroup

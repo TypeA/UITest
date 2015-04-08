@@ -8,6 +8,7 @@ import com.livejournal.uitests.pages.service_pages.update.FinishPostForm;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
 import com.livejournal.uitests.utility.date.PostTime;
+import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -19,6 +20,7 @@ import org.jbehave.core.annotations.When;
 public class ScheduledPost extends WebTest {
 
     //Scenario: Create scheduled post (1/3)
+    //Scenario: Create scheduled post with several privacy (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) throws InterruptedException {
         open(LoginPageUnlogged.class)
@@ -71,10 +73,27 @@ public class ScheduledPost extends WebTest {
         ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
 
-    //Scenario: Edit scheduled post (1/3)
+    //Scenario: Create scheduled post with several privacy (2/3)
+    @When("user create new scheduled post with privacy $privacy (group $group)")
+    public void user_create_new_scheduled_post_with_privacy(String privacy, String group) {
+        ArrayList<String> groups = new ArrayList<String>();
+        groups.add(group);
+        String[] date = PostTime.getCorrectDate("hour", "1")
+                .split(";");
+        String post_text = RandomText.getRandomText(30);
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .createPost("New scheduled post", "html", post_text)
+                .setDateAndTime(date[0], date[1])
+                .setPrivacy(privacy, groups)
+                .postEntry();
+        ThucydidesUtils.putToSession("post_text", post_text.trim());
+    }
+
+    //Scenario: Edit scheduled post (2/3)
     @When("user edit element $element in the scheduled post")
     public void user_edit_the_scheduled_post(String element) throws InterruptedException {
-        String post_text = RandomText.getRandomText(10); 
+        String post_text = RandomText.getRandomText(10);
         ThucydidesUtils.putToSession("post_text", post_text.trim());
         onOpened(SheduledEntriesPage.class)
                 .editFirstSheduledEntry(element, post_text);
@@ -100,7 +119,21 @@ public class ScheduledPost extends WebTest {
                 .finish();
     }
 
-    //Scenario: Edit scheduled post (1/3)
+    //Scenario: Create scheduled post with several privacy (3/3)
+    @Then("the post is scheduled with privacy $privacy")
+    public void the_post_is_scheduled_with_privacy(String privacy) {
+        String post_privacy = onDisplayed(FinishPostForm.class)
+                .clickToScheduledLink()
+                .getPrivacyByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .trim()
+                .toUpperCase();
+        verify().that(post_privacy.contains(privacy.toUpperCase()))
+                .ifResultIsExpected("Post is scheduled, whis correct privacy: " + privacy)
+                .ifElse("Post is scheduled, whis incorrect privacy: " + post_privacy)
+                .finish();
+    }
+
+    //Scenario: Edit scheduled post (3/3)
     @Then("the scheduled post is editing")
     public void scheduled_post_is_editing() {
         Integer entries_number = open(SheduledEntriesPage.class)
@@ -108,6 +141,7 @@ public class ScheduledPost extends WebTest {
         String entry_text = open(SheduledEntriesPage.class)
                 .getFirstPostText()
                 .trim();
+
         verify().that(entries_number.equals(ThucydidesUtils.getFromSession("number_of_entryes")))
                 .ifResultIsExpected("The correct amount of scheduled posts: " + ThucydidesUtils.getFromSession("number_of_entryes"))
                 .ifElse("The incorrect amount of scheduled posts: " + entries_number)
