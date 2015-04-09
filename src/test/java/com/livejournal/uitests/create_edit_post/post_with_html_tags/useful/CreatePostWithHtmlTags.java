@@ -48,9 +48,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setStyleText(style_text.toUpperCase());
-        goToVisualRedactor(post_text);
-        onOpened(UpdateBmlPageLogged.class)
+                .setStyleText(style_text.toUpperCase())
+                .goToVisualRedactor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -78,9 +77,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setFontText(font_text.toUpperCase());
-        goToVisualRedactor(post_text);
-        onOpened(UpdateBmlPageLogged.class)
+                .setFontText(font_text.toUpperCase())
+                .goToVisualRedactor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -108,9 +106,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setColorText(color_text);
-        goToVisualRedactor(post_text);
-        onOpened(UpdateBmlPageLogged.class)
+                .setColorText(color_text)
+                .goToVisualRedactor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -140,9 +137,8 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .setVisualEditor()
                 .setStyleText(style_text_1.toUpperCase())
                 .setStyleText(style_text_2.toUpperCase())
-                .setColorText(color_text);
-        goToVisualRedactor(post_text);
-        onOpened(UpdateBmlPageLogged.class)
+                .setColorText(color_text)
+                .goToVisualRedactor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -178,8 +174,7 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .addLink(link, Boolean.valueOf(newWindow));
-        onOpened(UpdateBmlPageLogged.class)
+                .addLink(link, Boolean.valueOf(newWindow))
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
@@ -205,8 +200,7 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .closeDraft()
                 .setVisualEditor()
                 .setStyleText(style_text.toUpperCase())
-                .addLink(link, Boolean.FALSE);
-        onOpened(UpdateBmlPageLogged.class)
+                .addLink(link, Boolean.FALSE)
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
@@ -226,16 +220,7 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .finish();
     }
 
-    ////////////////////////////////////////////////////////////
-    @StepGroup
-    public void goToVisualRedactor(String text) {
-        WebDriver driver = getCurrentBrowser().getDriver();
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
-        WebElement bodyOfMail = driver.findElement(By.xpath("//body[@class='lj-main-body']"));
-        bodyOfMail.sendKeys(text);
-        driver.switchTo().defaultContent();
-    }
-
+    ////////////////////////////////////////////////////////////  
     @StepGroup
     public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
         String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
