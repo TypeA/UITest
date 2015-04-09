@@ -41,7 +41,7 @@ public class MinSecurityCommunity extends WebTest {
     }
 
     //Scenario: Min security in creating post in community (2/3)
-    @When("user set min security $security in the community")
+    @When("user set min security $security in the community $community")
     public void user_set_min_security(String security, String community) {
         onOpened(SettingsMainPage.class)
                 .selectWorkAsUser(community)
