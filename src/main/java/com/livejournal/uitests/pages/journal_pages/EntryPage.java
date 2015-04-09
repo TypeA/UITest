@@ -65,12 +65,14 @@ public class EntryPage extends JournalPage {
 
     @StepGroup
     public String getPostSubject() {
-        String subject ="No subject";
+        String subject = "No subject";
         try {
             subject = postSubject.getText();
         } catch (Exception ex) {
         }
         return subject;
+    }
+
     public boolean postWithStyleIsDisplayed(String text, String style_text) {
         String script = "";
         switch (style_text) {
@@ -117,14 +119,15 @@ public class EntryPage extends JournalPage {
     }
 
     public Boolean postWithLinkIsDisplayed(String link, Boolean newWindow) {
-        String target="";
+        String target = "";
         if (newWindow) {
             target = "[target='_blank']";
-        } 
-        String script = "return jQuery(\"a[href*='"+link+"']"+target+"\").is(\":contains('"+link+"')\")";
+        }
+        String script = "return jQuery(\"a[href*='" + link + "']" + target + "\").is(\":contains('" + link + "')\")";
         return Boolean.valueOf(startScript(script).toString());
     }
-     @StepGroup
+
+    @StepGroup
     public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
         String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
         String script = "";
