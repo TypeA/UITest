@@ -220,7 +220,6 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()))
                 .getUrl().toString();
-        System.out.println("2222" + url);
         verify().that(linkWithStyleIsDisplayed(link, style_text.toUpperCase()))
                 .ifResultIsExpected("Post is displayed with link " + link + " and with style " + style_text)
                 .ifElse("Post is not displayed with link " + link + " and with style " + style_text)
