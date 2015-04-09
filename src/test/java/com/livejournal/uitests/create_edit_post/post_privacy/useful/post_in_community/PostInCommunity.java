@@ -141,11 +141,11 @@ public class PostInCommunity extends WebTest {
             case USER_IN_GROUP:
                 ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(community, group);
                 String user_in_group = getDBDate().friends().findFriendInGroup(community, group).get(0);
-                for (int i = 0; i < in_group.size(); i++) {
-                    if (in_group.get(i).contains("test")) {
-                        user_in_group = in_group.get(i);
-                    }
-                }
+        for (String in_group1 : in_group) {
+            if (in_group1.contains("test")) {
+                user_in_group = in_group1;
+            }
+        }
                 return user_in_group;
             case OTHER_USER:
                 return getDBDate().friends().findNotFriend(community);
