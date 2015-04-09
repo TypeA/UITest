@@ -192,7 +192,7 @@ public class Settings extends WebTest {
 
     //Scenario: Restore default settings (2/3)
     @When("user click Restore default settings Button and save it")
-    public void user_click_Restore_default_settings_Button_and_save_it() throws InterruptedException {
+    public void user_click_Restore_default_settings_Button_and_save_it() {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .restoreDefaultSettings();
@@ -274,8 +274,8 @@ public class Settings extends WebTest {
     //Scenario: Set text settings (3/3)
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
-    public void text_settings_is_changed_by_size_and_font(String size, String font) throws InterruptedException {
-        Thread.sleep(100);
+    public void text_settings_is_changed_by_size_and_font(String size, String font){
+      //  Thread.sleep(100);
         Integer titleSize = (Integer.valueOf(size)*7)/4;
         verify().that(getTextParametrs(TextParametrs.FONT).contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
@@ -294,9 +294,9 @@ public class Settings extends WebTest {
     //Scenario: Set paging type (3/3)
     //Scenario: Cancel paging type (3/3)
     @Then("Paging type is changed by type $type (number $number)")
-    public void paging_type_is_changed_by_type(String type, String number) throws InterruptedException {
+    public void paging_type_is_changed_by_type(String type, String number){
         refreshCurrentPage();
-        Thread.sleep(10000);
+       // Thread.sleep(10000);
         String strNumber = number;
         if (type.equals("ENDLESS")) {
             strNumber = "more then 20";
@@ -454,7 +454,7 @@ public class Settings extends WebTest {
     }
 
     @StepGroup
-    public boolean verifyPagingType(PagingType type, String size) throws InterruptedException {
+    public boolean verifyPagingType(PagingType type, String size) {
         Integer intSize = Integer.valueOf(size);
         String script = "return jQuery('.entryunit__text').size()";
 
@@ -474,7 +474,7 @@ public class Settings extends WebTest {
             case ENDLESS:
                 ((JavascriptExecutor) getCurrentBrowser().getDriver())
                         .executeScript("window.scrollBy(0,10000000)");
-                Thread.sleep(5000);
+              //  Thread.sleep(5000);
                 feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);

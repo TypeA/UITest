@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.post_time.comfortable;
+package com.livejournal.uitests.create_edit_post.post_time.comfortable.old_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
@@ -20,7 +20,7 @@ public class OldPost extends WebTest{
     
     //Scenario: Create old post (1/3)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_Create_Post_page(String name) throws InterruptedException {
+    public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)

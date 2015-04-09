@@ -74,7 +74,7 @@ public class UsersPost extends WebTest {
                 .closeDraft()
                 .createPost("Test for privacy", "html", "privacy " + privacy)
                 .setPrivacy(privacy, getParsedString(group, ";"));
-        Thread.sleep(5000);
+        Thread.sleep(2000);
     }
 
     //Scenario: Create post (3/4)

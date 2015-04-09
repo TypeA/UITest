@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.post_time.useful.post_time;
+package com.livejournal.uitests.create_edit_post.post_time.useful.scheduled_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
@@ -22,7 +22,7 @@ public class ScheduledPost extends WebTest {
     //Scenario: Create scheduled post (1/3)
     //Scenario: Create scheduled post with several privacy (1/3)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_Create_Post_page(String name) throws InterruptedException {
+    public void logged_user_on_Create_Post_page(String name){
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
@@ -35,7 +35,7 @@ public class ScheduledPost extends WebTest {
     //Scenario: Edit scheduled post (1/3)
     //Scenario: Delete scheduled post (1/3)
     @Given("logged user $name with scheduled post on Scheduled post Page")
-    public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name) throws InterruptedException {
+    public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name){
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
@@ -92,7 +92,7 @@ public class ScheduledPost extends WebTest {
 
     //Scenario: Edit scheduled post (2/3)
     @When("user edit element $element in the scheduled post")
-    public void user_edit_the_scheduled_post(String element) throws InterruptedException {
+    public void user_edit_the_scheduled_post(String element) {
         String post_text = RandomText.getRandomText(10);
         ThucydidesUtils.putToSession("post_text", post_text.trim());
         onOpened(SheduledEntriesPage.class)

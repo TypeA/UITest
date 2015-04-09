@@ -20,7 +20,7 @@ public class LjuserTag extends WebTest {
     //Logged user create new post with correct lj-user tag (1/3)
     //Logged user create new post with uncorrect lj-user tag (1/3)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_Create_Post_page(String name) throws InterruptedException {
+    public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)

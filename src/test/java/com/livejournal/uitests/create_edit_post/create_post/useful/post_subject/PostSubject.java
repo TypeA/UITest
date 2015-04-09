@@ -18,7 +18,7 @@ public class PostSubject extends WebTest {
     //Logged user create new post with subject(1/3)
     //Logged user restore post with subject from draft(1/3)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_create_post_page(String name) throws InterruptedException {
+    public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultStyle(name);

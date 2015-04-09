@@ -67,6 +67,7 @@ public class ManageFriends extends WebTest {
 
     }
 
+    ///////////////////////////////////////////////////
     private boolean onPageVerification(String users) {
         boolean flag = true;
         for (int i = 0; i < getParsedString(users, ";").size(); i++) {

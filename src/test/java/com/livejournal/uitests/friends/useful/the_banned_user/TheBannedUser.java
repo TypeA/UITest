@@ -1,15 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.friends.useful.the_banned_user;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.BannedUsersPage;
-import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -70,7 +64,6 @@ public class TheBannedUser extends WebTest {
     //Scenario: Unban user(3/3)
     @Then("user_1 does not exists in ban list")
     public void user_1_does_not_exists_in_ban_list() {
-        String user = ThucydidesUtils.getFromSession("user").toString();
         String user_1 = ThucydidesUtils.getFromSession("user_1").toString();
         verify().that(!onOpened(BannedUsersPage.class).userInBanList(user_1))
                 .ifResultIsExpected("User not in ban list")
@@ -138,7 +131,6 @@ public class TheBannedUser extends WebTest {
     @Then("users does not exist in ban list")
     public void users_does_not_exist_in_ban_list() {
         String user_1 = ThucydidesUtils.getFromSession("user_1").toString();
-        String user_2 = ThucydidesUtils.getFromSession("user_2").toString();
         verify().that(!onOpened(BannedUsersPage.class).userInBanList(user_1))
                 .ifResultIsExpected("User_1 not in ban list")
                 .ifElse("User_1 in ban list")
