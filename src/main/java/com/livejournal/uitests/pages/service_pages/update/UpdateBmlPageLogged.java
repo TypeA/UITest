@@ -237,8 +237,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @StepGroup
     public UpdateBmlPageLogged goToVisualRedactor(String text) {
         getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
-        WebElement bodyOfMail = getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
-        bodyOfMail.sendKeys(text);
+        WebElement bodyOfMessage = getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
+        bodyOfMessage.sendKeys(text);
         getDriver().switchTo().defaultContent();
         return this;
     }
