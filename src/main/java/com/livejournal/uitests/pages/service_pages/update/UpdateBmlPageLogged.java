@@ -234,5 +234,14 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     addButtonLink.click();
     return this;
     }
+    @StepGroup
+    public UpdateBmlPageLogged goToVisualRedactor(String text) {
+        WebDriver driver = getDriver();
+        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
+        WebElement bodyOfMail = driver.findElement(By.xpath("//body[@class='lj-main-body']"));
+        bodyOfMail.sendKeys(text);
+        driver.switchTo().defaultContent();
+        return this;
+    }
 
 }
