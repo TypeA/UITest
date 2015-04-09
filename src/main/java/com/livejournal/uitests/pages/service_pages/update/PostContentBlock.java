@@ -71,7 +71,7 @@ public class PostContentBlock extends UIBlock {
 
     @StepGroup
     public void setSubject(String subject) {
-        if (subject.toUpperCase().equals("NO TITLE")) {
+        if (subject.toUpperCase().equals("NO SUBJECT")) {
         } else {
             subjectField.enter(subject);
         }

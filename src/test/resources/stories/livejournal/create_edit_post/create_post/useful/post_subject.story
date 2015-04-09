@@ -43,3 +43,17 @@ Examples:
 |testautotest |И вам привет!  |
 |testautotest |Hello world!   |
 
+Scenario: Logged user create new post with subject and edit this post and save changes
+Meta: 
+@categories create_edit_post post_subject useful
+
+Given logged user <name> on Create Post page
+When user create new post with subject <subject>
+Then user edit this post with a new subject <newsubject> and see correct subject in post
+
+Examples:
+|name         |subject        |newsubject       |
+|testautotest |No subject     |Я заголовок      |
+|testautotest |Всем "привет"! |No subject       |
+|testautotest |И вам привет!  |I AM BREAD       |
+|testautotest |Hello world!   |Кто здесь?       |

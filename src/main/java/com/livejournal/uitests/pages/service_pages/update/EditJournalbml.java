@@ -96,4 +96,9 @@ public class EditJournalbml extends ServicePageLogged {
         return postContentBlock.getPostSubject();
     }
 
+    @StepGroup
+    public EditJournalbml setSubject(String subject) {
+        postContentBlock.setSubject(subject);
+        return this;
+    }
 }

@@ -19,6 +19,7 @@ public class PostSubject extends WebTest {
     //Logged user create new post with subject(1/3)
     //Logged user restore post with subject from draft(1/3)
     //Logged user create new post with subject and edit this post(1/3)
+    //Logged user create new post with subject and edit this post and save changes(1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_create_post_page(String name) throws InterruptedException {
         open(LoginPageUnlogged.class)
@@ -28,6 +29,7 @@ public class PostSubject extends WebTest {
 
     //Logged user create new post with subject(2/3)
     //Logged user create new post with subject and edit this post(2/3)
+    //Logged user create new post with subject and edit this post and save changes(2/3)
     @When("user create new post with subject $subject")
     public void user_create_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
@@ -74,6 +76,21 @@ public class PostSubject extends WebTest {
         verify().that(onOpened(EditJournalbml.class).getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in editing '" + subject + "'")
                 .ifElse("User see incorrect post subject in editing '" + onOpened(EditJournalbml.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .finish();
+
+    }
+
+    //Logged user create new post with subject and edit this post and save changes(3/3)
+    @Then("user edit this post with a new subject $newsubject and see correct subject in post")
+    public void user_edit_this_post_with_a_new_subject_and_see_correct_subject_in_post(String newsubject) {
+        onOpened(EntryPage.class)
+                .clickOnEditButton()
+                .setSubject("")
+                .setSubject(newsubject)
+                .saveEntry();
+        verify().that(onOpened(EntryPage.class).getPostSubject().equals(newsubject))
+                .ifResultIsExpected("User see correct post subject '" + newsubject + "'")
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + newsubject + "'")
                 .finish();
 
     }
