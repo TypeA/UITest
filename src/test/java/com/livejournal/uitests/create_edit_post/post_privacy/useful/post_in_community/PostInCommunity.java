@@ -50,7 +50,6 @@ public class PostInCommunity extends WebTest {
                 .createPost("", "html", postText)
                 .setPrivacy(privacy, getParsedString(group, ";"))
                 .postEntry();
-        ThucydidesUtils.putToSession("community", community);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
@@ -59,10 +58,10 @@ public class PostInCommunity extends WebTest {
     }
 
     //Scenario: Edit post in community (3/4)
-    @When("user edit privacy $privacy_1 (group $group_1) and save post in community")
-    public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1) throws InterruptedException {
+    @When("user edit privacy $privacy_1 (group $group_1) and save post in community $community")
+    public void user_edit_privacy_and_save_post_in_community(String privacy_1, String group_1, String community) throws InterruptedException {
         open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
+                .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class)
                 .clickOnEditButton();
@@ -71,16 +70,16 @@ public class PostInCommunity extends WebTest {
     }
     
     //Scenario: Create post in community (3/4)
-    @Then("user $name_1 can read the post in community")
-    public void user_can_read_the_post(String name_1) {
+    @Then("user $name_1 can read the post in community $community")
+    public void user_can_read_the_post(String name_1, String community) {
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
-        String user = selectUserForComminuty(ThucydidesUtils.getFromSession("community").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
+        String user = selectUserForComminuty(community, name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
         open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
+                .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         String postText = ThucydidesUtils.getFromSession("post_text").toString();
         verify().that(postText.contains(onOpened(EntryPage.class).getPostText()))
@@ -93,19 +92,19 @@ public class PostInCommunity extends WebTest {
     }
     
     //Scenario: Create post in community (4/4)
-    @Then("user $name_2 cannot read the post in community")
-    public void user_cannot_read_post_in_comminuty(String name_2) throws InterruptedException {
+    @Then("user $name_2 cannot read the post in community $community")
+    public void user_cannot_read_post_in_comminuty(String name_2, String community) throws InterruptedException {
         if (name_2.isEmpty()) {
             verify().that(true)
                     .ifResultIsExpected("All user can see post")
                     .ifElse("")
                     .finish();
         } else {
-            String user = selectUserForComminuty(ThucydidesUtils.getFromSession("community").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
+            String user = selectUserForComminuty(community, name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user));
             open(MyJournalPage.class, new Url()
-                    .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
+                    .setPrefix(community + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
             String error = getCurrentBrowser()
                     .getDriver()
@@ -118,10 +117,10 @@ public class PostInCommunity extends WebTest {
     }
 
     //Scenario: Edit post in community (4/4)
-    @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post in community")
-    public void user_see_correct_privacy_when_edit_this_post_in_community(String privacy_1, String group_1) throws InterruptedException {
+    @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post in community $community")
+    public void user_see_correct_privacy_when_edit_this_post_in_community(String privacy_1, String group_1, String community) throws InterruptedException {
         open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("community").toString() + ".")
+                .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
         verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
