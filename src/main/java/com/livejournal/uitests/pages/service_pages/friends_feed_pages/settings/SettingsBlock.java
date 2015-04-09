@@ -128,7 +128,7 @@ public class SettingsBlock extends UIBlock {
     }
 
     @StepGroup
-    public FriendsFeedLogged restoreDefaultSettings() throws InterruptedException {
+    public FriendsFeedLogged restoreDefaultSettings(){
         restoreButton.click();
         return waitThatSettingsBlockClose();
     }
@@ -266,8 +266,14 @@ public class SettingsBlock extends UIBlock {
     }
 
     @WhenPageOpens
-    public void waitBlock() throws InterruptedException {
-        Thread.sleep(1500);
+    public void waitBlock() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return titleField.isDisplayed();
+            }
+        });
     }
 
 }

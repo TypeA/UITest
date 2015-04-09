@@ -86,7 +86,7 @@ public class LJPage extends Page {
         return onOpened(LJPage.class);
     }
 
-    public LJPage defaultStyle(String user) throws InterruptedException {
+    public LJPage defaultStyle(String user){
 
         List<ArrayList<String>> user_atr = workWithDB().conect()
                 .select("select * from user where user = '" + user + "';", "userid")

@@ -69,7 +69,7 @@ public class EditJournalbml extends ServicePageLogged {
     }
     
     @StepGroup
-    public EntryPage editPostContent(String content, String text) throws InterruptedException {
+    public EntryPage editPostContent(String content, String text) {
         switch (PostElement.valueOf(content.toUpperCase())) {
             case SUBJECT:
                 postContentBlock.setSubject(text);

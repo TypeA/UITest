@@ -53,7 +53,7 @@ public class SheduledEntriesPage extends ServicePageLogged {
         return onOpened(MyJournalPage.class);
     }
 
-    public FinishPostForm editFirstSheduledEntry(String content, String text) throws InterruptedException {
+    public FinishPostForm editFirstSheduledEntry(String content, String text) {
         startScript("jQuery('.b-editentry a')[0].click()");
         onOpened(EditJournalbml.class)
                 .editPostContent(content, text);
