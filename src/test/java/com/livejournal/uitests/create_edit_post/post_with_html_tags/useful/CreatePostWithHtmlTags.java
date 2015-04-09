@@ -170,7 +170,6 @@ public class CreatePostWithHtmlTags extends WebTest {
     //Scenario: Create post with link(2/3)
     @When("user create new post with link $link and add property open in new window $newWindow")
     public void user_create_new_post_with_link(String link, String newWindow) {
-        String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
