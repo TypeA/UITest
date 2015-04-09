@@ -19,21 +19,21 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 @DefaultUrl("/editjournal.bml")
 public class EditJournalbml extends ServicePageLogged {
-    
+
     public PostContentBlock postContentBlock;
-    
+
     @FindBy(name = "action:update")
     private Button saveButton;
-    
+
     @FindBy(name = "action:delete")
     private Button deleteButton;
-    
+
     @StepGroup
     public EditJournalbml createPost(String subject, String editorType, String text) {
         postContentBlock.createPost(subject, editorType, text);
         return this;
     }
-    
+
     @StepGroup
     public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) {
         WebDriverWait wait = new WebDriverWait(getDriver(), 15);
@@ -46,28 +46,28 @@ public class EditJournalbml extends ServicePageLogged {
         postContentBlock.setPrivacy(privacy, group);
         return this;
     }
-    
+
     public ArrayList<String> getAllPrivacy() {
         return postContentBlock.getAllPrivacy();
     }
-    
+
     @StepGroup
     public String getCurrentPrivacy() {
         return postContentBlock.getCurrentPrivacy();
     }
-    
+
     @StepGroup
     public void saveEntry() {
         saveButton.click();
     }
-    
+
     @StepGroup
     public MyJournalPage deleteEntry() {
         deleteButton.click();
         getDriver().switchTo().alert().accept();
         return onOpened(MyJournalPage.class);
     }
-    
+
     @StepGroup
     public EntryPage editPostContent(String content, String text) throws InterruptedException {
         switch (PostElement.valueOf(content.toUpperCase())) {
@@ -90,5 +90,10 @@ public class EditJournalbml extends ServicePageLogged {
         saveButton.click();
         return onOpened(EntryPage.class);
     }
-    
+
+    @StepGroup
+    public String getPostSubject() {
+        return postContentBlock.getPostSubject();
+    }
+
 }

@@ -28,4 +28,18 @@ Examples:
 |testautotest |И вам привет!  |
 |testautotest |Hello world!   |
 
+Scenario: Logged user create new post with subject and edit this post
+Meta: 
+@categories create_edit_post post_subject useful
+
+Given logged user <name> on Create Post page
+When user create new post with subject <subject>
+Then user edit this post and see correct subject <subject>
+
+Examples:
+|name         |subject        |
+|testautotest |No subject     |
+|testautotest |Всем "привет"! |
+|testautotest |И вам привет!  |
+|testautotest |Hello world!   |
 
