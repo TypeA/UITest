@@ -1,11 +1,11 @@
 Scenario: Create post in community
 Meta: 
-@categories privacy create_edit_post useful
+@categories create_edit_post privacy post_community useful
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>) in community <community>
-Then user <name_1> can read the post in community
-Then user <name_2> cannot read the post in community
+Then user <name_1> can read the post in community <community>
+Then user <name_2> cannot read the post in community <community>
 
 Examples:
 |name           |community   |name_1         |name_2        |privacy     |group     | 
@@ -16,12 +16,12 @@ Examples:
 
 Scenario: Edit post in community
 Meta:
-@categories privacy create_edit_post useful
+@categories create_edit_post privacy post_community useful
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>) in community <community>
-When user edit privacy <privacy_1> (group <group_1>) and save post in community
-Then user see correct privacy <privacy_1> (group <group_1>) when edit this post in community
+When user edit privacy <privacy_1> (group <group_1>) and save post in community <community>
+Then user see correct privacy <privacy_1> (group <group_1>) when edit this post in community <community>
 
 Examples:
 |name           |community   |privacy     |group     |privacy_1    |group_1    |

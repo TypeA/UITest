@@ -71,6 +71,75 @@ public class EntryPage extends JournalPage {
         } catch (Exception ex) {
         }
         return subject;
+    public boolean postWithStyleIsDisplayed(String text, String style_text) {
+        String script = "";
+        switch (style_text) {
+            case "BOLD":
+                script = "return jQuery(\"b\").is(\":contains('" + text + "')\")";
+                break;
+            case "ITALIC":
+                script = "return jQuery(\"i\").is(\":contains('" + text + "')\")";
+                break;
+            case "UNDERLINED":
+                script = "return jQuery(\"u\").is(\":contains('" + text + "')\")";
+                break;
+        }
+        return Boolean.valueOf(startScript(script).toString());
+    }
+
+    @StepGroup
+    public Boolean postWithFontIsDisplayed(String text, String font_style) {
+        String script = "";
+        switch (font_style) {
+            case "TINY":
+                script = "return jQuery(\"span[style='font-size:0.7em;']\").is(\":contains('" + text + "')\")";
+                break;
+            case "SMALL":
+                script = "return jQuery(\"span[style='font-size:0.9em;']\").is(\":contains('" + text + "')\")";
+                break;
+            case "NORMAL":
+                script = "return jQuery(\"article.e-content\").is(\":contains('" + text + "')\")";
+                break;
+            case "LARGE":
+                script = "return jQuery(\"span[style='font-size:1.4em;']\").is(\":contains('" + text + "')\")";
+                break;
+            case "HUGE":
+                script = "return jQuery(\"span[style='font-size:1.8em;']\").is(\":contains('" + text + "')\")";
+
+        }
+        return Boolean.valueOf(startScript(script).toString());
+    }
+
+    @StepGroup
+    public Boolean postWithColorIsDisplayed(String text, String color) {
+        String script = "return jQuery(\"span[style='color:#" + color + ";']\").is(\":contains('" + text + "')\")";
+        return Boolean.valueOf(startScript(script).toString());
+    }
+
+    public Boolean postWithLinkIsDisplayed(String link, Boolean newWindow) {
+        String target="";
+        if (newWindow) {
+            target = "[target='_blank']";
+        } 
+        String script = "return jQuery(\"a[href*='"+link+"']"+target+"\").is(\":contains('"+link+"')\")";
+        return Boolean.valueOf(startScript(script).toString());
+    }
+     @StepGroup
+    public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
+        String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
+        String script = "";
+        switch (style_text) {
+            case "BOLD":
+                script = "return jQuery(\"b " + htmlLink;
+                break;
+            case "ITALIC":
+                script = "return jQuery(\"i " + htmlLink;
+                break;
+            case "UNDERLINED":
+                script = "return jQuery(\"u " + htmlLink;
+                break;
+        }
+        return Boolean.valueOf(startScript(script).toString());
     }
 
 }
