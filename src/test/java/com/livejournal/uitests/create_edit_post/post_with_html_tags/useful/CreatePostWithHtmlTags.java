@@ -213,30 +213,10 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()))
                 .getUrl().toString();
-        verify().that(linkWithStyleIsDisplayed(link, style_text.toUpperCase()))
+        verify().that(onOpened(EntryPage.class).linkWithStyleIsDisplayed(link, style_text.toUpperCase()))
                 .ifResultIsExpected("Post is displayed with link " + link + " and with style " + style_text)
                 .ifElse("Post is not displayed with link " + link + " and with style " + style_text)
                 .finish();
     }
-
-    ////////////////////////////////////////////////////////////  
-    @StepGroup
-    public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
-        String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
-        String script = "";
-        switch (style_text) {
-            case "BOLD":
-                script = "return jQuery(\"b " + htmlLink;
-                System.out.println("11111" + script);
-                break;
-            case "ITALIC":
-                script = "return jQuery(\"i " + htmlLink;
-                break;
-            case "UNDERLINED":
-                script = "return jQuery(\"u " + htmlLink;
-                break;
-        }
-        return Boolean.valueOf(startScript(script).toString());
-    }
-
+    
 }
