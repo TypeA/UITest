@@ -95,5 +95,22 @@ public class EntryPage extends JournalPage {
         String script = "return jQuery(\"a[href*='"+link+"']"+target+"\").is(\":contains('"+link+"')\")";
         return Boolean.valueOf(startScript(script).toString());
     }
+     @StepGroup
+    public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
+        String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
+        String script = "";
+        switch (style_text) {
+            case "BOLD":
+                script = "return jQuery(\"b " + htmlLink;
+                break;
+            case "ITALIC":
+                script = "return jQuery(\"i " + htmlLink;
+                break;
+            case "UNDERLINED":
+                script = "return jQuery(\"u " + htmlLink;
+                break;
+        }
+        return Boolean.valueOf(startScript(script).toString());
+    }
 
 }
