@@ -1,6 +1,7 @@
 package com.livejournal.uitests.utility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -12,9 +13,7 @@ public class ParseString {
     { 
         String[] stringArray = inString.split(parseSymbol);
         ArrayList<String> outArray = new ArrayList<>();
-        for (int i = 0; i < stringArray.length; i++) {
-            outArray.add(stringArray[i]);
-        }
+        outArray.addAll(Arrays.asList(stringArray));
         return outArray;
         
     }

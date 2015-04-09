@@ -6,7 +6,10 @@ import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
 import com.livejournal.uitests.pages.service_pages.update.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
 /**
@@ -24,10 +27,16 @@ public class LJUserBubble extends UIBlock {
     private Button submitButton;
 
     @StepGroup
-    public PostContentBlock enterCorrectUsername(String ljuser) throws InterruptedException {
+    public PostContentBlock enterCorrectUsername(String ljuser) {
         username.enter(ljuser);
         startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
-        Thread.sleep(500);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 3);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return !LJUserBubble.super.isDisplayed();
+            }
+        });
         return onDisplayed(PostContentBlock.class);
     }
 

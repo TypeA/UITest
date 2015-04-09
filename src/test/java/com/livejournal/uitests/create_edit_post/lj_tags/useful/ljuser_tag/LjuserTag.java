@@ -1,6 +1,5 @@
 package com.livejournal.uitests.create_edit_post.lj_tags.useful.ljuser_tag;
 
-import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -26,12 +25,11 @@ public class LjuserTag extends WebTest {
                 .defaultLanguageLogged(name)
                 .defaultStyle(name);
         open(UpdateBmlPageLogged.class);
-        ThucydidesUtils.putToSession("user", name);
     }
 
     //Logged user create new post with correct lj-user tag (2/3)
     @When("user enter correct username $ljuser in ljuser bubble and create new post")
-    public void user_ener_correct_username_in_ljuser_bubble_and_create_new_post(String ljuser) throws InterruptedException {
+    public void user_ener_correct_username_in_ljuser_bubble_and_create_new_post(String ljuser) {
         String postText = RandomText.getRandomText(30) + " ";
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
