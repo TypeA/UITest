@@ -85,22 +85,21 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(css = ".b-colorpicker-controls-hex")
     private TextField codeColor;
-    
-    @FindBy(css="button.b-flatbutton[ng-click='submitColor()']")
+
+    @FindBy(css = "button.b-flatbutton[ng-click='submitColor()']")
     private Button chooseColorButton;
-    
-    @FindBy(css=".cke_button_LJLink2")
+
+    @FindBy(css = ".cke_button_LJLink2")
     private Button buttonToolLink;
-    
-    @FindBy(css=".b-updateform-bubble-input")
+
+    @FindBy(css = ".b-updateform-bubble-input")
     private TextField inputUrl;
-    
-    @FindBy(css=".b-updateform-bubble-checkbox")
+
+    @FindBy(css = ".b-updateform-bubble-checkbox")
     private Button checkboxNewWindow;
-    
-    @FindBy(xpath="//button[@class='b-flatbutton b-flatbutton-simple  ng-binding' and @lj-disabled[contains(.,'link')]]")
+
+    @FindBy(xpath = "//button[@class='b-flatbutton b-flatbutton-simple  ng-binding' and @lj-disabled[contains(.,'link')]]")
     private Button addButtonLink;
-    
 
     @StepGroup
     public UpdateBmlPageLogged closeDraft() {
@@ -223,24 +222,24 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         visualEditor.click();
         return this;
     }
-    
+
     @StepGroup
-    public UpdateBmlPageLogged addLink(String url, Boolean newWindow){
-    buttonToolLink.click();
-    inputUrl.enter(url);
-    if(newWindow){
-    checkboxNewWindow.click();
+    public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
+        buttonToolLink.click();
+        inputUrl.enter(url);
+        if (newWindow) {
+            checkboxNewWindow.click();
+        }
+        addButtonLink.click();
+        return this;
     }
-    addButtonLink.click();
-    return this;
-    }
+
     @StepGroup
     public UpdateBmlPageLogged goToVisualRedactor(String text) {
-        WebDriver driver = getDriver();
-        driver.switchTo().frame(driver.findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
-        WebElement bodyOfMail = driver.findElement(By.xpath("//body[@class='lj-main-body']"));
+        getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
+        WebElement bodyOfMail = getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
         bodyOfMail.sendKeys(text);
-        driver.switchTo().defaultContent();
+        getDriver().switchTo().defaultContent();
         return this;
     }
 
