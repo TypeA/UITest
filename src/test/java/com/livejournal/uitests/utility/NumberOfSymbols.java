@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.livejournal.uitests.utility;
 
 /**
@@ -11,12 +5,13 @@ package com.livejournal.uitests.utility;
  * @author m.prytkova
  */
 public class NumberOfSymbols {
-    
-   public static String get (String data, int number){
-       String newSumbols= "";
-       for (int i=1; i<=number+1;i++)
-           newSumbols=newSumbols+"a";      
+
+    public static String get(String data, int number) {
+        String newSumbols = "";
+        for (int i = 1; i <= number + 1; i++) {
+            newSumbols = newSumbols + "a";
+        }
         return data.replace("NOS", newSumbols);
-   }
-    
+    }
+
 }

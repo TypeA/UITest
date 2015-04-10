@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.create_edit_post.post_with_html_tags.useful;
 
 import com.livejournal.uisteps.core.Url;
@@ -205,14 +200,13 @@ public class CreatePostWithHtmlTags extends WebTest {
     //Scenario: Create post with custom link(3/3)
     @Then("post with link $link and with style $style_text is displayed")
     public void post_with_link_and_with_style_is_displayed(String link, String style_text) {
-        String url = open(EntryPage.class, new Url()
+        open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()))
-                .getUrl().toString();
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         verify().that(onOpened(EntryPage.class).linkWithStyleIsDisplayed(link, style_text.toUpperCase()))
                 .ifResultIsExpected("Post is displayed with link " + link + " and with style " + style_text)
                 .ifElse("Post is not displayed with link " + link + " and with style " + style_text)
                 .finish();
     }
-    
+
 }

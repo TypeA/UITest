@@ -30,8 +30,7 @@ public class TheBannedUser extends WebTest {
     //Scenario: Ban User(2/3)
     @When("user ban one user_1 and save change")
     public void user_ban_one_user_1_and_save_change() {
-        String user = ThucydidesUtils.getFromSession("user").toString();
-        String user_1 = getDBDate().bannedUser().findUserNotInBannedList(user);
+        String user_1 = getDBDate().bannedUser().findUserNotInBannedList(ThucydidesUtils.getFromSession("user").toString());
         onOpened(BannedUsersPage.class)
                 .typeInBanList(user_1)
                 .clickBannedUser();
@@ -41,7 +40,6 @@ public class TheBannedUser extends WebTest {
     //Scenario: Ban User(3/3)
     @Then("user_1 exist in ban list")
     public void user_1_can_not_add_comment_for_user_post() {
-        String user = ThucydidesUtils.getFromSession("user").toString();
         String user_1 = ThucydidesUtils.getFromSession("user_1").toString();
         verify().that(onOpened(BannedUsersPage.class).userInBanList(user_1))
                 .ifResultIsExpected("User add to ban list")
