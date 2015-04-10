@@ -5,11 +5,11 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.LJUserBubble;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
@@ -170,9 +170,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged openLJUserBubble() {
+    public LJUserBubble openLJUserBubble() {
         postContentBlock.openLJUserBubble();
-        return this;
+        return onDisplayed(LJUserBubble.class);
     }
 
     @StepGroup
