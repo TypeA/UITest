@@ -11,7 +11,7 @@ import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
-import static com.livejournal.uitests.utility.iterations.EqualityOfArrayLists.isEqual;
+import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;

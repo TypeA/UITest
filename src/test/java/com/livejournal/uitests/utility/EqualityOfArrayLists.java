@@ -1,4 +1,4 @@
-package com.livejournal.uitests.utility.iterations;
+package com.livejournal.uitests.utility;
 
 import java.util.ArrayList;
 

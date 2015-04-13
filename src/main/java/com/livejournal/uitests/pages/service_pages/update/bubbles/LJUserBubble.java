@@ -23,8 +23,8 @@ public class LJUserBubble extends UIBlock {
     @FindBy(css = ".b-updateform-bubble-input-username .b-updateform-bubble-input")
     private TextField username;
 
-    @FindBy(name = ".b-updateform-bubble-user-button .b-flatbutton")
-    private Button submitButton;
+    //@FindBy(name = ".b-updateform-bubble-user-button .b-flatbutton")
+    //private Button submitButton;
 
     @StepGroup
     public PostContentBlock enterCorrectUsername(String ljuser) {

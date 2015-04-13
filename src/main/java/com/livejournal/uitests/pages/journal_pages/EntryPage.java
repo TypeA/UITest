@@ -145,4 +145,12 @@ public class EntryPage extends JournalPage {
         return Boolean.valueOf(startScript(script).toString());
     }
 
+    @StepGroup
+    public String LjUserTagText() {
+        try {
+            return startScript("return jQuery('.e-content span')[0].textContent").toString();
+        } catch (Exception ex) {
+            return "BAD SPAN";
+        }
+    }
 }
