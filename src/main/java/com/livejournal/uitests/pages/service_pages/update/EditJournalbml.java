@@ -5,6 +5,7 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import java.util.ArrayList;
+import java.util.Arrays;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
@@ -78,8 +79,12 @@ public class EditJournalbml extends ServicePageLogged {
                 postContentBlock.setText(text, "html");
                 break;
             case PRIVACY:
-                ArrayList<String> group = null;
-                postContentBlock.setPrivacy(text, group);
+                String[] list = text.split("/");
+                ArrayList<String> groups = new ArrayList<>();
+                groups.addAll(Arrays.asList(list));
+                String privacy = groups.get(0);
+                groups.remove(0);
+                postContentBlock.setPrivacy(privacy, groups);
                 break;
             case TAGS:
                 postContentBlock.setTags(text);

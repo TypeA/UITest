@@ -6,6 +6,7 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.FinishPostForm;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.RandomText;
 import com.livejournal.uitests.utility.date.PostTime;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class ScheduledPost extends WebTest {
     //Scenario: Create scheduled post (1/3)
     //Scenario: Create scheduled post with several privacy (1/3)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_Create_Post_page(String name){
+    public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
@@ -33,27 +34,28 @@ public class ScheduledPost extends WebTest {
     }
 
     //Scenario: Edit scheduled post (1/3)
+    //Scenario: Edit privacy in scheduled post (1/3)
     //Scenario: Delete scheduled post (1/3)
     @Given("logged user $name with scheduled post on Scheduled post Page")
-    public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name){
+    public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
                 .defaultStyle(name);
-        Integer number_of_entryes = open(SheduledEntriesPage.class)
-                .getNumberOfEntryes();
-        if (number_of_entryes < 1) {
-            String[] date = PostTime.getCorrectDate("day", "1")
-                    .split(";");
-            open(UpdateBmlPageLogged.class)
-                    .closeDraft()
-                    .createPost("Sheduled post for deleting", "html", RandomText.getRandomText(30))
-                    .setDateAndTime(date[0], date[1])
-                    .postEntry();
-            open(SheduledEntriesPage.class);
-            number_of_entryes = number_of_entryes + 1;
-        }
-        ThucydidesUtils.putToSession("number_of_entryes", number_of_entryes);
+        open(SheduledEntriesPage.class)
+                .deleteAllSheduledEntries();
+
+        String[] date = PostTime.getCorrectDate("hour", "1")
+                .split(";");
+        String post_text = RandomText.getRandomText(10).trim();
+
+        open(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .createPost("Sheduled post for deleting", "html", post_text)
+                .setDateAndTime(date[0], date[1])
+                .postEntry();
+        ThucydidesUtils.putToSession("number_of_entryes", open(SheduledEntriesPage.class).getNumberOfEntryes());
+        ThucydidesUtils.putToSession("post_text", post_text);
     }
 
     //Scenario: Create scheduled post (2/3)
@@ -91,12 +93,12 @@ public class ScheduledPost extends WebTest {
     }
 
     //Scenario: Edit scheduled post (2/3)
-    @When("user edit element $element in the scheduled post")
-    public void user_edit_the_scheduled_post(String element) {
-        String post_text = RandomText.getRandomText(10);
-        ThucydidesUtils.putToSession("post_text", post_text.trim());
+    //Scenario: Edit privacy in scheduled post (2/3)
+    @When("user edit element $element by change $changes in the scheduled post")
+    public void user_edit_the_scheduled_post(String element, String changes) {
+        ThucydidesUtils.putToSession("changes", new RandomName(changes).get());
         onOpened(SheduledEntriesPage.class)
-                .editFirstSheduledEntry(element, post_text);
+                .editSheduledEntryByText(element, ThucydidesUtils.getFromSession("changes").toString(), ThucydidesUtils.getFromSession("post_text").toString());
     }
 
     //Scenario: Delete scheduled post (2/3)
@@ -133,21 +135,37 @@ public class ScheduledPost extends WebTest {
                 .finish();
     }
 
+    //Scenario: Edit privacy in scheduled post (3/3)
+    @Then("privacy $changes in the scheduled post is editing")
+    public void privacy_in_the_scheduled_post_is_editing(String changes) {
+        if (changes.contains("/")) {
+            changes = changes.substring(0, changes.indexOf('/'));
+        }
+        String post_privacy = onDisplayed(FinishPostForm.class)
+                .clickToScheduledLink()
+                .getPrivacyByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .trim()
+                .toUpperCase();
+        verify().that(post_privacy.contains(changes.toUpperCase()))
+                .ifResultIsExpected("Post is scheduled, whis correct privacy: " + changes)
+                .ifElse("Post is scheduled, whis incorrect privacy: " + post_privacy)
+                .finish();
+    }
+
     //Scenario: Edit scheduled post (3/3)
     @Then("the scheduled post is editing")
     public void scheduled_post_is_editing() {
         Integer entries_number = open(SheduledEntriesPage.class)
                 .getNumberOfEntryes();
         String entry_text = open(SheduledEntriesPage.class)
-                .getFirstPostText()
+                .getPostByText(ThucydidesUtils.getFromSession("post_text").toString())
                 .trim();
-
         verify().that(entries_number.equals(ThucydidesUtils.getFromSession("number_of_entryes")))
                 .ifResultIsExpected("The correct amount of scheduled posts: " + ThucydidesUtils.getFromSession("number_of_entryes"))
                 .ifElse("The incorrect amount of scheduled posts: " + entries_number)
                 .and()
                 .that(entry_text.contains(ThucydidesUtils.getFromSession("post_text").toString()))
-                .ifResultIsExpected("The post is editing by value: " + entry_text)
+                .ifResultIsExpected("The post is editing by value: " + ThucydidesUtils.getFromSession("post_text"))
                 .ifElse("The post is not editing by value: " + entry_text)
                 .finish();
     }

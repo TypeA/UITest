@@ -18,18 +18,13 @@ public class SheduledEntriesPage extends ServicePageLogged {
                 .toString();
     }
 
-    public String getFirstPostText() {
-        return startScript("return jQuery('.b-editentry')[0].textContent")
-                .toString();
-    }
-
     public String getPrivacyByText(String post_text) {
         String privacy;
         try {
             privacy = startScript("return jQuery('.b-editentry:contains(\"" + post_text + "\") img:eq(1)').attr('src')")
                     .toString();
             privacy = privacy.substring(privacy.indexOf('_') + 1, privacy.indexOf('?') - 4);
-        }  catch (Exception ex) {
+        } catch (Exception ex) {
             privacy = "Public";
         }
         return privacy.replaceAll("protected", "friends")
@@ -53,8 +48,8 @@ public class SheduledEntriesPage extends ServicePageLogged {
         return onOpened(MyJournalPage.class);
     }
 
-    public FinishPostForm editFirstSheduledEntry(String content, String text) {
-        startScript("jQuery('.b-editentry a')[0].click()");
+    public FinishPostForm editSheduledEntryByText(String content, String text, String post_text) {
+        startScript("jQuery('.b-editentry:contains(\"" + post_text + "\") a')[0].click()");
         onOpened(EditJournalbml.class)
                 .editPostContent(content, text);
         return onDisplayed(FinishPostForm.class);

@@ -30,20 +30,35 @@ Examples:
 |testautotest   |Private     |           |
 
 
-
 Scenario: Edit scheduled post
 Meta: 
 @categories create_edit_post post_time useful
 
 Given logged user <name> with scheduled post on Scheduled post Page
-When user edit element <element> in the scheduled post
+When user edit element <element> by change <changes> in the scheduled post
 Then the scheduled post is editing
 
 Examples:
-|name         |element           |
-|testautotest |subject           |
-|testautotest |text              |
-|testautotest |tags              |
+|name         |element      |changes           |
+|testautotest |subject      |rnd               |
+|testautotest |text         |rnd               |
+|testautotest |tags         |rnd               |
+
+
+Scenario: Edit privacy in scheduled post
+Meta: 
+@categories create_edit_post post_time useful
+
+Given logged user <name> with scheduled post on Scheduled post Page
+When user edit element <element> by change <changes> in the scheduled post
+Then privacy <changes> in the scheduled post is editing
+
+Examples:
+|name         |element      |changes           |
+|testautotest |privacy      |Friends           |
+|testautotest |privacy      |Custom/test_group |
+|testautotest |privacy      |Private           |
+
 
 
 Scenario: Delete scheduled post
