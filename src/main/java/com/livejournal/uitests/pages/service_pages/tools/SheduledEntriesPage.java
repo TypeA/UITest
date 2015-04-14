@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.tools;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
-import com.livejournal.uitests.pages.service_pages.update.FinishPostForm;
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.FinishPostForm;
 import net.thucydides.core.annotations.DefaultUrl;
 
 /**

@@ -4,7 +4,7 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
-import com.livejournal.uitests.pages.service_pages.update.FinishPostForm;
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.FinishPostForm;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.RandomText;

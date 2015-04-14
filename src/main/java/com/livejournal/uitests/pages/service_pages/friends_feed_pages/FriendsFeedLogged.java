@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages;
 
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.SidebarWidgets;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIElement;

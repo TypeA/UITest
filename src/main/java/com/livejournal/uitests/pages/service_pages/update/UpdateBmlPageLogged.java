@@ -1,11 +1,12 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.LJUserBubble;
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.LJUserBubble;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;

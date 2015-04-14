@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.update;
+package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;

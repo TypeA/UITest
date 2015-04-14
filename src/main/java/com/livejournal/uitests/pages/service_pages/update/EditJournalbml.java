@@ -1,5 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.enums.PostElement;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;

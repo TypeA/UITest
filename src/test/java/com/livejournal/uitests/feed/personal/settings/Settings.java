@@ -4,12 +4,9 @@ import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSelectType;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.ColorSettings;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.PagingType;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.TextParametrs;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.RandomeValue;
@@ -98,7 +95,7 @@ public class Settings extends WebTest {
     public void user_change_color_by_type_and_save_it(String color, String type, String code, String barY, String colorX, String colorY) {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .setColor(ColorSettings.valueOf(color), ColorSelectType.valueOf(type), code, Integer.parseInt(barY), Integer.parseInt(colorX), Integer.parseInt(colorY))
+                .setColor(ColorSettings.valueOf(color), type, code, Integer.parseInt(barY), Integer.parseInt(colorX), Integer.parseInt(colorY))
                 .saveSettings();
     }
 
@@ -107,7 +104,7 @@ public class Settings extends WebTest {
     public void user_change_color_and_return_current_color(String color, String code) {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .setColor(ColorSettings.valueOf(color), ColorSelectType.BY_CODE, code, 0, 0, 0)
+                .setColor(ColorSettings.valueOf(color), "BY_CODE", code, 0, 0, 0)
                 .saveSettings()
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color))
@@ -126,7 +123,7 @@ public class Settings extends WebTest {
     public void user_change_color_and_cansel_it(String color, String code) {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .setColor(ColorSettings.valueOf(color), ColorSelectType.BY_CODE, code, 0, 0, 0)
+                .setColor(ColorSettings.valueOf(color), "BY_CODE", code, 0, 0, 0)
                 .saveSettings()
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color))
@@ -274,34 +271,32 @@ public class Settings extends WebTest {
     //Scenario: Set text settings (3/3)
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
-    public void text_settings_is_changed_by_size_and_font(String size, String font){
-      //  Thread.sleep(100);
-        Integer titleSize = (Integer.valueOf(size)*7)/4;
-        verify().that(getTextParametrs(TextParametrs.FONT).contains(font))
+    public void text_settings_is_changed_by_size_and_font(String size, String font) {
+        Integer titleSize = (Integer.valueOf(size) * 7) / 4;
+        verify().that(getTextParametrs("FONT").contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)
-                .ifElse("New text font is incorrect:\n" + getTextParametrs(TextParametrs.FONT))
+                .ifElse("New text font is incorrect:\n" + getTextParametrs("FONT"))
                 .and()
-                .that(getTextParametrs(TextParametrs.SIZE).contains(size))
+                .that(getTextParametrs("SIZE").contains(size))
                 .ifResultIsExpected("Correct text size:\n" + size)
-                .ifElse("New text size is incorrect:\n" + getTextParametrs(TextParametrs.SIZE))
+                .ifElse("New text size is incorrect:\n" + getTextParametrs("SIZE"))
                 .and()
-                .that(getTitleParametrs(TextParametrs.SIZE).contains(titleSize.toString()))
+                .that(getTitleParametrs("SIZE").contains(titleSize.toString()))
                 .ifResultIsExpected("Correct text size:\n" + titleSize)
-                .ifElse("New text size is incorrect:\n" + getTitleParametrs(TextParametrs.SIZE))
+                .ifElse("New text size is incorrect:\n" + getTitleParametrs("SIZE"))
                 .finish();
     }
 
     //Scenario: Set paging type (3/3)
     //Scenario: Cancel paging type (3/3)
     @Then("Paging type is changed by type $type (number $number)")
-    public void paging_type_is_changed_by_type(String type, String number){
+    public void paging_type_is_changed_by_type(String type, String number) {
         refreshCurrentPage();
-       // Thread.sleep(10000);
         String strNumber = number;
         if (type.equals("ENDLESS")) {
             strNumber = "more then 20";
         }
-        verify().that(verifyPagingType(PagingType.valueOf(type), number))
+        verify().that(verifyPagingType(type, number))
                 .ifResultIsExpected("Correct paging type:" + type + "\nMust be " + strNumber + " posts in the feed")
                 .ifElse("Incorrect paging type:" + type + "\nThere are " + ThucydidesUtils.getFromSession("feed_size") + " posts in the feed")
                 .finish();
@@ -399,11 +394,11 @@ public class Settings extends WebTest {
                 .getCssValue(value);
     }
 
-    private String getTextParametrs(TextParametrs parametr) {
-        switch (parametr) {
-            case SIZE:
+    private String getTextParametrs(String parametr) {
+        switch (parametr.toUpperCase()) {
+            case "SIZE":
                 return startScript("return jQuery('.p-lenta .entryunit__text').css('font-size')").toString();
-            case FONT:
+            case "FONT":
                 return startScript("return jQuery('.p-lenta .entryunit__text').css('font-family')").toString();
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
@@ -411,11 +406,11 @@ public class Settings extends WebTest {
         return "ERROR!!!!!";
     }
 
-    private String getTitleParametrs(TextParametrs parametr) {
+    private String getTitleParametrs(String parametr) {
         switch (parametr) {
-            case SIZE:
+            case "SIZE":
                 return startScript("return jQuery('.p-lenta .entryunit__title').css('font-size')").toString();
-            case FONT:
+            case "FONT":
                 return startScript("return jQuery('.p-lenta .entryunit__title').css('font-family')").toString();
             default:
                 Assert.fail("Unknown parametr " + parametr + "!");
@@ -454,12 +449,12 @@ public class Settings extends WebTest {
     }
 
     @StepGroup
-    public boolean verifyPagingType(PagingType type, String size) {
+    public boolean verifyPagingType(String type, String size) {
         Integer intSize = Integer.valueOf(size);
         String script = "return jQuery('.entryunit__text').size()";
 
         switch (type) {
-            case PAGES:
+            case "PAGES":
                 Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 Integer intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);
@@ -471,10 +466,9 @@ public class Settings extends WebTest {
                 }
                 return onOpened(FriendsFeedLogged.class).displaySwitchPagesButtons() && Objects.equals(intFeedSize, correctSize);
 
-            case ENDLESS:
+            case "ENDLESS":
                 ((JavascriptExecutor) getCurrentBrowser().getDriver())
                         .executeScript("window.scrollBy(0,10000000)");
-              //  Thread.sleep(5000);
                 feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);
@@ -504,7 +498,7 @@ public class Settings extends WebTest {
 
     private ArrayList<String> rememberSettings() {
         ArrayList<String> settings = rememberColors();
-        settings.add(getTextParametrs(TextParametrs.FONT) + ", " + getTextParametrs(TextParametrs.SIZE));
+        settings.add(getTextParametrs("FONT") + ", " + getTextParametrs("SIZE"));
         return settings;
     }
 
@@ -537,17 +531,17 @@ public class Settings extends WebTest {
         }
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .setColor(ColorSettings.BACKGROUND_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.BORDERS_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.ELEMENTS_BACKGROUND, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.ELEMENTS_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.FOREGROUND_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.LINK_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.MAIN_TEXT_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.ON_HOVER_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.SIDEBAR_BACKGROUND, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.SIDEBAR_TEXT_COLOR, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.VISITED_LINK, ColorSelectType.BY_POINT, "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.BACKGROUND_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.BORDERS_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.ELEMENTS_BACKGROUND, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.ELEMENTS_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.FOREGROUND_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.LINK_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.MAIN_TEXT_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.ON_HOVER_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.SIDEBAR_BACKGROUND, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.SIDEBAR_TEXT_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.VISITED_LINK, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
                 .setTextSettings(text_size.toString(), text_font)
                 .setPaging(paging_type)
                 .setSize(new RandomeValue(20).get().toString())

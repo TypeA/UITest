@@ -3,7 +3,6 @@ package com.livejournal.uitests.registration.comfortable.features_of_password;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.create_account_pages.MappingLink;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
 import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
@@ -37,17 +36,17 @@ public class FeaturesOfPassword extends WebTest {
     @When("user clicks Mapping Button")
     public void user_clicks_Mapping_Button() {
         onOpened(CreateAccountPage.class)
-                .clickOnPasswordMappingLink(MappingLink.HIDE);
+                .clickOnPasswordMappingLink("HIDE");
     }
 
     //Scenario: Displays password(3/5)
     @Then("the password is hidden")
     public void the_password_is_hidden() {
-        verify().that(onOpened(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.HIDE))
+        verify().that(onOpened(CreateAccountPage.class).displayedPasswordMappingLink("HIDE"))
                 .ifResultIsExpected("Correct icon is displayed: hide icon")
                 .ifElse("Hide icon is hidden!")
                 .and()
-                .that(!onOpened(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.SHOW))
+                .that(!onOpened(CreateAccountPage.class).displayedPasswordMappingLink("SHOW"))
                 .ifResultIsExpected("Correct icon is hidden: show icon")
                 .ifElse("Show icon is displayed!")
                 .finish();
@@ -56,11 +55,11 @@ public class FeaturesOfPassword extends WebTest {
     //Scenario: Displays password(5/5)
     @Then("the password is displayed")
     public void the_password_is_displayed() {
-        verify().that(!onOpened(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.HIDE))
+        verify().that(!onOpened(CreateAccountPage.class).displayedPasswordMappingLink("HIDE"))
                 .ifResultIsExpected("Correct icon is hidden: hide icon")
                 .ifElse("Hide icon is displayed!")
                 .and()
-                .that(onOpened(CreateAccountPage.class).displayedPasswordMappingLink(MappingLink.SHOW))
+                .that(onOpened(CreateAccountPage.class).displayedPasswordMappingLink("SHOW"))
                 .ifResultIsExpected("Correct icon is displayed: show icon")
                 .ifElse("Show icon is hidden!")
                 .finish();

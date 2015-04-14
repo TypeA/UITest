@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
 
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.ColorSettings;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
@@ -112,7 +113,7 @@ public class SettingsBlock extends UIBlock {
     @StepGroup
     public PageSize setPaging(String type) {
         pageType.selectByValue(type.toLowerCase());
-        return new PageSize(PagingType.valueOf(type));
+        return new PageSize(type);
     }
 
     @StepGroup
@@ -177,7 +178,7 @@ public class SettingsBlock extends UIBlock {
     }
 
     @StepGroup
-    public SettingsBlock setColor(ColorSettings button, ColorSelectType type, String code, int barY, int colorX, int colorY) {
+    public SettingsBlock setColor(ColorSettings button, String type, String code, int barY, int colorX, int colorY) {
         getColorButton(button).click()
                 .setColor(type, code, barY, colorX, colorY);
         return this;
@@ -233,16 +234,16 @@ public class SettingsBlock extends UIBlock {
 
     public class PageSize {
 
-        private final PagingType type;
+        private final String type;
 
-        public PageSize(PagingType type) {
+        public PageSize(String type) {
             this.type = type;
         }
 
         @StepGroup
         public SettingsBlock setSize(String size) {
             switch (type) {
-                case PAGES:
+                case "PAGES":
                     try {
                         pageSize.enter(size);
 
@@ -251,7 +252,7 @@ public class SettingsBlock extends UIBlock {
                     }
                     break;
 
-                case ENDLESS:
+                case "ENDLESS":
                     try {
                         Assert.assertFalse("Page size input field is displayed!", pageSize.isDisplayed());
                     } catch (NoSuchElementException ex) {

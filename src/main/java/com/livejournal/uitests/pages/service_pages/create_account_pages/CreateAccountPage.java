@@ -104,12 +104,12 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
-    public CreateAccountPage clickOnPasswordMappingLink(MappingLink icon) {
-        switch (icon) {
-            case HIDE:
+    public CreateAccountPage clickOnPasswordMappingLink(String icon) {
+        switch (icon.toUpperCase()) {
+            case "HIDE":
                 passwordMappingLinkHide.click();
                 return this;
-            case SHOW:
+            case "SHOW":
                 passwordMappingLinkShow.click();
                 return this;
             default:
@@ -119,11 +119,11 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
-    public boolean displayedPasswordMappingLink(MappingLink icon) {
-        switch (icon) {
-            case HIDE:
+    public boolean displayedPasswordMappingLink(String icon) {
+        switch (icon.toUpperCase()) {
+            case "HIDE":
                 return passwordMappingLinkHide.isDisplayed();
-            case SHOW:
+            case "SHOW":
                 return passwordMappingLinkShow.isDisplayed();
             default:
                 org.junit.Assert.fail("Unknown icon " + icon + "!");

@@ -81,14 +81,14 @@ public class SettingsBubbleColorBlock extends UIBlock {
     }
 
     @StepGroup
-    public void setColor(ColorSelectType type, String code, int barY, int colorX, int colorY) {
-        switch (type) {
-            case BY_POINT:
+    public void setColor(String type, String code, int barY, int colorX, int colorY) {
+        switch (type.toUpperCase()) {
+            case "BY_POINT":
                 setColorBarByPoint(barY)
                         .setColorByPoint(colorX, colorY)
                         .clickChooseButton();
                 break;
-            case BY_CODE:
+            case "BY_CODE":
                 enterCode(code)
                         .clickChooseButton();
                 break;

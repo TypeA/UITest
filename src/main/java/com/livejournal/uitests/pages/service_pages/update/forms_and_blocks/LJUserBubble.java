@@ -1,10 +1,8 @@
-package com.livejournal.uitests.pages.service_pages.update.bubbles;
+package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
 
-import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
-import com.livejournal.uitests.pages.service_pages.update.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;

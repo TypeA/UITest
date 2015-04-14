@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.friends_feed_pages;
+package com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums;
 
 /**
  *

@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.update;
+package com.livejournal.uitests.pages.service_pages.update.enums;
 
 /**
  *

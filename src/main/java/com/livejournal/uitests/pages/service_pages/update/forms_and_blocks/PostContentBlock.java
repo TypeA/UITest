@@ -1,10 +1,9 @@
-package com.livejournal.uitests.pages.service_pages.update;
+package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.LJUserBubble;
 import java.util.ArrayList;
 import java.util.List;
 import net.thucydides.core.annotations.StepGroup;
@@ -55,12 +54,12 @@ public class PostContentBlock extends UIBlock {
         } else {
             subjectField.enter(subject);
         }
-        switch (EditPostType.valueOf(editorType.toUpperCase())) {
-            case VISUAL:
+        switch (editorType.toUpperCase()) {
+            case "VISUAL":
                 visualEditButton.click();
                 postVisualField.enter(text);
                 break;
-            case HTML:
+            case "HTML":
                 htmlEditButton.click();
                 postHtmlField.enter(text);
                 break;
@@ -79,12 +78,12 @@ public class PostContentBlock extends UIBlock {
 
     @StepGroup
     public void setText(String text, String editorType) {
-        switch (EditPostType.valueOf(editorType.toUpperCase())) {
-            case VISUAL:
+        switch (editorType.toUpperCase()) {
+            case "VISUAL":
                 visualEditButton.click();
                 postVisualField.enter(text);
                 break;
-            case HTML:
+            case "HTML":
                 htmlEditButton.click();
                 postHtmlField.enter(text);
                 break;
