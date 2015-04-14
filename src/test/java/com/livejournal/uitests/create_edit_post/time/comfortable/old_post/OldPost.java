@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.post_time.comfortable.old_post;
+package com.livejournal.uitests.create_edit_post.time.comfortable.old_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;

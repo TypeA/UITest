@@ -1,5 +1,5 @@
 
-package com.livejournal.uitests.create_edit_post.post_privacy.useful.users_post;
+package com.livejournal.uitests.create_edit_post.privacy.useful.users_post;
 
 /**
  *

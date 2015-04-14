@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.post_privacy.personal.min_security_community;
+package com.livejournal.uitests.create_edit_post.privacy.personal.min_security;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;
@@ -15,61 +15,55 @@ import org.junit.Assert;
 
 /**
  *
- * @author m.panferova
+ * @author m.prytkova
  */
-public class MinSecurityCommunity extends WebTest {
+public class MinSecurity extends WebTest {
 
-    //Scenario: Min security in creating post in community (1/3)
-    @Given("logged user $name on Security page for community $community")
-    public void logged_user_on_Security_page(String name, String community) {
+    //Scenario: Min security in creating post(1/3)
+    @Given("logged user $name on Security page")
+    public void logged_user_on_Security_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name);
-        open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"));
+        open(SettingsMainPage.class, new Url().setPostfix("?cat=privacy"));
     }
 
-    //Scenario: Min security in editing post in community (1/3)
-    @Given("logged user $name with min security $security on Create Post page in community $community")
-    public void logged_user_with_min_security_on_Create_Post_page_in_community(String name, String community, String security) {
+    //Scenario: Min security in editing post(1/3)
+    @Given("logged user $name with min security $security on Create Post page")
+    public void logged_user_with_min_security_on_Create_Post_page(String name, String security) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name);
-        open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"))
+        open(SettingsMainPage.class, new Url().setPostfix("?cat=privacy"))
                 .setMinSecurity(security)
                 .saveSettings();
         open(UpdateBmlPageLogged.class);
     }
 
-    //Scenario: Min security in creating post in community (2/3)
-    @When("user set min security $security in the community $community")
-    public void user_set_min_security(String security, String community) {
+    //Scenario: Min security in creating post(2/3)
+    @When("user set min security $security")
+    public void user_set_min_security(String security) {
         onOpened(SettingsMainPage.class)
-                .selectWorkAsUser(community)
-                .clickSwitchJournalType()
                 .setMinSecurity(security)
                 .saveSettings();
     }
 
-    //Min security in editing post in community (2/3)
-    @When("user create new post with privacy $security in community $community")
-    public void user_create_new_post_with_privacy(String security, String community) {
+    //Scenario: Min security in editing post(2/3)
+    @When("user create new post with privacy $security")
+    public void user_create_new_post_with_privacy(String security) {
         ArrayList<String> g = new ArrayList<String>();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .postInCommunity()
-                .selectCommunity(community)
                 .createPost("", "html", RandomText.getRandomText(30))
                 .setPrivacy(security, g)
                 .postEntry();
     }
 
-    //Scenario: Min security in creating post in community (3/3)
-    @Then("user can set only allowed security $security when create post in community $community")
-    public void user_can_set_only_allowed_security_when_create_post(String security, String community){
+    //Scenario: Min security in creating post(3/3)
+    @Then("user can set only allowed security $security when create post")
+    public void user_can_set_only_allowed_security_when_create_post(String security){
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .postInCommunity()
-                .selectCommunity(community)
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy(security).get(0))
@@ -77,9 +71,9 @@ public class MinSecurityCommunity extends WebTest {
                 .finish();
     }
 
-    //Scenario: Min security in editing post in community (3/3)
-    @Then("user see all privacy when edit this post (security $security)")
-    public void user_see_all_privacy_when_edit_this_post(String security) {
+    //Scenario: Min security in editing post(3/3)
+    @Then("user see all privacy when edit this post")
+    public void user_see_all_privacy_when_edit_this_post() {
         ArrayList<String> privacy = onOpened(EntryPage.class)
                 .clickOnEditButton()
                 .getAllPrivacy();
@@ -92,17 +86,20 @@ public class MinSecurityCommunity extends WebTest {
     ////////////////////////////////////////////
     private ArrayList<String> correctPrivacy(String privacy) {
         ArrayList<String> okPrivacy = new ArrayList<>();
-        switch (AllowPrivacyCommunity.valueOf(privacy.toUpperCase())) {
+        switch (AllowPrivacy.valueOf(privacy.toUpperCase())) {
             case PUBLIC:
                 okPrivacy.add("Public");
-                okPrivacy.add("Members");
+                okPrivacy.add("Friends");
                 okPrivacy.add("Custom");
-                okPrivacy.add("Maintainers");
+                okPrivacy.add("Private");
                 break;
-            case MEMBERS:
-                okPrivacy.add("Members");
+            case FRIENDS:
+                okPrivacy.add("Friends");
                 okPrivacy.add("Custom");
-                okPrivacy.add("Maintainers");
+                okPrivacy.add("Private");
+                break;
+            case PRIVATE:
+                okPrivacy.add("Private");
                 break;
             default:
                 Assert.fail("Unknown privacy " + privacy + "!");

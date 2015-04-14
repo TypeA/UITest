@@ -1,6 +1,6 @@
 Scenario: Create scheduled post
 Meta: 
-@categories create_edit_post post_time useful
+@categories create_edit_post time useful
 
 Given logged user <name> on Create Post page
 When user create new post and change parameter <parameter> by value <value>
@@ -16,7 +16,7 @@ Examples:
 
 Scenario: Create scheduled post with several privacy
 Meta: 
-@categories create_edit_post post_time useful
+@categories create_edit_post time useful
 
 Given logged user <name> on Create Post page
 When user create new scheduled post with privacy <privacy> (group <group>)
@@ -32,7 +32,7 @@ Examples:
 
 Scenario: Edit scheduled post
 Meta: 
-@categories create_edit_post post_time useful
+@categories create_edit_post time useful
 
 Given logged user <name> with scheduled post on Scheduled post Page
 When user edit element <element> by change <changes> in the scheduled post
@@ -47,7 +47,7 @@ Examples:
 
 Scenario: Edit privacy in scheduled post
 Meta: 
-@categories create_edit_post post_time useful
+@categories create_edit_post time useful
 
 Given logged user <name> with scheduled post on Scheduled post Page
 When user edit element <element> by change <changes> in the scheduled post
@@ -63,7 +63,7 @@ Examples:
 
 Scenario: Delete scheduled post
 Meta: 
-@categories create_edit_post post_time useful
+@categories create_edit_post time useful
 
 Given logged user <name> with scheduled post on Scheduled post Page
 When user delete the scheduled post
