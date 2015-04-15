@@ -1,0 +1,36 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.livejournal.uitests.pages.service_pages.update.bubbles;
+
+import com.livejournal.uisteps.thucydides.elements.Button;
+import com.livejournal.uisteps.thucydides.elements.TextField;
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.update.PostContentBlock;
+import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
+
+/**
+ *
+ * @author m.panferova
+ */
+
+@Block(
+        @FindBy(css = ".b-bubble-color"))
+public class ColorBubble extends UIBlock {
+
+     @FindBy(css = ".b-colorpicker-controls-hex")
+    private TextField codeColor;
+
+    @FindBy(css = "button.b-flatbutton[ng-click='submitColor()']")
+    private Button chooseColorButton;
+
+    public PostContentBlock setTextColor(String color) {
+        codeColor.enter(color);
+        chooseColorButton.click();
+        return onDisplayed(PostContentBlock.class);
+    }
+
+}
