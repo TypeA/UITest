@@ -6,21 +6,31 @@ package com.livejournal.uitests.friends.useful.manage_friends_groups;
  */
 class TwoRandomIndexNotEquals {
 
-    int indexMoveUp;
-    int indexMoveDown;
+  
+    public int indexMoveUp;
+    public int indexMoveDown;
 
-    TwoRandomIndexNotEquals(int i, int b) {
-        indexMoveUp = i;
-        indexMoveDown = b;
+    public TwoRandomIndexNotEquals(int size) {
+        if (size == 2) {
+            indexMoveDown = 1;
+            indexMoveUp = 2;
+        }
+        if (size > 2) {
+            indexMoveUp = (int) (Math.random() * size + 2);
+            indexMoveDown = (int) (Math.random() * (size - 1) + 2);
+            while (indexMoveUp == indexMoveDown) {
+                indexMoveDown = (int) (Math.random() * (size - 1) + 2);
+            }
+        }
+        this.getIndexMoveDown();
+        this.getIndexMoveUp();
     }
 
-    TwoRandomIndexNotEquals getIndexTwoGroup(int size) {
-        int moveUp = (int) (Math.random() * size + 2);
-        int moveDown = (int) (Math.random() * (size - 1) + 2);
-        while (moveUp == moveDown) {
-            moveDown = (int) (Math.random() * (size - 1) + 2);
-        }
-        TwoRandomIndexNotEquals result = new TwoRandomIndexNotEquals(moveUp, moveDown);
-        return result;
+    public int getIndexMoveDown() {
+        return indexMoveDown;
+    }
+
+    public int getIndexMoveUp() {
+        return indexMoveUp;
     }
 }
