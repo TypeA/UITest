@@ -47,7 +47,7 @@ public class PostContentBlock extends UIBlock {
     private Link ljUserBubbleButton;
 
     private LJUserBubble ljuserBubble;
-
+    
     @StepGroup
     public void createPost(String subject, String editorType, String text) {
         if (subject.toUpperCase().equals("NO SUBJECT")) {
