@@ -5,11 +5,14 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.ColorBubble;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.FontBubble;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.LinkBubble;
+import com.livejournal.uitests.pages.service_pages.update.visualEditor.HtmlsTags;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
@@ -23,6 +26,14 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     private PostContentBlock postContentBlock;
 
+    private HtmlsTags htmlTags;
+
+    private FontBubble fontBubble;
+
+    private ColorBubble colorBubble;
+    
+    private LinkBubble linkBubble;
+    
     @FindBy(name = "community")
     private Select communitySelect;
 
@@ -52,55 +63,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @FindBy(css = ".b-updatepage-tab-visual")
     private Button visualEditor;
 
-    ////////html_tags in visual editor
-    @FindBy(css = ".cke_button_bold")
-    private Button boldText;
-
-    @FindBy(css = ".cke_button_italic")
-    private Button italicText;
-
-    @FindBy(css = ".cke_button_underline")
-    private Button underlineText;
-
-    @FindBy(css = ".cke_button_LJFont")
-    private Button fontText;
-
-    @FindBy(css = ".b-fontsize-select-item-tiny")
-    private Button tinyFontText;
-
-    @FindBy(css = ".b-fontsize-select-item-small")
-    private Button smallFontText;
-
-    @FindBy(css = ".b-fontsize-select-item-normal")
-    private Button normalFontText;
-
-    @FindBy(css = ".b-fontsize-select-item-large")
-    private Button largeFontText;
-
-    @FindBy(css = ".b-fontsize-select-item-huge")
-    private Button hugeFontText;
-
-    @FindBy(css = ".cke_button_LJColor")
-    private Button colorText;
-
-    @FindBy(css = ".b-colorpicker-controls-hex")
-    private TextField codeColor;
-
-    @FindBy(css = "button.b-flatbutton[ng-click='submitColor()']")
-    private Button chooseColorButton;
-
-    @FindBy(css = ".cke_button_LJLink2")
-    private Button buttonToolLink;
-
-    @FindBy(css = ".b-updateform-bubble-input")
-    private TextField inputUrl;
-
-    @FindBy(css = ".b-updateform-bubble-checkbox")
-    private Button checkboxNewWindow;
-
-    @FindBy(xpath = "//button[@class='b-flatbutton b-flatbutton-simple  ng-binding' and @lj-disabled[contains(.,'link')]]")
-    private Button addButtonLink;
-
     @StepGroup
     public UpdateBmlPageLogged closeDraft() {
         try {
@@ -126,6 +88,33 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @StepGroup
     public UpdateBmlPageLogged addText(String text) {
         postContentBlock.postHtmlField.type(text);
+        return this;
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setTextStyle(String style_text) {
+        htmlTags.setTextStyle(style_text);
+        return this;
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setTextFont(String font_text) {
+        htmlTags.clickFont();
+        fontBubble.setTextFont(font_text);
+        return this;
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setTextColor(String color_text) {
+        htmlTags.clickColor();
+        colorBubble.setTextColor(color_text);
+        return this;
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
+        htmlTags.clickLink();
+        linkBubble.addLink(url, newWindow);
         return this;
     }
 
@@ -179,51 +168,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public String getPostSubject() {
         return postContentBlock.getPostSubject();
     }
-    public UpdateBmlPageLogged setStyleText(String style_text) {
-        switch (style_text) {
-            case "BOLD":
-                boldText.click();
-                break;
-            case "ITALIC":
-                italicText.click();
-                break;
-            case "UNDERLINED":
-                underlineText.click();
-                break;
-        }
-        return this;
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setFontText(String font_text) {
-        fontText.click();
-        switch (font_text) {
-            case "TINY":
-                tinyFontText.click();
-                break;
-            case "SMALL":
-                smallFontText.click();
-                break;
-            case "NORMAL":
-                normalFontText.click();
-                break;
-            case "LARGE":
-                largeFontText.click();
-                break;
-            case "HUGE":
-                hugeFontText.click();
-                break;
-        }
-        return this;
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setColorText(String color) {
-        colorText.click();
-        codeColor.enter(color);
-        chooseColorButton.click();
-        return this;
-    }
 
     @StepGroup
     public UpdateBmlPageLogged setVisualEditor() {
@@ -232,23 +176,17 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
-        buttonToolLink.click();
-        inputUrl.enter(url);
-        if (newWindow) {
-            checkboxNewWindow.click();
-        }
-        addButtonLink.click();
+    public UpdateBmlPageLogged enterTextToVisualEditor(String text) {
+        switchToVisualEditot().sendKeys(text);
+        getDriver().switchTo().defaultContent();
         return this;
     }
 
     @StepGroup
-    public UpdateBmlPageLogged goToVisualRedactor(String text) {
+    public WebElement switchToVisualEditot() {
         getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
         WebElement bodyOfMessage = getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
-        bodyOfMessage.sendKeys(text);
-        getDriver().switchTo().defaultContent();
-        return this;
+        return bodyOfMessage;
     }
 
 }
