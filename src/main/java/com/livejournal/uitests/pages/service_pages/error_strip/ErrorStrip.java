@@ -15,7 +15,7 @@ public class ErrorStrip extends UIBlock {
 
     @StepGroup
     public String getErrorText() {
-        return startScript("return jQuery(\".b-msgsystem-body\")[0].textContent").toString();
+        return startScript("return jQuery('.b-msgsystem-body')[0].textContent").toString();
     }
 
 }

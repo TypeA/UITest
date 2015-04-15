@@ -55,7 +55,7 @@ public class LjuserTag extends WebTest {
     public void post_is_in_journal_and_contains_correct_username(String ljuser) {
         verify().that(onOpened(EntryPage.class).containsLjUser(ljuser))
                 .ifResultIsExpected("Username " + ljuser + " displaying correctly in post")
-                .ifElse("Username " + ljuser + " displaying incorrectly in post. Text of username is: " + onOpened(EntryPage.class).LjUserTagText())
+                .ifElse("Username " + ljuser + " displaying incorrectly in post. Text of username is: " + onOpened(EntryPage.class).ljUserTagText())
                 .finish();
     }
 

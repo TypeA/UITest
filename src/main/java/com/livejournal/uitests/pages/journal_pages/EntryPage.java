@@ -146,7 +146,7 @@ public class EntryPage extends JournalPage {
     }
 
     @StepGroup
-    public String LjUserTagText() {
+    public String ljUserTagText() {
         try {
             return startScript("return jQuery('.e-content span')[0].textContent").toString();
         } catch (Exception ex) {
