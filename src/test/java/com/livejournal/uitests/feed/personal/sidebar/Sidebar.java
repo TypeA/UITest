@@ -38,7 +38,9 @@ public class Sidebar extends WebTest {
     public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .defaultLanguageLogged(name)
+                .regionSwitchLogged(name, "CYR");
+        
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .addAllWidgets();
     }
@@ -60,7 +62,7 @@ public class Sidebar extends WebTest {
     //Scenario: Up Button on widget (2/3)
     @When("user click Up Button many time on lower widget")
     public void user_click_Up_Button_many_time_on_lower_widget() {
-        String widget = selectWidget(WidgetsType.LOWER);
+        String widget = selectWidget("LOWER");
         ThucydidesUtils.putToSession("widget", widget);
         onOpened(FriendsFeedLogged.class)
                 .moveMouseOnWidget(widget);
@@ -81,7 +83,7 @@ public class Sidebar extends WebTest {
     //Scenario: Down Button on widget(2/3)
     @When("user click Down Button many time on top widget")
     public void user_click_Down_Button_on_top_widget() {
-        String widget = selectWidget(WidgetsType.UPPER);
+        String widget = selectWidget("UPPER");
         ThucydidesUtils.putToSession("widget", widget);
         onOpened(FriendsFeedLogged.class)
                 .moveMouseOnWidget(widget);
@@ -103,7 +105,7 @@ public class Sidebar extends WebTest {
     //Scenario: Up and Down Buttons(2/3)
     @When("user move mouse on middle widget")
     public void user_move_mouse_on_middle_widget() {
-        String widget = selectWidget(WidgetsType.MIDDLE);
+        String widget = selectWidget("MIDDLE");
         ThucydidesUtils.putToSession("widget", widget);
         onOpened(FriendsFeedLogged.class)
                 .moveMouseOnWidget(widget);
@@ -205,22 +207,22 @@ public class Sidebar extends WebTest {
         return flag;
     }
 
-    private String selectWidget(WidgetsType type) {
+    private String selectWidget(String type) {
         String widget = "";
         Object widgetsSize = startScript("return jQuery('div[ng-switch-when]').size()");
         Integer intSize = Integer.valueOf(widgetsSize.toString());
         Object ok_widget = null;
         if (intSize > 1) {
-            switch (type) {
-                case UPPER:
+            switch (type.toUpperCase()) {
+                case "UPPER":
                     ok_widget = startScript("return jQuery('div[ng-switch-when]')[0].textContent");
                     widget = correctWidget(ok_widget.toString());
                     break;
-                case LOWER:
+                case "LOWER":
                     ok_widget = startScript("return jQuery('div[ng-switch-when]')[jQuery('div[ng-switch-when]').size()-1].textContent");
                     widget = correctWidget(ok_widget.toString());
                     break;
-                case MIDDLE:
+                case "MIDDLE":
                     ok_widget = startScript("return jQuery('div[ng-switch-when]')[" + new RandomeValue(intSize - 1).get() + "].textContent");
                     widget = correctWidget(ok_widget.toString());
                     break;

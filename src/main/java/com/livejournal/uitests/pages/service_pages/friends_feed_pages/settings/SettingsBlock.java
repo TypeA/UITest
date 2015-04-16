@@ -129,7 +129,7 @@ public class SettingsBlock extends UIBlock {
     }
 
     @StepGroup
-    public FriendsFeedLogged restoreDefaultSettings(){
+    public FriendsFeedLogged restoreDefaultSettings() {
         restoreButton.click();
         return waitThatSettingsBlockClose();
     }

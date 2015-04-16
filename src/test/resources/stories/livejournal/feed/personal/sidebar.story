@@ -1,5 +1,3 @@
-@categories feed personal
-
 Scenario: Add widget
 Meta: 
 @categories feed personal
