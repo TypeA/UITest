@@ -1,15 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.pages.service_pages.update.visualEditor;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.update.PostContentBlock;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.ColorBubble;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.LinkBubble;
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -27,7 +22,7 @@ public class HtmlsTags extends UIBlock {
 
     @FindBy(css = ".cke_button_LJFont")
     private Button fontText;
-    
+
     @FindBy(css = ".cke_button_bold")
     private Button boldText;
 
@@ -36,10 +31,9 @@ public class HtmlsTags extends UIBlock {
 
     @FindBy(css = ".cke_button_underline")
     private Button underlineText;
-    
+
     @FindBy(css = ".cke_button_LJLink2")
     private Button link;
-    
 
     @StepGroup
     public PostContentBlock setTextStyle(String style_text) {
@@ -66,7 +60,7 @@ public class HtmlsTags extends UIBlock {
         color.click();
         return onDisplayed(ColorBubble.class);
     }
-    
+
     public LinkBubble clickLink() {
         link.click();
         return onDisplayed(LinkBubble.class);

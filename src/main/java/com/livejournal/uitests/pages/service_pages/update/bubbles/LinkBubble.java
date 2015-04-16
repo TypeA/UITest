@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.pages.service_pages.update.bubbles;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.update.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;

@@ -39,8 +39,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setStyleText(style_text.toUpperCase())
-                .goToVisualRedactor(post_text)
+                .setTextStyle(style_text.toUpperCase())
+                .enterTextToVisualEditor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -68,8 +68,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setFontText(font_text.toUpperCase())
-                .goToVisualRedactor(post_text)
+                .setTextFont(font_text.toUpperCase())
+                .enterTextToVisualEditor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -97,8 +97,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setColorText(color_text)
-                .goToVisualRedactor(post_text)
+                .setTextColor(color_text)
+                .enterTextToVisualEditor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -126,10 +126,10 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setStyleText(style_text_1.toUpperCase())
-                .setStyleText(style_text_2.toUpperCase())
-                .setColorText(color_text)
-                .goToVisualRedactor(post_text)
+                .setTextStyle(style_text_1.toUpperCase())
+                .setTextStyle(style_text_2.toUpperCase())
+                .setTextColor(color_text)
+                .enterTextToVisualEditor(post_text)
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -189,7 +189,7 @@ public class CreatePostWithHtmlTags extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setVisualEditor()
-                .setStyleText(style_text.toUpperCase())
+                .setTextStyle(style_text.toUpperCase())
                 .addLink(link, Boolean.FALSE)
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();

@@ -139,7 +139,7 @@ public class ManageGroupsPage extends ServicePageLogged {
     }
 
     public String deleteSecurityInGroups(String text) {
-        String groups = text.replace(" (public)", "").replace(" (общедоступная)", "");
+        String groups = text.replace(" (public)", "");
         return groups;
     }
 
