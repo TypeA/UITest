@@ -344,7 +344,6 @@ public class Settings extends WebTest {
             case ELEMENTS_COLOR:
                 ans.add(startScript("return jQuery('.js-elem-color--svgicon .svgicon').css('color')").toString());
                 ans.add(startScript("return jQuery('.b-selectus .label').css('color')").toString());
-                ans.add(startScript("return jQuery('.svgpreloader-background').css('color')").toString());
                 ans.add(startScript("return jQuery('.js-elem-color').css('color')").toString());
                 ans.add(startScript("return jQuery('.b-lenta-sidebar-title').css('color')").toString());
                 return ans;
@@ -421,8 +420,8 @@ public class Settings extends WebTest {
     @StepGroup
     public boolean verifyColor(String hex, ArrayList<String> rgbArray) {
         boolean result = true;
-        for (int i = 0; i < rgbArray.size(); i++) {
-            result = result & verifyColor(hex, rgbArray.get(i));
+        for (String rgbArray1 : rgbArray) {
+            result = result & verifyColor(hex, rgbArray1);
         }
         return result;
     }

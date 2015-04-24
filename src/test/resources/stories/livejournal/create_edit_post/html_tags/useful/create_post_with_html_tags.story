@@ -1,6 +1,6 @@
 Scenario: Create post with style
 Meta: 
-@categories create_post html_tags useful tester
+@categories create_post html_tags useful
 
 Given logged user <name> on Create Post page
 When user create new post with style <style_text> and save post

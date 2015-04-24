@@ -44,14 +44,14 @@ public class ScheduledPost extends WebTest {
                 .defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
-
+        
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
         String post_text = RandomText.getRandomText(10).trim();
-
+        
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("Sheduled post for deleting", "html", post_text)
+                .createPost("Sheduled post for deleting or editing", "html", post_text)
                 .setDateAndTime(date[0], date[1])
                 .postEntry();
         ThucydidesUtils.putToSession("number_of_entryes", open(SheduledEntriesPage.class).getNumberOfEntryes());
@@ -99,6 +99,9 @@ public class ScheduledPost extends WebTest {
         ThucydidesUtils.putToSession("changes", new RandomName(changes).get());
         onOpened(SheduledEntriesPage.class)
                 .editSheduledEntryByText(element, ThucydidesUtils.getFromSession("changes").toString(), ThucydidesUtils.getFromSession("post_text").toString());
+        if (element.toUpperCase().equals("TEXT")) {
+            ThucydidesUtils.putToSession("post_text", ThucydidesUtils.getFromSession("changes").toString());
+        }
     }
 
     //Scenario: Delete scheduled post (2/3)
@@ -157,7 +160,7 @@ public class ScheduledPost extends WebTest {
     public void scheduled_post_is_editing() {
         Integer entries_number = open(SheduledEntriesPage.class)
                 .getNumberOfEntryes();
-        String entry_text = open(SheduledEntriesPage.class)
+        String entry_text = onOpened(SheduledEntriesPage.class)
                 .getPostByText(ThucydidesUtils.getFromSession("post_text").toString())
                 .trim();
         verify().that(entries_number.equals(ThucydidesUtils.getFromSession("number_of_entryes")))
@@ -180,5 +183,5 @@ public class ScheduledPost extends WebTest {
                 .ifElse("The scheduled post is not deleted, I see " + number_of_entries + " scheduled posts")
                 .finish();
     }
-
+    
 }

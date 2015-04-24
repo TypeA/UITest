@@ -72,6 +72,11 @@ public class SettingsBubbleColorBlock extends UIBlock {
 
    
     public String getCurrentColor() {
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException ex) {
+           // Logger.getLogger(SettingsBubbleColorBlock.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return currentColor.getWrappedElement().getAttribute("style");
     }
 

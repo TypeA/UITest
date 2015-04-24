@@ -1,6 +1,6 @@
 Scenario: New Title
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user add new Title <title> in Settings and save it
@@ -14,7 +14,7 @@ Examples:
 
 Scenario: Change Title
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change Title <title> in Settings and save it
@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Cancel changing Title
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change Title <title> in Settings and cancel it
@@ -41,7 +41,7 @@ Examples:
 
 Scenario: Set new color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
@@ -49,26 +49,8 @@ Then the color <color> corresponds to correct code <code>
 
 Examples:
 |name           |color              |type           |code   |barY   |colorX |colorY |
-|testautotest   |BACKGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |BACKGROUND_COLOR   |BY_CODE        |dae3c8 |0      |0      |0      |
-|testautotest   |FOREGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |FOREGROUND_COLOR   |BY_CODE        |232282 |0      |0      |0      |
-|testautotest   |SIDEBAR_BACKGROUND |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |SIDEBAR_BACKGROUND |BY_CODE        |f5e907 |0      |0      |0      |
-|testautotest   |ELEMENTS_BACKGROUND|BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |ELEMENTS_BACKGROUND|BY_CODE        |1b4245 |0      |0      |0      |
 |testautotest   |ELEMENTS_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |ELEMENTS_COLOR     |BY_CODE        |f797ac |0      |0      |0      |
-|testautotest   |BORDERS_COLOR      |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |BORDERS_COLOR      |BY_CODE        |8f0096 |0      |0      |0      |
-|testautotest   |MAIN_TEXT_COLOR    |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |MAIN_TEXT_COLOR    |BY_CODE        |8f0096 |0      |0      |0      |
-|testautotest   |SIDEBAR_TEXT_COLOR |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |SIDEBAR_TEXT_COLOR |BY_CODE        |030100 |0      |0      |0      |
-|testautotest   |LINK_COLOR         |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |LINK_COLOR         |BY_CODE        |7fb816 |0      |0      |0      | 
-|testautotest   |ON_HOVER_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |ON_HOVER_COLOR     |BY_CODE        |66b5ed |0      |0      |0      | 
+|testautotest   |ELEMENTS_COLOR     |BY_CODE        |f797ac |0      |0      |0      | 
 
 
 
@@ -82,21 +64,12 @@ Then the color <color> corresponds to correct code <code>
 
 Examples:
 |name           |color              |code   |
-|testautotest   |BACKGROUND_COLOR   |030100 |
-|testautotest   |FOREGROUND_COLOR   |d6c5e0 |
-|testautotest   |SIDEBAR_BACKGROUND |e76dfe |
-|testautotest   |ELEMENTS_BACKGROUND|f797ac |
 |testautotest   |ELEMENTS_COLOR     |f5e907 |
-|testautotest   |BORDERS_COLOR      |8f0096 |
-|testautotest   |MAIN_TEXT_COLOR    |232282 |
-|testautotest   |SIDEBAR_TEXT_COLOR |66b5ed |
-|testautotest   |LINK_COLOR         |8f0096 |
-|testautotest   |ON_HOVER_COLOR     |1b4245 |
 
 
 Scenario: Return the current color
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change color <color> (old code <code>) and return current color
@@ -120,7 +93,7 @@ Examples:
 
 Scenario: Add background image 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 
 Given logged user (name <name>) on Friends Feed (pic)
@@ -138,7 +111,7 @@ Examples:
 
 Scenario: Delete background image 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 
 Given logged user (name <name>) with Background image on Friends Feed
@@ -155,7 +128,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
@@ -172,7 +145,7 @@ Examples:
 
 Scenario: Cancel text settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <new_size> and font <new_font> in Settings and cancel it (old size <size>, old font <font>)
@@ -189,7 +162,7 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it
@@ -208,7 +181,7 @@ Examples:
 
 Scenario: Cancel paging type 
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) on Friends Feed
 When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cancel it
@@ -224,7 +197,7 @@ Examples:
 
 Scenario: Restore default settings 
 Meta: 
-@categories feed personal test
+@categories feed personal
 @issue LJSUP-19537
 
 Given logged user (name <name>) with own settings on Friends Feed
@@ -239,7 +212,7 @@ Examples:
 
 Scenario: Save settings after user logged out
 Meta: 
-@categories feed personal test
+@categories feed personal
 
 Given logged user (name <name>) with own settings on Friends Feed
 When user logged out and logged in again (name <name>)
