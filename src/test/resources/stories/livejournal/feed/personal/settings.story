@@ -49,8 +49,26 @@ Then the color <color> corresponds to correct code <code>
 
 Examples:
 |name           |color              |type           |code   |barY   |colorX |colorY |
+|testautotest   |BACKGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |BACKGROUND_COLOR   |BY_CODE        |dae3c8 |0      |0      |0      |
+|testautotest   |FOREGROUND_COLOR   |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |FOREGROUND_COLOR   |BY_CODE        |232282 |0      |0      |0      |
+|testautotest   |SIDEBAR_BACKGROUND |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |SIDEBAR_BACKGROUND |BY_CODE        |f5e907 |0      |0      |0      |
+|testautotest   |ELEMENTS_BACKGROUND|BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |ELEMENTS_BACKGROUND|BY_CODE        |1b4245 |0      |0      |0      |
 |testautotest   |ELEMENTS_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
-|testautotest   |ELEMENTS_COLOR     |BY_CODE        |f797ac |0      |0      |0      | 
+|testautotest   |ELEMENTS_COLOR     |BY_CODE        |f797ac |0      |0      |0      |
+|testautotest   |BORDERS_COLOR      |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |BORDERS_COLOR      |BY_CODE        |8f0096 |0      |0      |0      |
+|testautotest   |MAIN_TEXT_COLOR    |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |MAIN_TEXT_COLOR    |BY_CODE        |8f0096 |0      |0      |0      |
+|testautotest   |SIDEBAR_TEXT_COLOR |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |SIDEBAR_TEXT_COLOR |BY_CODE        |030100 |0      |0      |0      |
+|testautotest   |LINK_COLOR         |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |LINK_COLOR         |BY_CODE        |7fb816 |0      |0      |0      | 
+|testautotest   |ON_HOVER_COLOR     |BY_POINT       |d6c5e0 |60     |30     |30     |
+|testautotest   |ON_HOVER_COLOR     |BY_CODE        |66b5ed |0      |0      |0      | 
 
 
 
@@ -64,7 +82,16 @@ Then the color <color> corresponds to correct code <code>
 
 Examples:
 |name           |color              |code   |
+|testautotest   |BACKGROUND_COLOR   |030100 |
+|testautotest   |FOREGROUND_COLOR   |d6c5e0 |
+|testautotest   |SIDEBAR_BACKGROUND |e76dfe |
+|testautotest   |ELEMENTS_BACKGROUND|f797ac |
 |testautotest   |ELEMENTS_COLOR     |f5e907 |
+|testautotest   |BORDERS_COLOR      |8f0096 |
+|testautotest   |MAIN_TEXT_COLOR    |232282 |
+|testautotest   |SIDEBAR_TEXT_COLOR |66b5ed |
+|testautotest   |LINK_COLOR         |8f0096 |
+|testautotest   |ON_HOVER_COLOR     |1b4245 |
 
 
 Scenario: Return the current color
@@ -86,8 +113,6 @@ Examples:
 |testautotest   |SIDEBAR_TEXT_COLOR |66b5ed |
 |testautotest   |LINK_COLOR         |8f0096 |
 |testautotest   |ON_HOVER_COLOR     |1b4245 |
-
-
 
 
 
