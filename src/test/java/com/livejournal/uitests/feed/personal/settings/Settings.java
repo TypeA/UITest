@@ -13,6 +13,8 @@ import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -468,6 +470,11 @@ public class Settings extends WebTest {
             case "ENDLESS":
                 ((JavascriptExecutor) getCurrentBrowser().getDriver())
                         .executeScript("window.scrollBy(0,10000000)");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
                 intFeedSize = Integer.valueOf(feedSize.toString());
                 ThucydidesUtils.putToSession("feed_size", feedSize);

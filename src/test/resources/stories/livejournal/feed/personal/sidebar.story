@@ -9,7 +9,6 @@ Then widget <widget> added in sidebar
 Examples:
 |name           |widget             |
 |testautotest   |Twitter Feed       |
-|testautotest   |Facebook Feed      |
 |testautotest   |Instagram Feed     |
 |testautotest   |Tumblr Feed        |
 |testautotest   |Calendar           |
@@ -35,7 +34,6 @@ Then widget <widget> deleted in sidebar
 Examples:
 |name           |widget             |
 |testautotest   |Twitter Feed       |
-|testautotest   |Facebook Feed      |
 |testautotest   |Instagram Feed     |
 |testautotest   |Tumblr Feed        |
 |testautotest   |Calendar           |

@@ -32,7 +32,7 @@ Examples:
 
 Scenario: Edit scheduled post
 Meta: 
-@categories create_edit_post time useful test
+@categories create_edit_post time useful
 
 Given logged user <name> with scheduled post on Scheduled post Page
 When user edit element <element> by change <changes> in the scheduled post
