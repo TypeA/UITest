@@ -12,11 +12,16 @@ import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.LJUse
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import com.livejournal.uitests.pages.service_pages.update.visualEditor.HtmlsTags;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
@@ -33,9 +38,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private FontBubble fontBubble;
 
     private ColorBubble colorBubble;
-    
+
     private LinkBubble linkBubble;
-    
+
     @FindBy(name = "community")
     private Select communitySelect;
 
@@ -56,7 +61,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private TextField timeField;
 
     /////////////////////////// draft
-    @FindBy(css = ".b-popup.b-popupus.b-popupus-blue.b-popupus-confirm[style*='position'] .i-popup-close")
+    @FindBy(name = "dialog-cancel")
     private UIElement closeDraftButton;
 
     @FindBy(name = "dialog-ok")
@@ -136,6 +141,18 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     public UpdateBmlPageLogged selectCommunity(String community) {
         communitySelect.selectByValue(community);
+        /*   try {
+         Thread.sleep(300);
+         } catch (InterruptedException ex) {
+         // Logger.getLogger(UpdateBmlPageLogged.class.getName()).log(Level.SEVERE, null, ex);
+         }*/
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return communitySelect.isDisplayed();
+            }
+        });
         return this;
     }
 
