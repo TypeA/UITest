@@ -148,9 +148,6 @@ Examples:
 |test   |
 
 
-
-
-
 Scenario: Set text settings 
 Meta: 
 @categories feed personal

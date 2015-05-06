@@ -19,7 +19,6 @@ public class LogInWithIncorrectData extends WebTest {
     public void unlogged_user_on_Login_Form() {
         open(MainPageUnlogged.class);
         addCookie("langpref", "en_LJ");
-        
     }
 
     //Scenario: Unsuccessfully autorization(2/3)
