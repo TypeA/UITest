@@ -43,9 +43,9 @@ public class PostContentBlock extends UIBlock {
     public Select privacySelect;
 
     @FindBy(css = ".b-updateform-button.b-updateform-button-user")
-    private Link ljUserBubbleButton;
+    private Link ljUserButton;
 
-    private LJUserBubble ljuserBubble;
+    private LJUserBubble ljUserBubble;
 
     @StepGroup
     public void createPost(String subject, String editorType, String text) {
@@ -134,7 +134,7 @@ public class PostContentBlock extends UIBlock {
 
     @StepGroup
     public LJUserBubble openLJUserBubble() {
-        ljUserBubbleButton.click();
+        ljUserButton.click();
         return onDisplayed(LJUserBubble.class);
     }
 

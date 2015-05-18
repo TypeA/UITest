@@ -22,10 +22,9 @@ public class ColorBubble extends UIBlock {
     @FindBy(css = "button.b-flatbutton[ng-click='submitColor()']")
     private Button chooseColorButton;
 
-    public PostContentBlock setTextColor(String color) {
+    public void setTextColor(String color) {
         codeColor.enter(color);
         chooseColorButton.click();
-        return onDisplayed(PostContentBlock.class);
     }
 
 }

@@ -12,8 +12,6 @@ import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.LJUse
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import com.livejournal.uitests.pages.service_pages.update.visualEditor.HtmlsTags;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
@@ -36,8 +34,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private HtmlsTags htmlTags;
 
     private FontBubble fontBubble;
-
-    private ColorBubble colorBubble;
 
     private LinkBubble linkBubble;
 
@@ -113,8 +109,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public UpdateBmlPageLogged setTextColor(String color_text) {
-        htmlTags.clickColor();
-        colorBubble.setTextColor(color_text);
+        htmlTags.setTextColor(color_text);
         return this;
     }
 
@@ -141,11 +136,10 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     public UpdateBmlPageLogged selectCommunity(String community) {
         communitySelect.selectByValue(community);
-        /*   try {
-         Thread.sleep(300);
-         } catch (InterruptedException ex) {
-         // Logger.getLogger(UpdateBmlPageLogged.class.getName()).log(Level.SEVERE, null, ex);
-         }*/
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException ex) {
+        }
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
@@ -204,8 +198,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @StepGroup
     public WebElement switchToVisualEditot() {
         getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
-        WebElement bodyOfMessage = getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
-        return bodyOfMessage;
+        return getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
     }
 
 }

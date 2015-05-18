@@ -34,6 +34,8 @@ public class HtmlsTags extends UIBlock {
 
     @FindBy(css = ".cke_button_LJLink2")
     private Button link;
+    
+    private ColorBubble colorBubble;
 
     @StepGroup
     public PostContentBlock setTextStyle(String style_text) {
@@ -56,9 +58,10 @@ public class HtmlsTags extends UIBlock {
         return onDisplayed(HtmlsTags.class);
     }
 
-    public ColorBubble clickColor() {
+    public void setTextColor(String color_text) {
         color.click();
-        return onDisplayed(ColorBubble.class);
+        onDisplayed(ColorBubble.class)
+                .setTextColor(color_text);
     }
 
     public LinkBubble clickLink() {
