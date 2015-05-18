@@ -39,12 +39,12 @@ public class LinksOnTheAccountCreationPage extends WebTest {
 
     private void clickOnLink(String link) {
 
-        switch (RegistrationLinks.valueOf(link.toUpperCase())) {
-            case TOS:
+        switch (link.toUpperCase()) {
+            case "TOS":
                 onOpened(CreateAccountPage.class)
                         .clickOnTOSLink();
                 break;
-            case PRIVACY:
+            case "PRIVACY":
                 onOpened(CreateAccountPage.class)
                         .clickOnPrivacyLink();
                 break;

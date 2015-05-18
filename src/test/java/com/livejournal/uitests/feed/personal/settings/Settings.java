@@ -274,6 +274,11 @@ public class Settings extends WebTest {
     //Scenario: Cancel text settings (3/3)
     @Then("text settings is changed by size $size and font $font")
     public void text_settings_is_changed_by_size_and_font(String size, String font) {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Integer titleSize = (Integer.valueOf(size) * 7) / 4;
         verify().that(getTextParametrs("FONT").contains(font))
                 .ifResultIsExpected("Correct text font:\n" + font)

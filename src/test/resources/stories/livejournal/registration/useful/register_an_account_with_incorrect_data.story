@@ -61,7 +61,8 @@ Examples:
 Scenario: Register an account with incorrect password
 
 Meta: 
-@categories registration useful 
+@categories registration useful
+@issue LJSUP-21440
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -137,7 +138,8 @@ Examples:
 Scenario: Register an account with empty password
 
 Meta: 
-@categories registration useful 
+@categories registration useful
+@issue LJSUP-21440
 
 Given unlogged user on Registration Form
 When user enter correct data except for the password: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>

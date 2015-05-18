@@ -234,7 +234,6 @@ public class Sidebar extends WebTest {
     private ArrayList<String> allWidgets() {
         ArrayList<String> widgets = new ArrayList<>();
         widgets.add("Twitter Feed");
-        widgets.add("Facebook Feed");
         widgets.add("Instagram Feed");
         widgets.add("Tumblr Feed");
         widgets.add("Calendar");
