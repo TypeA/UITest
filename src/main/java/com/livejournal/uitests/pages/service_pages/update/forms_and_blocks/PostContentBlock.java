@@ -45,8 +45,6 @@ public class PostContentBlock extends UIBlock {
     @FindBy(css = ".b-updateform-button.b-updateform-button-user")
     private Link ljUserButton;
 
-    private LJUserBubble ljUserBubble;
-
     @StepGroup
     public void createPost(String subject, String editorType, String text) {
         if (subject.toUpperCase().equals("NO SUBJECT")) {
