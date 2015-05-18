@@ -9,13 +9,11 @@ import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
 import com.livejournal.uitests.utility.RandomText;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.WebDriver;
 
 /**
  *
@@ -70,16 +68,15 @@ public class ManageFriendsGroups extends WebTest {
     }
 
     //Scenario: Create new group(2/4)
-    @When("user create new group $group and save the changes")
-    public void user_create_new_group_and_save_the_changes(String group) {
+    @When("user create new group and save the changes")
+    public void user_create_new_group_and_save_the_changes() {
+        String group = RandomText.getRandomText(10);
         String groups = convertArrayToString((ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before")) + group;
         onOpened(ManageGroupsPage.class)
-                .createNewGroup(group);
-        onOpened(ManageGroupsPage.class)
+                .createNewGroup(group)
                 .saveChangesForGroup();
         ThucydidesUtils.putToSession("groupList", groups);
         ThucydidesUtils.putToSession("newGroup", group);
-        System.out.println("!!!!!!!!!" + group);
     }
 
     //Scenario: Delete group(2/3)
@@ -100,7 +97,6 @@ public class ManageFriendsGroups extends WebTest {
         ArrayList<String> groupListBefore = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
         String group = RandomText.getRandomText(10);
         int randomIndex = new Random().nextInt(groupListBefore.size());
-        System.out.println("!!!!!!!"+randomIndex+"!!!!!"+groupListBefore.size());
         onOpened(ManageGroupsPage.class)
                 .renameGroup(randomIndex, group)
                 .saveChangesForGroup();
@@ -218,9 +214,9 @@ public class ManageFriendsGroups extends WebTest {
     public void there_are_no_posts_in_the_new_group() {
         String newGroup = ThucydidesUtils.getFromSession("newGroup").toString();
         String user = ThucydidesUtils.getFromSession("user").toString();
-        open(FriendsFeedLogged.class, new Url().setPostfix("/" + newGroup)
-                .setPrefix(user + "."));
-        Boolean emptyFeed = onOpened(FriendsFeedLogged.class).feedIsEmpty();
+        Boolean emptyFeed = open(FriendsFeedLogged.class, new Url().setPostfix("/" + newGroup)
+                .setPrefix(user + "."))
+                .feedIsEmpty();
         verify().that(emptyFeed)
                 .ifResultIsExpected("Feed is empty")
                 .ifElse("Feed not Empty")

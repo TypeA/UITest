@@ -6,10 +6,14 @@ import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.filters.FiltersBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
+import java.util.ArrayList;
+import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
@@ -89,13 +93,14 @@ public class FriendsFeedLogged extends ServicePageLogged {
 
     @StepGroup
     public String getGroups() {
-        String script = "return jQuery('ul.l-flatslide-menu-items.l-flatslide-menu-items-active li a').text()";
-        try {
-            ((JavascriptExecutor) getDriver()).executeScript(script);
-        } catch (Exception ex) {
-            script = "return jQuery('ul.l-flatslide-menu-items.l-flatslide-menu-items-active li a').text()";
+        List<WebElement> list = getDriver()
+                .findElements(By.xpath("//ul[@class='l-flatslide-menu-items l-flatslide-menu-items-active']//li//a"));
+        StringBuilder filresFeed = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            String filter = list.get(i).getAttribute("text");
+            filresFeed.append(filter);
         }
-        return startScript(script).toString().trim();
+        return filresFeed.toString();
     }
 
     @StepGroup
