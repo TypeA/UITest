@@ -38,7 +38,6 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
                 .setTextStyle(style_text.toUpperCase())
                 .enterTextToVisualEditor(post_text)
                 .postEntry();
@@ -67,7 +66,6 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
                 .setTextFont(font_text.toUpperCase())
                 .enterTextToVisualEditor(post_text)
                 .postEntry();
@@ -96,7 +94,6 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
                 .setTextColor(color_text)
                 .enterTextToVisualEditor(post_text)
                 .postEntry();
@@ -125,7 +122,6 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
                 .setTextStyle(style_text_1.toUpperCase())
                 .setTextStyle(style_text_2.toUpperCase())
                 .setTextColor(color_text)
@@ -163,7 +159,6 @@ public class CreatePostWithHtmlTags extends WebTest {
     public void user_create_new_post_with_link(String link, String newWindow) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
                 .addLink(link, Boolean.valueOf(newWindow))
                 .postEntry();
         String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
@@ -188,7 +183,6 @@ public class CreatePostWithHtmlTags extends WebTest {
     public void user_create_new_post_with_link_link_and_style(String link, String style_text) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
                 .setTextStyle(style_text.toUpperCase())
                 .addLink(link, Boolean.FALSE)
                 .postEntry();

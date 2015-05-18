@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.ColorBubble;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.FontBubble;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.LinkBubble;
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.LJUserBubble;
@@ -63,8 +62,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @FindBy(name = "dialog-ok")
     private Button restoreDraft;
 
-    @FindBy(css = ".b-updatepage-tab-visual")
-    private Button visualEditor;
 
     @StepGroup
     public UpdateBmlPageLogged closeDraft() {
@@ -182,21 +179,16 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return postContentBlock.getPostSubject();
     }
 
-    @StepGroup
-    public UpdateBmlPageLogged setVisualEditor() {
-        visualEditor.click();
-        return this;
-    }
 
     @StepGroup
     public UpdateBmlPageLogged enterTextToVisualEditor(String text) {
-        switchToVisualEditot().sendKeys(text);
+        switchToVisualEditor().sendKeys(text);
         getDriver().switchTo().defaultContent();
         return this;
     }
 
     @StepGroup
-    public WebElement switchToVisualEditot() {
+    public WebElement switchToVisualEditor() {
         getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
         return getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
     }
