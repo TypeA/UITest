@@ -33,7 +33,6 @@ public class LjuserTag extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
-                .openLJUserBubble()
                 .enterUsername(ljuser,true);
         onOpened(UpdateBmlPageLogged.class)
                 .postEntry();
@@ -45,7 +44,6 @@ public class LjuserTag extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", "")
-                .openLJUserBubble()
                 .enterUsername(ljuser,false);
     }
 

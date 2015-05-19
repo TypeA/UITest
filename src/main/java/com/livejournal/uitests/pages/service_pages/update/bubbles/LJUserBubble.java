@@ -2,8 +2,7 @@ package com.livejournal.uitests.pages.service_pages.update.bubbles;
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -23,7 +22,7 @@ public class LJUserBubble extends UIBlock {
     private TextField username;
 
     @StepGroup
-    public UIBlock enterUsername(String ljuser, Boolean isCorrectUser) {
+    public UpdateBmlPageLogged enterUsername(String ljuser, Boolean isCorrectUser) {
         username.enter(ljuser);
         startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
         if(isCorrectUser){
@@ -34,9 +33,9 @@ public class LJUserBubble extends UIBlock {
                 return !LJUserBubble.super.isDisplayed();
             }
         });      
-            return onDisplayed(PostContentBlock.class);
-        } else {
-            return onDisplayed(ErrorStrip.class);
-        }
+            
+        } 
+            return onOpened(UpdateBmlPageLogged.class);
+        
     }
 }

@@ -164,9 +164,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public LJUserBubble openLJUserBubble() {
-        ljTags.openLJUserBubble();
-        return onDisplayed(LJUserBubble.class);
+    public UpdateBmlPageLogged enterUsername(String ljuser, Boolean isCorrect) {
+        return ljTags.openLJUserBubble().enterUsername(ljuser, isCorrect);    
     }
 
     @StepGroup
