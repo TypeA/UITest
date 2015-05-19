@@ -36,12 +36,6 @@ public class HtmlsTags extends UIBlock {
     @FindBy(css = ".cke_button_LJLink2")
     private Button link;
 
-    private ColorBubble colorBubble;
-
-    private FontBubble fontBubble;
-
-    private LinkBubble linkBubble;
-
     @StepGroup
     public PostContentBlock setTextStyle(String style_text) {
         switch (style_text) {

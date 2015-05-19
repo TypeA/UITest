@@ -34,7 +34,7 @@ public class LjuserTag extends WebTest {
                 .closeDraft()
                 .createPost("", "html", postText)
                 .openLJUserBubble()
-                .enterCorrectUsername(ljuser,true);
+                .enterUsername(ljuser,true);
         onOpened(UpdateBmlPageLogged.class)
                 .postEntry();
     }
@@ -46,7 +46,7 @@ public class LjuserTag extends WebTest {
                 .closeDraft()
                 .createPost("", "html", "")
                 .openLJUserBubble()
-                .enterCorrectUsername(ljuser,false);
+                .enterUsername(ljuser,false);
     }
 
     //Logged user create new post with correct lj-user tag (3/3)

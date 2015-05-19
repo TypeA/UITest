@@ -23,7 +23,7 @@ public class LJUserBubble extends UIBlock {
     private TextField username;
 
     @StepGroup
-    public UIBlock enterCorrectUsername(String ljuser, Boolean isCorrectUser) {
+    public UIBlock enterUsername(String ljuser, Boolean isCorrectUser) {
         username.enter(ljuser);
         startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
         if(isCorrectUser){
