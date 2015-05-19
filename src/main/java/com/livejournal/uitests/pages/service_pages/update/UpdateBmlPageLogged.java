@@ -5,10 +5,9 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.FontBubble;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.LinkBubble;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.LJUserBubble;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.LJUserBubble;
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.htmlEditor.LJTags;
 import com.livejournal.uitests.pages.service_pages.update.visualEditor.HtmlsTags;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -31,10 +30,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private PostContentBlock postContentBlock;
 
     private HtmlsTags htmlTags;
-
-    private FontBubble fontBubble;
-
-    private LinkBubble linkBubble;
+    
+    private LJTags ljTags;
 
     @FindBy(name = "community")
     private Select communitySelect;
@@ -54,7 +51,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-time input")
     private TextField timeField;
-
+     
     /////////////////////////// draft
     @FindBy(name = "dialog-cancel")
     private UIElement closeDraftButton;
@@ -99,8 +96,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public UpdateBmlPageLogged setTextFont(String font_text) {
-        htmlTags.clickFont();
-        fontBubble.setTextFont(font_text);
+        htmlTags.setTextFont(font_text);
         return this;
     }
 
@@ -112,11 +108,10 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
-        htmlTags.clickLink();
-        linkBubble.addLink(url, newWindow);
+        htmlTags.addLink(url, newWindow);
         return this;
     }
-
+  
     @StepGroup
     public UpdateBmlPageLogged setDateAndTime(String date, String time) {
         changeDate.click();
@@ -170,7 +165,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public LJUserBubble openLJUserBubble() {
-        postContentBlock.openLJUserBubble();
+        ljTags.openLJUserBubble();
         return onDisplayed(LJUserBubble.class);
     }
 
