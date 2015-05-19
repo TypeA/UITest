@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.create_post.useful.create_post;
+package com.livejournal.uitests.create_edit_post.login_form.useful.login_form;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
@@ -13,7 +13,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class CreatePost extends WebTest {
+public class LoginForm extends WebTest {
 
     //Scenario: Logged user create new post (1/3)
     @Given("logged user $name on Create Post page")

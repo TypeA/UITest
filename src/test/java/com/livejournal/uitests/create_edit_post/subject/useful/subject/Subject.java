@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.create_post.useful.post_subject;
+package com.livejournal.uitests.create_edit_post.subject.useful.subject;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
@@ -14,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author s.savinykh
  */
-public class PostSubject extends WebTest {
+public class Subject extends WebTest {
 
     //Logged user create new post with subject(1/3)
     //Logged user restore post with subject from draft(1/3)
