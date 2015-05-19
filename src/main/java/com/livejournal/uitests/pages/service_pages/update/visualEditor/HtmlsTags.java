@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update.visualEditor;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.ColorBubble;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.FontBubble;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.LinkBubble;
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
@@ -34,8 +35,12 @@ public class HtmlsTags extends UIBlock {
 
     @FindBy(css = ".cke_button_LJLink2")
     private Button link;
-    
+
     private ColorBubble colorBubble;
+
+    private FontBubble fontBubble;
+
+    private LinkBubble linkBubble;
 
     @StepGroup
     public PostContentBlock setTextStyle(String style_text) {
@@ -53,9 +58,10 @@ public class HtmlsTags extends UIBlock {
         return onDisplayed(PostContentBlock.class);
     }
 
-    public HtmlsTags clickFont() {
+    public void setTextFont(String font_text) {
         fontText.click();
-        return onDisplayed(HtmlsTags.class);
+        onDisplayed(FontBubble.class).setTextFont(font_text);
+
     }
 
     public void setTextColor(String color_text) {
@@ -64,8 +70,8 @@ public class HtmlsTags extends UIBlock {
                 .setTextColor(color_text);
     }
 
-    public LinkBubble clickLink() {
+    public void addLink(String link_text, Boolean new_window) {
         link.click();
-        return onDisplayed(LinkBubble.class);
+        onDisplayed(LinkBubble.class).addLink(link_text, new_window);
     }
 }

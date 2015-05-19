@@ -1,7 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
-import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import java.util.ArrayList;
@@ -42,8 +41,6 @@ public class PostContentBlock extends UIBlock {
     @FindBy(name = "privacy")
     public Select privacySelect;
 
-    @FindBy(css = ".b-updateform-button.b-updateform-button-user")
-    private Link ljUserButton;
 
     @StepGroup
     public void createPost(String subject, String editorType, String text) {
@@ -129,13 +126,7 @@ public class PostContentBlock extends UIBlock {
         }
         return text;
     }
-
-    @StepGroup
-    public LJUserBubble openLJUserBubble() {
-        ljUserButton.click();
-        return onDisplayed(LJUserBubble.class);
-    }
-
+ 
     @StepGroup
     public String getPostSubject() {
         String subject = startScript("return jQuery('#subject').val()").toString();

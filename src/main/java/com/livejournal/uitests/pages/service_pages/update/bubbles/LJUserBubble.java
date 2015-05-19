@@ -1,8 +1,9 @@
-package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
+package com.livejournal.uitests.pages.service_pages.update.bubbles;
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
+import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -22,23 +23,20 @@ public class LJUserBubble extends UIBlock {
     private TextField username;
 
     @StepGroup
-    public PostContentBlock enterCorrectUsername(String ljuser) {
+    public UIBlock enterCorrectUsername(String ljuser, Boolean isCorrectUser) {
         username.enter(ljuser);
         startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
+        if(isCorrectUser){
         WebDriverWait wait = new WebDriverWait(getDriver(), 3);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
                 return !LJUserBubble.super.isDisplayed();
             }
-        });
-        return onDisplayed(PostContentBlock.class);
-    }
-
-    @StepGroup
-    public ErrorStrip enterIncorrectUsername(String ljuser) {
-        username.enter(ljuser);
-        startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
-        return onDisplayed(ErrorStrip.class);
+        });      
+            return onDisplayed(PostContentBlock.class);
+        } else {
+            return onDisplayed(ErrorStrip.class);
+        }
     }
 }
