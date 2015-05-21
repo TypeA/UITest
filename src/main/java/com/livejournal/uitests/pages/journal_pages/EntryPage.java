@@ -86,6 +86,8 @@ public class EntryPage extends JournalPage {
                 script = "return jQuery(\"u\").is(\":contains('" + text + "')\")";
                 break;
         }
+
+       // String script = "return jQuery(\"" + style_text.substring(0, 1) + "\").is(\":contains('" + text + "')\")";
         return Boolean.valueOf(startScript(script).toString());
     }
 
@@ -152,5 +154,10 @@ public class EntryPage extends JournalPage {
         } catch (Exception ex) {
             return "BAD SPAN";
         }
+    }
+
+    @StepGroup
+    public String getTagsTextInSubject(String tag) {
+        return startScript("return jQuery('.b-singlepost-title.entry-title.p-name " + tag + "').text()").toString();
     }
 }

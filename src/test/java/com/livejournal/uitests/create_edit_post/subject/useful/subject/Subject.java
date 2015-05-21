@@ -16,10 +16,10 @@ import org.jbehave.core.annotations.When;
  */
 public class Subject extends WebTest {
 
-    //Logged user create new post with subject(1/3)
-    //Logged user restore post with subject from draft(1/3)
-    //Logged user create new post with subject and edit this post(1/3)
-    //Logged user create new post with subject and edit this post and save changes(1/3)
+    //User create new post with subject(1/3)
+    //User restore post with subject from draft(1/3)
+    //Subject in editing(1/3)
+    //User edit post with subject(1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -27,9 +27,9 @@ public class Subject extends WebTest {
                 .defaultStyle(name);
     }
 
-    //Logged user create new post with subject(2/3)
-    //Logged user create new post with subject and edit this post(2/3)
-    //Logged user create new post with subject and edit this post and save changes(2/3)
+    //User create new post with subject(2/3)
+    //Subject in editing(2/3)
+    //User edit post with subject(2/3)
     @When("user create new post with subject $subject")
     public void user_create_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
@@ -38,7 +38,7 @@ public class Subject extends WebTest {
                 .postEntry();
     }
 
-    //Logged user restore post with subject from draft(2/3)
+    //User restore post with subject from draft(2/3)
     @When("user write new post with subject $subject")
     public void user_write_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
@@ -46,7 +46,7 @@ public class Subject extends WebTest {
                 .createPost(subject, "HTML", RandomText.getRandomText(30));
     }
 
-    //Logged user create new post with subject(3/3)
+    //User create new post with subject(3/3)
     @Then("the post in journal has correct subject $subject")
     public void the_post_in_journal_has_correct_subject(String subject) {
         verify().that(onOpened(EntryPage.class).getPostSubject().equals(subject))
@@ -55,7 +55,7 @@ public class Subject extends WebTest {
                 .finish();
     }
 
-    //Logged user restore post with subject from draft(3/3)
+    //User restore post with subject from draft(3/3)
     @Then("user can restore this post with subject $subject from draft")
     public void user_can_restore_this_post_with_subject_from_draft(String subject) throws InterruptedException {
         Thread.sleep(5000);
@@ -68,7 +68,7 @@ public class Subject extends WebTest {
                 .finish();
     }
 
-    //Logged user create new post with subject and edit this post(3/3)
+    //Subject in editing(3/3)
     @Then("user edit this post and see correct subject $subject")
     public void user_edit_this_post_and_see_correct_subject(String subject) {
         onOpened(EntryPage.class)
@@ -77,10 +77,9 @@ public class Subject extends WebTest {
                 .ifResultIsExpected("User see correct post subject in editing '" + subject + "'")
                 .ifElse("User see incorrect post subject in editing '" + onOpened(EditJournalbml.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
-
     }
 
-    //Logged user create new post with subject and edit this post and save changes(3/3)
+    //User edit post with subject(3/3)
     @Then("user edit this post with a new subject $newsubject and see correct subject in post")
     public void user_edit_this_post_with_a_new_subject_and_see_correct_subject_in_post(String newsubject) {
         onOpened(EntryPage.class)
@@ -92,7 +91,6 @@ public class Subject extends WebTest {
                 .ifResultIsExpected("User see correct post subject '" + newsubject + "'")
                 .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + newsubject + "'")
                 .finish();
-
     }
 
 }
