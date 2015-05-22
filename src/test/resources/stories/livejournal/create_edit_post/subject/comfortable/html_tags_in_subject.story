@@ -34,7 +34,7 @@ Examples:
 
 Scenario: Subject with incorrect html tags
 Meta: 
-@categories create_edit_post subject comfortable test
+@categories create_edit_post subject comfortable
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>

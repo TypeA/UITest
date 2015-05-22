@@ -46,20 +46,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
     }
-
-    //Scenario: Create post with style(3/3)
-    @Then("post with style $style_text is displayed correctly")
-    public void post_is_displayed_correctly(String style_text) {
-        String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        verify().that(onOpened(EntryPage.class).postWithStyleIsDisplayed(post_text, style_text.toUpperCase()))
-                .ifResultIsExpected("Post is displayed with bold text")
-                .ifElse("Post is not displayed with bold text")
-                .finish();
-    }
-
+    
+    
     //Scenario: Create post with font(2/3)
     @When("user create new post with font $font_text and save post")
     public void user_create_new_post_with_font_and_save_post(String font_text) {
@@ -74,20 +62,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
     }
-
-    //Scenario: Create post with font(3/3)
-    @Then("post with font $font_text is displayed correctly")
-    public void pos_with_font_is_displayed_correctly(String font_text) {
-        String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        verify().that(onOpened(EntryPage.class).postWithFontIsDisplayed(post_text, font_text.toUpperCase()))
-                .ifResultIsExpected("Post is displayed with font " + font_text)
-                .ifElse("Post is not displayed with font " + font_text)
-                .finish();
-    }
-
+    
+    
     //Scenario: Create post with color(2/3)
     @When("user create new post with color $color_text and save post")
     public void user_create_new_post_with_color_and_save_post(String color_text) {
@@ -102,20 +78,8 @@ public class CreatePostWithHtmlTags extends WebTest {
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
     }
-
-    //Scenario: Create post with color(3/3)
-    @Then("post with color $color_text is displayed correctly")
-    public void post_with_font_is_displayed_correctly(String color_text) {
-        String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        open(EntryPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
-                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        verify().that(onOpened(EntryPage.class).postWithColorIsDisplayed(post_text, color_text))
-                .ifResultIsExpected("Post is displayed with color " + color_text)
-                .ifElse("Post is not displayed with color " + color_text)
-                .finish();
-    }
-
+    
+    
     //Scenario: Create post with custom text(2/3)
     @When("user create new post with color $color_text style_1 $style_text_1 style_2 $style_text_2 and save post")
     public void user_create_new_post_with_color_style_1_style_2_and_save_post(String color_text, String style_text_1, String style_text_2) {
@@ -132,6 +96,73 @@ public class CreatePostWithHtmlTags extends WebTest {
         postfix = postfix.replace("livejournal.ru/", "!");
         ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
     }
+    
+        //Scenario: Create post with link(2/3)
+    @When("user create new post with link $link and add property open in new window $newWindow")
+    public void user_create_new_post_with_link(String link, String newWindow) {
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .addLink(link, Boolean.valueOf(newWindow))
+                .postEntry();
+        String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
+        postfix = postfix.replace("livejournal.ru/", "!");
+        ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
+    }
+    
+        //Scenario: Create post with custom link(2/3)
+    @When("user create new post with link $link and style $style_text")
+    public void user_create_new_post_with_link_link_and_style(String link, String style_text) {
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .setTextStyle(style_text.toUpperCase())
+                .addLink(link, Boolean.FALSE)
+                .postEntry();
+        String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
+        postfix = postfix.replace("livejournal.ru/", "!");
+        ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
+    }
+
+    //Scenario: Create post with style(3/3)
+    @Then("post with style $style_text is displayed correctly")
+    public void post_is_displayed_correctly(String style_text) {
+        String post_text = ThucydidesUtils.getFromSession("post_text").toString();
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        verify().that(onOpened(EntryPage.class).postWithStyleIsDisplayed(post_text, style_text.toUpperCase()))
+                .ifResultIsExpected("Post is displayed with bold text")
+                .ifElse("Post is not displayed with bold text")
+                .finish();
+    }
+
+
+    //Scenario: Create post with font(3/3)
+    @Then("post with font $font_text is displayed correctly")
+    public void pos_with_font_is_displayed_correctly(String font_text) {
+        String post_text = ThucydidesUtils.getFromSession("post_text").toString();
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        verify().that(onOpened(EntryPage.class).postWithFontIsDisplayed(post_text, font_text.toUpperCase()))
+                .ifResultIsExpected("Post is displayed with font " + font_text)
+                .ifElse("Post is not displayed with font " + font_text)
+                .finish();
+    }
+
+
+    //Scenario: Create post with color(3/3)
+    @Then("post with color $color_text is displayed correctly")
+    public void post_with_font_is_displayed_correctly(String color_text) {
+        String post_text = ThucydidesUtils.getFromSession("post_text").toString();
+        open(EntryPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
+                .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
+        verify().that(onOpened(EntryPage.class).postWithColorIsDisplayed(post_text, color_text))
+                .ifResultIsExpected("Post is displayed with color " + color_text)
+                .ifElse("Post is not displayed with color " + color_text)
+                .finish();
+    }
+
 
     //Scenario: Create post with custom text(3/3)
     @Then("post with color $color_text and styles $style_text_1 $style_text_2 is displayed correctly")
@@ -154,17 +185,7 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .finish();
     }
 
-    //Scenario: Create post with link(2/3)
-    @When("user create new post with link $link and add property open in new window $newWindow")
-    public void user_create_new_post_with_link(String link, String newWindow) {
-        onOpened(UpdateBmlPageLogged.class)
-                .closeDraft()
-                .addLink(link, Boolean.valueOf(newWindow))
-                .postEntry();
-        String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
-        postfix = postfix.replace("livejournal.ru/", "!");
-        ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
-    }
+
 
     //Scenario: Create post with link(3/3)
     @Then("post with link $link is displayed and open in newWindow $newWindow")
@@ -176,19 +197,6 @@ public class CreatePostWithHtmlTags extends WebTest {
                 .ifResultIsExpected("Post is displayed with link " + link)
                 .ifElse("Post is not displayed with link " + link)
                 .finish();
-    }
-
-    //Scenario: Create post with custom link(2/3)
-    @When("user create new post with link $link and style $style_text")
-    public void user_create_new_post_with_link_link_and_style(String link, String style_text) {
-        onOpened(UpdateBmlPageLogged.class)
-                .closeDraft()
-                .setTextStyle(style_text.toUpperCase())
-                .addLink(link, Boolean.FALSE)
-                .postEntry();
-        String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
-        postfix = postfix.replace("livejournal.ru/", "!");
-        ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
     }
 
     //Scenario: Create post with custom link(3/3)

@@ -167,7 +167,7 @@ public class CreateAccountPage extends LJPage {
         return onOpened(PrivacyPageUnlogged.class);
     }
 
-    public String getFinishText(){
+    public String getFinishText() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override

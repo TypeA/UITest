@@ -1,6 +1,6 @@
 Scenario: Create post with style
 Meta: 
-@categories create_post html_tags useful
+@categories create_post html_tags useful test
 
 Given logged user <name> on Create Post page
 When user create new post with style <style_text> and save post
@@ -45,7 +45,7 @@ Examples:
 
 Scenario: Create post with custom text
 Meta: 
-@categories create_post html_tags useful 
+@categories create_post html_tags useful test
 
 Given logged user <name> on Create Post page
 When user create new post with color <color_text> style_1 <style_text_1> style_2 <style_text_2> and save post
