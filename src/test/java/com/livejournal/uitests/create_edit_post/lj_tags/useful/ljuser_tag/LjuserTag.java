@@ -33,7 +33,6 @@ public class LjuserTag extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
-                .openLJUserBubble()
                 .enterUsername(ljuser,true);
         onOpened(UpdateBmlPageLogged.class)
                 .postEntry();
@@ -45,7 +44,6 @@ public class LjuserTag extends WebTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", "")
-                .openLJUserBubble()
                 .enterUsername(ljuser,false);
     }
 
@@ -60,7 +58,7 @@ public class LjuserTag extends WebTest {
 
     //Logged user create new post with uncorrect lj-user tag (3/3)
     @Then("user see an error in header")
-    public void user_see_an_error_in_header() {
+    public void user_see_an_error_in_header(){
         verify().that(onOpened(UpdateBmlPageLogged.class).getErrorStrip().getErrorText().toUpperCase().equals("INVALID USER"))
                 .ifResultIsExpected("User see an error 'Invalid user'")
                 .ifElse("User didn't see an error 'Invalid user'")
