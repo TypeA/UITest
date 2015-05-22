@@ -5,8 +5,6 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -19,6 +17,7 @@ public class HtmlTagsInSubject extends WebTest {
 
     //Subject with correct html tags (1/3)
     //Scenario: Subject with cropped html tags(1/3)
+    //Scenario: Subject with incorrect html tags (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -28,6 +27,7 @@ public class HtmlTagsInSubject extends WebTest {
 
     //Subject with correct html tags (2/3)
     //Scenario: Subject with cropped html tags(2/3)
+    //Scenario: Subject with incorrect html tags (2/3)
     @When("user create new post with subject $subject")
     public void user_create_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
@@ -63,6 +63,9 @@ public class HtmlTagsInSubject extends WebTest {
                 .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
                 .finish();
     }
+    
+    //Scenario: Subject with incorrect html tags (3/3)
+   // Then the post in journal has subject <cultivated_subject>
 
     private String cutSubject(String subject) {
         String ans = subject.substring(subject.indexOf(">") + 1);
