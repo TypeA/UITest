@@ -1,6 +1,6 @@
 Scenario: Subject with correct html tags
 Meta: 
-@categories create_edit_post subject comfortable test
+@categories create_edit_post subject comfortable
 @issue LJSUP-21525
 
 Given logged user <name> on Create Post page
@@ -10,15 +10,15 @@ Then the post in journal has subject <subject> with correct tag
 Examples:
 |name         |subject     |
 |testautotest |<b>Тема</b> |
-|--testautotest |<i>Тема</i> |
-|--testautotest |<u>Тема</u> |
-|--testautotest |<s>Тема</s> |
+|testautotest |<i>Тема</i> |
+|testautotest |<u>Тема</u> |
+|testautotest |<s>Тема</s> |
 
 
 
 Scenario: Subject with cropped html tags
 Meta: 
-@categories create_edit_post subject comfortable test
+@categories create_edit_post subject comfortable
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -34,7 +34,7 @@ Examples:
 
 Scenario: Subject with incorrect html tags
 Meta: 
-@categories create_edit_post subject1 comfortable
+@categories create_edit_post subject comfortable test
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>

@@ -38,7 +38,7 @@ public class HtmlTagsInSubject extends WebTest {
 
     //Subject with correct html tags(3/3)
     @Then("the post in journal has subject $subject with correct tag")
-    public void the_post_in_journal_has_correct_subject(String subject) {
+    public void the_post_in_journal_has_correct_subject_with_correct_tag(String subject) {
         verify().that(onOpened(EntryPage.class)
                 .getPostSubject()
                 .equals(cutSubject(subject)))
@@ -63,9 +63,15 @@ public class HtmlTagsInSubject extends WebTest {
                 .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
                 .finish();
     }
-    
+
     //Scenario: Subject with incorrect html tags (3/3)
-   // Then the post in journal has subject <cultivated_subject>
+    @Then("the post in journal has subject $cultivated_subject")
+    public void post_in_journal_has_subject(String cultivated_subject) {
+        verify().that(onOpened(EntryPage.class).getPostSubject().equals(cultivated_subject))
+                .ifResultIsExpected("User see correct post subject '" + cultivated_subject + "'")
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
+                .finish();       
+    }
 
     private String cutSubject(String subject) {
         String ans = subject.substring(subject.indexOf(">") + 1);
