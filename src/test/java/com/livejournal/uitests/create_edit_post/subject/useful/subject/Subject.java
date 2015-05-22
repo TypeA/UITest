@@ -20,6 +20,7 @@ public class Subject extends WebTest {
     //User restore post with subject from draft(1/3)
     //Subject in editing(1/3)
     //User edit post with subject(1/3)
+    //User create new post with long subject(1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -30,6 +31,7 @@ public class Subject extends WebTest {
     //User create new post with subject(2/3)
     //Subject in editing(2/3)
     //User edit post with subject(2/3)
+    //User create new post with long subject(2/3)
     @When("user create new post with subject $subject")
     public void user_create_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
@@ -90,6 +92,16 @@ public class Subject extends WebTest {
         verify().that(onOpened(EntryPage.class).getPostSubject().equals(newsubject))
                 .ifResultIsExpected("User see correct post subject '" + newsubject + "'")
                 .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + newsubject + "'")
+                .finish();
+    }
+    
+    //User create new post with long subject(3/3)
+    @Then("the post in journal has correct trimmed subject $subject")
+    public void the_post_in_journal_has_correct_trimmed_subject(String subject) {
+        subject = subject.substring(0,100);
+        verify().that(onOpened(EntryPage.class).getPostSubject().equals(subject))
+                .ifResultIsExpected("User see correct post subject '" + subject + "'")
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 

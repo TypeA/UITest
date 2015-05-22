@@ -7,12 +7,12 @@ When user create new post with subject <subject>
 Then the post in journal has correct subject <subject>
 
 Examples:
-|name         |subject                                    |
-|testautotest |No subject                                 |
-|testautotest |Всем "привет"!                             |
-|testautotest |И вам привет!                              |
-|testautotest |Hello world!                               |
-|testautotest |Со всякими символами ().,?/@#$%^&*+_=-!;:  |
+|name         |subject                                                                                                              |
+|testautotest |No subject                                                                                                           |
+|testautotest |Всем "привет"!                                                                                                       |
+|testautotest |И вам привет!                                                                                                        |
+|testautotest |Hello world!                                                                                                         |
+|testautotest |Со всякими символами ().,?/@#$%^&*+_=-!;:                                                                            |
 
 
 
@@ -60,3 +60,16 @@ Examples:
 |testautotest |Всем "привет"! |
 |testautotest |И вам привет!  |
 |testautotest |Hello world!   |
+
+
+Scenario: User create new post with long subject
+Meta: 
+@categories create_edit_post subject useful
+
+Given logged user <name> on Create Post page
+When user create new post with subject <subject>
+Then the post in journal has correct trimmed subject <subject>
+
+Examples:
+|name         |subject                                                                                                              |
+|testautotest |Это будет слишком большой и длинный заголовок для этого скромного и простого поста который ты читаешь прямо сейчас   |
