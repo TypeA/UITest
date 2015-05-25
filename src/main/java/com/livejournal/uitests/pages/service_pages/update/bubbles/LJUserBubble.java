@@ -26,7 +26,7 @@ public class LJUserBubble extends UIBlock {
         username.enter(ljuser);
         startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
         if(isCorrectUser){
-        WebDriverWait wait = new WebDriverWait(getDriver(), 3);
+        WebDriverWait wait = new WebDriverWait(getDriver(), 5);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
