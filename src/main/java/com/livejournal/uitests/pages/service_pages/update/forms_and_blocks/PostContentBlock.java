@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.util.ArrayList;
 import java.util.List;
 import net.thucydides.core.annotations.StepGroup;
@@ -41,14 +42,24 @@ public class PostContentBlock extends UIBlock {
     @FindBy(name = "privacy")
     public Select privacySelect;
 
+    @StepGroup
+    public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
+        setSubject(subject);
+        setText(text, editorType);
+        return onOpened(UpdateBmlPageLogged.class);
+    }
 
     @StepGroup
-    public void createPost(String subject, String editorType, String text) {
+    public UpdateBmlPageLogged setSubject(String subject) {
         if (subject.toUpperCase().equals("NO SUBJECT")) {
-            subjectField.enter("");
-        } else {
-            subjectField.enter(subject);
+            subject = "";
         }
+        subjectField.enter(subject);
+        return onOpened(UpdateBmlPageLogged.class);
+    }
+
+    @StepGroup
+    public UpdateBmlPageLogged setText(String text, String editorType) {
         switch (editorType.toUpperCase()) {
             case "VISUAL":
                 visualEditButton.click();
@@ -61,45 +72,24 @@ public class PostContentBlock extends UIBlock {
             default:
                 Assert.fail("Unknown edit type " + editorType + "!");
         }
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     @StepGroup
-    public void setSubject(String subject) {
-        if (subject.toUpperCase().equals("NO SUBJECT")) {
-        } else {
-            subjectField.enter(subject);
-        }
-    }
-
-    @StepGroup
-    public void setText(String text, String editorType) {
-        switch (editorType.toUpperCase()) {
-            case "VISUAL":
-                visualEditButton.click();
-                postVisualField.enter(text);
-                break;
-            case "HTML":
-                htmlEditButton.click();
-                postHtmlField.enter(text);
-                break;
-            default:
-                Assert.fail("Unknown edit type " + editorType + "!");
-        }
-    }
-
-    @StepGroup
-    public void setPrivacy(String privacy, ArrayList<String> group){
+    public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) {
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
             for (String group1 : group) {
-                this.startScript("jQuery(\"label:contains('" + group1 + "')\").click()");
+                startScript("jQuery(\"label:contains('" + group1 + "')\").click()");
             }
         }
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     @StepGroup
-    public void setTags(String tags) {
+    public UpdateBmlPageLogged setTags(String tags) {
         tagsField.enter(tags);
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     public ArrayList<String> getAllPrivacy() {
@@ -121,12 +111,10 @@ public class PostContentBlock extends UIBlock {
                     text = text + "\n" + startScript("return jQuery(\".privacy-item.ng-scope label span\").eq(" + i.toString() + ").text()").toString();
                 }
             }
-        } else {
-            return text;
         }
         return text;
     }
- 
+
     @StepGroup
     public String getPostSubject() {
         String subject = startScript("return jQuery('#subject').val()").toString();

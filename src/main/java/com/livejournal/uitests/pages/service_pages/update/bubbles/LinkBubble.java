@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update.bubbles;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -26,12 +26,12 @@ public class LinkBubble extends UIBlock {
     private Button addButtonLink;
 
     @StepGroup
-    public PostContentBlock addLink(String url, Boolean newWindow) {
+    public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
         inputUrl.enter(url);
         if (newWindow) {
             checkboxNewWindow.click();
         }
         addButtonLink.click();
-        return onDisplayed(PostContentBlock.class);
+        return onOpened(UpdateBmlPageLogged.class);
     }
 }

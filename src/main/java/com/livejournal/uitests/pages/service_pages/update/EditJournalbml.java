@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.annotations.WhenPageOpens;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -35,40 +36,6 @@ public class EditJournalbml extends ServicePageLogged {
     public EditJournalbml createPost(String subject, String editorType, String text) {
         postContentBlock.createPost(subject, editorType, text);
         return this;
-    }
-
-    @StepGroup
-    public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) {
-        WebDriverWait wait = new WebDriverWait(getDriver(), 15);
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return postContentBlock.isDisplayed();
-            }
-        });
-        postContentBlock.setPrivacy(privacy, group);
-        return this;
-    }
-
-    public ArrayList<String> getAllPrivacy() {
-        return postContentBlock.getAllPrivacy();
-    }
-
-    @StepGroup
-    public String getCurrentPrivacy() {
-        return postContentBlock.getCurrentPrivacy();
-    }
-
-    @StepGroup
-    public void saveEntry() {
-        saveButton.click();
-    }
-
-    @StepGroup
-    public MyJournalPage deleteEntry() {
-        deleteButton.click();
-        getDriver().switchTo().alert().accept();
-        return onOpened(MyJournalPage.class);
     }
 
     @StepGroup
@@ -99,13 +66,52 @@ public class EditJournalbml extends ServicePageLogged {
     }
 
     @StepGroup
-    public String getPostSubject() {
-        return postContentBlock.getPostSubject();
+    public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) {
+        postContentBlock.setPrivacy(privacy, group);
+        return this;
     }
 
     @StepGroup
     public EditJournalbml setSubject(String subject) {
         postContentBlock.setSubject(subject);
         return this;
+    }
+
+    public ArrayList<String> getAllPrivacy() {
+        return postContentBlock.getAllPrivacy();
+    }
+
+    @StepGroup
+    public String getCurrentPrivacy() {
+        return postContentBlock.getCurrentPrivacy();
+    }
+
+    @StepGroup
+    public String getPostSubject() {
+        return postContentBlock.getPostSubject();
+    }
+
+    @StepGroup
+    public EntryPage saveEntry() {
+        saveButton.click();
+        return onOpened(EntryPage.class);
+    }
+
+    @StepGroup
+    public MyJournalPage deleteEntry() {
+        deleteButton.click();
+        getDriver().switchTo().alert().accept();
+        return onOpened(MyJournalPage.class);
+    }
+
+    @WhenPageOpens
+    public void waitPage() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return postContentBlock.isDisplayed();
+            }
+        });
     }
 }

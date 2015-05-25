@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update.bubbles;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -30,7 +30,7 @@ public class FontBubble extends UIBlock {
     private Button hugeFontText;
     
     
-    public PostContentBlock setTextFont(String font_text) {
+    public UpdateBmlPageLogged setTextFont(String font_text) {
         
         switch (font_text) {
             case "TINY":
@@ -49,7 +49,7 @@ public class FontBubble extends UIBlock {
                 hugeFontText.click();
                 break;
         }
-        return onDisplayed(PostContentBlock.class);
+        return onOpened(UpdateBmlPageLogged.class);
     }
     
 }

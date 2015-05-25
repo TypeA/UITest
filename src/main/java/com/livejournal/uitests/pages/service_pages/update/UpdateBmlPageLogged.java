@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.LJUserBubble;
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import com.livejournal.uitests.pages.service_pages.update.htmlEditor.LJTags;
 import com.livejournal.uitests.pages.service_pages.update.visualEditor.HtmlsTags;
@@ -30,7 +29,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private PostContentBlock postContentBlock;
 
     private HtmlsTags htmlTags;
-    
+
     private LJTags ljTags;
 
     @FindBy(name = "community")
@@ -51,7 +50,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-time input")
     private TextField timeField;
-     
+
     /////////////////////////// draft
     @FindBy(name = "dialog-cancel")
     private UIElement closeDraftButton;
@@ -59,15 +58,13 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @FindBy(name = "dialog-ok")
     private Button restoreDraft;
 
-
     @StepGroup
     public UpdateBmlPageLogged closeDraft() {
         try {
             closeDraftButton.click();
-            return this;
         } catch (Exception ex) {
-            return this;
         }
+        return this;
     }
 
     @StepGroup
@@ -78,40 +75,34 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
-        postContentBlock.createPost(subject, editorType, text);
-        return this;
+        return postContentBlock.createPost(subject, editorType, text);
     }
 
     @StepGroup
-    public UpdateBmlPageLogged addText(String text) {
-        postContentBlock.postHtmlField.type(text);
-        return this;
+    public UpdateBmlPageLogged setText(String text) {
+        return postContentBlock.setText(text, text);
     }
 
     @StepGroup
     public UpdateBmlPageLogged setTextStyle(String style_text) {
-        htmlTags.setTextStyle(style_text);
-        return this;
+        return htmlTags.setTextStyle(style_text);
     }
 
     @StepGroup
     public UpdateBmlPageLogged setTextFont(String font_text) {
-        htmlTags.setTextFont(font_text);
-        return this;
+        return htmlTags.setTextFont(font_text);
     }
 
     @StepGroup
     public UpdateBmlPageLogged setTextColor(String color_text) {
-        htmlTags.setTextColor(color_text);
-        return this;
+        return htmlTags.setTextColor(color_text);
     }
 
     @StepGroup
     public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
-        htmlTags.addLink(url, newWindow);
-        return this;
+        return htmlTags.addLink(url, newWindow);
     }
-  
+
     @StepGroup
     public UpdateBmlPageLogged setDateAndTime(String date, String time) {
         changeDate.click();
@@ -122,8 +113,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @StepGroup
     public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) {
-        postContentBlock.setPrivacy(privacy, group);
-        return this;
+        return postContentBlock.setPrivacy(privacy, group);
     }
 
     public UpdateBmlPageLogged selectCommunity(String community) {
@@ -131,14 +121,14 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         try {
             Thread.sleep(300);
         } catch (InterruptedException ex) {
+            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+            wait.until(new ExpectedCondition<Boolean>() {
+                @Override
+                public Boolean apply(WebDriver d) {
+                    return communitySelect.isDisplayed();
+                }
+            });
         }
-        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-        wait.until(new ExpectedCondition<Boolean>() {
-            @Override
-            public Boolean apply(WebDriver d) {
-                return communitySelect.isDisplayed();
-            }
-        });
         return this;
     }
 
@@ -164,15 +154,14 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged enterUsername(String ljuser, Boolean isCorrect) {
-        return ljTags.openLJUserBubble().enterUsername(ljuser, isCorrect);    
-    }
-
-    @StepGroup
     public String getPostSubject() {
         return postContentBlock.getPostSubject();
     }
 
+    @StepGroup
+    public UpdateBmlPageLogged enterUsername(String ljuser, Boolean isCorrect) {
+        return ljTags.enterUsername(ljuser, isCorrect);
+    }
 
     @StepGroup
     public UpdateBmlPageLogged enterTextToVisualEditor(String text) {
@@ -181,7 +170,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return this;
     }
 
-    @StepGroup
     public WebElement switchToVisualEditor() {
         getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
         return getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
