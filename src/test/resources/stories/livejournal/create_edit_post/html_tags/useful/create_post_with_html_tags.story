@@ -3,19 +3,19 @@ Meta:
 @categories create_post html_tags useful
 
 Given logged user <name> on Create Post page
-When user create new post with style <style_text> and save post
-Then post with style <style_text> is displayed correctly
+When user create new post with style <tag> and save post
+Then post with style <tag> is displayed correctly
 
 Examples:
-|name         |style_text    |
-|testautotest |bold          |
-|testautotest |italic        |
-|testautotest |underlined    |
+|name         |tag       |
+|testautotest |b         |      
+|testautotest |i         |
+|testautotest |u         |
 
 
 Scenario: Create post with font
 Meta: 
-@categories create_post html_tags useful 
+@categories create_post html_tags useful
 
 Given logged user <name> on Create Post page
 When user create new post with font <font_text> and save post
@@ -31,7 +31,7 @@ Examples:
 
 Scenario: Create post with color
 Meta: 
-@categories create_post html_tags useful 
+@categories create_post html_tags useful
 
 Given logged user <name> on Create Post page
 When user create new post with color <color_text> and save post
@@ -43,18 +43,18 @@ Examples:
 |testautotest |64b30b         |
 |testautotest |de0d48         |
 
-Scenario: Create post with custom text
+Scenario: Create post with custom text 
 Meta: 
 @categories create_post html_tags useful 
 
 Given logged user <name> on Create Post page
-When user create new post with color <color_text> style_1 <style_text_1> style_2 <style_text_2> and save post
-Then post with color <color_text> and styles <style_text_1> <style_text_2> is displayed correctly
+When user create new post with color <color_text> style_1 <tag_1> style_2 <tag_2> and save post
+Then post with color <color_text> and styles <tag_1> <tag_2> is displayed correctly
 
 Examples:
-|name         |style_text_1   |style_text_2   |color_text     |
-|testautotest |bold           |underlined     |e03d3d         |
-|testautotest |italic         |bold           |64b30b         |
+|name         |tag_1   |tag_2   |color_text     |
+|testautotest |b       |u       |e03d3d         |
+|testautotest |i       |b       |64b30b         |
 
 Scenario: Create post with link
 Meta: 
@@ -74,12 +74,12 @@ Meta:
 @categories create_post html_tags useful
 
 Given logged user <name> on Create Post page
-When user create new post with link <link> and style <style_text>
-Then post with link <link> and with style <style_text> is displayed
+When user create new post with link <link> and style <tag>
+Then post with link <link> and with style <tag> is displayed
 
 Examples:
-|name         |link         |style_text   |
-|testautotest |rambler.co   |bold         |
-|testautotest |google.com   |underlined   |
-|testautotest |google.com   |italic       |
+|name         |link         |tag      |
+|testautotest |rambler.co   |b        |
+|testautotest |google.com   |u        |
+|testautotest |google.com   |i        |
 
