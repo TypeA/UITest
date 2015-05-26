@@ -1,6 +1,7 @@
 package com.livejournal.uitests.pages.journal_pages;
 
 import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
+import java.io.IOException;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.JavascriptExecutor;
@@ -73,20 +74,8 @@ public class EntryPage extends JournalPage {
         return subject;
     }
 
-    public boolean postWithStyleIsDisplayed(String text, String style_text) {
-        String script = "";
-        switch (style_text) {
-            case "BOLD":
-                script = "return jQuery(\"b\").is(\":contains('" + text + "')\")";
-                break;
-            case "ITALIC":
-                script = "return jQuery(\"i\").is(\":contains('" + text + "')\")";
-                break;
-            case "UNDERLINED":
-                script = "return jQuery(\"u\").is(\":contains('" + text + "')\")";
-                break;
-        }
-        return Boolean.valueOf(startScript(script).toString());
+    public boolean postWithStyleIsDisplayed(String text, String tag) {
+        return Boolean.valueOf(startScript("return jQuery(\"" + tag + "\").is(\":contains('" + text + "')\")").toString());
     }
 
     @StepGroup
@@ -109,6 +98,7 @@ public class EntryPage extends JournalPage {
                 script = "return jQuery(\"span[style='font-size:1.8em;']\").is(\":contains('" + text + "')\")";
 
         }
+        System.out.println(script);
         return Boolean.valueOf(startScript(script).toString());
     }
 
@@ -152,5 +142,9 @@ public class EntryPage extends JournalPage {
         } catch (Exception ex) {
             return "BAD SPAN";
         }
+    }
+
+    public String getIdPost(String user) throws IOException {
+        return getDriver().getCurrentUrl().replace("http://" + user.replace("_", "-") + "." + getSystemConfiguration().getBaseUrl() + "/", "");
     }
 }
