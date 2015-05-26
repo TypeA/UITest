@@ -43,7 +43,7 @@ public class HtmlsTags extends UIBlock {
     private Button button;
 
     @StepGroup
-    public PostContentBlock setTextStyle(String style_text) {
+    public UpdateBmlPageLogged setTextStyle(String style_text) {
 
         switch (style_text) {
             case "b":
@@ -65,7 +65,7 @@ public class HtmlsTags extends UIBlock {
             }
         });
 
-        return onDisplayed(PostContentBlock.class);
+        return onOpened(UpdateBmlPageLogged.class);
     }
 
     public UpdateBmlPageLogged setTextFont(String font_text) {

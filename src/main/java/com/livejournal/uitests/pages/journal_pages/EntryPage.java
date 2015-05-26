@@ -144,8 +144,10 @@ public class EntryPage extends JournalPage {
         }
     }
 
+    @StepGroup
     public String getIdPost(String user) throws IOException {
-        return getDriver().getCurrentUrl().replace("http://" + user.replace("_", "-") + "." + getSystemConfiguration().getBaseUrl() + "/", "");
+        return getDriver().getCurrentUrl().replace("http://" + user.replace("_", "-") + "." + getSystemConfiguration().getBaseUrl() + "/", "");}
+   
     @StepGroup
     public String getTagsTextInSubject(String tag) {
         return startScript("return jQuery('.b-singlepost-title.entry-title.p-name " + tag + "').text()").toString();
