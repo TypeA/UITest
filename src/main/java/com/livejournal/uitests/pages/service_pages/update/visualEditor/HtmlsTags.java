@@ -7,7 +7,11 @@ import com.livejournal.uitests.pages.service_pages.update.bubbles.FontBubble;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.LinkBubble;
 import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
 /**
@@ -36,19 +40,31 @@ public class HtmlsTags extends UIBlock {
     @FindBy(css = ".cke_button_LJLink2")
     private Button link;
 
+    private Button button;
+
     @StepGroup
     public PostContentBlock setTextStyle(String style_text) {
+
         switch (style_text) {
-            case "BOLD":
-                boldText.click();
+            case "b":
+                button = boldText;
                 break;
-            case "ITALIC":
-                italicText.click();
+            case "i":
+                button = italicText;
                 break;
-            case "UNDERLINED":
-                underlineText.click();
+            case "u":
+                button = underlineText;
                 break;
         }
+        button.click();
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return button.getWrappedElement().getAttribute("aria-pressed").equals("true");
+            }
+        });
+
         return onDisplayed(PostContentBlock.class);
     }
 
