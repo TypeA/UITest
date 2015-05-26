@@ -12,6 +12,7 @@ import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
 import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
+import java.io.IOException;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
@@ -42,18 +43,17 @@ public class UsersPost extends WebTest {
     //Scenario: Privacy in editing(2/3)
     //Scenario: Edit post(2/4)
     @When("user create new post with privacy $privacy (group $group)")
-    public void user_create_new_post_with_privacy(String privacy, String group)  {
+    public void user_create_new_post_with_privacy(String privacy, String group) throws IOException  {
         String postText = RandomText.getRandomText(30);
-        onOpened(UpdateBmlPageLogged.class)
+      String post_link =  onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .createPost("", "html", postText)
                 .setPrivacy(privacy, getParsedString(group, ";"))
-                .postEntry();
-        String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
-        postfix = postfix.replace("livejournal.ru/", "!");
-        ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
+                .postEntry()
+                .getIdPost(ThucydidesUtils.getFromSession("user").toString());
         ThucydidesUtils.putToSession("post_text", postText);
         ThucydidesUtils.putToSession("friend_group", group);
+        ThucydidesUtils.putToSession("post_link", post_link);
     }
 
     //Scenario: Edit post(3/4)
