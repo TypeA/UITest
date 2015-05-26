@@ -40,6 +40,10 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(name = "action:update")
     private Button addPostButton;
+    
+    @FindBy(css = ".b-updatepage-tab-visual")
+    private Button visualEditor;
+
 
     /////////////////////////// date
     @FindBy(css = ".b-updatepage-date-current a")
@@ -163,6 +167,12 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return ljTags.enterUsername(ljuser, isCorrect);
     }
 
+    @StepGroup
+    public UpdateBmlPageLogged setVisualEditor()  {
+        visualEditor.click();
+        return this;
+    }
+ 
     @StepGroup
     public UpdateBmlPageLogged enterTextToVisualEditor(String text) {
         switchToVisualEditor().sendKeys(text);

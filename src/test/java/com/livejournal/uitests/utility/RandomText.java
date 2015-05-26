@@ -18,7 +18,7 @@ public class RandomText {
             char w = (char) ((int) '!' + Math.random() * ((int) '\\' - (int) '!' + 1));
             text.append(c).append(a).append(n).append(w);
         }
-        return text.toString().replaceAll(" +", " ").trim().substring(0, n);
+        return text.toString().replaceAll(" +", " ").trim().substring(0, n).replace("'","").replace("\"","");
     }
 }
 

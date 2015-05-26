@@ -12,7 +12,9 @@ import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
 import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
+import java.io.IOException;
 import java.util.ArrayList;
+import net.thucydides.core.ThucydidesSystemProperty;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -27,32 +29,31 @@ public class PostInCommunity extends WebTest {
     //Scenario: Create post in community (1/4)
     //Scenario: Edit post in community (1/4)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_Create_Post_page(String name) {
+    public void logged_user_on_Create_Post_page(String name)  {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name);
         ThucydidesUtils.putToSession("user", name);
-    }
+        }
 
     //Scenario: Create post in community (2/4)
     //Scenario: Edit post in community (2/4)
     @When("user create new post with privacy $privacy (group $group) in community $community")
-    public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) {
+    public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws IOException {
         String postText = RandomText.getRandomText(30);
         onOpened(LoginPageUnlogged.class)
                 .defaultMinSecurity(community);
-        open(UpdateBmlPageLogged.class)
+      String post_link = open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .postInCommunity()
                 .selectCommunity(community)
                 .createPost("", "html", postText)
                 .setPrivacy(privacy, getParsedString(group, ";"))
-                .postEntry();
-        String postfix = getCurrentBrowser().getDriver().getCurrentUrl();
-        postfix = postfix.replace("livejournal.ru/", "!");
-        ThucydidesUtils.putToSession("post_link", postfix.substring(postfix.indexOf("!") + 1));
+                .postEntry()
+                .getIdPost(community);
         ThucydidesUtils.putToSession("post_text", postText);
         ThucydidesUtils.putToSession("friend_group", group);
+        ThucydidesUtils.putToSession("post_link", post_link);
     }
 
     //Scenario: Edit post in community (3/4)
