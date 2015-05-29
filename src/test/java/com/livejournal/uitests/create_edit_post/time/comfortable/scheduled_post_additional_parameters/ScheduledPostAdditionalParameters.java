@@ -36,8 +36,11 @@ public class ScheduledPostAdditionalParameters extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("New scheduled post with additional parametrs", "html", post_text)
                 .setDateAndTime(date[0], date[1])
+                .usePostContent()
+                .setPostText(post_text, "html")
+                .setSubject("New scheduled post with additional parametrs")
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text.trim());
     }

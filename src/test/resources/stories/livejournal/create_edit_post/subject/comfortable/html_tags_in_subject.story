@@ -1,7 +1,6 @@
 Scenario: Subject with correct html tags
 Meta: 
 @categories create_edit_post subject comfortable
-@issue LJSUP-21525
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -38,7 +37,7 @@ Meta:
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
-Then the post in journal has subject <cultivated_subject>
+Then the post in journal has cultivated subject <cultivated_subject>
 
 Examples:
 |name         |subject                                                                                                                                                                                                                                                                                                                                              |cultivated_subject                                                                                     |

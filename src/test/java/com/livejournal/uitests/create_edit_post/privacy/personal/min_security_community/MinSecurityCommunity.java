@@ -56,10 +56,11 @@ public class MinSecurityCommunity extends WebTest {
         ArrayList<String> g = new ArrayList<String>();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .postInCommunity()
                 .selectCommunity(community)
-                .createPost("", "html", RandomText.getRandomText(30))
+                .usePostContent()
+                .setPostText(RandomText.getRandomText(30), "html")
                 .setPrivacy(security, g)
+                .usePage()
                 .postEntry();
     }
 
@@ -68,8 +69,8 @@ public class MinSecurityCommunity extends WebTest {
     public void user_can_set_only_allowed_security_when_create_post(String security, String community) {
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .postInCommunity()
                 .selectCommunity(community)
+                .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy(security).get(0))
@@ -82,6 +83,7 @@ public class MinSecurityCommunity extends WebTest {
     public void user_see_all_privacy_when_edit_this_post(String security) {
         ArrayList<String> privacy = onOpened(EntryPage.class)
                 .clickOnEditButton()
+                .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy("public").equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy("public").get(0))
@@ -92,14 +94,14 @@ public class MinSecurityCommunity extends WebTest {
     ////////////////////////////////////////////
     private ArrayList<String> correctPrivacy(String privacy) {
         ArrayList<String> okPrivacy = new ArrayList<>();
-        switch (AllowPrivacyCommunity.valueOf(privacy.toUpperCase())) {
-            case PUBLIC:
+        switch (privacy.toUpperCase()) {
+            case "PUBLIC":
                 okPrivacy.add("Public");
                 okPrivacy.add("Members");
                 okPrivacy.add("Custom");
                 okPrivacy.add("Maintainers");
                 break;
-            case MEMBERS:
+            case "MEMBERS":
                 okPrivacy.add("Members");
                 okPrivacy.add("Custom");
                 okPrivacy.add("Maintainers");

@@ -4,7 +4,7 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.FinishPostForm;
+import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.RandomText;
@@ -44,15 +44,18 @@ public class ScheduledPost extends WebTest {
                 .defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
-        
+
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
         String post_text = RandomText.getRandomText(10).trim();
-        
+
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("Sheduled post for deleting or editing", "html", post_text)
                 .setDateAndTime(date[0], date[1])
+                .usePostContent()
+                .setSubject("Sheduled post for deleting or editing")
+                .setPostText(post_text, "html")
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("number_of_entryes", open(SheduledEntriesPage.class).getNumberOfEntryes());
         ThucydidesUtils.putToSession("post_text", post_text);
@@ -69,8 +72,11 @@ public class ScheduledPost extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("New scheduled post", "html", post_text)
                 .setDateAndTime(date[0], date[1])
+                .usePostContent()
+                .setSubject("New scheduled post")
+                .setPostText(post_text, "html")
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
@@ -85,9 +91,12 @@ public class ScheduledPost extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("New scheduled post", "html", post_text)
                 .setDateAndTime(date[0], date[1])
+                .usePostContent()
+                .setSubject("New scheduled post")
+                .setPostText(post_text, "html")
                 .setPrivacy(privacy, groups)
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
@@ -183,5 +192,5 @@ public class ScheduledPost extends WebTest {
                 .ifElse("The scheduled post is not deleted, I see " + number_of_entries + " scheduled posts")
                 .finish();
     }
-    
+
 }

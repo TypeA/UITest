@@ -1,6 +1,5 @@
 package com.livejournal.uitests.create_edit_post.html_tags.useful;
 
-import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
@@ -38,9 +37,10 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
+                .useVisualEditor()
                 .setTextStyle(tag)
-                .enterTextToVisualEditor(post_text)
+                .setPostText(post_text)
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
     }
@@ -51,9 +51,10 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
+                .useVisualEditor()
                 .setTextFont(font_text.toUpperCase())
-                .enterTextToVisualEditor(post_text)
+                .setPostText(post_text)
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
     }
@@ -64,9 +65,10 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
+                .useVisualEditor()
                 .setTextColor(color_text)
-                .enterTextToVisualEditor(post_text)
+                .setPostText(post_text)
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
     }
@@ -77,11 +79,12 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
+                .useVisualEditor()
                 .setTextStyle(tag_1)
                 .setTextStyle(tag_2)
                 .setTextColor(color_text)
-                .enterTextToVisualEditor(post_text)
+                .setPostText(post_text)
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
     }
@@ -91,7 +94,9 @@ public class CreatePostWithHtmlTags extends WebTest {
     public void user_create_new_post_with_link(String link, String newWindow) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .useVisualEditor()
                 .addLink(link, Boolean.valueOf(newWindow))
+                .usePage()
                 .postEntry();
     }
 
@@ -100,9 +105,10 @@ public class CreatePostWithHtmlTags extends WebTest {
     public void user_create_new_post_with_link_link_and_style(String link, String tag) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .setVisualEditor()
+                .useVisualEditor()
                 .setTextStyle(tag)
                 .addLink(link, Boolean.FALSE)
+                .usePage()
                 .postEntry();
     }
 

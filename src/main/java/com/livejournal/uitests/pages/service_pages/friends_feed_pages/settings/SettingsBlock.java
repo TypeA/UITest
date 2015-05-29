@@ -267,7 +267,7 @@ public class SettingsBlock extends UIBlock {
     }
 
     @WhenPageOpens
-    public void waitBlock() {
+    private void waitBlock() {
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override

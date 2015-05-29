@@ -7,14 +7,13 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
-import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
 import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
 import java.io.IOException;
 import java.util.ArrayList;
-import net.thucydides.core.ThucydidesSystemProperty;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -29,12 +28,12 @@ public class PostInCommunity extends WebTest {
     //Scenario: Create post in community (1/4)
     //Scenario: Edit post in community (1/4)
     @Given("logged user $name on Create Post page")
-    public void logged_user_on_Create_Post_page(String name)  {
+    public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name);
         ThucydidesUtils.putToSession("user", name);
-        }
+    }
 
     //Scenario: Create post in community (2/4)
     //Scenario: Edit post in community (2/4)
@@ -43,12 +42,13 @@ public class PostInCommunity extends WebTest {
         String postText = RandomText.getRandomText(30);
         onOpened(LoginPageUnlogged.class)
                 .defaultMinSecurity(community);
-      String post_link = open(UpdateBmlPageLogged.class)
+        String post_link = open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .postInCommunity()
                 .selectCommunity(community)
-                .createPost("", "html", postText)
+                .usePostContent()
+                .setPostText(postText, "html")
                 .setPrivacy(privacy, getParsedString(group, ";"))
+                .usePage()
                 .postEntry()
                 .getIdPost(community);
         ThucydidesUtils.putToSession("post_text", postText);
@@ -64,7 +64,10 @@ public class PostInCommunity extends WebTest {
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class)
                 .clickOnEditButton();
-        onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
+        onOpened(EditJournalBml.class)
+                .usePostContent()
+                .setPrivacy(privacy_1, getParsedString(group_1, ";"))
+                .onOpened(EditJournalBml.class)
                 .saveEntry();
     }
 
@@ -122,9 +125,9 @@ public class PostInCommunity extends WebTest {
                 .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
+        verify().that(isEqual(getParsedString(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
-                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+                .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();
     }
 
@@ -140,11 +143,11 @@ public class PostInCommunity extends WebTest {
             case USER_IN_GROUP:
                 ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(community, group);
                 String user_in_group = getDBDate().friends().findFriendInGroup(community, group).get(0);
-        for (String in_group1 : in_group) {
-            if (in_group1.contains("test")) {
-                user_in_group = in_group1;
-            }
-        }
+                for (String in_group1 : in_group) {
+                    if (in_group1.contains("test")) {
+                        user_in_group = in_group1;
+                    }
+                }
                 return user_in_group;
             case OTHER_USER:
                 return getDBDate().friends().findNotFriend(community);

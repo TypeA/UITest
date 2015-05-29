@@ -5,15 +5,12 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
-import com.livejournal.uitests.pages.service_pages.update.htmlEditor.LJTags;
-import com.livejournal.uitests.pages.service_pages.update.visualEditor.HtmlsTags;
-import java.util.ArrayList;
+import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.content.editors.HTMLEditor;
+import com.livejournal.uitests.pages.service_pages.update.content.editors.VisualEditor;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -28,10 +25,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     private PostContentBlock postContentBlock;
 
-    private HtmlsTags htmlTags;
-
-    private LJTags ljTags;
-
     @FindBy(name = "community")
     private Select communitySelect;
 
@@ -40,12 +33,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
 
     @FindBy(name = "action:update")
     private Button addPostButton;
-    
-    @FindBy(css = ".b-updatepage-tab-visual")
-    private Button visualEditor;
 
-
-    /////////////////////////// date
     @FindBy(css = ".b-updatepage-date-current a")
     private Button changeDate;
 
@@ -55,7 +43,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-time input")
     private TextField timeField;
 
-    /////////////////////////// draft
     @FindBy(name = "dialog-cancel")
     private UIElement closeDraftButton;
 
@@ -78,36 +65,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
-        return postContentBlock.createPost(subject, editorType, text);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setText(String text) {
-        return postContentBlock.setText(text, text);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setTextStyle(String style_text) {
-        return htmlTags.setTextStyle(style_text);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setTextFont(String font_text) {
-        return htmlTags.setTextFont(font_text);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setTextColor(String color_text) {
-        return htmlTags.setTextColor(color_text);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged addLink(String url, Boolean newWindow) {
-        return htmlTags.addLink(url, newWindow);
-    }
-
-    @StepGroup
     public UpdateBmlPageLogged setDateAndTime(String date, String time) {
         changeDate.click();
         dateField.enter(date);
@@ -116,11 +73,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) {
-        return postContentBlock.setPrivacy(privacy, group);
-    }
-
     public UpdateBmlPageLogged selectCommunity(String community) {
+        postToCommunity.click();
         communitySelect.selectByValue(community);
         try {
             Thread.sleep(300);
@@ -142,47 +96,15 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return onOpened(EntryPage.class);
     }
 
-    @StepGroup
-    public UpdateBmlPageLogged postInCommunity() {
-        postToCommunity.click();
-        return this;
+    public PostContentBlock usePostContent() {
+        return postContentBlock;
     }
 
-    public ArrayList<String> getAllPrivacy() {
-        return postContentBlock.getAllPrivacy();
+    public VisualEditor useVisualEditor() {
+        return onDisplayed(VisualEditor.class);
     }
-
-    @StepGroup
-    public String getCurrentPrivacy() {
-        return postContentBlock.getCurrentPrivacy();
+    
+        public HTMLEditor useHTMLEditor() {
+        return onDisplayed(HTMLEditor.class);
     }
-
-    @StepGroup
-    public String getPostSubject() {
-        return postContentBlock.getPostSubject();
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged enterUsername(String ljuser, Boolean isCorrect) {
-        return ljTags.enterUsername(ljuser, isCorrect);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setVisualEditor()  {
-        visualEditor.click();
-        return this;
-    }
- 
-    @StepGroup
-    public UpdateBmlPageLogged enterTextToVisualEditor(String text) {
-        switchToVisualEditor().sendKeys(text);
-        getDriver().switchTo().defaultContent();
-        return this;
-    }
-
-    public WebElement switchToVisualEditor() {
-        getDriver().switchTo().frame(getDriver().findElement(By.xpath("//iframe[@title[contains(.,'Rich text editor')]]")));
-        return getDriver().findElement(By.xpath("//body[@class='lj-main-body']"));
-    }
-
 }

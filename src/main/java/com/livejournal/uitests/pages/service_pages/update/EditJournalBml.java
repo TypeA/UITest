@@ -1,7 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.update;
 
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.PostContentBlock;
-import com.livejournal.uitests.pages.service_pages.update.enums.PostElement;
+import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
@@ -22,7 +21,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * @author s.savinykh
  */
 @DefaultUrl("/editjournal.bml")
-public class EditJournalbml extends ServicePageLogged {
+public class EditJournalBml extends ServicePageLogged {
 
     public PostContentBlock postContentBlock;
 
@@ -32,63 +31,38 @@ public class EditJournalbml extends ServicePageLogged {
     @FindBy(name = "action:delete")
     private Button deleteButton;
 
-    @StepGroup
-    public EditJournalbml createPost(String subject, String editorType, String text) {
-        postContentBlock.createPost(subject, editorType, text);
-        return this;
+    public PostContentBlock usePostContent() {
+        return postContentBlock;
     }
 
     @StepGroup
-    public EntryPage editPostContent(String content, String text) {
-        switch (PostElement.valueOf(content.toUpperCase())) {
-            case SUBJECT:
-                postContentBlock.setSubject(text);
+    public void editPostContent(String content, String text) {
+        switch (content.toUpperCase()) {
+            case "SUBJECT":
+                usePostContent()
+                        .setSubject(text);
                 break;
-            case TEXT:
-                postContentBlock.setText(text, "html");
+            case "TEXT":
+                usePostContent()
+                        .setPostText(text, "html");
                 break;
-            case PRIVACY:
-                String[] list = text.split("/");
+            case "PRIVACY":
+                String[] stringArray = text.split("/");
                 ArrayList<String> groups = new ArrayList<>();
-                groups.addAll(Arrays.asList(list));
+                groups.addAll(Arrays.asList(stringArray));
                 String privacy = groups.get(0);
                 groups.remove(0);
-                postContentBlock.setPrivacy(privacy, groups);
+                usePostContent()
+                        .setPrivacy(privacy, groups);
                 break;
-            case TAGS:
-                postContentBlock.setTags(text);
+            case "TAGS":
+                usePostContent()
+                        .setTags(text);
                 break;
             default:
-                Assert.fail("Unknown post element " + content + "!");
+                Assert.fail("Unknown content " + content + "!");
         }
         saveButton.click();
-        return onOpened(EntryPage.class);
-    }
-
-    @StepGroup
-    public EditJournalbml setPrivacy(String privacy, ArrayList<String> group) {
-        postContentBlock.setPrivacy(privacy, group);
-        return this;
-    }
-
-    @StepGroup
-    public EditJournalbml setSubject(String subject) {
-        postContentBlock.setSubject(subject);
-        return this;
-    }
-
-    public ArrayList<String> getAllPrivacy() {
-        return postContentBlock.getAllPrivacy();
-    }
-
-    @StepGroup
-    public String getCurrentPrivacy() {
-        return postContentBlock.getCurrentPrivacy();
-    }
-
-    @StepGroup
-    public String getPostSubject() {
-        return postContentBlock.getPostSubject();
     }
 
     @StepGroup
@@ -99,8 +73,11 @@ public class EditJournalbml extends ServicePageLogged {
 
     @StepGroup
     public MyJournalPage deleteEntry() {
+        System.out.println("============== перешел непосредственно к удалению");
         deleteButton.click();
+        System.out.println("============== нажал на кнопку");
         getDriver().switchTo().alert().accept();
+        System.out.println("============== нажал на алерт");
         return onOpened(MyJournalPage.class);
     }
 

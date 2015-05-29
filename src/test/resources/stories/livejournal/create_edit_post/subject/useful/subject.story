@@ -7,12 +7,12 @@ When user create new post with subject <subject>
 Then the post in journal has correct subject <subject>
 
 Examples:
-|name         |subject                                                                                                              |
-|testautotest |No subject                                                                                                           |
-|testautotest |Всем "привет"!                                                                                                       |
-|testautotest |И вам привет!                                                                                                        |
-|testautotest |Hello world!                                                                                                         |
-|testautotest |Со всякими символами ().,?/@#$%^&*+_=-!;:                                                                            |
+|name         |subject                                  |
+|testautotest |No subject                               |
+|testautotest |Всем "привет"!                           |
+|testautotest |И вам привет!                            |
+|testautotest |Hello world!                             |
+|testautotest |Со всякими символами ().,?/@#$%^&*+_=-!;:|
 
 
 

@@ -1,4 +1,4 @@
-Scenario: Logged user create new post with correct lj-user tag
+Scenario: Post with correct lj-user tag
 Meta: 
 @categories create_edit_post lj_tags useful
 
@@ -9,9 +9,8 @@ Then the post is in journal and contains correct username <ljuser>
 Examples:
 |name         |ljuser       |
 |testautotest |test         |
-|testautotest |test001      |
 
-Scenario: Logged user create new post with uncorrect lj-user tag
+Scenario: Post with uncorrect lj-user tag
 Meta: 
 @categories create_edit_post lj_tags useful
 

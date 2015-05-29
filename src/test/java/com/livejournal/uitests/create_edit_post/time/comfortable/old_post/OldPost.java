@@ -16,8 +16,8 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class OldPost extends WebTest{
-    
+public class OldPost extends WebTest {
+
     //Scenario: Create old post (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
@@ -41,8 +41,11 @@ public class OldPost extends WebTest{
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("New old post", "html", post_text)
                 .setDateAndTime(date[0], date[1])
+                .usePostContent()
+                .setSubject("New old post")
+                .setPostText(post_text, "html")
+                .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
     }
@@ -63,5 +66,5 @@ public class OldPost extends WebTest{
                 .ifElse("Post with incorrect text \n'" + post_text + "'\n is in journal")
                 .finish();
     }
-    
+
 }

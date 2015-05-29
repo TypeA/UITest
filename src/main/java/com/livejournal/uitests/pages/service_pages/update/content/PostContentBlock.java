@@ -1,9 +1,11 @@
-package com.livejournal.uitests.pages.service_pages.update.forms_and_blocks;
+package com.livejournal.uitests.pages.service_pages.update.content;
 
-import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import com.livejournal.uitests.pages.service_pages.update.content.editors.HTMLEditor;
+import com.livejournal.uitests.pages.service_pages.update.content.editors.VisualEditor;
 import java.util.ArrayList;
 import java.util.List;
 import net.thucydides.core.annotations.StepGroup;
@@ -21,20 +23,12 @@ import ru.yandex.qatools.htmlelements.element.Select;
         @FindBy(css = ".b-updatepage"))
 public class PostContentBlock extends UIBlock {
 
+    private VisualEditor visualEditor;
+
+    private HTMLEditor htmlEditor;
+
     @FindBy(id = "subject")
     public TextField subjectField;
-
-    @FindBy(css = "body[class=lj-main-body]")
-    public TextField postVisualField;
-
-    @FindBy(css = ".b-updateform-textarea")
-    public TextField postHtmlField;
-
-    @FindBy(css = ".b-updatepage-tab-visual")
-    public Button visualEditButton;
-
-    @FindBy(css = ".b-updatepage-tab-html")
-    public Button htmlEditButton;
 
     @FindBy(id = "tags")
     public TextField tagsField;
@@ -43,53 +37,53 @@ public class PostContentBlock extends UIBlock {
     public Select privacySelect;
 
     @StepGroup
-    public UpdateBmlPageLogged createPost(String subject, String editorType, String text) {
-        setSubject(subject);
-        setText(text, editorType);
-        return onOpened(UpdateBmlPageLogged.class);
-    }
-
-    @StepGroup
-    public UpdateBmlPageLogged setSubject(String subject) {
+    public PostContentBlock setSubject(String subject) {
         if (subject.toUpperCase().equals("NO SUBJECT")) {
             subject = "";
         }
         subjectField.enter(subject);
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setText(String text, String editorType) {
+    public PostContentBlock setPostText(String text, String editorType) {
         switch (editorType.toUpperCase()) {
             case "VISUAL":
-                visualEditButton.click();
-                postVisualField.enter(text);
+                visualEditor.setPostText(text);
                 break;
             case "HTML":
-                htmlEditButton.click();
-                postHtmlField.enter(text);
+                htmlEditor.setPostText(text);
                 break;
             default:
                 Assert.fail("Unknown edit type " + editorType + "!");
         }
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setPrivacy(String privacy, ArrayList<String> group) {
+    public PostContentBlock setPrivacy(String privacy, ArrayList<String> group) {
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
             for (String group1 : group) {
                 startScript("jQuery(\"label:contains('" + group1 + "')\").click()");
             }
         }
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
     }
 
     @StepGroup
-    public UpdateBmlPageLogged setTags(String tags) {
+    public PostContentBlock setTags(String tags) {
         tagsField.enter(tags);
-        return onOpened(UpdateBmlPageLogged.class);
+        return this;
+    }
+
+    @StepGroup
+    public String getPostSubject() {
+        String subject = startScript("return jQuery('#subject').val()").toString();
+        if (subject.equals("")) {
+            subject = "No subject";
+        }
+        return subject;
     }
 
     public ArrayList<String> getAllPrivacy() {
@@ -115,12 +109,20 @@ public class PostContentBlock extends UIBlock {
         return text;
     }
 
-    @StepGroup
-    public String getPostSubject() {
-        String subject = startScript("return jQuery('#subject').val()").toString();
-        if (subject.equals("")) {
-            subject = "No subject";
-        }
-        return subject;
+    public VisualEditor useVisualEditor() {
+        return onDisplayed(VisualEditor.class);
     }
+
+    public HTMLEditor useHTMLEditor() {
+        return onDisplayed(HTMLEditor.class);
+    }
+
+    public UpdateBmlPageLogged usePage() {
+        return onOpened(UpdateBmlPageLogged.class);
+    }
+
+    public EditJournalBml useEditingPage() {
+        return onOpened(EditJournalBml.class);
+    }
+
 }

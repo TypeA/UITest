@@ -3,7 +3,7 @@ package com.livejournal.uitests.create_edit_post.subject.useful.subject;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
@@ -36,7 +36,10 @@ public class Subject extends WebTest {
     public void user_create_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost(subject, "HTML", RandomText.getRandomText(30))
+                .usePostContent()
+                .setSubject(subject)
+                .setPostText(RandomText.getRandomText(30), "HTML")
+                .usePage()
                 .postEntry();
     }
 
@@ -45,7 +48,9 @@ public class Subject extends WebTest {
     public void user_write_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost(subject, "HTML", RandomText.getRandomText(30));
+                .usePostContent()
+                .setSubject(subject)
+                .setPostText(RandomText.getRandomText(30), "HTML");
     }
 
     //User create new post with subject(3/3)
@@ -64,9 +69,9 @@ public class Subject extends WebTest {
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
         Thread.sleep(3000);
-        verify().that(onOpened(UpdateBmlPageLogged.class).getPostSubject().equals(subject))
+        verify().that(onOpened(UpdateBmlPageLogged.class).usePostContent().getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in draft '" + subject + "'")
-                .ifElse("User see incorrect post subject in draft '" + onOpened(UpdateBmlPageLogged.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .ifElse("User see incorrect post subject in draft '" + onOpened(UpdateBmlPageLogged.class).usePostContent().getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 
@@ -75,9 +80,9 @@ public class Subject extends WebTest {
     public void user_edit_this_post_and_see_correct_subject(String subject) {
         onOpened(EntryPage.class)
                 .clickOnEditButton();
-        verify().that(onOpened(EditJournalbml.class).getPostSubject().equals(subject))
+        verify().that(onOpened(EditJournalBml.class).usePostContent().getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in editing '" + subject + "'")
-                .ifElse("User see incorrect post subject in editing '" + onOpened(EditJournalbml.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .ifElse("User see incorrect post subject in editing '" + onOpened(EditJournalBml.class).usePostContent().getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 
@@ -86,8 +91,10 @@ public class Subject extends WebTest {
     public void user_edit_this_post_with_a_new_subject_and_see_correct_subject_in_post(String newsubject) {
         onOpened(EntryPage.class)
                 .clickOnEditButton()
+                .usePostContent()
                 .setSubject("")
                 .setSubject(newsubject)
+                .useEditingPage()
                 .saveEntry();
         verify().that(onOpened(EntryPage.class).getPostSubject().equals(newsubject))
                 .ifResultIsExpected("User see correct post subject '" + newsubject + "'")

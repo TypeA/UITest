@@ -7,7 +7,7 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
-import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
 import com.livejournal.uitests.utility.RandomText;
@@ -43,12 +43,14 @@ public class UsersPost extends WebTest {
     //Scenario: Privacy in editing(2/3)
     //Scenario: Edit post(2/4)
     @When("user create new post with privacy $privacy (group $group)")
-    public void user_create_new_post_with_privacy(String privacy, String group) throws IOException  {
+    public void user_create_new_post_with_privacy(String privacy, String group) throws IOException {
         String postText = RandomText.getRandomText(30);
-      String post_link =  onOpened(UpdateBmlPageLogged.class)
+        String post_link = onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("", "html", postText)
+                .usePostContent()
+                .setPostText(postText, "html")
                 .setPrivacy(privacy, getParsedString(group, ";"))
+                .usePage()
                 .postEntry()
                 .getIdPost(ThucydidesUtils.getFromSession("user").toString());
         ThucydidesUtils.putToSession("post_text", postText);
@@ -58,21 +60,26 @@ public class UsersPost extends WebTest {
 
     //Scenario: Edit post(3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post")
-    public void user_edit_privacy_and_save_post(String privacy_1, String group_1){
+    public void user_edit_privacy_and_save_post(String privacy_1, String group_1) {
         open(EntryPage.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        onOpened(EditJournalbml.class).setPrivacy(privacy_1, getParsedString(group_1, ";"))
+        onOpened(EditJournalBml.class)
+                .usePostContent()
+                .setPrivacy(privacy_1, getParsedString(group_1, ";"))
+                .useEditingPage()
                 .saveEntry();
     }
 
     //Scenario: Restore privacy from draft (2/3)
     @When("user write new post with privacy $privacy (group $group)")
-    public void user_write_new_post_with_privacy(String privacy, String group) throws InterruptedException{
+    public void user_write_new_post_with_privacy(String privacy, String group) throws InterruptedException {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("Test for privacy", "html", "privacy " + privacy)
+                .usePostContent()
+                .setSubject("Test for privacy")
+                .setPostText("privacy " + privacy, "html")
                 .setPrivacy(privacy, getParsedString(group, ";"));
         Thread.sleep(2000);
     }
@@ -131,20 +138,25 @@ public class UsersPost extends WebTest {
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
     public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) {
         onOpened(EntryPage.class).clickOnEditButton();
-        verify().that(isEqual(getParsedString(onOpened(EditJournalbml.class).getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
+        verify().that(isEqual(getParsedString(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
-                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+                .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();
     }
 
     //Scenario: Restore privacy from draft (3/3)
     @Then("user can restore this post with privacy $privacy (group $group) from draft")
-    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group){
+    public void user_can_restore_this_post_with_privacy_from_draft(String privacy, String group) {
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
-        verify().that(onOpened(UpdateBmlPageLogged.class).getCurrentPrivacy().equals(privacy))
+        verify().that(onOpened(UpdateBmlPageLogged.class)
+                .usePostContent()
+                .getCurrentPrivacy()
+                .equals(privacy))
                 .ifResultIsExpected("User see correct privacy " + privacy)
-                .ifElse("User see incorrect privacy " + onOpened(EditJournalbml.class).getCurrentPrivacy())
+                .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class)
+                        .usePostContent()
+                        .getCurrentPrivacy())
                 .finish();
     }
 

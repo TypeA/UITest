@@ -15,7 +15,7 @@ import org.jbehave.core.annotations.When;
  */
 public class HtmlTagsInSubject extends WebTest {
 
-    //Subject with correct html tags (1/3)
+    //Scenario: Subject with correct html tags (1/3)
     //Scenario: Subject with cropped html tags(1/3)
     //Scenario: Subject with incorrect html tags (1/3)
     @Given("logged user $name on Create Post page")
@@ -25,20 +25,23 @@ public class HtmlTagsInSubject extends WebTest {
                 .defaultStyle(name);
     }
 
-    //Subject with correct html tags (2/3)
+    //Scenario: Subject with correct html tags (2/3)
     //Scenario: Subject with cropped html tags(2/3)
     //Scenario: Subject with incorrect html tags (2/3)
     @When("user create new post with subject $subject")
     public void user_create_new_post_with_subject(String subject) {
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost(subject, "HTML", RandomText.getRandomText(30))
+                .usePostContent()
+                .setSubject(subject)
+                .setPostText(RandomText.getRandomText(30), "html")
+                .usePage()
                 .postEntry();
     }
 
-    //Subject with correct html tags(3/3)
+    //Scenario: Subject with correct html tags(3/3)
     @Then("the post in journal has subject $subject with correct tag")
-    public void the_post_in_journal_has_correct_subject_with_correct_tag(String subject) {
+    public void correct_tag(String subject) {
         verify().that(onOpened(EntryPage.class)
                 .getPostSubject()
                 .equals(cutSubject(subject)))
@@ -51,6 +54,7 @@ public class HtmlTagsInSubject extends WebTest {
                 .ifResultIsExpected("Tag '" + cutTag(subject) + "' is worked")
                 .ifElse("Tag '" + cutTag(subject) + "' is not worked")
                 .finish();
+
     }
 
     //Scenario: Subject with cropped html tags(3/3)
@@ -65,12 +69,12 @@ public class HtmlTagsInSubject extends WebTest {
     }
 
     //Scenario: Subject with incorrect html tags (3/3)
-    @Then("the post in journal has subject $cultivated_subject")
+    @Then("the post in journal has cultivated subject $cultivated_subject")
     public void post_in_journal_has_subject(String cultivated_subject) {
         verify().that(onOpened(EntryPage.class).getPostSubject().equals(cultivated_subject))
                 .ifResultIsExpected("User see correct post subject '" + cultivated_subject + "'")
                 .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
-                .finish();       
+                .finish();
     }
 
     private String cutSubject(String subject) {
@@ -81,7 +85,6 @@ public class HtmlTagsInSubject extends WebTest {
     private String cutTag(String subject) {
         String tag = subject.substring(subject.indexOf("/") + 1);
         return tag.substring(0, tag.indexOf(">"));
-
     }
 
 }

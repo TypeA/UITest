@@ -12,6 +12,7 @@ public class DB extends WebTest {
         System.out.println( "test " + this.getSystemConfiguration().getBaseUrl());
         System.out.println("!!!!!!!!!!!!!!!!!!!! getUrlInPage");
         System.out.println("!!!!!!!!!!!!! test stop");
+
     }
 
 }

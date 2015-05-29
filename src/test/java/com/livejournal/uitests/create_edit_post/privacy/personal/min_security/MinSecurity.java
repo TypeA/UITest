@@ -54,8 +54,10 @@ public class MinSecurity extends WebTest {
         ArrayList<String> g = new ArrayList<String>();
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .createPost("", "html", RandomText.getRandomText(30))
+                .usePostContent()
+                .setPostText(RandomText.getRandomText(30), "html")
                 .setPrivacy(security, g)
+                .usePage()
                 .postEntry();
     }
 
@@ -64,6 +66,7 @@ public class MinSecurity extends WebTest {
     public void user_can_set_only_allowed_security_when_create_post(String security){
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy(security).get(0))
@@ -76,6 +79,7 @@ public class MinSecurity extends WebTest {
     public void user_see_all_privacy_when_edit_this_post() {
         ArrayList<String> privacy = onOpened(EntryPage.class)
                 .clickOnEditButton()
+                .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy("public").equals(privacy))
                 .ifResultIsExpected("Privacy is correct " + correctPrivacy("public").get(0))
@@ -86,19 +90,19 @@ public class MinSecurity extends WebTest {
     ////////////////////////////////////////////
     private ArrayList<String> correctPrivacy(String privacy) {
         ArrayList<String> okPrivacy = new ArrayList<>();
-        switch (AllowPrivacy.valueOf(privacy.toUpperCase())) {
-            case PUBLIC:
+        switch (privacy.toUpperCase()) {
+            case "PUBLIC":
                 okPrivacy.add("Public");
                 okPrivacy.add("Friends");
                 okPrivacy.add("Custom");
                 okPrivacy.add("Private");
                 break;
-            case FRIENDS:
+            case "FRIENDS":
                 okPrivacy.add("Friends");
                 okPrivacy.add("Custom");
                 okPrivacy.add("Private");
                 break;
-            case PRIVATE:
+            case "PRIVATE":
                 okPrivacy.add("Private");
                 break;
             default:

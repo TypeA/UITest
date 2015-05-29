@@ -33,10 +33,7 @@ public class LoginForm extends WebTest {
         ThucydidesUtils.putToSession("post_text", RandomText.getRandomText(30));
    
         System.out.println("==================4");
-        onOpened(UpdateBmlPageLogged.class)
-                .closeDraft()
-                .createPost("New post", "html", ThucydidesUtils.getFromSession("post_text").toString())
-                .postEntry();
+
         
     }
 

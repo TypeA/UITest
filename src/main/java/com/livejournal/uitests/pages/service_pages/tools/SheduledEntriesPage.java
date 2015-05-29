@@ -1,10 +1,16 @@
 package com.livejournal.uitests.pages.service_pages.tools;
 
+import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
-import com.livejournal.uitests.pages.service_pages.update.EditJournalbml;
-import com.livejournal.uitests.pages.service_pages.update.forms_and_blocks.FinishPostForm;
+import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
+import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
 import net.thucydides.core.annotations.DefaultUrl;
+import net.thucydides.core.annotations.WhenPageOpens;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -12,6 +18,9 @@ import net.thucydides.core.annotations.DefaultUrl;
  */
 @DefaultUrl("/manage/scheduled_posts.bml")
 public class SheduledEntriesPage extends ServicePageLogged {
+
+    @FindBy(css = ".b-editentries-form")
+    private TextField communityInput;
 
     public String getPostByText(String post_text) {
         return startScript("return jQuery('.b-editentry:contains(\"" + post_text + "\")').text()")
@@ -25,7 +34,7 @@ public class SheduledEntriesPage extends ServicePageLogged {
                     .toString();
             privacy = privacy.substring(privacy.indexOf('_') + 1, privacy.indexOf('?') - 4);
         } catch (Exception ex) {
-            privacy = "Public";
+            privacy = "public";
         }
         return privacy.replaceAll("protected", "friends")
                 .replaceAll("groups", "custom");
@@ -34,7 +43,7 @@ public class SheduledEntriesPage extends ServicePageLogged {
     public SheduledEntriesPage deleteAllSheduledEntries() {
         while (getNumberOfEntryes() > 6) {
             startScript("jQuery('.b-editentry a')[0].click()");
-            onOpened(EditJournalbml.class)
+            onOpened(EditJournalBml.class)
                     .deleteEntry();
             open(SheduledEntriesPage.class);
         }
@@ -43,14 +52,14 @@ public class SheduledEntriesPage extends ServicePageLogged {
 
     public MyJournalPage deleteFirstSheduledEntry() {
         startScript("jQuery('.b-editentry a')[0].click()");
-        onOpened(EditJournalbml.class)
+        onOpened(EditJournalBml.class)
                 .deleteEntry();
         return onOpened(MyJournalPage.class);
     }
 
     public FinishPostForm editSheduledEntryByText(String content, String text, String post_text) {
         startScript("jQuery('.b-editentry:contains(\"" + post_text + "\") a')[0].click()");
-        onOpened(EditJournalbml.class)
+        onOpened(EditJournalBml.class)
                 .editPostContent(content, text);
         return onDisplayed(FinishPostForm.class);
     }
@@ -58,6 +67,17 @@ public class SheduledEntriesPage extends ServicePageLogged {
     public Integer getNumberOfEntryes() {
         String size = startScript("return jQuery('.b-editentry').size()").toString();
         return Integer.valueOf(size);
+    }
+
+    @WhenPageOpens
+    private void waitPage() {
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return communityInput.isDisplayed();
+            }
+        });
     }
 
 }
