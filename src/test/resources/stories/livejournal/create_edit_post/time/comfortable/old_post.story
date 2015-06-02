@@ -1,6 +1,6 @@
 Scenario: Create old post
 Meta: 
-@categories create_edit_post time comfortable
+@categories create_edit_post time comfortable test
 
 Given logged user <name> on Create Post page
 When user create new post and change parameter <parameter> by value <value>

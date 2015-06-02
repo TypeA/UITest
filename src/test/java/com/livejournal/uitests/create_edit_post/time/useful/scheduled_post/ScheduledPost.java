@@ -27,7 +27,8 @@ public class ScheduledPost extends WebTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
-                .defaultStyle(name);
+                .defaultStyle(name)
+                .defaultMinSecurity(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
@@ -44,7 +45,6 @@ public class ScheduledPost extends WebTest {
                 .defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
-
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
         String post_text = RandomText.getRandomText(10).trim();

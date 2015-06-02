@@ -16,7 +16,7 @@ Examples:
 
 Scenario: Create scheduled post with several privacy 
 Meta: 
-@categories create_edit_post time useful 
+@categories create_edit_post time useful
 
 Given logged user <name> on Create Post page
 When user create new scheduled post with privacy <privacy> (group <group>)

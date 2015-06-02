@@ -8,6 +8,8 @@ import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.support.FindBy;
@@ -58,6 +60,11 @@ public class HTMLEditor extends UIBlock {
     @WhenPageOpens
     public void switchToHTMLEditor() {
         htmlEditButton.click();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(HTMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
