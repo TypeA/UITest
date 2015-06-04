@@ -9,7 +9,7 @@ Then the Title is changed on correct title <correct_title>
 Examples:
 |name           |title      |correct_title    |
 |testautotest   |new_title  |NEW_TITLE        |
-|testautotest   |           |ENTRIES FEED OF  |
+|testautotest   |           |ENTRIES FEED FOR |
 
 
 Scenario: Change Title
@@ -184,7 +184,7 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings test
 
 Given logged user (name <name>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it
@@ -203,7 +203,7 @@ Examples:
 
 Scenario: Cancel paging type 
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings test
 
 Given logged user (name <name>) on Friends Feed
 When user set Paging type <new_type> (old type <type>, number <number>) in Settings and cancel it
