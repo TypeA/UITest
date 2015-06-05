@@ -57,6 +57,11 @@ public class SheduledEntriesPage extends ServicePageLogged {
         return onOpened(MyJournalPage.class);
     }
 
+    public EditJournalBml editSheduledEntryByText(String post_text) {
+        startScript("jQuery('.b-editentry:contains(\"" + post_text + "\") a')[0].click()");
+        return onOpened(EditJournalBml.class);
+    }
+
     public FinishPostForm editSheduledEntryByText(String content, String text, String post_text) {
         startScript("jQuery('.b-editentry:contains(\"" + post_text + "\") a')[0].click()");
         onOpened(EditJournalBml.class)

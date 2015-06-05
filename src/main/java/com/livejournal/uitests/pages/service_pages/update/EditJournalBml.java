@@ -5,6 +5,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -30,10 +31,6 @@ public class EditJournalBml extends ServicePageLogged {
 
     @FindBy(name = "action:delete")
     private Button deleteButton;
-
-    public PostContentBlock usePostContent() {
-        return postContentBlock;
-    }
 
     @StepGroup
     public void editPostContent(String content, String text) {
@@ -88,4 +85,13 @@ public class EditJournalBml extends ServicePageLogged {
             }
         });
     }
+
+    public PostContentBlock usePostContent() {
+        return postContentBlock;
+    }
+
+    public AdditionalContent useAdditionalContent() {
+        return onDisplayed(AdditionalContent.class);
+    }
+
 }
