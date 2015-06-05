@@ -73,11 +73,8 @@ public class EditJournalBml extends ServicePageLogged {
 
     @StepGroup
     public MyJournalPage deleteEntry() {
-        System.out.println("============== перешел непосредственно к удалению");
         deleteButton.click();
-        System.out.println("============== нажал на кнопку");
         getDriver().switchTo().alert().accept();
-        System.out.println("============== нажал на алерт");
         return onOpened(MyJournalPage.class);
     }
 

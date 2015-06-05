@@ -1,10 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.update.content;
 
-import com.livejournal.uisteps.core.Page;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
-import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
-import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.editors.HTMLEditor;
 import com.livejournal.uitests.pages.service_pages.update.content.editors.VisualEditor;
 import java.util.ArrayList;
@@ -22,7 +18,7 @@ import ru.yandex.qatools.htmlelements.element.Select;
  */
 @Block(
         @FindBy(css = ".b-updatepage"))
-public class PostContentBlock extends UIBlock {
+public class PostContentBlock extends UpdateBmlBlockes {
 
     private VisualEditor visualEditor;
 
@@ -109,25 +105,5 @@ public class PostContentBlock extends UIBlock {
         }
         return text;
     }
-
-    public VisualEditor useVisualEditor() {
-        return onDisplayed(VisualEditor.class);
-    }
-
-    public HTMLEditor useHTMLEditor() {
-        return onDisplayed(HTMLEditor.class);
-    }
-
-    public AdditionalContent useAdditionalContent() {
-        return onDisplayed(AdditionalContent.class);
-    }
-
-     public UpdateBmlPageLogged usePage() {
-     return onOpened(UpdateBmlPageLogged.class);
-     }
-
-     public EditJournalBml useEditingPage() {
-     return onOpened(EditJournalBml.class);
-     }
 
 }

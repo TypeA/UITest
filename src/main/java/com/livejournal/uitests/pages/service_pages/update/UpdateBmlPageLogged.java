@@ -104,12 +104,4 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public AdditionalContent useAdditionalContent() {
         return onDisplayed(AdditionalContent.class);
     }
-
-    public VisualEditor useVisualEditor() {
-        return onDisplayed(VisualEditor.class);
-    }
-
-    public HTMLEditor useHTMLEditor() {
-        return onDisplayed(HTMLEditor.class);
-    }
 }

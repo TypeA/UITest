@@ -15,7 +15,7 @@ Examples:
 
 Scenario: Create post with font
 Meta: 
-@categories create_post html_tags useful
+@categories create_post html_tags useful test
 
 Given logged user <name> on Create Post page
 When user create new post with font <font_text> and save post

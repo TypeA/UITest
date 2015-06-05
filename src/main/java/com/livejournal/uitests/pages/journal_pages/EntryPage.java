@@ -80,25 +80,25 @@ public class EntryPage extends JournalPage {
 
     @StepGroup
     public Boolean postWithFontIsDisplayed(String text, String font_style) {
-        String script = "";
+        String jQuery = "";
         switch (font_style) {
             case "TINY":
-                script = "return jQuery(\"span[style='font-size:0.7em;']\").is(\":contains('" + text + "')\")";
+                jQuery = "span[style='font-size:0.7em;']";
                 break;
             case "SMALL":
-                script = "return jQuery(\"span[style='font-size:0.9em;']\").is(\":contains('" + text + "')\")";
+                jQuery = "span[style='font-size:0.9em;']";
                 break;
             case "NORMAL":
-                script = "return jQuery(\"article.e-content\").is(\":contains('" + text + "')\")";
+                jQuery = "article.e-content";
                 break;
             case "LARGE":
-                script = "return jQuery(\"span[style='font-size:1.4em;']\").is(\":contains('" + text + "')\")";
+                jQuery = "span[style='font-size:1.4em;']";
                 break;
             case "HUGE":
-                script = "return jQuery(\"span[style='font-size:1.8em;']\").is(\":contains('" + text + "')\")";
+                jQuery = "span[style='font-size:1.8em;']";
 
         }
-        System.out.println(script);
+        String script = "return jQuery(\"" + jQuery + "\").is(\":contains('" + text + "')\")";
         return Boolean.valueOf(startScript(script).toString());
     }
 

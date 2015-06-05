@@ -37,6 +37,7 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useVisualEditor()
                 .setTextStyle(tag)
                 .setPostText(post_text)
@@ -51,6 +52,7 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useVisualEditor()
                 .setTextFont(font_text.toUpperCase())
                 .setPostText(post_text)
@@ -65,6 +67,7 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useVisualEditor()
                 .setTextColor(color_text)
                 .setPostText(post_text)
@@ -79,6 +82,7 @@ public class CreatePostWithHtmlTags extends WebTest {
         String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useVisualEditor()
                 .setTextStyle(tag_1)
                 .setTextStyle(tag_2)
@@ -94,6 +98,7 @@ public class CreatePostWithHtmlTags extends WebTest {
     public void user_create_new_post_with_link(String link, String newWindow) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useVisualEditor()
                 .addLink(link, Boolean.valueOf(newWindow))
                 .usePage()
@@ -105,6 +110,7 @@ public class CreatePostWithHtmlTags extends WebTest {
     public void user_create_new_post_with_link_link_and_style(String link, String tag) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useVisualEditor()
                 .setTextStyle(tag)
                 .addLink(link, Boolean.FALSE)

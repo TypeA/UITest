@@ -2,12 +2,12 @@ package com.livejournal.uitests.pages.service_pages.update.content.editors;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
+import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.By;
@@ -24,7 +24,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".b-updatepage-event"))
-public class VisualEditor extends UIBlock {
+public class VisualEditor extends UpdateBmlBlockes {
 
     @FindBy(css = ".b-updatepage-tab-visual")
     public Button visualEditButton;

@@ -32,6 +32,7 @@ public class LjuserTag extends WebTest {
         String postText = RandomText.getRandomText(30) + " ";
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useHTMLEditor()
                 .setPostText(postText)
                 .setUsername(ljuser, true)
@@ -44,6 +45,7 @@ public class LjuserTag extends WebTest {
     public void user_enter_incorrect_username_in_ljuser_bubble(String ljuser) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
+                .usePostContent()
                 .useHTMLEditor()
                 .setPostText("")
                 .setUsername(ljuser, false);
