@@ -6,6 +6,7 @@ import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
+import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
@@ -48,7 +49,7 @@ public class VisualEditor extends UIBlock {
 
     @FindBy(css = ".cke_button_LJLink2")
     private OpenBubbleButton link;
-    
+
     private Button button;
 
     @StepGroup
@@ -105,6 +106,10 @@ public class VisualEditor extends UIBlock {
 
     public PostContentBlock usePostContent() {
         return onDisplayed(PostContentBlock.class);
+    }
+
+    public AdditionalContent useAdditionalContent() {
+        return onDisplayed(AdditionalContent.class);
     }
 
     public UpdateBmlPageLogged usePage() {

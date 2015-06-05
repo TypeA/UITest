@@ -5,6 +5,7 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
 import com.livejournal.uitests.pages.service_pages.update.content.editors.HTMLEditor;
 import com.livejournal.uitests.pages.service_pages.update.content.editors.VisualEditor;
@@ -100,11 +101,15 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return postContentBlock;
     }
 
+    public AdditionalContent useAdditionalContent() {
+        return onDisplayed(AdditionalContent.class);
+    }
+
     public VisualEditor useVisualEditor() {
         return onDisplayed(VisualEditor.class);
     }
-    
-        public HTMLEditor useHTMLEditor() {
+
+    public HTMLEditor useHTMLEditor() {
         return onDisplayed(HTMLEditor.class);
     }
 }
