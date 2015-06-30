@@ -246,7 +246,6 @@ public class SettingsBlock extends UIBlock {
                 case "PAGES":
                     try {
                         pageSize.enter(size);
-
                     } catch (Exception ex) {
                         Assert.fail("Page size input field is not displayed!" + ex);
                     }
@@ -256,7 +255,7 @@ public class SettingsBlock extends UIBlock {
                     try {
                         Assert.assertFalse("Page size input field is displayed!", pageSize.isDisplayed());
                     } catch (NoSuchElementException ex) {
-
+                        Assert.fail("Page size input field is not displayed! " + ex);
                     }
                     break;
                 default:

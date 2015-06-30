@@ -86,8 +86,8 @@ public class PostContentBlock extends UpdateBmlBlockes {
     public ArrayList<String> getAllPrivacy() {
         List<WebElement> allSecurity = privacySelect.getOptions();
         ArrayList<String> privasy = new ArrayList<>();
-        for (int i = 0; i < allSecurity.size(); i++) {
-            privasy.add(allSecurity.get(i).getText());
+        for (WebElement allSecurity1 : allSecurity) {
+            privasy.add(allSecurity1.getText());
         }
         return privasy;
     }

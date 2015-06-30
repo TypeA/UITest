@@ -19,8 +19,6 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ".b-loginform-body"))
 public class LoginForm extends UIBlock {
 
-    private SocialNetworksBlock socialNetworksBlock;
-
     @FindBy(id = "user")
     private TextField loginField;
 

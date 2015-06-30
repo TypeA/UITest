@@ -51,6 +51,7 @@ public class LJPage extends Page {
                     .setMinSecurity("Public")
                     .saveSettings();
         } catch (Exception ex) {
+            Assert.fail("I cannot set default min security");
         }
         return this;
     }
@@ -86,7 +87,7 @@ public class LJPage extends Page {
         return onOpened(LJPage.class);
     }
 
-    public LJPage defaultStyle(String user){
+    public LJPage defaultStyle(String user) {
 
         List<ArrayList<String>> user_atr = workWithDB().conect()
                 .select("select * from user where user = '" + user + "';", "userid")
@@ -102,7 +103,7 @@ public class LJPage extends Page {
                 .finish()
                 .get(0)
                 .get(0);
-        
+
         String script2 = "select name from s2styles "
                 + "where userid= '" + user_atr.get(0).get(0)
                 + "' and styleid = '" + styleid + "';";
@@ -134,6 +135,8 @@ public class LJPage extends Page {
                     open(SettingsMainPage.class, new Url().setPostfix("?cat=display")).changeCyrServices().saveSettings();
                 }
                 break;
+            default:
+                Assert.fail("Incorrect user region " + region);
         }
         return onOpened(LJPage.class);
     }
@@ -146,6 +149,8 @@ public class LJPage extends Page {
             case "NONCYR":
                 addCookie("fake_ipclass", "US");
                 break;
+            default:
+                Assert.fail("Incorrect user region " + reg);
         }
         return onOpened(LJPage.class);
     }

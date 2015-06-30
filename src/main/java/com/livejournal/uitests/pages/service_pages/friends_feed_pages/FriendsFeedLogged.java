@@ -83,7 +83,6 @@ public class FriendsFeedLogged extends ServicePageLogged {
     public boolean displaySwitchPagesButtons() {
         try {
             return previousButton.isDisplayed() && nextButton.isDisplayed();
-
         } catch (NoSuchElementException ex) {
             return false;
         }
@@ -94,8 +93,8 @@ public class FriendsFeedLogged extends ServicePageLogged {
         List<WebElement> list = getDriver()
                 .findElements(By.xpath("//ul[@class='l-flatslide-menu-items l-flatslide-menu-items-active']//li//a"));
         StringBuilder filresFeed = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            String filter = list.get(i).getAttribute("text");
+        for (WebElement list1 : list) {
+            String filter = list1.getAttribute("text");
             filresFeed.append(filter);
         }
         return filresFeed.toString();

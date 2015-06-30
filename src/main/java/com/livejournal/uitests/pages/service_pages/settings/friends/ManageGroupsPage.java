@@ -161,8 +161,8 @@ public class ManageGroupsPage extends ServicePageLogged {
         Select value = new Select(list);
         List<WebElement> options = value.getOptions();
         ArrayList<String>  usersOutGroup = new ArrayList<String>();
-        for (int i = 0; i < options.size(); i++) {
-          String  userOutGroup = options.get(i).getText();
+        for (WebElement option : options) {
+            String userOutGroup = option.getText();
             usersOutGroup.add(userOutGroup);
         }
         return usersOutGroup;
@@ -175,8 +175,8 @@ public class ManageGroupsPage extends ServicePageLogged {
         Select value = new Select(list);
         List<WebElement> options = value.getOptions();
         ArrayList<String> nameGroups = new ArrayList<String>();
-        for (int i = 0; i < options.size(); i++) {
-            String nameGroup = options.get(i).getText();
+        for (WebElement option : options) {
+            String nameGroup = option.getText();
             nameGroups.add(nameGroup);
         }
         return nameGroups;

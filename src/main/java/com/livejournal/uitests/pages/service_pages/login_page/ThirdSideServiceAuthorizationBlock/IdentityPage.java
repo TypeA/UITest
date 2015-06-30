@@ -1,6 +1,5 @@
 package com.livejournal.uitests.pages.service_pages.login_page.ThirdSideServiceAuthorizationBlock;
 
-import com.livejournal.uitests.pages.service_pages.ServicePage;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
 

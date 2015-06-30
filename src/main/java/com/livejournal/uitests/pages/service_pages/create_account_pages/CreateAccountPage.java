@@ -10,6 +10,7 @@ import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyP
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosPageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -113,7 +114,7 @@ public class CreateAccountPage extends LJPage {
                 passwordMappingLinkShow.click();
                 return this;
             default:
-                org.junit.Assert.fail("Unknown icon " + icon + "!");
+                Assert.fail("Unknown icon " + icon + "!");
         }
         return null;
     }
@@ -126,7 +127,7 @@ public class CreateAccountPage extends LJPage {
             case "SHOW":
                 return passwordMappingLinkShow.isDisplayed();
             default:
-                org.junit.Assert.fail("Unknown icon " + icon + "!");
+                Assert.fail("Unknown icon " + icon + "!");
         }
         return false;
     }

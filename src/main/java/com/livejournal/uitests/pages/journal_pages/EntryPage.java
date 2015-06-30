@@ -56,20 +56,21 @@ public class EntryPage extends JournalPage {
 
     @StepGroup
     public Boolean containsLjUser(String ljuser) {
-        Boolean fl2 = false;
-        Boolean fl1 = Boolean.valueOf(startScript("return jQuery('.e-content span').is(\"[lj\\\\:user='" + ljuser + "']\")").toString());
-        if (fl1) {
-            fl2 = startScript("return jQuery('.e-content span')[0].textContent").toString().equals(ljuser);
+        String script = "return jQuery('.e-content span').is(\"[lj\\\\:user='" + ljuser + "']\")";
+        Boolean fl = false;
+        if (Boolean.valueOf(startScript(script).toString())) {
+            fl = startScript("return jQuery('.e-content span')[0].textContent").toString().equals(ljuser);
         }
-        return fl2;
+        return fl;
     }
 
     @StepGroup
     public String getPostSubject() {
-        String subject = "No subject";
+        String subject;
         try {
             subject = postSubject.getText();
         } catch (Exception ex) {
+            subject = "No subject";
         }
         return subject;
     }
@@ -136,18 +137,10 @@ public class EntryPage extends JournalPage {
     }
 
     @StepGroup
-    public String ljUserTagText() {
-        try {
-            return startScript("return jQuery('.e-content span')[0].textContent").toString();
-        } catch (Exception ex) {
-            return "BAD SPAN";
-        }
+    public String getIdPost(String user) throws IOException {
+        return getDriver().getCurrentUrl().replace("http://" + user.replace("_", "-") + "." + getSystemConfiguration().getBaseUrl() + "/", "");
     }
 
-    @StepGroup
-    public String getIdPost(String user) throws IOException {
-        return getDriver().getCurrentUrl().replace("http://" + user.replace("_", "-") + "." + getSystemConfiguration().getBaseUrl() + "/", "");}
-   
     @StepGroup
     public String getTagsTextInSubject(String tag) {
         return startScript("return jQuery('.b-singlepost-title.entry-title.p-name " + tag + "').text()").toString();

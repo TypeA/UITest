@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import net.thucydides.core.annotations.StepGroup;
+import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -125,6 +126,8 @@ public class BubblesUpdateBml extends UIBlock {
                 case "HUGE":
                     hugeFontText.click();
                     break;
+                default:
+                    Assert.fail("Incorrect text font " + font_text);
             }
         }
     }

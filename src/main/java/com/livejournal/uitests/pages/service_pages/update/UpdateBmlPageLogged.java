@@ -70,17 +70,13 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged selectCommunity(String community) {
         postToCommunity.click();
         communitySelect.selectByValue(community);
-        try {
-            Thread.sleep(300);
-        } catch (InterruptedException ex) {
-            WebDriverWait wait = new WebDriverWait(getDriver(), 10);
-            wait.until(new ExpectedCondition<Boolean>() {
-                @Override
-                public Boolean apply(WebDriver d) {
-                    return communitySelect.isDisplayed();
-                }
-            });
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return communitySelect.isDisplayed();
+            }
+        });
         return this;
     }
 
