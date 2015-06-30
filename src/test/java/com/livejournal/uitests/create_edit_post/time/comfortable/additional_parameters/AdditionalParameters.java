@@ -50,8 +50,8 @@ public class AdditionalParameters extends WebTest {
     }
 
     //Scenario: Location, mood and music (2/3)
-    @When("user create new sheduied post with right element $element")
-    public void user_create_new_sheduied_post_with_right_element(String element) {
+    @When("user create new sheduied post with right element $element (content $content)")
+    public void user_create_new_sheduied_post_with_right_element(String element, String content) {
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
         String post_text = RandomText.getRandomText(30);
@@ -80,5 +80,19 @@ public class AdditionalParameters extends WebTest {
                 .ifElse("The Sticky post is not scheduled")
                 .finish();
 
+    }
+
+    //Scenario: Location, mood and music (3/3)
+    @Then("the post is scheduled with right element $element (content $content)")
+    public void post_is_scheduled_with_right_element(String element, String content) {
+        String text = onDisplayed(FinishPostForm.class)
+                .clickToScheduledLink()
+                .editSheduledEntryByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .useAdditionalContent()
+                .getRightBlockContent(element);
+        verify().that(text.contains(content))
+                .ifResultIsExpected("Content in " + element + " is correct: " + content)
+                .ifElse("Content in " + element + " is incorrect: " + text)
+                .finish();
     }
 }

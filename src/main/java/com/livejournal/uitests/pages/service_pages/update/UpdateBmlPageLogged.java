@@ -7,8 +7,6 @@ import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
-import com.livejournal.uitests.pages.service_pages.update.content.editors.HTMLEditor;
-import com.livejournal.uitests.pages.service_pages.update.content.editors.VisualEditor;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
@@ -23,26 +21,6 @@ import ru.yandex.qatools.htmlelements.element.Select;
  */
 @DefaultUrl("/update.bml")
 public class UpdateBmlPageLogged extends ServicePageLogged {
-
-    private PostContentBlock postContentBlock;
-
-    @FindBy(name = "community")
-    private Select communitySelect;
-
-    @FindBy(css = "label[for=\"community\"]")
-    private UIElement postToCommunity;
-
-    @FindBy(name = "action:update")
-    private Button addPostButton;
-
-    @FindBy(css = ".b-updatepage-date-current a")
-    private Button changeDate;
-
-    @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-date input")
-    private TextField dateField;
-
-    @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-time input")
-    private TextField timeField;
 
     @FindBy(name = "dialog-cancel")
     private UIElement closeDraftButton;
@@ -65,6 +43,15 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return this;
     }
 
+    @FindBy(css = ".b-updatepage-date-current a")
+    private Button changeDate;
+
+    @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-date input")
+    private TextField dateField;
+
+    @FindBy(css = ".b-updatepage-date-new .b-updatepage-date-new-time input")
+    private TextField timeField;
+
     @StepGroup
     public UpdateBmlPageLogged setDateAndTime(String date, String time) {
         changeDate.click();
@@ -72,6 +59,12 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         timeField.enter(time);
         return this;
     }
+
+    @FindBy(name = "community")
+    private Select communitySelect;
+
+    @FindBy(css = "label[for=\"community\"]")
+    private UIElement postToCommunity;
 
     @StepGroup
     public UpdateBmlPageLogged selectCommunity(String community) {
@@ -91,6 +84,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
         return this;
     }
 
+    @FindBy(name = "action:update")
+    private Button addPostButton;
+
     @StepGroup
     public EntryPage postEntry() {
         addPostButton.click();
@@ -98,7 +94,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     }
 
     public PostContentBlock usePostContent() {
-        return postContentBlock;
+        return onDisplayed(PostContentBlock.class);
     }
 
     public AdditionalContent useAdditionalContent() {

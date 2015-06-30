@@ -2,6 +2,7 @@ package com.livejournal.uitests.pages.service_pages.update.content;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
+import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -21,9 +22,6 @@ public class AdditionalContent extends UpdateBmlBlockes {
         return this;
     }
 
-    public void setRightBlockContent(String type, String content) {
-    }
-
     public Boolean getStickyPost() {
         return subjectField.isSelected();
     }
@@ -36,7 +34,28 @@ public class AdditionalContent extends UpdateBmlBlockes {
 
     @FindBy(id = "location")
     public TextField location;
-    
-    private TextField rigthBlock;
+
+    public AdditionalContent setRightBlockContent(String type, String content) {
+        selestRightBlockContent(type).enter(content);
+        return this;
+    }
+
+    public String getRightBlockContent(String type) {
+        return selestRightBlockContent(type).getText();
+    }
+
+    private TextField selestRightBlockContent(String type) {
+        switch (type.toUpperCase()) {
+            case "MOOD":
+                return mood;
+            case "MUSIC":
+                return mood;
+            case "LOCATION":
+                return location;
+            default:
+                Assert.fail("Unknown right block type " + type + "!");
+                return null;
+        }
+    }
 
 }

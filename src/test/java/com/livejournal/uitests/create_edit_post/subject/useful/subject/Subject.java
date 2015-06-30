@@ -69,9 +69,9 @@ public class Subject extends WebTest {
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
         Thread.sleep(3000);
-        verify().that(onOpened(UpdateBmlPageLogged.class).usePostContent().getPostSubject().equals(subject))
+        verify().that(onOpened(UpdateBmlPageLogged.class).usePostContent().getSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in draft '" + subject + "'")
-                .ifElse("User see incorrect post subject in draft '" + onOpened(UpdateBmlPageLogged.class).usePostContent().getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .ifElse("User see incorrect post subject in draft '" + onOpened(UpdateBmlPageLogged.class).usePostContent().getSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 
@@ -80,9 +80,9 @@ public class Subject extends WebTest {
     public void user_edit_this_post_and_see_correct_subject(String subject) {
         onOpened(EntryPage.class)
                 .clickOnEditButton();
-        verify().that(onOpened(EditJournalBml.class).usePostContent().getPostSubject().equals(subject))
+        verify().that(onOpened(EditJournalBml.class).usePostContent().getSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in editing '" + subject + "'")
-                .ifElse("User see incorrect post subject in editing '" + onOpened(EditJournalBml.class).usePostContent().getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .ifElse("User see incorrect post subject in editing '" + onOpened(EditJournalBml.class).usePostContent().getSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 

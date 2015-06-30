@@ -24,24 +24,6 @@ public class PostContentBlock extends UpdateBmlBlockes {
 
     private HTMLEditor htmlEditor;
 
-    @FindBy(id = "subject")
-    public TextField subjectField;
-
-    @FindBy(id = "tags")
-    public TextField tagsField;
-
-    @FindBy(name = "privacy")
-    public Select privacySelect;
-
-    @StepGroup
-    public PostContentBlock setSubject(String subject) {
-        if (subject.toUpperCase().equals("NO SUBJECT")) {
-            subject = "";
-        }
-        subjectField.enter(subject);
-        return this;
-    }
-
     @StepGroup
     public PostContentBlock setPostText(String text, String editorType) {
         switch (editorType.toUpperCase()) {
@@ -57,6 +39,39 @@ public class PostContentBlock extends UpdateBmlBlockes {
         return this;
     }
 
+    @FindBy(id = "tags")
+    public TextField tagsField;
+
+    @StepGroup
+    public PostContentBlock setTags(String tags) {
+        tagsField.enter(tags);
+        return this;
+    }
+
+    @FindBy(id = "subject")
+    public TextField subjectField;
+
+    @StepGroup
+    public PostContentBlock setSubject(String subject) {
+        if (subject.toUpperCase().equals("NO SUBJECT")) {
+            subject = "";
+        }
+        subjectField.enter(subject);
+        return this;
+    }
+
+    @StepGroup
+    public String getSubject() {
+        String subject = startScript("return jQuery('#subject').val()").toString();
+        if (subject.equals("")) {
+            subject = "No subject";
+        }
+        return subject;
+    }
+
+    @FindBy(name = "privacy")
+    public Select privacySelect;
+
     @StepGroup
     public PostContentBlock setPrivacy(String privacy, ArrayList<String> group) {
         privacySelect.selectByVisibleText(privacy);
@@ -66,21 +81,6 @@ public class PostContentBlock extends UpdateBmlBlockes {
             }
         }
         return this;
-    }
-
-    @StepGroup
-    public PostContentBlock setTags(String tags) {
-        tagsField.enter(tags);
-        return this;
-    }
-
-    @StepGroup
-    public String getPostSubject() {
-        String subject = startScript("return jQuery('#subject').val()").toString();
-        if (subject.equals("")) {
-            subject = "No subject";
-        }
-        return subject;
     }
 
     public ArrayList<String> getAllPrivacy() {
