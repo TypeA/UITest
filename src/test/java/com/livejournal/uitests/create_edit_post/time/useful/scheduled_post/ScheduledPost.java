@@ -1,11 +1,13 @@
 package com.livejournal.uitests.create_edit_post.time.useful.scheduled_post;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
-import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
 import com.livejournal.uitests.utility.RandomName;
 import com.livejournal.uitests.utility.RandomText;
 import com.livejournal.uitests.utility.date.PostTime;
@@ -22,6 +24,7 @@ public class ScheduledPost extends WebTest {
 
     //Scenario: Create scheduled post (1/3)
     //Scenario: Create scheduled post with several privacy (1/3)
+    //Scenario: Publication of scheduled post (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -32,6 +35,7 @@ public class ScheduledPost extends WebTest {
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
+        ThucydidesUtils.putToSession("user", name);
     }
 
     //Scenario: Edit scheduled post (1/3)
@@ -62,6 +66,7 @@ public class ScheduledPost extends WebTest {
     }
 
     //Scenario: Create scheduled post (2/3)
+    //Scenario: Publication of scheduled post (2/3)
     @When("user create new post and change parameter $parameter by value $value")
     public void user_create_new_post_and_change_date(String parameter, String value) {
         ThucydidesUtils.putToSession("post_date", PostTime.getCorrectDate(parameter, value));
@@ -130,6 +135,28 @@ public class ScheduledPost extends WebTest {
         verify().that(post_text.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "scheduled post")))
                 .ifResultIsExpected("Post is scheduled, whis correct date: " + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "scheduled post"))
                 .ifElse("There is no post " + post_text + " in scheduled, with correct date")
+                .finish();
+    }
+
+    //Scenario: Publication of scheduled post (3/3)
+    @Then("the post is publicated in correct time")
+    public void post_is_publicated_in_correct_time() throws InterruptedException {
+        for (int i = 0; i < 20; i++) {
+            if (PostTime.getCurrentDate().equals(ThucydidesUtils.getFromSession("post_date"))) {
+                i = 20;
+            } else {
+                Thread.sleep(500);
+            }
+        }
+        open(MyJournalPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("user").toString() + "."));
+        String post_time = onOpened(MyJournalPage.class)
+                .openPostByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .getPostTime();
+        verify().that(post_time.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post")))
+                .ifResultIsExpected("Post is injournal, whith correct date: "
+                        + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post"))
+                .ifElse("Incorrect post time " + post_time + " in journal")
                 .finish();
     }
 

@@ -13,7 +13,7 @@ Examples:
 
 Scenario: Location, mood and music
 Meta: 
-@categories create_edit_post time comfortable test
+@categories create_edit_post time comfortable
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with right element <element> (content <content>)

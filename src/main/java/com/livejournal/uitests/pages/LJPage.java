@@ -51,7 +51,7 @@ public class LJPage extends Page {
                     .setMinSecurity("Public")
                     .saveSettings();
         } catch (Exception ex) {
-            Assert.fail("I cannot set default min security");
+           Assert.assertTrue("I cannot set default min security", true);
         }
         return this;
     }

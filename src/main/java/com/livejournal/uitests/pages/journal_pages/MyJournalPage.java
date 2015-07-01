@@ -9,5 +9,9 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/")
 public class MyJournalPage extends JournalPage {
 
+    public EntryPage openPostByText(String text) {
+        startScript("jQuery('.entryunit:contains(\"" + text + "\") .entryunit__title a')[0].click()");
+        return onOpened(EntryPage.class);
+    }
 
 }

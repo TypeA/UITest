@@ -5,6 +5,28 @@ package com.livejournal.uitests.utility.date;
  * @author m.prytkova
  */
 public class PostTime {
+    
+        public static String getCurrentDate() {
+        Integer day = Date.getCurrentDay();
+        Integer month = Date.getCurrentMonth();
+        Integer year = Date.getCurrentYear();
+        Integer hour = Date.getCurrentTime("hour") - 1;
+        Integer min = Date.getCurrentTime("min");
+
+        String dop_month = "";
+        String dop_day = "";
+        String dop_min = "";
+        if (month.toString().length() == 1) {
+            dop_month = "0";
+        }
+        if (day.toString().length() == 1) {
+            dop_day = "0";
+        }
+        if (min.toString().length() == 1) {
+            dop_min = "0";
+        }
+        return dop_month + month + "/" + dop_day + day + "/" + year + ";" + hour + ":" + dop_min + min;
+    }
 
     public static String getCorrectDate(String parameter, String value) {
         Integer day = Date.getCurrentDay();

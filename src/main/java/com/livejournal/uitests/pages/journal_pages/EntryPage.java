@@ -56,6 +56,7 @@ public class EntryPage extends JournalPage {
 
     @StepGroup
     public Boolean containsLjUser(String ljuser) {
+        ljuser = ljuser.toLowerCase();
         String script = "return jQuery('.e-content span').is(\"[lj\\\\:user='" + ljuser + "']\")";
         Boolean fl = false;
         if (Boolean.valueOf(startScript(script).toString())) {

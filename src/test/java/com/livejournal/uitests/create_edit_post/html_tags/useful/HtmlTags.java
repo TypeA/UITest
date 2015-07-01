@@ -14,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class CreatePostWithHtmlTags extends WebTest {
+public class HtmlTags extends WebTest {
 
     //Scenario: Create post with style(1/3)
     //Scenario: Create post with font(1/3)
