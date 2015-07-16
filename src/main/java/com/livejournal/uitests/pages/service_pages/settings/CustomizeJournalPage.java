@@ -26,7 +26,7 @@ public class CustomizeJournalPage extends ServicePageLogged {
     @FindBy(name = "Widget[ThemeNav]_search_submit")
     private Button searchStyleButton;
 
-    @FindBy(name = "Widget[ThemeChooser]_apply")
+    @FindBy(id = "theme_btn_36913693")
     private Button applyStyle;
 
     public CustomizeJournalPage findStyle(String style) {
