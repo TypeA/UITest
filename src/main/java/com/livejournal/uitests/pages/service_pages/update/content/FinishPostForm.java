@@ -11,7 +11,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  * @author m.prytkova
  */
 @Block(
-        @FindBy(css = ".b-panel.b-updatepage-result"))
+        @FindBy(css = ".b-resultpage.l-contentplus.b-service.b-service-v5"))
 public class FinishPostForm extends UIBlock {
 
     @FindBy(css = ".b-updatepage-result-status a")

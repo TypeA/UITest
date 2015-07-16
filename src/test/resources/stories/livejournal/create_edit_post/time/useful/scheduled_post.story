@@ -9,9 +9,9 @@ Then the post is scheduled
 Examples:
 |name         |parameter |value |
 |testautotest |hour      |3     |
-|--testautotest |day       |3     |
-|--testautotest |month     |3     |
-|--testautotest |year      |3     |
+|testautotest |day       |3     |
+|testautotest |month     |3     |
+|testautotest |year      |3     |
 
 
 Scenario: Publication of scheduled post
