@@ -63,50 +63,21 @@ public class HeaderNavigation extends WebTest {
                 page.clickOnLjMagazineMenuItem();
                 break;
             case BROWSE:
-                page.clickOnbrowseMenuItem();
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnBrowse();
+                break;
+            case RSS:
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnRss();
                 break;
             case SHOP:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnShop();
-                break;
-            case PAID:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnPaid();
-                break;
-            case PROMO:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnPromo();
-                break;
-            case TOKENS:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnTokensLink();
+                page.clickOnShopMenuItem();
                 break;
             case HELP:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnHelp();
-                break;
-            case ABOUT:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnAbout();
-                break;
-            case FAQ:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnFaq();
-                break;
-            case TOS:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnTos();
-                break;
-            case PRIVACY:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnPrivacy();
-                break;
-            case DMCA:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnDmca();
+                page.clickOnHelpMenuItem();
                 break;
             case REGISTRATION:
-                page.clicOnkSignUpMenuItem();
+                page.clicOnSignUpMenuItem();
                 break;
         }
     }
@@ -121,82 +92,44 @@ public class HeaderNavigation extends WebTest {
                 page.clickOnLjMagazineMenuItem();
                 break;
             case BROWSE:
-                page.clickOnbrowseMenuItem();
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnBrowse();
                 break;
-            case MNGGROUP:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnMngGroups();
+            case RSS:
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnRss();
                 break;
-            case MNGFRIENDS:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnMngFriends();
-                break;
-            case MNGCOMMUNITIES:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnMngCommunities();
-                break;
-            case BANNEDUSERS:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnBannedUsers();
+            case FEED:
+                page.clickOnFriendsFeedMenuItem();
                 break;
             case SHOP:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnShop();
+                page.clickOnShopMenuItem();
                 break;
-            case PAID:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnPaid();
-                break;
-            case PROMO:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnPromo();
-                break;
-            case HISTORY:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnOrderHistory();
-                break;
-            case TOKENS:
-                page.moveMouseOverShopMenuItem()
-                        .clickOnTokensLink();
-                break;
-            case HELP:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnHelp();
-                break;
-            case ABOUT:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnAbout();
-                break;
-            case FAQ:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnFaq();
-                break;
-            case TOS:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnTos();
-                break;
-            case PRIVACY:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnPrivacy();
-                break;
-            case DMCA:
-                page.moveMouseOverHelpMenuItem()
-                        .clickOnDmca();
-                break;
-            case NEWENTRYINMENU:
+            case NEWENTRY:
                 page.clickOnPostNewEntry();
-
                 break;
-            case EDITPROFILE:
-                page.moveMouseOverUserPicMenuItem()
-                        .clickOnEditProfie();
+            case JOURNAL:
+                page.clickOnMyJournalMenuItem();
                 break;
-            case MANAGEUSERPICS:
+            case PROFILE:
                 page.moveMouseOverMyJournalMenuItem()
-                        .clickOnEditPics();
+                        .clickOnProfile();
                 break;
-            case MESSAGESINMENU:
-                page.clickOnMessagesMenuItem();
+            case STATISTICS:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnStatistics();
+                break;
+            case ALBUM:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnScrapbook();
+                break;
+            case VIDEO:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnVideo();
+                break;
+            case MESSAGES:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnMessagesInMenu();
                 break;
             case SHEDULED:
                 page.moveMouseOverMyJournalMenuItem()
@@ -206,46 +139,23 @@ public class HeaderNavigation extends WebTest {
                 page.moveMouseOverMyJournalMenuItem()
                         .clickOnRecentComments();
                 break;
-            case STATISTICS:
-                page.moveMouseOverUserPicMenuItem()
-                        .clickOnStatistics();
-                break;
-            case TAGS:
+            case MNGCOMMUNITIES:
                 page.moveMouseOverMyJournalMenuItem()
-                        .clickOnTags();
-                break;
-            case MEMORIES:
-                page.moveMouseOverUserPicMenuItem()
-                        .clickOnMemories();
-                break;
-            case JOURNALSTYLE:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnJournalStyle();
+                        .clickOnManageCommunities();
                 break;
             case SETTINGS:
                 page.moveMouseOverUserPicMenuItem()
                         .clickOnSettings();
                 break;
+            case HELP:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnSupport();
+                break;
             case LOGOUT:
                 page.moveMouseOverMyJournalMenuItem()
                         .clickOnLogOut();
                 break;
-            case JOURNAL:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnAuthotizedAs();
-                break;
-            case PROFILE:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnProfile();
-                break;
-            case ALBUM:
-                page.moveMouseOverMyJournalMenuItem()
-                        .clickOnScrapbook();
-                break;
-            case FEED:
-                page.moveMouseOverFriendsFeedMenuItem()
-                        .clickOnFriendsFeed();
-                break;
+
 
         }
     }

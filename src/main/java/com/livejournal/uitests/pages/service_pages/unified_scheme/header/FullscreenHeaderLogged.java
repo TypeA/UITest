@@ -1,19 +1,15 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uitests.pages.browse.BrowseMainPageLogged;
-import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
-import com.livejournal.uitests.pages.service_pages.search.SearchPageLogged;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.FriendsFeedMenu;
+import com.livejournal.uitests.pages.service_pages.shop_pages.logged.ShopPageLogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.MyJournalMenu;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuLogged;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuLogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.findMoreMenu.FindMoreMenuLogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import net.thucydides.core.annotations.StepGroup;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -25,35 +21,17 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = FullscreenHeader.CSS))
 public class FullscreenHeaderLogged extends FullscreenHeader {
 
-    @FindBy(css = ".s-nav-item-friends")
+    @FindBy(css = ".s-header-item__link--friends")
     public Link friendsFeedMenuItem;
 
-    @FindBy(css = ".s-nav-item-user div.s-userpic")
+    @FindBy(css = ".s-userpic")
     public Link userPicMenuItem;
 
-    @FindBy(css = ".s-nav-rootlink-blog")
+    @FindBy(css = ".s-nav-item__name")
     public Link myJournalMenuItem;
 
-    @FindBy(css = ".s-inline-search-input")
-    public TextField searchMenuItem;
-
-    @FindBy(css = ".s-do-item.s-do-item-post")
+    @FindBy(css = ".s-header-item__link--post")
     public Link postNewEntry;
-
-    @FindBy(css = ".s-do-item.s-do-item-message")
-    public Link messagesMenuItem;
-
-    @StepGroup
-    public MyJournalMenu moveMouseOverUserPicMenuIem() {
-        userPicMenuItem.moveMouseOver();
-        return onDisplayed(MyJournalMenu.class);
-    }
-
-    @StepGroup
-    public MyJournalMenu moveMouseOverMyJournalMenuItem() {
-        myJournalMenuItem.moveMouseOver();
-        return onDisplayed(MyJournalMenu.class);
-    }
 
     @StepGroup
     public MainPageLogged clickOnLogo() {
@@ -68,27 +46,21 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     }
 
     @StepGroup
-    public BrowseMainPageLogged clickOnbrowseMenuItem() {
-        browseMenuItem.click();
-        return onOpened(BrowseMainPageLogged.class);
+    public FindMoreMenuLogged moveMouseOverInterestingMenuItem() {
+        interestingMenuItem.moveMouseOver();
+        return onDisplayed(FindMoreMenuLogged.class);
     }
 
     @StepGroup
-    public FriendsFeedMenu moveMouseOverFriendsFeedMenuItem() {
-        friendsFeedMenuItem.moveMouseOver();
-        return onDisplayed(FriendsFeedMenu.class);
+    public FriendsFeedLogged clickOnFriendsFeedMenuItem() {
+        friendsFeedMenuItem.click();
+        return onOpened(FriendsFeedLogged.class);
     }
 
     @StepGroup
-    public ShopMenuLogged moveMouseOverShopMenuItem() {
-        shopMenuItem.moveMouseOver();
-        return onDisplayed(ShopMenuLogged.class);
-    }
-
-    @StepGroup
-    public HelpMenuLogged moveMouseOverHelpMenuItem() {
-        helpMenuItem.moveMouseOver();
-        return onDisplayed(HelpMenuLogged.class);
+    public ShopPageLogged clickOnShopMenuItem() {
+        shopMenuItem.click();
+        return onOpened(ShopPageLogged.class);
     }
 
     @StepGroup
@@ -98,16 +70,21 @@ public class FullscreenHeaderLogged extends FullscreenHeader {
     }
 
     @StepGroup
-    public InboxMainPage clickOnMessagesMenuItem() {
-        messagesMenuItem.click();
-        return onOpened(InboxMainPage.class);
+    public MyJournalPage clickOnMyJournalMenuItem() {
+        myJournalMenuItem.click();
+        return onOpened(MyJournalPage.class);
     }
 
     @StepGroup
-    public SearchPageLogged useSearchLogged(String text) {
-        searchMenuItem.enter(text);
-        sendKeys(Keys.ENTER);
-        return onOpened(SearchPageLogged.class);
+    public MyJournalMenu moveMouseOverUserPicMenuIem() {
+        userPicMenuItem.moveMouseOver();
+        return onDisplayed(MyJournalMenu.class);
+    }
+
+    @StepGroup
+    public MyJournalMenu moveMouseOverMyJournalMenuItem() {
+        myJournalMenuItem.moveMouseOver();
+        return onDisplayed(MyJournalMenu.class);
     }
 
 }

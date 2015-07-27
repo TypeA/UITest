@@ -1,18 +1,15 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uitests.pages.browse.BrowseMainPageUnlogged;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.search.SearchPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.ShopPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.SupportMainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.LangSwitchMenu;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuUnlogged;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuUnlogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.findMoreMenu.FindMoreMenuUnlogged;
 import net.thucydides.core.annotations.StepGroup;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -24,18 +21,18 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = FullscreenHeader.CSS))
 public class FullscreenHeaderUnlogged extends FullscreenHeader {
 
-    @FindBy(css = ".s-nav-item.s-nav-item-login")
+    @FindBy(css = ".s-header-item__link--login")
     private Link loginMenuItem;
-
-    @FindBy(css = ".s-drop-master.s-nav-item-lang")
+  
+    @FindBy(css = ".s-nav-item-lang")
     private Link langSwitch;
 
-    @FindBy(css = ".s-inline-search-input")
-    public TextField searchMenuItem;
+    @FindBy(css = ".s-header-item--signup a")
+    private Link signupMenuItem;
 
-    @FindBy(css = ".s-nav-item-signup")
-    public TextField signupMenuItem;
-
+    @FindBy(css = ".s-header-item__link--support")
+    private Link helpMenuItem;
+    
     @StepGroup
     public MainPageUnlogged clickOnLogo() {
         logo.click();
@@ -48,9 +45,10 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
         return onOpened(LJMagazinePageUnlogged.class);
     }
 
-    public BrowseMainPageUnlogged clickOnbrowseMenuItem() {
-        browseMenuItem.click();
-        return onOpened(BrowseMainPageUnlogged.class);
+    @StepGroup
+    public FindMoreMenuUnlogged moveMouseOverInterestingMenuItem() {
+        interestingMenuItem.moveMouseOver();
+        return onDisplayed(FindMoreMenuUnlogged.class);
     }
 
     @StepGroup
@@ -60,15 +58,15 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
     }
 
     @StepGroup
-    public ShopMenuUnlogged moveMouseOverShopMenuItem() {
-        shopMenuItem.moveMouseOver();
-        return onDisplayed(ShopMenuUnlogged.class);
+    public ShopPageUnlogged clickOnShopMenuItem() {
+        shopMenuItem.click();
+        return onOpened(ShopPageUnlogged.class);
     }
 
     @StepGroup
-    public HelpMenuUnlogged moveMouseOverHelpMenuItem() {
-        helpMenuItem.moveMouseOver();
-        return onDisplayed(HelpMenuUnlogged.class);
+    public SupportMainPageUnlogged clickOnHelpMenuItem() {
+        helpMenuItem.click();
+        return onOpened(SupportMainPageUnlogged.class);
     }
 
     @StepGroup
@@ -76,17 +74,17 @@ public class FullscreenHeaderUnlogged extends FullscreenHeader {
         langSwitch.moveMouseOver();
         return onDisplayed(LangSwitchMenu.class);
     }
-
+    
     @StepGroup
+    public CreateAccountPage clicOnSignUpMenuItem() {
+        signupMenuItem.click();
+        return onOpened(CreateAccountPage.class);
+    }
+    
+    /*@StepGroup
     public SearchPageUnlogged useSearchLogged(String text) {
         searchMenuItem.enter(text);
         sendKeys(Keys.ENTER);
         return onOpened(SearchPageUnlogged.class);
-    }
-
-    @StepGroup
-    public CreateAccountPage clicOnkSignUpMenuItem() {
-        signupMenuItem.click();
-        return onOpened(CreateAccountPage.class);
-    }
+    }*/
 }

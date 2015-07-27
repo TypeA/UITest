@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.browse;
+package com.livejournal.uitests.pages.rss;
 
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
@@ -7,7 +7,7 @@ import net.thucydides.core.annotations.DefaultUrl;
  *
  * @author s.savinykh
  */
-@DefaultUrl("/browse")
-public class BrowseMainPageUnlogged extends ServicePageUnlogged {
+@DefaultUrl("/syn")
+public class RssPageUnlogged extends ServicePageUnlogged {
 
 }

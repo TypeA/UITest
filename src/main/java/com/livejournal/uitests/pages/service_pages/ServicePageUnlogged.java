@@ -3,11 +3,13 @@ package com.livejournal.uitests.pages.service_pages;
 import com.livejournal.uitests.pages.common_elements.LoginForm;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
+import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.shop_pages.unlogged.ShopPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.SupportMainPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderUnlogged;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.LangSwitchMenu;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.helpMenu.HelpMenuUnlogged;
-import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.shopMenu.ShopMenuUnlogged;
+import com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.findMoreMenu.FindMoreMenuUnlogged;
 import net.thucydides.core.annotations.StepGroup;
 
 /**
@@ -36,13 +38,13 @@ public class ServicePageUnlogged extends ServicePage {
     }
 
     @StepGroup
-    public void clickOnLjMagazineMenuItem() {
-        getFullscreenHeader().clickOnLjMagazineMenuItem();
+    public LJMagazinePageUnlogged clickOnLjMagazineMenuItem() {
+        return getFullscreenHeader().clickOnLjMagazineMenuItem();
     }
 
     @StepGroup
-    public void clickOnbrowseMenuItem() {
-        getFullscreenHeader().clickOnbrowseMenuItem();
+    public FindMoreMenuUnlogged moveMouseOverInterestingMenuItem() {
+        return getFullscreenHeader().moveMouseOverInterestingMenuItem();
     }
 
     @StepGroup
@@ -51,13 +53,13 @@ public class ServicePageUnlogged extends ServicePage {
     }
 
     @StepGroup
-    public ShopMenuUnlogged moveMouseOverShopMenuItem() {
-        return getFullscreenHeader().moveMouseOverShopMenuItem();
+    public ShopPageUnlogged clickOnShopMenuItem() {
+        return getFullscreenHeader().clickOnShopMenuItem();
     }
-
+    
     @StepGroup
-    public HelpMenuUnlogged moveMouseOverHelpMenuItem() {
-        return getFullscreenHeader().moveMouseOverHelpMenuItem();
+    public SupportMainPageUnlogged clickOnHelpMenuItem() {
+        return getFullscreenHeader().clickOnHelpMenuItem();
     }
 
     @StepGroup
@@ -66,8 +68,8 @@ public class ServicePageUnlogged extends ServicePage {
     }
 
     @StepGroup
-    public CreateAccountPage clicOnkSignUpMenuItem() {
-        return getFullscreenHeader().clicOnkSignUpMenuItem();
+    public CreateAccountPage clicOnSignUpMenuItem() {
+        return getFullscreenHeader().clicOnSignUpMenuItem();
     }
 
 }
