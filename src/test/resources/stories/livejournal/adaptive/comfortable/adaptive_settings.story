@@ -18,7 +18,7 @@ Examples:
 Scenario: Logged user see correct style
 
 Meta: 
-@categories adaptive comfortable testt
+@categories adaptive comfortable
 
 Given logged user <user> on journal <journal> page
 Then user see correct style <style> in journal <journal> page
