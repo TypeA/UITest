@@ -141,11 +141,12 @@ public class ScheduledPost extends WebTest {
     //Scenario: Publication of scheduled post (3/3)
     @Then("the post is publicated in correct time")
     public void post_is_publicated_in_correct_time() throws InterruptedException {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < 30; i++) {
             if (PostTime.getCurrentDate().equals(ThucydidesUtils.getFromSession("post_date"))) {
-                i = 20;
+                i = 30;
+                Thread.sleep(60000);
             } else {
-                Thread.sleep(500);
+                Thread.sleep(10000);
             }
         }
         open(MyJournalPage.class, new Url()

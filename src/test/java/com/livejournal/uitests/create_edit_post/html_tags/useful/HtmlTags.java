@@ -178,7 +178,7 @@ public class HtmlTags extends WebTest {
     //Scenario: Create post with custom link(3/3)
     @Then("post with link $link and with style $tag is displayed")
     public void post_with_link_and_with_style_is_displayed(String link, String tag) {
-        verify().that(onOpened(EntryPage.class).linkWithStyleIsDisplayed(link, tag.toUpperCase()))
+        verify().that(onOpened(EntryPage.class).linkWithStyleIsDisplayed(link, tag))
                 .ifResultIsExpected("Post is displayed with link " + link + " and with style " + tag)
                 .ifElse("Post is not displayed with link " + link + " and with style " + tag)
                 .finish();

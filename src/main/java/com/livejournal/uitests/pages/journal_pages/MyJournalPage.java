@@ -10,7 +10,8 @@ import net.thucydides.core.annotations.DefaultUrl;
 public class MyJournalPage extends JournalPage {
 
     public EntryPage openPostByText(String text) {
-        startScript("jQuery('.entryunit:contains(\"" + text + "\") .entryunit__title a')[0].click()");
+        System.out.println("!!!!!!!!! "+"jQuery('.entryunit:contains(\"" + text + "\") .entryunit__head .entryunit__title a')[0].click()");
+        startScript("jQuery('.entryunit:contains(\"" + text + "\") .entryunit__head .entryunit__title a')[0].click()");
         return onOpened(EntryPage.class);
     }
 

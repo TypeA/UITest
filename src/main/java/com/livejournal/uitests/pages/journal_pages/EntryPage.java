@@ -122,18 +122,10 @@ public class EntryPage extends JournalPage {
     @StepGroup
     public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
         String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
-        String script = "";
-        switch (style_text) {
-            case "BOLD":
-                script = "return jQuery(\"b " + htmlLink;
-                break;
-            case "ITALIC":
-                script = "return jQuery(\"i " + htmlLink;
-                break;
-            case "UNDERLINED":
-                script = "return jQuery(\"u " + htmlLink;
-                break;
-        }
+        String script = "return jQuery(\""+ style_text.toLowerCase() + " " + htmlLink;
+        System.out.println("!!!!!!!!!!!! style_text: " + style_text);
+        System.out.println("!!!!!!!!!!!! htmlLink: " + htmlLink);
+        System.out.println("!!!!!!!!!!!! script: " + script);
         return Boolean.valueOf(startScript(script).toString());
     }
 
