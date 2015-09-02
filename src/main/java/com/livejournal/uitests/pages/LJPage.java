@@ -51,7 +51,7 @@ public class LJPage extends Page {
                     .setMinSecurity("Public")
                     .saveSettings();
         } catch (Exception ex) {
-           Assert.assertTrue("I cannot set default min security", true);
+            Assert.assertTrue("I cannot set default min security", true);
         }
         return this;
     }
@@ -88,33 +88,7 @@ public class LJPage extends Page {
     }
 
     public LJPage defaultStyle(String user) {
-
-        List<ArrayList<String>> user_atr = workWithDB().conect()
-                .select("select * from user where user = '" + user + "';", "userid")
-                .select("select * from user where user = '" + user + "';", "clusterid")
-                .finish();
-
-        String script1 = "select * from lj_c" + user_atr.get(1).get(0) + ".userproplite2 "
-                + "where userid = '" + user_atr.get(0).get(0) + "'"
-                + "and upropid = (select upropid from userproplist where name = 's2_style');";
-
-        String styleid = workWithDB().conect()
-                .select(script1, "value")
-                .finish()
-                .get(0)
-                .get(0);
-
-        String script2 = "select name from s2styles "
-                + "where userid= '" + user_atr.get(0).get(0)
-                + "' and styleid = '" + styleid + "';";
-
-        String style = workWithDB().conect()
-                .select(script2, "name")
-                .finish()
-                .get(0)
-                .get(0);
-
-        if (!style.equals("wizard-air/default_theme")) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-air/default_theme")) {
             open(CustomizeJournalPage.class)
                     .findStyle("Air")
                     .applyStyle();
