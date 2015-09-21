@@ -15,7 +15,8 @@ import org.jbehave.core.annotations.When;
  * @author s.savinykh
  */
 public class AdaptiveSettings extends WebTest {
-
+    
+    //User see Air theme(1/3)
     @Given("user $user")
     public void given_user(String user) {
         if (!user.toUpperCase().equals("UNLOGGED")) {
@@ -23,11 +24,13 @@ public class AdaptiveSettings extends WebTest {
         }
     }
 
+    //User see Air theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
         open(JournalPage.class, new Url().setPrefix(getUser("Journal", paid, mobileView, style) + "."));
     }
 
+    //User see Air theme(3/3)
     @Then("user see correct style $correctStyle")
     public void user_see_correct_style(String correctStyle) {
         verify().that(isCorrectStyle(correctStyle))
