@@ -5,8 +5,6 @@ import com.livejournal.uisteps.thucydides.Root;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.settings.CustomizeJournalPage;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
-import java.util.ArrayList;
-import java.util.List;
 import junit.framework.Assert;
 
 /**
@@ -87,16 +85,6 @@ public class LJPage extends Page {
         return onOpened(LJPage.class);
     }
 
-    public LJPage defaultStyle(String user) {
-        if (!getDBDate().userSettings().getStyle(user).equals("wizard-air/default_theme")) {
-            open(CustomizeJournalPage.class)
-                    .findStyle("Air")
-                    .applyStyle();
-        }
-
-        return this;
-    }
-
     public LJPage regionSwitchLogged(String user, String region) {
         switch (region.toUpperCase()) {
             case "CYR":
@@ -127,6 +115,42 @@ public class LJPage extends Page {
                 Assert.fail("Incorrect user region " + reg);
         }
         return onOpened(LJPage.class);
+    }
+
+    public LJPage setCustonAdaptiveProp(String user, String adaptive) {
+        if (!(adaptive.equals(getDBDate().userSettings().isCustomAdaptive(user).toString()))) {
+            open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
+                    .changeCustomAdaptive()
+                    .saveSettings();
+        }
+        return this;
+    }
+
+    public LJPage setDefaultStyle(String user) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-air/default_theme")) {
+            open(CustomizeJournalPage.class)
+                    .findStyle("Air")
+                    .applyStyle("Air");
+        }
+        return this;
+    }
+
+    public LJPage setAdaptiveStyle(String user) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-chameleon/__adaptive")) {
+            open(CustomizeJournalPage.class)
+                    .findStyle("Unstyled Adaptive")
+                    .applyStyle("Unstyled Adaptive");
+        }
+        return this;
+    }
+
+    public LJPage setRegularStyle(String user) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-voxhtml/light-clouds")) {
+            open(CustomizeJournalPage.class)
+                    .findStyle("Light clouds")
+                    .applyStyle("Light clouds");
+        }
+        return this;
     }
 
 }
