@@ -149,7 +149,6 @@ public class AdaptiveSettings extends WebTest {
             case "ADAPTIVE":
                 try {
                     correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')[0]").toString().isEmpty());
-
                 } catch (Exception ex) {
                     correct = false;
                 }
