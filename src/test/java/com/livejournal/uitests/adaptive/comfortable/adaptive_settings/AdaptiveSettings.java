@@ -1,6 +1,7 @@
 package com.livejournal.uitests.adaptive.comfortable.adaptive_settings;
 
 import com.livejournal.uisteps.core.Url;
+import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.JournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -15,7 +16,7 @@ import org.jbehave.core.annotations.When;
  * @author s.savinykh
  */
 public class AdaptiveSettings extends WebTest {
-    
+
     //User see Air theme(1/3)
     @Given("user $user")
     public void given_user(String user) {
@@ -27,15 +28,16 @@ public class AdaptiveSettings extends WebTest {
     //User see Air theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
-        open(JournalPage.class, new Url().setPrefix(getUser("Journal", paid, mobileView, style) + "."));
+        ThucydidesUtils.putToSession("finded_user", getUser("Journal", paid, mobileView, style));
+        open(JournalPage.class, new Url().setPrefix(ThucydidesUtils.getFromSession("finded_user") + "."));
     }
 
     //User see Air theme(3/3)
     @Then("user see correct style $correctStyle")
     public void user_see_correct_style(String correctStyle) {
         verify().that(isCorrectStyle(correctStyle))
-                .ifResultIsExpected("User see correct style " + correctStyle)
-                .ifElse("User see incorrect style")
+                .ifResultIsExpected("User see correct style " + correctStyle + "in " + ThucydidesUtils.getFromSession("finded_user") + " journal")
+                .ifElse("User see incorrect style in " + ThucydidesUtils.getFromSession("finded_user") + " journal")
                 .finish();
     }
 
@@ -58,7 +60,7 @@ public class AdaptiveSettings extends WebTest {
                     + "left join lj_c" + i.toString() + ".log2 on lj_c" + i.toString() + ".log2.journalid = user.userid "
                     + "WHERE  lj_c" + i.toString() + ".userproplite2.upropid = 96 "
                     + "AND user.statusvis = 'V' "
-                    + "AND lj_c" + i.toString() + ".log2.security = 'public'";
+                    + "AND lj_c" + i.toString() + ".log2.security = 'public' ";
             switch (userType.toUpperCase()) {
                 case "JOURNAL":
                     script[i] += "AND user.journaltype = 'P' ";
@@ -85,9 +87,9 @@ public class AdaptiveSettings extends WebTest {
                 case "AIR":
                     script[i] += "AND s2styles.name like '%wizard-air/default_theme%';";
                     break;
-                case "ADAPTIVE":
+                case "CHAMELEON":
                     script[i] += "AND s2styles.name like '%chameleon%' "
-                            + "AND s2styles.name !='wizard-chameleon/__none "
+                            + "AND s2styles.name !='wizard-chameleon/__none' "
                             + "AND s2styles.name !='wizard-chameleon/__headerin_alpha' "
                             + "AND s2styles.name !='wizard-chameleon/bright-decorations' "
                             + "AND s2styles.name !='wizard-chameleon/orange-tinsel';";
