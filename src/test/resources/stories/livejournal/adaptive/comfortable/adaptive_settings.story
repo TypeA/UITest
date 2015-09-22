@@ -79,7 +79,7 @@ Examples:
 Scenario: User see correct theme in his journal
 
 Meta: 
-@categories adaptive comfortable adad
+@categories adaptive comfortable
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>)
 When user go to the his journal page
