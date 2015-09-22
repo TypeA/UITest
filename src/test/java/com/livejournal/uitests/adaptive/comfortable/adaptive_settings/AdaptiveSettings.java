@@ -18,6 +18,7 @@ import org.jbehave.core.annotations.When;
 public class AdaptiveSettings extends WebTest {
 
     //User see Air theme(1/3)
+    //User see Adaptive Chameleon theme(1/3)
     @Given("user $user")
     public void given_user(String user) {
         if (!user.toUpperCase().equals("UNLOGGED")) {
@@ -26,6 +27,7 @@ public class AdaptiveSettings extends WebTest {
     }
 
     //User see Air theme(2/3)
+    //User see Adaptive Chameleon theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
         ThucydidesUtils.putToSession("finded_user", getUser("Journal", paid, mobileView, style));
@@ -33,14 +35,16 @@ public class AdaptiveSettings extends WebTest {
     }
 
     //User see Air theme(3/3)
+    //User see Adaptive Chameleon theme(3/3)
     @Then("user see correct style $correctStyle")
     public void user_see_correct_style(String correctStyle) {
         verify().that(isCorrectStyle(correctStyle))
-                .ifResultIsExpected("User see correct style " + correctStyle + "in " + ThucydidesUtils.getFromSession("finded_user") + " journal")
+                .ifResultIsExpected("User see correct style " + correctStyle + " in " + ThucydidesUtils.getFromSession("finded_user") + " journal")
                 .ifElse("User see incorrect style in " + ThucydidesUtils.getFromSession("finded_user") + " journal")
                 .finish();
     }
 
+    ///////////////////////////////////////METHODS///////////////////////////////////////
     private String getUser(String userType, String paid, String mobileView, String style) {
         int index = 0;
         ArrayList<String> neededUsers = new ArrayList<>();
@@ -90,6 +94,8 @@ public class AdaptiveSettings extends WebTest {
                 case "CHAMELEON":
                     script[i] += "AND s2styles.name like '%chameleon%' "
                             + "AND s2styles.name !='wizard-chameleon/__none' "
+                            + "AND s2styles.name NOT LIKE '%chameleonljart%' "
+                            + "AND s2styles.name NOT LIKE '%chamljartv2%' "
                             + "AND s2styles.name !='wizard-chameleon/__headerin_alpha' "
                             + "AND s2styles.name !='wizard-chameleon/bright-decorations' "
                             + "AND s2styles.name !='wizard-chameleon/orange-tinsel';";
