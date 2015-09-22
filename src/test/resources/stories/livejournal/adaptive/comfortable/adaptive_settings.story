@@ -28,7 +28,7 @@ Examples:
 Scenario: User see Adaptive Chameleon theme
 
 Meta: 
-@categories adaptive1 comfortable 
+@categories adaptive comfortable 
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
