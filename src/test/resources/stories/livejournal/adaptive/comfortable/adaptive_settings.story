@@ -42,3 +42,33 @@ Examples:
 |autotest_plus_1    |false              |false                  |Chameleon      |Adaptive               |
 |autotest_plus_1    |false              |true                   |Chameleon      |Adaptive               |
 |autotest_plus_1    |true               |false                  |Chameleon      |Adaptive               |
+
+
+Scenario: User see Non adaptive theme
+
+Meta: 
+@categories adaptive comfortable 
+
+Given user <user>
+When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
+Then user see correct style <correctStyle>
+
+Examples:
+|user               |paid               |mobileView             |style          |correctStyle           |
+|unlogged           |true               |true                   |nonAdaptive    |nonAdaptive            |
+|autotest_plus_1    |true               |true                   |nonAdaptive    |nonAdaptive            |
+
+
+Scenario: User see Non adaptive Chameleon theme
+
+Meta: 
+@categories adaptive comfortable
+
+Given user <user>
+When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
+Then user see correct style <correctStyle>
+
+Examples:
+|user               |paid               |mobileView             |style          |correctStyle           |
+|unlogged           |true               |true                   |Chameleon      |Chameleon              |
+|autotest_plus_1    |true               |true                   |Chameleon      |Chameleon              |
