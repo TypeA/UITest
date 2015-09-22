@@ -140,13 +140,26 @@ public class AdaptiveSettings extends WebTest {
         Boolean correct = false;
         switch (style.toUpperCase()) {
             case "AIR":
-                correct = !startScript("return jQuery('.entryunit__title a')[0]").toString().isEmpty();
+                try {
+                    correct = !startScript("return jQuery('.entryunit__title a')[0]").toString().isEmpty();
+                } catch (Exception ex) {
+                    correct = false;
+                }
                 break;
             case "ADAPTIVE":
-                correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')[0]").toString().isEmpty());
+                try {
+                    correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')[0]").toString().isEmpty());
+
+                } catch (Exception ex) {
+                    correct = false;
+                }
                 break;
             case "CHAMELEON":
-                correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')").toString().isEmpty());
+                try {
+                    correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')").toString().isEmpty());
+                } catch (Exception ex) {
+                    correct = false;
+                }
                 break;
             case "NONADAPTIVE":
                 try {
