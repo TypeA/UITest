@@ -37,6 +37,8 @@ Then user see correct style <correctStyle>
 Examples:
 |user               |paid               |mobileView             |style          |correctStyle           |
 |unlogged           |false              |false                  |Chameleon      |Adaptive               |
+|unlogged           |false              |true                   |Chameleon      |Adaptive               |
 |unlogged           |true               |false                  |Chameleon      |Adaptive               |
 |autotest_plus_1    |false              |false                  |Chameleon      |Adaptive               |
+|autotest_plus_1    |false              |true                   |Chameleon      |Adaptive               |
 |autotest_plus_1    |true               |false                  |Chameleon      |Adaptive               |
