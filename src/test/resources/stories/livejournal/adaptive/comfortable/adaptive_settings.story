@@ -72,3 +72,30 @@ Examples:
 |user               |paid               |mobileView             |style          |correctStyle           |
 |unlogged           |true               |true                   |Chameleon      |Chameleon              |
 |autotest_plus_1    |true               |true                   |Chameleon      |Chameleon              |
+
+
+
+
+Scenario: User see correct theme in his journal
+
+Meta: 
+@categories adaptive comfortable adad
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>)
+When user go to the his journal page
+Then user see correct style <correctStyle>
+
+Examples:
+|paid               |mobileView             |style          |correctStyle           |
+|false              |false                  |Air            |Air                    |
+|false              |false                  |nonAdaptive    |Air                    |
+|false              |false                  |Chameleon      |Adaptive               |
+|false              |true                   |Air            |Air                    |
+|false              |true                   |nonAdaptive    |nonAdaptive            |
+|false              |true                   |Chameleon      |Chameleon              |
+|true               |false                  |Air            |Air                    |
+|true               |false                  |nonAdaptive    |Air                    |
+|true               |false                  |Chameleon      |Adaptive               |
+|true               |true                   |Air            |Air                    |
+|true               |true                   |nonAdaptive    |nonAdaptive            |
+|true               |true                   |Chameleon      |Chameleon              |

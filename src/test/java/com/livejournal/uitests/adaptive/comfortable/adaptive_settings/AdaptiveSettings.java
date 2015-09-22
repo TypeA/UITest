@@ -19,6 +19,8 @@ public class AdaptiveSettings extends WebTest {
 
     //User see Air theme(1/3)
     //User see Adaptive Chameleon theme(1/3)
+    //User see Non adaptive theme(1/3)
+    //User see Non adaptive Chameleon theme(1/3)
     @Given("user $user")
     public void given_user(String user) {
         if (!user.toUpperCase().equals("UNLOGGED")) {
@@ -26,16 +28,34 @@ public class AdaptiveSettings extends WebTest {
         }
     }
 
+    //User see correct theme in his journal(1/3)
+    @Given("random user (paid $paid,mobile view $mobileView,style $style)")
+    public void random_user(String paid, String mobileView, String style) {
+        ThucydidesUtils.putToSession("finded_user", getUser("yes", "Journal", paid, mobileView, style));
+        open(LoginPageUnlogged.class).authorizeBy(ThucydidesUtils.getFromSession("finded_user").toString(), getDBDate().userData().getUserPassword(ThucydidesUtils.getFromSession("finded_user").toString()));
+    }
+
     //User see Air theme(2/3)
     //User see Adaptive Chameleon theme(2/3)
+    //User see Non adaptive theme(2/3)
+    //User see Non adaptive Chameleon theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
-        ThucydidesUtils.putToSession("finded_user", getUser("Journal", paid, mobileView, style));
+        ThucydidesUtils.putToSession("finded_user", getUser("DONT NEED PASS", "Journal", paid, mobileView, style));
+        open(JournalPage.class, new Url().setPrefix(ThucydidesUtils.getFromSession("finded_user") + "."));
+    }
+
+    //User see correct theme in his journal(2/3)
+    @When("user go to the his journal page")
+    public void user_go_to_the_his_journal_page() {
         open(JournalPage.class, new Url().setPrefix(ThucydidesUtils.getFromSession("finded_user") + "."));
     }
 
     //User see Air theme(3/3)
     //User see Adaptive Chameleon theme(3/3)
+    //User see Non adaptive theme(3/3)
+    //User see Non adaptive Chameleon theme(3/3)
+    //User see correct theme in his journal(2/3)
     @Then("user see correct style $correctStyle")
     public void user_see_correct_style(String correctStyle) {
         verify().that(isCorrectStyle(correctStyle))
@@ -45,7 +65,7 @@ public class AdaptiveSettings extends WebTest {
     }
 
     ///////////////////////////////////////METHODS///////////////////////////////////////
-    private String getUser(String userType, String paid, String mobileView, String style) {
+    private String getUser(String needPass, String userType, String paid, String mobileView, String style) {
         int index = 0;
         ArrayList<String> neededUsers = new ArrayList<>();
         String[] script = new String[3];
@@ -58,13 +78,19 @@ public class AdaptiveSettings extends WebTest {
 
         for (Integer i = 1; i < 3; i++) {
             script[i] = "SELECT DISTINCT user.user "
-                    + "FROM user "
-                    + "left join lj_c" + i.toString() + ".userproplite2 on user.userid = lj_c" + i.toString() + ".userproplite2.userid "
+                    + "FROM user ";
+            if (needPass.toUpperCase().equals("YES")) {
+                script[i] += "LEFT JOIN password ON user.userid=password.userid ";
+            }
+            script[i] += "left join lj_c" + i.toString() + ".userproplite2 on user.userid = lj_c" + i.toString() + ".userproplite2.userid "
                     + "left join s2styles on lj_c" + i.toString() + ".userproplite2.value = s2styles.styleid "
                     + "left join lj_c" + i.toString() + ".log2 on lj_c" + i.toString() + ".log2.journalid = user.userid "
                     + "WHERE  lj_c" + i.toString() + ".userproplite2.upropid = 96 "
-                    + "AND user.statusvis = 'V' "
-                    + "AND lj_c" + i.toString() + ".log2.security = 'public' ";
+                    + "AND user.statusvis = 'V' ";
+            if (needPass.toUpperCase().equals("YES")) {
+                script[i] += "AND password.password not like '%md5%' ";
+            }
+            script[i] += "AND lj_c" + i.toString() + ".log2.security = 'public' ";
             switch (userType.toUpperCase()) {
                 case "JOURNAL":
                     script[i] += "AND user.journaltype = 'P' ";
