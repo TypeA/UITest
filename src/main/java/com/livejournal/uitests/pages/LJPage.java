@@ -153,4 +153,13 @@ public class LJPage extends Page {
         return this;
     }
 
+    public LJPage setOptionViewInMyStyle(String user, String optionValue) {
+        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getViewInMyOnStyleSetting(user).toUpperCase())) {
+            open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
+                    .changeViewInMyStyle()
+                    .saveSettings();
+        }
+        return this;
+    }
+
 }

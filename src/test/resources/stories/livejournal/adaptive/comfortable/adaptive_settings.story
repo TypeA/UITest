@@ -28,7 +28,7 @@ Examples:
 Scenario: User see Adaptive Chameleon theme
 
 Meta: 
-@categories adaptive comfortable 
+@categories adaptive comfortable ad
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -99,3 +99,169 @@ Examples:
 |true               |true                   |Air            |Air                    |
 |true               |true                   |nonAdaptive    |nonAdaptive            |
 |true               |true                   |Chameleon      |Chameleon              |
+
+
+Scenario: User see correct theme in random journal with option 'in my style' part1
+
+Meta: 
+@categories adaptive comfortable
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
+When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
+Then random user see correct style <correctStyle> in random journal
+
+Examples:
+|paid               |mobileView             |style          |paid1              |mobileView1            |style1         |correctStyle           |
+|true               |false                  |Air            |false              |false                  |Air            |Air                    |
+|true               |false                  |Air            |false              |false                  |nonAdaptive    |Air                    |
+|true               |false                  |Air            |false              |false                  |Chameleon      |Air                    |
+|true               |false                  |Air            |false              |true                   |Air            |Air                    |
+|true               |false                  |Air            |false              |true                   |nonAdaptive    |Air                    |
+|true               |false                  |Air            |false              |true                   |Chameleon      |Air                    |
+|true               |false                  |Air            |true               |false                  |Air            |Air                    |
+|true               |false                  |Air            |true               |false                  |nonAdaptive    |Air                    |
+|true               |false                  |Air            |true               |false                  |Chameleon      |Air                    |
+|true               |false                  |Air            |true               |true                   |Air            |Air                    |
+|true               |false                  |Air            |true               |true                   |nonAdaptive    |Air                    |
+|true               |false                  |Air            |true               |true                   |Chameleon      |Air                    |
+
+
+
+
+Scenario: User see correct theme in random journal with option 'in my style' part2
+
+Meta: 
+@categories adaptive comfortable
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
+When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
+Then random user see correct style <correctStyle> in random journal
+
+Examples:
+|paid               |mobileView             |style          |paid1              |mobileView1            |style1         |correctStyle           |
+|true               |false                  |nonAdaptive    |false              |false                  |Air            |Air                    |
+|true               |false                  |nonAdaptive    |false              |false                  |nonAdaptive    |Air                    |
+|true               |false                  |nonAdaptive    |false              |false                  |Chameleon      |Air                    |
+|true               |false                  |nonAdaptive    |false              |true                   |Air            |Air                    |
+|true               |false                  |nonAdaptive    |false              |true                   |nonAdaptive    |Air                    |
+|true               |false                  |nonAdaptive    |false              |true                   |Chameleon      |Air                    |
+|true               |false                  |nonAdaptive    |true               |false                  |Air            |Air                    |
+|true               |false                  |nonAdaptive    |true               |false                  |nonAdaptive    |Air                    |
+|true               |false                  |nonAdaptive    |true               |false                  |Chameleon      |Air                    |
+|true               |false                  |nonAdaptive    |true               |true                   |Air            |Air                    |
+|true               |false                  |nonAdaptive    |true               |true                   |nonAdaptive    |Air                    |
+|true               |false                  |nonAdaptive    |true               |true                   |Chameleon      |Air                    |
+
+
+
+
+
+
+Scenario: User see correct theme in random journal with option 'in my style' part3
+
+Meta: 
+@categories adaptive comfortable
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
+When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
+Then random user see correct style <correctStyle> in random journal
+
+Examples:
+|paid               |mobileView             |style          |paid1              |mobileView1            |style1         |correctStyle           |
+|true               |false                  |Chameleon      |false              |false                  |Air            |Adaptive               |
+|true               |false                  |Chameleon      |false              |false                  |nonAdaptive    |Adaptive               |
+|true               |false                  |Chameleon      |false              |false                  |Chameleon      |Adaptive               |
+|true               |false                  |Chameleon      |false              |true                   |Air            |Adaptive               |
+|true               |false                  |Chameleon      |false              |true                   |nonAdaptive    |Adaptive               |
+|true               |false                  |Chameleon      |false              |true                   |Chameleon      |Adaptive               |
+|true               |false                  |Chameleon      |true               |false                  |Air            |Adaptive               |
+|true               |false                  |Chameleon      |true               |false                  |nonAdaptive    |Adaptive               |
+|true               |false                  |Chameleon      |true               |false                  |Chameleon      |Adaptive               |
+|true               |false                  |Chameleon      |true               |true                   |Air            |Adaptive               |
+|true               |false                  |Chameleon      |true               |true                   |nonAdaptive    |Adaptive               |
+|true               |false                  |Chameleon      |true               |true                   |Chameleon      |Adaptive               |
+
+
+
+
+
+Scenario: User see correct theme in random journal with option 'in my style' part4
+
+Meta: 
+@categories adaptive comfortable
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
+When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
+Then random user see correct style <correctStyle> in random journal
+
+Examples:
+|paid               |mobileView             |style          |paid1              |mobileView1            |style1         |correctStyle           |
+|true               |true                   |Air            |false              |false                  |Air            |Air                    |
+|true               |true                   |Air            |false              |false                  |nonAdaptive    |Air                    |
+|true               |true                   |Air            |false              |false                  |Chameleon      |Air                    |
+|true               |true                   |Air            |false              |true                   |Air            |Air                    |
+|true               |true                   |Air            |false              |true                   |nonAdaptive    |Air                    |
+|true               |true                   |Air            |false              |true                   |Chameleon      |Air                    |
+|true               |true                   |Air            |true               |false                  |Air            |Air                    |
+|true               |true                   |Air            |true               |false                  |nonAdaptive    |Air                    |
+|true               |true                   |Air            |true               |false                  |Chameleon      |Air                    |
+|true               |true                   |Air            |true               |true                   |Air            |Air                    |
+|true               |true                   |Air            |true               |true                   |nonAdaptive    |Air                    |
+|true               |true                   |Air            |true               |true                   |Chameleon      |Air                    |
+
+
+
+
+
+Scenario: User see correct theme in random journal with option 'in my style' part5
+
+Meta: 
+@categories adaptive comfortable
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
+When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
+Then random user see correct style <correctStyle> in random journal
+
+Examples:
+|paid               |mobileView             |style          |paid1              |mobileView1            |style1         |correctStyle           |
+|true               |true                   |nonAdaptive    |false              |false                  |Air            |nonAdaptive            |
+|true               |true                   |nonAdaptive    |false              |false                  |Chameleon      |nonAdaptive            |
+|true               |true                   |nonAdaptive    |false              |false                  |nonAdaptive    |nonAdaptive            |
+|true               |true                   |nonAdaptive    |false              |true                   |Air            |nonAdaptive            |
+|true               |true                   |nonAdaptive    |false              |true                   |nonAdaptive    |nonAdaptive            |
+|true               |true                   |nonAdaptive    |false              |true                   |Chameleon      |nonAdaptive            |
+|true               |true                   |nonAdaptive    |true               |false                  |Air            |nonAdaptive            |
+|true               |true                   |nonAdaptive    |true               |false                  |nonAdaptive    |nonAdaptive            |
+|true               |true                   |nonAdaptive    |true               |false                  |Chameleon      |nonAdaptive            |
+|true               |true                   |nonAdaptive    |true               |true                   |Air            |nonAdaptive            |
+|true               |true                   |nonAdaptive    |true               |true                   |nonAdaptive    |nonAdaptive            |
+|true               |true                   |nonAdaptive    |true               |true                   |Chameleon      |nonAdaptive            |
+
+
+
+
+
+
+Scenario: User see correct theme in random journal with option 'in my style' part6
+
+Meta: 
+@categories adaptive comfortable
+
+Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
+When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
+Then random user see correct style <correctStyle> in random journal
+
+Examples:
+|paid               |mobileView             |style          |paid1              |mobileView1            |style1         |correctStyle           |
+|true               |true                   |Chameleon      |false              |false                  |Air            |Chameleon              |
+|true               |true                   |Chameleon      |false              |false                  |nonAdaptive    |Chameleon              |
+|true               |true                   |Chameleon      |false              |false                  |Chameleon      |Chameleon              |
+|true               |true                   |Chameleon      |false              |true                   |Air            |Chameleon              |
+|true               |true                   |Chameleon      |false              |true                   |nonAdaptive    |Chameleon              |
+|true               |true                   |Chameleon      |false              |true                   |Chameleon      |Chameleon              |
+|true               |true                   |Chameleon      |true               |false                  |Air            |Chameleon              |
+|true               |true                   |Chameleon      |true               |false                  |nonAdaptive    |Chameleon              |
+|true               |true                   |Chameleon      |true               |false                  |Chameleon      |Chameleon              |
+|true               |true                   |Chameleon      |true               |true                   |Air            |Chameleon              |
+|true               |true                   |Chameleon      |true               |true                   |nonAdaptive    |Chameleon              |
+|true               |true                   |Chameleon      |true               |true                   |Chameleon      |Chameleon              |
