@@ -30,7 +30,7 @@ public class ScheduledPost extends WebTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
-                .defaultStyle(name)
+                .setDefaultStyle(name)
                 .defaultMinSecurity(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
@@ -46,7 +46,7 @@ public class ScheduledPost extends WebTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
-                .defaultStyle(name);
+                .setDefaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         String[] date = PostTime.getCorrectDate("hour", "1")

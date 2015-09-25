@@ -26,9 +26,6 @@ public class CustomizeJournalPage extends ServicePageLogged {
     @FindBy(name = "Widget[ThemeNav]_search_submit")
     private Button searchStyleButton;
 
-    @FindBy(id = "theme_btn_36913693")
-    private Button applyStyle;
-
     public CustomizeJournalPage findStyle(String style) {
         searchStyleField.enter(style);
         searchStyleButton.click();
@@ -42,8 +39,8 @@ public class CustomizeJournalPage extends ServicePageLogged {
         return this;
     }
 
-    public CustomizeJournalPage applyStyle() {
-        applyStyle.click();
+    public CustomizeJournalPage applyStyle(String style) {
+        startScript("jQuery('.theme-item-in:contains(\""+style+"\") .theme-form .theme-button').click()");
         getDriver().switchTo().alert().accept();
         return this;
     }

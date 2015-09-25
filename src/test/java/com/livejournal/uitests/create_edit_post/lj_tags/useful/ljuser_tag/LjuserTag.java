@@ -22,7 +22,7 @@ public class LjuserTag extends WebTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
-                .defaultStyle(name);
+                .setDefaultStyle(name);
         open(UpdateBmlPageLogged.class);
     }
 

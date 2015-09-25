@@ -25,7 +25,7 @@ public class Subject extends WebTest {
     public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultStyle(name);
+                .setDefaultStyle(name);
     }
 
     //User create new post with subject(2/3)

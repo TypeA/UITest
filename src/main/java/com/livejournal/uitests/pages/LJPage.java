@@ -5,8 +5,6 @@ import com.livejournal.uisteps.thucydides.Root;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.settings.CustomizeJournalPage;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
-import java.util.ArrayList;
-import java.util.List;
 import junit.framework.Assert;
 
 /**
@@ -51,7 +49,7 @@ public class LJPage extends Page {
                     .setMinSecurity("Public")
                     .saveSettings();
         } catch (Exception ex) {
-           Assert.assertTrue("I cannot set default min security", true);
+            Assert.assertTrue("I cannot set default min security", true);
         }
         return this;
     }
@@ -87,42 +85,6 @@ public class LJPage extends Page {
         return onOpened(LJPage.class);
     }
 
-    public LJPage defaultStyle(String user) {
-
-        List<ArrayList<String>> user_atr = workWithDB().conect()
-                .select("select * from user where user = '" + user + "';", "userid")
-                .select("select * from user where user = '" + user + "';", "clusterid")
-                .finish();
-
-        String script1 = "select * from lj_c" + user_atr.get(1).get(0) + ".userproplite2 "
-                + "where userid = '" + user_atr.get(0).get(0) + "'"
-                + "and upropid = (select upropid from userproplist where name = 's2_style');";
-
-        String styleid = workWithDB().conect()
-                .select(script1, "value")
-                .finish()
-                .get(0)
-                .get(0);
-
-        String script2 = "select name from s2styles "
-                + "where userid= '" + user_atr.get(0).get(0)
-                + "' and styleid = '" + styleid + "';";
-
-        String style = workWithDB().conect()
-                .select(script2, "name")
-                .finish()
-                .get(0)
-                .get(0);
-
-        if (!style.equals("wizard-air/default_theme")) {
-            open(CustomizeJournalPage.class)
-                    .findStyle("Air")
-                    .applyStyle();
-        }
-
-        return this;
-    }
-
     public LJPage regionSwitchLogged(String user, String region) {
         switch (region.toUpperCase()) {
             case "CYR":
@@ -153,6 +115,51 @@ public class LJPage extends Page {
                 Assert.fail("Incorrect user region " + reg);
         }
         return onOpened(LJPage.class);
+    }
+
+    public LJPage setCustonAdaptiveProp(String user, String adaptive) {
+        if (!(adaptive.equals(getDBDate().userSettings().getAdaptiveSetting(user).toString()))) {
+            open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
+                    .changeCustomAdaptive()
+                    .saveSettings();
+        }
+        return this;
+    }
+
+    public LJPage setDefaultStyle(String user) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-air/default_theme")) {
+            open(CustomizeJournalPage.class)
+                    .findStyle("Air")
+                    .applyStyle("Air");
+        }
+        return this;
+    }
+
+    public LJPage setAdaptiveStyle(String user) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-chameleon/__adaptive")) {
+            open(CustomizeJournalPage.class)
+                    .findStyle("Unstyled Adaptive")
+                    .applyStyle("Unstyled Adaptive");
+        }
+        return this;
+    }
+
+    public LJPage setRegularStyle(String user) {
+        if (!getDBDate().userSettings().getStyle(user).equals("wizard-voxhtml/light-clouds")) {
+            open(CustomizeJournalPage.class)
+                    .findStyle("Light clouds")
+                    .applyStyle("Light clouds");
+        }
+        return this;
+    }
+
+    public LJPage setOptionViewInMyStyle(String user, String optionValue) {
+        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getInMyOnStyleSetting(user).toUpperCase())) {
+            open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
+                    .changeViewInMyStyle()
+                    .saveSettings();
+        }
+        return this;
     }
 
 }

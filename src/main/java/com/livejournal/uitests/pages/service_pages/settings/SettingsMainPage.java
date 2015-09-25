@@ -36,7 +36,17 @@ public class SettingsMainPage extends ServicePageLogged {
     }
 
     public SettingsMainPage changeCyrServices() {
-        startScript("jQuery(\"tr td input[id='LJ__Setting__CyrillicServices_cyrillicservices']\").click()");
+        startScript("jQuery('tr td input[id=LJ__Setting__CyrillicServices_cyrillicservices]').click()");
+        return this;
+    }
+
+    public SettingsMainPage changeCustomAdaptive() {
+        startScript("jQuery('tr td input[id=LJ__Setting__MobAdaptive_cmobadv]').click()");
+        return this;
+    }
+
+    public SettingsMainPage changeViewInMyStyle() {
+        startScript("jQuery('tr td input[id=LJ__Setting__StyleAlwaysMine_stylealwaysmine]').click()");
         return this;
     }
 
