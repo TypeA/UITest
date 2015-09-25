@@ -5,7 +5,8 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.JournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.utility.GetUsers;
+import static com.livejournal.uitests.utility.GetUsers.scriptAllUsers;
+import static com.livejournal.uitests.utility.GetUsers.scriptWithMobileView;
 import java.util.ArrayList;
 import java.util.List;
 import net.thucydides.core.annotations.StepGroup;
@@ -160,9 +161,9 @@ public class AdaptiveSettings extends WebTest {
 
     private List<ArrayList<String>> getAllUsers(String needPass, String userType, Boolean paid, String style) {
         return workWithDB().conect()
-                .select(GetUsers.scriptWithMobileView(), "user")
-                .select(GetUsers.scriptAllUsers(needPass, userType, paid, style)[0], "user")
-                .select(GetUsers.scriptAllUsers(needPass, userType, paid, style)[1], "user")
+                .select(scriptWithMobileView(), "user")
+                .select(scriptAllUsers(needPass, userType, paid, style)[0], "user")
+                .select(scriptAllUsers(needPass, userType, paid, style)[1], "user")
                 .finish();
     }
 }
