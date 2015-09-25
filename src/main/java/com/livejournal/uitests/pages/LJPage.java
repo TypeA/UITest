@@ -118,7 +118,7 @@ public class LJPage extends Page {
     }
 
     public LJPage setCustonAdaptiveProp(String user, String adaptive) {
-        if (!(adaptive.equals(getDBDate().userSettings().isCustomAdaptive(user).toString()))) {
+        if (!(adaptive.equals(getDBDate().userSettings().getAdaptiveSetting(user).toString()))) {
             open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
                     .changeCustomAdaptive()
                     .saveSettings();
@@ -154,7 +154,7 @@ public class LJPage extends Page {
     }
 
     public LJPage setOptionViewInMyStyle(String user, String optionValue) {
-        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getViewInMyOnStyleSetting(user).toUpperCase())) {
+        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getInMyOnStyleSetting(user).toUpperCase())) {
             open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
                     .changeViewInMyStyle()
                     .saveSettings();

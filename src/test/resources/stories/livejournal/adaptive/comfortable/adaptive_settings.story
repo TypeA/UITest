@@ -265,3 +265,13 @@ Examples:
 |true               |true                   |Chameleon      |true               |true                   |Air            |Chameleon              |
 |true               |true                   |Chameleon      |true               |true                   |nonAdaptive    |Chameleon              |
 |true               |true                   |Chameleon      |true               |true                   |Chameleon      |Chameleon              |
+
+
+Scenario: User with Adaptive Chameleon see correct theme in journal with option 'in my style'
+
+Meta: 
+@categories adaptive comfortable
+
+Given user <user> with option in my style
+When user go to the random journal <journal> page
+Then user see correct style <correctStyle> in journal
