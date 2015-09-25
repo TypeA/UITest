@@ -6,7 +6,7 @@ package com.livejournal.uitests.utility;
  */
 public class GetUsers {
 
-    private String scriptWithMobileView() {  //формирование запроса на включенную опцию Mobile View
+    public static String scriptWithMobileView() {  //формирование запроса на включенную опцию Mobile View
         return "SELECT user.user "
                 + "FROM user "
                 + "left join lj_c2.userproplite2 on user.userid = lj_c2.userproplite2.userid "
@@ -16,34 +16,29 @@ public class GetUsers {
 
     }
 
-    private String[] scriptAllUsers(String needPass, String userType, Boolean paid, String style) { //формирование кластерных запросов для поиска подходящих пользователей
-        String[] script = new String[3];
-        script[0] = "";
-        for (Integer i = 1; i < 3; i++) {
+    public static String[] scriptAllUsers(String needPass, String userType, Boolean paid, String style) { //формирование кластерных запросов для поиска подходящих пользователей
+        String[] script = new String[2];
+
+        for (Integer i = 0; i < 2; i++) {
             script[i] = "SELECT DISTINCT user.user "
                     + "FROM user ";
             if (needPass.toUpperCase().equals("NEED PASS")) {
                 script[i] += "LEFT JOIN password ON user.userid=password.userid ";
             }
-            script[i] += "left join lj_c" + i.toString() + ".userproplite2 on user.userid = lj_c" + i.toString() + ".userproplite2.userid "
-                    + "left join s2styles on lj_c" + i.toString() + ".userproplite2.value = s2styles.styleid "
-                    + "left join lj_c" + i.toString() + ".log2 on lj_c" + i.toString() + ".log2.journalid = user.userid "
-                    + "WHERE  lj_c" + i.toString() + ".userproplite2.upropid = 96 "
-                    + "AND user.statusvis = 'V' ";
+            script[i] += "left join lj_c" + (i + 1) + ".userproplite2 on user.userid = lj_c" + (i + 1) + ".userproplite2.userid "
+                    + "left join s2styles on lj_c" + (i + 1) + ".userproplite2.value = s2styles.styleid "
+                    + "left join lj_c" + (i + 1) + ".log2 on lj_c" + (i + 1) + ".log2.journalid = user.userid "
+                    + "WHERE  lj_c" + (i + 1) + ".userproplite2.upropid = 96 "
+                    + "AND user.statusvis = 'V' "
+                    + "AND lj_c" + (i + 1) + ".log2.security = 'public' ";
             if (needPass.toUpperCase().equals("NEED PASS")) {
                 script[i] += "AND password.password not like '%md5%' ";
             }
-            script[i] += "AND lj_c" + i.toString() + ".log2.security = 'public' ";
-            switch (userType.toUpperCase()) {
-                case "JOURNAL":
-                    script[i] += "AND user.journaltype = 'P' ";
-                    break;
-                case "COMMUNITY":
-                    script[i] += "AND user.journaltype = 'C' ";
-                    break;
-                default:
-                    script[i] += "AND user.journaltype = 'P' ";
-                    break;
+
+            if (userType.toUpperCase().equals("COMMUNITY")) {
+                script[i] += "AND user.journaltype = 'C' ";
+            } else {
+                script[i] += "AND user.journaltype = 'P' ";
             }
 
             if (paid) {
