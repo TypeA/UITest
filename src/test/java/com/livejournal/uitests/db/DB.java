@@ -2,6 +2,7 @@ package com.livejournal.uitests.db;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 
 public class DB extends WebTest {
@@ -11,7 +12,7 @@ public class DB extends WebTest {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
         open(LoginPageUnlogged.class)
-                .authorizeBy("autotest-paid-1", getDBDate().userData().getUserPassword("autotest-paid-1"));;
+                .authorizeBy("test", getDBDate().userData().getUserPassword("test"));
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
 
     }

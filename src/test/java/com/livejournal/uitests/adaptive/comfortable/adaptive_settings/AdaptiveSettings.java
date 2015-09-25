@@ -25,24 +25,27 @@ public class AdaptiveSettings extends WebTest {
     @Given("user $user")
     public void given_user(String user) {
         if (!user.toUpperCase().equals("UNLOGGED")) {
-            open(LoginPageUnlogged.class).authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "n");
+            open(LoginPageUnlogged.class)
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "n");
         }
     }
 
     //User see correct theme in his journal(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style)")
     public void random_user(String paid, String mobileView, String style) {
-        String user = getUser("Need pass", "Journal", paid, mobileView, style);
+        String user = getUser("Need pass", "Journal", Boolean.valueOf(paid), mobileView, style);
         ThucydidesUtils.putToSession("finded_user", user);
-        open(LoginPageUnlogged.class).authorizeBy(user, getDBDate().userData().getUserPassword(user));
+        open(LoginPageUnlogged.class)
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user));
     }
 
     //User see correct theme in random journal with option 'in my style'(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style) with option in my style")
     public void random_user_with_option_in_my_style(String paid, String mobileView, String style) {
-        String user = getUser("Need pass", "Journal", paid, mobileView, style);
+        String user = getUser("Need pass", "Journal", Boolean.valueOf(paid), mobileView, style);
         ThucydidesUtils.putToSession("viewer", user);
-        open(LoginPageUnlogged.class).authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
+        open(LoginPageUnlogged.class)
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
     }
 
     //User see Air theme(2/3)
@@ -51,7 +54,7 @@ public class AdaptiveSettings extends WebTest {
     //User see Non adaptive Chameleon theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
-        String findedUser = getUser("DONT NEED PASS", "Journal", paid, mobileView, style);
+        String findedUser = getUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid), mobileView, style);
         ThucydidesUtils.putToSession("finded_user", findedUser);
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
@@ -65,7 +68,7 @@ public class AdaptiveSettings extends WebTest {
     //User see correct theme in random journal with option 'in my style'(2/3)
     @When("user go to the random journal (paid $paid1,mobile view $mobileView1,style $style1) page")
     public void user_go_to_the_random_journal(String paid1, String mobileView1, String style1) {
-        String findedUser = getUser("DONT NEED PASS", "Journal", paid1, mobileView1, style1);
+        String findedUser = getUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid1), mobileView1, style1);
         ThucydidesUtils.putToSession("finded_user", findedUser);
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
@@ -92,9 +95,9 @@ public class AdaptiveSettings extends WebTest {
                 .finish();
     }
 
-    ///////////////////////////////////////METHODS///////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////
     @StepGroup
-    private String getUser(String needPass, String userType, String paid, String mobileView, String style) {
+    private String getUser(String needPass, String userType, Boolean paid, String mobileView, String style) {
         int index = 0;
         ArrayList<String> neededUsers = new ArrayList<>();
         String[] script = new String[3];
@@ -131,17 +134,13 @@ public class AdaptiveSettings extends WebTest {
                     script[i] += "AND user.journaltype = 'P' ";
                     break;
             }
-            switch (paid.toUpperCase()) {
-                case "TRUE":
-                    script[i] += "AND ((user.caps & 1<<3 = 8) =1 or (user.caps & 1<<4=16)=1) ";
-                    break;
-                case "FALSE":
-                    script[i] += "AND ((user.caps & 1<<3 = 8) =0 and (user.caps & 1<<4=16)=0) ";
-                    break;
-                default:
-                    script[i] += "AND ((user.caps & 1<<3 = 8) =0 and (user.caps & 1<<4=16)=0) ";
-                    break;
+            
+            if (paid == true) {
+                script[i] += "AND ((user.caps & 1<<3 = 8) =1 or (user.caps & 1<<4=16)=1) ";
+            } else {
+                script[i] += "AND ((user.caps & 1<<3 = 8) =0 and (user.caps & 1<<4=16)=0) ";
             }
+            
             switch (style.toUpperCase()) {
                 case "AIR":
                     script[i] += "AND s2styles.name like '%wizard-air/default_theme%';";
