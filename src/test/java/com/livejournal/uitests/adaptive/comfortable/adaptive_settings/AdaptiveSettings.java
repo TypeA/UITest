@@ -33,7 +33,7 @@ public class AdaptiveSettings extends WebTest {
     //User see correct theme in his journal(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style)")
     public void random_user(String paid, String mobileView, String style) {
-        String user = getUser("Need pass", "Journal", Boolean.valueOf(paid), mobileView, style);
+        String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
         ThucydidesUtils.putToSession("finded_user", user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
@@ -42,7 +42,7 @@ public class AdaptiveSettings extends WebTest {
     //User see correct theme in random journal with option 'in my style'(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style) with option in my style")
     public void random_user_with_option_in_my_style(String paid, String mobileView, String style) {
-        String user = getUser("Need pass", "Journal", Boolean.valueOf(paid), mobileView, style);
+        String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
         ThucydidesUtils.putToSession("viewer", user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
@@ -54,7 +54,7 @@ public class AdaptiveSettings extends WebTest {
     //User see Non adaptive Chameleon theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
-        String findedUser = getUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid), mobileView, style);
+        String findedUser = getNeededUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
         ThucydidesUtils.putToSession("finded_user", findedUser);
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
@@ -68,7 +68,7 @@ public class AdaptiveSettings extends WebTest {
     //User see correct theme in random journal with option 'in my style'(2/3)
     @When("user go to the random journal (paid $paid1,mobile view $mobileView1,style $style1) page")
     public void user_go_to_the_random_journal(String paid1, String mobileView1, String style1) {
-        String findedUser = getUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid1), mobileView1, style1);
+        String findedUser = getNeededUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid1), Boolean.valueOf(mobileView1), style1);
         ThucydidesUtils.putToSession("finded_user", findedUser);
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
@@ -95,19 +95,78 @@ public class AdaptiveSettings extends WebTest {
                 .finish();
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @StepGroup
-    private String getUser(String needPass, String userType, Boolean paid, String mobileView, String style) {
+    public String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
         int index = 0;
         ArrayList<String> neededUsers = new ArrayList<>();
-        String[] script = new String[3];
-        script[0] = "SELECT user.user "
+        List<ArrayList<String>> users = getAllUsers(needPass, userType, paid, style);
+        users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
+        users.get(1).remove("system"); //удаление пользователя system
+        if (mobileView) {
+            for (int i = 0; i < users.get(0).size(); i++) {
+                if (users.get(1).contains(users.get(0).get(i))) {
+                    neededUsers.add(users.get(0).get(i));
+                }
+            }
+        } else {
+            for (int i = 0; i < users.get(0).size(); i++) {
+                users.get(1).remove(users.get(0).get(i));
+            }
+            neededUsers.addAll(users.get(1));
+        }
+        if (!neededUsers.isEmpty()) {
+            index = (int) (Math.random() * (neededUsers.size()));
+        } else {
+            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! НЕТ ДАННЫХ !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+            neededUsers.set(index, "");
+        }
+        return neededUsers.get(index);
+    }
+
+    @StepGroup
+    private Boolean isCorrectStyle(String style) {
+        String script1 = "", script2 = "";
+        switch (style.toUpperCase()) {
+            case "AIR":
+                script1 = "return jQuery('.entryunit__title a')[0]";
+                script2 = "return jQuery('.actions-entryunit__item.actions-entryunit__item--reply')[0]";
+                break;
+            case "ADAPTIVE":
+                script1 = "return jQuery('.j-e-title')[0]";
+                script2 = "return jQuery('.j-p-adaptability-on')[0]";
+                break;
+            case "CHAMELEON":
+                script1 = "return jQuery('.j-e-title')[0]";
+                script2 = "return jQuery('.j-p-adaptability-on')";
+                break;
+            case "NONADAPTIVE":
+                script1 = "return jQuery('.entryunit__title a')[0]";
+                script2 = "return jQuery('.j-e-title')[0]";
+                break;
+
+        }
+        try {
+            return (!startScript(script1).toString().isEmpty()) && (!startScript(script2).toString().isEmpty());
+        } catch (Exception ex) {
+            return style.toUpperCase().equals("NONADAPTIVE");
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    private String scriptWithMobileView() {  //формирование запроса на включенную опцию Mobile View
+        return "SELECT user.user "
                 + "FROM user "
                 + "left join lj_c2.userproplite2 on user.userid = lj_c2.userproplite2.userid "
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "
                 + "WHERE lj_c2.userproplite2.upropid = 402 "
-                + "OR lj_c1.userproplite2.upropid = 402;"; //формирование запроса на включенную опцию
+                + "OR lj_c1.userproplite2.upropid = 402;";
 
+    }
+
+    private String[] scriptAllUsers(String needPass, String userType, Boolean paid, String style) { //формирование кластерных запросов для поиска подходящих пользователей
+        String[] script = new String[3];
+        script[0] = "";
         for (Integer i = 1; i < 3; i++) {
             script[i] = "SELECT DISTINCT user.user "
                     + "FROM user ";
@@ -134,13 +193,13 @@ public class AdaptiveSettings extends WebTest {
                     script[i] += "AND user.journaltype = 'P' ";
                     break;
             }
-            
-            if (paid == true) {
+
+            if (paid) {
                 script[i] += "AND ((user.caps & 1<<3 = 8) =1 or (user.caps & 1<<4=16)=1) ";
             } else {
                 script[i] += "AND ((user.caps & 1<<3 = 8) =0 and (user.caps & 1<<4=16)=0) ";
             }
-            
+
             switch (style.toUpperCase()) {
                 case "AIR":
                     script[i] += "AND s2styles.name like '%wizard-air/default_theme%';";
@@ -161,68 +220,15 @@ public class AdaptiveSettings extends WebTest {
                     script[i] += "AND s2styles.name not like '%wizard-air/default_theme%' and  s2styles.name not like '%chameleon%';";
                     break;
             }
-        }//формирование кластерных запросов для поиска подходящих пользователей
-        List<ArrayList<String>> users = workWithDB().conect()
-                .select(script[0], "user")
-                .select(script[1], "user")
-                .select(script[2], "user")
-                .finish();//0 - все с включенной опцией, 1 - все заданные пользователи первого кластера, 2 - все заданные пользователи второго кластера
-        users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
-        users.get(1).remove("system"); //удаление пользователя system
-        if (mobileView.toUpperCase().equals("TRUE")) {
-            for (int i = 0; i < users.get(0).size(); i++) {
-                if (users.get(1).contains(users.get(0).get(i))) {
-                    neededUsers.add(users.get(0).get(i));
-                }
-            }
-        } else {
-            for (int i = 0; i < users.get(0).size(); i++) {
-                users.get(1).remove(users.get(0).get(i));
-            }
-            neededUsers.addAll(users.get(1));
         }
-        if (!neededUsers.isEmpty()) {
-            index = (int) (Math.random() * (neededUsers.size()));
-        } else {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! НЕТ ДАННЫХ !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            neededUsers.set(index, "");
-        }
-        return neededUsers.get(index);
+        return script;
     }
 
-    @StepGroup
-    private Boolean isCorrectStyle(String style) {
-        Boolean correct = false;
-        switch (style.toUpperCase()) {
-            case "AIR":
-                try {
-                    correct = !startScript("return jQuery('.entryunit__title a')[0]").toString().isEmpty();
-                } catch (Exception ex) {
-                    correct = false;
-                }
-                break;
-            case "ADAPTIVE":
-                try {
-                    correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')[0]").toString().isEmpty());
-                } catch (Exception ex) {
-                    correct = false;
-                }
-                break;
-            case "CHAMELEON":
-                try {
-                    correct = (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty()) && (!startScript("return jQuery('.j-p-adaptability-on')").toString().isEmpty());
-                } catch (Exception ex) {
-                    correct = false;
-                }
-                break;
-            case "NONADAPTIVE":
-                try {
-                    correct = (!startScript("return jQuery('.entryunit__title a')[0]").toString().isEmpty()) || (!startScript("return jQuery('.j-e-title')[0]").toString().isEmpty());
-                } catch (Exception ex) {
-                    correct = true;
-                }
-                break;
-        }
-        return correct;
+    private List<ArrayList<String>> getAllUsers(String needPass, String userType, Boolean paid, String style) {
+        return workWithDB().conect()
+                .select(scriptWithMobileView(), "user")
+                .select(scriptAllUsers(needPass, userType, paid, style)[1], "user")
+                .select(scriptAllUsers(needPass, userType, paid, style)[2], "user")
+                .finish();
     }
 }
