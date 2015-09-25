@@ -1,5 +1,7 @@
 package com.livejournal.uitests.utility;
 
+import com.livejournal.uisteps.thucydides.Databases;
+
 /**
  *
  * @author m.prytkova

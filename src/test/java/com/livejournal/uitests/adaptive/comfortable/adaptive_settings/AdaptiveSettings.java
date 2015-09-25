@@ -98,11 +98,12 @@ public class AdaptiveSettings extends WebTest {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @StepGroup
     public String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
-        int index = 0;
-        ArrayList<String> neededUsers = new ArrayList<>();
+
         List<ArrayList<String>> users = getAllUsers(needPass, userType, paid, style);
         users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
         users.get(1).remove("system"); //удаление пользователя system
+        
+        ArrayList<String> neededUsers = new ArrayList<>();
         if (mobileView) {
             for (int i = 0; i < users.get(0).size(); i++) {
                 if (users.get(1).contains(users.get(0).get(i))) {
@@ -115,6 +116,8 @@ public class AdaptiveSettings extends WebTest {
             }
             neededUsers.addAll(users.get(1));
         }
+
+        int index = 0;
         if (!neededUsers.isEmpty()) {
             index = (int) (Math.random() * (neededUsers.size()));
         } else {
@@ -130,7 +133,7 @@ public class AdaptiveSettings extends WebTest {
         switch (style.toUpperCase()) {
             case "AIR":
                 script1 = "return jQuery('.entryunit__title a')[0]";
-                script2 = "return jQuery('.actions-entryunit__item.actions-entryunit__item--reply')[0]";
+                script2 = "return jQuery('.entryunit__title a')[0]";
                 break;
             case "ADAPTIVE":
                 script1 = "return jQuery('.j-e-title')[0]";
@@ -144,8 +147,8 @@ public class AdaptiveSettings extends WebTest {
                 script1 = "return jQuery('.entryunit__title a')[0]";
                 script2 = "return jQuery('.j-e-title')[0]";
                 break;
-
         }
+        
         try {
             return (!startScript(script1).toString().isEmpty()) && (!startScript(script2).toString().isEmpty());
         } catch (Exception ex) {
@@ -161,37 +164,31 @@ public class AdaptiveSettings extends WebTest {
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "
                 + "WHERE lj_c2.userproplite2.upropid = 402 "
                 + "OR lj_c1.userproplite2.upropid = 402;";
-
     }
 
     private String[] scriptAllUsers(String needPass, String userType, Boolean paid, String style) { //формирование кластерных запросов для поиска подходящих пользователей
-        String[] script = new String[3];
-        script[0] = "";
-        for (Integer i = 1; i < 3; i++) {
+        String[] script = new String[2];
+
+        for (Integer i = 0; i < 2; i++) {
             script[i] = "SELECT DISTINCT user.user "
                     + "FROM user ";
             if (needPass.toUpperCase().equals("NEED PASS")) {
                 script[i] += "LEFT JOIN password ON user.userid=password.userid ";
             }
-            script[i] += "left join lj_c" + i.toString() + ".userproplite2 on user.userid = lj_c" + i.toString() + ".userproplite2.userid "
-                    + "left join s2styles on lj_c" + i.toString() + ".userproplite2.value = s2styles.styleid "
-                    + "left join lj_c" + i.toString() + ".log2 on lj_c" + i.toString() + ".log2.journalid = user.userid "
-                    + "WHERE  lj_c" + i.toString() + ".userproplite2.upropid = 96 "
-                    + "AND user.statusvis = 'V' ";
+            script[i] += "left join lj_c" + (i + 1) + ".userproplite2 on user.userid = lj_c" + (i + 1) + ".userproplite2.userid "
+                    + "left join s2styles on lj_c" + (i + 1) + ".userproplite2.value = s2styles.styleid "
+                    + "left join lj_c" + (i + 1) + ".log2 on lj_c" + (i + 1) + ".log2.journalid = user.userid "
+                    + "WHERE  lj_c" + (i + 1) + ".userproplite2.upropid = 96 "
+                    + "AND user.statusvis = 'V' "
+                    + "AND lj_c" + (i + 1) + ".log2.security = 'public' ";
             if (needPass.toUpperCase().equals("NEED PASS")) {
                 script[i] += "AND password.password not like '%md5%' ";
             }
-            script[i] += "AND lj_c" + i.toString() + ".log2.security = 'public' ";
-            switch (userType.toUpperCase()) {
-                case "JOURNAL":
-                    script[i] += "AND user.journaltype = 'P' ";
-                    break;
-                case "COMMUNITY":
-                    script[i] += "AND user.journaltype = 'C' ";
-                    break;
-                default:
-                    script[i] += "AND user.journaltype = 'P' ";
-                    break;
+
+            if (userType.toUpperCase().equals("COMMUNITY")) {
+                script[i] += "AND user.journaltype = 'C' ";
+            } else {
+                script[i] += "AND user.journaltype = 'P' ";
             }
 
             if (paid) {

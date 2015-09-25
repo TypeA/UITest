@@ -1,14 +1,10 @@
 package com.livejournal.uitests.utility;
 
-import com.livejournal.uisteps.thucydides.WebTest;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author s.savinykh
  */
-public class GetUsers extends WebTest {
+public class GetUsers {
 
     private String scriptWithMobileView() {  //формирование запроса на включенную опцию Mobile View
         return "SELECT user.user "
@@ -80,38 +76,4 @@ public class GetUsers extends WebTest {
         return script;
     }
 
-    private List<ArrayList<String>> getAllUsers(String needPass, String userType, Boolean paid, String style) {
-        return workWithDB().conect()
-                .select(scriptWithMobileView(), "user")
-                .select(scriptAllUsers(needPass, userType, paid, style)[1], "user")
-                .select(scriptAllUsers(needPass, userType, paid, style)[2], "user")
-                .finish();
-    }
-
-    public String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
-        int index = 0;
-        ArrayList<String> neededUsers = new ArrayList<>();
-        List<ArrayList<String>> users = getAllUsers(needPass, userType, paid, style);
-        users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
-        users.get(1).remove("system"); //удаление пользователя system
-        if (mobileView) {
-            for (int i = 0; i < users.get(0).size(); i++) {
-                if (users.get(1).contains(users.get(0).get(i))) {
-                    neededUsers.add(users.get(0).get(i));
-                }
-            }
-        } else {
-            for (int i = 0; i < users.get(0).size(); i++) {
-                users.get(1).remove(users.get(0).get(i));
-            }
-            neededUsers.addAll(users.get(1));
-        }
-        if (!neededUsers.isEmpty()) {
-            index = (int) (Math.random() * (neededUsers.size()));
-        } else {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! НЕТ ДАННЫХ !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            neededUsers.set(index, "");
-        }
-        return neededUsers.get(index);
-    }
 }
