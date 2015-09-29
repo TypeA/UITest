@@ -99,7 +99,7 @@ public class AdaptiveSettings extends WebTest {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @StepGroup
-    public String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
+    private String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
 
         List<ArrayList<String>> users = getAllUsers(needPass, userType, paid, style);
         users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
