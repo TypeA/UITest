@@ -41,7 +41,8 @@ public class AdditionalContent extends UpdateBmlBlockes {
     }
 
     public String getRightBlockContent(String type) {
-        return selestRightBlockContent(type).getText();
+        return startScript("return jQuery('.b-updatepage-input.b-updatepage-input-"
+                + type.toLowerCase() + "').val()").toString();
     }
 
     private TextField selestRightBlockContent(String type) {
@@ -49,7 +50,7 @@ public class AdditionalContent extends UpdateBmlBlockes {
             case "MOOD":
                 return mood;
             case "MUSIC":
-                return mood;
+                return music;
             case "LOCATION":
                 return location;
             default:

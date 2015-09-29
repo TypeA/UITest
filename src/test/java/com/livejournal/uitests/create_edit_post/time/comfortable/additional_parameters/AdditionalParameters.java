@@ -59,7 +59,7 @@ public class AdditionalParameters extends WebTest {
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])
                 .useAdditionalContent()
-                .setStickyPost()
+                .setRightBlockContent(element, content)
                 .usePostContent()
                 .setPostText(post_text, "html")
                 .usePage()
@@ -91,8 +91,8 @@ public class AdditionalParameters extends WebTest {
                 .useAdditionalContent()
                 .getRightBlockContent(element);
         verify().that(text.contains(content))
-                .ifResultIsExpected("Content in " + element + " is correct: " + content)
-                .ifElse("Content in " + element + " is incorrect: " + text)
+                .ifResultIsExpected("Content in " + element + " is correct: " + text)
+                .ifElse("Content in " + element + "is incorrect: " + text + ". Correct content is '" + content + "'")
                 .finish();
     }
 }
