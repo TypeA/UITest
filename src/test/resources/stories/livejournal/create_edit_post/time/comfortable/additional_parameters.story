@@ -22,8 +22,8 @@ Then the post is scheduled with right element <element> (content <content>)
 Examples:
 |name         |element  |content |
 |testautotest |location |NY      |
-|--testautotest |mood     |cold    |
-|--testautotest |music    |My music|
+|testautotest |mood     |cold    |
+|testautotest |music    |My music|
 
  
 
