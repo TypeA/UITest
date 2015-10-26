@@ -20,6 +20,9 @@ public class AdditionalParameters extends WebTest {
 
     //Scenario: Sticky post (1/3)
     //Scenario: Location, mood and music (1/3)
+    //Scenario: Check-boxes (1/3)
+    //Scenario: Three posts(1/3)
+    //Scenario: Drop-down menu (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -29,6 +32,8 @@ public class AdditionalParameters extends WebTest {
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
+        String post_text = RandomText.getRandomText(30);
+        ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
 
     //Scenario: Sticky post (2/3)
@@ -36,17 +41,15 @@ public class AdditionalParameters extends WebTest {
     public void user_create_new_sheduied_post_sticky() {
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
-        String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])
                 .useAdditionalContent()
                 .setStickyPost()
                 .usePostContent()
-                .setPostText(post_text, "html")
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
                 .usePage()
                 .postEntry();
-        ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
 
     //Scenario: Location, mood and music (2/3)
@@ -54,17 +57,63 @@ public class AdditionalParameters extends WebTest {
     public void user_create_new_sheduied_post_with_right_element(String element, String content) {
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
-        String post_text = RandomText.getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])
                 .useAdditionalContent()
                 .setRightBlockContent(element, content)
                 .usePostContent()
-                .setPostText(post_text, "html")
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
                 .usePage()
                 .postEntry();
-        ThucydidesUtils.putToSession("post_text", post_text.trim());
+    }
+
+    //Scenario: Check-boxes (2/3)
+    @When("user create new sheduied post with check-boxes $checkbox")
+    public void user_create_new_sheduied_pos_wit_checkboxes(String checkbox) {
+        String[] date = PostTime.getCorrectDate("hour", "1")
+                .split(";");
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .setDateAndTime(date[0], date[1])
+                .useAdditionalContent()
+                .setFeedRssIgnore()
+                .usePostContent()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .usePage()
+                .postEntry();
+    }
+
+    //Scenario: Three posts (2/3)
+    @When("user create new sheduied post with Three posts")
+    public void user_create_new_sheduied_post_with_Three_posts() {
+        String[] date = PostTime.getCorrectDate("hour", "1")
+                .split(";");
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .setDateAndTime(date[0], date[1])
+                .useAdditionalContent()
+                .setThreePosts()
+                .usePostContent()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .usePage()
+                .postEntry();
+    }
+    
+    //Scenario: Drop-down menu (2/3)
+    @When("user create new sheduied post with drop-down menu content $content")
+    public void user_create_new_sheduied_post_with_dropdown_menu(String content) {
+        String[] date = PostTime.getCorrectDate("hour", "1")
+                .split(";");
+        onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
+                .setDateAndTime(date[0], date[1])
+                .useAdditionalContent()
+                .setThreePosts()
+                .usePostContent()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .usePage()
+                .postEntry();
     }
 
     //Scenario: Sticky post (3/3)
@@ -93,6 +142,34 @@ public class AdditionalParameters extends WebTest {
         verify().that(text.contains(content))
                 .ifResultIsExpected("Content in " + element + " is correct: " + text)
                 .ifElse("Content in " + element + "is incorrect: " + text + ". Correct content is '" + content + "'")
+                .finish();
+    }
+
+    //Scenario: Check-boxes (3/3)
+    @Then("the post is scheduled with check-boxes $checkbox")
+    public void post_is_scheduled_with_checkboxes(String checkbox) {
+        Boolean checkboxState = onDisplayed(FinishPostForm.class)
+                .clickToScheduledLink()
+                .editSheduledEntryByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .useAdditionalContent()
+                .getFeedRssIgnore();
+        verify().that(checkboxState)
+                .ifResultIsExpected("Check-box " + checkbox + " is set")
+                .ifElse("Check-box " + checkbox + " is not set")
+                .finish();
+    }
+
+    //Scenario: Three posts (3/3)
+    @Then("the post is scheduled with Three posts")
+    public void post_is_scheduled_with_Three_posts() {
+        Boolean threePostsState = onDisplayed(FinishPostForm.class)
+                .clickToScheduledLink()
+                .editSheduledEntryByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .useAdditionalContent()
+                .getThreePosts();
+        verify().that(threePostsState)
+                .ifResultIsExpected("Three posts is set")
+                .ifElse("Three posts is not set")
                 .finish();
     }
 }
