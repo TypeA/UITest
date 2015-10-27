@@ -70,6 +70,11 @@
             <artifactId>uisteps</artifactId>
             <version>0.2.5-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>net.thucydides</groupId>
+            <artifactId>thucydides-jbehave-plugin</artifactId>
+            <version>0.9.250</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
