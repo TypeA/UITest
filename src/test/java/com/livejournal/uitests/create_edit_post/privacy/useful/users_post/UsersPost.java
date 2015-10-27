@@ -163,7 +163,7 @@ public class UsersPost extends WebTest {
     ////////////////////////////////////////////////////////
     @StepGroup
     private String selectFriend(String user, String type, String group) {
-        switch (SelectUser.valueOf(type.toUpperCase())) {
+        switch (SelectUserList.valueOf(type.toUpperCase())) {
             case NOT_FRIEND:
                 return getDBDate().friends().findNotFriend(user);
             case FRIEND:
