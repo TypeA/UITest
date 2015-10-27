@@ -19,21 +19,28 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class announce extends WebTest {
+public class Announce extends WebTest {
+    
+    ////////////////// нет аннотаций к шагам (где указывается стори)
+    ////////////////// нет форматирования
+    ////////////////// неправильное расположение шагов теста
 
+    //////////////////зачем оборот user on Main Page and go to?
+    ///////////////// Main Page нет и не должно быть и в тесте и в опиании
     @Given("logged user on Main Page and go to Admin Magazine Announce")
     public void logged_user_on_Main_Page_and_go_to_Admin_Magazine_Announce() {
 
-        String name = getDBDate().privUser().findUserWithPrivDiscovery();
+        String name = getDBDate().privileges().getUserWithPrivDiscovery();
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(AnnouncePage.class);
     }
 
+    //////////////// main announce это гдавный пост? если да, можно вполне обойтись без main
     @When("create new main announce with image $image")
     public void create_new_main_announce_with_image(String image) {
-        int idSlot = workWithRedis().announce().getIdMainAnnounce();
-        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().selectJItemIdMagazine() + ".html";
+        int idSlot = getRedisData().discovery().getMainAnnounceId();
+        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
         String subject = getRandomChar(10);
         String lead = getRandomChar(15);
         onOpened(AnnouncePage.class)
@@ -63,14 +70,21 @@ public class announce extends WebTest {
 
     @When("remove existing main announce and create new main announce with image $image")
     public void remove_existing_main_announce_and_create_new_main_announce(String image) {
-        int idSlot = workWithRedis().announce().getIdMainAnnounce();
+        int idSlot = getRedisData().discovery().getMainAnnounceId();
+        
+        
+        /////////////////// а разве выделенный кусок не избыточен?
+        /////////////////// вроде то же самое в методе getMainAnnounceId
         for (int i = 1; i < 4; i++) {
             if (i != idSlot) {
                 idSlot = i;
                 break;
             }
         }
-        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().selectJItemIdMagazine() + ".html";
+        //////////////////
+        
+        
+        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
         String subject = getRandomChar(10);
         String lead = getRandomChar(15);
         onOpened(AnnouncePage.class)
@@ -84,4 +98,7 @@ public class announce extends WebTest {
         
     
     }
+    
+    
+    //////////////// см. то же самое во втором тесте
 }

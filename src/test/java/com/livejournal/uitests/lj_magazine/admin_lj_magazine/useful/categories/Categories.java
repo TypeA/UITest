@@ -23,7 +23,7 @@ public class Categories extends WebTest {
 
     @Given("logged user on Main Page and go to Admin Magazine Categories")
     public void logged_user_on_Main_Page_and_go_to_Admin_Magazine_Categories() {
-        String name = getDBDate().privUser().findUserWithPrivDiscovery();
+        String name = getDBDate().privileges().getUserWithPrivDiscovery();
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(CategoriesPage.class);
@@ -56,7 +56,7 @@ public class Categories extends WebTest {
         if (Boolean.valueOf(new_name)) {
             new_name = getRandomChar(10);
         }
-        String idCategory = getDBDate().discovery().selectIdCategories(usual_category);
+        String idCategory = getDBDate().discovery().getIdCategories(usual_category);
         onOpened(CategoriesPage.class)
                 .editCategory(idCategory, usual_category, new_name);
         ThucydidesUtils.putToSession("new_name", new_name);
@@ -68,7 +68,7 @@ public class Categories extends WebTest {
         String categoryName = ThucydidesUtils.getFromSession("new_name").toString();
         String idCategory = ThucydidesUtils.getFromSession("idCategory").toString();
         verify().that(open(LJMagazinePageLogged.class)
-                .categoryExistOnLJMagagazine(Boolean.valueOf(special_category) ? false : true, categoryName, getDBDate().discovery().selectKeywordCategories(idCategory)))
+                .categoryExistOnLJMagagazine(Boolean.valueOf(special_category) ? false : true, categoryName, getDBDate().discovery().getKeywordCategories(idCategory)))
                 .ifResultIsExpected("Category = " + categoryName + " is changed")
                 .ifElse("Category  = " + categoryName + " is not changed")
                 .finish();
@@ -76,12 +76,12 @@ public class Categories extends WebTest {
 
     @When("delete $usual_category category")
     public void delete_category(String usual_category) {
-        String idCategory = getDBDate().discovery().selectIdCategories(usual_category);
-        String nameCategory = getDBDate().discovery().selectNameCategory(idCategory);
+        String idCategory = getDBDate().discovery().getIdCategories(usual_category);
+        String nameCategory = getDBDate().discovery().getNameCategory(idCategory);
         onOpened(CategoriesPage.class)
                 .deleteCategory(idCategory);
         ThucydidesUtils.putToSession("nameCategory", nameCategory);
-        ThucydidesUtils.putToSession("keywordCategory", getDBDate().discovery().selectKeywordCategories(idCategory));
+        ThucydidesUtils.putToSession("keywordCategory", getDBDate().discovery().getKeywordCategories(idCategory));
 
     }
 
