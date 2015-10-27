@@ -1,4 +1,4 @@
-package com.livejournal.uitests.create_edit_post.html_tags.useful;
+package com.livejournal.uitests.create_edit_post.html_tags.useful.HtmlTags;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;

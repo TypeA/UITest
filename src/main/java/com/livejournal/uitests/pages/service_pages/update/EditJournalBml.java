@@ -8,6 +8,8 @@ import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
@@ -69,7 +71,7 @@ public class EditJournalBml extends ServicePageLogged {
     }
 
     @StepGroup
-    public MyJournalPage deleteEntry() {
+    public MyJournalPage deleteEntry() {   
         deleteButton.click();
         getDriver().switchTo().alert().accept();
         return onOpened(MyJournalPage.class);

@@ -134,7 +134,7 @@ public class PostInCommunity extends WebTest {
 ////////////////////////////////////////////////////////
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
-        switch (SelectUserForCommunity.valueOf(name.toUpperCase())) {
+        switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
             case MEMBERS:
                 String ans = getDBDate().community().findMemberInCommunityNotInGroup(community);
                 return ans;

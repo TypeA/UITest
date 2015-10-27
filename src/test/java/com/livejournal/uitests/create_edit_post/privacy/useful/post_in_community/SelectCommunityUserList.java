@@ -4,7 +4,7 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.post_in_communit
  *
  * @author m.panferova
  */
-public enum SelectUserForCommunity {
+public enum SelectCommunityUserList {
 
     MEMBERS,
     MAINTAINERS,
