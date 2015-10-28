@@ -5,6 +5,7 @@ Meta:
 Given logged user on Admin Magazine Announce
 When edit announce with image <image>
 Then announce with image <image> is displayed on Lj Magazine
+Then post in previous announce is displayed on feed LJ Magazine
 
 Examples:
 |image  |

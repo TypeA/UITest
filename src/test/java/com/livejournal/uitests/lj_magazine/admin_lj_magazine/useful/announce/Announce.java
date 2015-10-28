@@ -22,9 +22,8 @@ public class Announce extends LJTest {
 
     //////////////////зачем оборот user on Main Page and go to?
     ///////////////// Main Page нет и не должно быть и в тесте и в опиании
-    @Given("logged user on Main Page and go to Admin Magazine Announce")
-    public void logged_user_on_Main_Page_and_go_to_Admin_Magazine_Announce() {
-
+    @Given("logged user on Admin Magazine Announce")
+    public void logged_user_on_Admin_Magazine_Announce() {
         String name = getDBDate().privileges().getUserWithPrivDiscovery();
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
@@ -32,8 +31,8 @@ public class Announce extends LJTest {
     }
 
     //////////////// main announce это гдавный пост? если да, можно вполне обойтись без main
-    @When("create new main announce with image $image")
-    public void create_new_main_announce_with_image(String image) {
+    @When("edit announce with image $image")
+    public void edit_announce_with_image(String image) {
         int idSlot = getRedisData().discovery().getMainAnnounceId();
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
         String subject = utility().random().getRandomChar(10);
@@ -63,22 +62,9 @@ public class Announce extends LJTest {
                 .finish();
     }
 
-    @When("remove existing main announce and create new main announce with image $image")
-    public void remove_existing_main_announce_and_create_new_main_announce(String image) {
-        int idSlot = getRedisData().discovery().getMainAnnounceId();
-        
-        
-        /////////////////// а разве выделенный кусок не избыточен?
-        /////////////////// вроде то же самое в методе getMainAnnounceId
-        for (int i = 1; i < 4; i++) {
-            if (i != idSlot) {
-                idSlot = i;
-                break;
-            }
-        }
-        //////////////////
-        
-        
+    @When("create new announce with image $image")
+    public void create_new_announce_with_image(String image) {
+        int idSlot = getRedisData().discovery().getNotMainAnnounce();       
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
         String subject = utility().random().getRandomChar(10);
         String lead = utility().random().getRandomChar(15);
@@ -88,8 +74,8 @@ public class Announce extends LJTest {
         ThucydidesUtils.putToSession("subject", subject);
         ThucydidesUtils.putToSession("lead", lead);
     }
-    @Then("new main announce with image $image is dispalyed in widget")
-    public void new_main_announce_with_image_is_dispalyed_in_widget(String image){
+    @Then("new announce with image $image is dispalyed in widget")
+    public void new_announce_with_image_is_dispalyed_in_widget(String image){
         
     
     }
