@@ -14,8 +14,12 @@ public class Utility {
         return new Calculation();
     }
 
-    public Conversion conversion() {
-        return new Conversion();
+    public Convertation convertation() {
+        return new Convertation();
+    }
+
+    public Verification verification() {
+        return new Verification();
     }
 
 }

@@ -8,7 +8,6 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.Colo
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.utility.HexToRGB;
 import com.livejournal.uitests.utility.VerifyText;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -112,7 +111,7 @@ public class Settings extends LJTest {
                 .setColorBarByPoint(utility().random().getRandomValue(250))
                 .setColorByPoint(utility().random().getRandomValue(250), utility().random().getRandomValue(250));
         verify().that(!verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
+                .ifResultIsExpected("Correct new color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
         onDisplayed(SettingsBubbleColorBlock.class)
@@ -131,7 +130,7 @@ public class Settings extends LJTest {
                 .setColorBarByPoint(utility().random().getRandomValue(250))
                 .setColorByPoint(utility().random().getRandomValue(250), utility().random().getRandomValue(250));
         verify().that(!verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color :\n" + HexToRGB.hexToRGB(code))
+                .ifResultIsExpected("Correct new color :\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
         onDisplayed(SettingsBubbleColorBlock.class)
@@ -239,19 +238,19 @@ public class Settings extends LJTest {
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color));
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor()))
-                .ifResultIsExpected("Correct current color:\n" + HexToRGB.hexToRGB(code))
+                .ifResultIsExpected("Correct current color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor())
                 .and()
                 .that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
+                .ifResultIsExpected("Correct new color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .that(verifyColor(code, "(" + utility().convertation().hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
                 .and()
                 .that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
-                .ifResultIsExpected("Correct element color:\n" + HexToRGB.hexToRGB(code))
+                .ifResultIsExpected("Correct element color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
     }
@@ -260,10 +259,10 @@ public class Settings extends LJTest {
     @Then("the color changed to the current code $code")
     public void the_color_changed_to_the_current(String code) {
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
-                .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
+                .ifResultIsExpected("Correct new color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .and()
-                .that(verifyColor(code, "(" + HexToRGB.hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .that(verifyColor(code, "(" + utility().convertation().hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
                 .finish();
