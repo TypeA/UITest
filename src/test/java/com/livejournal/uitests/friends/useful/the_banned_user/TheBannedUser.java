@@ -2,6 +2,7 @@ package com.livejournal.uitests.friends.useful.the_banned_user;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.BannedUsersPage;
 import org.jbehave.core.annotations.Given;
@@ -15,7 +16,7 @@ import org.openqa.selenium.WebElement;
  *
  * @author m.panferova
  */
-public class TheBannedUser extends WebTest {
+public class TheBannedUser extends LJTest {
 
     //Scenario: Ban User(1/3)
     //Scenario: Unban user(1/3)

@@ -3,6 +3,7 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.users_post;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -23,7 +24,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class UsersPost extends WebTest {
+public class UsersPost extends LJTest {
 
     //Scenario: Create post (1/4)
     //Scenario: Privacy in editing (1/3)

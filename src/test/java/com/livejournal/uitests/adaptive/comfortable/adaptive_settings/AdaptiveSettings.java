@@ -1,5 +1,6 @@
 package com.livejournal.uitests.adaptive.comfortable.adaptive_settings;
 
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
@@ -18,7 +19,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author s.savinykh
  */
-public class AdaptiveSettings extends WebTest {
+public class AdaptiveSettings extends LJTest {
 
     //User see Air theme(1/3)
     //User see Adaptive Chameleon theme(1/3)

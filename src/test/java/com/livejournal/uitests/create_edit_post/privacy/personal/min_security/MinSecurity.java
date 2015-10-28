@@ -2,6 +2,7 @@ package com.livejournal.uitests.create_edit_post.privacy.personal.min_security;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
@@ -17,7 +18,7 @@ import org.junit.Assert;
  *
  * @author m.prytkova
  */
-public class MinSecurity extends WebTest {
+public class MinSecurity extends LJTest {
 
     //Scenario: Min security in creating post(1/3)
     @Given("logged user $name on Security page")

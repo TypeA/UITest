@@ -2,6 +2,7 @@ package com.livejournal.uitests.friends.useful.manage_friends;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageFriendsPage;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
@@ -13,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author IKasatkin
  */
-public class ManageFriends extends WebTest {
+public class ManageFriends extends LJTest {
 
     //Scenario: Add friend (1/3)
     //Scenario: Delete friend(1/3)

@@ -2,6 +2,7 @@ package com.livejournal.uitests.navigation.useful.header_navigation;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -14,7 +15,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class HeaderNavigation extends WebTest {
+public class HeaderNavigation extends LJTest {
 
     //Scenario: Navigation for logged user (1/3)
     @Given("logged user (name $name,region $region) on Main Page")

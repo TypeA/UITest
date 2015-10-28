@@ -2,6 +2,7 @@ package com.livejournal.uitests.create_edit_post.login_form.useful.login_form;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.utility.RandomText;
@@ -13,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class LoginForm extends WebTest {
+public class LoginForm extends LJTest {
 
     //Scenario: Logged user create new post (1/3)
     @Given("logged user $name on Create Post page")

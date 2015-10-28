@@ -3,6 +3,7 @@ package com.livejournal.uitests.pages;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.Root;
 import com.livejournal.uisteps.thucydides.elements.Page;
+import com.livejournal.uitests.databasesData.DatabasesData;
 import com.livejournal.uitests.pages.service_pages.settings.CustomizeJournalPage;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import junit.framework.Assert;
@@ -13,6 +14,10 @@ import junit.framework.Assert;
  */
 @Root
 public class LJPage extends Page {
+
+    public DatabasesData getDBDate() {
+        return new DatabasesData();
+    }
 
     public LJPage() {
         getUrl().setUser("ljdev9c")
@@ -154,7 +159,7 @@ public class LJPage extends Page {
     }
 
     public LJPage setOptionViewInMyStyle(String user, String optionValue) {
-        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getInMyOnStyleSetting(user).toUpperCase())) {
+        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getInMyStyleSetting(user).toUpperCase())) {
             open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
                     .changeViewInMyStyle()
                     .saveSettings();

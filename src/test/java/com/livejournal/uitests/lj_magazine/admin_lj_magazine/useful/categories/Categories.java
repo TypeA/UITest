@@ -9,6 +9,7 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.admin_lj_magazine.CategoriesPage;
 import static com.livejournal.uitests.utility.RandomOnlyChar.getRandomChar;
@@ -19,7 +20,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class Categories extends WebTest {
+public class Categories extends LJTest {
 
     @Given("logged user on Main Page and go to Admin Magazine Categories")
     public void logged_user_on_Main_Page_and_go_to_Admin_Magazine_Categories() {

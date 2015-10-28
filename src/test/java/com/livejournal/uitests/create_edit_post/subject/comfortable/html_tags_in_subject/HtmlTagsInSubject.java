@@ -1,6 +1,7 @@
 package com.livejournal.uitests.create_edit_post.subject.comfortable.html_tags_in_subject;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -13,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class HtmlTagsInSubject extends WebTest {
+public class HtmlTagsInSubject extends LJTest {
 
     //Scenario: Subject with correct html tags (1/3)
     //Scenario: Subject with cropped html tags(1/3)

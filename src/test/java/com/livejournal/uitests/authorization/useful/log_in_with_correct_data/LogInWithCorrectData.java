@@ -1,6 +1,7 @@
 package com.livejournal.uitests.authorization.useful.log_in_with_correct_data;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.unified_scheme.header.FullscreenHeaderLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
@@ -11,7 +12,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class LogInWithCorrectData extends WebTest {
+public class LogInWithCorrectData extends LJTest {
 
     //Scenario: Successfully autorization(1/3)
     @Given("unlogged user on Login Form")

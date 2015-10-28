@@ -3,6 +3,7 @@ package com.livejournal.uitests.friends.useful.manage_friends_groups;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
@@ -19,7 +20,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class ManageFriendsGroups extends WebTest {
+public class ManageFriendsGroups extends LJTest {
 
     //Scenario: Change the position of the group(1/4)
     //Scenario: Public group(1/3)

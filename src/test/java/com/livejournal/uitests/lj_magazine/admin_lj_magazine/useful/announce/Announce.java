@@ -7,6 +7,7 @@ package com.livejournal.uitests.lj_magazine.admin_lj_magazine.useful.announce;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.admin_lj_magazine.AnnouncePage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -19,7 +20,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class Announce extends WebTest {
+public class Announce extends LJTest {
     
     ////////////////// нет аннотаций к шагам (где указывается стори)
     ////////////////// нет форматирования

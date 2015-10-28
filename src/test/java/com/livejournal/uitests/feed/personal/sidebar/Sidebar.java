@@ -3,6 +3,7 @@ package com.livejournal.uitests.feed.personal.sidebar;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.RandomeValue;
@@ -16,7 +17,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class Sidebar extends WebTest {
+public class Sidebar extends LJTest {
 
     //Scenario: Add widget (1/3)
     @Given("logged user (name $name) without widgets in sidebar on Friends Feed")

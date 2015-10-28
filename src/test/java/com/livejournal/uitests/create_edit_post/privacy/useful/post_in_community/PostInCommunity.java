@@ -3,6 +3,7 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.post_in_communit
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -23,7 +24,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class PostInCommunity extends WebTest {
+public class PostInCommunity extends LJTest {
 
     //Scenario: Create post in community (1/4)
     //Scenario: Edit post in community (1/4)

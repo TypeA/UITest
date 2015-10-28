@@ -1,6 +1,7 @@
 package com.livejournal.uitests.create_edit_post.lj_tags.useful.ljuser_tag;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -13,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author s.savinykh
  */
-public class LjuserTag extends WebTest {
+public class LjuserTag extends LJTest {
 
     //Logged user create new post with correct lj-user tag (1/3)
     //Logged user create new post with uncorrect lj-user tag (1/3)

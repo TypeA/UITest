@@ -3,6 +3,7 @@ package com.livejournal.uitests.feed.comfortable.custom_friends_groups;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
@@ -13,7 +14,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class CustomFriendsGroups extends WebTest {
+public class CustomFriendsGroups extends LJTest {
 
     //Scenario: Go to Edit Custom Friends Groups (1/3)
     //Scenario: Replacement blocks (1/3)

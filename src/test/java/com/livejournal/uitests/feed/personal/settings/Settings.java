@@ -3,6 +3,7 @@ package com.livejournal.uitests.feed.personal.settings;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.ColorSettings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
@@ -27,7 +28,7 @@ import org.openqa.selenium.JavascriptExecutor;
  *
  * @author m.prytkova
  */
-public class Settings extends WebTest {
+public class Settings extends LJTest {
 
     //Scenario: New Title(1/3)
     //Scenario: Change Title(1/3)

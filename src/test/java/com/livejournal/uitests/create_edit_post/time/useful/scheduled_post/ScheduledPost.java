@@ -3,6 +3,7 @@ package com.livejournal.uitests.create_edit_post.time.useful.scheduled_post;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
@@ -20,7 +21,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class ScheduledPost extends WebTest {
+public class ScheduledPost extends LJTest {
 
     //Scenario: Create scheduled post (1/3)
     //Scenario: Create scheduled post with several privacy (1/3)

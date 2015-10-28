@@ -2,6 +2,7 @@ package com.livejournal.uitests.create_edit_post.html_tags.useful.HtmlTags;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -14,7 +15,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.panferova
  */
-public class HtmlTags extends WebTest {
+public class HtmlTags extends LJTest {
 
     //Scenario: Create post with style(1/3)
     //Scenario: Create post with font(1/3)

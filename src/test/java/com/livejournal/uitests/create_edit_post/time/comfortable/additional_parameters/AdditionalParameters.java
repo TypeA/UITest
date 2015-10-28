@@ -2,6 +2,7 @@ package com.livejournal.uitests.create_edit_post.time.comfortable.additional_par
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -16,7 +17,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class AdditionalParameters extends WebTest {
+public class AdditionalParameters extends LJTest {
 
     //Scenario: Sticky post (1/3)
     //Scenario: Location, mood and music (1/3)

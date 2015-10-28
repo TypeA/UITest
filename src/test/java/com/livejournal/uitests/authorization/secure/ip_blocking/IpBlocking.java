@@ -1,6 +1,7 @@
 package com.livejournal.uitests.authorization.secure.ip_blocking;
 
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.VerifyText;
 import com.livejournal.uitests.utility.iterations.IterationsWithLoginForm;
@@ -12,7 +13,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class IpBlocking extends WebTest {
+public class IpBlocking extends LJTest {
     
     //Scenario: IP blocking, when you spent login attempts(1/3)
     @Given("unlogged user on Login Form")

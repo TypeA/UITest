@@ -2,6 +2,7 @@ package com.livejournal.uitests.create_edit_post.time.comfortable.old_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uisteps.thucydides.WebTest;
+import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
@@ -16,7 +17,7 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class OldPost extends WebTest {
+public class OldPost extends LJTest {
 
     //Scenario: Create old post (1/3)
     @Given("logged user $name on Create Post page")
