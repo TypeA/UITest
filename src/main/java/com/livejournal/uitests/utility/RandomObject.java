@@ -18,6 +18,10 @@ public class RandomObject {
         return name.replace("rnd", "" + random.nextInt(900000));
     }
 
+    public Integer getRandomValue(Integer value) {
+        return random.nextInt(value);
+    }
+
     public String getRandomChar(int n) {
         StringBuilder text = new StringBuilder();
         for (int i = 0; i < n; i++) {
