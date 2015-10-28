@@ -2,7 +2,6 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.post_in_communit
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
@@ -11,7 +10,6 @@ import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import static com.livejournal.uitests.utility.ParseString.getParsedString;
-import com.livejournal.uitests.utility.RandomText;
 import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class PostInCommunity extends LJTest {
     //Scenario: Edit post in community (2/4)
     @When("user create new post with privacy $privacy (group $group) in community $community")
     public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws IOException {
-        String postText = RandomText.getRandomText(30);
+        String postText = utility().random().getRandomText(30);
         onOpened(LoginPageUnlogged.class)
                 .defaultMinSecurity(community);
         String post_link = open(UpdateBmlPageLogged.class)

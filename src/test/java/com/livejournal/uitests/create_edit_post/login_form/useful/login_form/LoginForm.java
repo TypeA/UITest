@@ -1,11 +1,9 @@
 package com.livejournal.uitests.create_edit_post.login_form.useful.login_form;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -31,7 +29,7 @@ public class LoginForm extends LJTest {
     @When("user create new post")
     public void user_create_new_post_and_change_date(String parameter, String value) {
         System.out.println("==================3");
-        ThucydidesUtils.putToSession("post_text", RandomText.getRandomText(30));
+        ThucydidesUtils.putToSession("post_text", utility().random().getRandomText(30));
    
         System.out.println("==================4");
 

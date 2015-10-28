@@ -1,11 +1,9 @@
 package com.livejournal.uitests.create_edit_post.lj_tags.useful.ljuser_tag;
 
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -30,7 +28,7 @@ public class LjuserTag extends LJTest {
     //Logged user create new post with correct lj-user tag (2/3)
     @When("user enter correct username $ljuser in ljuser bubble and create new post")
     public void user_ener_correct_username_in_ljuser_bubble_and_create_new_post(String ljuser) {
-        String postText = RandomText.getRandomText(30) + " ";
+        String postText = utility().random().getRandomText(30) + " ";
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
