@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.livejournal.uitests.lj_magazine.admin_lj_magazine.useful.announce;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.admin_lj_magazine.AnnouncePage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import static com.livejournal.uitests.utility.RandomOnlyChar.getRandomChar;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -42,8 +36,8 @@ public class Announce extends LJTest {
     public void create_new_main_announce_with_image(String image) {
         int idSlot = getRedisData().discovery().getMainAnnounceId();
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
-        String subject = getRandomChar(10);
-        String lead = getRandomChar(15);
+        String subject = utility().random().getRandomChar(10);
+        String lead = utility().random().getRandomChar(15);
         onOpened(AnnouncePage.class)
                 .editSlot(idSlot, image, urlPost, subject, lead);
         ThucydidesUtils.putToSession("linkTopost", urlPost);
@@ -86,8 +80,8 @@ public class Announce extends LJTest {
         
         
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
-        String subject = getRandomChar(10);
-        String lead = getRandomChar(15);
+        String subject = utility().random().getRandomChar(10);
+        String lead = utility().random().getRandomChar(15);
         onOpened(AnnouncePage.class)
                 .editSlot(idSlot, image, urlPost, subject, lead);
         ThucydidesUtils.putToSession("linkTopost", urlPost);

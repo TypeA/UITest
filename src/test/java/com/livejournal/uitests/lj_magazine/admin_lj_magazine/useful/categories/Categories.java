@@ -1,18 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.livejournal.uitests.lj_magazine.admin_lj_magazine.useful.categories;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.admin_lj_magazine.CategoriesPage;
-import static com.livejournal.uitests.utility.RandomOnlyChar.getRandomChar;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
@@ -32,8 +25,8 @@ public class Categories extends LJTest {
 
     @When("create new $usual_category category")
     public void create_new_category(String usual_category) {
-        String nameCategory = getRandomChar(10);
-        String keyword = getRandomChar(10);
+        String nameCategory = utility().random().getRandomChar(10);
+        String keyword = utility().random().getRandomChar(10);
         onOpened(CategoriesPage.class)
                 .addCategory(Boolean.valueOf(usual_category), nameCategory, keyword);
         ThucydidesUtils.putToSession("nameCategory", nameCategory);
@@ -55,7 +48,7 @@ public class Categories extends LJTest {
     @When("edit $usual_category category and set option special category $special_category and new name $new_name")
     public void edit_usual_category_category_and_set_option_special_category_special_category_and_new_name(String usual_category, String new_name) {
         if (Boolean.valueOf(new_name)) {
-            new_name = getRandomChar(10);
+            new_name = utility().random().getRandomChar(10);
         }
         String idCategory = getDBDate().discovery().getIdCategories(usual_category);
         onOpened(CategoriesPage.class)
