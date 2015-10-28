@@ -1,12 +1,10 @@
 package com.livejournal.uitests.create_edit_post.html_tags.useful.HtmlTags;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -35,7 +33,7 @@ public class HtmlTags extends LJTest {
     //Scenario: Create post with style(2/3)
     @When("user create new post with style $tag and save post")
     public void user_create_new_post_with_bold_text_and_save_post(String tag) {
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
@@ -50,7 +48,7 @@ public class HtmlTags extends LJTest {
     //Scenario: Create post with font(2/3)
     @When("user create new post with font $font_text and save post")
     public void user_create_new_post_with_font_and_save_post(String font_text) {
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
@@ -65,7 +63,7 @@ public class HtmlTags extends LJTest {
     //Scenario: Create post with color(2/3)
     @When("user create new post with color $color_text and save post")
     public void user_create_new_post_with_color_and_save_post(String color_text) {
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
@@ -80,7 +78,7 @@ public class HtmlTags extends LJTest {
     //Scenario: Create post with custom text(2/3)
     @When("user create new post with color $color_text style_1 $tag_1 style_2 $tag_2 and save post")
     public void user_create_new_post_with_color_style_1_style_2_and_save_post(String color_text, String tag_1, String tag_2) {
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()

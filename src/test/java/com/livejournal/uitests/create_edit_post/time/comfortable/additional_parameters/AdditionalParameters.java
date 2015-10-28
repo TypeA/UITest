@@ -1,13 +1,11 @@
 package com.livejournal.uitests.create_edit_post.time.comfortable.additional_parameters;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
-import com.livejournal.uitests.utility.RandomText;
 import com.livejournal.uitests.utility.date.PostTime;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -33,7 +31,7 @@ public class AdditionalParameters extends LJTest {
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         ThucydidesUtils.putToSession("post_text", post_text.trim());
     }
 

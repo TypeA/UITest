@@ -2,13 +2,11 @@ package com.livejournal.uitests.friends.useful.manage_friends_groups;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
-import com.livejournal.uitests.utility.RandomText;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -71,7 +69,7 @@ public class ManageFriendsGroups extends LJTest {
     //Scenario: Create new group(2/4)
     @When("user create new group and save the changes")
     public void user_create_new_group_and_save_the_changes() {
-        String group = RandomText.getRandomText(10);
+        String group = utility().random().getRandomText(10);
         String groups = convertArrayToString((ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before")) + group;
         onOpened(ManageGroupsPage.class)
                 .createNewGroup(group)
@@ -96,7 +94,7 @@ public class ManageFriendsGroups extends LJTest {
     @When("user rename group name and save the changes")
     public void user_rename_group_name_and_save_the_changes() {
         ArrayList<String> groupListBefore = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-        String group = RandomText.getRandomText(10);
+        String group = utility().random().getRandomText(10);
         int randomIndex = new Random().nextInt(groupListBefore.size());
         onOpened(ManageGroupsPage.class)
                 .renameGroup(randomIndex, group)

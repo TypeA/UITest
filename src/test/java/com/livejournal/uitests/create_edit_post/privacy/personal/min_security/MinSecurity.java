@@ -1,13 +1,11 @@
 package com.livejournal.uitests.create_edit_post.privacy.personal.min_security;
 
 import com.livejournal.uisteps.core.Url;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -56,7 +54,7 @@ public class MinSecurity extends LJTest {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
-                .setPostText(RandomText.getRandomText(30), "html")
+                .setPostText(utility().random().getRandomText(30), "html")
                 .setPrivacy(security, g)
                 .usePage()
                 .postEntry();

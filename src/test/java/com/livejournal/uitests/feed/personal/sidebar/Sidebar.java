@@ -2,11 +2,9 @@ package com.livejournal.uitests.feed.personal.sidebar;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.utility.RandomeValue;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
@@ -224,7 +222,7 @@ public class Sidebar extends LJTest {
                     widget = correctWidget(ok_widget.toString());
                     break;
                 case "MIDDLE":
-                    ok_widget = startScript("return jQuery('div[ng-switch-when]')[" + new RandomeValue(intSize - 1).get() + "].textContent");
+                    ok_widget = startScript("return jQuery('div[ng-switch-when]')[" + utility().random().getRandomValue(intSize - 1) + "].textContent");
                     widget = correctWidget(ok_widget.toString());
                     break;
             }
