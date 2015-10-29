@@ -34,7 +34,7 @@ public class Announce extends LJTest {
     //////////////// main announce это гдавный пост? если да, можно вполне обойтись без main
     @When("create new main announce with image $image")
     public void create_new_main_announce_with_image(String image) {
-        int idSlot = getRedisData().discovery().getMainAnnounceId();
+        int idSlot = getRedisDate().discovery().getMainAnnounceId();
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
         String subject = utility().random().getRandomChar(10);
         String lead = utility().random().getRandomChar(15);
@@ -65,7 +65,7 @@ public class Announce extends LJTest {
 
     @When("remove existing main announce and create new main announce with image $image")
     public void remove_existing_main_announce_and_create_new_main_announce(String image) {
-        int idSlot = getRedisData().discovery().getMainAnnounceId();
+        int idSlot = getRedisDate().discovery().getMainAnnounceId();
         
         
         /////////////////// а разве выделенный кусок не избыточен?
