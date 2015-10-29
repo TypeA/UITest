@@ -12,9 +12,31 @@ import net.thucydides.core.annotations.StepGroup;
 public class LJMagazinePageUnlogged extends ServicePageUnlogged {
 
     @StepGroup
-    public LJMagazinePageUnlogged openRandomPost() {
-        Integer rnd = (int) (Math.random() * 19);
-        startScript("jQuery('.entryunit__title a')[" + rnd + "].click()");
+    public LJMagazinePageUnlogged openRandomPost(String authorOfPost) {
+        boolean flag = true;
+        int page = 1;
+        while (flag) {
+            try {
+                if (authorOfPost.equals("ljEditor")) {
+                    startScript("jQuery(\"a.i-ljuser-username:contains('Журнал ЖЖ')\").parents('.entryunit').find('.entryunit__head a')[0].click()");
+                } else {
+                    startScript("jQuery(\"a.i-ljuser-username:not(:contains('Журнал ЖЖ'))\").parents('.entryunit').find('.entryunit__head a')[0].click()");
+                }
+                flag = false;
+            } catch (Exception ex) {
+                if (page > 10) {
+                    flag = false;
+                } else {
+                    page++;
+                }
+            }
+        }
         return this;
     }
+
+    @StepGroup
+    private Boolean addToFriendsButtonIsAvaliable() {
+        return startScript("jQuery('.b-discoveryarticle-addfriend-title').attr('lj-ml')").equals("discovery.article.addfriend");
+    }
+
 }
