@@ -4,7 +4,6 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
-import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -75,8 +74,8 @@ public class FeaturesOfPassword extends WebTest {
                 .ifElse("Popup is not displyed!")
                 .and()
                 .that(onDisplayed(PopupsBlock.class).getPopupText().contains(text))
-                .ifResultIsExpected(VerifyText.okTextForMessage(text))
-                .ifElse(VerifyText.errorTextForMessage(onDisplayed(PopupsBlock.class).getPopupText()))
+                .ifResultIsExpected("Correct text.\nText contains: " + text)
+                .ifElse("Incorrect text!\nCurrent text: " + onDisplayed(PopupsBlock.class).getPopupText())
                 .finish();
         onDisplayed(PopupsBlock.class).clickOnLearnMoreLink();
         verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))

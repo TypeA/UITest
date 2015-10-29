@@ -8,7 +8,6 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.Colo
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.utility.VerifyText;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -83,8 +82,8 @@ public class Settings extends LJTest {
                 .openSettings()
                 .typeToTitle(title);
         verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title") + title))
-                .ifResultIsExpected(VerifyText.okTextForMessage((String) ThucydidesUtils.getFromSession("feed_title") + title))
-                .ifElse(VerifyText.errorTextForMessage(onOpened(FriendsFeedLogged.class).getFeedTitle()))
+                .ifResultIsExpected("Correct text.\nText contains: " + ThucydidesUtils.getFromSession("feed_title") + title)
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).getFeedTitle())
                 .finish();
         onDisplayed(SettingsBlock.class)
                 .cancelSettings();
@@ -216,8 +215,8 @@ public class Settings extends LJTest {
             correct_title = title + correct_title;
         }
         verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
-                .ifResultIsExpected(VerifyText.okTextForMessage(correct_title))
-                .ifElse(VerifyText.errorTextForMessage(onOpened(FriendsFeedLogged.class).getFeedTitle()))
+                .ifResultIsExpected("Correct text.\nText contains: " + correct_title)
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).getFeedTitle())
                 .finish();
     }
 
@@ -225,8 +224,8 @@ public class Settings extends LJTest {
     @Then("the Title is not changed")
     public void the_Title_is_not_changed() {
         verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title")))
-                .ifResultIsExpected(VerifyText.okTextForMessage((String) ThucydidesUtils.getFromSession("feed_title")))
-                .ifElse(VerifyText.errorTextForMessage(onOpened(FriendsFeedLogged.class).getFeedTitle()))
+                .ifResultIsExpected("Correct text.\nText contains: " + ThucydidesUtils.getFromSession("feed_title"))
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).getFeedTitle())
                 .finish();
     }
 
