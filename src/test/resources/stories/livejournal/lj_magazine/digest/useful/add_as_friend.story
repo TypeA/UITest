@@ -14,7 +14,7 @@ Examples:
 
 Scenario: Unlogged user cant see button Add to friends
 Meta: 
-@categories lj_magazine digest useful
+@categories lj_magazine digest useful 123
 
 Given unlogged user on the post page
 Then unlogged user cant see button add to friends
