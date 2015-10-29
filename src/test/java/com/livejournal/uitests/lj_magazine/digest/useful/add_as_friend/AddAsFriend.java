@@ -26,19 +26,15 @@ public class AddAsFriend extends LJTest {
                 .ifElse("The \"Add to friends\" button is avaliable for unlogged users")
                 .finish();
     }
-    
+
     @StepGroup
     private Boolean addToFriendsButtonIsOnPage() {
         try {
             return !startScript("jQuery('.b-discoveryarticle-addfriend').text()").toString().isEmpty();
-            
+
         } catch (Exception ex) {
             return false;
         }
     }
-    
 
-    
-    
-    
 }
