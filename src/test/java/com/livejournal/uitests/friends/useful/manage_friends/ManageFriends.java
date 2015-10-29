@@ -1,7 +1,6 @@
 package com.livejournal.uitests.friends.useful.manage_friends;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageFriendsPage;

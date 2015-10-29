@@ -1,6 +1,5 @@
 package com.livejournal.uitests.navigation.useful.header_navigation;
 
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;

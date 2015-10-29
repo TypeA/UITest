@@ -1,4 +1,5 @@
 Scenario: Logged user can add to friends author of the post
+
 Meta: 
 @categories lj_magazine digest useful
 
@@ -13,6 +14,7 @@ Examples:
 
 
 Scenario: Unlogged user cant see button Add to friends
+
 Meta: 
 @categories lj_magazine digest useful
 

@@ -20,10 +20,10 @@ import org.jbehave.core.annotations.When;
  */
 public class AdaptiveSettings extends LJTest {
 
-    //User see Air theme(1/3)
-    //User see Adaptive Chameleon theme(1/3)
-    //User see Non adaptive theme(1/3)
-    //User see Non adaptive Chameleon theme(1/3)
+    //Scenario: User see Air theme(1/3)
+    //Scenario: User see Adaptive Chameleon theme(1/3)
+    //Scenario: User see Non adaptive theme(1/3)
+    //Scenario: User see Non adaptive Chameleon theme(1/3)
     @Given("user $user")
     public void given_user(String user) {
         if (!user.toUpperCase().equals("UNLOGGED")) {
@@ -32,7 +32,7 @@ public class AdaptiveSettings extends LJTest {
         }
     }
 
-    //User see correct theme in his journal(1/3)
+    //Scenario: User see correct theme in his journal(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style)")
     public void random_user(String paid, String mobileView, String style) {
         String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
@@ -41,7 +41,7 @@ public class AdaptiveSettings extends LJTest {
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
     }
 
-    //User see correct theme in random journal with option 'in my style'(1/3)
+    //Scenario: User see correct theme in random journal with option 'in my style'(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style) with option in my style")
     public void random_user_with_option_in_my_style(String paid, String mobileView, String style) {
         String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
@@ -50,10 +50,10 @@ public class AdaptiveSettings extends LJTest {
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
     }
 
-    //User see Air theme(2/3)
-    //User see Adaptive Chameleon theme(2/3)
-    //User see Non adaptive theme(2/3)
-    //User see Non adaptive Chameleon theme(2/3)
+    //Scenario: User see Air theme(2/3)
+    //Scenario: User see Adaptive Chameleon theme(2/3)
+    //Scenario: User see Non adaptive theme(2/3)
+    //Scenario: User see Non adaptive Chameleon theme(2/3)
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
         String findedUser = getNeededUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
@@ -61,13 +61,13 @@ public class AdaptiveSettings extends LJTest {
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
 
-    //User see correct theme in his journal(2/3)
+    //Scenario: User see correct theme in his journal(2/3)
     @When("user go to the his journal page")
     public void user_go_to_the_his_journal_page() {
         open(JournalPage.class, new Url().setPrefix(ThucydidesUtils.getFromSession("finded_user") + "."));
     }
 
-    //User see correct theme in random journal with option 'in my style'(2/3)
+    //Scenario: User see correct theme in random journal with option 'in my style'(2/3)
     @When("user go to the random journal (paid $paid1,mobile view $mobileView1,style $style1) page")
     public void user_go_to_the_random_journal(String paid1, String mobileView1, String style1) {
         String findedUser = getNeededUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid1), Boolean.valueOf(mobileView1), style1);
@@ -75,11 +75,11 @@ public class AdaptiveSettings extends LJTest {
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
 
-    //User see Air theme(3/3)
-    //User see Adaptive Chameleon theme(3/3)
-    //User see Non adaptive theme(3/3)
-    //User see Non adaptive Chameleon theme(3/3)
-    //User see correct theme in his journal(2/3)
+    //Scenario: User see Air theme(3/3)
+    //Scenario: User see Adaptive Chameleon theme(3/3)
+    //Scenario: User see Non adaptive theme(3/3)
+    //Scenario: User see Non adaptive Chameleon theme(3/3)
+    //Scenario: User see correct theme in his journal(2/3)
     @Then("user see correct style $correctStyle")
     public void user_see_correct_style(String correctStyle) {
         verify().that(isCorrectStyle(correctStyle))
@@ -88,7 +88,7 @@ public class AdaptiveSettings extends LJTest {
                 .finish();
     }
 
-    //User see correct theme in random journal with option 'in my style'(2/3)
+    //Scenario: User see correct theme in random journal with option 'in my style'(2/3)
     @Then("random user see correct style $correctStyle in random journal")
     public void user_see_correct_style_in_random_journal(String correctStyle) {
         verify().that(isCorrectStyle(correctStyle))
