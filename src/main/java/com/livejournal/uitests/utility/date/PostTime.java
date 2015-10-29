@@ -5,8 +5,8 @@ package com.livejournal.uitests.utility.date;
  * @author m.prytkova
  */
 public class PostTime {
-    
-        public static String getCurrentDate() {
+
+    public static String getCurrentDate() {
         Integer day = Date.getCurrentDay();
         Integer month = Date.getCurrentMonth();
         Integer year = Date.getCurrentYear();

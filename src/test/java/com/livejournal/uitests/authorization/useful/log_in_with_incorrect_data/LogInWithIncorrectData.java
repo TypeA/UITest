@@ -3,7 +3,6 @@ package com.livejournal.uitests.authorization.useful.log_in_with_incorrect_data;
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
-import com.livejournal.uitests.utility.VerifyText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -32,8 +31,8 @@ public class LogInWithIncorrectData extends WebTest {
     @Then("user is not logged and see message $message")
     public void user_is_not_logged_and_see_message(String message) {
         verify().that(onOpened(LoginPageUnlogged.class).getErrorText().getText().contains(message))
-                .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(onOpened(LoginPageUnlogged.class).getErrorText().getText()))
+                .ifResultIsExpected("Correct text.\nText contains: " + message)
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(LoginPageUnlogged.class).getErrorText().getText())
                 .finish();
 
     }

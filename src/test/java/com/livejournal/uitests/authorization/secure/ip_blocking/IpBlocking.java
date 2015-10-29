@@ -1,9 +1,7 @@
 package com.livejournal.uitests.authorization.secure.ip_blocking;
 
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.utility.VerifyText;
 import com.livejournal.uitests.utility.iterations.IterationsWithLoginForm;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -32,8 +30,8 @@ public class IpBlocking extends LJTest {
     @Then("user see message $message and can not enter with correct data: name $name, correct_password $correct_password")
     public void user_see_message_and_can_not_enter_with_correct_data(String message, String name) {
         verify().that(onOpened(LoginPageUnlogged.class).getErrorText().getText().contains(message))
-                .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(onOpened(LoginPageUnlogged.class).getErrorText().getText()))
+                .ifResultIsExpected("Correct text.\nText contains: " + message)
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(LoginPageUnlogged.class).getErrorText().getText())
                 .finish();
         onOpened(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
