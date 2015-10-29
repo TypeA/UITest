@@ -1,8 +1,5 @@
 package com.livejournal.uitests.utility;
 
-import com.livejournal.uitests.utility.date.Date;
-import com.livejournal.uitests.utility.date.PostTime;
-
 /**
  *
  * @author m.prytkova
