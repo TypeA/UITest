@@ -1,12 +1,10 @@
 package com.livejournal.uitests.create_edit_post.subject.useful.subject;
 
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -39,7 +37,7 @@ public class Subject extends LJTest {
                 .closeDraft()
                 .usePostContent()
                 .setSubject(subject)
-                .setPostText(RandomText.getRandomText(30), "HTML")
+                .setPostText(utility().random().getRandomText(30), "HTML")
                 .usePage()
                 .postEntry();
     }
@@ -51,7 +49,7 @@ public class Subject extends LJTest {
                 .closeDraft()
                 .usePostContent()
                 .setSubject(subject)
-                .setPostText(RandomText.getRandomText(30), "HTML");
+                .setPostText(utility().random().getRandomText(30), "HTML");
     }
 
     //User create new post with subject(3/3)

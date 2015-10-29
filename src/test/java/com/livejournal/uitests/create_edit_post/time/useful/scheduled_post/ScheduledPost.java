@@ -2,15 +2,12 @@ package com.livejournal.uitests.create_edit_post.time.useful.scheduled_post;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
-import com.livejournal.uitests.utility.RandomName;
-import com.livejournal.uitests.utility.RandomText;
 import com.livejournal.uitests.utility.date.PostTime;
 import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
@@ -52,7 +49,7 @@ public class ScheduledPost extends LJTest {
                 .deleteAllSheduledEntries();
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
-        String post_text = RandomText.getRandomText(10).trim();
+        String post_text = utility().random().getRandomText(10).trim();
 
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -75,7 +72,7 @@ public class ScheduledPost extends LJTest {
                 .getFromSession("post_date")
                 .toString()
                 .split(";");
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])
@@ -94,7 +91,7 @@ public class ScheduledPost extends LJTest {
         groups.add(group);
         String[] date = PostTime.getCorrectDate("hour", "1")
                 .split(";");
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])
@@ -111,7 +108,7 @@ public class ScheduledPost extends LJTest {
     //Scenario: Edit privacy in scheduled post (2/3)
     @When("user edit element $element by change $changes in the scheduled post")
     public void user_edit_the_scheduled_post(String element, String changes) {
-        ThucydidesUtils.putToSession("changes", new RandomName(changes).get());
+        ThucydidesUtils.putToSession("changes", utility().random().getRandomName(changes));
         onOpened(SheduledEntriesPage.class)
                 .editSheduledEntryByText(element, ThucydidesUtils.getFromSession("changes").toString(), ThucydidesUtils.getFromSession("post_text").toString());
         if (element.toUpperCase().equals("TEXT")) {

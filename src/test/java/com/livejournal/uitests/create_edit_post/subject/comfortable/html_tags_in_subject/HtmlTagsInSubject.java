@@ -1,11 +1,9 @@
 package com.livejournal.uitests.create_edit_post.subject.comfortable.html_tags_in_subject;
 
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -35,7 +33,7 @@ public class HtmlTagsInSubject extends LJTest {
                 .closeDraft()
                 .usePostContent()
                 .setSubject(subject)
-                .setPostText(RandomText.getRandomText(30), "html")
+                .setPostText(utility().random().getRandomText(30), "html")
                 .usePage()
                 .postEntry();
     }

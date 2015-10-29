@@ -2,7 +2,6 @@ package com.livejournal.uitests.feed.personal.settings;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.ColorSettings;
@@ -10,7 +9,6 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.S
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.utility.HexToRGB;
-import com.livejournal.uitests.utility.RandomeValue;
 import com.livejournal.uitests.utility.VerifyText;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -111,8 +109,8 @@ public class Settings extends LJTest {
                 .saveSettings()
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color))
-                .setColorBarByPoint(new RandomeValue(250).get())
-                .setColorByPoint(new RandomeValue(250).get(), new RandomeValue(250).get());
+                .setColorBarByPoint(utility().random().getRandomValue(250))
+                .setColorByPoint(utility().random().getRandomValue(250), utility().random().getRandomValue(250));
         verify().that(!verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + HexToRGB.hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
@@ -130,8 +128,8 @@ public class Settings extends LJTest {
                 .saveSettings()
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color))
-                .setColorBarByPoint(new RandomeValue(250).get())
-                .setColorByPoint(new RandomeValue(250).get(), new RandomeValue(250).get());
+                .setColorBarByPoint(utility().random().getRandomValue(250))
+                .setColorByPoint(utility().random().getRandomValue(250), utility().random().getRandomValue(250));
         verify().that(!verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color :\n" + HexToRGB.hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
@@ -531,10 +529,10 @@ public class Settings extends LJTest {
     }
 
     private void setRandomSettings() {
-        Integer text_size = new RandomeValue(26).get() + 10;
+        Integer text_size = utility().random().getRandomValue(26) + 10;
         String paging_type;
         String text_font;
-        if (new RandomeValue(20).get() > 1) {
+        if (utility().random().getRandomValue(20) > 1) {
             paging_type = "PAGES";
             text_font = "Arial";
         } else {
@@ -543,20 +541,20 @@ public class Settings extends LJTest {
         }
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .setColor(ColorSettings.BACKGROUND_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.BORDERS_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.ELEMENTS_BACKGROUND, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.ELEMENTS_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.FOREGROUND_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.LINK_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.MAIN_TEXT_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.ON_HOVER_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.SIDEBAR_BACKGROUND, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.SIDEBAR_TEXT_COLOR, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
-                .setColor(ColorSettings.VISITED_LINK, "BY_POINT", "", new RandomeValue(250).get(), new RandomeValue(250).get(), new RandomeValue(250).get())
+                .setColor(ColorSettings.BACKGROUND_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.BORDERS_COLOR, "BY_POINT", "",utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.ELEMENTS_BACKGROUND, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.ELEMENTS_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.FOREGROUND_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.LINK_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.MAIN_TEXT_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.ON_HOVER_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.SIDEBAR_BACKGROUND, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.SIDEBAR_TEXT_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.VISITED_LINK, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
                 .setTextSettings(text_size.toString(), text_font)
                 .setPaging(paging_type)
-                .setSize(new RandomeValue(20).get().toString())
+                .setSize(utility().random().getRandomValue(20).toString())
                 .saveSettings();
     }
 }
