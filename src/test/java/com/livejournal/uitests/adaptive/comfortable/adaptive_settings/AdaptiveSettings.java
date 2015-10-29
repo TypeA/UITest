@@ -3,7 +3,6 @@ package com.livejournal.uitests.adaptive.comfortable.adaptive_settings;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.pages.journal_pages.JournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import static com.livejournal.uitests.utility.GetUsers.scriptAllUsers;
