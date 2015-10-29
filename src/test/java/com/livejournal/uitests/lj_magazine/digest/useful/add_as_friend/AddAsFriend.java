@@ -1,7 +1,9 @@
 package com.livejournal.uitests.lj_magazine.digest.useful.add_as_friend;
 
 import com.livejournal.uitests.LJTest;
+import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageUnlogged;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -25,6 +27,13 @@ public class AddAsFriend extends LJTest {
                 .ifResultIsExpected("The \"Add to friends\" button is not avaliable for unlogged users")
                 .ifElse("The \"Add to friends\" button is avaliable for unlogged users")
                 .finish();
+    }
+
+    //Scenario: Logged user can add to friends author of the post(1/3)
+    @Given("logged user $user on the post page")
+    public void logged_user_on_the_post_page(String user) {
+        open(LoginPageUnlogged.class).authorizeBy(user, getDBDate().userData().getUserPassword(user));
+        open(LJMagazinePageLogged.class).openRandomPost("user");
     }
 
     @StepGroup
