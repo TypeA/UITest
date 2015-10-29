@@ -30,7 +30,7 @@ public class Announce extends LJTest {
         open(AnnouncePage.class);
     }
 
-    @When("edit announce with image $image")
+  /*  @When("edit announce with image $image")
     public void edit_announce_with_image(String image) {
         int idSlot = getRedisData().discovery().getMainAnnounceId();
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" +
@@ -43,7 +43,7 @@ public class Announce extends LJTest {
         ThucydidesUtils.putToSession("subject", subject);
         ThucydidesUtils.putToSession("lead", lead);
 
-    }
+    }*/
 
     @Then("announce with image $image is displayed on Lj Magazine")
     public void announce_with_image_is_displayed_on_Lj_Magazine(String image) {
@@ -67,7 +67,7 @@ public class Announce extends LJTest {
     
     }
 
-    @When("create new announce with image $image")
+   /* @When("create new announce with image $image")
     public void create_new_announce_with_image(String image) {
         int idSlot = getRedisData().discovery().getNotMainAnnounce();       
         String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" +
@@ -79,7 +79,7 @@ public class Announce extends LJTest {
         ThucydidesUtils.putToSession("linkTopost", urlPost);
         ThucydidesUtils.putToSession("subject", subject);
         ThucydidesUtils.putToSession("lead", lead);
-    }
+    }*/
     @Then("new announce with image $image is dispalyed in widget")
     public void new_announce_with_image_is_dispalyed_in_widget(String image){
         
