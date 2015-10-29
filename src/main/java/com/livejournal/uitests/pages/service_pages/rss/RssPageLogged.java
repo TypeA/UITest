@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.rss;
+package com.livejournal.uitests.pages.service_pages.rss;
 
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import net.thucydides.core.annotations.DefaultUrl;

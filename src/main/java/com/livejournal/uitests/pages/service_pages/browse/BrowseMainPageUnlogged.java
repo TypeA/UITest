@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.browse;
+package com.livejournal.uitests.pages.service_pages.browse;
 
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;
