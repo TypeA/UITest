@@ -40,4 +40,8 @@ public class DatabasesData extends Databases {
         return new Privileges();
     }
 
+    public Tags tags() {
+        return new Tags();
+    }
+
 }

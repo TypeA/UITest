@@ -30,11 +30,11 @@ public class Announce extends LJTest {
         open(AnnouncePage.class);
     }
 
-    //////////////// main announce это гдавный пост? если да, можно вполне обойтись без main
     @When("edit announce with image $image")
     public void edit_announce_with_image(String image) {
         int idSlot = getRedisData().discovery().getMainAnnounceId();
-        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
+        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" +
+                getDBDate().discovery().getLastPostFromMainCategory()+ ".html";
         String subject = utility().random().getRandomChar(10);
         String lead = utility().random().getRandomChar(15);
         onOpened(AnnouncePage.class)
@@ -61,11 +61,17 @@ public class Announce extends LJTest {
                         + " is not exist")
                 .finish();
     }
+    
+    @Then("post in previous announce is displayed on feed LJ Magazine")
+    public void post_in_previous_announce_is_displayed_on_feed_LJ_Magazine(){
+    
+    }
 
     @When("create new announce with image $image")
     public void create_new_announce_with_image(String image) {
         int idSlot = getRedisData().discovery().getNotMainAnnounce();       
-        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
+        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" +
+                getDBDate().discovery().getLastPostFromMainCategory() + ".html";
         String subject = utility().random().getRandomChar(10);
         String lead = utility().random().getRandomChar(15);
         onOpened(AnnouncePage.class)

@@ -1,6 +1,6 @@
 Scenario: Edit main announce
 Meta: 
-@categories lj_magazine admin_magazine  admin_announce_magazine useful fdsfdsfdsfdsfds
+@categories lj_magazine admin_magazine  admin_announce_magazine useful fdsfdsfdswwwfdsfds
 
 Given logged user on Admin Magazine Announce
 When edit announce with image <image>
