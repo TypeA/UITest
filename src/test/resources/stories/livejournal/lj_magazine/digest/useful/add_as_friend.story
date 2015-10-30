@@ -12,6 +12,18 @@ Examples:
 |testautotest               |
 
 
+Scenario: Logged user cant add to friends ljEditor
+
+Meta: 
+@categories lj_magazine digest useful 123321
+
+Given logged user <user> on the ljEditor post page
+Then user cant see button add to friends
+
+Examples:
+|user                       |
+|testautotest               |
+
 
 Scenario: Unlogged user cant see button Add to friends
 

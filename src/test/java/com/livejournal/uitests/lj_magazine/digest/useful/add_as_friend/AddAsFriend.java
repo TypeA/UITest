@@ -31,6 +31,13 @@ public class AddAsFriend extends LJTest {
         open(LJMagazinePageLogged.class).openRandomPost("user");
     }
 
+    //Scenario: Logged user cant add to friends ljEditor(1/2)
+    @Given("logged user $user on the ljEditor post page")
+    public void logged_user_on_the_ljEditor_post_page(String user) {
+        open(LoginPageUnlogged.class).authorizeBy(user, getDBDate().userData().getUserPassword(user));
+        open(LJMagazinePageLogged.class).openRandomPost("ljEditor");
+    }
+
     //Scenario: Logged user can add to friends author of the post(2/3)
     @When("user $user click on the Add to friends button")
     public void user_click_on_the_add_to_friends_button(String user) {
@@ -67,6 +74,15 @@ public class AddAsFriend extends LJTest {
                 .ifElse("The button is enabled")
                 .finish();
 
+    }
+
+    //Scenario: Logged user cant add to friends ljEditor(2/2)
+    @Then("user cant see button add to friends")
+    public void user_cant_see_button_add_to_friends() {
+        verify().that(!addToFriendsButtonIsOnPage())
+                .ifResultIsExpected("The \"Add to friends\" button is not avaliable for user in LJ Editor post page")
+                .ifElse("The \"Add to friends\" button is avaliable for user in LJ Editor post pageF")
+                .finish();
     }
 
     @StepGroup
