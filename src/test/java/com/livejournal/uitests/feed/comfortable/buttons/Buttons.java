@@ -1,7 +1,6 @@
-package com.livejournal.uitests.feed.comfortable.custom_friends_groups;
+package com.livejournal.uitests.feed.comfortable.buttons;
 
 import com.livejournal.uisteps.core.Url;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
@@ -14,23 +13,14 @@ import org.jbehave.core.annotations.When;
  *
  * @author m.prytkova
  */
-public class CustomFriendsGroups extends LJTest {
+public class Buttons extends LJTest {
 
-    //Scenario: Go to Edit Custom Friends Groups (1/3)
     //Scenario: Replacement blocks (1/3)
     @Given("logged user (name $name) on Friends Feed")
     public void logged_user_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
-    }
-
-    //Scenario: Go to Edit Custom Friends Groups (2/2)
-    @When("user go to Edit Custom Friends Groups")
-    public void user_go_to_Edit_Custom_Friends_Groups() {
-        onOpened(FriendsFeedLogged.class)
-                .openFilters()
-                .clickOnManageFilters();
     }
 
     //Scenario: Replacement blocks (2/3)
@@ -40,13 +30,6 @@ public class CustomFriendsGroups extends LJTest {
                 .openSettings();
         onOpened(FriendsFeedLogged.class)
                 .openFilters();
-    }
-
-    //Scenario: Go to Edit Custom Friends Groups (3/3)
-    @Then("user in correct page $page")
-    public void user_in_correct_Page(String page) {
-        verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
-                .finish();
     }
 
     //Scenario: Replacement blocks (3/3)

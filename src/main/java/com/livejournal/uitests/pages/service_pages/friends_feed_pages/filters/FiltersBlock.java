@@ -17,7 +17,7 @@ public class FiltersBlock extends UIBlock {
     @FindBy(css = ".l-flatslide-menu-item-settings a[href*='/friends/editgroups.bml']")
     private Link manageFilters;
 
-    public ManageGroupsPage clickOnManageFilters() {
+    public ManageGroupsPage openManageFilters() {
         manageFilters.click();
         return onOpened(ManageGroupsPage.class);
     }

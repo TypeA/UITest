@@ -1,4 +1,4 @@
-package com.livejournal.uitests.RedisData;
+package com.livejournal.uitests.redis_data;
 
 import com.livejournal.uisteps.thucydides.RedisDatabase;
 
