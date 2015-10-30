@@ -11,13 +11,46 @@ import com.livejournal.uitests.pages.service_pages.unified_scheme.header.Fullscr
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
  * @author s.savinykh
  */
-@DefaultUrl("/magazine")
+@DefaultUrl("/magazine/")
 public class LJMagazinePage extends ServicePage {
+
+    public String getPostID() {
+        return getDriver().getCurrentUrl().replace("http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/", "");
+    }
+
+    public String getStatusOfAddAsFriendButton() {
+        String status = "enabled";
+        if (startScript("return jQuery('.b-discoveryarticle-addfriend-title').attr(\"lj-ml\")").equals("discovery.article.addfriend.added")) {
+            status = "disabled";
+        }
+        return status;
+    }
+
+    @StepGroup
+    public String getAuthorOfThePost() {
+        return startScript("return jQuery('.b-discoveryarticle-v5 .i-ljuser-username').text()").toString();
+    }
+
+    @StepGroup
+    public LJMagazinePage addAsFriend() {
+        startScript("jQuery('.b-discoveryarticle-addfriend-title').click()");
+        WebDriverWait wait = new WebDriverWait(getDriver(), 15);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                return onOpened(LJMagazinePage.class).getStatusOfAddAsFriendButton().equals("disabled");
+            }
+        });
+        return this;
+    }
 
     @StepGroup
     public LJMagazinePage openRandomPost(String authorOfPost) {
@@ -40,11 +73,6 @@ public class LJMagazinePage extends ServicePage {
             }
         }
         return this;
-    }
-
-    @StepGroup
-    private Boolean addToFriendsButtonIsAvaliable() {
-        return startScript("jQuery('.b-discoveryarticle-addfriend-title').attr('lj-ml')").equals("discovery.article.addfriend");
     }
 
     public Boolean categoryExistOnLJMagagazine(boolean usual_category, String name, String keyword) {

@@ -4,8 +4,8 @@ Meta:
 @categories lj_magazine digest useful
 
 Given logged user <user> on the post page
-When user click on the Add to friends button
-Then user have author of the post in his friends
+When user <user> click on the Add to friends button
+Then user <user> have author of the post in his friends
 
 Examples:
 |user                       |
