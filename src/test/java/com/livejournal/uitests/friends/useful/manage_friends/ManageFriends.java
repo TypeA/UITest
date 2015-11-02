@@ -41,7 +41,7 @@ public class ManageFriends extends LJTest {
     @Then("user $users should be added as a friend")
     public void user_should_be_added_as_a_friend(String users) {
         open(ManageFriendsPage.class);
-        verify().that(getDBDate().friends().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(utility().convertation().stringToList(users, ";")))
+        verify().that(getDBDate().friends().getAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(utility().convertation().stringToList(users, ";")))
                 .ifResultIsExpected("Users " + users + " are successfuly added as a friends in DB")
                 .ifElse("Users " + users + " are not successfuly added as a friends in DB")
                 .and()
@@ -55,7 +55,7 @@ public class ManageFriends extends LJTest {
     @Then("user $users should be removed from friends")
     public void users_should_be_removed_from_friends(String users) {
         open(ManageFriendsPage.class);
-        verify().that(!getDBDate().friends().findAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(utility().convertation().stringToList(users, ";")))
+        verify().that(!getDBDate().friends().getAllFriends(ThucydidesUtils.getFromSession("user").toString()).containsAll(utility().convertation().stringToList(users, ";")))
                 .ifResultIsExpected("Users " + users + " are successfuly deleted from a friends in DB")
                 .ifElse("Users " + users + " are not successfully deleted from friends in DB")
                 .and()

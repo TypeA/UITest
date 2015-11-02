@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
-import com.livejournal.uitests.pages.service_pages.login_page.SocialNetworksBlock;
 import com.livejournal.uitests.pages.service_pages.lost_info.LostInfoPage;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;

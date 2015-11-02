@@ -1,17 +1,17 @@
 Scenario: Default friends filters
 Meta: 
-@categories feed useful
+@categories feed useful test
 
-Given logged user <user> on Friends Feed
+Given logged user <user> with friends on Friends Feed
 When user set filter <filter>
 Then user see feeds feed by filter <filter>
 
 Examples:
 |user               |filter         |
-|test_with_friends  |all            |
-|test_with_friends  |journals       |
-|test_with_friends  |communities    |
-|test_with_friends  |sendicated     |
+|test  |all            |
+|--test_with_friends  |journals       |
+|--test_with_friends  |communities    |
+|--test_with_friends  |sendicated     |
 
 
 Scenario: Default view

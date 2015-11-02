@@ -24,7 +24,7 @@ public class LogInWithIncorrectData extends WebTest {
     @When("user enter incorrect data: name $name and clicks LogIn")
     public void user_enter_incorrect_data_and_clicks_LogIn(String name, String password){
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, password);
+                .authorizeBy(name, password, false);
     }
 
     //Scenario: Unsuccessfully autorization(3/3)
