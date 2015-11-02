@@ -165,7 +165,7 @@ public class ManageFriendsGroups extends LJTest {
                 .clickOnLogOut();
         String user = ThucydidesUtils.getFromSession("user").toString();
         String publicGroup = ThucydidesUtils.getFromSession("publicGroup").toString();
-        String userNotFriend = getDBDate().friends().findFriendWithoutGroup(user);
+        String userNotFriend = getDBDate().friends().getFriendWithoutGroup(user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(userNotFriend, getDBDate().userData().getUserPassword(userNotFriend));
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."))

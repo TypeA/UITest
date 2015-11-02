@@ -1,4 +1,4 @@
-package com.livejournal.uitests.databasesData;
+package com.livejournal.uitests.databases_data;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class Friends extends DatabasesData {
 
-    public ArrayList<String> findAllFriends(String user) {
+    public ArrayList<String> getAllFriends(String user) {
         String select1 = "select u.user, u.userid, f.friendid from user u "
                 + "left join friends f on u.userid = f.userid "
                 + "where u.user = '" + user + "';";
@@ -30,8 +30,8 @@ public class Friends extends DatabasesData {
                 .get(0);
     }
 
-    public String findFriend(String user) {
-        ArrayList<String> ans = findAllFriends(user);
+    public String getFriend(String user) {
+        ArrayList<String> ans = getAllFriends(user);
         String select = "select user from user "
                 + "where (user = '" + ans.get(0) + "' ";
         for (int i = 1; i < ans.size(); i++) {
@@ -54,7 +54,7 @@ public class Friends extends DatabasesData {
         return answer.get(new Random().nextInt(ans.size()));
     }
 
-    public ArrayList<String> findNotFriends(String user, Integer limit) {
+    public ArrayList<String> getNotFriends(String user, Integer limit) {
         String select1 = "select u.user, u.userid, f.friendid from user u "
                 + "left join friends f on u.userid = f.userid "
                 + "where u.user = '" + user + "';";
@@ -86,12 +86,12 @@ public class Friends extends DatabasesData {
         return answer;
     }
 
-    public String findNotFriend(String user) {
-        ArrayList<String> ans = findNotFriends(user, 100);
+    public String getNotFriend(String user) {
+        ArrayList<String> ans = getNotFriends(user, 100);
         return ans.get(new Random().nextInt(ans.size()));
     }
 
-    public List<ArrayList<String>> findAllFriendsInGroups(String user) {
+    public List<ArrayList<String>> getAllFriendsInGroups(String user) {
 
         ArrayList<ArrayList<String>> ans = new ArrayList<ArrayList<String>>();
         String select1 = "select * from friends "
@@ -150,9 +150,9 @@ public class Friends extends DatabasesData {
         return ans;
     }
 
-    public String findFriendInGroup(String user) {
+    public String getFriendInGroup(String user) {
         String ans = "";
-        ArrayList<String> answer = findAllFriendsInGroups(user).get(0);
+        ArrayList<String> answer = getAllFriendsInGroups(user).get(0);
         for (int i = 0; i < answer.size(); i++) {
             if (answer.get(i).contains("test")) {
                 ans = answer.get(i);
@@ -165,9 +165,9 @@ public class Friends extends DatabasesData {
         return ans;
     }
 
-    public ArrayList<String> findFriendInGroup(String user, String group) {
+    public ArrayList<String> getFriendInGroup(String user, String group) {
         ArrayList<String> ans = new ArrayList<String>();
-        List<ArrayList<String>> answer = findAllFriendsInGroups(user);
+        List<ArrayList<String>> answer = getAllFriendsInGroups(user);
         for (int i = 0; i < answer.get(0).size(); i++) {
             if (answer.get(1).get(i).contains(group)) {
                 ans.add(answer.get(0).get(i));
@@ -176,7 +176,7 @@ public class Friends extends DatabasesData {
         return ans;
     }
 
-    public String findFriendWithoutGroup(String user) {
+    public String getFriendWithoutGroup(String user) {
         String select1 = "select u.user, u.userid, f.friendid from user u "
                 + "left join friends f on u.userid = f.userid "
                 + "where u.user = '" + user + "' and groupmask = '1';";

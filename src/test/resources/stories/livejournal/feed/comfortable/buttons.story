@@ -27,3 +27,17 @@ Then Settings list is visible and Settings icone changed on Close icon
 Examples:
 |name       |password   |
 |test765765 |test       |
+
+
+Scenario: Replacement blocks
+
+Meta: 
+@categories feed personal
+
+Given logged user (name <name>) on Friends Feed
+When user click on settings and filters icons
+Then the blocks is changed
+
+Examples:
+|name   |page             |
+|test   |ManageGroupsPage |

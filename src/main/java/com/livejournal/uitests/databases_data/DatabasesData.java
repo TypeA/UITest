@@ -1,4 +1,4 @@
-package com.livejournal.uitests.databasesData;
+package com.livejournal.uitests.databases_data;
 
 import com.livejournal.uisteps.thucydides.Databases;
 

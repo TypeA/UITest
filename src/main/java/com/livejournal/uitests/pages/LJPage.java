@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.Root;
 import com.livejournal.uisteps.thucydides.elements.Page;
-import com.livejournal.uitests.databasesData.DatabasesData;
+import com.livejournal.uitests.databases_data.DatabasesData;
 import com.livejournal.uitests.pages.service_pages.settings.CustomizeJournalPage;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import junit.framework.Assert;

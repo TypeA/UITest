@@ -162,12 +162,12 @@ public class UsersPost extends LJTest {
     private String selectFriend(String user, String type, String group) {
         switch (SelectUserList.valueOf(type.toUpperCase())) {
             case NOT_FRIEND:
-                return getDBDate().friends().findNotFriend(user);
+                return getDBDate().friends().getNotFriend(user);
             case FRIEND:
-                return getDBDate().friends().findFriendWithoutGroup(user);
+                return getDBDate().friends().getFriendWithoutGroup(user);
             case FRIEND_IN_GROUP:
-                ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(user, group);
-                String user_in_group = getDBDate().friends().findFriendInGroup(user, group).get(0);
+                ArrayList<String> in_group = getDBDate().friends().getFriendInGroup(user, group);
+                String user_in_group = getDBDate().friends().getFriendInGroup(user, group).get(0);
                 for (int i = 0; i < in_group.size(); i++) {
                     if (in_group.get(i).contains("test")) {
                         user_in_group = in_group.get(i);

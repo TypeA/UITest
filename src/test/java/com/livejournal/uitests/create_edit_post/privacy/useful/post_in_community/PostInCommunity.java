@@ -138,8 +138,8 @@ public class PostInCommunity extends LJTest {
             case MAINTAINERS:
                 return getDBDate().community().findMaintainerInComminuty(community);
             case USER_IN_GROUP:
-                ArrayList<String> in_group = getDBDate().friends().findFriendInGroup(community, group);
-                String user_in_group = getDBDate().friends().findFriendInGroup(community, group).get(0);
+                ArrayList<String> in_group = getDBDate().friends().getFriendInGroup(community, group);
+                String user_in_group = getDBDate().friends().getFriendInGroup(community, group).get(0);
                 for (String in_group1 : in_group) {
                     if (in_group1.contains("test")) {
                         user_in_group = in_group1;
@@ -147,7 +147,7 @@ public class PostInCommunity extends LJTest {
                 }
                 return user_in_group;
             case OTHER_USER:
-                return getDBDate().friends().findNotFriend(community);
+                return getDBDate().friends().getNotFriend(community);
             default:
                 String user2 = ThucydidesUtils.getFromSession("user").toString();
                 return user2;

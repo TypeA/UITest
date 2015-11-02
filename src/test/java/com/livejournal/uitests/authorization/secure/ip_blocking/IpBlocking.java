@@ -34,7 +34,7 @@ public class IpBlocking extends LJTest {
                 .ifElse("Incorrect text!\nCurrent text: " + onOpened(LoginPageUnlogged.class).getErrorText().getText())
                 .finish();
         onOpened(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name), false);
         verify().that(getCurrentUrl().contains("/login.bml"))
                 .ifResultIsExpected("IP is blocked")
                 .ifElse("IP is not blocked!")

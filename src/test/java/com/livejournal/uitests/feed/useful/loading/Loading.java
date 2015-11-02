@@ -1,4 +1,4 @@
-package com.livejournal.uitests.feed.useful;
+package com.livejournal.uitests.feed.useful.loading;
 
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;

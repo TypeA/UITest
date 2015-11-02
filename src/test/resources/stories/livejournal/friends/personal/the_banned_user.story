@@ -1,6 +1,6 @@
 Scenario: Ban User
 Meta: 
-@categories banned users useful
+@categories banned users personal
 
 Given logged user (name <name>) on BannedUsersPage
 When user ban one user_1 and save change
@@ -12,7 +12,7 @@ Examples:
 
 Scenario: Unban user
 Meta: 
-@categories banned users useful
+@categories banned users personal
 
 Given logged user (name <name>) on BannedUsersPage
 When user unban one user_1 and save change
@@ -24,7 +24,7 @@ Examples:
 
 Scenario: Ban several users
 Meta: 
-@categories banned users useful 
+@categories banned users personal 
 
 Given logged user (name <name>) on BannedUsersPage
 When user ban several users and save change
@@ -36,7 +36,7 @@ Examples:
 
 Scenario: Unban several users
 Meta: 
-@categories banned users useful
+@categories banned users personal
 
 Given logged user (name <name>) on BannedUsersPage
 When user unban several users and save change
