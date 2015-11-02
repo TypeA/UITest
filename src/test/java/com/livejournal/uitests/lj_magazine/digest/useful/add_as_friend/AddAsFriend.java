@@ -43,7 +43,7 @@ public class AddAsFriend extends LJTest {
     public void user_click_on_the_add_to_friends_button(String user) {
         String author = onOpened(LJMagazinePageLogged.class).getAuthorOfThePost();
         ThucydidesUtils.putToSession("author", author);
-        if (getDBDate().userData().friends().findAllFriends(user).contains(author)) {
+        if (getDBDate().userData().friends().getAllFriends(user).contains(author)) {
             String postID = onOpened(LJMagazinePageLogged.class).getPostID();
             open(ManageFriendsPage.class).removeFriend(utility().convertation().stringToList(author + ";", ";"));
             open(LJMagazinePageLogged.class, new Url()
@@ -65,7 +65,7 @@ public class AddAsFriend extends LJTest {
     //Scenario: Logged user can add to friends author of the post(2/3)
     @Then("user $user have author of the post in his friends")
     public void user_have_author_of_the_post_in_his_friends(String user) {
-        verify().that(getDBDate().userData().friends().findAllFriends(user).contains(ThucydidesUtils.getFromSession("author")))
+        verify().that(getDBDate().userData().friends().getAllFriends(user).contains(ThucydidesUtils.getFromSession("author")))
                 .ifResultIsExpected("User " + ThucydidesUtils.getFromSession("author") + " is friend in DB")
                 .ifElse("User " + ThucydidesUtils.getFromSession("author") + " is not a friend in DB")
                 .and()
