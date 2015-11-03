@@ -8,10 +8,10 @@ Then user see feeds feed by filter <filter>
 
 Examples:
 |user               |filter         |
-|test  |all            |
-|--test_with_friends  |journals       |
-|--test_with_friends  |communities    |
-|--test_with_friends  |sendicated     |
+|test               |all            |
+|test               |journals       |
+|test               |communities    |
+|test               |sendicated     |
 
 
 Scenario: Default view

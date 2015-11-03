@@ -43,6 +43,12 @@ public class Filters extends LJTest {
                 .openManageFilters();
     }
 
+    //Scenario: Default friends filters (3/3)
+    @Then("user $user see feeds feed by filter $filter")
+    public void use_see_feeds_feed_by_filter(String user, String filter) {
+        onOpened(FriendsFeedLogged.class);
+    }
+
     //Scenario: Edit Filters (3/3)
     @Then("user in correct page $page")
     public void user_in_correct_Page(String page) {
