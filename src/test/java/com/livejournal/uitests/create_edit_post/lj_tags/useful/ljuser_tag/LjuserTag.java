@@ -14,8 +14,8 @@ import org.jbehave.core.annotations.When;
  */
 public class LjuserTag extends LJTest {
 
-    //Logged user create new post with correct lj-user tag (1/3)
-    //Logged user create new post with uncorrect lj-user tag (1/3)
+    //Scenario: Logged user create new post with correct lj-user tag (1/3)
+    //Scenario: Logged user create new post with uncorrect lj-user tag (1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -25,7 +25,7 @@ public class LjuserTag extends LJTest {
         open(UpdateBmlPageLogged.class);
     }
 
-    //Logged user create new post with correct lj-user tag (2/3)
+    //Scenario: Logged user create new post with correct lj-user tag (2/3)
     @When("user enter correct username $ljuser in ljuser bubble and create new post")
     public void user_ener_correct_username_in_ljuser_bubble_and_create_new_post(String ljuser) {
         String postText = utility().random().getRandomText(30) + " ";
@@ -39,7 +39,7 @@ public class LjuserTag extends LJTest {
                 .postEntry();
     }
 
-    //Logged user create new post with uncorrect lj-user tag (2/3)
+    //Scenario: Logged user create new post with uncorrect lj-user tag (2/3)
     @When("user enter incorrect username $ljuser in ljuser bubble and try to post new entry")
     public void user_enter_incorrect_username_in_ljuser_bubble(String ljuser) {
         onOpened(UpdateBmlPageLogged.class)
@@ -50,7 +50,7 @@ public class LjuserTag extends LJTest {
                 .setUsername(ljuser, false);
     }
 
-    //Logged user create new post with correct lj-user tag (3/3)
+    //Scenario: Logged user create new post with correct lj-user tag (3/3)
     @Then("the post is in journal and contains correct username $ljuser")
     public void post_is_in_journal_and_contains_correct_username(String ljuser) {
         verify().that(onOpened(EntryPage.class).containsLjUser(ljuser))
@@ -59,7 +59,7 @@ public class LjuserTag extends LJTest {
                 .finish();
     }
 
-    //Logged user create new post with uncorrect lj-user tag (3/3)
+    //Scenario: Logged user create new post with uncorrect lj-user tag (3/3)
     @Then("user see an error in header")
     public void user_see_an_error_in_header() {
         verify().that(onOpened(UpdateBmlPageLogged.class).getErrorStrip().getErrorText().toUpperCase().equals("INVALID USER"))

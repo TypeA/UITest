@@ -5,8 +5,8 @@
  */
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header.menuBlocks.findMoreMenu;
 
-import com.livejournal.uitests.pages.browse.BrowseMainPageUnlogged;
-import com.livejournal.uitests.pages.rss.RssPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.browse.BrowseMainPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.rss.RssPageUnlogged;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
