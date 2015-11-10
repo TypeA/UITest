@@ -1,6 +1,6 @@
 Scenario: New Title
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user add new Title <title> in Settings and save it
@@ -9,12 +9,12 @@ Then the Title is changed on correct title <correct_title>
 Examples:
 |name           |title      |correct_title    |
 |testautotest   |new_title  |NEW_TITLE        |
-|testautotest   |           |ENTRIES FEED FOR |
+|testautotest   |           |FEED             |
 
 
 Scenario: Change Title
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user change Title <title> in Settings and save it
@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Cancel changing Title
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user change Title <title> in Settings and cancel it
@@ -41,7 +41,7 @@ Examples:
 
 Scenario: Set new color
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user change color <color> by type <type> (parametrs: code <code>, barY <barY>, colorX <colorX>, colorY <colorY>) and save it
@@ -150,7 +150,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
@@ -167,7 +167,7 @@ Examples:
 
 Scenario: Cancel text settings 
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <new_size> and font <new_font> in Settings and cancel it (old size <size>, old font <font>)
@@ -184,7 +184,7 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings test
 
 Given logged user (name <name>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it
@@ -219,7 +219,7 @@ Examples:
 
 Scenario: Restore default settings 
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 @issue LJSUP-19537
 
 Given logged user (name <name>) with own settings on Friends Feed
@@ -234,7 +234,7 @@ Examples:
 
 Scenario: Save settings after user logged out
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) with own settings on Friends Feed
 When user logged out and logged in again (name <name>)

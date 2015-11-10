@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.friends_feed_pages;
+package com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;

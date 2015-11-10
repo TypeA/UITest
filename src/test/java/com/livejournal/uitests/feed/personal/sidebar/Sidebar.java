@@ -24,6 +24,7 @@ public class Sidebar extends LJTest {
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
+                .sidebar()
                 .deleteAllWidgets();
 
     }
@@ -39,8 +40,9 @@ public class Sidebar extends LJTest {
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
                 .regionSwitchLogged(name, "CYR");
-        
+
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
+                .sidebar()
                 .addAllWidgets();
     }
 
@@ -48,6 +50,7 @@ public class Sidebar extends LJTest {
     @When("user click Add widget and select widget $widget")
     public void user_click_Add_widget_and_select_widget(String widget) {
         onOpened(FriendsFeedLogged.class)
+                .sidebar()
                 .addWidget(widget);
     }
 
@@ -55,6 +58,7 @@ public class Sidebar extends LJTest {
     @When("user click Delete widget $widget")
     public void user_click_Delete_widget(String widget) {
         onOpened(FriendsFeedLogged.class)
+                .sidebar()
                 .closeWidget(widget);
     }
 
@@ -64,6 +68,7 @@ public class Sidebar extends LJTest {
         String widget = selectWidget("LOWER");
         ThucydidesUtils.putToSession("widget", widget);
         onOpened(FriendsFeedLogged.class)
+                .sidebar()
                 .moveMouseOnWidget(widget);
         String script = "return jQuery('.b-feedwidgets-move-down')"
                 + ".slice((jQuery('.b-feedwidgets-move-down').size()-1),(jQuery('.b-feedwidgets-move-down').size()))"
@@ -75,6 +80,7 @@ public class Sidebar extends LJTest {
         Integer steps = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
         for (int i = 0; i < steps - 1; i++) {
             onOpened(FriendsFeedLogged.class)
+                    .sidebar()
                     .upWidget(widget);
         }
     }
@@ -85,6 +91,7 @@ public class Sidebar extends LJTest {
         String widget = selectWidget("UPPER");
         ThucydidesUtils.putToSession("widget", widget);
         onOpened(FriendsFeedLogged.class)
+                .sidebar()
                 .moveMouseOnWidget(widget);
         String script = "return jQuery('.b-feedwidgets-move-up')"
                 + ".slice(0,1)"
@@ -96,6 +103,7 @@ public class Sidebar extends LJTest {
         Integer steps = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
         for (int i = 0; i < steps - 1; i++) {
             onOpened(FriendsFeedLogged.class)
+                    .sidebar()
                     .downWidget(widget);
         }
 
@@ -107,6 +115,7 @@ public class Sidebar extends LJTest {
         String widget = selectWidget("MIDDLE");
         ThucydidesUtils.putToSession("widget", widget);
         onOpened(FriendsFeedLogged.class)
+                .sidebar()
                 .moveMouseOnWidget(widget);
     }
 
@@ -124,7 +133,7 @@ public class Sidebar extends LJTest {
     //Scenario: Add widget (3/3)
     @Then("widget $widget added in sidebar")
     public void widget_added_in_sidebar(String widget) {
-        verify().that(onOpened(FriendsFeedLogged.class).displayingWidget(widget))
+        verify().that(onOpened(FriendsFeedLogged.class).sidebar().displayingWidget(widget))
                 .ifResultIsExpected("Necessary widget '" + widget + "' is displayed")
                 .ifElse("Necessary widget '" + widget + "' is not displayed!")
                 .finish();
@@ -170,11 +179,13 @@ public class Sidebar extends LJTest {
     @Then("Up and Down Buttons are displayed")
     public void Up_and_Down_Buttons_are_displayed() {
         String widget = ThucydidesUtils.getFromSession("widget").toString();
-        verify().that(onOpened(FriendsFeedLogged.class).buttonUpDisplaying(widget))
+        verify().that(onOpened(FriendsFeedLogged.class)
+                .sidebar().buttonUpDisplaying(widget))
                 .ifResultIsExpected("Up button is displayed")
                 .ifElse("Up button is not displayed")
                 .and()
-                .that(onOpened(FriendsFeedLogged.class).buttonDownDisplaying(widget))
+                .that(onOpened(FriendsFeedLogged.class)
+                        .sidebar().buttonDownDisplaying(widget))
                 .ifResultIsExpected("Down button is displayed")
                 .ifElse("Down button is not displayed")
                 .finish();

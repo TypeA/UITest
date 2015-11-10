@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings;
+package com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.settings;
 
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.ColorSettings;
 import com.livejournal.uisteps.thucydides.elements.Button;
