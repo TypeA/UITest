@@ -1,13 +1,14 @@
 package com.livejournal.uitests.databases_data;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 /**
  *
  * @author m.prytkova
  */
-public class Discovery extends DatabasesData{
+public class Discovery extends DatabasesData {
 
     public String getIdCategories(String usualCategories) {
         int specialCategories = (Boolean.valueOf(usualCategories)) ? 0 : 1;
@@ -33,11 +34,15 @@ public class Discovery extends DatabasesData{
                 .finish().get(0).get(0);
     }
 
-    public String getJItemIdMagazine() {
+    public String getMagazinePostId() {
         String select = "select max(magazine_jitemid) from magazine";
         return workWithDB().conect()
                 .select(select, "magazine_jitemid*256")
                 .finish().get(0).get(0);
+    }
+
+    public String getLastPostFromMainCategory() {
+        return Collections.max(posts().getPostIdByKeyword("lj_magazine", "main"));
     }
 
 }
