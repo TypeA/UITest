@@ -1,13 +1,11 @@
 package com.livejournal.uitests.create_edit_post.time.comfortable.old_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import com.livejournal.uitests.utility.RandomText;
 import com.livejournal.uitests.utility.date.PostTime;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -39,7 +37,7 @@ public class OldPost extends LJTest {
                 .getFromSession("post_date")
                 .toString()
                 .split(";");
-        String post_text = RandomText.getRandomText(30);
+        String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])

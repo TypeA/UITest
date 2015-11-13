@@ -3,8 +3,6 @@ package com.livejournal.uitests.registration.useful.register_an_account_with_inc
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
-import com.livejournal.uitests.utility.NumberOfSymbols;
-import com.livejournal.uitests.utility.VerifyText;
 import com.livejournal.uitests.utility.date.Date;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -67,7 +65,7 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     public void user_enter_correct_data_except_for_the_email(String name, String email, String password, String day, String month, String year, String gender) {
         onOpened(CreateAccountPage.class)
                 .createAccountData(utility().random().getRandomName(name),
-                        NumberOfSymbols.get(email, 30),
+                        numberOfSumbols(email, 30),
                         password,
                         Date.parceDayOrGetCurrent(day).toString(),
                         Date.parceMonthOrGetCurrent(month).toString(),
@@ -83,7 +81,7 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_correct_data_except_for_the_name(String name, String email, String password, String day, String month, String year, String gender) {
         onOpened(CreateAccountPage.class)
-                .createAccountData(NumberOfSymbols.get(utility().random().getRandomName(name), 30),
+                .createAccountData(numberOfSumbols(utility().random().getRandomName(name), 30),
                         email,
                         password,
                         Date.parceDayOrGetCurrent(day).toString(),
@@ -101,7 +99,7 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
         onOpened(CreateAccountPage.class)
                 .createAccountData(utility().random().getRandomName(name),
                         email,
-                        NumberOfSymbols.get(password, 30),
+                        numberOfSumbols(password, 30),
                         Date.parceDayOrGetCurrent(day).toString(),
                         Date.parceMonthOrGetCurrent(month).toString(),
                         Date.parceYearOrGetCurrent(year).toString(),
@@ -124,8 +122,8 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
                 .ifElse("Popup is not displyed!")
                 .and()
                 .that(onDisplayed(PopupsBlock.class).getPopupText().contains(message))
-                .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(onDisplayed(PopupsBlock.class).getPopupText()))
+                .ifResultIsExpected("Correct text.\nText contains: " + message)
+                .ifElse("Incorrect text!\nCurrent text: " + onDisplayed(PopupsBlock.class).getPopupText())
                 .and()
                 .that(!onOpened(CreateAccountPage.class).createAccountButtonState())
                 .ifResultIsExpected("Create account Button is disabled")
@@ -146,10 +144,18 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     //Scenario: Register an account with incorrect age(3/3)
     @Then("user go to Finish Registration Form and see message $message")
     public void user_go_to_Finish_Registration_Form_and_see_message(String message) {
-         verify().that(onOpened(CreateAccountPage.class).getFinishText().contains(message))
-                .ifResultIsExpected(VerifyText.okTextForMessage(message))
-                .ifElse(VerifyText.errorTextForMessage(onOpened(CreateAccountPage.class).getFinishText()))
+        verify().that(onOpened(CreateAccountPage.class).getFinishText().contains(message))
+                .ifResultIsExpected("Correct text.\nText contains: " + message)
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(CreateAccountPage.class).getFinishText())
                 .finish();
+    }
+
+    private String numberOfSumbols(String data, int number) {
+        String newSumbols = "";
+        for (int i = 1; i <= number + 1; i++) {
+            newSumbols = newSumbols + "a";
+        }
+        return data.replace("NOS", newSumbols);
     }
 
 }

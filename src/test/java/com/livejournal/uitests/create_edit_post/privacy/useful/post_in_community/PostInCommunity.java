@@ -2,7 +2,6 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.post_in_communit
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
@@ -10,9 +9,6 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import static com.livejournal.uitests.utility.ParseString.getParsedString;
-import com.livejournal.uitests.utility.RandomText;
-import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
 import java.io.IOException;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
@@ -40,7 +36,7 @@ public class PostInCommunity extends LJTest {
     //Scenario: Edit post in community (2/4)
     @When("user create new post with privacy $privacy (group $group) in community $community")
     public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws IOException {
-        String postText = RandomText.getRandomText(30);
+        String postText = utility().random().getRandomText(30);
         onOpened(LoginPageUnlogged.class)
                 .defaultMinSecurity(community);
         String post_link = open(UpdateBmlPageLogged.class)
@@ -48,7 +44,7 @@ public class PostInCommunity extends LJTest {
                 .selectCommunity(community)
                 .usePostContent()
                 .setPostText(postText, "html")
-                .setPrivacy(privacy, getParsedString(group, ";"))
+                .setPrivacy(privacy, utility().convertation().stringToList(group, ";"))
                 .usePage()
                 .postEntry()
                 .getIdPost(community);
@@ -67,7 +63,7 @@ public class PostInCommunity extends LJTest {
                 .clickOnEditButton();
         onOpened(EditJournalBml.class)
                 .usePostContent()
-                .setPrivacy(privacy_1, getParsedString(group_1, ";"))
+                .setPrivacy(privacy_1, utility().convertation().stringToList(group_1, ";"))
                 .onOpened(EditJournalBml.class)
                 .saveEntry();
     }
@@ -126,7 +122,7 @@ public class PostInCommunity extends LJTest {
                 .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         onOpened(EntryPage.class).clickOnEditButton();
-        verify().that(isEqual(getParsedString(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
+        verify().that(utility().verification().sameArrayLists(utility().convertation().stringToList(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), utility().convertation().stringToList(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();

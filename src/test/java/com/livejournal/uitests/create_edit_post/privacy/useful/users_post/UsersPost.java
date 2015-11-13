@@ -2,7 +2,6 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.users_post;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.EntryPage;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
@@ -10,9 +9,6 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import static com.livejournal.uitests.utility.ParseString.getParsedString;
-import com.livejournal.uitests.utility.RandomText;
-import static com.livejournal.uitests.utility.EqualityOfArrayLists.isEqual;
 import java.io.IOException;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
@@ -45,12 +41,12 @@ public class UsersPost extends LJTest {
     //Scenario: Edit post(2/4)
     @When("user create new post with privacy $privacy (group $group)")
     public void user_create_new_post_with_privacy(String privacy, String group) throws IOException {
-        String postText = RandomText.getRandomText(30);
+        String postText = utility().random().getRandomText(30);
         String post_link = onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
                 .setPostText(postText, "html")
-                .setPrivacy(privacy, getParsedString(group, ";"))
+                .setPrivacy(privacy, utility().convertation().stringToList(group, ";"))
                 .usePage()
                 .postEntry()
                 .getIdPost(ThucydidesUtils.getFromSession("user").toString());
@@ -68,7 +64,7 @@ public class UsersPost extends LJTest {
         onOpened(EntryPage.class).clickOnEditButton();
         onOpened(EditJournalBml.class)
                 .usePostContent()
-                .setPrivacy(privacy_1, getParsedString(group_1, ";"))
+                .setPrivacy(privacy_1, utility().convertation().stringToList(group_1, ";"))
                 .useEditingPage()
                 .saveEntry();
     }
@@ -81,7 +77,7 @@ public class UsersPost extends LJTest {
                 .usePostContent()
                 .setSubject("Test for privacy")
                 .setPostText("privacy " + privacy, "html")
-                .setPrivacy(privacy, getParsedString(group, ";"));
+                .setPrivacy(privacy, utility().convertation().stringToList(group, ";"));
         Thread.sleep(2000);
     }
 
@@ -139,7 +135,7 @@ public class UsersPost extends LJTest {
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
     public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) {
         onOpened(EntryPage.class).clickOnEditButton();
-        verify().that(isEqual(getParsedString(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), getParsedString(privacy_1 + ";" + group_1, ";")))
+        verify().that(utility().verification().sameArrayLists(utility().convertation().stringToList(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), utility().convertation().stringToList(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();
