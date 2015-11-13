@@ -120,4 +120,34 @@ public class UserSettings extends DatabasesData {
         }
     }
 
+    public String getFeedPaging(String user, String setting) {
+        String prop_name = "";
+        if (setting.equals("type")) {
+            prop_name = "friendsfeed_paging_type";
+        }
+        if (setting.equals("size")) {
+            prop_name = "friendsfeed_page_size";
+        }
+        
+        String select1 = "SELECT * "
+                + "FROM user "
+                + "WHERE user='"
+                + user + "';";
+        List<ArrayList<String>> user_atr = workWithDB().conect()
+                .select(select1, "clusterid, userid")
+                .finish();
+
+        String select2 = "select * from lj_c" + user_atr.get(0).get(0) + ".userproplite2 "
+                + "where upropid="
+                + "(select upropid from userproplist "
+                + "where name = '" + prop_name + "') "
+                + "and userid = " + user_atr.get(0).get(1) + ";";
+
+        return workWithDB().conect()
+                .select(select2, "value")
+                .finish()
+                .get(0)
+                .get(0);
+    }
+
 }

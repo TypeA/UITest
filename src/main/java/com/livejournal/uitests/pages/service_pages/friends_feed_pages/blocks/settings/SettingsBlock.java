@@ -241,11 +241,11 @@ public class SettingsBlock extends UIBlock {
         }
 
         @StepGroup
-        public SettingsBlock setSize(String size) {
+        public SettingsBlock setSize(Integer size) {
             switch (type) {
                 case "PAGES":
                     try {
-                        pageSize.enter(size);
+                        pageSize.enter(size.toString());
                     } catch (Exception ex) {
                         Assert.fail("Page size input field is not displayed!" + ex);
                     }

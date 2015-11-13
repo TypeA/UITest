@@ -1,40 +1,40 @@
-Scenario: Feed loading for users with underscope in name on his feed
+Scenario: User's feed loading
 Meta: 
 @categories feed useful
 
-Given user (name <name>) with underscope in name on the Friends Feed
-When user scroll down his Friends Feed
-Then more entries are loading on Friends Feed
+Given user <user> with paging type <type> on the Friends Feed
+When user scroll Friends Feed down
+Then more entries are loading on Friends Feed by type <type>
 
 Examples:
-|name     |
-|long_name|
+|name           |type       |
+|testautotest   |PAGES      |
+|testautotest   |ENDLESS    |
 
 
-
-
-Scenario: Feed loading for users with underscope in name on oter user feed
+Scenario: Another user feed loading
 Meta: 
 @categories feed useful
 
-Given user (name <name>) with underscope in name on the Friends Feed
-When user scroll down oter user Friends Feed
+Given user <user> on the user2 <user2> Friends Feed
+When user scroll Friends Feed down
 Then more entries are loading on Friends Feed
 
 Examples:
-|name     |
-|long_name|
+|user           |user2  |
+|testautotest   |test   |
 
 
 
-Scenario: Feed with filter loading for users with underscope in name 
+Scenario: Feed loading by unlogged user
 Meta: 
 @categories feed useful
 
-Given user (name <name>) with underscope in name on the Friends Feed
-When user scroll down his Friends Feed with filter
+Given unlogged user on the user <user> Friends Feed
+When user scroll Friends Feed down
 Then more entries are loading on Friends Feed
 
 Examples:
-|name     |
-|long_name|
+|user           |
+|testautotest   |
+

@@ -168,7 +168,7 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(type)
-                .setSize(number)
+                .setSize(Integer.valueOf(number))
                 .saveSettings();
         refreshCurrentPage();
     }
@@ -179,11 +179,11 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(type)
-                .setSize(number)
+                .setSize(Integer.valueOf(number))
                 .saveSettings()
                 .openSettings()
                 .setPaging(new_type)
-                .setSize(number)
+                .setSize(Integer.valueOf(number))
                 .cancelSettings();
 
     }
@@ -554,7 +554,7 @@ public class Settings extends LJTest {
                 .setColor(ColorSettings.VISITED_LINK, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
                 .setTextSettings(text_size.toString(), text_font)
                 .setPaging(paging_type)
-                .setSize(utility().random().getRandomValue(20).toString())
+                .setSize(utility().random().getRandomValue(20))
                 .saveSettings();
     }
 }
