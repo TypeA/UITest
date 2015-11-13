@@ -1,4 +1,3 @@
-
 package com.livejournal.uitests.lj_magazine.admin_lj_magazine.useful.announce;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
@@ -15,27 +14,25 @@ import org.jbehave.core.annotations.When;
  * @author m.panferova
  */
 public class Announce extends LJTest {
-    
+
     ////////////////// нет аннотаций к шагам (где указывается стори)
     ////////////////// нет форматирования
     ////////////////// неправильное расположение шагов теста
-
     //////////////////зачем оборот user on Main Page and go to?
     ///////////////// Main Page нет и не должно быть и в тесте и в опиании
-    @Given("logged user on Main Page and go to Admin Magazine Announce")
-    public void logged_user_on_Main_Page_and_go_to_Admin_Magazine_Announce() {
-
+    @Given("logged user on Admin Magazine Announce")
+    public void logged_user_on_Admin_Magazine_Announce() {
         String name = getDBDate().privileges().getUserWithPrivDiscovery();
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
         open(AnnouncePage.class);
     }
 
-    //////////////// main announce это гдавный пост? если да, можно вполне обойтись без main
-    @When("create new main announce with image $image")
-    public void create_new_main_announce_with_image(String image) {
+    @When("edit announce with image $image")
+    public void edit_announce_with_image(String image) {
         int idSlot = getRedisDate().discovery().getMainAnnounceId();
-        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
+        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/"
+                + getDBDate().discovery().getLastPostFromMainCategory() + ".html";
         String subject = utility().random().getRandomChar(10);
         String lead = utility().random().getRandomChar(15);
         onOpened(AnnouncePage.class)
@@ -63,23 +60,16 @@ public class Announce extends LJTest {
                 .finish();
     }
 
-    @When("remove existing main announce and create new main announce with image $image")
-    public void remove_existing_main_announce_and_create_new_main_announce(String image) {
-        int idSlot = getRedisDate().discovery().getMainAnnounceId();
-        
-        
-        /////////////////// а разве выделенный кусок не избыточен?
-        /////////////////// вроде то же самое в методе getMainAnnounceId
-        for (int i = 1; i < 4; i++) {
-            if (i != idSlot) {
-                idSlot = i;
-                break;
-            }
-        }
-        //////////////////
-        
-        
-        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/" + getDBDate().discovery().getJItemIdMagazine() + ".html";
+    @Then("post in previous announce is displayed on feed LJ Magazine")
+    public void post_in_previous_announce_is_displayed_on_feed_LJ_Magazine() {
+
+    }
+
+    @When("create new announce with image $image")
+    public void create_new_announce_with_image(String image) {
+        int idSlot = getRedisDate().discovery().getNotMainAnnounceId();
+        String urlPost = "http://www." + getSystemConfiguration().getBaseUrl() + "/magazine/"
+                + getDBDate().discovery().getLastPostFromMainCategory() + ".html";
         String subject = utility().random().getRandomChar(10);
         String lead = utility().random().getRandomChar(15);
         onOpened(AnnouncePage.class)
@@ -88,12 +78,9 @@ public class Announce extends LJTest {
         ThucydidesUtils.putToSession("subject", subject);
         ThucydidesUtils.putToSession("lead", lead);
     }
-    @Then("new main announce with image $image is dispalyed in widget")
-    public void new_main_announce_with_image_is_dispalyed_in_widget(String image){
-        
-    
+
+    @Then("new announce with image $image is dispalyed in widget")
+    public void new_announce_with_image_is_dispalyed_in_widget(String image) {
+
     }
-    
-    
-    //////////////// см. то же самое во втором тесте
 }
