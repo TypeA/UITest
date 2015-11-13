@@ -29,4 +29,14 @@ public class RedisData extends RedisDatabase {
         }
     }
 
+    public int getNotMainAnnounceId() {
+        int idSlot = discovery().getNotMainAnnounceId();
+        for (int i = 1; i < 4; i++) {
+            if (i != idSlot) {
+                idSlot = i;
+            }
+        }
+        return idSlot;
+    }
+
 }
