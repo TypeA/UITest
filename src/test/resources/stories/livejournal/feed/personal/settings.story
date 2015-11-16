@@ -74,7 +74,7 @@ Examples:
 
 Scenario: Cansel new color
 Meta: 
-@categories feed personal feed_settings
+@categories feed personal feed_settings 
 
 Given logged user (name <name>) on Friends Feed
 When user change color <color> (old code <code>) and cansel it
@@ -150,7 +150,7 @@ Examples:
 
 Scenario: Set text settings 
 Meta: 
-@categories feed personal feed_settings 
+@categories feed personal feed_settings
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <size> and font <font> in Settings and save it
@@ -167,7 +167,7 @@ Examples:
 
 Scenario: Cancel text settings 
 Meta: 
-@categories feed personal feed_settings 
+@categories feed personal feed_settings
 
 Given logged user (name <name>) on Friends Feed
 When user change text size <new_size> and font <new_font> in Settings and cancel it (old size <size>, old font <font>)

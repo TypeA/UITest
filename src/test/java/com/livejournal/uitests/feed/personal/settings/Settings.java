@@ -238,22 +238,31 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color));
+        System.out.println("!!!!!!!!!!!!!!!! открыли окно");
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor()))
                 .ifResultIsExpected("Correct current color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor())
-                .and()
-                .that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
+                .finish();
+        System.out.println("!!!!!!!!!!!!!!!!  проверка 1");
+        verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
-                .and()
-                .that(verifyColor(code, "(" + utility().convertation().hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
+                .finish();
+        System.out.println("!!!!!!!!!!!!!!!!  проверка 2");
+        verify().that(verifyColor(code, "(" + utility().convertation().hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
-                .and()
-                .that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
+                .finish();
+        System.out.println("!!!!!!!!!!!!!!!!  проверка 3");
+        getElementColor(ColorSettings.valueOf(color));
+        System.out.println("!!!!!!!!!!!!!!!!  предположение 1");
+        utility().convertation().hexToRGB(code);
+        System.out.println("!!!!!!!!!!!!!!!!  предположение 2");
+        verify().that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
                 .ifResultIsExpected("Correct element color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
+        System.out.println("!!!!!!!!!!!!!!!!  проверка 4");
     }
 
     //Scenario: Return the current color(3/3)
@@ -357,19 +366,15 @@ public class Settings extends LJTest {
                 return ans;
             case ELEMENTS_BACKGROUND:
                 ans.add(startScript("return jQuery('.js-elem-bgcolor').css('backgroundColor')").toString());
-                ans.add(startScript("return jQuery('.b-lenta-calendar TABLE TH').css('backgroundColor')").toString());
                 ans.add(startScript("return jQuery('.b-feedwidgets-options .b-selectus').css('backgroundColor')").toString());
                 return ans;
             case ELEMENTS_COLOR:
                 ans.add(startScript("return jQuery('.js-elem-color--svgicon .svgicon').css('color')").toString());
                 ans.add(startScript("return jQuery('.b-selectus .label').css('color')").toString());
                 ans.add(startScript("return jQuery('.js-elem-color').css('color')").toString());
-                ans.add(startScript("return jQuery('.b-lenta-sidebar-title').css('color')").toString());
                 return ans;
             case BORDERS_COLOR:
                 ans.add(startScript("return jQuery('.js-elem-bordercolor').css('borderTopColor')").toString());
-                ans.add(startScript("return jQuery('.js-elem-bordercolor--table TD').css('borderTopColor')").toString());
-                ans.add(startScript("return jQuery('.js-elem-bordercolor--table TH').css('borderTopColor')").toString());
                 ans.add(startScript("return jQuery('.b-feedwidgets-options').css('borderTopColor')").toString());
                 ans.add(startScript("return jQuery('.b-feedwidgets-options .b-selectus').css('borderTopColor')").toString());
                 return ans;
@@ -378,10 +383,6 @@ public class Settings extends LJTest {
                 return ans;
             case SIDEBAR_TEXT_COLOR:
                 ans.add(startScript("return jQuery('.js-sidebar-color').css('color')").toString());
-                ans.add(startScript("return jQuery('.js-sidebar-color TH').css('color')").toString());
-                ans.add(startScript("return jQuery('.js-sidebar-color TD').css('color')").toString());
-                ans.add(startScript("return jQuery('.sbar-cal-month').css('color')").toString());
-                ans.add(startScript("return jQuery('.sbar-cal-year').css('color')").toString());
                 return ans;
             case LINK_COLOR:
                 ans.add(startScript("return jQuery('.js-link-color').css('color')").toString());
