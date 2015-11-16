@@ -184,7 +184,7 @@ Examples:
 
 Scenario: Set paging type 
 Meta: 
-@categories feed personal feed_settings test
+@categories feed personal feed_settings
 
 Given logged user (name <name>) on Friends Feed
 When user set Paging type <type> (number <number>)  in Settings and save it

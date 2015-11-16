@@ -298,14 +298,27 @@ public class Settings extends LJTest {
     @Then("Paging type is changed by type $type (number $number)")
     public void paging_type_is_changed_by_type(String type, String number) {
         refreshCurrentPage();
-        String strNumber = number;
+        Integer numOfPosts = onOpened(FriendsFeedLogged.class)
+                .feed()
+                .getNumberOfPosts();
+
         if (type.equals("ENDLESS")) {
-            strNumber = "more then 20";
+            verify().that(numOfPosts >= 20)
+                    .ifResultIsExpected("Correct numbers of posts on the feed (type " + type + ")")
+                    .ifElse("Incorrect numbers of posts on the feed = " + numOfPosts)
+                    .finish();
         }
-        verify().that(verifyPagingType(type, number))
-                .ifResultIsExpected("Correct paging type:" + type + "\nMust be " + strNumber + " posts in the feed")
-                .ifElse("Incorrect paging type:" + type + "\nThere are " + ThucydidesUtils.getFromSession("feed_size") + " posts in the feed")
-                .finish();
+
+        if (type.equals("PAGES")) {
+            Integer correctSize = Integer.valueOf(number);
+            if (correctSize < 1 || correctSize > 50) {
+                correctSize = 20;
+            }
+            verify().that(Objects.equals(numOfPosts, correctSize))
+                    .ifResultIsExpected("Correct numbers of posts on the feed (type " + type + ")")
+                    .ifElse("Incorrect numbers of posts on the feed = " + numOfPosts)
+                    .finish();
+        }
 
     }
 
@@ -451,43 +464,6 @@ public class Settings extends LJTest {
             resultB = !resultB;
         }
         return resultR & resultG & resultB;
-    }
-
-    @StepGroup
-    public boolean verifyPagingType(String type, String size) {
-        Integer intSize = Integer.valueOf(size);
-        String script = "return jQuery('.entryunit__text').size()";
-
-        switch (type) {
-            case "PAGES":
-                Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-                Integer intFeedSize = Integer.valueOf(feedSize.toString());
-                ThucydidesUtils.putToSession("feed_size", feedSize);
-                Integer correctSize;
-                if (intSize < 1 || intSize > 20) {
-                    correctSize = 20;
-                } else {
-                    correctSize = intSize;
-                }
-                return onOpened(FriendsFeedLogged.class).feed().displaySwitchPagesButtons() && Objects.equals(intFeedSize, correctSize);
-
-            case "ENDLESS":
-                ((JavascriptExecutor) getCurrentBrowser().getDriver())
-                        .executeScript("window.scrollBy(0,10000000)");
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-                intFeedSize = Integer.valueOf(feedSize.toString());
-                ThucydidesUtils.putToSession("feed_size", feedSize);
-                return !onOpened(FriendsFeedLogged.class).feed().displaySwitchPagesButtons() && intFeedSize > 20;
-
-            default:
-                Assert.fail("Unknown type " + type + "!");
-        }
-        return false;
     }
 
     private String getColorCode(ColorSettings button) {
