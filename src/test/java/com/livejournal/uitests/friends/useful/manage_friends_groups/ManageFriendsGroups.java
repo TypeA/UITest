@@ -170,7 +170,9 @@ public class ManageFriendsGroups extends LJTest {
                 .authorizeBy(userNotFriend, getDBDate().userData().getUserPassword(userNotFriend));
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."))
                 .openFilters();
-        String nameOfGroup = onOpened(FriendsFeedLogged.class).getGroups();
+        String nameOfGroup = onOpened(FriendsFeedLogged.class)
+                .openFilters()
+                .getGroups();
         verify().that(nameOfGroup.contains(publicGroup))
                 .ifResultIsExpected("Group is public")
                 .ifElse("Group is not Public")
@@ -201,7 +203,9 @@ public class ManageFriendsGroups extends LJTest {
         String user = ThucydidesUtils.getFromSession("user").toString();
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."))
                 .openFilters();
-        String nameOfGroup = onOpened(FriendsFeedLogged.class).getGroups();
+        String nameOfGroup = onOpened(FriendsFeedLogged.class)
+                .openFilters()
+                .getGroups();
         verify().that(nameOfGroup.contains(groupListBefore))
                 .ifResultIsExpected("Group is changed success")
                 .ifElse("Not change")
@@ -215,6 +219,7 @@ public class ManageFriendsGroups extends LJTest {
         String user = ThucydidesUtils.getFromSession("user").toString();
         Boolean emptyFeed = open(FriendsFeedLogged.class, new Url().setPostfix("/" + newGroup)
                 .setPrefix(user + "."))
+                .feed()
                 .feedIsEmpty();
         verify().that(emptyFeed)
                 .ifResultIsExpected("Feed is empty")

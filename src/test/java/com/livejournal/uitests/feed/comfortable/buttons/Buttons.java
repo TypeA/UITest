@@ -4,6 +4,7 @@ import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.FiltersBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -35,7 +36,7 @@ public class Buttons extends LJTest {
     //Scenario: Replacement blocks (3/3)
     @Then("the blocks is changed")
     public void the_blocks_is_changed() {
-        verify().that(onOpened(FriendsFeedLogged.class).filtersDisplaying())
+        verify().that(onDisplayed(FiltersBlock.class).isDisplayed())
                 .ifResultIsExpected("Filters block is displayed")
                 .ifElse("Filters block is not displayed")
                 .finish();

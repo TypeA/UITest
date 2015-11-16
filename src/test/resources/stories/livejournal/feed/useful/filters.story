@@ -1,6 +1,6 @@
 Scenario: Default friends filters
 Meta: 
-@categories feed useful test
+@categories feed useful
 
 Given logged user <user> with friends on Friends Feed
 When user set filter <filter>

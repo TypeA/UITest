@@ -5,8 +5,8 @@ import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.ColorSettings;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBlock;
-import com.livejournal.uitests.pages.service_pages.friends_feed_pages.settings.SettingsBubbleColorBlock;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.settings.SettingsBlock;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.settings.SettingsBubbleColorBlock;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -67,7 +67,9 @@ public class Settings extends LJTest {
     //Scenario: Change Title(2/3)
     @When("user change Title $title in Settings and save it")
     public void user_change_Title_in_Settings_and_save_it(String title) {
-        ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class).getFeedTitle());
+        ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class)
+                .feed()
+                .getFeedTitle());
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .typeToTitle(title)
@@ -77,13 +79,13 @@ public class Settings extends LJTest {
     //Scenario: Cancel changing Title(2/3)
     @When("user change Title $title in Settings and cancel it")
     public void user_change_Title_in_Settings_and_cansel_it(String title) {
-        ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class).getFeedTitle());
+        ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class).feed().getFeedTitle());
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .typeToTitle(title);
-        verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title") + title))
+        verify().that(onOpened(FriendsFeedLogged.class).feed().getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title") + title))
                 .ifResultIsExpected("Correct text.\nText contains: " + ThucydidesUtils.getFromSession("feed_title") + title)
-                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).getFeedTitle())
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).feed().getFeedTitle())
                 .finish();
         onDisplayed(SettingsBlock.class)
                 .cancelSettings();
@@ -166,7 +168,7 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(type)
-                .setSize(number)
+                .setSize(Integer.valueOf(number))
                 .saveSettings();
         refreshCurrentPage();
     }
@@ -177,11 +179,11 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setPaging(type)
-                .setSize(number)
+                .setSize(Integer.valueOf(number))
                 .saveSettings()
                 .openSettings()
                 .setPaging(new_type)
-                .setSize(number)
+                .setSize(Integer.valueOf(number))
                 .cancelSettings();
 
     }
@@ -214,18 +216,18 @@ public class Settings extends LJTest {
         if (title != null) {
             correct_title = title + correct_title;
         }
-        verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals(correct_title))
+        verify().that(onOpened(FriendsFeedLogged.class).feed().getFeedTitle().contains(correct_title))
                 .ifResultIsExpected("Correct text.\nText contains: " + correct_title)
-                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).getFeedTitle())
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).feed().getFeedTitle())
                 .finish();
     }
 
     //Scenario: Cancel changing Title (3/3)
     @Then("the Title is not changed")
     public void the_Title_is_not_changed() {
-        verify().that(onOpened(FriendsFeedLogged.class).getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title")))
+        verify().that(onOpened(FriendsFeedLogged.class).feed().getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title")))
                 .ifResultIsExpected("Correct text.\nText contains: " + ThucydidesUtils.getFromSession("feed_title"))
-                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).getFeedTitle())
+                .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).feed().getFeedTitle())
                 .finish();
     }
 
@@ -296,14 +298,27 @@ public class Settings extends LJTest {
     @Then("Paging type is changed by type $type (number $number)")
     public void paging_type_is_changed_by_type(String type, String number) {
         refreshCurrentPage();
-        String strNumber = number;
+        Integer numOfPosts = onOpened(FriendsFeedLogged.class)
+                .feed()
+                .getNumberOfPosts();
+
         if (type.equals("ENDLESS")) {
-            strNumber = "more then 20";
+            verify().that(numOfPosts >= 20)
+                    .ifResultIsExpected("Correct numbers of posts on the feed (type " + type + ")")
+                    .ifElse("Incorrect numbers of posts on the feed = " + numOfPosts)
+                    .finish();
         }
-        verify().that(verifyPagingType(type, number))
-                .ifResultIsExpected("Correct paging type:" + type + "\nMust be " + strNumber + " posts in the feed")
-                .ifElse("Incorrect paging type:" + type + "\nThere are " + ThucydidesUtils.getFromSession("feed_size") + " posts in the feed")
-                .finish();
+
+        if (type.equals("PAGES")) {
+            Integer correctSize = Integer.valueOf(number);
+            if (correctSize < 1 || correctSize > 50) {
+                correctSize = 20;
+            }
+            verify().that(Objects.equals(numOfPosts, correctSize))
+                    .ifResultIsExpected("Correct numbers of posts on the feed (type " + type + ")")
+                    .ifElse("Incorrect numbers of posts on the feed = " + numOfPosts)
+                    .finish();
+        }
 
     }
 
@@ -376,11 +391,11 @@ public class Settings extends LJTest {
                 ans.add(startScript("return jQuery('.b-translation-pseudo:link').css('color')").toString());
                 return ans;
             case ON_HOVER_COLOR:
-                onOpened(FriendsFeedLogged.class).getUserName().moveMouseOver();
+                onOpened(FriendsFeedLogged.class).feed().getUserName().moveMouseOver();
                 ans.add(getNecessaryValue(".p-lenta .l-flatslide-intro-heads A:hover", "color"));
                 return ans;
             case VISITED_LINK:
-                onOpened(FriendsFeedLogged.class).getUserName().click();
+                onOpened(FriendsFeedLogged.class).feed().getUserName().click();
                 ans.add("ERROR!!!");
                 return ans;
             default:
@@ -451,43 +466,6 @@ public class Settings extends LJTest {
         return resultR & resultG & resultB;
     }
 
-    @StepGroup
-    public boolean verifyPagingType(String type, String size) {
-        Integer intSize = Integer.valueOf(size);
-        String script = "return jQuery('.entryunit__text').size()";
-
-        switch (type) {
-            case "PAGES":
-                Object feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-                Integer intFeedSize = Integer.valueOf(feedSize.toString());
-                ThucydidesUtils.putToSession("feed_size", feedSize);
-                Integer correctSize;
-                if (intSize < 1 || intSize > 20) {
-                    correctSize = 20;
-                } else {
-                    correctSize = intSize;
-                }
-                return onOpened(FriendsFeedLogged.class).displaySwitchPagesButtons() && Objects.equals(intFeedSize, correctSize);
-
-            case "ENDLESS":
-                ((JavascriptExecutor) getCurrentBrowser().getDriver())
-                        .executeScript("window.scrollBy(0,10000000)");
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Settings.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                feedSize = ((JavascriptExecutor) getCurrentBrowser().getDriver()).executeScript(script);
-                intFeedSize = Integer.valueOf(feedSize.toString());
-                ThucydidesUtils.putToSession("feed_size", feedSize);
-                return !onOpened(FriendsFeedLogged.class).displaySwitchPagesButtons() && intFeedSize > 20;
-
-            default:
-                Assert.fail("Unknown type " + type + "!");
-        }
-        return false;
-    }
-
     private String getColorCode(ColorSettings button) {
         return onDisplayed(SettingsBlock.class)
                 .getCurrentColorCode(button);
@@ -540,7 +518,7 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .setColor(ColorSettings.BACKGROUND_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
-                .setColor(ColorSettings.BORDERS_COLOR, "BY_POINT", "",utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
+                .setColor(ColorSettings.BORDERS_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
                 .setColor(ColorSettings.ELEMENTS_BACKGROUND, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
                 .setColor(ColorSettings.ELEMENTS_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
                 .setColor(ColorSettings.FOREGROUND_COLOR, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
@@ -552,7 +530,7 @@ public class Settings extends LJTest {
                 .setColor(ColorSettings.VISITED_LINK, "BY_POINT", "", utility().random().getRandomValue(250), utility().random().getRandomValue(250), utility().random().getRandomValue(250))
                 .setTextSettings(text_size.toString(), text_font)
                 .setPaging(paging_type)
-                .setSize(utility().random().getRandomValue(20).toString())
+                .setSize(utility().random().getRandomValue(20))
                 .saveSettings();
     }
 }

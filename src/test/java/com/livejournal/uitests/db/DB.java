@@ -1,27 +1,24 @@
 package com.livejournal.uitests.db;
 
-import com.livejournal.uisteps.thucydides.ThucydidesUtils;
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.feed.personal.settings.Settings;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import java.util.Objects;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Set;
 import org.jbehave.core.annotations.Given;
-import org.junit.Assert;
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Cookie;
 
 public class DB extends LJTest {
 
     @Given("data from DB")
-    public void db() throws InterruptedException {
+    public void db() {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
-        String user = "testmaxatest";
+        String user = "testautotest";
        
-        open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+        System.out.println(getDBDate().userSettings().getFeedPaging(user, "type"));
+        System.out.println(getDBDate().userSettings().getFeedPaging(user, "size"));
+       
 
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
