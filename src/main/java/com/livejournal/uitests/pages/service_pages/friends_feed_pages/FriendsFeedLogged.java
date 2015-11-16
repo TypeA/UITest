@@ -37,20 +37,38 @@ public class FriendsFeedLogged extends ServicePageLogged {
         closeSettingsButton.moveMouseOver();
         return onDisplayed(SettingsBlock.class).waitThatSettingsBlockClose();
     }
-    
-        @StepGroup
+
+    @StepGroup
     public FiltersBlock openFilters() {
         filtersButton.click();
         return onDisplayed(FiltersBlock.class);
     }
 
+    @FindBy(css = ".b-pager-link--prev")
+    public Button previousButton;
+
+    @FindBy(css = ".b-pager-link--next")
+    public Button nextButton;
+
+    @StepGroup
+    public FriendsFeedLogged openPreviousPage() {
+        previousButton.click();
+        return this;
+    }
+
+    @StepGroup
+    public FriendsFeedLogged openNextPage() {
+        nextButton.click();
+        return this;
+    }
+
     @StepGroup
     public SidebarBlock sidebar() {
-       return onDisplayed(SidebarBlock.class);
+        return onDisplayed(SidebarBlock.class);
     }
-    
-        @StepGroup
+
+    @StepGroup
     public FeedBlock feed() {
-       return onDisplayed(FeedBlock.class);
+        return onDisplayed(FeedBlock.class);
     }
 }

@@ -7,22 +7,23 @@ When user scroll Friends Feed down
 Then more entries are loading on Friends Feed by type <type>
 
 Examples:
-|name           |type       |
+|user           |type       |
 |testautotest   |PAGES      |
 |testautotest   |ENDLESS    |
 
 
+
 Scenario: Another user feed loading
 Meta: 
-@categories feed useful
+@categories feed useful 
 
 Given user <user> on the user2 <user2> Friends Feed
 When user scroll Friends Feed down
-Then more entries are loading on Friends Feed
+Then more entries are loading on Friends Feed by type <type>
 
 Examples:
-|user           |user2  |
-|testautotest   |test   |
+|user           |user2  |type       |
+|testautotest   |test   |ENDLESS    |
 
 
 
@@ -32,9 +33,9 @@ Meta:
 
 Given unlogged user on the user <user> Friends Feed
 When user scroll Friends Feed down
-Then more entries are loading on Friends Feed
+Then more entries are loading on Friends Feed by type <type>
 
 Examples:
-|user           |
-|testautotest   |
+|user           |type       |
+|testautotest   |ENDLESS    |
 

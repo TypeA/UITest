@@ -27,7 +27,6 @@ public class LoginPageUnlogged extends ServicePageUnlogged {
     @StepGroup
     public LJPage authorizeBy(String login, String password) {
         loginForm.authorizeBy(login, password);
-
         verifyAutorize();
         return onOpened(LJPage.class);
     }

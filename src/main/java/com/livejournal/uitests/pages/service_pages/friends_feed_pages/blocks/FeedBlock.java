@@ -60,4 +60,9 @@ public class FeedBlock extends UIBlock {
         return feedEmpty.isDisplayed();
     }
 
+    @StepGroup
+    public Integer getNumberOfPosts() {
+        return Integer.valueOf(startScript("return jQuery('.entryunit__text').size()").toString());
+    }
+
 }

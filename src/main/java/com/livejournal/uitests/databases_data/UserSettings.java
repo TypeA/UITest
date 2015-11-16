@@ -122,10 +122,10 @@ public class UserSettings extends DatabasesData {
 
     public String getFeedPaging(String user, String setting) {
         String prop_name = "";
-        if (setting.equals("type")) {
+        if (setting.toUpperCase().equals("TYPE")) {
             prop_name = "friendsfeed_paging_type";
         }
-        if (setting.equals("size")) {
+        if (setting.toUpperCase().equals("SIZE")) {
             prop_name = "friendsfeed_page_size";
         }
         
