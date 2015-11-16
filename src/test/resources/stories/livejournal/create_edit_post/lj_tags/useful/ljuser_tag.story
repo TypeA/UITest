@@ -1,6 +1,6 @@
 Scenario: Post with correct lj-user tag
 Meta: 
-@categories create_edit_post lj_tags useful
+@categories create_edit_post lj_tags useful 
 
 Given logged user <name> on Create Post page
 When user enter correct username <ljuser> in ljuser bubble and create new post
@@ -26,3 +26,15 @@ Examples:
 |testautotest |тест         |
 |testautotest |! =@4 /3     |
 |testautotest |tеst         |
+
+Scenario: User can use autocomplete for lj-user tag
+Meta: 
+@categories create_edit_post lj_tags useful 
+
+Given logged user <name> on Create Post page
+When user <name> enter few symbols of his friend username and choose his name and save post
+Then the post is in journal and contains correct username
+
+Examples:
+|name         |
+|testautotest |

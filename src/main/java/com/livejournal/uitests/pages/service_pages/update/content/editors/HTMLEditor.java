@@ -42,6 +42,12 @@ public class HTMLEditor extends UpdateBmlBlockes {
         return this;
     }
 
+    @StepGroup
+    public HTMLEditor setUserNameByAutocomplete(String ljuser) {
+        ljUserButton.click();
+        onDisplayed(BubblesUpdateBml.class).openLJUserBubble().enterUsernameUsingAutocomplete(ljuser);
+        return this;
+    }
 
     @WhenPageOpens
     public void switchToHTMLEditor() {
