@@ -44,9 +44,15 @@ public class Filters extends LJTest {
     }
 
     //Scenario: Default friends filters (3/3)
-    @Then("user $user see feeds feed by filter $filter")
-    public void use_see_feeds_feed_by_filter(String user, String filter) {
-        onOpened(FriendsFeedLogged.class);
+    @Then("user see friends feed by filter $filter")
+    public void use_see_feeds_feed_by_filter(String filter) {
+        ArrayList<String> autors = onOpened(FriendsFeedLogged.class)
+                .feed()
+                .getAutors();
+        verify().that(verifyAutors(autors).equals(filter))
+                .ifResultIsExpected("User see friends feed by correct filter " + filter)
+                .ifElse("Filter " + filter + " does not work")
+                .finish();
     }
 
     //Scenario: Edit Filters (3/3)
@@ -72,6 +78,34 @@ public class Filters extends LJTest {
             }
         }
         return flagC && flagJ;
+    }
+
+    private String verifyAutors(ArrayList<String> autors) {
+        boolean flagJ = false;
+        boolean flagC = false;
+
+        for (int i = 0; i < autors.size(); i++) {
+            if (getDBDate().userData().getUserType(autors.get(i)).equals("journal")) {
+                flagJ = true;
+            }
+            if (getDBDate().userData().getUserType(autors.get(i)).equals("community")) {
+                flagC = true;
+            }
+        }
+
+        if (flagJ && flagC) {
+            return "all";
+        } else {
+            if (flagJ && !flagC) {
+                return "journals";
+            } else {
+                if (!flagJ && flagC) {
+                    return "communities";
+                } else {
+                    return "nothing";
+                }
+            }
+        }
     }
 
 }

@@ -1,31 +1,29 @@
 Scenario: Default friends filters
 Meta: 
-@categories feed useful
+@categories feed useful 
 
 Given logged user <user> with friends on Friends Feed
 When user set filter <filter>
-Then user see feeds feed by filter <filter>
+Then user see friends feed by filter <filter>
 
 Examples:
 |user               |filter         |
-|test               |all            |
-|test               |journals       |
-|test               |communities    |
-|test               |sendicated     |
+|testautotest       |all            |
+|testautotest       |journals       |
+|testautotest       |communities    |
 
 
 Scenario: Default view
 Meta: 
-@categories feed useful
+@categories feed useful test
 
-Given user, which exists Sendicated and other posts on the feed
-When logged user (name <name>, password <password>) go to his Friends Feed
-When user set Sendicated feeds filter
-Then necessary posts displayed on the feed
+Given logged user <user> with Default view on Friends Feed
+Then user see friends feed by group <group>
 
 Examples:
-|name|password|
-|test|test|
+|user           |group          |
+|testautotest   |default view   |
+
 
 
 Scenario: Edit Filters
@@ -39,55 +37,6 @@ Then user in correct page <page>
 Examples:
 |name   |page             |
 |test   |ManageGroupsPage |
-
-
-
-
-
-
-
-
-
-Scenario: Journals only filter
-Meta: 
-@categories feed useful
-
-Given user, which exists Journals and other posts on the feed
-When logged user (name <name>, password <password>) go to his Friends Feed
-When user set Journals only filter
-Then necessary posts displayed on the feed
-
-Examples:
-|name|password|
-|test|test|
-
-
-Scenario: Communities only filter
-Meta: 
-@categories feed useful
-
-Given user, which exists Communities and other posts on the feed
-When logged user (name <name>, password <password>) go to his Friends Feed
-When user set Communities only filter
-Then necessary posts displayed on the feed
-
-Examples:
-|name|password|
-|test|test|
-
-
-Scenario: Sendicated filter
-Meta: 
-@categories feed useful
-
-Given user, which exists Sendicated and other posts on the feed
-When logged user (name <name>, password <password>) go to his Friends Feed
-When user set Sendicated feeds filter
-Then necessary posts displayed on the feed
-
-Examples:
-|name|password|
-|test|test|
 
 
 
