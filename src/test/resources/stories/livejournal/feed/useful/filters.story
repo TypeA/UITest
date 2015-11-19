@@ -1,10 +1,10 @@
 Scenario: Default friends filters
 Meta: 
-@categories feed useful 
+@categories feed useful test
 
 Given logged user <user> with friends on Friends Feed
 When user set filter <filter>
-Then user see friends feed by filter <filter>
+Then user see Friends Feed by filter <filter>
 
 Examples:
 |user               |filter         |
@@ -13,30 +13,44 @@ Examples:
 |testautotest       |communities    |
 
 
-Scenario: Default view
+Scenario: Default View
 Meta: 
 @categories feed useful test
 
-Given logged user <user> with Default view on Friends Feed
-Then user see friends feed by group <group>
+Given logged user <user> with group <filter> on Friends Feed
+Then user see Friends Feed by group <filter>
 
 Examples:
-|user           |group          |
-|testautotest   |default view   |
+|user           |filter         |
+|testautotest   |Default View   |
+
+
+
+Scenario: Friends group
+Meta: 
+@categories feed useful test
+
+Given logged user <user> with group <filter> on Friends Feed
+When user set filter <filter>
+Then user see Friends Feed by group <filter>
+
+Examples:
+|user           |filter         |
+|testautotest   |test_group     |
 
 
 
 Scenario: Edit Filters
 Meta: 
-@categories feed useful
+@categories feed useful test
 
 Given logged user <user> on Friends Feed
 When user go to Edit Custom Friends Groups
 Then user in correct page <page>
 
 Examples:
-|name   |page             |
-|test   |ManageGroupsPage |
+|user           |page             |
+|testautotest   |ManageGroupsPage |
 
 
 

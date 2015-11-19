@@ -11,13 +11,7 @@ import java.util.Random;
 public class Friends extends DatabasesData {
 
     public ArrayList<String> getAllFriends(String user) {
-        String select1 = "select u.user, u.userid, f.friendid from user u "
-                + "left join friends f on u.userid = f.userid "
-                + "where u.user = '" + user + "';";
-        ArrayList<String> friendid = workWithDB().conect()
-                .select(select1, "friendid")
-                .finish()
-                .get(0);
+        ArrayList<String> friendid = getFriendsId(user);
         String select2 = "select user from user "
                 + "where (userid = '" + friendid.get(0) + "' ";
         for (int i = 1; i < friendid.size(); i++) {
@@ -55,13 +49,7 @@ public class Friends extends DatabasesData {
     }
 
     public ArrayList<String> getNotFriends(String user, Integer limit) {
-        String select1 = "select u.user, u.userid, f.friendid from user u "
-                + "left join friends f on u.userid = f.userid "
-                + "where u.user = '" + user + "';";
-        ArrayList<String> friendid = workWithDB().conect()
-                .select(select1, "friendid")
-                .finish()
-                .get(0);
+        ArrayList<String> friendid = getFriendsId(user);
         String select2 = "select user from user "
                 + "where (userid != '" + friendid.get(0) + "' ";
         for (int i = 1; i < friendid.size(); i++) {
@@ -117,14 +105,6 @@ public class Friends extends DatabasesData {
 
         ArrayList<String> groups_list = new ArrayList<String>();
 
-        String dop_script = "select clusterid, user from user "
-                + "where user = '" + user + "';";
-        String clusterid = workWithDB().conect()
-                .select(dop_script, "clusterid")
-                .finish()
-                .get(0)
-                .get(0);
-
         for (int j = 0; j < ans.get(1).size(); j++) {
             char[] myCharArray = Integer
                     .toBinaryString(Integer.valueOf(ans.get(1).get(j)))
@@ -133,7 +113,7 @@ public class Friends extends DatabasesData {
             String groupsid = "";
             for (int i = 1; i < myCharArray.length; i++) {
                 if (myCharArray[i] == '1') {
-                    String select3 = "select groupname from lj_c" + clusterid + ".friendgroup2 "
+                    String select3 = "select groupname from lj_c" + userData().getUserClusterId(user) + ".friendgroup2 "
                             + "where userid = (select userid from user where user = '" + user + "') "
                             + "and groupnum = '" + i + "';";
                     String groupname = workWithDB().conect()
@@ -203,6 +183,49 @@ public class Friends extends DatabasesData {
             }
         }
         return answer.get(new Random().nextInt(ans.size()));
+    }
+
+    public ArrayList<String> getAllGroups(String user) {
+        String select = "select * from lj_c" + userData().getUserClusterId(user)
+                + ".friendgroup2 where userid = (select userid from user where user = '"
+                + user + "');";
+        return workWithDB().conect()
+                .select(select, "groupname")
+                .finish()
+                .get(0);
+    }
+
+    public ArrayList<String> getFriendsInGroup(String user, String group) {
+        String select1 = "select * from lj_c" + userData().getUserClusterId(user)
+                + ".friendgroup2 where userid = "
+                + "(select userid from user where user = '" + user
+                + "') and groupname = '" + group
+                + "';";
+        Integer groupNum = Integer.valueOf(workWithDB().conect()
+                .select(select1, "groupnum")
+                .finish()
+                .get(0)
+                .get(0));
+        String select2 = "select u.user from friends f "
+                + "left join user u on u.userid = f.friendid "
+                + "where f.userid = "
+                + "(select userid from user where user = '" + user
+                + "') and (f.groupmask&1<<" + groupNum
+                + "=" + Math.pow(2, groupNum) + ") =1 ;";
+        return workWithDB().conect()
+                .select(select2, "user")
+                .finish()
+                .get(0);
+    }
+
+    private ArrayList<String> getFriendsId(String user) {
+        String select1 = "select u.user, u.userid, f.friendid from user u "
+                + "left join friends f on u.userid = f.userid "
+                + "where u.user = '" + user + "';";
+        return workWithDB().conect()
+                .select(select1, "friendid")
+                .finish()
+                .get(0);
     }
 
 }
