@@ -3,6 +3,8 @@ package com.livejournal.uitests.registration.comfortable.links_on_the_account_cr
 import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -52,6 +54,5 @@ public class LinksOnTheAccountCreationPage extends WebTest {
                 Assert.fail("Unknown link " + link + "!");
                 break;
         }
-
     }
 }

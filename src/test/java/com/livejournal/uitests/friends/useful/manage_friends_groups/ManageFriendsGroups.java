@@ -31,8 +31,7 @@ public class ManageFriendsGroups extends LJTest {
     public void logged_user_on_Manage_Groups_Page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name));
-        ArrayList<String> groupListBefore = new ArrayList<String>();
-        groupListBefore = open(ManageGroupsPage.class)
+        ArrayList<String> groupListBefore = open(ManageGroupsPage.class)
                 .getAllGroupForUser();
         ThucydidesUtils.putToSession("user", name);
         ThucydidesUtils.putToSession("group_list_before", groupListBefore);

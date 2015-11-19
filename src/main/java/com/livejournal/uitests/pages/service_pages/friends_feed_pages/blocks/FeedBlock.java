@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
+import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.support.FindBy;
@@ -63,6 +64,18 @@ public class FeedBlock extends UIBlock {
     @StepGroup
     public Integer getNumberOfPosts() {
         return Integer.valueOf(startScript("return jQuery('.entryunit__text').size()").toString());
+    }
+
+    @StepGroup
+    public ArrayList<String> getAutors() {
+        ArrayList<String> ans = new ArrayList<String>();
+        int num = getNumberOfPosts();
+        for (int i = 0; i < num; i++) {
+            ans.add(startScript("return jQuery('.author-entryunit').eq("
+                    + i + ").find('.ljuser').eq(jQuery('.author-entryunit').eq("
+                    + i + ").find('.ljuser').size()-1).text()").toString());
+        }
+        return ans;
     }
 
 }

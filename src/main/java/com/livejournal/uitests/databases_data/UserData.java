@@ -59,7 +59,7 @@ public class UserData extends DatabasesData {
     public String getUserClusterId(String user) {
         String select = "select clusterid from user where user='" + user + "'";
         return workWithDB().conect()
-                .select(select, "userid")
+                .select(select, "clusterid")
                 .finish().get(0).get(0);
     }
 
