@@ -18,7 +18,6 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 
 /**
  *
@@ -72,7 +71,7 @@ public class Settings extends LJTest {
                 .getFeedTitle());
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .typeToTitle(title)
+                .editTitle(title)
                 .saveSettings();
     }
 
@@ -82,7 +81,7 @@ public class Settings extends LJTest {
         ThucydidesUtils.putToSession("feed_title", onOpened(FriendsFeedLogged.class).feed().getFeedTitle());
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
-                .typeToTitle(title);
+                .editTitle(title);
         verify().that(onOpened(FriendsFeedLogged.class).feed().getFeedTitle().equals((String) ThucydidesUtils.getFromSession("feed_title") + title))
                 .ifResultIsExpected("Correct text.\nText contains: " + ThucydidesUtils.getFromSession("feed_title") + title)
                 .ifElse("Incorrect text!\nCurrent text: " + onOpened(FriendsFeedLogged.class).feed().getFeedTitle())

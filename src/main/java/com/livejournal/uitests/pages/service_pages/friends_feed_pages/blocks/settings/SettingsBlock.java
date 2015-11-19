@@ -99,7 +99,7 @@ public class SettingsBlock extends UIBlock {
     }
 
     @StepGroup
-    public SettingsBlock typeToTitle(String title) {
+    public SettingsBlock editTitle(String title) {
         titleField.type(title);
         return this;
     }

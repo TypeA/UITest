@@ -22,17 +22,19 @@ public class FiltersBlock extends UIBlock {
     @FindBy(css = ".l-flatslide-menu-item-settings a[href*='/friends/editgroups.bml']")
     private Link manageFilters;
 
+    @StepGroup
     public ManageGroupsPage openManageFilters() {
         manageFilters.click();
         return onOpened(ManageGroupsPage.class);
     }
 
+    @StepGroup
     public FriendsFeedLogged openDefaultFilter(String filter) {
         startScript("jQuery(\"li[data-filter*='" + filter + "']:not([style='display: none;']) a\")[0].click()");
         return onOpened(FriendsFeedLogged.class);
     }
 
-        @StepGroup
+    @StepGroup
     public String getGroups() {
         List<WebElement> list = getDriver()
                 .findElements(By.xpath("//ul[@class='l-flatslide-menu-items l-flatslide-menu-items-active']//li//a"));

@@ -11,7 +11,7 @@ Examples:
 |testautotest   |Twitter Feed       |
 |testautotest   |Instagram Feed     |
 |testautotest   |Tumblr Feed        |
-|testautotest   |Calendar           |
+|--testautotest   |Calendar           |
 |testautotest   |Discovery Today    |
 |testautotest   |LiveJournal Today  |
 |testautotest   |Interesting links  |
@@ -36,7 +36,7 @@ Examples:
 |testautotest   |Twitter Feed       |
 |testautotest   |Instagram Feed     |
 |testautotest   |Tumblr Feed        |
-|testautotest   |Calendar           |
+|--testautotest   |Calendar           |
 |testautotest   |Discovery Today    |
 |testautotest   |LiveJournal Today  |
 |testautotest   |Interesting links  |
