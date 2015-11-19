@@ -43,7 +43,7 @@ public class Ljcut extends LJTest {
 
     @Then("the post is in journal and contains lj-cut with some information in it")
     public void post_in_journal_and_contains_ljcut_with_some_information_in_it() {
-        System.out.println("---------");
+        System.out.println("--------");
     }
 
 }
