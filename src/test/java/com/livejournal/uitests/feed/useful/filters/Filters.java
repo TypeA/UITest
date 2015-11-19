@@ -22,7 +22,6 @@ public class Filters extends LJTest {
     //Scenario: Default friends filters (1/3)
     @Given("logged user $user with friends on Friends Feed")
     public void logged_user_with_friends_on_Feed(String user) {
-        System.out.println("!!!!!!!!! вошли в первый шаг Default friends filters");
         Assert.assertTrue("Incorrect user: without friends", userWithFriends(user));
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
@@ -33,9 +32,7 @@ public class Filters extends LJTest {
     //Scenario: Friends group(1/3)
     @Given("logged user $user with group $filter on Friends Feed")
     public void logged_user_with_group_on_Feed(String user, String filter) {
-        System.out.println("!!!!!!!!! вошли в первый шаг Default view и Friends group");
         ThucydidesUtils.putToSession("user", user);
-        System.out.println("!!!!!!!!! по идее все записалось");
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
         ArrayList<String> groups = getDBDate().friends().getAllGroups(user);
@@ -97,16 +94,12 @@ public class Filters extends LJTest {
     //Scenario: Friends group(3/3)
     @Then("user see Friends Feed by group $filter")
     public void user_see_feed_by_group(String filter) {
-        System.out.println("!!!!!!!!! вошли в последний шаг Default view");
         ArrayList<String> autors = onOpened(FriendsFeedLogged.class)
                 .feed()
                 .getAutors();
-        System.out.println("!!!!!!!!!!!!! взяли авторов");
-        System.out.println("!!!!!!!!!!!!! подозрительный параметр" + ThucydidesUtils.getFromSession("user").toString());
         ArrayList<String> okAutors = getDBDate()
                 .friends()
                 .getFriendsInGroup(ThucydidesUtils.getFromSession("user").toString(), filter);
-        System.out.println("!!!!!!!!!!!!! взяли нужных авторов");
         verify().that(okAutors.containsAll(autors))
                 .ifResultIsExpected("There are only correct autors on the feed")
                 .ifElse("There are incorrect autors on the feed")
