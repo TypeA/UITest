@@ -40,7 +40,7 @@ public class CustomizeJournalPage extends ServicePageLogged {
     }
 
     public CustomizeJournalPage applyStyle(String style) {
-        startScript("jQuery('.theme-item-in:contains(\""+style+"\") .theme-form .theme-button').click()");
+        startScript("jQuery('.theme-item:contains(\""+style+"\") .theme-form .theme-button').click()");
         getDriver().switchTo().alert().accept();
         return this;
     }
