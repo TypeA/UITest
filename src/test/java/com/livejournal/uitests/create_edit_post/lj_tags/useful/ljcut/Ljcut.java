@@ -7,6 +7,8 @@ import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -40,6 +42,7 @@ public class Ljcut extends LJTest {
         String text = utility().random().getRandomText(10);
         ThucydidesUtils.putToSession("text", text);
         onOpened(UpdateBmlPageLogged.class)
+                .closeDraft()
                 .usePostContent()
                 .useHTMLEditor()
                 .setLJCut(ljcut)
@@ -49,12 +52,21 @@ public class Ljcut extends LJTest {
     }
 
     @Then("the post is in journal and contains lj-cut with some information in it")
+
     public void post_in_journal_and_contains_ljcut_with_some_information_in_it() {
-        verify().that(open(MyJournalPage.class, new Url()
-                .setPrefix(ThucydidesUtils.getFromSession("name").toString() + ".")).checkWorkLJCut(ThucydidesUtils.getFromSession("text").toString()))
+        open(MyJournalPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("name").toString() + "."));
+        verify().that(getTextFromLJCut(ThucydidesUtils.getFromSession("before").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
                 .ifResultIsExpected("The CUT is working properly")
                 .ifElse("The cut doesn't work properly")
                 .finish();
+
+    }
+
+    private String getTextFromLJCut(String text) {
+        startScript("jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-decor a').click()");
+        return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
+
     }
 
 }
