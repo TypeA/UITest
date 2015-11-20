@@ -29,7 +29,7 @@ public class Ljcut extends LJTest {
     }
 
     //Scenario: User can create new entry with lj-cut (2/3)
-    //Scenario: User can create new entry with custom title in lj-cut (1/3)
+    //Scenario: User can create new entry with custom title in lj-cut (2/3)
     @When("user use lj-cut $ljcut and put some text in it")
     public void user_use_ljcut_and_put_some_information_in_it(String ljcut) {
         String before = utility().random().getRandomText(10);
@@ -60,7 +60,7 @@ public class Ljcut extends LJTest {
 
     }
 
-    //Scenario: User can create new entry with custom title in lj-cut (1/3)
+    //Scenario: User can create new entry with custom title in lj-cut (3/3)
     @Then("the post is in journal and contains lj-cut with custom title $ljcut")
     public void post_in_journal_and_contains_ljcut_with_custom_title(String ljcut) {
         open(MyJournalPage.class, new Url()
