@@ -67,7 +67,6 @@ public class HTMLEditor extends UpdateBmlBlockes {
         postText = before + " " + postText;
         postText += " " + after;
         startScript("jQuery('.b-updateform-textarea').val('" + postText + "')");
-        System.out.println("=====================" + postText);
         return this;
     }
 
