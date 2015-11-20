@@ -4,17 +4,12 @@ import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
-import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  *
@@ -63,9 +58,27 @@ public class Ljcut extends LJTest {
 
     }
 
+    @Then("the post is in journal and contains lj-cut with custom title $ljcut")
+    public void post_in_journal_and_contains_ljcut_with_custom_title(String ljcut) {
+        open(MyJournalPage.class, new Url()
+                .setPrefix(ThucydidesUtils.getFromSession("name").toString() + "."));
+        verify().that(getLJCutCustomText(ThucydidesUtils.getFromSession("before").toString()).equals(ljcut))
+                .ifResultIsExpected("The ljcut title displaying correctly")
+                .ifElse("The ljcut title displaying incorrect")
+                .finish();
+
+    }
+
+    @StepGroup
     private String getTextFromLJCut(String text) {
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-decor a').click()");
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
+
+    }
+
+    @StepGroup
+    private String getLJCutCustomText(String text) {
+        return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-link-expand').attr('title')").toString();
 
     }
 
