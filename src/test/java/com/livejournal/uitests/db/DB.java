@@ -11,7 +11,8 @@ public class DB extends LJTest {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
         
-        this.getCurrentBrowser().getDriver().getWindowHandles().size();
+        String rgb = "rgb(36, 55, 227)";
+        System.out.println(utility().convertation().RgbToHex(rgb));
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
 

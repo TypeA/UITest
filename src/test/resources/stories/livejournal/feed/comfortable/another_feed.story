@@ -15,10 +15,10 @@ Scenario: Default settings
 Meta: 
 @categories feed comfortable
 
-Given user <user> on user2 <user2> Friends Feed
+Given user <user> on custom Friends Feed
 Then user see Feed on default settings
+Then unlogged see Feed on default settings
 
 Examples:
-|user               |user2         |
-|testautotest       |test          |
-|unlogged           |test          |
+|user               |
+|testautotest       |

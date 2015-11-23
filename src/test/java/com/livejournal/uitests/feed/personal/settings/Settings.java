@@ -413,27 +413,13 @@ public class Settings extends LJTest {
     }
 
     private String getTextParametrs(String parametr) {
-        switch (parametr.toUpperCase()) {
-            case "SIZE":
-                return startScript("return jQuery('.p-lenta .entryunit__text').css('font-size')").toString();
-            case "FONT":
-                return startScript("return jQuery('.p-lenta .entryunit__text').css('font-family')").toString();
-            default:
-                Assert.fail("Unknown parametr " + parametr + "!");
-        }
-        return "ERROR!!!!!";
+        return startScript("return jQuery('.p-lenta .entryunit__text').css('font-"
+                + parametr.toLowerCase().replace("font", "family") + "')").toString();
     }
 
     private String getTitleParametrs(String parametr) {
-        switch (parametr) {
-            case "SIZE":
-                return startScript("return jQuery('.p-lenta .entryunit__title').css('font-size')").toString();
-            case "FONT":
-                return startScript("return jQuery('.p-lenta .entryunit__title').css('font-family')").toString();
-            default:
-                Assert.fail("Unknown parametr " + parametr + "!");
-        }
-        return "ERROR!!!!!";
+        return startScript("return jQuery('.p-lenta .entryunit__title').css('font-"
+                + parametr.toLowerCase().replace("font", "family") + "')").toString();
     }
 
     @StepGroup
@@ -447,23 +433,7 @@ public class Settings extends LJTest {
 
     @StepGroup
     public boolean verifyColor(String hex, String rgb) {
-        rgb = rgb.substring(rgb.indexOf('(') + 1, rgb.indexOf(')'));
-        String[] mas = rgb.split(", ");
-        boolean resultR = true;
-        boolean resultG = true;
-        boolean resultB = true;
-        if ((Integer.parseInt(mas[0]) < Integer.parseInt(hex.substring(0, 2), 16) - 5) || (Integer.parseInt(mas[0]) > Integer.parseInt(hex.substring(0, 2), 16) + 5)) {
-            resultR = !resultR;
-        }
-
-        if (Integer.parseInt(mas[1]) < Integer.parseInt(hex.substring(2, 4), 16) - 5 || Integer.parseInt(mas[1]) > Integer.parseInt(hex.substring(2, 4), 16) + 5) {
-            resultG = !resultG;
-        }
-
-        if (Integer.parseInt(mas[2]) < Integer.parseInt(hex.substring(4, 6), 16) - 5 || Integer.parseInt(mas[2]) > Integer.parseInt(hex.substring(4, 6), 16) + 5) {
-            resultB = !resultB;
-        }
-        return resultR & resultG & resultB;
+        return hex.equals(utility().convertation().RgbToHex(rgb));
     }
 
     private String getColorCode(ColorSettings button) {

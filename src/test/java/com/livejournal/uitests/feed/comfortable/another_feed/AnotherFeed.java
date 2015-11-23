@@ -21,11 +21,28 @@ public class AnotherFeed extends LJTest {
     //Scenario: Public filters (1/3)
     @Given("user $user on user2 $user2 Friends Feed")
     public void user_on_user2_Feed(String user, String user2) {
+        ThucydidesUtils.putToSession("user", user2);
         Assert.assertTrue("Incorrect user: without groups", userWithGroups(user2));
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
         open(FriendsFeedLogged.class, new Url().setPrefix(user2 + "."));
-        ThucydidesUtils.putToSession("user", user2);
+
+    }
+
+    //Scenario: Default settings (1/3)
+    @Given("user $user on custom Friends Feed")
+    public void user_on_custom_Feed(String user) {
+        ArrayList<String> users = getDBDate().userSettings().getUsersWithCustomFeed();
+        String user_for_feed = "";
+        for (int i = 0; i < users.size(); i++) {
+            if (!users.get(i).equals(user) && users.get(i).contains("test")) {
+                user_for_feed = users.get(i);
+                i = users.size();
+            }
+        }
+        open(LoginPageUnlogged.class)
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+        open(FriendsFeedLogged.class, new Url().setPrefix(user_for_feed + "."));
     }
 
     //Scenario: Public filters (2/3)
@@ -57,6 +74,12 @@ public class AnotherFeed extends LJTest {
                 .finish();
     }
 
+    //Scenario: Default settings (2/3)
+    @Then("user see Feed on default settings")
+    public void user_see_Feed_on_default_settings() {
+        onOpened(FriendsFeedLogged.class);
+    }
+
     private boolean userWithGroups(String user) {
         List<ArrayList<String>> groups = getDBDate().friends().getAllGroupsWithParams(user);
         int sum = 0;
@@ -65,4 +88,21 @@ public class AnotherFeed extends LJTest {
         }
         return (sum > 1) && ((sum < groups.get(2).size()));
     }
+
+    private ArrayList<String> defaultSettings() {
+        ArrayList<String> colors = new ArrayList<>();
+        colors.add("ffffff");
+        colors.add("ffffff");
+        colors.add("ffffff");
+        colors.add("f8f9fb");
+        colors.add("7a9199");
+        colors.add("dae3e6");
+        colors.add("242f33");
+        colors.add("242f33");
+        colors.add("00a3d9");
+        colors.add("0086b3");
+        colors.add("007399");
+        return colors;
+    }
+
 }
