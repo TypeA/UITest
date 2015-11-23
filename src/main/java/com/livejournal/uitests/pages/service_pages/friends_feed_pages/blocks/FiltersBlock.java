@@ -6,8 +6,6 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFee
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

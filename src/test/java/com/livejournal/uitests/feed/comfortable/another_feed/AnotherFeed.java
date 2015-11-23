@@ -4,6 +4,7 @@ import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +35,6 @@ public class AnotherFeed extends LJTest {
                 .openFilters()
                 .getAllGroups();
         ArrayList<String> okgroups = getDBDate().friends().getPublicGroups(ThucydidesUtils.getFromSession("user").toString());
-
         verify().that(okgroups.containsAll(groups))
                 .ifResultIsExpected("Only public groups on the feed")
                 .ifElse("Incorrect groups on the feed")
@@ -44,6 +44,17 @@ public class AnotherFeed extends LJTest {
                 .ifElse("Numers of groups is incorrect")
                 .finish();
 
+    }
+
+    //Scenario: Public filters (3/3)
+    @Then("unlogged user cannot see filters")
+    public void unlogged_user_cannot_see_filters() {
+        onOpened(FriendsFeedLogged.class).moveMouseOverMyJournalMenuItem().clickOnLogOut();
+        verify().that(!onOpened(FriendsFeedUnlogged.class)
+                .filtersIsDisplayed())
+                .ifResultIsExpected("Unlogged user cannot see filters")
+                .ifElse("Filters button is displayed")
+                .finish();
     }
 
     private boolean userWithGroups(String user) {
