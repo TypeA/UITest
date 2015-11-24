@@ -8,10 +8,7 @@ import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
 /**
@@ -35,6 +32,11 @@ public class BubblesUpdateBml extends UIBlock {
     @StepGroup
     public LJUserBubble openLJUserBubble() {
         return new LJUserBubble();
+    }
+
+    @StepGroup
+    public LJCutBubble openLJCutBubble() {
+        return new LJCutBubble();
     }
 
     @StepGroup
@@ -84,6 +86,9 @@ public class BubblesUpdateBml extends UIBlock {
     @FindBy(css = ".b-updateform-bubble-input-wrapper.b-updateform-bubble-input-username input")
     private TextField username;
 
+    @FindBy(css = ".b-bubble-cut .b-updateform-bubble-input")
+    private TextField ljcutText;
+
     @Block(
             @FindBy(css = ".b-bubble-user"))
     public class LJUserBubble extends UIBlock {
@@ -116,7 +121,7 @@ public class BubblesUpdateBml extends UIBlock {
                 } else {
                     ljuserCutted = ljuser.substring(0, ljuserCutted.length() + 1);
                     username.enter(ljuserCutted);
-                    i=0;
+                    i = 0;
                 }
             }
             try {
@@ -125,6 +130,21 @@ public class BubblesUpdateBml extends UIBlock {
                 Logger.getLogger(BubblesUpdateBml.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    @Block(
+            @FindBy(css = ".b-bubble-cut"))
+    public class LJCutBubble extends UIBlock {
+
+        public void useLJCut(String ljcut) {
+            if (ljcut.toUpperCase().equals("DEFAULT")) {
+                startScript("jQuery('.b-bubble-cut .b-flatbutton').click()");
+            } else {
+                ljcutText.enter(ljcut);
+                startScript("jQuery('.b-bubble-cut .b-flatbutton').click()");
+            }
+        }
+
     }
 
     @FindBy(css = ".b-fontsize-select-item-tiny")
