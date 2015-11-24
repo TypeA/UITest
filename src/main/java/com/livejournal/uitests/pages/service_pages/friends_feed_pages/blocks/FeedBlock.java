@@ -16,7 +16,7 @@ import ru.yandex.qatools.htmlelements.element.TextBlock;
  * @author m.prytkova
  */
 @Block(
-        @FindBy(css = ".l-flatslide-container"))
+        @FindBy(css = ".l-flatslide-wrapper"))
 public class FeedBlock extends UIBlock {
 
     @FindBy(css = ".b-lenta-preview")

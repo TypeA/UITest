@@ -237,31 +237,24 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color));
-        System.out.println("!!!!!!!!!!!!!!!! открыли окно");
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor()))
                 .ifResultIsExpected("Correct current color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor())
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 1");
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 2");
         verify().that(verifyColor(code, "(" + utility().convertation().hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 3");
         getElementColor(ColorSettings.valueOf(color));
-        System.out.println("!!!!!!!!!!!!!!!!  предположение 1");
         utility().convertation().hexToRGB(code);
-        System.out.println("!!!!!!!!!!!!!!!!  предположение 2");
         verify().that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
                 .ifResultIsExpected("Correct element color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 4");
     }
 
     //Scenario: Return the current color(3/3)
@@ -350,7 +343,7 @@ public class Settings extends LJTest {
                 .finish();
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    
     private ArrayList<String> getElementColor(ColorSettings button) {
         ArrayList<String> ans = new ArrayList<String>();
         switch (button) {

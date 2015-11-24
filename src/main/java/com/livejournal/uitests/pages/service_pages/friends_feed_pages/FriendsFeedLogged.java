@@ -4,8 +4,10 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.FeedBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.FiltersBlock;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.OverallBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.SidebarBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.settings.SettingsBlock;
+import java.util.ArrayList;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
@@ -21,10 +23,10 @@ public class FriendsFeedLogged extends ServicePageLogged {
     private Button filtersButton;
 
     @FindBy(css = ".l-flatslide-settingslink-open")
-    public Button settingsButton;
+    private Button settingsButton;
 
     @FindBy(css = "a .l-flatslide-settingslink-close svg")
-    public Button closeSettingsButton;
+    private Button closeSettingsButton;
 
     @StepGroup
     public SettingsBlock openSettings() {
@@ -70,5 +72,17 @@ public class FriendsFeedLogged extends ServicePageLogged {
     @StepGroup
     public FeedBlock feed() {
         return onDisplayed(FeedBlock.class);
+    }
+
+    private OverallBlock overall;
+
+    @StepGroup
+    public boolean settingsIsDisplayed() {
+        return overall.settingsIsDisplayed();
+    }
+
+    @StepGroup
+    public ArrayList<String> getMainSettings() {
+        return overall.getMainSettings();
     }
 }

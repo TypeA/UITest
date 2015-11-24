@@ -77,7 +77,26 @@ public class AnotherFeed extends LJTest {
     //Scenario: Default settings (2/3)
     @Then("user see Feed on default settings")
     public void user_see_Feed_on_default_settings() {
-        onOpened(FriendsFeedLogged.class);
+        ArrayList<String> settings = onOpened(FriendsFeedLogged.class)
+                .getMainSettings();
+        verify().that(defaultSettings().containsAll(settings))
+                .ifResultIsExpected("Feed in default settings")
+                .ifElse("Feed in custom settings")
+                .finish();
+    }
+
+    //Scenario: Default settings (3/3)
+    @Then("unlogged user see Feed on default settings")
+    public void unlogged_user_see_Feed_on_default_settings() {
+        onOpened(FriendsFeedLogged.class)
+                .moveMouseOverMyJournalMenuItem()
+                .clickOnLogOut();
+        ArrayList<String> settings = onOpened(FriendsFeedUnlogged.class)
+                .getMainSettings();
+        verify().that(defaultSettings().containsAll(settings))
+                .ifResultIsExpected("Feed in default settings")
+                .ifElse("Feed in custom settings")
+                .finish();
     }
 
     private boolean userWithGroups(String user) {
@@ -90,19 +109,18 @@ public class AnotherFeed extends LJTest {
     }
 
     private ArrayList<String> defaultSettings() {
-        ArrayList<String> colors = new ArrayList<>();
-        colors.add("ffffff");
-        colors.add("ffffff");
-        colors.add("ffffff");
-        colors.add("f8f9fb");
-        colors.add("7a9199");
-        colors.add("dae3e6");
-        colors.add("242f33");
-        colors.add("242f33");
-        colors.add("00a3d9");
-        colors.add("0086b3");
-        colors.add("007399");
-        return colors;
+        ArrayList<String> settings = new ArrayList<String>();
+        settings.add(utility().convertation().hexToRGB("FFFFFF"));
+        settings.add("PROXIMANOVAREGULAR");
+        settings.add(utility().convertation().hexToRGB("242F33"));
+        settings.add(utility().convertation().hexToRGB("00A3D9"));
+        settings.add(utility().convertation().hexToRGB("FFFFFF"));
+        settings.add(utility().convertation().hexToRGB("FFFFFF"));
+        settings.add(utility().convertation().hexToRGB("242F33"));
+        settings.add(utility().convertation().hexToRGB("7A9199"));
+        settings.add(utility().convertation().hexToRGB("DAE3E6"));
+        settings.add(utility().convertation().hexToRGB("F8F9FB"));
+        return settings;
     }
 
 }
