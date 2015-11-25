@@ -330,7 +330,6 @@ public class Settings extends LJTest {
                 .ifResultIsExpected("Default settings are set")
                 .ifElse("Default settings are not set!")
                 .finish();
-
     }
 
     //Scenario: Save settings after user logged out (3/3)
