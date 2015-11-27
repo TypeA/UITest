@@ -6,7 +6,6 @@ import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -43,7 +42,7 @@ public class Ljcut extends LJTest {
                 .usePostContent()
                 .useHTMLEditor()
                 .setLJCut(ljcut)
-                .setTextInsideLJCut(before, text, after)
+                .putTextBetweenTags(before, text, after)
                 .usePage()
                 .postEntry();
     }
