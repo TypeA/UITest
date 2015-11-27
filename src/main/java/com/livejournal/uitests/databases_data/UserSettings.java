@@ -93,7 +93,6 @@ public class UserSettings extends DatabasesData {
     }
 
     public String getInMyStyleSetting(String user) {
-
         String select1 = "SELECT * "
                 + "FROM user "
                 + "WHERE user='"
@@ -128,7 +127,7 @@ public class UserSettings extends DatabasesData {
         if (setting.toUpperCase().equals("SIZE")) {
             prop_name = "friendsfeed_page_size";
         }
-        
+
         String select1 = "SELECT * "
                 + "FROM user "
                 + "WHERE user='"
@@ -147,6 +146,25 @@ public class UserSettings extends DatabasesData {
                 .select(select2, "value")
                 .finish()
                 .get(0)
+                .get(0);
+    }
+
+    public ArrayList<String> getUsersWithCustomFeed() {
+        String select = "(select u.user, c.userid from lj_c2.userproplite2 c\n"
+                + "left join user u on c.userid = u.userid\n"
+                + "where c.upropid = 327 "
+                + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'\n"
+                + "and u.statusvis = 'V')\n"
+                + "UNION \n"
+                + "(select u.user, c.userid from lj_c1.userproplite2 c\n"
+                + "left join user u on c.userid = u.userid\n"
+                + "where c.upropid = 327 "
+                + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'\n"
+                + "and u.statusvis = 'V' )";
+
+        return workWithDB().conect()
+                .select(select, "user")
+                .finish()
                 .get(0);
     }
 

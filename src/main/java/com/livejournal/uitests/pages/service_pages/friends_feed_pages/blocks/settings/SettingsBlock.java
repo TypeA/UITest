@@ -141,7 +141,7 @@ public class SettingsBlock extends UIBlock {
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
             public Boolean apply(WebDriver d) {
-                return onOpened(FriendsFeedLogged.class).settingsButton.isDisplayed();
+                return onOpened(FriendsFeedLogged.class).settingsIsDisplayed();
             }
         });
         return onOpened(FriendsFeedLogged.class);

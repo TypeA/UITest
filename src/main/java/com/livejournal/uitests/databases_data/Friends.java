@@ -185,14 +185,30 @@ public class Friends extends DatabasesData {
         return answer.get(new Random().nextInt(ans.size()));
     }
 
-    public ArrayList<String> getAllGroups(String user) {
+    public List<ArrayList<String>> getAllGroupsWithParams(String user) {
         String select = "select * from lj_c" + userData().getUserClusterId(user)
                 + ".friendgroup2 where userid = (select userid from user where user = '"
                 + user + "');";
         return workWithDB().conect()
                 .select(select, "groupname")
-                .finish()
-                .get(0);
+                .select(select, "sortorder")
+                .select(select, "is_public")
+                .finish();
+    }
+
+    public ArrayList<String> getAllGroups(String user) {
+        return getAllGroupsWithParams(user).get(0);
+    }
+
+    public ArrayList<String> getPublicGroups(String user) {
+        List<ArrayList<String>> all_groups = getAllGroupsWithParams(user);
+        ArrayList<String> groups = new ArrayList<String>();
+        for (int i = 0; i < all_groups.get(0).size(); i++) {
+            if (Integer.valueOf(all_groups.get(2).get(i)) == 1) {
+                groups.add(all_groups.get(0).get(i));
+            }
+        }
+        return groups;
     }
 
     public ArrayList<String> getFriendsInGroup(String user, String group) {

@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
+import java.util.ArrayList;
 import java.util.List;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
@@ -44,5 +45,15 @@ public class FiltersBlock extends UIBlock {
             filresFeed.append(filter);
         }
         return filresFeed.toString();
+    }
+
+    @StepGroup
+    public ArrayList<String> getAllGroups() {
+        Integer size = Integer.valueOf(startScript("return jQuery('.l-flatslide-menu-movable:not([style=\"display: none;\"])').size()").toString());
+        ArrayList<String> ans = new ArrayList<String>();
+        for (int i = 4; i < size; i++) {
+            ans.add(startScript("return jQuery('.l-flatslide-menu-movable:not([style=\"display: none;\"])').eq(" + i + ").text()").toString().trim());
+        }
+        return ans;
     }
 }

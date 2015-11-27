@@ -237,31 +237,24 @@ public class Settings extends LJTest {
         onOpened(FriendsFeedLogged.class)
                 .openSettings()
                 .getColor(ColorSettings.valueOf(color));
-        System.out.println("!!!!!!!!!!!!!!!! открыли окно");
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor()))
                 .ifResultIsExpected("Correct current color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Current color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCurrentColor())
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 1");
         verify().that(verifyColor(code, onDisplayed(SettingsBubbleColorBlock.class).getNewColor()))
                 .ifResultIsExpected("Correct new color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("New color is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getNewColor())
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 2");
         verify().that(verifyColor(code, "(" + utility().convertation().hexToRGB(onDisplayed(SettingsBubbleColorBlock.class).getCode()) + ")"))
                 .ifResultIsExpected("Correct color code:\n" + code)
                 .ifElse("Color code is incorrect:\n" + onDisplayed(SettingsBubbleColorBlock.class).getCode())
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 3");
         getElementColor(ColorSettings.valueOf(color));
-        System.out.println("!!!!!!!!!!!!!!!!  предположение 1");
         utility().convertation().hexToRGB(code);
-        System.out.println("!!!!!!!!!!!!!!!!  предположение 2");
         verify().that(verifyColor(code, getElementColor(ColorSettings.valueOf(color))))
                 .ifResultIsExpected("Correct element color:\n" + utility().convertation().hexToRGB(code))
                 .ifElse("Element color is incorrect:\n" + getElementColor(ColorSettings.valueOf(color)))
                 .finish();
-        System.out.println("!!!!!!!!!!!!!!!!  проверка 4");
     }
 
     //Scenario: Return the current color(3/3)
@@ -350,7 +343,7 @@ public class Settings extends LJTest {
                 .finish();
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    
     private ArrayList<String> getElementColor(ColorSettings button) {
         ArrayList<String> ans = new ArrayList<String>();
         switch (button) {
@@ -413,27 +406,13 @@ public class Settings extends LJTest {
     }
 
     private String getTextParametrs(String parametr) {
-        switch (parametr.toUpperCase()) {
-            case "SIZE":
-                return startScript("return jQuery('.p-lenta .entryunit__text').css('font-size')").toString();
-            case "FONT":
-                return startScript("return jQuery('.p-lenta .entryunit__text').css('font-family')").toString();
-            default:
-                Assert.fail("Unknown parametr " + parametr + "!");
-        }
-        return "ERROR!!!!!";
+        return startScript("return jQuery('.p-lenta .entryunit__text').css('font-"
+                + parametr.toLowerCase().replace("font", "family") + "')").toString();
     }
 
     private String getTitleParametrs(String parametr) {
-        switch (parametr) {
-            case "SIZE":
-                return startScript("return jQuery('.p-lenta .entryunit__title').css('font-size')").toString();
-            case "FONT":
-                return startScript("return jQuery('.p-lenta .entryunit__title').css('font-family')").toString();
-            default:
-                Assert.fail("Unknown parametr " + parametr + "!");
-        }
-        return "ERROR!!!!!";
+        return startScript("return jQuery('.p-lenta .entryunit__title').css('font-"
+                + parametr.toLowerCase().replace("font", "family") + "')").toString();
     }
 
     @StepGroup
@@ -447,23 +426,7 @@ public class Settings extends LJTest {
 
     @StepGroup
     public boolean verifyColor(String hex, String rgb) {
-        rgb = rgb.substring(rgb.indexOf('(') + 1, rgb.indexOf(')'));
-        String[] mas = rgb.split(", ");
-        boolean resultR = true;
-        boolean resultG = true;
-        boolean resultB = true;
-        if ((Integer.parseInt(mas[0]) < Integer.parseInt(hex.substring(0, 2), 16) - 5) || (Integer.parseInt(mas[0]) > Integer.parseInt(hex.substring(0, 2), 16) + 5)) {
-            resultR = !resultR;
-        }
-
-        if (Integer.parseInt(mas[1]) < Integer.parseInt(hex.substring(2, 4), 16) - 5 || Integer.parseInt(mas[1]) > Integer.parseInt(hex.substring(2, 4), 16) + 5) {
-            resultG = !resultG;
-        }
-
-        if (Integer.parseInt(mas[2]) < Integer.parseInt(hex.substring(4, 6), 16) - 5 || Integer.parseInt(mas[2]) > Integer.parseInt(hex.substring(4, 6), 16) + 5) {
-            resultB = !resultB;
-        }
-        return resultR & resultG & resultB;
+        return hex.equals(utility().convertation().RgbToHex(rgb));
     }
 
     private String getColorCode(ColorSettings button) {

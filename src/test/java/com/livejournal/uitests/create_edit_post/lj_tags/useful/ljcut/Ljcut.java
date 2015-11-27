@@ -33,10 +33,13 @@ public class Ljcut extends LJTest {
     public void user_use_ljcut_and_put_some_information_in_it(String ljcut) {
         String before = utility().random().getRandomText(10);
         ThucydidesUtils.putToSession("before", before);
+        
         String after = utility().random().getRandomText(10);
         ThucydidesUtils.putToSession("after", after);
+        
         String text = utility().random().getRandomText(10);
         ThucydidesUtils.putToSession("text", text);
+        
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
