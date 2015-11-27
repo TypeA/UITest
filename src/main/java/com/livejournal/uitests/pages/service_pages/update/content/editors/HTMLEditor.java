@@ -61,7 +61,7 @@ public class HTMLEditor extends UpdateBmlBlockes {
     }
 
     @StepGroup
-    public HTMLEditor setTextInsideLJCut(String before, String text, String after) {
+    public HTMLEditor putTextBetweenTags(String before, String text, String after) {
         String postText = startScript("return jQuery('.b-updateform-textarea').val()").toString();
         postText = postText.replace("></", "> " + text + " </");
         postText = before + " " + postText;
