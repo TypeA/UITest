@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.tools;
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;
@@ -50,11 +50,11 @@ public class SheduledEntriesPage extends ServicePageLogged {
         return this;
     }
 
-    public MyJournalPage deleteFirstSheduledEntry() {
+    public MyJournalPageLogged deleteFirstSheduledEntry() {
         startScript("jQuery('.b-editentry a')[0].click()");
         onOpened(EditJournalBml.class)
                 .deleteEntry();
-        return onOpened(MyJournalPage.class);
+        return onOpened(MyJournalPageLogged.class);
     }
 
     public EditJournalBml editSheduledEntryByText(String post_text) {

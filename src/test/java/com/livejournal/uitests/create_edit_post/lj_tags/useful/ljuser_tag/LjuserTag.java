@@ -2,7 +2,7 @@ package com.livejournal.uitests.create_edit_post.lj_tags.useful.ljuser_tag;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.util.ArrayList;
@@ -73,7 +73,7 @@ public class LjuserTag extends LJTest {
     //Scenario: Logged user create new post with correct lj-user tag (3/3)
     @Then("the post is in journal and contains correct username $ljuser")
     public void post_is_in_journal_and_contains_correct_username(String ljuser) {
-        verify().that(onOpened(EntryPage.class).containsLjUser(ljuser))
+        verify().that(onOpened(EntryPageLogged.class).Entry().containsLjUser(ljuser))
                 .ifResultIsExpected("Username " + ljuser + " displaying correctly in post")
                 .ifElse("Username " + ljuser + " displaying incorrectly in post")
                 .finish();
@@ -92,7 +92,7 @@ public class LjuserTag extends LJTest {
     @Then("the post is in journal and contains correct username")
     public void post_contains_correct_username() {
         String correctName = ThucydidesUtils.getFromSession("ljuser").toString();
-        verify().that(onOpened(EntryPage.class).containsLjUser(correctName))
+        verify().that(onOpened(EntryPageLogged.class).Entry().containsLjUser(correctName))
                 .ifResultIsExpected("Username " + correctName + " displaying correctly in post")
                 .ifElse("Username " + correctName + " displaying incorrectly in post")
                 .finish();

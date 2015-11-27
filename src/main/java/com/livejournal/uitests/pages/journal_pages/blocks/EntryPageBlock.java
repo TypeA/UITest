@@ -1,19 +1,21 @@
-package com.livejournal.uitests.pages.journal_pages;
+package com.livejournal.uitests.pages.journal_pages.blocks;
 
+import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import java.io.IOException;
-import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
+import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
 /**
  *
  * @author s.savinykh
  */
-@DefaultUrl("/")
-public class EntryPage extends JournalPage {
+@Block(
+        @FindBy(css = ".hentry"))
+public class EntryPageBlock extends UIBlock {
 
     @FindBy(css = ".b-msgsystem-error.b-msgsystem-error-banned ")
     private TextBlock errorTextBanned;
@@ -122,7 +124,7 @@ public class EntryPage extends JournalPage {
     @StepGroup
     public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
         String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
-        String script = "return jQuery(\""+ style_text.toLowerCase() + " " + htmlLink;
+        String script = "return jQuery(\"" + style_text.toLowerCase() + " " + htmlLink;
         System.out.println("!!!!!!!!!!!! style_text: " + style_text);
         System.out.println("!!!!!!!!!!!! htmlLink: " + htmlLink);
         System.out.println("!!!!!!!!!!!! script: " + script);
@@ -130,12 +132,8 @@ public class EntryPage extends JournalPage {
     }
 
     @StepGroup
-    public String getIdPost(String user) throws IOException {
-        return getDriver().getCurrentUrl().replace("http://" + user.replace("_", "-") + "." + getSystemConfiguration().getBaseUrl() + "/", "");
-    }
-
-    @StepGroup
     public String getTagsTextInSubject(String tag) {
         return startScript("return jQuery('.b-singlepost-title.entry-title.p-name " + tag + "').text()").toString();
     }
+
 }

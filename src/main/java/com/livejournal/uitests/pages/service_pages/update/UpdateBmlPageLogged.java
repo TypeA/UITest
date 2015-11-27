@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
@@ -84,9 +84,9 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     private Button addPostButton;
 
     @StepGroup
-    public EntryPage postEntry() {
+    public EntryPageLogged postEntry() {
         addPostButton.click();
-        return onOpened(EntryPage.class);
+        return onOpened(EntryPageLogged.class);
     }
 
     public PostContentBlock usePostContent() {

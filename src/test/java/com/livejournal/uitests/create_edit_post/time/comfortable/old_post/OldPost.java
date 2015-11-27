@@ -2,7 +2,7 @@ package com.livejournal.uitests.create_edit_post.time.comfortable.old_post;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -52,9 +52,11 @@ public class OldPost extends LJTest {
     //Scenario: Old post (3/3)
     @Then("the post is in journal")
     public void the_post_is_in_journal() {
-        String post_text = onOpened(EntryPage.class)
+        String post_text = onOpened(EntryPageLogged.class)
+                .Entry()
                 .getPostText().trim();
-        String post_time = onOpened(EntryPage.class)
+        String post_time = onOpened(EntryPageLogged.class)
+                .Entry()
                 .getPostTime();
         verify().that(post_time.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post")))
                 .ifResultIsExpected("Post is in journal, whis correct date: \n'" + PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post") + "'")

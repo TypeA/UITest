@@ -1,6 +1,5 @@
-package com.livejournal.uitests.pages.service_pages;
+package com.livejournal.uitests.pages.journal_pages;
 
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
@@ -14,9 +13,9 @@ import net.thucydides.core.annotations.StepGroup;
 
 /**
  *
- * @author m.prytkova
+ * @author s.savinykh
  */
-public class ServicePageLogged extends ServicePage {
+public class JournalPageLogged extends JournalPage {
 
     private FullscreenHeaderLogged fullscreenHeaderLogged;
 
@@ -75,4 +74,5 @@ public class ServicePageLogged extends ServicePage {
     public UpdateBmlPageLogged clickOnPostNewEntry() {
         return getFullscreenHeader().clickOnPostNewEntry();
     }
+
 }

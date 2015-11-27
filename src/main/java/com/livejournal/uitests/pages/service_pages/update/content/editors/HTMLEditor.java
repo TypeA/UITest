@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
 import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
-import com.livejournal.uitests.utility.RandomObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;

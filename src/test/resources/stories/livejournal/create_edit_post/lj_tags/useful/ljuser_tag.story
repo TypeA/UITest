@@ -1,6 +1,6 @@
 Scenario: Post with correct lj-user tag
 Meta: 
-@categories create_edit_post lj_tags useful 
+@categories create_edit_post lj_tags useful
 
 Given logged user <name> on Create Post page
 When user enter correct username <ljuser> in ljuser bubble and create new post

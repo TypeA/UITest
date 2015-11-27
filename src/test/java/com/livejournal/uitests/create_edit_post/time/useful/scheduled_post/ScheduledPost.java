@@ -3,7 +3,7 @@ package com.livejournal.uitests.create_edit_post.time.useful.scheduled_post;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.tools.SheduledEntriesPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -147,10 +147,11 @@ public class ScheduledPost extends LJTest {
                 Thread.sleep(10000);
             }
         }
-        open(MyJournalPage.class, new Url()
+        open(MyJournalPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + "."));
-        String post_time = onOpened(MyJournalPage.class)
+        String post_time = onOpened(MyJournalPageLogged.class)
                 .openPostByText(ThucydidesUtils.getFromSession("post_text").toString())
+                .Entry()
                 .getPostTime();
         verify().that(post_time.contains(PostTime.convertPostTime(ThucydidesUtils.getFromSession("post_date").toString(), "post")))
                 .ifResultIsExpected("Post is injournal, whith correct date: "
