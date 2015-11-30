@@ -32,6 +32,9 @@ public class HTMLEditor extends UpdateBmlBlockes {
     @FindBy(css = ".b-updateform-button-cut")
     Button ljCutButton;
 
+    @FindBy(css = ".b-updateform-button-spoiler")
+    Button spoiler;
+
     @StepGroup
     public HTMLEditor setPostText(String text) {
         postHtmlField.enter(text);
@@ -56,6 +59,13 @@ public class HTMLEditor extends UpdateBmlBlockes {
     public HTMLEditor setLJCut(String ljcut) {
         ljCutButton.click();
         onDisplayed(BubblesUpdateBml.class).openLJCutBubble().useLJCut(ljcut);
+        return this;
+    }
+
+    @StepGroup
+    public HTMLEditor setSpoiler(String spoilerText) {
+        spoiler.click();
+        onDisplayed(BubblesUpdateBml.class).openSpoilerBubble().useSpoiler(spoilerText);
         return this;
     }
 

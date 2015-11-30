@@ -2,7 +2,6 @@ package com.livejournal.uitests.pages.journal_pages.blocks;
 
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
-import java.io.IOException;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.support.FindBy;
@@ -136,4 +135,16 @@ public class EntryPageBlock extends UIBlock {
         return startScript("return jQuery('.b-singlepost-title.entry-title.p-name " + tag + "').text()").toString();
     }
 
+    @StepGroup
+    public String getSpoilerCustomText(String text) {
+        return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-head a').text()").toString();
+
+    }
+
+    @StepGroup
+    public String getTextSpoiler(String text) {
+        startScript("jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-head a').click()");
+        return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-body').text().trim()").toString();
+
+    }
 }
