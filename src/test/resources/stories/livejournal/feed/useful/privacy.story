@@ -11,3 +11,4 @@ Examples:
 |testautotest   |Public     |            |follower          |not_follower   |
 |testautotest   |Friends    |            |friend            |not_friend     |
 |testautotest   |Custom     |test_group  |in_group          |not_in_group   |
+|testautotest   |Private    |            |nobody            |current_user   |
