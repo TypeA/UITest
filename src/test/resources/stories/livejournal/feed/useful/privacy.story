@@ -1,6 +1,6 @@
 Scenario: Post displaying on the feed
 Meta: 
-@categories feed useful test
+@categories feed useful
 
 Given user <user> which create post with privacy <privacy> (group <group>)
 Then user <user1> can see the post on the Friends Feed
