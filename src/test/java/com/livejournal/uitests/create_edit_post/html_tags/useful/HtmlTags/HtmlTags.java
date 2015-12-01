@@ -2,7 +2,7 @@ package com.livejournal.uitests.create_edit_post.html_tags.useful.HtmlTags;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import org.jbehave.core.annotations.Given;
@@ -121,7 +121,7 @@ public class HtmlTags extends LJTest {
     @Then("post with style $tag is displayed correctly")
     public void post_is_displayed_correctly(String tag) {
         String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(onOpened(EntryPage.class).postWithStyleIsDisplayed(post_text, tag))
+        verify().that(onOpened(EntryPageLogged.class).Entry().postWithStyleIsDisplayed(post_text, tag))
                 .ifResultIsExpected("Post is displayed with bold text")
                 .ifElse("Post is not displayed with bold text")
                 .finish();
@@ -131,7 +131,7 @@ public class HtmlTags extends LJTest {
     @Then("post with font $font_text is displayed correctly")
     public void pos_with_font_is_displayed_correctly(String font_text) {
         String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(onOpened(EntryPage.class).postWithFontIsDisplayed(post_text, font_text.toUpperCase()))
+        verify().that(onOpened(EntryPageLogged.class).Entry().postWithFontIsDisplayed(post_text, font_text.toUpperCase()))
                 .ifResultIsExpected("Post is displayed with font " + font_text + "and post_text " + post_text)
                 .ifElse("Post is not displayed with font " + font_text + "and post_text " + post_text)
                 .finish();
@@ -141,7 +141,7 @@ public class HtmlTags extends LJTest {
     @Then("post with color $color_text is displayed correctly")
     public void post_with_font_is_displayed_correctly(String color_text) {
         String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(onOpened(EntryPage.class).postWithColorIsDisplayed(post_text, color_text))
+        verify().that(onOpened(EntryPageLogged.class).Entry().postWithColorIsDisplayed(post_text, color_text))
                 .ifResultIsExpected("Post is displayed with color " + color_text)
                 .ifElse("Post is not displayed with color " + color_text)
                 .finish();
@@ -151,15 +151,15 @@ public class HtmlTags extends LJTest {
     @Then("post with color $color_text and styles $tag_1 $tag_2 is displayed correctly")
     public void post_with_color_and_styles_is_displayed_correctly(String color_text, String tag_1, String tag_2) {
         String post_text = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(onOpened(EntryPage.class).postWithColorIsDisplayed(post_text, color_text))
+        verify().that(onOpened(EntryPageLogged.class).Entry().postWithColorIsDisplayed(post_text, color_text))
                 .ifResultIsExpected("Post is displayed with color " + color_text)
                 .ifElse("Post is not displayed with color " + color_text)
                 .and()
-                .that(onOpened(EntryPage.class).postWithStyleIsDisplayed(post_text, tag_1))
+                .that(onOpened(EntryPageLogged.class).Entry().postWithStyleIsDisplayed(post_text, tag_1))
                 .ifResultIsExpected("Post is displayed with style  " + tag_1)
                 .ifElse("Post is not displayed with style " + tag_1)
                 .and()
-                .that(onOpened(EntryPage.class).postWithStyleIsDisplayed(post_text, tag_2))
+                .that(onOpened(EntryPageLogged.class).Entry().postWithStyleIsDisplayed(post_text, tag_2))
                 .ifResultIsExpected("Post is displayed with style  " + tag_2)
                 .ifElse("Post is not displayed with style " + tag_2)
                 .finish();
@@ -168,7 +168,7 @@ public class HtmlTags extends LJTest {
     //Scenario: Create post with link(3/3)
     @Then("post with link $link is displayed and open in newWindow $newWindow")
     public void post_with_link_is_displayed_and_open_in_newWindow(String link, String newWindow) {
-        verify().that(onOpened(EntryPage.class).postWithLinkIsDisplayed(link, Boolean.valueOf(newWindow)))
+        verify().that(onOpened(EntryPageLogged.class).Entry().postWithLinkIsDisplayed(link, Boolean.valueOf(newWindow)))
                 .ifResultIsExpected("Post is displayed with link " + link)
                 .ifElse("Post is not displayed with link " + link)
                 .finish();
@@ -177,7 +177,7 @@ public class HtmlTags extends LJTest {
     //Scenario: Create post with custom link(3/3)
     @Then("post with link $link and with style $tag is displayed")
     public void post_with_link_and_with_style_is_displayed(String link, String tag) {
-        verify().that(onOpened(EntryPage.class).linkWithStyleIsDisplayed(link, tag))
+        verify().that(onOpened(EntryPageLogged.class).Entry().linkWithStyleIsDisplayed(link, tag))
                 .ifResultIsExpected("Post is displayed with link " + link + " and with style " + tag)
                 .ifElse("Post is not displayed with link " + link + " and with style " + tag)
                 .finish();

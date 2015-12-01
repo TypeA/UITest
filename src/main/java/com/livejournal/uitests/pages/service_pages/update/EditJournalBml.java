@@ -2,8 +2,8 @@ package com.livejournal.uitests.pages.service_pages.update;
 
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
 import com.livejournal.uisteps.thucydides.elements.Button;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import java.util.ArrayList;
@@ -65,16 +65,16 @@ public class EditJournalBml extends ServicePageLogged {
     }
 
     @StepGroup
-    public EntryPage saveEntry() {
+    public EntryPageLogged saveEntry() {
         saveButton.click();
-        return onOpened(EntryPage.class);
+        return onOpened(EntryPageLogged.class);
     }
 
     @StepGroup
-    public MyJournalPage deleteEntry() {   
+    public MyJournalPageLogged deleteEntry() {   
         deleteButton.click();
         getDriver().switchTo().alert().accept();
-        return onOpened(MyJournalPage.class);
+        return onOpened(MyJournalPageLogged.class);
     }
 
     @WhenPageOpens

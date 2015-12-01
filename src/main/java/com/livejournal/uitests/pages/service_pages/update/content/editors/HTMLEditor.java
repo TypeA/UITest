@@ -5,7 +5,6 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
 import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
-import com.livejournal.uitests.utility.RandomObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
@@ -32,6 +31,9 @@ public class HTMLEditor extends UpdateBmlBlockes {
 
     @FindBy(css = ".b-updateform-button-cut")
     Button ljCutButton;
+
+    @FindBy(css = ".b-updateform-button-spoiler")
+    Button spoiler;
 
     @StepGroup
     public HTMLEditor setPostText(String text) {
@@ -61,7 +63,14 @@ public class HTMLEditor extends UpdateBmlBlockes {
     }
 
     @StepGroup
-    public HTMLEditor setTextInsideLJCut(String before, String text, String after) {
+    public HTMLEditor setSpoiler(String spoilerText) {
+        spoiler.click();
+        onDisplayed(BubblesUpdateBml.class).openSpoilerBubble().useSpoiler(spoilerText);
+        return this;
+    }
+
+    @StepGroup
+    public HTMLEditor putTextBetweenTags(String before, String text, String after) {
         String postText = startScript("return jQuery('.b-updateform-textarea').val()").toString();
         postText = postText.replace("></", "> " + text + " </");
         postText = before + " " + postText;

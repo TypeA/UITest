@@ -2,7 +2,7 @@ package com.livejournal.uitests.create_edit_post.privacy.personal.min_security;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -76,7 +76,8 @@ public class MinSecurity extends LJTest {
     //Scenario: Min security in editing post(3/3)
     @Then("user see all privacy when edit this post")
     public void user_see_all_privacy_when_edit_this_post() {
-        ArrayList<String> privacy = onOpened(EntryPage.class)
+        ArrayList<String> privacy = onOpened(EntryPageLogged.class)
+                .Entry()
                 .clickOnEditButton()
                 .usePostContent()
                 .getAllPrivacy();

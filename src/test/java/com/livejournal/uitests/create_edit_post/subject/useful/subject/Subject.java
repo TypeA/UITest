@@ -1,7 +1,7 @@
 package com.livejournal.uitests.create_edit_post.subject.useful.subject;
 
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
@@ -55,9 +55,9 @@ public class Subject extends LJTest {
     //User create new post with subject(3/3)
     @Then("the post in journal has correct subject $subject")
     public void the_post_in_journal_has_correct_subject(String subject) {
-        verify().that(onOpened(EntryPage.class).getPostSubject().equals(subject))
+        verify().that(onOpened(EntryPageLogged.class).Entry().getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject '" + subject + "'")
-                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPageLogged.class).Entry().getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 
@@ -77,7 +77,8 @@ public class Subject extends LJTest {
     //Subject in editing(3/3)
     @Then("user edit this post and see correct subject $subject")
     public void user_edit_this_post_and_see_correct_subject(String subject) {
-        onOpened(EntryPage.class)
+        onOpened(EntryPageLogged.class)
+                .Entry()
                 .clickOnEditButton();
         verify().that(onOpened(EditJournalBml.class).usePostContent().getSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject in editing '" + subject + "'")
@@ -88,16 +89,17 @@ public class Subject extends LJTest {
     //User edit post with subject(3/3)
     @Then("user edit this post with a new subject $newsubject and see correct subject in post")
     public void user_edit_this_post_with_a_new_subject_and_see_correct_subject_in_post(String newsubject) {
-        onOpened(EntryPage.class)
+        onOpened(EntryPageLogged.class)
+                .Entry()
                 .clickOnEditButton()
                 .usePostContent()
                 .setSubject("")
                 .setSubject(newsubject)
                 .useEditingPage()
                 .saveEntry();
-        verify().that(onOpened(EntryPage.class).getPostSubject().equals(newsubject))
+        verify().that(onOpened(EntryPageLogged.class).Entry().getPostSubject().equals(newsubject))
                 .ifResultIsExpected("User see correct post subject '" + newsubject + "'")
-                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + newsubject + "'")
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPageLogged.class).Entry().getPostSubject() + "'. Correct subject is '" + newsubject + "'")
                 .finish();
     }
     
@@ -105,9 +107,9 @@ public class Subject extends LJTest {
     @Then("the post in journal has correct trimmed subject $subject")
     public void the_post_in_journal_has_correct_trimmed_subject(String subject) {
         subject = subject.substring(0,100);
-        verify().that(onOpened(EntryPage.class).getPostSubject().equals(subject))
+        verify().that(onOpened(EntryPageLogged.class).Entry().getPostSubject().equals(subject))
                 .ifResultIsExpected("User see correct post subject '" + subject + "'")
-                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject() + "'. Correct subject is '" + subject + "'")
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPageLogged.class).Entry().getPostSubject() + "'. Correct subject is '" + subject + "'")
                 .finish();
     }
 

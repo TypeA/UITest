@@ -13,7 +13,7 @@ Examples:
 
 Scenario: User can create new entry with custom title in lj-cut
 Meta: 
-@categories create_edit_post lj_tags useful testcut
+@categories create_edit_post lj_tags useful
 
 Given logged user <name> on Create Post page
 When user use lj-cut <ljcut> and put some text in it

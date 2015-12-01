@@ -3,8 +3,8 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.users_post;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
@@ -57,10 +57,10 @@ public class UsersPost extends LJTest {
     //Scenario: Edit post(3/4)
     @When("user edit privacy $privacy_1 (group $group_1) and save post")
     public void user_edit_privacy_and_save_post(String privacy_1, String group_1) {
-        open(EntryPage.class, new Url()
+        open(EntryPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
-        onOpened(EntryPage.class).clickOnEditButton();
+        onOpened(EntryPageLogged.class).Entry().clickOnEditButton();
         onOpened(EditJournalBml.class)
                 .usePostContent()
                 .setPrivacy(privacy_1, utility().convertation().stringToList(group_1, ";"))
@@ -90,13 +90,13 @@ public class UsersPost extends LJTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defaultLanguageLogged(user);
-        open(EntryPage.class, new Url()
+        open(EntryPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
         String postText = ThucydidesUtils.getFromSession("post_text").toString();
-        verify().that(postText.contains(onOpened(EntryPage.class).getPostText()))
+        verify().that(postText.contains(onOpened(EntryPageLogged.class).Entry().getPostText()))
                 .ifResultIsExpected("User can see post '" + postText + "'")
-                .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPage.class).getPostText() + "'")
+                .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPageLogged.class).Entry().getPostText() + "'")
                 .finish();
         open(MainPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
@@ -116,7 +116,7 @@ public class UsersPost extends LJTest {
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                     .defaultLanguageLogged(user);
-            open(MyJournalPage.class, new Url()
+            open(MyJournalPageLogged.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
             String error = getCurrentBrowser()
@@ -133,7 +133,7 @@ public class UsersPost extends LJTest {
     //Scenario: Edit post(4/4)
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
     public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) {
-        onOpened(EntryPage.class).clickOnEditButton();
+        onOpened(EntryPageLogged.class).Entry().clickOnEditButton();
         verify().that(utility().verification().sameArrayLists(utility().convertation().stringToList(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), utility().convertation().stringToList(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())

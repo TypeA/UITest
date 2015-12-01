@@ -3,10 +3,9 @@ package com.livejournal.uitests.create_edit_post.lj_tags.useful.ljcut;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPage;
+import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -46,7 +45,7 @@ public class Ljcut extends LJTest {
                 .usePostContent()
                 .useHTMLEditor()
                 .setLJCut(ljcut)
-                .setTextInsideLJCut(before, text, after)
+                .putTextBetweenTags(before, text, after)
                 .usePage()
                 .postEntry();
     }
@@ -54,9 +53,9 @@ public class Ljcut extends LJTest {
     //Scenario: User can create new entry with lj-cut (3/3)
     @Then("the post is in journal and contains lj-cut with some information in it")
     public void post_in_journal_and_contains_ljcut_with_some_information_in_it() {
-        open(MyJournalPage.class, new Url()
+        open(MyJournalPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("name").toString() + "."));
-        verify().that(onOpened(MyJournalPage.class).getTextFromLJCut(ThucydidesUtils.getFromSession("before").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
+        verify().that(onOpened(MyJournalPageLogged.class).getTextFromLJCut(ThucydidesUtils.getFromSession("before").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
                 .ifResultIsExpected("The CUT is working properly")
                 .ifElse("The cut doesn't work properly")
                 .finish();
@@ -66,9 +65,9 @@ public class Ljcut extends LJTest {
     //Scenario: User can create new entry with custom title in lj-cut (3/3)
     @Then("the post is in journal and contains lj-cut with custom title $ljcut")
     public void post_in_journal_and_contains_ljcut_with_custom_title(String ljcut) {
-        open(MyJournalPage.class, new Url()
+        open(MyJournalPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("name").toString() + "."));
-        verify().that(onOpened(MyJournalPage.class).getLJCutCustomText(ThucydidesUtils.getFromSession("before").toString()).equals(ljcut))
+        verify().that(onOpened(MyJournalPageLogged.class).getLJCutCustomText(ThucydidesUtils.getFromSession("before").toString()).equals(ljcut))
                 .ifResultIsExpected("The ljcut title displaying correctly")
                 .ifElse("The ljcut title displaying incorrect")
                 .finish();

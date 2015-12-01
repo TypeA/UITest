@@ -40,6 +40,11 @@ public class BubblesUpdateBml extends UIBlock {
     }
 
     @StepGroup
+    public SpolierBubble openSpoilerBubble() {
+        return new SpolierBubble();
+    }
+
+    @StepGroup
     public FontBubble openFontBubble() {
         return new FontBubble();
     }
@@ -88,6 +93,9 @@ public class BubblesUpdateBml extends UIBlock {
 
     @FindBy(css = ".b-bubble-cut .b-updateform-bubble-input")
     private TextField ljcutText;
+
+    @FindBy(css = ".b-bubble-spoiler .b-updateform-bubble-input")
+    private TextField spoilerText;
 
     @Block(
             @FindBy(css = ".b-bubble-user"))
@@ -142,6 +150,21 @@ public class BubblesUpdateBml extends UIBlock {
             } else {
                 ljcutText.enter(ljcut);
                 startScript("jQuery('.b-bubble-cut .b-flatbutton').click()");
+            }
+        }
+
+    }
+
+    @Block(
+            @FindBy(css = ".b-bubble-spoiler"))
+    public class SpolierBubble extends UIBlock {
+
+        public void useSpoiler(String spoiler) {
+            if (spoiler.toUpperCase().equals("DEFAULT")) {
+                startScript("jQuery('.b-bubble-spoiler .b-flatbutton').click()");
+            } else {
+                spoilerText.enter(spoiler);
+                startScript("jQuery('.b-bubble-spoiler .b-flatbutton').click()");
             }
         }
 

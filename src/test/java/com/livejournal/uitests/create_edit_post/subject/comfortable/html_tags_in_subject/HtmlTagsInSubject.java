@@ -1,7 +1,7 @@
 package com.livejournal.uitests.create_edit_post.subject.comfortable.html_tags_in_subject;
 
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPage;
+import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import org.jbehave.core.annotations.Given;
@@ -41,13 +41,15 @@ public class HtmlTagsInSubject extends LJTest {
     //Scenario: Subject with correct html tags(3/3)
     @Then("the post in journal has subject $subject with correct tag")
     public void correct_tag(String subject) {
-        verify().that(onOpened(EntryPage.class)
+        verify().that(onOpened(EntryPageLogged.class)
+                .Entry()
                 .getPostSubject()
                 .equals(cutSubject(subject)))
                 .ifResultIsExpected("User see correct post subject '" + cutSubject(subject) + "'")
-                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPageLogged.class).Entry().getPostSubject())
                 .and()
-                .that(onOpened(EntryPage.class)
+                .that(onOpened(EntryPageLogged.class)
+                        .Entry()
                         .getTagsTextInSubject(cutTag(subject))
                         .contains(cutSubject(subject)))
                 .ifResultIsExpected("Tag '" + cutTag(subject) + "' is worked")
@@ -59,20 +61,21 @@ public class HtmlTagsInSubject extends LJTest {
     //Scenario: Subject with cropped html tags(3/3)
     @Then("the post in journal has subject $subject with cropped tag")
     public void post_in_journal_has_subject_with_cropped_tag(String subject) {
-        verify().that(onOpened(EntryPage.class)
+        verify().that(onOpened(EntryPageLogged.class)
+                .Entry()
                 .getPostSubject()
                 .equals(cutSubject(subject)))
                 .ifResultIsExpected("User see correct post subject '" + cutSubject(subject) + "'")
-                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPageLogged.class).Entry().getPostSubject())
                 .finish();
     }
 
     //Scenario: Subject with incorrect html tags (3/3)
     @Then("the post in journal has cultivated subject $cultivated_subject")
     public void post_in_journal_has_subject(String cultivated_subject) {
-        verify().that(onOpened(EntryPage.class).getPostSubject().equals(cultivated_subject))
+        verify().that(onOpened(EntryPageLogged.class).Entry().getPostSubject().equals(cultivated_subject))
                 .ifResultIsExpected("User see correct post subject '" + cultivated_subject + "'")
-                .ifElse("User see incorrect post subject '" + onOpened(EntryPage.class).getPostSubject())
+                .ifElse("User see incorrect post subject '" + onOpened(EntryPageLogged.class).Entry().getPostSubject())
                 .finish();
     }
 
