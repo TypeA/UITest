@@ -78,4 +78,19 @@ public class FeedBlock extends UIBlock {
         return ans;
     }
 
+    @StepGroup
+    public boolean postInFeedBySubject(String subject) {
+        int size = getNumberOfPosts();
+        boolean ans = false;
+        for (int i = 0; i < size; i++) {
+            String subj = startScript("return jQuery('.entryunit__title .js-link-color').eq("
+                    + i + ").text()").toString();
+            if (subject.equals(subj)) {
+                ans = true;
+                i = getNumberOfPosts();
+            }
+        }
+        return ans;
+    }
+
 }

@@ -51,7 +51,7 @@ public class AnotherFeed extends LJTest {
         ArrayList<String> groups = onOpened(FriendsFeedLogged.class)
                 .openFilters()
                 .getAllGroups();
-        ArrayList<String> okgroups = getDBDate().friends().getPublicGroups(ThucydidesUtils.getFromSession("user").toString());
+        ArrayList<String> okgroups = getDBDate().friends().getAllPublicGroups(ThucydidesUtils.getFromSession("user").toString());
         verify().that(okgroups.containsAll(groups))
                 .ifResultIsExpected("Only public groups on the feed")
                 .ifElse("Incorrect groups on the feed")

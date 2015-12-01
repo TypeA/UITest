@@ -138,8 +138,8 @@ public class PostInCommunity extends LJTest {
             case MAINTAINERS:
                 return getDBDate().community().findMaintainerInComminuty(community);
             case USER_IN_GROUP:
-                ArrayList<String> in_group = getDBDate().friends().getFriendInGroup(community, group);
-                String user_in_group = getDBDate().friends().getFriendInGroup(community, group).get(0);
+                ArrayList<String> in_group = getDBDate().friends().getAllFriendsInGroup(community, group);
+                String user_in_group = getDBDate().friends().getAllFriendsInGroup(community, group).get(0);
                 for (String in_group1 : in_group) {
                     if (in_group1.contains("test")) {
                         user_in_group = in_group1;

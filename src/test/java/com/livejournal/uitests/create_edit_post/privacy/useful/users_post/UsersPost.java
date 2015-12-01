@@ -11,7 +11,6 @@ import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.io.IOException;
 import java.util.ArrayList;
-import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -157,24 +156,15 @@ public class UsersPost extends LJTest {
                 .finish();
     }
 
-    ////////////////////////////////////////////////////////
-    @StepGroup
     private String selectFriend(String user, String type, String group) {
-        switch (SelectUserList.valueOf(type.toUpperCase())) {
-            case NOT_FRIEND:
+        switch (type.toUpperCase()) {
+            case "NOT_FRIEND":
                 return getDBDate().friends().getNotFriend(user);
-            case FRIEND:
+            case "FRIEND":
                 return getDBDate().friends().getFriendWithoutGroup(user);
-            case FRIEND_IN_GROUP:
-                ArrayList<String> in_group = getDBDate().friends().getFriendInGroup(user, group);
-                String user_in_group = getDBDate().friends().getFriendInGroup(user, group).get(0);
-                for (int i = 0; i < in_group.size(); i++) {
-                    if (in_group.get(i).contains("test")) {
-                        user_in_group = in_group.get(i);
-                    }
-                }
-                return user_in_group;
-            case CURRENT_USER:
+            case "FRIEND_IN_GROUP":
+                return getDBDate().friends().getFriendInGroup(user, group);
+            case "CURRENT_USER":
                 return user;
             default:
                 return user;

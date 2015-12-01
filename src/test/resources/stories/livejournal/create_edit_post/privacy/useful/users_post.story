@@ -24,11 +24,11 @@ When user create new post with privacy <privacy> (group <group>)
 Then user see correct privacy <privacy_1> (group <group_1>) when edit this post
 
 Examples:
-|name           |privacy     |group                         |privacy_1     |group_1                       |
-|testautotest   |Public      |                              |Public        |                              |
-|testautotest   |Friends     |                              |Friends       |                              |
-|testautotest   |Custom      |test_group;Work;Local Friends |Custom        |test_group;Work;Local Friends |
-|testautotest   |Private     |                              |Private       |                              |
+|name           |privacy     |group             |privacy_1     |group_1                 |
+|testautotest   |Public      |                  |Public        |                        |
+|testautotest   |Friends     |                  |Friends       |                        |
+|testautotest   |Custom      |test_group;Work   |Custom        |test_group;Work         |
+|testautotest   |Private     |                  |Private       |                        |
 
 
 

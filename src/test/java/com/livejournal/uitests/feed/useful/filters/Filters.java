@@ -99,7 +99,7 @@ public class Filters extends LJTest {
                 .getAutors();
         ArrayList<String> okAutors = getDBDate()
                 .friends()
-                .getFriendsInGroup(ThucydidesUtils.getFromSession("user").toString(), filter);
+                .getAllFriendsInGroup(ThucydidesUtils.getFromSession("user").toString(), filter);
         verify().that(okAutors.containsAll(autors))
                 .ifResultIsExpected("There are only correct autors on the feed")
                 .ifElse("There are incorrect autors on the feed")

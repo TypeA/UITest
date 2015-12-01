@@ -10,9 +10,10 @@ public class DB extends LJTest {
     public void db() {
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
-        
-        String rgb = "rgb(36, 55, 227)";
-        System.out.println(utility().convertation().RgbToHex(rgb));
+
+        System.out.println(Math.round((float) (Math.random() * (7 - 0) + 0)));
+        System.out.println(Math.round((float) (Math.random() * (7 - 0) + 0)));
+        System.out.println(Math.round((float) (Math.random() * (7 - 0) + 0)));
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
 
