@@ -1,4 +1,4 @@
-package com.livejournal.uitests.feed.useful.privacy;
+package com.livejournal.uitests.feed.useful.composition;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
@@ -15,9 +15,9 @@ import org.jbehave.core.annotations.Then;
  *
  * @author m.prytkova
  */
-public class Privacy extends LJTest {
+public class Composition extends LJTest {
 
-    //Scenario: Post displaying on the feed (1/3)
+    //Scenario: Privacy (1/3)
     @Given("user $user which create post with privacy $privacy (group $group)")
     public void user_which_create_post_with_privacy(String user, String privacy, String group) {
         open(LoginPageUnlogged.class)
@@ -37,7 +37,7 @@ public class Privacy extends LJTest {
         ThucydidesUtils.putToSession("post_subject", postSudject);
     }
 
-    //Scenario: Post displaying on the feed (2/3)
+    //Scenario: Privacy(2/3)
     @Then("user $user1 can see the post on the Friends Feed")
     public void user_can_see_post_on_Feed(String user1) {
         if (!user1.equals("nobody")) {
@@ -45,7 +45,6 @@ public class Privacy extends LJTest {
             open(MainPageLogged.class)
                     .moveMouseOverMyJournalMenuItem()
                     .clickOnLogOut();
-            System.out.println("!!!!!!!!!!!!!!!! разлогинились");
             user1 = selectFriend(ThucydidesUtils.getFromSession("user").toString(), type, ThucydidesUtils.getFromSession("group").toString());
             open(LoginPageUnlogged.class)
                     .authorizeBy(user1, getDBDate().userData().getUserPassword(user1));
@@ -61,7 +60,7 @@ public class Privacy extends LJTest {
 
     }
 
-    //Scenario: Post displaying on the feed (3/3)
+    //Scenario: Privacy (3/3)
     @Then("user $user2 cannot see the post on the Friends Feed")
     public void user_cannot_see_post_on_Feed(String user2) {
         String type = user2;
@@ -82,7 +81,6 @@ public class Privacy extends LJTest {
     }
 
     private String selectFriend(String user, String type, String group) {
-        System.out.println("!!!!!!!!!!!!!!!! вошли в метод");
         ArrayList<String> in_group = new ArrayList<String>();
         ArrayList<String> friends = new ArrayList<String>();
         ArrayList<String> follower = getDBDate().friends().getAllFllowers(user);
@@ -103,11 +101,7 @@ public class Privacy extends LJTest {
             case "NOT_FRIEND":
                 friends = getDBDate().friends().getAllFriends(user);
                 follower.removeAll(friends);
-                for (int i = 0; i < follower.size(); i++) {
-                    if (follower.get(i).contains("test")) {
-                        return follower.get(i);
-                    }
-                }
+                return actualUser(follower);
             case "IN_GROUP":
                 in_group = getDBDate().friends().getAllFriendsInGroup(user, group);
                 for (String in_group1 : in_group) {
@@ -120,15 +114,19 @@ public class Privacy extends LJTest {
             case "NOT_IN_GROUP":
                 in_group = getDBDate().friends().getAllFriendsInGroup(user, group);
                 follower.removeAll(in_group);
-                for (int i = 0; i < follower.size(); i++) {
-                    if (follower.get(i).contains("test")) {
-                        return follower.get(i);
-                    }
-                }
+                return actualUser(follower);
             default:
                 return user;
         }
+    }
 
+    private String actualUser(ArrayList<String> users) {
+        for (String user : users) {
+            if (user.contains("test")) {
+                return user;
+            }
+        }
+        return null;
     }
 
 }
