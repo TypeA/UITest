@@ -10,6 +10,7 @@ import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
 
 /**
  *
@@ -35,6 +36,25 @@ public class Composition extends LJTest {
         ThucydidesUtils.putToSession("post_link", getCurrentBrowser().getCurrentUrl());
         ThucydidesUtils.putToSession("group", group);
         ThucydidesUtils.putToSession("post_subject", postSudject);
+    }
+
+    //Scenario: Widgets (1/3)
+    @Given("user $user by parametr $parameter on Friends Feed")
+    public void user_by_parametr_on_Feed(String user, String parameter) {
+        open(LoginPageUnlogged.class)
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .defaultLanguageLogged(user)
+                .regionSwitchLogged(user, parameter);
+        open(FriendsFeedLogged.class, new Url().setPrefix(user + "."));
+        ThucydidesUtils.putToSession("user", user);
+    }
+
+    //Scenario: Widgets (2/3)
+    @When("user add all widgets on the Feed")
+    public void user_add_all_widgets_on_Feed() {
+        onOpened(FriendsFeedLogged.class)
+                .sidebar()
+                .addAllWidgets();
     }
 
     //Scenario: Privacy(2/3)
@@ -77,6 +97,23 @@ public class Composition extends LJTest {
                 .ifResultIsExpected("User '" + type + "' cannot see post in his feed")
                 .ifElse("User " + user2 + " '" + type + "' see post \n'"
                         + ThucydidesUtils.getFromSession("post_subject") + "' \nin his feed")
+                .finish();
+    }
+
+    //Scenario: Widgets (3/3)
+    @Then("composition of widgets is correct")
+    public void composition_of_widgets_is_correct() {
+        ArrayList<String> widgets = onOpened(FriendsFeedLogged.class)
+                .sidebar()
+                .getAllWidgets();
+        ArrayList<String> ok_widgets = getCorrectWidgets(ThucydidesUtils.getFromSession("user").toString());
+        verify().that(widgets.size() == ok_widgets.size())
+                .ifResultIsExpected("Numbers of widgets is correct: " + ok_widgets.size())
+                .ifElse("Numbers of widgets is not correct: " + widgets.size())
+                .and()
+                .that(widgets.containsAll(ok_widgets))
+                .ifResultIsExpected("Compositien of widgets is correct")
+                .ifElse("Compositien of widgets is not correct")
                 .finish();
     }
 
@@ -127,6 +164,26 @@ public class Composition extends LJTest {
             }
         }
         return null;
+    }
+
+    private ArrayList<String> getCorrectWidgets(String user) {
+        ArrayList<String> widgets = new ArrayList<>();
+        widgets.add("Twitter Feed");
+        widgets.add("Instagram Feed");
+        widgets.add("Tumblr Feed");
+        widgets.add("LiveJournal Today");
+        widgets.add("Interesting links");
+        widgets.add("Events");
+        widgets.add("Comments");
+        widgets.add("Guests");
+        widgets.add("Entries");
+        if (getDBDate().userSettings().getCyrSetting(user).equals("CYR")) {
+            widgets.add("Discovery Today");
+        }
+        if (getDBDate().userData().getUserPaidType(user)) {
+            widgets.add("Calendar");
+        }
+        return widgets;
     }
 
 }

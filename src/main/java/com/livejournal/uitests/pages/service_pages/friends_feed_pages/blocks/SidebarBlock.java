@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.enums.SidebarWidgets;
+import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -173,6 +174,21 @@ public class SidebarBlock extends UIBlock {
         startScript("jQuery('.b-feedwidgets-close').each(function(i){jQuery(this).click()})");
     }
 
+    public ArrayList<String> getAllWidgets() {
+        ArrayList<String> widgets = allWidgets();
+        ArrayList<String> correct_widgets = new ArrayList<>();
+        Integer size = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
+        for (int i = 0; i < size; i++) {
+            for (String value : widgets) {
+                String text = startScript("return jQuery('div[ng-switch-when]')[" + i + "].textContent").toString();
+                if (text.contains(value)) {
+                    correct_widgets.add(value);
+                }
+            }
+        }
+        return correct_widgets;
+    }
+
     private SidebarWidgets stringToEnum(String widget) {
         return SidebarWidgets.valueOf(widget.replace("Календарь", "CALENDAR")
                 .replace(" ", "_")
@@ -211,7 +227,22 @@ public class SidebarBlock extends UIBlock {
         }
     }
 
-    /////////////////////////////////////////
+    private ArrayList<String> allWidgets() {
+        ArrayList<String> widgets = new ArrayList<>();
+        widgets.add("Twitter Feed");
+        widgets.add("Instagram Feed");
+        widgets.add("Tumblr Feed");
+        widgets.add("Calendar");
+        widgets.add("Discovery Today");
+        widgets.add("LiveJournal Today");
+        widgets.add("Interesting links");
+        widgets.add("Events");
+        widgets.add("Comments");
+        widgets.add("Guests");
+        widgets.add("Entries");
+        return widgets;
+    }
+
     public static class Widgets extends UIElement {
 
         public Widgets(WebElement wrappedElement) {

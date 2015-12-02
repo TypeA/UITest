@@ -12,3 +12,18 @@ Examples:
 |testautotest   |Friends    |            |friend            |not_friend     |
 |testautotest   |Custom     |test_group  |in_group          |not_in_group   |
 |testautotest   |Private    |            |nobody            |current_user   |
+
+
+Scenario: Widgets
+Meta: 
+@categories feed useful test
+Given user <user> by parametr <parameter> on Friends Feed
+When user add all widgets on the Feed
+Then composition of widgets is correct
+
+Examples:
+|user           |parameter  |
+|testautotest   |cyr        |
+|test001        |noncyr     |
+
+
