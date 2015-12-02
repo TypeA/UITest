@@ -122,7 +122,10 @@ public class Sidebar extends LJTest {
     //Scenario: Saving a layout of widgets (2/3)
     @When("user logged out and logged in again (name $name)")
     public void user_logged_out_and_logged_in_again(String name) {
-        ThucydidesUtils.putToSession("all_widgets", compositionOfWidgets());
+        ArrayList<String> widgets = onOpened(FriendsFeedLogged.class)
+                .sidebar()
+                .getAllWidgets();
+        ThucydidesUtils.putToSession("all_widgets", widgets);
         onOpened(FriendsFeedLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut()
@@ -195,13 +198,15 @@ public class Sidebar extends LJTest {
     @Then("user's layout of widgets is applied")
     public void user_layout_of_widgets_is_applied() {
         ArrayList<String> old_widgets = (ArrayList<String>) ThucydidesUtils.getFromSession("all_widgets");
-        verify().that(compositionOfWidgets().containsAll(old_widgets))
+        ArrayList<String> widgets = onOpened(FriendsFeedLogged.class)
+                .sidebar()
+                .getAllWidgets();
+        verify().that(widgets.containsAll(old_widgets))
                 .ifResultIsExpected("User's layout of widgets is applied")
                 .ifElse("User's layout of widgets is not applied!")
                 .finish();
     }
 
-    /////////////////////////////
     @StepGroup
     public boolean widgetInTheSidebar(String widget) {
         Object sidebarSize = startScript("return jQuery('div[ng-switch-when]').size()");
@@ -241,6 +246,17 @@ public class Sidebar extends LJTest {
         return widget;
     }
 
+    private String correctWidget(String text) {
+        ArrayList<String> widgets = allWidgets();
+        String widget = "error";
+        for (String value : widgets) {
+            if (text.contains(value)) {
+                widget = value;
+            }
+        }
+        return widget;
+    }
+
     private ArrayList<String> allWidgets() {
         ArrayList<String> widgets = new ArrayList<>();
         widgets.add("Twitter Feed");
@@ -255,32 +271,6 @@ public class Sidebar extends LJTest {
         widgets.add("Guests");
         widgets.add("Entries");
         return widgets;
-    }
-
-    private String correctWidget(String text) {
-        ArrayList<String> widgets = allWidgets();
-        String widget = "error";
-        for (String value : widgets) {
-            if (text.contains(value)) {
-                widget = value;
-            }
-        }
-        return widget;
-    }
-
-    private ArrayList<String> compositionOfWidgets() {
-        ArrayList<String> widgets = allWidgets();
-        ArrayList<String> correct_widgets = new ArrayList<>();
-        Integer size = Integer.valueOf(startScript("return jQuery('div[ng-switch-when]').size()").toString());
-        for (int i = 0; i < size; i++) {
-            for (String value : widgets) {
-                String text = startScript("return jQuery('div[ng-switch-when]')[" + i + "].textContent").toString();
-                if (text.contains(value)) {
-                    correct_widgets.add(value);
-                }
-            }
-        }
-        return correct_widgets;
     }
 
 }
