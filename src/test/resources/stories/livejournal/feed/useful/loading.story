@@ -1,6 +1,6 @@
 Scenario: User's feed loading
 Meta: 
-@categories feed useful
+@categories feed useful loading
 
 Given user <user> with paging type <type> on the Friends Feed
 When user scroll Friends Feed down
@@ -15,7 +15,7 @@ Examples:
 
 Scenario: Another user feed loading
 Meta: 
-@categories feed useful 
+@categories feed useful loading
 
 Given user <user> on the user2 <user2> Friends Feed
 When user scroll Friends Feed down
@@ -29,7 +29,7 @@ Examples:
 
 Scenario: Feed loading by unlogged user
 Meta: 
-@categories feed useful
+@categories feed useful loading
 
 Given unlogged user on the user <user> Friends Feed
 When user scroll Friends Feed down

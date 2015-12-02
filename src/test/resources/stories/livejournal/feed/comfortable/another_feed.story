@@ -1,6 +1,6 @@
 Scenario: Public filters
 Meta: 
-@categories feed comfortable 
+@categories feed comfortable  another_feed
 
 Given user <user> on user2 <user2> Friends Feed
 Then user see only public filters
@@ -13,7 +13,7 @@ Examples:
 
 Scenario: Default settings
 Meta: 
-@categories feed comfortable test
+@categories feed comfortable another_feed 
 
 Given user <user> on custom Friends Feed
 Then user see Feed on default settings
