@@ -188,7 +188,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part4
 
 Meta: 
-@categories adaptive comfortable test
+@categories adaptive comfortable
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
@@ -216,7 +216,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part5
 
 Meta: 
-@categories adaptive comfortable test
+@categories adaptive comfortable
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
