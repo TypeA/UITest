@@ -1,4 +1,4 @@
-Scenario: Default friends filters
+Scenario: Default friends filters 
 Meta: 
 @categories feed useful filters
 
@@ -42,7 +42,7 @@ Examples:
 
 Scenario: Edit Filters
 Meta: 
-@categories feed useful filters
+@categories feed useful filters 
 
 Given logged user <user> on Friends Feed
 When user go to Edit Custom Friends Groups
