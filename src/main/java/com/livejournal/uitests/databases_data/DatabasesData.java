@@ -40,4 +40,8 @@ public class DatabasesData extends Databases {
         return new Privileges();
     }
 
+    public Photo photo() {
+        return new Photo();
+    }
+
 }

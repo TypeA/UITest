@@ -16,7 +16,6 @@ public class MyJournalPageLogged extends JournalPageLogged {
     private UIBlock cutArrow;
 
     public EntryPageLogged openPostByText(String text) {
-        System.out.println("!!!!!!!!! " + "jQuery('.entryunit:contains(\"" + text + "\") .entryunit__head .entryunit__title a')[0].click()");
         startScript("jQuery('.entryunit:contains(\"" + text + "\") .entryunit__head .entryunit__title a')[0].click()");
         return onOpened(EntryPageLogged.class);
     }

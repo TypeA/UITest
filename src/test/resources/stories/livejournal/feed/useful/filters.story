@@ -1,4 +1,4 @@
-Scenario: Default friends filters
+Scenario: Default friends filters 
 Meta: 
 @categories feed useful filters
 

@@ -5,6 +5,8 @@ import com.livejournal.uitests.pages.service_pages.update.content.editors.HTMLEd
 import com.livejournal.uitests.pages.service_pages.update.content.editors.VisualEditor;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
 import org.openqa.selenium.WebElement;
@@ -79,6 +81,11 @@ public class PostContentBlock extends UpdateBmlBlockes {
             for (String group1 : group) {
                 startScript("jQuery(\"label:contains('" + group1 + "')\").click()");
             }
+        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(PostContentBlock.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this;
     }

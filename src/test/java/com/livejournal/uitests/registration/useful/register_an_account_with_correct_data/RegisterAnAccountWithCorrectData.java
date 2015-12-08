@@ -4,6 +4,8 @@ import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.utility.date.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -34,18 +36,19 @@ public class RegisterAnAccountWithCorrectData extends LJTest {
                         Date.parceYearOrGetCurrent(year).toString(),
                         gender)
                 .clickOnCreateAccountButton();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(RegisterAnAccountWithCorrectData.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     //Scenario: Successfull registration(3/3)
-    @Then("user in correct page $page (journal name $name)")
-    public void user_go_to_Finish_Registration_Form_and_see_message(String page, String name) {
+    @Then("user in correct page $page")
+    public void user_go_to_Finish_Registration_Form_and_see_message(String page) {
         verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
-        verify().that(getCurrentBrowser().getDriver().getCurrentUrl().contains(name))
-                .ifResultIsExpected("User in his journal " + name)
-                .ifElse("User not in his journal " + name)
-                .and();
-        
+
     }
 
 }

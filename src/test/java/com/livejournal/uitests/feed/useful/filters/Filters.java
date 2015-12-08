@@ -22,7 +22,7 @@ public class Filters extends LJTest {
     //Scenario: Default friends filters (1/3)
     @Given("logged user $user with friends on Friends Feed")
     public void logged_user_with_friends_on_Feed(String user) {
-        Assert.assertTrue("Incorrect user: without friends", userWithFriends(user));
+        Assert.assertTrue("Incorrect user " + user + ": without friends", userWithFriends(user));
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."));

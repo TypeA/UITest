@@ -32,7 +32,7 @@ Examples:
 Scenario: Replacement blocks
 
 Meta: 
-@categories feed personal buttons
+@categories feed comfortable buttons
 
 Given logged user (name <name>) on Friends Feed
 When user click on settings and filters icons

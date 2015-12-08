@@ -22,7 +22,7 @@ public class AnotherFeed extends LJTest {
     @Given("user $user on user2 $user2 Friends Feed")
     public void user_on_user2_Feed(String user, String user2) {
         ThucydidesUtils.putToSession("user", user2);
-        Assert.assertTrue("Incorrect user: without groups", userWithGroups(user2));
+        Assert.assertTrue("Incorrect user " + user2 + ": without groups", userWithGroups(user2));
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
         open(FriendsFeedLogged.class, new Url().setPrefix(user2 + "."));
@@ -105,7 +105,7 @@ public class AnotherFeed extends LJTest {
         for (int i = 0; i < groups.get(2).size(); i++) {
             sum = sum + Integer.valueOf(groups.get(2).get(i));
         }
-        return (sum > 1) && ((sum < groups.get(2).size()));
+        return (sum >= 1) && ((sum < groups.get(2).size()));
     }
 
     private ArrayList<String> defaultSettings() {
