@@ -50,10 +50,12 @@ public class UserData extends DatabasesData {
     }
 
     public String getUserId(String user) {
-        String select = "select userid from user where user='" + user + "'";
+        String select = "Select userid from user where user='" + user + "'";
         return workWithDB().conect()
                 .select(select, "userid")
-                .finish().get(0).get(0);
+                .finish()
+                .get(0)
+                .get(0);
     }
 
     public String getUserClusterId(String user) {

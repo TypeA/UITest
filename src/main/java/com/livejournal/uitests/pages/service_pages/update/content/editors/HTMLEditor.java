@@ -35,6 +35,9 @@ public class HTMLEditor extends UpdateBmlBlockes {
     @FindBy(css = ".b-updateform-button-spoiler")
     Button spoiler;
 
+    @FindBy(css = ".b-updateform-button.b-updateform-button-photo")
+    private Button photoButton;
+
     @StepGroup
     public HTMLEditor setPostText(String text) {
         postHtmlField.enter(text);
@@ -79,6 +82,12 @@ public class HTMLEditor extends UpdateBmlBlockes {
         return this;
     }
 
+    public BubblesUpdateBml.PhotoBubble clickButtonPhoto() {
+        photoButton.click();
+        return onDisplayed(BubblesUpdateBml.class).openPhotoBubble();
+
+    }
+
     @WhenPageOpens
     public void switchToHTMLEditor() {
         htmlEditButton.click();
@@ -89,4 +98,22 @@ public class HTMLEditor extends UpdateBmlBlockes {
         }
     }
 
+    public void uploadPhotoToPostWithPrivacy(String adress, String privacy) {
+        clickButtonPhoto();
+        onDisplayed(BubblesUpdateBml.class).openPhotoBubble().uploadPhotoWithPrivacy(adress, privacy);
+    }
+
+    @StepGroup
+    public HTMLEditor addPhotoByUrlToPost(String photoUrl, String link, String size) {
+        clickButtonPhoto().
+                enterPhotoByUrl(photoUrl, link, size);
+        return this;
+    }
+
+    @StepGroup
+    public HTMLEditor addPhotoFromAlbumToPost(String album, String photoIdInUrl, String link, String size) {
+        clickButtonPhoto().
+                enterPhotoFromAlbum(album, photoIdInUrl, link, size);
+        return this;
+    }
 }
