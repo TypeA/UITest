@@ -1,6 +1,6 @@
-package com.livejournal.uitests.pages.journal_pages;
+package com.livejournal.uitests.pages.journal_pages.entry;
 
-import com.livejournal.uitests.pages.journal_pages.blocks.EntryPageBlock;
+import com.livejournal.uitests.pages.journal_pages.JournalPageUnlogged;
 import java.io.IOException;
 import net.thucydides.core.annotations.StepGroup;
 

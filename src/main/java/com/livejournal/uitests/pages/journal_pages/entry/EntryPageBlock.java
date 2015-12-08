@@ -1,4 +1,4 @@
-package com.livejournal.uitests.pages.journal_pages.blocks;
+package com.livejournal.uitests.pages.journal_pages.entry;
 
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
@@ -124,9 +124,6 @@ public class EntryPageBlock extends UIBlock {
     public Boolean linkWithStyleIsDisplayed(String link, String style_text) {
         String htmlLink = "a[href*='" + link + "']\").is(\":contains('" + link + "')\")";
         String script = "return jQuery(\"" + style_text.toLowerCase() + " " + htmlLink;
-        System.out.println("!!!!!!!!!!!! style_text: " + style_text);
-        System.out.println("!!!!!!!!!!!! htmlLink: " + htmlLink);
-        System.out.println("!!!!!!!!!!!! script: " + script);
         return Boolean.valueOf(startScript(script).toString());
     }
 

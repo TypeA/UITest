@@ -2,7 +2,7 @@ package com.livejournal.uitests.create_edit_post.privacy.personal.min_security_c
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
