@@ -1,6 +1,6 @@
 package com.livejournal.uitests.pages.service_pages;
 
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.error_strip.ErrorStrip;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;

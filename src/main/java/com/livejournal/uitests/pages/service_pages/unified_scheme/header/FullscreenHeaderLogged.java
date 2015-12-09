@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.unified_scheme.header;
 
 import com.livejournal.uisteps.thucydides.elements.Link;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.lj_magazine_page.LJMagazinePageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;

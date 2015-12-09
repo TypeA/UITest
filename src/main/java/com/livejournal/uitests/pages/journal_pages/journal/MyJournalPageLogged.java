@@ -1,6 +1,8 @@
-package com.livejournal.uitests.pages.journal_pages;
+package com.livejournal.uitests.pages.journal_pages.journal;
 
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.journal_pages.JournalPageLogged;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;

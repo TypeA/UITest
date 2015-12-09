@@ -1,7 +1,7 @@
 package com.livejournal.uitests.pages.service_pages.tools;
 
 import com.livejournal.uisteps.thucydides.elements.TextField;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.content.FinishPostForm;

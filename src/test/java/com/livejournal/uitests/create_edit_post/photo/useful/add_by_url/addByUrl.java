@@ -1,7 +1,7 @@
 package com.livejournal.uitests.create_edit_post.photo.useful.add_by_url;
 
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.io.IOException;

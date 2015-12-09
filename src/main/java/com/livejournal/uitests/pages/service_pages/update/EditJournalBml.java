@@ -2,8 +2,8 @@ package com.livejournal.uitests.pages.service_pages.update;
 
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
 import com.livejournal.uisteps.thucydides.elements.Button;
-import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import java.util.ArrayList;
