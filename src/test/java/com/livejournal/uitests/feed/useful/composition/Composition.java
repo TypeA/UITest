@@ -23,6 +23,7 @@ public class Composition extends LJTest {
     public void user_which_create_post_with_privacy(String user, String privacy, String group) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+       // String postSudject = "Тестовая Машичка 1";
         String postSudject = utility().random().getRandomText(20);
         open(UpdateBmlPageLogged.class)
                 .closeDraft()

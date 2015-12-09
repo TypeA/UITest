@@ -74,7 +74,7 @@ Examples:
 
 Scenario: Cansel new color
 Meta: 
-@categories feed personal feed_settings 
+@categories feed personal feed_settings
 
 Given logged user (name <name>) on Friends Feed
 When user change color <color> (old code <code>) and cansel it

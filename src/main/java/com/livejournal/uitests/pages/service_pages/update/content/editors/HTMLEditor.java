@@ -4,9 +4,8 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
+import com.livejournal.uitests.pages.service_pages.update.bubbles.PhotoBubble;
 import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.support.FindBy;
@@ -34,6 +33,9 @@ public class HTMLEditor extends UpdateBmlBlockes {
 
     @FindBy(css = ".b-updateform-button-spoiler")
     Button spoiler;
+
+    @FindBy(css = ".b-updateform-button.b-updateform-button-photo")
+    private Button photoButton;
 
     @StepGroup
     public HTMLEditor setPostText(String text) {
@@ -73,20 +75,39 @@ public class HTMLEditor extends UpdateBmlBlockes {
     public HTMLEditor putTextBetweenTags(String before, String text, String after) {
         String postText = startScript("return jQuery('.b-updateform-textarea').val()").toString();
         postText = postText.replace("></", "> " + text + " </");
-        postText = before + " " + postText;
-        postText += " " + after;
+        postText = before + " " + postText + " " + after;
         startScript("jQuery('.b-updateform-textarea').val('" + postText + "')");
         return this;
+    }
+
+    @StepGroup
+    public void uploadPhotoToPostWithPrivacy(String adress, String privacy) {
+        clickButtonPhoto();
+        onDisplayed(BubblesUpdateBml.class).openPhotoBubble().uploadPhotoWithPrivacy(adress, privacy);
+    }
+
+    @StepGroup
+    public HTMLEditor addPhotoByUrlToPost(String photoUrl, String link, String size) {
+        clickButtonPhoto().
+                enterPhotoByUrl(photoUrl, link, size);
+        return this;
+    }
+
+    @StepGroup
+    public HTMLEditor addPhotoFromAlbumToPost(String album, String photoIdInUrl, String link, String size) {
+        clickButtonPhoto().
+                enterPhotoFromAlbum(album, photoIdInUrl, link, size);
+        return this;
+    }
+
+    private PhotoBubble clickButtonPhoto() {
+        photoButton.click();
+        return onDisplayed(PhotoBubble.class);
     }
 
     @WhenPageOpens
     public void switchToHTMLEditor() {
         htmlEditButton.click();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(HTMLEditor.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
 }

@@ -1,6 +1,8 @@
-package com.livejournal.uitests.pages.journal_pages;
+package com.livejournal.uitests.pages.journal_pages.journal;
 
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import com.livejournal.uitests.pages.journal_pages.JournalPageLogged;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.support.FindBy;
@@ -16,7 +18,6 @@ public class MyJournalPageLogged extends JournalPageLogged {
     private UIBlock cutArrow;
 
     public EntryPageLogged openPostByText(String text) {
-        System.out.println("!!!!!!!!! " + "jQuery('.entryunit:contains(\"" + text + "\") .entryunit__head .entryunit__title a')[0].click()");
         startScript("jQuery('.entryunit:contains(\"" + text + "\") .entryunit__head .entryunit__title a')[0].click()");
         return onOpened(EntryPageLogged.class);
     }

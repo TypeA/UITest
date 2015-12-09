@@ -3,7 +3,7 @@ package com.livejournal.uitests.pages.service_pages.update;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
-import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;

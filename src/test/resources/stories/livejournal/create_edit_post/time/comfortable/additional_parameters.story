@@ -41,7 +41,7 @@ Examples:
 
 Scenario: Drop-down menu
 Meta: 
-@categories create_edit_post time comfortable test
+@categories create_edit_post time comfortable
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with drop-down menu content <content>
