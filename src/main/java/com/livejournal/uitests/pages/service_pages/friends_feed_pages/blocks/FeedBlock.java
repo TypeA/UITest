@@ -93,4 +93,17 @@ public class FeedBlock extends UIBlock {
         return ans;
     }
 
+    @StepGroup
+    public String getTextSpoiler(String text) {
+        startScript("jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-head a').click()");
+        return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-body').text().trim()").toString();
+
+    }
+
+    @StepGroup
+    public String getSpoilerCustomText(String text) {
+        return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-head a').text()").toString();
+
+    }
+
 }
