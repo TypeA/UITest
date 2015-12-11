@@ -46,28 +46,28 @@ public class HTMLEditor extends UpdateBmlBlockes {
     @StepGroup
     public HTMLEditor setUsername(String ljuser, Boolean isCorrectUser) {
         ljUserButton.click();
-        onDisplayed(BubblesUpdateBml.class).openLJUserBubble().enterUsername(ljuser, isCorrectUser);
+        onDisplayed(BubblesUpdateBml.class).userBubble().enterUsername(ljuser, isCorrectUser);
         return this;
     }
 
     @StepGroup
     public HTMLEditor setUserNameByAutocomplete(String ljuser) {
         ljUserButton.click();
-        onDisplayed(BubblesUpdateBml.class).openLJUserBubble().enterUsernameUsingAutocomplete(ljuser);
+        onDisplayed(BubblesUpdateBml.class).userBubble().enterUsernameUsingAutocomplete(ljuser);
         return this;
     }
 
     @StepGroup
     public HTMLEditor setLJCut(String ljcut) {
         ljCutButton.click();
-        onDisplayed(BubblesUpdateBml.class).openLJCutBubble().useLJCut(ljcut);
+        onDisplayed(BubblesUpdateBml.class).cutBubble().useLJCut(ljcut);
         return this;
     }
 
     @StepGroup
     public HTMLEditor setSpoiler(String spoilerText) {
         spoiler.click();
-        onDisplayed(BubblesUpdateBml.class).openSpoilerBubble().useSpoiler(spoilerText);
+        onDisplayed(BubblesUpdateBml.class).spoilerBubble().useSpoiler(spoilerText);
         return this;
     }
 
@@ -83,7 +83,7 @@ public class HTMLEditor extends UpdateBmlBlockes {
     @StepGroup
     public void uploadPhotoToPostWithPrivacy(String adress, String privacy) {
         clickButtonPhoto();
-        onDisplayed(BubblesUpdateBml.class).openPhotoBubble().uploadPhotoWithPrivacy(adress, privacy);
+        onDisplayed(BubblesUpdateBml.class).photoBubble().uploadPhotoWithPrivacy(adress, privacy);
     }
 
     @StepGroup

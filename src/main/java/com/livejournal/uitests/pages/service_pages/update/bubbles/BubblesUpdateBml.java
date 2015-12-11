@@ -10,37 +10,37 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 public class BubblesUpdateBml extends UIBlock {
 
     @StepGroup
-    public ColorBubble openColorBubble() {
+    public ColorBubble colorBubble() {
         return new ColorBubble();
     }
 
     @StepGroup
-    public LinkBubble openLinkBubble() {
+    public LinkBubble linkBubble() {
         return new LinkBubble();
     }
 
     @StepGroup
-    public LJUserBubble openLJUserBubble() {
-        return new LJUserBubble();
+    public LJUserBubble userBubble() {
+        return onDisplayed(LJUserBubble.class);
     }
 
     @StepGroup
-    public LJCutBubble openLJCutBubble() {
+    public LJCutBubble cutBubble() {
         return new LJCutBubble();
     }
 
     @StepGroup
-    public SpolierBubble openSpoilerBubble() {
+    public SpolierBubble spoilerBubble() {
         return new SpolierBubble();
     }
 
     @StepGroup
-    public FontBubble openFontBubble() {
+    public FontBubble fontBubble() {
         return new FontBubble();
     }
 
     @StepGroup
-    public PhotoBubble openPhotoBubble() {
+    public PhotoBubble photoBubble() {
         return new PhotoBubble();
     }
 
