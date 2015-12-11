@@ -11,12 +11,12 @@ public class BubblesUpdateBml extends UIBlock {
 
     @StepGroup
     public ColorBubble colorBubble() {
-        return new ColorBubble();
+        return onDisplayed(ColorBubble.class);
     }
 
     @StepGroup
     public LinkBubble linkBubble() {
-        return new LinkBubble();
+        return onDisplayed(LinkBubble.class);
     }
 
     @StepGroup
@@ -26,22 +26,22 @@ public class BubblesUpdateBml extends UIBlock {
 
     @StepGroup
     public LJCutBubble cutBubble() {
-        return new LJCutBubble();
+        return onDisplayed(LJCutBubble.class);
     }
 
     @StepGroup
     public SpolierBubble spoilerBubble() {
-        return new SpolierBubble();
+        return onDisplayed(SpolierBubble.class);
     }
 
     @StepGroup
     public FontBubble fontBubble() {
-        return new FontBubble();
+        return onDisplayed(FontBubble.class);
     }
 
     @StepGroup
     public PhotoBubble photoBubble() {
-        return new PhotoBubble();
+        return onDisplayed(PhotoBubble.class);
     }
 
 }
