@@ -13,7 +13,7 @@ Examples:
 
 Scenario: User can create new entry with custom title in spoiler
 Meta: 
-@categories create_edit_post lj_tags useful sp
+@categories create_edit_post lj_tags useful
 
 Given logged user <name> on Create Post page
 When user use spoiler <spoiler> and put some text in it

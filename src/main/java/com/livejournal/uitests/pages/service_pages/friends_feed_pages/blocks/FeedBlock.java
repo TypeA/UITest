@@ -106,4 +106,17 @@ public class FeedBlock extends UIBlock {
 
     }
 
+    @StepGroup
+    public String getTextFromLJCut(String text) {
+        startScript("jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-decor a').click()");
+        return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
+
+    }
+
+    @StepGroup
+    public String getLJCutCustomText(String text) {
+        return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-link-expand').attr('title')").toString();
+
+    }
+
 }
