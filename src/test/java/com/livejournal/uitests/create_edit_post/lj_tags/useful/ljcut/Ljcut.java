@@ -83,7 +83,7 @@ public class Ljcut extends LJTest {
     @Then("the post is on feed and contains lj-cut with some information in it")
     public void post_on_feed_and_contains_ljcut_with_some_information_in_it() {
         onOpened(EntryPageLogged.class).clickOnFriendsFeedMenuItem();
-        verify().that(onOpened(FriendsFeedLogged.class).feed().getTextFromLJCut(ThucydidesUtils.getFromSession("text").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
+        verify().that(onOpened(FriendsFeedLogged.class).feed().getTextFromLJCut(ThucydidesUtils.getFromSession("before").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
                 .ifResultIsExpected("The spoiler is working properly")
                 .ifElse("The spoiler doesn't work properly")
                 .finish();
@@ -94,7 +94,7 @@ public class Ljcut extends LJTest {
     @Then("the post is on feed and contains lj-cut with custom title $ljcut")
     public void post_on_feed_and_contains_spoiler_with_custom_title(String ljcut) {
         onOpened(EntryPageLogged.class).clickOnFriendsFeedMenuItem();
-        verify().that(onOpened(FriendsFeedLogged.class).feed().getLJCutCustomText(ThucydidesUtils.getFromSession("text").toString()).equals(ljcut))
+        verify().that(onOpened(FriendsFeedLogged.class).feed().getLJCutCustomText(ThucydidesUtils.getFromSession("before").toString()).equals(ljcut))
                 .ifResultIsExpected("The spoiler title displaying correctly")
                 .ifElse("The spoiler title displaying incorrect")
                 .finish();
