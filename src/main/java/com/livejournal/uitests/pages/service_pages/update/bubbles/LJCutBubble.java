@@ -13,7 +13,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ".b-bubble-cut"))
 public class LJCutBubble extends UIBlock {
 
-    @FindBy(css = ".b-bubble-cut .b-updateform-bubble-input")
+    @FindBy(css = ".b-updateform-bubble-input")
     private TextField ljcutText;
 
     public void useLJCut(String ljcut) {

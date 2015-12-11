@@ -90,17 +90,17 @@ public class VisualEditor extends UpdateBmlBlockes {
     }
 
     public VisualEditor setTextFont(String font_text) {
-        fontText.click().openFontBubble().setTextFont(font_text);
+        fontText.click().fontBubble().setTextFont(font_text);
         return this;
     }
 
     public VisualEditor setTextColor(String color_text) {
-        color.click().openColorBubble().setTextColor(color_text);
+        color.click().colorBubble().setTextColor(color_text);
         return this;
     }
 
     public VisualEditor addLink(String link_text, Boolean new_window) {
-        link.click().openLinkBubble().addLink(link_text, new_window);
+        link.click().linkBubble().addLink(link_text, new_window);
         return this;
     }
 
