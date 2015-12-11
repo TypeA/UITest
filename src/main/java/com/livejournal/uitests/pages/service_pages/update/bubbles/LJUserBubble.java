@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.update.bubbles;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import net.thucydides.core.annotations.StepGroup;
@@ -17,13 +18,16 @@ public class LJUserBubble extends UIBlock {
 
     @FindBy(css = ".b-updateform-bubble-input-wrapper.b-updateform-bubble-input-username input")
     private TextField username;
+    
+    @FindBy(css = ".b-updateform-bubble-user-button .b-flatbutton-simple")
+    private Button save;
 
 
 
     @StepGroup
     public void enterUsername(String ljuser, Boolean isCorrectUser) {
         username.enter(ljuser);
-        startScript("jQuery('.b-updateform-bubble-user-button .b-flatbutton-simple').click()");
+        save.click();
     }
 
     @StepGroup
