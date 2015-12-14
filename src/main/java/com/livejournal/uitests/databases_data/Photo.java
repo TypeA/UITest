@@ -24,6 +24,8 @@ public class Photo extends DatabasesData {
         //не понятно откуда взялся album_id=71. Он нигде не отображется на web. Возможно, это альбом для превью.
         String select1 = "Select photo_id from lj_c" + clusterId + ".fotki_photos where userid = " + userId
                 + " and security = '" + security + "' and album_id!=71 and photo_id in(" + joinedAns + ")";
+        System.out.println(select1);
+        System.out.println(select);
         ArrayList<String> ans1 = workWithDB()
                 .conect()
                 .select(select1, "photo_id")

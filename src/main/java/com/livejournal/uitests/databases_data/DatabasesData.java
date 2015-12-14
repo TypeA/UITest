@@ -43,5 +43,8 @@ public class DatabasesData extends Databases {
     public Photo photo() {
         return new Photo();
     }
+    public Video video() {
+        return new Video();
+    }
 
 }

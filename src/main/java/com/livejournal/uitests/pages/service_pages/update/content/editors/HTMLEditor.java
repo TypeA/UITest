@@ -36,6 +36,9 @@ public class HTMLEditor extends UpdateBmlBlockes {
     @FindBy(css = ".b-updateform-button.b-updateform-button-photo")
     private BubbleButton photoButton;
 
+    @FindBy(css = ".b-updateform-button.b-updateform-button-video.ng-scope")
+    private BubbleButton videoButton;
+
     @StepGroup
     public HTMLEditor setPostText(String text) {
         postHtmlField.enter(text);
@@ -105,6 +108,18 @@ public class HTMLEditor extends UpdateBmlBlockes {
         return this;
     }
 
+    @StepGroup
+    public HTMLEditor addVideoByUrl(String video) {
+        videoButton.click().videoBubble().enterVideoByUrl(video);
+        return this;
+    }
+
+    @StepGroup
+    public HTMLEditor addVideoFromAlbum(String album, String video) {
+        videoButton.click().videoBubble().enterVideoFromAlbum(album, video);
+        return this;
+    }
+
     public static class BubbleButton extends Button {
 
         public BubbleButton(WebElement wrappedElement) {
@@ -116,7 +131,6 @@ public class HTMLEditor extends UpdateBmlBlockes {
             super.click();
             return onDisplayed(BubblesUpdateBml.class);
         }
-
     }
 
     @WhenPageOpens

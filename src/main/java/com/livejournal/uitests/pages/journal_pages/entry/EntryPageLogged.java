@@ -37,4 +37,18 @@ public class EntryPageLogged extends JournalPageLogged {
         return getDriver().findElement(By.xpath(xpath)).isDisplayed();
     }
 
+    public boolean postWithVideoIsDisplayed(String urlVideo) {
+        getDriver().switchTo().frame(getDriver().findElement(By.className("lj_embedcontent")));
+        boolean video = getDriver().findElement(By.xpath("//html//body//iframe[@data-link[contains(.,'" + urlVideo + "')]]")).isDisplayed();
+        getDriver().switchTo().defaultContent();
+        return video;
+    }
+
+    public boolean postContainsVideoFromAlbum(String video) {
+        getDriver().switchTo().frame(getDriver().findElement(By.className("lj_embedcontent")));
+        boolean videoFromAlbum = getDriver().findElement(By.xpath("//html//body//iframe[@src[contains(.,'record_id=" + video + "')]]")).isDisplayed();
+        getDriver().switchTo().defaultContent();
+        return videoFromAlbum;
+    }
+
 }
