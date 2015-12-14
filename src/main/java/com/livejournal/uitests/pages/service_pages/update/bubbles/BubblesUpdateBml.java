@@ -44,4 +44,9 @@ public class BubblesUpdateBml extends UIBlock {
         return onDisplayed(PhotoBubble.class);
     }
 
+    @StepGroup
+    public VideoBubble videoBubble() {
+        return onDisplayed(VideoBubble.class);
+    }
+
 }
