@@ -44,4 +44,11 @@ public class EntryPageLogged extends JournalPageLogged {
         return video;
     }
 
+    public boolean postContainsVideoFromAlbum(String video) {
+        getDriver().switchTo().frame(getDriver().findElement(By.className("lj_embedcontent")));
+        boolean videoFromAlbum = getDriver().findElement(By.xpath("//html//body//iframe[@src[contains(.,'record_id=" + video + "')]]")).isDisplayed();
+        getDriver().switchTo().defaultContent();
+        return videoFromAlbum;
+    }
+
 }
