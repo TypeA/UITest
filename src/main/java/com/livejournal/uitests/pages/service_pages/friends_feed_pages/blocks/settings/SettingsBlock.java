@@ -204,7 +204,6 @@ public class SettingsBlock extends UIBlock {
 
     }
 
-    ////////////////////////////////////////////////
     public static class ColorPickerButton extends Button {
 
         public ColorPickerButton(WebElement wrappedElement) {
