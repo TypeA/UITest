@@ -16,8 +16,12 @@ public class BannedUser extends DatabasesData {
                 .finish()
                 .get(0)
                 .get(0);
-        String select2 = "Select user from user where user like '%test%' and user !='" + user + "'"
-                + "and userid not in(select targetid from reluser where type !='B' and userid =" + userid + ") "
+        String select2 = "Select user from user "
+                + "where user like '%test%' "
+                + "and user !='" + user + "'"
+                + "and userid not in"
+                + "(select targetid from reluser where type !='B' "
+                + "and userid =" + userid + ") "
                 + "and statusvisdate >= adddate(now(), interval - 500 day) limit 100;";
         ArrayList<String> ans = workWithDB().conect()
                 .select(select2, "user")

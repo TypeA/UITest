@@ -1,6 +1,7 @@
 package com.livejournal.uitests.databases_data;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -9,28 +10,8 @@ import java.util.Random;
  */
 public class Community extends DatabasesData {
 
-    private ArrayList<String> findUserInCommunity(String community, String type) {
-        String select = "select r.targetid from user u left join reluser r on "
-                + "u.userid=r.userid where u.user = '" + community + "' and r.type='" + type + "';";
-        ArrayList<String> targetid = workWithDB().conect()
-                .select(select, "targetid")
-                .finish()
-                .get(0);
-        ArrayList<String> user = new ArrayList<String>();
-        for (String targetid1 : targetid) {
-            String select2 = "Select user from user where userid = " + targetid1;
-            String ans = workWithDB().conect()
-                    .select(select2, "user")
-                    .finish()
-                    .get(0)
-                    .get(0);
-            user.add(ans);
-        }
-        return user;
-    }
-
     public String findMaintainerInComminuty(String community) {
-        ArrayList<String> users = findUserInCommunity(community, "A");
+        ArrayList<String> users = targetIdWithParams(community, "A").get(0);
         return users.get(new Random().nextInt(users.size()));
     }
 
@@ -65,6 +46,16 @@ public class Community extends DatabasesData {
             users.add(ans1);
         }
         return users.get(new Random().nextInt(users.size()));
+    }
+
+    private List<ArrayList<String>>
+            targetIdWithParams(String community, String type) {
+        String select = "select r.targetid, r.type from user u left join reluser r on "
+                + "u.userid=r.userid where u.user = '"
+                + community + "' and r.type='" + type + "';";
+        return workWithDB().conect()
+                .select(select, "targetid")
+                .finish();
     }
 
 }
