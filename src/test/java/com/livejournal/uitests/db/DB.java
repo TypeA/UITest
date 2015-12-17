@@ -28,10 +28,6 @@ public class DB extends LJTest {
         addTable().pageOpen("MainPageUnlogged")
                 .importantErrors(loggs.get(0))
                 .otherErrors(null)
-                .and()
-                .pageOpen("Page 2")
-                .importantErrors(loggs.get(1))
-                .otherErrors(loggs.get(0))
                 .finish();
 
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
