@@ -5,7 +5,7 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.LJPage;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosPageUnlogged;
 import net.thucydides.core.annotations.DefaultUrl;

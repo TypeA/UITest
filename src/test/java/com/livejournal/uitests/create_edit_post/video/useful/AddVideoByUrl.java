@@ -1,18 +1,16 @@
-package com.livejournal.uitests.create_edit_post.photo.useful.add_by_url;
+package com.livejournal.uitests.create_edit_post.video.useful;
 
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import java.io.IOException;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
+public class AddVideoByUrl extends LJTest {
 
-public class addByUrl extends LJTest {
-
-    //Scenario: add photo by url with different size(1/3)
+    //Scenario: add video by url(1/3)
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
@@ -21,26 +19,26 @@ public class addByUrl extends LJTest {
                 .setDefaultStyle(name);
         open(UpdateBmlPageLogged.class);
     }
-
-    //Scenario: add photo by url with different size(2/3)
-    @When("add photo by url $photo_url with size $size and with link $link")
-    public void add_photo_by_url_with_size_and_with_link(String name, String photo_url, String link, String size) throws IOException {
+       
+    //Scenario: add video by url(2/3)
+    @When("add video by url $video_url")
+    public void add_video_by_url(String video_url) {
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .usePostContent()
                 .useHTMLEditor()
                 .setPostText(utility().random().getRandomText(30))
-                .addPhotoByUrlToPost(photo_url, link, size)
+                .addVideoByUrl(video_url)
                 .usePage()
                 .postEntry();
     }
-
-    //Scenario: add photo by url with different size(3/3)
-    @Then("post contains photo by url $photo_url and size $size and link $link")
-    public void post_contains_photo_by_url_and_size_and_link(String photo_url, String link, String size) {
-        verify().that(onOpened(EntryPageLogged.class).postWithImageIsDisplayed(photo_url, link, size))
-                .ifResultIsExpected("Post is displayed with url " + photo_url)
-                .ifElse("Post isn't displayed with url " + photo_url)
-                .finish();
+    
+    //Scenario: add video by url(3/3)
+    @Then("post contains video by url $video_url")
+    public void post_contains_video_by_url(String video_url){
+     verify().that(onOpened(EntryPageLogged.class).postWithVideoIsDisplayed(video_url))
+             .ifResultIsExpected("Video with link="+video_url+" is displayed")
+             .ifElse("Video with link="+video_url+" is not displayed")
+             .finish();
     }
 }

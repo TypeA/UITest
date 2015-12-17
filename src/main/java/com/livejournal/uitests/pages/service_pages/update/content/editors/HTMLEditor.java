@@ -1,13 +1,12 @@
 package com.livejournal.uitests.pages.service_pages.update.content.editors;
 
 import com.livejournal.uisteps.thucydides.elements.Button;
-import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
-import com.livejournal.uitests.pages.service_pages.update.bubbles.PhotoBubble;
 import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -20,22 +19,25 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 public class HTMLEditor extends UpdateBmlBlockes {
 
     @FindBy(css = ".b-updatepage-tab-html")
-    public Button htmlEditButton;
+    private Button htmlEditButton;
 
     @FindBy(css = ".b-updateform-textarea")
-    public TextField postHtmlField;
+    private TextField postHtmlField;
 
     @FindBy(css = ".b-updateform-button.b-updateform-button-user")
-    private Link ljUserButton;
+    private BubbleButton ljUserButton;
 
     @FindBy(css = ".b-updateform-button-cut")
-    Button ljCutButton;
+    private BubbleButton ljCutButton;
 
     @FindBy(css = ".b-updateform-button-spoiler")
-    Button spoiler;
+    private BubbleButton spoiler;
 
     @FindBy(css = ".b-updateform-button.b-updateform-button-photo")
-    private Button photoButton;
+    private BubbleButton photoButton;
+
+    @FindBy(css = ".b-updateform-button.b-updateform-button-video.ng-scope")
+    private BubbleButton videoButton;
 
     @StepGroup
     public HTMLEditor setPostText(String text) {
@@ -45,29 +47,33 @@ public class HTMLEditor extends UpdateBmlBlockes {
 
     @StepGroup
     public HTMLEditor setUsername(String ljuser, Boolean isCorrectUser) {
-        ljUserButton.click();
-        onDisplayed(BubblesUpdateBml.class).openLJUserBubble().enterUsername(ljuser, isCorrectUser);
+        ljUserButton.click()
+                .userBubble()
+                .enterUsername(ljuser, isCorrectUser);
         return this;
     }
 
     @StepGroup
     public HTMLEditor setUserNameByAutocomplete(String ljuser) {
-        ljUserButton.click();
-        onDisplayed(BubblesUpdateBml.class).openLJUserBubble().enterUsernameUsingAutocomplete(ljuser);
+        ljUserButton.click()
+                .userBubble()
+                .enterUsernameUsingAutocomplete(ljuser);
         return this;
     }
 
     @StepGroup
     public HTMLEditor setLJCut(String ljcut) {
-        ljCutButton.click();
-        onDisplayed(BubblesUpdateBml.class).openLJCutBubble().useLJCut(ljcut);
+        ljCutButton.click()
+                .cutBubble()
+                .useLJCut(ljcut);
         return this;
     }
 
     @StepGroup
     public HTMLEditor setSpoiler(String spoilerText) {
-        spoiler.click();
-        onDisplayed(BubblesUpdateBml.class).openSpoilerBubble().useSpoiler(spoilerText);
+        spoiler.click()
+                .spoilerBubble()
+                .useSpoiler(spoilerText);
         return this;
     }
 
@@ -82,27 +88,49 @@ public class HTMLEditor extends UpdateBmlBlockes {
 
     @StepGroup
     public void uploadPhotoToPostWithPrivacy(String adress, String privacy) {
-        clickButtonPhoto();
-        onDisplayed(BubblesUpdateBml.class).openPhotoBubble().uploadPhotoWithPrivacy(adress, privacy);
+        photoButton.click()
+                .photoBubble().uploadPhotoWithPrivacy(adress, privacy);
     }
 
     @StepGroup
     public HTMLEditor addPhotoByUrlToPost(String photoUrl, String link, String size) {
-        clickButtonPhoto().
-                enterPhotoByUrl(photoUrl, link, size);
+        photoButton.click()
+                .photoBubble()
+                .enterPhotoByUrl(photoUrl, link, size);
         return this;
     }
 
     @StepGroup
     public HTMLEditor addPhotoFromAlbumToPost(String album, String photoIdInUrl, String link, String size) {
-        clickButtonPhoto().
-                enterPhotoFromAlbum(album, photoIdInUrl, link, size);
+        photoButton.click()
+                .photoBubble()
+                .enterPhotoFromAlbum(album, photoIdInUrl, link, size);
         return this;
     }
 
-    private PhotoBubble clickButtonPhoto() {
-        photoButton.click();
-        return onDisplayed(PhotoBubble.class);
+    @StepGroup
+    public HTMLEditor addVideoByUrl(String video) {
+        videoButton.click().videoBubble().enterVideoByUrl(video);
+        return this;
+    }
+
+    @StepGroup
+    public HTMLEditor addVideoFromAlbum(String album, String video) {
+        videoButton.click().videoBubble().enterVideoFromAlbum(album, video);
+        return this;
+    }
+
+    public static class BubbleButton extends Button {
+
+        public BubbleButton(WebElement wrappedElement) {
+            super(wrappedElement);
+        }
+
+        @Override
+        public BubblesUpdateBml click() {
+            super.click();
+            return onDisplayed(BubblesUpdateBml.class);
+        }
     }
 
     @WhenPageOpens

@@ -97,9 +97,9 @@ public class PhotoBubble extends UIBlock {
             startScript("var scrolling = document.getElementsByClassName('b-photouploader-albums-inner')[0];"
                     + "scrolling.scrollTop = scrolling.scrollHeight;\n");
             try {
-                Thread.sleep(2000);//к сожалению без него никак. скрипты выполняются довольно быстро. иначе будет много циклов. 
+                Thread.sleep(5000);//к сожалению без него никак. скрипты выполняются довольно быстро. иначе будет много циклов. 
             } catch (InterruptedException ex) {
-                Logger.getLogger(BubblesUpdateBml.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PhotoBubble.class.getName()).log(Level.SEVERE, null, ex);
             }
             elementIsPresent = Boolean.valueOf(startScript("var elementIsPresent  = jQuery(\".b-photouploader-pictures-img[ng-src*='" + photo + "']\").length>0;"
                     + "return elementIsPresent").toString());
@@ -109,7 +109,7 @@ public class PhotoBubble extends UIBlock {
                 + "[@class='b-photouploader-pictures-img'"
                 + " and @src[contains(.,'" + photo + "')]]"));
         ((JavascriptExecutor) getDriver()).executeScript("arguments[0].scrollIntoView(true);", element);
-        element.click();
+        startScript("jQuery(\".b-photouploader-pictures-pic img.b-photouploader-pictures-img[src*='"+photo+"']\").click()");
         if (Boolean.valueOf(link)) {
             checkbocLinkToOriginal.click();
         }
@@ -117,6 +117,6 @@ public class PhotoBubble extends UIBlock {
             selectSizePhotoFromAlbum.selectByVisibleText(size);
         }
         insertFromAlbum.click();
+            }
+  
     }
-
-}

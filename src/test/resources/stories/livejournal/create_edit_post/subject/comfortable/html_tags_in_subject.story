@@ -8,10 +8,10 @@ Then the post in journal has subject <subject> with correct tag
 
 Examples:
 |name         |subject     |
-|testautotest |<b>Тема</b> |
-|testautotest |<i>Тема</i> |
-|testautotest |<u>Тема</u> |
-|testautotest |<s>Тема</s> |
+|testautotest |<b>РўРµРјР°</b> |
+|testautotest |<i>РўРµРјР°</i> |
+|testautotest |<u>РўРµРјР°</u> |
+|testautotest |<s>РўРµРјР°</s> |
 
 
 
@@ -25,9 +25,9 @@ Then the post in journal has subject <subject> with cropped tag
 
 Examples:
 |name         |subject                                                  |
-|testautotest |<span style="font-size: 0.7em">Тема размер шрифта</span> |
-|testautotest |<span style="color: #ad5e5e;">Тема цветная</span>        |
-|testautotest |<a href="http://www.yandex.ru/">Ссылка</a>               |
+|testautotest |<span style="font-size: 0.7em">РўРµРјР° СЂР°Р·РјРµСЂ С€СЂРёС„С‚Р°</span> |
+|testautotest |<span style="color: #ad5e5e;">РўРµРјР° С†РІРµС‚РЅР°СЏ</span>        |
+|testautotest |<a href="http://www.yandex.ru/">РЎСЃС‹Р»РєР°</a>               |
 
 
 

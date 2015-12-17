@@ -3,8 +3,8 @@ package com.livejournal.uitests.create_edit_post.privacy.useful.post_in_communit
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.journal_pages.EntryPageLogged;
-import com.livejournal.uitests.pages.journal_pages.MyJournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
+import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
@@ -129,7 +129,7 @@ public class PostInCommunity extends LJTest {
                 .finish();
     }
 
-////////////////////////////////////////////////////////
+
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
