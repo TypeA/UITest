@@ -14,7 +14,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".b-bubble-user"))
-public class LJUserBubble extends UIBlock {
+public class UserBubble extends UIBlock {
 
     @FindBy(css = ".b-updateform-bubble-input-wrapper.b-updateform-bubble-input-username input")
     private TextField username;

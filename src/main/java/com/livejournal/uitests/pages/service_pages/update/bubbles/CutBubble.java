@@ -12,7 +12,7 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
  */
 @Block(
         @FindBy(css = ".b-bubble-cut"))
-public class LJCutBubble extends UIBlock {
+public class CutBubble extends UIBlock {
 
     @FindBy(css = ".b-updateform-bubble-input")
     private TextField ljcutText;
@@ -21,12 +21,10 @@ public class LJCutBubble extends UIBlock {
     private Button save;
 
     public void useLJCut(String ljcut) {
-        if (ljcut.toUpperCase().equals("DEFAULT")) {
-            save.click();
-        } else {
+        if (!ljcut.toUpperCase().equals("DEFAULT")) {
             ljcutText.enter(ljcut);
-            save.click();
         }
+        save.click();
     }
 
 }
