@@ -19,8 +19,33 @@ import org.openqa.selenium.support.FindBy;
 @DefaultUrl("/feed")
 public class FriendsFeedLogged extends ServicePageLogged {
 
-    @FindBy(css = "button[ng-class*='filters']")
-    private Button filtersButton;
+    private OverallBlock overall;
+
+    @StepGroup
+    public boolean settingsIsDisplayed() {
+        return overall.settingsIsDisplayed();
+    }
+
+    @StepGroup
+    public ArrayList<String> getMainSettings() {
+        return overall.getMainSettings();
+    }
+
+    @StepGroup
+    public FiltersBlock openFilters() {
+        return overall.openFilters();
+    }
+
+    @StepGroup
+    public FriendsFeedLogged clickUpButton() {
+        overall.clickUpButton();
+        return this;
+    }
+
+    @StepGroup
+    public boolean upIsDisplayed() {
+        return overall.upIsDisplayed();
+    }
 
     @FindBy(css = ".l-flatslide-settingslink-open")
     private Button settingsButton;
@@ -38,12 +63,6 @@ public class FriendsFeedLogged extends ServicePageLogged {
     public FriendsFeedLogged closeSettings() {
         closeSettingsButton.moveMouseOver();
         return onDisplayed(SettingsBlock.class).waitThatSettingsBlockClose();
-    }
-
-    @StepGroup
-    public FiltersBlock openFilters() {
-        filtersButton.click();
-        return onDisplayed(FiltersBlock.class);
     }
 
     @FindBy(css = ".b-pager-link--prev")
@@ -74,15 +93,4 @@ public class FriendsFeedLogged extends ServicePageLogged {
         return onDisplayed(FeedBlock.class);
     }
 
-    private OverallBlock overall;
-
-    @StepGroup
-    public boolean settingsIsDisplayed() {
-        return overall.settingsIsDisplayed();
-    }
-
-    @StepGroup
-    public ArrayList<String> getMainSettings() {
-        return overall.getMainSettings();
-    }
 }

@@ -4,7 +4,6 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
-import static net.thucydides.jbehave.ThucydidesJUnitStories.DEFAULT_STORY_NAME;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 
@@ -19,8 +18,11 @@ public class OverallBlock extends UIBlock {
     @FindBy(css = "button[ng-class*='filters']")
     private Button filtersButton;
 
-    @FindBy(css = ".l-flatslide-settingslink-open")
-    private Button settingsButton;
+    @StepGroup
+    public FiltersBlock openFilters() {
+        filtersButton.click();
+        return onDisplayed(FiltersBlock.class);
+    }
 
     @StepGroup
     public boolean filtersIsDisplayed() {
@@ -31,6 +33,9 @@ public class OverallBlock extends UIBlock {
         }
     }
 
+    @FindBy(css = ".l-flatslide-settingslink-open")
+    private Button settingsButton;
+
     @StepGroup
     public boolean settingsIsDisplayed() {
         try {
@@ -38,6 +43,19 @@ public class OverallBlock extends UIBlock {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    @FindBy(css = ".l-flatslide-scrolltop.scroll-update__button ")
+    private Button upButton;
+
+    @StepGroup
+    public void clickUpButton() {
+        upButton.click();
+    }
+
+    @StepGroup
+    public boolean upIsDisplayed() {
+        return upButton.isDisplayed();
     }
 
     @StepGroup

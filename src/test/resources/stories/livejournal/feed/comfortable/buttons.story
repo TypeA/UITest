@@ -1,17 +1,21 @@
 Scenario: Up button
 Meta: 
-@categories feed comfortable buttons
+@categories feed comfortable buttons test
 
-Given unlogged user on Friends Feed
-When user scrolls down the feed
-Then Up button is visible and that button return feed up
+Given logged user <user> on Friends Feed
+When user scroll Feed down
+Then Up button is visible and can return Feed up
+
+Examples:
+|user         |
+|testautotest |
 
 
 Scenario: Fulter button
 Meta: 
 @categories feed comfortable buttons
 
-Given unlogged user on Friends Feed
+Given logged user <user> on Friends Feed
 When click on Fulter button
 Then Filter list is visible and Fulter icone changed on Close icon
 
@@ -20,13 +24,13 @@ Scenario: Settings button
 Meta: 
 @categories feed comfortable buttons
 
-Given login user (name <name>, password <password>) on Friends Feed
+Given logged user <user> on Friends Feed
 When click on Settings button
 Then Settings list is visible and Settings icone changed on Close icon
 
 Examples:
-|name       |password   |
-|test765765 |test       |
+|name       |
+|test765765 |
 
 
 Scenario: Replacement blocks
@@ -34,7 +38,7 @@ Scenario: Replacement blocks
 Meta: 
 @categories feed comfortable buttons
 
-Given logged user (name <name>) on Friends Feed
+Given logged user <user> on Friends Feed
 When user click on settings and filters icons
 Then the blocks is changed
 

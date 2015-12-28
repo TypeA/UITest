@@ -57,11 +57,7 @@ public class Loading extends LJTest {
     public void user_scroll_Friends_Feed_down() {
         try {
             Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Assert.assertNull(open(FriendsFeedLogged.class));
-        }
-        this.startScript("window.scrollBy(0,10000000)");
-        try {
+            this.startScript("window.scrollBy(0,10000000)");
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
             Assert.assertNull(open(FriendsFeedLogged.class));
