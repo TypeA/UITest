@@ -144,4 +144,9 @@ public class EntryPageBlock extends UIBlock {
         return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-body').text().trim()").toString();
 
     }
+    
+    @StepGroup
+    public String getLJLikeButtons() {
+        return startScript("return jQuery('.lj-like').attr(\"data-services\")").toString();
+    }
 }
