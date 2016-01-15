@@ -6,10 +6,10 @@ import java.util.Random;
 public class Video extends DatabasesData {
 
     public String getVideoIdWithSecurity(String user, String security) {
-        String userId = userData().getUserId(user);
-        String clusterId = userData().getUserClusterId(user);
-        String select = " select id from lj_c" + clusterId + ".video_records "
-                + "where userid=" + userId + " and security='" + security + "'";
+        String select = " select id from lj_c" 
+                + userData().getUserClusterId(user) + ".video_records "
+                + "where userid=" + userData().getUserId(user) 
+                + " and security='" + security + "'";
         ArrayList<String> ans = workWithDB()
                 .conect()
                 .select(select, "id")
@@ -19,10 +19,10 @@ public class Video extends DatabasesData {
     }
 
     public String getVideoName(String user, String videoId) {
-        String userId = userData().getUserId(user);
-        String clusterId = userData().getUserClusterId(user);
-        String select = "select name from lj_c" + clusterId + ".video_records"
-                + " where userid=" + userId + " and id=" + videoId;
+        String select = "select name from lj_c" 
+                + userData().getUserClusterId(user) + ".video_records"
+                + " where userid=" + userData().getUserId(user) 
+                + " and id=" + videoId;
         return workWithDB()
                 .conect()
                 .select(select, "name")
@@ -53,9 +53,10 @@ public class Video extends DatabasesData {
     }
 
     public String getVideoIdInUrl(String user, String videoId) {
-        String userId = userData().getUserId(user);
-        String clusterId = userData().getUserClusterId(user);
-        String select = "select storageid from lj_c" + clusterId + ".video_records where id=" + videoId + " and userid=" + userId;
+        String select = "select storageid from lj_c" 
+                + userData().getUserClusterId(user) 
+                + ".video_records where id=" + videoId 
+                + " and userid=" + userData().getUserId(user);
         return workWithDB()
                 .conect()
                 .select(select, "storageid")

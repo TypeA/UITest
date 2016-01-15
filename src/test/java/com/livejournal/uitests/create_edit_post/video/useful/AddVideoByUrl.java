@@ -39,6 +39,6 @@ public class AddVideoByUrl extends LJTest {
      verify().that(onOpened(EntryPageLogged.class).postWithVideoIsDisplayed(video_url))
              .ifResultIsExpected("Video with link="+video_url+" is displayed")
              .ifElse("Video with link="+video_url+" is not displayed")
-             .finish();;
+             .finish();
     }
 }

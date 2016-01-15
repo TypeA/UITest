@@ -129,7 +129,7 @@ public class PostInCommunity extends LJTest {
                 .finish();
     }
 
-////////////////////////////////////////////////////////
+
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
