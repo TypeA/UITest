@@ -1,7 +1,6 @@
 package com.livejournal.uitests.feed.comfortable.buttons;
 
 import com.livejournal.uisteps.core.Url;
-import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
 import com.livejournal.uitests.pages.service_pages.friends_feed_pages.blocks.FiltersBlock;

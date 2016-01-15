@@ -1,7 +1,7 @@
 Scenario: User see Air theme
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable 
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
