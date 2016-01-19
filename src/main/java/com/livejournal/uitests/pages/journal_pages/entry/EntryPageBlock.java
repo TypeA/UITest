@@ -2,8 +2,11 @@ package com.livejournal.uitests.pages.journal_pages.entry;
 
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
+import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -144,9 +147,14 @@ public class EntryPageBlock extends UIBlock {
         return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-body').text().trim()").toString();
 
     }
-    
+
     @StepGroup
-    public String getLJLikeButtons() {
-        return startScript("return jQuery('.lj-like').attr(\"data-services\")").toString();
+    public ArrayList<String> getLJLikeButtons() {
+        ArrayList<WebElement> likes = (ArrayList<WebElement>) findElements(By.cssSelector(".lj-like-item"));
+        ArrayList<String> likeClass = new ArrayList<String>();
+        for (int i = 0; i < likes.size(); i++) {
+            likeClass.add(likes.get(i).getAttribute("class"));
+        }
+        return likeClass;
     }
 }

@@ -34,8 +34,7 @@ public class LikeBubble extends UIBlock {
     public void setLikes(ArrayList<String> likesList) {
         if (!likesList.get(0).toUpperCase().equals("DEFAULT")) {
             clearAll();
-            ArrayList<WebElement> likes = new ArrayList<WebElement>();
-            likes = (ArrayList<WebElement>) findElements(By.cssSelector("li"));
+            ArrayList<WebElement> likes = (ArrayList<WebElement>) findElements(By.cssSelector("li"));
             for (String likesList1 : likesList) {
                 for (WebElement like : likes) {
                     if (like.getAttribute("class").contains(likesList1)) {
