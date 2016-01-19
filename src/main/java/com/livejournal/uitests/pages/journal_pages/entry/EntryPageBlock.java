@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -150,7 +151,11 @@ public class EntryPageBlock extends UIBlock {
 
     @StepGroup
     public ArrayList<String> getLJLikeButtons() {
-        ArrayList<WebElement> likes = (ArrayList<WebElement>) findElements(By.cssSelector(".lj-like-item"));
+        ArrayList<WebElement> likes = new ArrayList<WebElement>();
+        while (likes.isEmpty()) {
+            this.sendKeys(Keys.ARROW_DOWN);
+            likes = (ArrayList<WebElement>) findElements(By.cssSelector(".lj-like-item"));
+        }
         ArrayList<String> likeClass = new ArrayList<String>();
         for (int i = 0; i < likes.size(); i++) {
             likeClass.add(likes.get(i).getAttribute("class"));
