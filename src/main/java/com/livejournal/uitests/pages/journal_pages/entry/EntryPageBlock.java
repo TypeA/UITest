@@ -152,7 +152,9 @@ public class EntryPageBlock extends UIBlock {
     @StepGroup
     public ArrayList<String> getLJLikeButtons() {
         ArrayList<WebElement> likes = new ArrayList<WebElement>();
-        while (likes.isEmpty()) {
+        int counter = 0;
+        while ((likes.isEmpty()) && (counter < 50)) {
+            counter++;
             this.sendKeys(Keys.ARROW_DOWN);
             likes = (ArrayList<WebElement>) findElements(By.cssSelector(".lj-like-item"));
         }
