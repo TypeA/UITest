@@ -8,9 +8,10 @@ Then post with style <tag> is displayed correctly
 
 Examples:
 |name         |tag       |
-|testautotest |b         |      
+|testautotest |b         |
 |testautotest |i         |
 |testautotest |u         |
+|testautotest |s         |
 
 
 Scenario: Create post with font
@@ -31,7 +32,7 @@ Examples:
 
 Scenario: Create post with color
 Meta: 
-@categories create_post html_tags useful release 
+@categories create_post html_tags useful release
 
 Given logged user <name> on Create Post page
 When user create new post with color <color_text> and save post

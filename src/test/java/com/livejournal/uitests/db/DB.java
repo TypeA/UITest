@@ -18,6 +18,8 @@ public class DB extends LJTest {
     @Then("table is displayed")
     public void table_is_displayed() {
 
+        
+        
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
     }
 
