@@ -1,6 +1,6 @@
 Scenario: Create post with style
 Meta: 
-@categories create_post html_tags useful 
+@categories create_post html_tags useful test 
 
 Given logged user <name> on Create Post page
 When user create new post with style <tag> and save post
@@ -8,9 +8,10 @@ Then post with style <tag> is displayed correctly
 
 Examples:
 |name         |tag       |
-|testautotest |b         |      
-|testautotest |i         |
-|testautotest |u         |
+|--testautotest |b         |      
+|--testautotest |i         |
+|--testautotest |u         |
+|testautotest |s         |
 
 
 Scenario: Create post with font
