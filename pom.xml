@@ -44,7 +44,7 @@
             <version>1.4</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>com.livejournal</groupId>
             <artifactId>uisteps</artifactId>
             <version>0.2.5-SNAPSHOT</version>
         </dependency>
@@ -58,18 +58,7 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.5</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>uisteps</artifactId>
-            <version>0.2.5</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>uisteps</artifactId>
-            <version>0.2.5-SNAPSHOT</version>
-        </dependency>
+        </dependency>      
         <dependency>
             <groupId>net.thucydides</groupId>
             <artifactId>thucydides-jbehave-plugin</artifactId>
