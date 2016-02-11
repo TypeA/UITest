@@ -58,7 +58,7 @@ Examples:
 
 Scenario: Create post with link
 Meta: 
-@categories create_post html_tags useful
+@categories create_post html_tags useful html_tags_link
  
 Given logged user <name> on Create Post page
 When user create new post with link <link> and add property open in new window <newWindow>
@@ -71,7 +71,7 @@ Examples:
 
 Scenario: Create post with custom link 
 Meta: 
-@categories create_post html_tags useful
+@categories create_post html_tags useful html_tags_link
 
 Given logged user <name> on Create Post page
 When user create new post with link <link> and style <tag>

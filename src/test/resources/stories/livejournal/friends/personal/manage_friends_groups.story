@@ -1,15 +1,16 @@
 Scenario: Change the position of the group
 Meta: 
-@categories friends group personal 
+@categories friends group personal  dfgdfgdfgfdg
 
 Given logged user (name <name>) on Manage Groups Page
-When user moves the group up and moves the group down and save the changes
+When user <name> moves the group <position> and save change
 Then the changes displayed correctly on Manage Groups Page
 Then the changes displayed correctly on the Friends Feed
 
 Examples:
-|name   |
-|test   |
+|name   |position   |
+|test   |up         |
+|test   |down       |
 
 Scenario: Public group
 Meta: 

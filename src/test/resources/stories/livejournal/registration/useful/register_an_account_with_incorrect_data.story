@@ -5,7 +5,7 @@ Register an account with incorrect data
 Scenario: Register an account with incorrect name
 
 Meta: 
-@categories registration useful 
+@categories registration useful incoorect_name
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -25,7 +25,7 @@ Examples:
 Scenario: Register an account with long name
 
 Meta: 
-@categories registration useful 
+@categories registration useful long_name
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -40,7 +40,7 @@ Examples:
 Scenario: Register an account with incorrect email
 
 Meta: 
-@categories registration useful
+@categories registration useful incorrect_email
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -61,7 +61,7 @@ Examples:
 Scenario: Register an account with incorrect password
 
 Meta: 
-@categories registration useful
+@categories registration useful incorrect_password
 @issue LJSUP-21440
 
 Given unlogged user on Registration Form
@@ -86,7 +86,7 @@ Examples:
 Scenario: Register an account with incorrect age
 
 Meta: 
-@categories registration useful
+@categories registration useful incorrect_age
 
 Given unlogged user on Registration Form
 When user enter correct data except for the age: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender> and clicks Create Account
@@ -102,7 +102,7 @@ Examples:
 Scenario: Register an account with empty name
 
 Meta: 
-@categories registration useful 
+@categories registration useful empty_name
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -120,7 +120,7 @@ Examples:
 Scenario: Register an account with empty email
 
 Meta: 
-@categories registration useful 
+@categories registration useful empty_email
 
 Given unlogged user on Registration Form
 When user enter correct data except for the email: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
@@ -138,7 +138,7 @@ Examples:
 Scenario: Register an account with empty password
 
 Meta: 
-@categories registration useful
+@categories registration useful empty_password
 @issue LJSUP-21440
 
 Given unlogged user on Registration Form

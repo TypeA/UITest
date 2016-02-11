@@ -5,7 +5,10 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.finish_form.FinishFormManageFriends;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 /**
@@ -108,9 +111,8 @@ public class ManageFriendsPage extends ServicePageLogged {
         }
         return friendsOnPage;
     }
-    
-    public ManageFriendsPage removeFriend(ArrayList<String> users)
-    {
+
+    public ManageFriendsPage removeFriend(ArrayList<String> users) {
         for (String user : users) {
             applyFilter(user);
             this.startScript("jQuery(\"td input[id='editfriend_keep_" + user + "']\").click()");
@@ -119,4 +121,22 @@ public class ManageFriendsPage extends ServicePageLogged {
         }
         return this;
     }
+
+    public FinishFormManageFriends addNoteToFriend(String friend, String note) {
+        applyFilter(friend);
+        getDriver().findElement(By.id("useralias_" + friend)).clear();
+        getDriver().findElement(By.id("useralias_" + friend)).sendKeys(note);
+        return clickSaveChangesButton();
+    }
+
+    public boolean friendWithNoteExist(String friend, String note) {
+        applyFilter(friend);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(ManageFriendsPage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return getDriver().findElement(By.xpath("//tr/td/span[@data-ljuser='" + friend + "']/following::input[@id='useralias_" + friend + "' and @value='"+note+"']")).isDisplayed();
+    }
+
 }

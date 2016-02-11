@@ -64,8 +64,8 @@ public class ManageGroupsPage extends ServicePageLogged {
         return this;
     }
 
-    public ManageGroupsPage clickPrivacy(Integer index, String privacy) {
-        selectByIndexGroup(index);
+    public ManageGroupsPage clickPrivacy(String value, String privacy) {
+        selectByValueGroup(value);
         if (privacy.equals("private")) {
             makeGroupPrivate.click();
         } else if (privacy.equals("public")) {
@@ -74,16 +74,16 @@ public class ManageGroupsPage extends ServicePageLogged {
         return this;
     }
 
-    public ManageGroupsPage renameGroup(int index, String group) {
-        selectByIndexGroup(index);
+    public ManageGroupsPage renameGroup(String value, String group) {
+        selectByValueGroup(value);
         renameGroup.click();
         getDriver().switchTo().alert().sendKeys(group);
         getDriver().switchTo().alert().accept();
         return this;
     }
 
-    public ManageGroupsPage selectByIndexGroup(Integer index) {
-        groupList.selectByIndex(index);
+    public ManageGroupsPage selectByValueGroup(String value) {
+        groupList.selectByValue(value);
         return this;
     }
 
@@ -109,15 +109,15 @@ public class ManageGroupsPage extends ServicePageLogged {
         return onDisplayed(FinishFormGroupPage.class);
     }
 
-    public ManageGroupsPage clickDeleteGroup(int index) {
-        selectByIndexGroup(index);
+    public ManageGroupsPage clickDeleteGroup(String value) {
+        selectByValueGroup(value);
         deleteGroup.click();
         getDriver().switchTo().alert().accept();
         return this;
     }
 
-    public ManageGroupsPage moveGroup(Integer index, String direction) {
-        selectByIndexGroup(index);
+    public ManageGroupsPage moveGroup(String value, String direction) {
+        selectByValueGroup(value);
         if (direction.equals("up")) {
             moveGroupUp.click();
         } else if (direction.equals("down")) {

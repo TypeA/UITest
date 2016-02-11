@@ -134,6 +134,32 @@ public class Friends extends DatabasesData {
         return groups;
     }
 
+    public ArrayList<String> getSortAllGroup(String user) {
+        String select = "select groupname from lj_c" + userData().getUserClusterId(user)
+                + ".friendgroup2 where userid =" + userData().getUserId(user)
+                + " order by sortorder";
+        return workWithDB().conect()
+                .select(select, "groupname")
+                .finish()
+                .get(0);
+    }
+
+    public String getRandomGroup(String user, String minOrMax) {
+        String select = "select " + minOrMax + "(sortorder) from lj_c2.friendgroup2 where userid=" + userData().getUserId(user);
+        String sortorder = workWithDB().conect()
+                .select(select, minOrMax + "(sortorder)")
+                .finish()
+                .get(0)
+                .get(0);
+        String select1 = "select groupnum from lj_c2.friendgroup2 where groupname!='Default View' "
+                + "and userid=" + userData().getUserId(user) + " "
+                + "and sortorder!=" + sortorder + " order by RAND() limit 1";
+        return workWithDB().conect()
+                .select(select1, "groupnum")
+                .finish()
+                .get(0)
+                .get(0);
+    }
     public ArrayList<String> getAllFriendsInGroup(String user, String group) {
         String select1 = "select * from lj_c" + userData().getUserClusterId(user)
                 + ".friendgroup2 where userid = "
