@@ -9,10 +9,12 @@ import static com.livejournal.uitests.utility.GetUsers.scriptAllUsers;
 import static com.livejournal.uitests.utility.GetUsers.scriptWithMobileView;
 import java.util.ArrayList;
 import java.util.List;
+import net.thucydides.core.Thucydides;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.firefox.FirefoxProfile;
 
 /**
  *
@@ -26,6 +28,7 @@ public class AdaptiveSettings extends LJTest {
     //Scenario: User see Non adaptive Chameleon theme(1/3)
     @Given("user $user")
     public void given_user(String user) {
+        setMobileAgent();
         if (!user.toUpperCase().equals("UNLOGGED")) {
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "n");
@@ -35,6 +38,7 @@ public class AdaptiveSettings extends LJTest {
     //Scenario: User see correct theme in his journal(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style)")
     public void random_user(String paid, String mobileView, String style) {
+        setMobileAgent();
         String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
         ThucydidesUtils.putToSession("finded_user", user);
         open(LoginPageUnlogged.class)
@@ -44,6 +48,7 @@ public class AdaptiveSettings extends LJTest {
     //Scenario: User see correct theme in random journal with option 'in my style'(1/3)
     @Given("random user (paid $paid,mobile view $mobileView,style $style) with option in my style")
     public void random_user_with_option_in_my_style(String paid, String mobileView, String style) {
+        setMobileAgent();
         String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
         ThucydidesUtils.putToSession("viewer", user);
         open(LoginPageUnlogged.class)
@@ -104,7 +109,7 @@ public class AdaptiveSettings extends LJTest {
         List<ArrayList<String>> users = getAllUsers(needPass, userType, paid, style);
         users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
         users.get(1).remove("system"); //удаление пользователя system
-        
+
         ArrayList<String> neededUsers = new ArrayList<>();
         if (mobileView) {
             for (int i = 0; i < users.get(0).size(); i++) {
@@ -150,7 +155,7 @@ public class AdaptiveSettings extends LJTest {
                 script2 = "return jQuery('.j-e-title')[0]";
                 break;
         }
-        
+
         try {
             return (!startScript(script1).toString().isEmpty()) && (!startScript(script2).toString().isEmpty());
         } catch (Exception ex) {
@@ -158,12 +163,17 @@ public class AdaptiveSettings extends LJTest {
         }
     }
 
-
     private List<ArrayList<String>> getAllUsers(String needPass, String userType, Boolean paid, String style) {
         return workWithDB().conect()
                 .select(scriptWithMobileView(), "user")
                 .select(scriptAllUsers(needPass, userType, paid, style)[0], "user")
                 .select(scriptAllUsers(needPass, userType, paid, style)[1], "user")
                 .finish();
+    }
+
+    private void setMobileAgent() {
+        FirefoxProfile myProfile = new FirefoxProfile();
+        myProfile.setPreference("general.useragent.override", "Mozilla/5.0 (iPhone; U; CPU iPhone OS 4_2_1 like Mac OS X; en-us) AppleWebKit/533.17.9 (KHTML, like Gecko) Version/5.0.2 Mobile/8C148 Safari/6533.18.5");
+        Thucydides.useFirefoxProfile(myProfile);
     }
 }

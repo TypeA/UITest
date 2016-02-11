@@ -1,4 +1,0 @@
-accounts.firefox.com:HSTS	0	16671	1455982372879,1,1
-stats.g.doubleclick.net:HSTS	0	16671	1451316750150,1,0
-yastatic.net:HSTS	0	16671	1440473590175,1,1
-mc.yandex.ru:HSTS	0	16671	1471966543064,1,0

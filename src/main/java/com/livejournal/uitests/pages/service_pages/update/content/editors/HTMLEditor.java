@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uitests.pages.service_pages.update.bubbles.BubblesUpdateBml;
 import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
+import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
 import org.openqa.selenium.WebElement;
@@ -17,34 +18,37 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
 @Block(
         @FindBy(css = ".b-updatepage-event"))
 public class HTMLEditor extends UpdateBmlBlockes {
-
+    
     @FindBy(css = ".b-updatepage-tab-html")
     private Button htmlEditButton;
-
+    
     @FindBy(css = ".b-updateform-textarea")
     private TextField postHtmlField;
-
+    
     @FindBy(css = ".b-updateform-button.b-updateform-button-user")
     private BubbleButton ljUserButton;
-
+    
     @FindBy(css = ".b-updateform-button-cut")
     private BubbleButton ljCutButton;
-
+    
     @FindBy(css = ".b-updateform-button-spoiler")
-    private BubbleButton spoiler;
-
+    private BubbleButton spoilerButton;
+    
     @FindBy(css = ".b-updateform-button.b-updateform-button-photo")
     private BubbleButton photoButton;
-
+    
     @FindBy(css = ".b-updateform-button.b-updateform-button-video.ng-scope")
     private BubbleButton videoButton;
-
+    
+    @FindBy(css = ".b-updateform-button-like")
+    private BubbleButton ljLikeButton;
+    
     @StepGroup
     public HTMLEditor setPostText(String text) {
         postHtmlField.enter(text);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor setUsername(String ljuser, Boolean isCorrectUser) {
         ljUserButton.click()
@@ -52,7 +56,7 @@ public class HTMLEditor extends UpdateBmlBlockes {
                 .enterUsername(ljuser, isCorrectUser);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor setUserNameByAutocomplete(String ljuser) {
         ljUserButton.click()
@@ -60,7 +64,7 @@ public class HTMLEditor extends UpdateBmlBlockes {
                 .enterUsernameUsingAutocomplete(ljuser);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor setLJCut(String ljcut) {
         ljCutButton.click()
@@ -68,15 +72,15 @@ public class HTMLEditor extends UpdateBmlBlockes {
                 .useLJCut(ljcut);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor setSpoiler(String spoilerText) {
-        spoiler.click()
+        spoilerButton.click()
                 .spoilerBubble()
                 .useSpoiler(spoilerText);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor putTextBetweenTags(String before, String text, String after) {
         String postText = startScript("return jQuery('.b-updateform-textarea').val()").toString();
@@ -85,13 +89,13 @@ public class HTMLEditor extends UpdateBmlBlockes {
         startScript("jQuery('.b-updateform-textarea').val('" + postText + "')");
         return this;
     }
-
+    
     @StepGroup
     public void uploadPhotoToPostWithPrivacy(String adress, String privacy) {
         photoButton.click()
                 .photoBubble().uploadPhotoWithPrivacy(adress, privacy);
     }
-
+    
     @StepGroup
     public HTMLEditor addPhotoByUrlToPost(String photoUrl, String link, String size) {
         photoButton.click()
@@ -99,7 +103,7 @@ public class HTMLEditor extends UpdateBmlBlockes {
                 .enterPhotoByUrl(photoUrl, link, size);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor addPhotoFromAlbumToPost(String album, String photoIdInUrl, String link, String size) {
         photoButton.click()
@@ -107,35 +111,43 @@ public class HTMLEditor extends UpdateBmlBlockes {
                 .enterPhotoFromAlbum(album, photoIdInUrl, link, size);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor addVideoByUrl(String video) {
         videoButton.click().videoBubble().enterVideoByUrl(video);
         return this;
     }
-
+    
     @StepGroup
     public HTMLEditor addVideoFromAlbum(String album, String video) {
         videoButton.click().videoBubble().enterVideoFromAlbum(album, video);
         return this;
     }
-
+    
+    @StepGroup
+    public HTMLEditor setLikes(ArrayList<String> likesList) {
+        ljLikeButton.click()
+                .likeBubble()
+                .setLikes(likesList);
+        return this;
+    }
+    
     public static class BubbleButton extends Button {
-
+        
         public BubbleButton(WebElement wrappedElement) {
             super(wrappedElement);
         }
-
+        
         @Override
         public BubblesUpdateBml click() {
             super.click();
             return onDisplayed(BubblesUpdateBml.class);
         }
     }
-
+    
     @WhenPageOpens
     public void switchToHTMLEditor() {
         htmlEditButton.click();
     }
-
+    
 }
