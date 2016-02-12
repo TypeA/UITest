@@ -176,7 +176,7 @@
                                 </plugin>
                             </reportPlugins>
                             <systemPropertyVariables>
-                                <webdriver.firefox.bin>/usr/bin/firefox</webdriver.firefox.bin>
+                                <webdriver.firefox.bin>/home/lj/firefox</webdriver.firefox.bin>
                             </systemPropertyVariables>
                         </configuration>
                     </plugin>
