@@ -23,7 +23,8 @@ public class LogInWithCorrectData extends LJTest {
     @When("user enter correct data: name $name and clicks LogIn")
     public void user_enter_correct_data_and_clicks_LogIn(String name) {
         onOpened(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
+                .authorizeBy("test", "test");
+                //.authorizeBy(name, getDBDate().userData().getUserPassword(name));
     }
 
     //Scenario: Successfully autorization(3/3)
