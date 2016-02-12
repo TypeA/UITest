@@ -9,7 +9,7 @@ public class DB extends LJTest {
     @Given("data from DB")
     public void db() {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
-
+        System.out.println(System.getProperty("webdriver.firefox.bin"));
      //    List<ArrayList<String>> ans = getDBDate()
             //     .community()
             //     .targetIdWithParams("test_comm", "A");
