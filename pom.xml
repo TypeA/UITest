@@ -175,6 +175,9 @@
                                     <version>${thucydides.version}</version>
                                 </plugin>
                             </reportPlugins>
+                            <systemPropertyVariables>
+                                <webdriver.firefox.bin>/usr/bin/firefox</webdriver.firefox.bin>
+                            </systemPropertyVariables>
                         </configuration>
                     </plugin>
                 </plugins>
