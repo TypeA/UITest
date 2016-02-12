@@ -1,6 +1,7 @@
 package com.livejournal.uitests.db;
 
 import com.livejournal.uitests.LJTest;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 
