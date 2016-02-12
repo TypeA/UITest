@@ -10,7 +10,7 @@ public class DB extends LJTest {
     @Given("data from DB")
     public void db() {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
-       System.setProperty("webdriver.firefox.bin", "/usr/bin/firefox");
+       System.setProperty("webdriver.firefox.bin", "/usr/bin/firefox /usr/lib64/firefox");
        System.out.println(System.getProperty("webdriver.firefox.bin"));
        
        open(LoginPageUnlogged.class);
