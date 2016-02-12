@@ -176,9 +176,7 @@
                                 </plugin>
                             </reportPlugins>
                         
-                           <systemPropertyVariables>
-                           <webdriver.firefox.bin>/usr/share/man/man1/firefox.1.gz</webdriver.firefox.bin>
-                           </systemPropertyVariables>
+
 
                         </configuration>
                     </plugin>
