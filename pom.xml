@@ -177,7 +177,7 @@
                             </reportPlugins>
                         
                            <systemPropertyVariables>
-                           <webdriver.firefox.bin>/usr/local/firefox</webdriver.firefox.bin>
+                           <webdriver.firefox.bin>/usr/bin/firefox/webdriver.firefox.bin>
                            </systemPropertyVariables>
 
                         </configuration>
