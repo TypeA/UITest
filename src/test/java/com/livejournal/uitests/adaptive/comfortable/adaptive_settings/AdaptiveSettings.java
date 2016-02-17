@@ -14,6 +14,7 @@ import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 import org.openqa.selenium.firefox.FirefoxProfile;
 
 /**
@@ -40,6 +41,7 @@ public class AdaptiveSettings extends LJTest {
     public void random_user(String paid, String mobileView, String style) {
         setMobileAgent();
         String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
+        Assert.assertFalse("There is no required user", user.isEmpty());
         ThucydidesUtils.putToSession("finded_user", user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
@@ -50,6 +52,7 @@ public class AdaptiveSettings extends LJTest {
     public void random_user_with_option_in_my_style(String paid, String mobileView, String style) {
         setMobileAgent();
         String user = getNeededUser("Need pass", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
+        Assert.assertFalse("There is no required user", user.isEmpty());
         ThucydidesUtils.putToSession("viewer", user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
@@ -62,6 +65,7 @@ public class AdaptiveSettings extends LJTest {
     @When("user go to the journal (paid $paid,mobile view $mobileView,style $style) page")
     public void user_go_to_the_journal_page(String paid, String mobileView, String style) {
         String findedUser = getNeededUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid), Boolean.valueOf(mobileView), style);
+        Assert.assertFalse("There is no required user", findedUser.isEmpty());
         ThucydidesUtils.putToSession("finded_user", findedUser);
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
@@ -76,6 +80,7 @@ public class AdaptiveSettings extends LJTest {
     @When("user go to the random journal (paid $paid1,mobile view $mobileView1,style $style1) page")
     public void user_go_to_the_random_journal(String paid1, String mobileView1, String style1) {
         String findedUser = getNeededUser("DONT NEED PASS", "Journal", Boolean.valueOf(paid1), Boolean.valueOf(mobileView1), style1);
+        Assert.assertFalse("There is no required user", findedUser.isEmpty());
         ThucydidesUtils.putToSession("finded_user", findedUser);
         open(JournalPage.class, new Url().setPrefix(findedUser + "."));
     }
@@ -124,14 +129,13 @@ public class AdaptiveSettings extends LJTest {
             neededUsers.addAll(users.get(1));
         }
 
-        int index = 0;
         if (!neededUsers.isEmpty()) {
-            index = (int) (Math.random() * (neededUsers.size()));
+            int index = (int) (Math.random() * (neededUsers.size()));
+            return neededUsers.get(index);
         } else {
-            System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!! НЕТ ДАННЫХ !!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-            neededUsers.set(index, "");
+            return "";
         }
-        return neededUsers.get(index);
+
     }
 
     @StepGroup
