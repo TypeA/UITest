@@ -21,20 +21,35 @@ public class AddNoteSuccess extends LJTest {
                 .setDefaultStyle(user);
     }
 
+    @Given("logged user $user on Manage Note")
+    public void logged_user_on_Manage_Note(String user) {
+        open(LoginPageUnlogged.class)
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .defaultLanguageLogged(user)
+                .setDefaultStyle(user);
+        open(ManageNote.class);
+    }
+
     @When("user $user add note for friend")
     public void user_add_note_for_friend(String user) {
         ArrayList<String> friends = getDBDate().friends().getAllFriends(user);
-        System.out.println("11111111");
         ArrayList<String> usersNote = open(ManageNote.class).getAllUserNote();
-        System.out.println("11111111");
         String friendNotInListNote = UserNotInNoteList(user, usersNote, friends);
-        System.out.println("11111111");
         String note = utility().random().getRandomChar(7);
-        System.out.println("11111111");
         open(ManageFriendsPage.class)
                 .addNoteToFriend(friendNotInListNote, note);
-        System.out.println("11111111");
         ThucydidesUtils.putToSession("friend", friendNotInListNote);
+        ThucydidesUtils.putToSession("note", note);
+    }
+    
+    @When("user $user add note for user $userStatus")
+    public void add_note_for_user(String user, String userStatus) {
+        String note = utility().random().getRandomText(7);
+        ArrayList<String> usersNote = onOpened(ManageNote.class).getAllUserNote();
+        String userAddNote = UserNotInNoteList(user, usersNote, getDBDate().userData().getUserWithStatus(userStatus));
+        onOpened(ManageNote.class)
+                .addNote(userAddNote, note);
+        ThucydidesUtils.putToSession("userWithNote", userAddNote);
         ThucydidesUtils.putToSession("note", note);
     }
 
@@ -49,8 +64,8 @@ public class AddNoteSuccess extends LJTest {
                 .finish();
     }
 
-    @Then("username friend with note is displayed on Manage Note")
-    public void username_friend_with_note_is_displayed_on_Manage_Note() {
+    @Then("note is displayed on Manage Note Page")
+    public void note_is_displayed_on_Manage_Note_Page() {
         String user = ThucydidesUtils.getFromSession("friend").toString();
         String note = ThucydidesUtils.getFromSession("note").toString();
         verify().that(open(ManageNote.class).noteIsDisplayed(user, note))
@@ -69,17 +84,15 @@ public class AddNoteSuccess extends LJTest {
                 .ifElse("Note = " + note + " is not displayed in user " + userWithNote + " profile")
                 .finish();
     }
-
-    @When("user $user add note for user $user_status")
-    public void add_note_for_user(String user, String user_status) {
-        String note = utility().random().getRandomText(7);
-        ArrayList<String> usersNote = onOpened(ManageNote.class).getAllUserNote();
-        String userAddNote = UserNotInNoteList(user, usersNote, getDBDate().userData().getUserWithStatus(user_status));
-        onOpened(ManageNote.class)
-                .addNote(userAddNote, note);
-        ThucydidesUtils.putToSession("userWithNote", userAddNote);
-        ThucydidesUtils.putToSession("note", note);
+    
+    @Then("note is displayed in control strip")
+    public void note_is_displayed_in_control_strip(){
+    String note = ThucydidesUtils.getFromSession("note").toString();
+    String userWithNote = ThucydidesUtils.getFromSession("userWithNote").toString();
+    
     }
+    
+
 
     private String UserNotInNoteList(String user, ArrayList<String> userWithNote, ArrayList<String> usersOther) {
         String friendNotInListNote = usersOther.get(0);

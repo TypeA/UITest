@@ -57,9 +57,9 @@ public class ManageFriendsPage extends ServicePageLogged {
     @FindBy(css = "form[method=get] .b-flatbutton")
     private Button filterButton;
 
-    public FinishFormManageFriends clickSaveChangesButton() {
+    public ManageFriendsPage clickSaveChangesButton() {
         saveChanges.click();
-        return onDisplayed(FinishFormManageFriends.class);
+        return this;
     }
 
     private TextField selectField(int index) {
@@ -122,7 +122,7 @@ public class ManageFriendsPage extends ServicePageLogged {
         return this;
     }
 
-    public FinishFormManageFriends addNoteToFriend(String friend, String note) {
+    public ManageFriendsPage addNoteToFriend(String friend, String note) {
         applyFilter(friend);
         getDriver().findElement(By.id("useralias_" + friend)).clear();
         getDriver().findElement(By.id("useralias_" + friend)).sendKeys(note);

@@ -21,7 +21,14 @@ public class ManageNote extends ServicePageLogged {
     private Button deleteNote;
 
     public boolean noteIsDisplayed(String user, String note) {
-        return getDriver().findElement(By.xpath("//div//span[@class[contains(.,'ljuser')] and @data-ljuser='test']//a/b[contains(text(),'" + user + "')]/following::span[contains(text(),'" + note + "')]")).isDisplayed();
+        int countSize = getDriver().findElements(By.xpath("//ul[@class='b-pager-pages']//li")).size();
+        int i = 1;
+        boolean noteIsDisplay = getDriver().findElements(By.xpath("//div//span[@class[contains(.,'ljuser')] and @data-ljuser='"+user+"']//a/b[contains(text(),'" + user + "')]/following::span[contains(text(),'" + note + "')]")).size()>0;
+        while (i < countSize&&!noteIsDisplay) {
+            noteIsDisplay = getDriver().findElement(By.xpath("//div//span[@class[contains(.,'ljuser')] and @data-ljuser='"+user+"']//a/b[contains(text(),'" + user + "')]/following::span[contains(text(),'" + note + "')]")).isDisplayed();
+        i++;
+        }
+        return noteIsDisplay;
     }
 
     public ManageNote selectNote(String user) {
@@ -37,14 +44,17 @@ public class ManageNote extends ServicePageLogged {
 
     public ArrayList<String> getAllUserNote() {
         int countSize = getDriver().findElements(By.xpath("//ul[@class='b-pager-pages']//li")).size();
-        int size = getDriver().findElements(By.xpath("//ul[@class='manage-notes__list']/li[@class='manage-notes__item note-item ng-scope']")).size();;
         ArrayList<String> userNote = new ArrayList();
+        int size = 0;
         for (int j = 1; j < countSize + 1; j++) {
             if (countSize > 1) {
                 getDriver().findElement(By.xpath("//ul[@class='b-pager-pages']//li[" + j + "]/a")).click();
             }
+            size = getDriver().findElements(By.xpath("//ul[@class='manage-notes__list']/li[@class='manage-notes__item note-item ng-scope']")).size();
             for (int i = 1; i < size + 1; i++) {
                 userNote.add(getDriver().findElement(By.xpath("//ul[@class='manage-notes__list']/li[" + i + "]//span[@class[contains(.,'ljuser')]]")).getAttribute("data-ljuser"));
+
+                System.out.println("!!!!!!!!!!!" + getDriver().findElement(By.xpath("//ul[@class='manage-notes__list']/li[" + i + "]//span[@class[contains(.,'ljuser')]]")));
             }
         }
         System.out.println("!!!!!!!!!!!" + userNote);
