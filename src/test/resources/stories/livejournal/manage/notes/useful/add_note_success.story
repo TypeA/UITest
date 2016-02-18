@@ -5,8 +5,8 @@ Meta:
 
 Given logged user <user> on Edit Friend Page
 When user <user> add note for friend
+Then username friend with asterisk and note is displayed on Friends Page
 Then note is displayed on Manage Note Page
-Then username friend with note is displayed on Manage Note
 
 Examples:
 |user             |

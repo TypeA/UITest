@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl("/manage/notes/")
-public class ManageNote extends ServicePageLogged {
+public class ManageNotePage extends ServicePageLogged {
 
     @FindBy(css = ".manage-notes-add__name")
     private TextField inputUsername;
@@ -31,12 +31,12 @@ public class ManageNote extends ServicePageLogged {
         return noteIsDisplay;
     }
 
-    public ManageNote selectNote(String user) {
+    public ManageNotePage selectNote(String user) {
         getDriver().findElement(By.xpath("//div/span/span[@data-ljuser='" + user + "']/parent::*/preceding-sibling::input")).click();
         return this;
     }
 
-    public ManageNote addNote(String user, String note) {
+    public ManageNotePage addNote(String user, String note) {
         inputUsername.sendKeys(user);
         inputNote.sendKeys(note);
         return this;
@@ -44,6 +44,7 @@ public class ManageNote extends ServicePageLogged {
 
     public ArrayList<String> getAllUserNote() {
         int countSize = getDriver().findElements(By.xpath("//ul[@class='b-pager-pages']//li")).size();
+         System.out.println("!!!!!!!!!!!");
         ArrayList<String> userNote = new ArrayList();
         int size = 0;
         for (int j = 1; j < countSize + 1; j++) {

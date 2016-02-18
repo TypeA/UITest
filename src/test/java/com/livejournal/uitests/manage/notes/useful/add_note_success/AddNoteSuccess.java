@@ -1,15 +1,17 @@
-package com.livejournal.uitests.manage.notes.useful;
+package com.livejournal.uitests.manage.notes.useful.add_note_success;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
+
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.profile.ProfilePage;
-import com.livejournal.uitests.pages.service_pages.settings.ManageNote;
+import com.livejournal.uitests.pages.service_pages.settings.ManageNotePage;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageFriendsPage;
 import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.openqa.selenium.WebDriver;
 
 public class AddNoteSuccess extends LJTest {
 
@@ -27,13 +29,15 @@ public class AddNoteSuccess extends LJTest {
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defaultLanguageLogged(user)
                 .setDefaultStyle(user);
-        open(ManageNote.class);
+        open(ManageNotePage.class);
     }
 
     @When("user $user add note for friend")
     public void user_add_note_for_friend(String user) {
+WebDriver driver = getCurrentBrowser().getDriver();
+driver.getCurrentUrl();
         ArrayList<String> friends = getDBDate().friends().getAllFriends(user);
-        ArrayList<String> usersNote = open(ManageNote.class).getAllUserNote();
+        ArrayList<String> usersNote = open(ManageNotePage.class).getAllUserNote();
         String friendNotInListNote = UserNotInNoteList(user, usersNote, friends);
         String note = utility().random().getRandomChar(7);
         open(ManageFriendsPage.class)
@@ -44,10 +48,11 @@ public class AddNoteSuccess extends LJTest {
     
     @When("user $user add note for user $userStatus")
     public void add_note_for_user(String user, String userStatus) {
+        
         String note = utility().random().getRandomText(7);
-        ArrayList<String> usersNote = onOpened(ManageNote.class).getAllUserNote();
+        ArrayList<String> usersNote = onOpened(ManageNotePage.class).getAllUserNote();
         String userAddNote = UserNotInNoteList(user, usersNote, getDBDate().userData().getUserWithStatus(userStatus));
-        onOpened(ManageNote.class)
+        onOpened(ManageNotePage.class)
                 .addNote(userAddNote, note);
         ThucydidesUtils.putToSession("userWithNote", userAddNote);
         ThucydidesUtils.putToSession("note", note);
@@ -68,7 +73,7 @@ public class AddNoteSuccess extends LJTest {
     public void note_is_displayed_on_Manage_Note_Page() {
         String user = ThucydidesUtils.getFromSession("friend").toString();
         String note = ThucydidesUtils.getFromSession("note").toString();
-        verify().that(open(ManageNote.class).noteIsDisplayed(user, note))
+        verify().that(open(ManageNotePage.class).noteIsDisplayed(user, note))
                 .ifResultIsExpected("Note =" + note + " for user " + user + " is displayed on Manage Note Page")
                 .ifElse("Note =" + note + " for user " + user + " is not displayed on Manage Note Page")
                 .finish();
