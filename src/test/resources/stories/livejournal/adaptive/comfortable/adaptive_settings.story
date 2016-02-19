@@ -1,7 +1,7 @@
 Scenario: User see Air theme
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -28,7 +28,7 @@ Examples:
 Scenario: User see Adaptive Chameleon theme
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -47,7 +47,7 @@ Examples:
 Scenario: User see Non adaptive theme
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -62,7 +62,7 @@ Examples:
 Scenario: User see Non adaptive Chameleon theme
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -79,7 +79,7 @@ Examples:
 Scenario: User see correct theme in his journal
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>)
 When user go to the his journal page
@@ -104,7 +104,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part1
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
@@ -131,7 +131,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part2
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
@@ -160,7 +160,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part3
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
@@ -188,7 +188,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part4
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
@@ -216,7 +216,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part5
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page
@@ -245,7 +245,7 @@ Examples:
 Scenario: User see correct theme in random journal with option 'in my style' part6
 
 Meta: 
-@categories adaptive comfortable
+@categories adaptive comfortable release
 
 Given random user (paid <paid>,mobile view <mobileView>,style <style>) with option in my style
 When user go to the random journal (paid <paid1>,mobile view <mobileView1>,style <style1>) page

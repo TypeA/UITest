@@ -1,6 +1,6 @@
 Scenario: User create new post with subject
 Meta: 
-@categories create_edit_post subject useful
+@categories create_edit_post subject useful release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -18,7 +18,7 @@ Examples:
 
 Scenario: User restore post with subject from draft
 Meta: 
-@categories create_edit_post subject useful draft
+@categories create_edit_post subject useful draft release
 
 Given logged user <name> on Create Post page
 When user write new post with subject <subject>
@@ -32,7 +32,7 @@ Examples:
 
 Scenario: User edit post with subject
 Meta: 
-@categories create_edit_post subject useful
+@categories create_edit_post subject useful release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -48,7 +48,7 @@ Examples:
 
 Scenario: Subject in editing
 Meta: 
-@categories create_edit_post subject useful
+@categories create_edit_post subject useful release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -64,7 +64,7 @@ Examples:
 
 Scenario: User create new post with long subject
 Meta: 
-@categories create_edit_post subject useful
+@categories create_edit_post subject useful release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
