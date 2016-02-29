@@ -1,6 +1,6 @@
 Scenario: Public filters
 Meta: 
-@categories feed comfortable  another_feed
+@categories feed comfortable  another_feed 
 
 Given user <user> on user2 <user2> Friends Feed
 Then user see only public filters
@@ -16,7 +16,7 @@ Meta:
 @categories feed comfortable another_feed 
 
 Given user <user> on custom Friends Feed
-Then user see Feed on default settings
+Then another user see Feed on default settings
 Then unlogged user see Feed on default settings
 
 Examples:

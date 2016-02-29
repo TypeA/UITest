@@ -1,9 +1,9 @@
 Scenario: Forgot password
 
 Meta: 
-@categories authorization comfortable
+@categories authorization comfortable 
 
-Given unlogged user on Login Form
+Given unlogged user on Login Form 
 When user click link Forgot Password
 Then user in correct page <page>
 

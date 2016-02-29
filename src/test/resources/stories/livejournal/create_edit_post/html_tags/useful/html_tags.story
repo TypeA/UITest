@@ -1,6 +1,6 @@
 Scenario: Create post with style
 Meta: 
-@categories create_post html_tags useful 
+@categories create_post html_tags useful z
 
 Given logged user <name> on Create Post page
 When user create new post with style <tag> and save post

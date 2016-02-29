@@ -57,7 +57,7 @@ Examples:
 
 Scenario: Check-boxes
 Meta: 
-@categories create_edit_post time comfortable
+@categories create_edit_post time comfortable 
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with check-boxes <checkbox>
