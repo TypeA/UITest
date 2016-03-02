@@ -4,7 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.inbox_pages.InboxMainPage;
-import com.livejournal.uitests.pages.service_pages.profile.ProfilePage;
+import com.livejournal.uitests.pages.service_pages.profile.ProfilePageLogged;
 import com.livejournal.uitests.pages.service_pages.scrapbook.ScrapBookMainPage;
 import com.livejournal.uitests.pages.service_pages.settings.ManageCommunitiesPage;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
@@ -59,9 +59,9 @@ public class MyJournalMenu extends UIBlock {
     private Link logOut;
 
     @StepGroup
-    public ProfilePage clickOnProfile() {
+    public ProfilePageLogged clickOnProfile() {
         profile.click();
-        return onOpened(ProfilePage.class);
+        return onOpened(ProfilePageLogged.class);
     }
 
     @StepGroup
