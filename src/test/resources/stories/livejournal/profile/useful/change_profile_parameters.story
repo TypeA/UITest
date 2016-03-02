@@ -12,10 +12,10 @@ When user enter another name <name> on Edit profile page
 Then in Profile user see new name <name>
 
 Examples:
-|user        |name     |
-|testautotest|test    |
-|--testautotest|rnd_name |
-|--testautotest|rnd_max  |
+|user          |name       |
+|testautotest  |test       |
+|--testautotest|           |
+|--testautotest|rnd_max    |
 
 
 

@@ -20,11 +20,9 @@ import ru.yandex.qatools.htmlelements.element.Select;
         @FindBy(css = ".ng-scope.ng-pristine.ng-valid"))
 public class IdentityBlock extends UIBlock {
 
-   // @FindBy(css = ".field_change-userpic a")
-   // private Link changeUserpicLink;
-    
-    
-/*
+    // @FindBy(css = ".field_change-userpic a")
+    // private Link changeUserpicLink;
+    /*
     @FindBy(name = "gender")
     private Select genderSelect;
 
@@ -48,21 +46,21 @@ public class IdentityBlock extends UIBlock {
 
     @FindBy(css = ".field_link.field_link--school.nowrap")
     private Link manageSchools;
- */
+     */
     @StepGroup
     public void setName(String name) {
-        WebElement profileInputName = getDriver().findElement(By.xpath("//div//input[@name='name']"));
-        profileInputName.sendKeys(name);
-        
-        // profileInputName.click();
-      //  profileInputName.enter(name);
+        /*WebElement profileInputName = getDriver().findElement(By.xpath("//div//input[@name='name']"));
+        profileInputName.clear();
+        profileInputName.sendKeys(name);*/
+        this.startScript("jQuery('.field_input input').val('" + name + "')");
     }
-   /*
+
     @StepGroup
     public String getName() {
-       return profileInputName.getText();
+        WebElement profileInputName = getDriver().findElement(By.xpath("//div//input[@name='name']"));
+        return this.startScript("return jQuery('.field_input input').val()").toString();
     }
-    
+    /*
     @StepGroup
     public void setGender(String gender) {
         genderSelect.selectByValue(gender);//use value U M F
@@ -81,5 +79,5 @@ public class IdentityBlock extends UIBlock {
     }
     
    
-    */
+     */
 }

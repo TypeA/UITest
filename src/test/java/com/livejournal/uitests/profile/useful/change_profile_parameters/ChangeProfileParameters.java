@@ -23,19 +23,15 @@ public class ChangeProfileParameters extends LJTest {
     public void logged_user_on_profile(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user));
-
         open(EditProfilePageLogged.class);
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! OPEN NEW PAGE");
     }
 
     //Scenario: Change name (2/3)
     @When("user enter another name $name on Edit profile page")
     public void user_enter_name(String name) {
-        System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! START STEP2");
-
-          onOpened(EditProfilePageLogged.class)
-                  .setName(name);
-                 // .saveSettings();
+        onOpened(EditProfilePageLogged.class)
+                .setName(name)
+                .saveSettings();
     }
 
     //Scenario: Change gender (2/3)
@@ -53,14 +49,21 @@ public class ChangeProfileParameters extends LJTest {
     //Scenario: Change name (3/3)
     @Then("in Profile user see new name $name")
     public void user_see_new_name(String name) {
-        /*   verify().that(onOpened(ProfilePageLogged.class).getName().equals(name))
+        System.out.println("---------------- STEP3");
+        System.out.println("!!!!!!!!!!!!!!!!!" + this.startScript("return jQuery('.b-profile-group.b-profile-userinfo .b-profile-group-row .b-profile-group-body').eq(0).text()"));
+        verify().that(onOpened(ProfilePageLogged.class).getName().equals(name))
                 .ifResultIsExpected("Name " + name + " is correct")
                 .ifElse("Name " + onOpened(ProfilePageLogged.class).getName() + " is not correct.")
-                .and()
-                .that(onOpened(EditProfilePageLogged.class).getName().equals(name))
+                .finish();
+        System.out.println("!!!!!!!!!!!!!!!!!" + ProfilePageLogged.class.getName());
+        /*
+                .and();
+        
+        verify().that(onOpened(EditProfilePageLogged.class).getName().equals(name))
                 .ifResultIsExpected("Name " + name + " is correct")
                 .ifElse("Name " + onOpened(EditProfilePageLogged.class).getName() + " is not correct.")
-                .finish();*/
+                .finish();
+         */
     }
 
     //Scenario: Change gender (3/3)
