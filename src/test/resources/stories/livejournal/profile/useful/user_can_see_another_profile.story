@@ -4,20 +4,20 @@ User can see another profile
 Scenario: Birthday privacy
 
 Meta:
-@categories profile useful
+@categories profile useful test
 
-Given logged Profile page with setting <setting>
-Then  user <user1> can see another birthday
-Then user <user2> can't see another user birthday
+Given logged user <user> on Profile page with setting <setting>
+Then user <user1> can see another user <user> birthday
+Then user <user2> can't see another user <user> birthday
 
 Examples:
-|user1         |user2         |setting       |
-|logged        |null          |everybody     | 
-|unlogged      |null          |everybody     | 
-|friend        |not_friend    |friends       |
-|logged        |unlogged      |registered    |
-|null          |logged        |nobody        |
-|null          |unlogged      |nobody        |
+|user        |user1         |user2         |setting  |
+|testautotest|logged        |null          |A        | 
+|testautotest|unlogged      |null          |A        | 
+|testautotest|friend        |not_friend    |F        |
+|testautotest|logged        |unlogged      |R        |
+|testautotest|null          |logged        |N        |
+|testautotest|null          |unlogged      |N        |
 
 
 

@@ -11,4 +11,18 @@ import net.thucydides.core.annotations.DefaultUrl;
 @DefaultUrl("/profile")
 public class ProfilePageUnlogged extends ServicePageUnlogged {
     
+    public String getProfileBirthday() {
+        return this.startScript("return jQuery('.b-profile-group-row .b-profile-group-body').eq(1).text()").toString();
+    }
+    
+    public boolean isBirthdayVisible() {
+        if(startScript("return jQuery('.b-profile-group-subheader').eq(1).text()").toString()
+                .equals("Birthdadate")) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
 }
