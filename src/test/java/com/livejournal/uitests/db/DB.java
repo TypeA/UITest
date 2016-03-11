@@ -12,34 +12,23 @@ public class DB extends LJTest {
     public void db() {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
         
-        System.out.println(parseUser("logged", "testautotest"));
-        System.out.println(parseUser("unlogged","testautotest"));
-        System.out.println(parseUser("friend", "testautotest"));
-        System.out.println(parseUser("not_friend", "testautotest"));
-        
+//        System.out.println(parseUser("logged", "testautotest"));
+//        System.out.println(parseUser("unlogged","testautotest"));
+//        System.out.println(parseUser("friend", "testautotest"));
+//        System.out.println(parseUser("not_friend", "testautotest"));
+        testTests("try06");
         System.out.println("STOP TEST +++++++++++++++++++++++++++++++");
 
     }
 
-    public String parseUser(String user, String main_user) { 
-        String username = null;
-        System.out.println(main_user);
-        switch (user) {
-            case "logged":
-                return getDBDate().friends().getNotFriend(main_user);
-            case "not_friend":
-                return getDBDate().friends().getNotFriend(main_user);
-
-            case "unlogged":
-//	    Nothing happens
-                return null;
-            case "friend":
-                return getDBDate().friends().getFriend(main_user);
-
-            default:
-                Assert.fail("Incorrect argument");
-                return null;
-        }
+    public void testTests(String username) {
+        open(LoginPageUnlogged.class)
+                        .authorizeBy(username, getDBDate().userData().getUserPassword(username))
+                        .defaultLanguageLogged(username);
     }
+    
+
+    
+
 
 }

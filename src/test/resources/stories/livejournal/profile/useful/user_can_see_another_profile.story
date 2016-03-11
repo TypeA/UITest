@@ -11,13 +11,13 @@ Then user <user1> can see another user <user> birthday
 Then user <user2> can't see another user <user> birthday
 
 Examples:
-|user        |user1         |user2         |setting  |
-|testautotest|logged        |null          |A        | 
-|testautotest|unlogged      |null          |A        | 
-|testautotest|friend        |not_friend    |F        |
-|testautotest|logged        |unlogged      |R        |
-|testautotest|null          |logged        |N        |
-|testautotest|null          |unlogged      |N        |
+|user         |user1         |user2         |setting    |
+|testautotest |logged        |nobody        |All        | 
+|testautotest |unlogged      |nobody        |All        | 
+|testautotest |friend        |not_friend    |Friend     |
+|testautotest |logged        |unlogged      |Registered |
+|testautotest |nobody        |logged        |Nobody     |
+|testautotest |nobody        |unlogged      |Nobody     |
 
 
 

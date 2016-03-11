@@ -62,27 +62,39 @@ public class LJPage extends Page {
     public LJPage defaultLanguageLogged(String user) {
         String script1 = "select clusterid, user from user "
                 + "where user = '" + user + "';";
+
         String clusterid = workWithDB().conect()
                 .select(script1, "clusterid")
                 .finish()
                 .get(0)
                 .get(0);
+
         String script2 = " select * from lj_c" + clusterid + ".userproplite2 "
                 + "where upropid = "
                 + "(select upropid from userproplist where name = 'browselang') "
                 + "and userid = "
                 + "(select userid from user where user = '" + user + "');";
-        String lang = workWithDB().conect()
-                .select(script2, "value")
-                .finish()
-                .get(0)
-                .get(0);
+
+        String lang = null;
+        try {
+            lang = workWithDB().conect()
+                    .select(script2, "value")
+                    .finish()
+                    .get(0)
+                    .get(0);
+
+        } catch (Exception ex) {
+            lang = "empty set";
+        }
+
         if (!lang.equals("en_LJ")) {
             open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
                     .setLanguage("en_LJ")
                     .saveSettings();
         }
+
         return onOpened(LJPage.class);
+
     }
 
     public LJPage defaultLanguageUnlogged() {

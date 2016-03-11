@@ -31,7 +31,8 @@ public class Friends extends DatabasesData {
         for (int i = 1; i < ans.size(); i++) {
             select = select + " or user = '" + ans.get(i) + "'";
         }
-        select = select + ") and user like '%test%' "
+        select = select + ") "
+                //+ "and user like '%test%' "
                 + "and user !='" + user + "'"
                 + "and statusvis = 'V'"
                 + "and journaltype = 'P'";
@@ -45,7 +46,8 @@ public class Friends extends DatabasesData {
                 answer.add(an);
             }
         }
-        return answer.get(new Random().nextInt(ans.size()));
+        return answer.get(new Random().nextInt(answer.size()));
+//          return answer.get(Min + (int)(Math.random() * ((Max - Min) + 1)))
     }
 
     public ArrayList<String> getAllNotFriends(String user, Integer limit) {
@@ -55,10 +57,11 @@ public class Friends extends DatabasesData {
         for (int i = 1; i < friendid.size(); i++) {
             select2 = select2 + " and userid != '" + friendid.get(i) + "'";
         }
-        select2 = select2 + ") and user like '%test%' "
+        select2 = select2 + ")"  
+//                + " and user like '%test%' "
                 + "and statusvis = 'V'"
                 + "and journaltype = 'P'"
-                + "and statusvisdate >= adddate(now(), interval - 500 day) "
+//                + "and statusvisdate >= adddate(now(), interval - 500 day) "
                 + "and user !='" + user + "'"
                 + "limit " + limit + ";";
         ArrayList<String> ans = workWithDB().conect()

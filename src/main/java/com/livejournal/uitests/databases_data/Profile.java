@@ -41,7 +41,7 @@ public class Profile extends DatabasesData {
     }
     
     public String getBirthday(String user) {
-        String select = "select* from user where user=" + user;
+        String select = "select* from user where user='" + user + "'";
         return  workWithDB().conect()
                 .select(select, "bdate")
                 .finish()
