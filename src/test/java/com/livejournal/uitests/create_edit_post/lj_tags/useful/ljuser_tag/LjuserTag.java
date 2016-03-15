@@ -63,7 +63,7 @@ public class LjuserTag extends LJTest {
                 .closeDraft()
                 .usePostContent()
                 .useHTMLEditor()
-                .setPostText("")
+                .setPostText("Hello, ")
                 .setUserNameByAutocomplete(ljuser)
                 .usePage()
                 .postEntry();

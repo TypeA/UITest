@@ -53,6 +53,10 @@ public class UserBubble extends UIBlock {
                 i = 0;
             }
         }
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+        }
     }
 
 }
