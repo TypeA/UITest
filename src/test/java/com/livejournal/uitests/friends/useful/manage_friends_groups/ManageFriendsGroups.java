@@ -1,281 +1,364 @@
-//package com.livejournal.uitests.friends.useful.manage_friends_groups;
+package com.livejournal.uitests.friends.useful.manage_friends_groups;
+
+import com.livejournal.uisteps.core.Url;
+import com.livejournal.uisteps.thucydides.ThucydidesUtils;
+import com.livejournal.uitests.LJTest;
+import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
+import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import org.jbehave.core.annotations.Given;
+import org.jbehave.core.annotations.Then;
+import org.jbehave.core.annotations.When;
+import org.openqa.selenium.WebElement;
+
+/**
+ *
+ * @author m.panferova
+ */
+public class ManageFriendsGroups extends LJTest {
+
+    //Scenario: Change the position of the group(1/4)
+    //Scenario: Public group(1/3)
+    //Scenario: Create new group(1/4)
+    //Scenario: Delete group(1/3)
+    //Scenario: Rename group name(1/3)
+    //Scenario: Add users in group(1/3)
+    //Scenario: Delete users in group(1/3)
+    @Given("logged user (name $name) on Manage Groups Page")
+    public void logged_user_on_Manage_Groups_Page(String name) {
+        open(LoginPageUnlogged.class)
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .defaultLanguageLogged(name);
+        List<ArrayList<String>> groupListBefore = getDBDate().friends().getSortAllGroup(name);
+        ThucydidesUtils.putToSession("group_list_before", groupListBefore);
+    }
 //
-//import com.livejournal.uisteps.core.Url;
-//import com.livejournal.uisteps.thucydides.ThucydidesUtils;
-//import com.livejournal.uitests.LJTest;
-//import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFeedLogged;
-//import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-//import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
-//import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
-//import java.util.ArrayList;
-//import java.util.Collections;
-//import java.util.Random;
-//import org.jbehave.core.annotations.Given;
-//import org.jbehave.core.annotations.Then;
-//import org.jbehave.core.annotations.When;
+//    Scenario: Change the position of the group(2/4)
+
+    @When("user $name moves the group $position and save change")
+    public void user_moves_the_group_and_save_change(String name, String position) {
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
+        String minOrMax = "min";
+        if (position.equals("up")) {
+            minOrMax = "min";
+        } else if (position.equals("down")) {
+            minOrMax = "max";
+        }
+        String moveGroup = getDBDate().friends().getRandomGroup(name, minOrMax);
+        open(ManageGroupsPage.class)
+                .moveGroup(moveGroup, position)
+                .saveChangesForGroup();
+        ThucydidesUtils.putToSession("groupList", putDefaultViewToBegining(changeArrayElements(groupListBefore, moveGroup, position)));
+    }
 //
-///**
-// *
-// * @author m.panferova
-// */
-//public class ManageFriendsGroups extends LJTest {
+    //Scenario: Public group(2/3)
+
+    @When("user (name $name) set the group is public and save the changes")
+    public void user_set_the_group_is_public_and_save_the_changes(String name) {
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
+        String notPublicValueGroup = getDBDate().friends().getValuePublicGroup(name, true);
+        open(ManageGroupsPage.class)
+                .clickPrivacy(notPublicValueGroup, true)
+                .saveChangesForGroup();
+        ThucydidesUtils.putToSession("publicGroup", getDBDate().friends().getNamePublicGroup(name, notPublicValueGroup));
+    }
 //
-//    //Scenario: Change the position of the group(1/4)
-//    //Scenario: Public group(1/3)
-//    //Scenario: Create new group(1/4)
-//    //Scenario: Delete group(1/3)
-//    //Scenario: Rename group name(1/3)
-//    //Scenario: Add users in group(1/3)
-//    //Scenario: Delete users in group(1/3)
-//    @Given("logged user (name $name) on Manage Groups Page")
-//    public void logged_user_on_Manage_Groups_Page(String name) {
-//        open(LoginPageUnlogged.class)
-//                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-//                .defaultLanguageLogged(name);
-//        System.out.println("!!!!!" + getDBDate().friends().getAllGroupsWithParams(name));
-//        ArrayList<String> groupListBefore = open(ManageGroupsPage.class)
-//                .getAllGroupForUser();
-//        ThucydidesUtils.putToSession("user", name);
-//        ThucydidesUtils.putToSession("group_list_before", groupListBefore);
-//    }
+    //Scenario: Create new group(2/4)
+
+    @When("user create new group and save the changes")
+    public void user_create_new_group_and_save_the_changes() {
+        String group = utility().random().getRandomChar(10);
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
+        open(ManageGroupsPage.class)
+                .createNewGroup(group)
+                .saveChangesForGroup();
+        groupListBefore.get(0).add(group);
+        ThucydidesUtils.putToSession("groupList", putDefaultViewToBegining(groupListBefore));
+        ThucydidesUtils.putToSession("newGroup", group);
+    }
+
+    //Scenario: Delete group(2/3)
+    @When("user (name $name) delete group and save the changes")
+    public void user_delete_group_and_save_the_changes(String name) {
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
+        int randomIndex = new Random().nextInt(groupListBefore.size());
+        String valueGroup = groupListBefore.get(3).get(randomIndex);
+        open(ManageGroupsPage.class)
+                .clickDeleteGroup(valueGroup)
+                .saveChangesForGroup();
+        for (int i = 0; i < groupListBefore.size(); i++) {
+            groupListBefore.get(i).remove(randomIndex);
+        }
+        ThucydidesUtils.putToSession("groupList", groupListBefore);
+    }
 //
-//    //Scenario: Change the position of the group(2/4)
-//    @When("user $name moves the group $position and save change")
-//    public void user_moves_the_group_and_save_change(String name, String position) {
-//        ArrayList<String> groupListBefore = getDBDate().friends().getSortAllGroup(name);
-//        if (position.equals("up")) {
-//            position = "min";
-//        } else if (position.equals("down")) {
-//            position = "max";
-//        }
-//        String moveGroup = getDBDate().friends().getRandomGroup(name, position);
-//        onOpened(ManageGroupsPage.class)
-//                .moveGroup(moveGroup, position)
-//                .saveChangesForGroup();
-//       // ThucydidesUtils.putToSession("groupList", convertArrayToString(changeArrayElements(groupListBefore, moveGroup)));
-//    }
+    //Scenario: Rename group name(2/3)
+
+    @When("user (name $name) rename group name and save the changes")
+    public void user_rename_group_name_and_save_the_changes(String name) {
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
+        String group = utility().random().getRandomChar(10);
+        int randomIndex = new Random().nextInt(groupListBefore.size());
+        String valueGroup = groupListBefore.get(3).get(randomIndex);
+        open(ManageGroupsPage.class)
+                .renameGroup(valueGroup, group)
+                .saveChangesForGroup();
+        groupListBefore.get(0).set(randomIndex, group);
+        ThucydidesUtils.putToSession("groupList", groupListBefore);
+    }
+
+    //Scenario: Delete users in group(2/3)
+    @When("user (name, $name) delete users in group and save the changes")
+    public void user_delete_users_in_group_and_save_the_changes(String name) {
+        ArrayList<String> groupList = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
+        String group = getGroupAndFriendInGroup(name).get(0);
+        String friend = getGroupAndFriendInGroup(name).get(1);
+        onOpened(ManageGroupsPage.class)
+                .moveUserOutByName(group, friend);
+        ThucydidesUtils.putToSession("group", group);
+        ThucydidesUtils.putToSession("userOutGroup", friend);
+
+    }
+
+    // Scenario: Add users in group(2/3)
+    @When("user (name $name) add users in group and save the changes")
+    public void user_add_users_in_group_and_save_the_changes(String name) {
+        ArrayList<String> groupList = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
+        ArrayList<String> friendAndGroup = getGroupAndGetFriendNotInGroup(name);
+        open(ManageGroupsPage.class)
+                .moveUserInByName(friendAndGroup.get(1), friendAndGroup.get(0))
+                .saveChangesForGroup();
+        ThucydidesUtils.putToSession("userInGroup", friendAndGroup.get(0));
+        ThucydidesUtils.putToSession("group", friendAndGroup.get(1));
+    }
+
+    //Scenario: Public group(3/3)
+    @Then("unlogged user (name $name) can see group")
+    public void unlogged_user_can_see_group(String name) {
+        open(MainPageLogged.class)
+                .moveMouseOverMyJournalMenuItem()
+                .clickOnLogOut();
+        String publicGroup = ThucydidesUtils.getFromSession("publicGroup").toString();
+        String userNotFriend = getDBDate().friends().getFriendWithoutGroup(name);
+        open(LoginPageUnlogged.class)
+                .authorizeBy(userNotFriend, getDBDate().userData().getUserPassword(userNotFriend));
+        ArrayList<String> groupsOnFeed = open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
+                .openFilters()
+                .getAllGroups();
+        verify().that(groupsOnFeed.contains(publicGroup))
+                .ifResultIsExpected("Group is public")
+                .ifElse("Group is not Public")
+                .finish();
+
+    }
+
+    //Scenario: Change the position of the group(3/4)
+    @Then("the changes displayed correctly on Manage Groups Page")
+    public void the_changes_displayed_correctly_on_Manage_Groups_Page() {
+        open(ManageGroupsPage.class);
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("groupList");
+        ArrayList<String> groupListAfter = onOpened(ManageGroupsPage.class).getAllGroupForUser();
+        verify().that(addPublicToGroup(groupListBefore).containsAll(groupListAfter))
+                .ifResultIsExpected("Group move change success")
+                .ifElse("Not change")
+                .finish();
+
+    }
+
+    //Scenario: Change the position of the group(4/4)
+    //Scenario: Create new group(3/4)
+    //Scenario: Delete group(3/3)
+    //Scenario: Rename group name(3/3)
+    @Then("the changes displayed correctly on the Friends Feed (name $name)")
+    public void the_changes_displayed_correctly_on_the_Friends_Feed(String name) {
+        List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("groupList");
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
+                .openFilters();
+        ArrayList<String> nameOfGroup = onOpened(FriendsFeedLogged.class)
+                .openFilters()
+                .getGroups();
+        System.out.println("!!!!!!!!! " + groupListBefore);
+        System.out.println("!!!!!!!!! " + nameOfGroup);
+        verify().that(checkFiltersOnFeed(groupListBefore, nameOfGroup))
+                .ifResultIsExpected("Group is changed success")
+                .ifElse("Not change")
+                .finish();
+    }
 //
-//    //Scenario: Public group(2/3)
-//    @When("user set the group is public and save the changes")
-//    public void user_set_the_group_is_public_and_save_the_changes() {
-//        ArrayList<String> groupListBefore = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-//        int randomIndex = new Random().nextInt(groupListBefore.size());
-//        String groupName = onOpened(ManageGroupsPage.class)
-//                .clickPrivacy(randomIndex, "private")
-//                .getTextInGroupListByIndex(randomIndex);
-//        onOpened(ManageGroupsPage.class)
-//                .saveChangesForGroup();
-//        open(ManageGroupsPage.class)
-//                .clickPrivacy(randomIndex, "public")
-//                .saveChangesForGroup();
-//        ThucydidesUtils.putToSession("publicGroup", groupName);
-//    }
-//
-//    //Scenario: Create new group(2/4)
-//    @When("user create new group and save the changes")
-//    public void user_create_new_group_and_save_the_changes() {
-//        String group = utility().random().getRandomText(10);
-//        String groups = convertArrayToString((ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before")) + group;
-//        onOpened(ManageGroupsPage.class)
-//                .createNewGroup(group)
-//                .saveChangesForGroup();
-//        ThucydidesUtils.putToSession("groupList", groups);
-//        ThucydidesUtils.putToSession("newGroup", group);
-//    }
-//
-//    //Scenario: Delete group(2/3)
-//    @When("user delete group and save the changes")
-//    public void user_delete_group_and_save_the_changes() {
-//        ArrayList<String> groupListBefore = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-//        int randomIndex = new Random().nextInt(groupListBefore.size());
-//        onOpened(ManageGroupsPage.class)
-//                .clickDeleteGroup(randomIndex)
-//                .saveChangesForGroup();
-//        groupListBefore.remove(randomIndex);
-//        ThucydidesUtils.putToSession("groupList", onOpened(ManageGroupsPage.class).deleteSecurityInGroups(convertArrayToString(groupListBefore)));
-//    }
-//
-//    //Scenario: Rename group name(2/3)
-//    @When("user rename group name and save the changes")
-//    public void user_rename_group_name_and_save_the_changes() {
-//        ArrayList<String> groupListBefore = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-//        String group = utility().random().getRandomText(10);
-//        int randomIndex = new Random().nextInt(groupListBefore.size());
-//        onOpened(ManageGroupsPage.class)
-//                .renameGroup(randomIndex, group)
-//                .saveChangesForGroup();
-//        ArrayList<String> groupListAfter = changeElementInArray(groupListBefore, randomIndex, group);
-//        ThucydidesUtils.putToSession("groupList", onOpened(ManageGroupsPage.class).deleteSecurityInGroups(convertArrayToString(groupListAfter)));
-//    }
-//
-//    //Scenario: Delete users in group(2/3)
-//    @When("user delete users in group and save the changes")
-//    public void user_delete_users_in_group_and_save_the_changes() {
-//        ArrayList<String> groupList = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-//        int i = 0;
-//        while (i < groupList.size()) {
-//            onOpened(ManageGroupsPage.class)
-//                    .selectByIndexGroup(i);
-//            ArrayList<String> usersInGroup = onOpened(ManageGroupsPage.class).usersInGroup();
-//            if (usersInGroup.size() > 0) {
-//                int randomIndexUser = new Random().nextInt(usersInGroup.size());
-//                onOpened(ManageGroupsPage.class)
-//                        .moveUserOut(randomIndexUser)
-//                        .saveChangesForGroup();
-//                ThucydidesUtils.putToSession("groupIndex", i);
-//                usersInGroup.remove(randomIndexUser);
-//                ThucydidesUtils.putToSession("listUser", convertArrayToString(usersInGroup));
-//                i = groupList.size();
-//            }
-//            i++;
-//        }
-//    }
-//
-//    // Scenario: Add users in group(2/3)
-//    @When("user add users in group and save the changes")
-//    public void user_add_users_in_group_and_save_the_changes() {
-//        ArrayList<String> groupList = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-//        ArrayList<String> usersOutGroup = null;
-//        ArrayList<String> usersInGroup;
-//        int randomIndexUser;
-//        String user;
-//        int i = 0;
-//        while (i < groupList.size()) {
-//            usersOutGroup = onOpened(ManageGroupsPage.class)
-//                    .selectByIndexGroup(i)
-//                    .userOutGroup();
-//            usersInGroup = onOpened(ManageGroupsPage.class).usersInGroup();
-//            if (!usersOutGroup.isEmpty()) {
-//                randomIndexUser = new Random().nextInt(usersOutGroup.size());
-//                user = onOpened(ManageGroupsPage.class).getTextUserOutGroupByIndex(randomIndexUser);
-//                onOpened(ManageGroupsPage.class)
-//                        .moveUserIn(randomIndexUser)
-//                        .saveChangesForGroup();
-//                ThucydidesUtils.putToSession("groupIndex", i);
-//                usersInGroup.add(user);
-//                Collections.sort(usersInGroup);
-//                ThucydidesUtils.putToSession("listUser", convertArrayToString(usersInGroup));
-//                i = groupList.size();
-//            }
-//            i++;
-//        }
-//
-//    }
-//
-//    //Scenario: Public group(3/3)
-//    @Then("unlogged user can see group")
-//    public void unlogged_user_can_see_group() {
-//        open(MainPageLogged.class)
-//                .moveMouseOverMyJournalMenuItem()
-//                .clickOnLogOut();
-//        String user = ThucydidesUtils.getFromSession("user").toString();
-//        String publicGroup = ThucydidesUtils.getFromSession("publicGroup").toString();
-//        String userNotFriend = getDBDate().friends().getFriendWithoutGroup(user);
-//        open(LoginPageUnlogged.class)
-//                .authorizeBy(userNotFriend, getDBDate().userData().getUserPassword(userNotFriend));
-//        open(FriendsFeedLogged.class, new Url().setPrefix(user + "."))
-//                .openFilters();
-//        String nameOfGroup = onOpened(FriendsFeedLogged.class)
-//                .openFilters()
-//                .getGroups();
-//        verify().that(nameOfGroup.contains(publicGroup))
-//                .ifResultIsExpected("Group is public")
-//                .ifElse("Group is not Public")
-//                .finish();
-//
-//    }
-//
-//    //Scenario: Change the position of the group(3/4)
-//    @Then("the changes displayed correctly on Manage Groups Page")
-//    public void the_changes_displayed_correctly_on_Manage_Groups_Page() {
-//        open(ManageGroupsPage.class);
-//        String groupListBefore = ThucydidesUtils.getFromSession("groupList").toString();
-//        ArrayList<String> groupListAfter = onOpened(ManageGroupsPage.class).getAllGroupForUser();
-//        verify().that(convertArrayToString(groupListAfter).equals(groupListBefore))
-//                .ifResultIsExpected("Group move change success")
-//                .ifElse("Not change")
-//                .finish();
-//
-//    }
-//
-//    //Scenario: Change the position of the group(4/4)
-//    //Scenario: Create new group(3/4)
-//    //Scenario: Delete group(3/3)
-//    //Scenario: Rename group name(3/3)
-//    @Then("the changes displayed correctly on the Friends Feed")
-//    public void the_changes_displayed_correctly_on_the_Friends_Feed() {
-//        String groupListBefore = onOpened(ManageGroupsPage.class).deleteSecurityInGroups(ThucydidesUtils.getFromSession("groupList").toString());
-//        System.out.println(groupListBefore);
-//
-//        String user = ThucydidesUtils.getFromSession("user").toString();
-//        open(FriendsFeedLogged.class, new Url().setPrefix(user + "."))
-//                .openFilters();
-//        String nameOfGroup = onOpened(FriendsFeedLogged.class)
-//                .openFilters()
-//                .getGroups();
-//        System.out.println(nameOfGroup);
-//        verify().that(nameOfGroup.contains(groupListBefore))
-//                .ifResultIsExpected("Group is changed success")
-//                .ifElse("Not change")
-//                .finish();
-//    }
-//
-//    //Scenario: Create new group(4/4)
-//    @Then("there are no posts in the new group")
-//    public void there_are_no_posts_in_the_new_group() {
-//        String newGroup = ThucydidesUtils.getFromSession("newGroup").toString();
-//        String user = ThucydidesUtils.getFromSession("user").toString();
-//        Boolean emptyFeed = open(FriendsFeedLogged.class, new Url().setPostfix("/" + newGroup)
-//                .setPrefix(user + "."))
-//                .feed()
-//                .feedIsEmpty();
-//        verify().that(emptyFeed)
-//                .ifResultIsExpected("Feed is empty")
-//                .ifElse("Feed not Empty")
-//                .finish();
-//    }
-//
-//    // Scenario: Add users in group(3/3)
-//    //Scenario: Delete users in group(3/3)
-//    @Then("in group displayed correct user")
-//    public void in_group_displayed_correct_user() {
-//        String groupIndex = ThucydidesUtils.getFromSession("groupIndex").toString();
-//        open(ManageGroupsPage.class)
-//                .selectByIndexGroup(Integer.parseInt(groupIndex));
-//        String users = ThucydidesUtils.getFromSession("listUser").toString();
-//        String usersAfter = convertArrayToString(onOpened(ManageGroupsPage.class).usersInGroup());
-//        verify().that(usersAfter.equals(users))
-//                .ifResultIsExpected("User move success")
-//                .ifElse("User not move")
-//                .finish();
-//    }
-//
-//    ////////////////////////////////
-//    private String convertArrayToString(ArrayList<String> array) {
-//        String[] myArray;
-//        myArray = array.toArray(new String[array.size()]);
-//        StringBuilder result = new StringBuilder();
-//        for (String array1 : myArray) {
-//            result.append(array1);
-//        }
-//        return result.toString();
-//    }
-//
-//    private ArrayList<String> changeElementInArray(ArrayList<String> array, int index, String newName) {
-//        ArrayList<String> newArray = new ArrayList<String>();
-//        array.set(index, newName);
-//        return newArray;
-//    }
-//
-//    private ArrayList<String> changeArrayElements(ArrayList<String> array, String moveGroup, String position) {
-//        String dop = array.get(results.indexMoveUp - 1);
-//        array.set(results.indexMoveUp - 1, array.get(results.indexMoveUp - 2));
-//        array.set(results.indexMoveUp - 2, dop);
-//
-//        dop = array.get(results.indexMoveDown - 1);
-//        array.set(results.indexMoveDown - 1, array.get(results.indexMoveDown));
-//        array.set(results.indexMoveDown, dop);
-//        return array;
-//
-//    }
-//}
+    //Scenario: Create new group(4/4)
+
+    @Then("there are no posts in the new group (name $name)")
+    public void there_are_no_posts_in_the_new_group(String name) {
+        String newGroup = ThucydidesUtils.getFromSession("newGroup").toString();
+        Boolean emptyFeed = open(FriendsFeedLogged.class, new Url().setPostfix("/" + newGroup)
+                .setPrefix(name + "."))
+                .feed()
+                .feedIsEmpty();
+        verify().that(emptyFeed)
+                .ifResultIsExpected("Feed is empty")
+                .ifElse("Feed not Empty")
+                .finish();
+    }
+
+    // Scenario: Add users in group(3/3)
+
+    @Then("user added to group")
+    public void user_added_to_group() {
+        String group = ThucydidesUtils.getFromSession("group").toString();
+        ArrayList<String> usersInGroup = open(ManageGroupsPage.class)
+                .selectByValueGroup(group)
+                .getAllUserInGroup();
+        String userAdd = ThucydidesUtils.getFromSession("userInGroup").toString();
+        verify().that(usersInGroup.contains(userAdd))
+                .ifResultIsExpected("User move success")
+                .ifElse("User not move")
+                .finish();
+    }
+    //Scenario: Delete users in group(3/3)
+    @Then("user deleted from group")
+    public void user_deleted_from_group(){
+    String group = ThucydidesUtils.getFromSession("group").toString();
+        ArrayList<String> usersInGroup = open(ManageGroupsPage.class)
+                .selectByValueGroup(group)
+                .getAllUserInGroup();
+        ArrayList<String> usersOutGroup = open(ManageGroupsPage.class)
+                .selectByValueGroup(group)
+                .getAllUserOutGroup();
+        String userOut = ThucydidesUtils.getFromSession("userOutGroup").toString();
+        verify().that(!usersInGroup.contains(userOut))
+                .ifResultIsExpected("User not in group")
+                .ifElse("User in group")
+                .and()
+                .that(usersOutGroup.contains(userOut))
+                .ifResultIsExpected("User is in list groupOut")
+                .ifElse("User is not in list groupout")
+                .finish();
+    }
+
+    private List<ArrayList<String>> changeArrayElements(List<ArrayList<String>> arrayList, String moveGroup, String position) {
+        int indexMoveGroup = arrayList.get(3).indexOf(moveGroup);
+        if (position.equals("up")) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                String b = arrayList.get(i).get(indexMoveGroup);
+                arrayList.get(i).set(indexMoveGroup, arrayList.get(i).get(indexMoveGroup - 1));
+                arrayList.get(i).set(indexMoveGroup - 1, b);
+            }
+        } else if (position.equals("down")) {
+            for (int i = 0; i < arrayList.size(); i++) {
+                String b = arrayList.get(i).get(indexMoveGroup);
+                arrayList.get(i).set(indexMoveGroup, arrayList.get(i).get(indexMoveGroup + 1));
+                arrayList.get(i).set(indexMoveGroup + 1, b);
+            }
+        }
+        return arrayList;
+    }
+
+    private ArrayList<String> addPublicToGroup(List<ArrayList<String>> arraylist) {
+        ArrayList<String> groupList = new ArrayList<String>();
+        for (int t = 0; t < arraylist.get(0).size(); t++) {
+            groupList.add(t, arraylist.get(0).get(t));
+        }
+        for (int i = 0; i < groupList.size(); i++) {
+            if (arraylist.get(2).get(i).equals("1")) {
+                groupList.set(i, groupList.get(i) + " (public)");
+            }
+        }
+        return groupList;
+    }
+
+    private List<ArrayList<String>> removePublicInGroup(List<ArrayList<String>> arraylist) {
+
+        for (int i = 0; i < arraylist.get(0).size(); i++) {
+            if (arraylist.get(2).get(i).equals("1")) {
+                arraylist.get(0).set(i, arraylist.get(0).get(i).replace(" (public)", ""));
+            }
+        }
+        return arraylist;
+    }
+
+    private List<ArrayList<String>> putDefaultViewToBegining(List<ArrayList<String>> grouplistBefore) {
+        int indexDefaultView = -1;
+        for (int i = 0; i < grouplistBefore.get(0).size(); i++) {
+            if (grouplistBefore.get(0).get(i).equalsIgnoreCase("default view")) {
+                indexDefaultView = i;
+                break;
+            }
+        }
+        if (indexDefaultView != -1) {
+            grouplistBefore.get(0).add(0, grouplistBefore.get(0).get(indexDefaultView));
+            grouplistBefore.get(0).remove(indexDefaultView + 1);
+        }
+        return grouplistBefore;
+    }
+
+    private boolean checkFiltersOnFeed(List<ArrayList<String>> grouplist, ArrayList<String> filterFeed) {
+        int index = 0;
+        boolean checkFilter = true;
+        ArrayList<String> list = new ArrayList();
+        if (grouplist.get(0).get(0).equalsIgnoreCase("default view")) {
+            list.add(grouplist.get(0).get(0));
+            index = 1;
+            list.add("Journals Only");
+            list.add("Communities Only");
+            list.add("Syndicated Feeds");
+            for (int t = 1; t < grouplist.get(0).size(); t++) {
+                list.add(grouplist.get(0).get(t));
+            }
+            list.add("All Friends");
+            list.add("Settings");
+        } else {
+            list.add("All Friends");
+            list.add("Journals Only");
+            list.add("Communities Only");
+            list.add("Syndicated Feeds");
+            for (int t = 0; t < grouplist.get(0).size(); t++) {
+                list.add(grouplist.get(0).get(t));
+            }
+            list.add("Settings");
+        }
+        System.out.println("!!!!!!!!! " + list);
+        for (int r = 0; r < grouplist.get(0).size(); r++) {
+            checkFilter = checkFilter && list.get(r).equalsIgnoreCase(filterFeed.get(r));
+        }
+        return checkFilter;
+    }
+
+    private ArrayList<String> getGroupAndGetFriendNotInGroup(String user) {
+        List<ArrayList<String>> allGroups = getDBDate().friends().getSortAllGroup(user);
+        ArrayList<String> allFriends = getDBDate().friends().getAllFriends(user);
+        ArrayList<String> groupAndFriend = new ArrayList();
+
+        for (int i = 0; i < allGroups.size(); i++) {
+            ArrayList<String> allFriendsInGroup = getDBDate().friends().getAllFriendsInGroup(user, allGroups.get(0).get(i));
+            for (int t = 0; t < allFriends.size(); t++) {
+                if (allFriendsInGroup.indexOf(allFriends.get(t)) == -1) {
+                    groupAndFriend.add(allFriends.get(t));
+                    break;
+                }
+            }
+            if (!groupAndFriend.isEmpty()) {
+                groupAndFriend.add(allGroups.get(3).get(i));
+                break;
+            }
+        }
+        return groupAndFriend;
+    }
+
+    private ArrayList<String> getGroupAndFriendInGroup(String user) {
+        List<ArrayList<String>> allGroups = getDBDate().friends().getSortAllGroup(user);
+        ArrayList<String> groupAndFriend = new ArrayList();
+        for (int i = 0; i < allGroups.size(); i++) {
+            ArrayList<String> allFriendsInGroup = getDBDate().friends().getAllFriendsInGroup(user, allGroups.get(0).get(i));
+            if (!allFriendsInGroup.isEmpty()) {
+                groupAndFriend.add(allGroups.get(0).get(i));
+                break;
+            }
+            groupAndFriend.add(allFriendsInGroup.get(new Random().nextInt(allFriendsInGroup.size())));
+        }
+        return groupAndFriend;
+    }
+}

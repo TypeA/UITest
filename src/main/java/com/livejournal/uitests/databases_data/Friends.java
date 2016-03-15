@@ -123,25 +123,38 @@ public class Friends extends DatabasesData {
                 .finish();
     }
 
-    public ArrayList<String> getAllPublicGroups(String user) {
+    public ArrayList<String> getAllPublicGroups(String user, boolean isPublic) {
         List<ArrayList<String>> all_groups = getAllGroupsWithParams(user);
         ArrayList<String> groups = new ArrayList<String>();
         for (int i = 0; i < all_groups.get(0).size(); i++) {
-            if (Integer.valueOf(all_groups.get(2).get(i)) == 1) {
+            if (all_groups.get(2).get(i).equals((isPublic) ? "1" : "0")) {
                 groups.add(all_groups.get(0).get(i));
             }
         }
         return groups;
     }
 
-    public ArrayList<String> getSortAllGroup(String user) {
-        String select = "select groupname from lj_c" + userData().getUserClusterId(user)
+    public List<ArrayList<String>> getSortAllGroup(String user) {
+        String select = "select groupname, sortorder, is_public, groupnum  from lj_c" + userData().getUserClusterId(user)
                 + ".friendgroup2 where userid =" + userData().getUserId(user)
                 + " order by sortorder";
         return workWithDB().conect()
                 .select(select, "groupname")
-                .finish()
-                .get(0);
+                .select(select, "sortorder")
+                .select(select, "is_public")
+                .select(select, "groupnum")
+                .finish();
+
+    }
+
+    public String getValuePublicGroup(String user, boolean isPublic) {
+        List<ArrayList<String>> allGroup = getSortAllGroup(user);
+        return allGroup.get(3).get(allGroup.get(2).indexOf((isPublic) ? "1" : "0"));
+    }
+
+    public String getNamePublicGroup(String user, String value) {
+        List<ArrayList<String>> allGroup = getSortAllGroup(user);
+        return allGroup.get(0).get(allGroup.get(3).indexOf(value));
     }
 
     public String getRandomGroup(String user, String minOrMax) {
@@ -160,6 +173,7 @@ public class Friends extends DatabasesData {
                 .get(0)
                 .get(0);
     }
+
     public ArrayList<String> getAllFriendsInGroup(String user, String group) {
         String select1 = "select * from lj_c" + userData().getUserClusterId(user)
                 + ".friendgroup2 where userid = "

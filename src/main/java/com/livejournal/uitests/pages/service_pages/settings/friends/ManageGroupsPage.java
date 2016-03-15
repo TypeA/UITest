@@ -64,11 +64,12 @@ public class ManageGroupsPage extends ServicePageLogged {
         return this;
     }
 
-    public ManageGroupsPage clickPrivacy(String value, String privacy) {
+    public ManageGroupsPage clickPrivacy(String value, boolean privacy) {
+        String privacyGroup = (privacy) ? "public" : "private";
         selectByValueGroup(value);
-        if (privacy.equals("private")) {
+        if (privacyGroup.equals("private")) {
             makeGroupPrivate.click();
-        } else if (privacy.equals("public")) {
+        } else if (privacyGroup.equals("public")) {
             makeGroupPublic.click();
         }
         return this;
@@ -87,13 +88,13 @@ public class ManageGroupsPage extends ServicePageLogged {
         return this;
     }
 
-    public ManageGroupsPage selectByIndexUserInGroup(Integer index) {
-        listUsersInGroup.selectByIndex(index);
+    public ManageGroupsPage selectByValueUserInGroup(String name) {
+        listUsersInGroup.selectByValue(name);
         return this;
     }
 
-    public ManageGroupsPage selectByIndexUserOutGroup(Integer index) {
-        listUsersOutGroup.selectByIndex(index);
+    public ManageGroupsPage selectByValueUserOutGroup(String user) {
+        listUsersOutGroup.selectByValue(user);
         return this;
     }
 
@@ -126,14 +127,45 @@ public class ManageGroupsPage extends ServicePageLogged {
         return this;
     }
 
-    public ManageGroupsPage moveUserOut(int index) {
-        selectByIndexUserInGroup(index);
+    public ManageGroupsPage moveUserOutBuIndex(int index) {
+        listUsersInGroup.selectByIndex(index);
         deleteUserInGroup.click();
         return this;
     }
 
-    public ManageGroupsPage moveUserIn(int index) {
-        selectByIndexUserOutGroup(index);
+    public ManageGroupsPage moveUserInByIndex(int index) {
+        listUsersInGroup.selectByIndex(index);
+        addUserInGroup.click();
+        return this;
+    }
+
+    public ArrayList<String> getAllUserInGroup() {
+        List<WebElement> options = listUsersInGroup.getOptions();
+        ArrayList<String> userInGroup = new ArrayList();
+        for (int i = 0; i < options.size(); i++) {
+            userInGroup.add(options.get(i).getText());
+        }
+        return userInGroup;
+    }
+    public ArrayList<String> getAllUserOutGroup() {
+        List<WebElement> options = listUsersOutGroup.getOptions();
+        ArrayList<String> userInGroup = new ArrayList();
+        for (int i = 0; i < options.size(); i++) {
+            userInGroup.add(options.get(i).getText());
+        }
+        return userInGroup;
+    }
+
+    public ManageGroupsPage moveUserOutByName(String value, String friend) {
+        selectByValueGroup(value);
+        selectByValueUserInGroup(friend);
+        deleteUserInGroup.click();
+        return this;
+    }
+
+    public ManageGroupsPage moveUserInByName(String value, String user) {
+        selectByValueGroup(value);
+        selectByValueUserOutGroup(user);
         addUserInGroup.click();
         return this;
     }
@@ -155,12 +187,12 @@ public class ManageGroupsPage extends ServicePageLogged {
         return usersInGroup;
     }
 
-    public ArrayList<String>  userOutGroup() {
+    public ArrayList<String> userOutGroup() {
         WebDriver driver = getDriver();
         WebElement list = driver.findElement(By.name("list_out"));
         Select value = new Select(list);
         List<WebElement> options = value.getOptions();
-        ArrayList<String>  usersOutGroup = new ArrayList<String>();
+        ArrayList<String> usersOutGroup = new ArrayList<String>();
         for (WebElement option : options) {
             String userOutGroup = option.getText();
             usersOutGroup.add(userOutGroup);
