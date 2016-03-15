@@ -3,6 +3,8 @@ package com.livejournal.uitests.pages.journal_pages.entry;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -60,14 +62,12 @@ public class EntryPageBlock extends UIBlock {
     }
 
     @StepGroup
-    public Boolean containsLjUser(String ljuser) {
-        ljuser = ljuser.toLowerCase();
-        String script = "return jQuery('.e-content span').is(\"[lj\\\\:user='" + ljuser + "']\")";
-        Boolean fl = false;
-        if (Boolean.valueOf(startScript(script).toString())) {
-            fl = startScript("return jQuery('.e-content span')[0].textContent").toString().equals(ljuser);
+    public String getLJUser() {
+        try {
+            return startScript("return jQuery('.b-singlepost-body .ljuser .i-ljuser-username').text()").toString().toLowerCase();
+        } catch (Exception ex) {
+            return "there is no LJUser on the page";
         }
-        return fl;
     }
 
     @StepGroup

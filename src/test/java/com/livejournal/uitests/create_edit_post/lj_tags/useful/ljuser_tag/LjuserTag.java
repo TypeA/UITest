@@ -73,7 +73,7 @@ public class LjuserTag extends LJTest {
     //Scenario: Logged user create new post with correct lj-user tag (3/3)
     @Then("the post is in journal and contains correct username $ljuser")
     public void post_is_in_journal_and_contains_correct_username(String ljuser) {
-        verify().that(onOpened(EntryPageLogged.class).Entry().containsLjUser(ljuser))
+        verify().that(onOpened(EntryPageLogged.class).Entry().getLJUser().equals(ljuser.toLowerCase()))
                 .ifResultIsExpected("Username " + ljuser + " displaying correctly in post")
                 .ifElse("Username " + ljuser + " displaying incorrectly in post")
                 .finish();
@@ -92,9 +92,9 @@ public class LjuserTag extends LJTest {
     @Then("the post is in journal and contains correct username")
     public void post_contains_correct_username() {
         String correctName = ThucydidesUtils.getFromSession("ljuser").toString();
-        verify().that(onOpened(EntryPageLogged.class).Entry().containsLjUser(correctName))
+        verify().that(onOpened(EntryPageLogged.class).Entry().getLJUser().equals(correctName.toLowerCase()))
                 .ifResultIsExpected("Username " + correctName + " displaying correctly in post")
-                .ifElse("Username " + correctName + " displaying incorrectly in post")
+                .ifElse("Username " + correctName + " displaying incorrectly in post.")
                 .finish();
     }
 }
