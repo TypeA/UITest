@@ -137,7 +137,8 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     public void there_is_symbols_in_name_field(String symbols) {
         verify().that(onOpened(CreateAccountPage.class).getNOSinName().equals(Integer.parseInt(symbols)))
                 .ifResultIsExpected("The number of symbolsame in name is correct")
-                .ifElse("The number of symbolsame in name is incorrect!");
+                .ifElse("The number of symbolsame in name is incorrect!")
+                .finish();
 
     }
 

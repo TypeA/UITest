@@ -75,7 +75,7 @@ public class AnotherFeed extends LJTest {
     }
 
     //Scenario: Default settings (2/3)
-    @Then("user see Feed on default settings")
+    @Then("another user see Feed on default settings")
     public void user_see_Feed_on_default_settings() {
         ArrayList<String> settings = onOpened(FriendsFeedLogged.class)
                 .getMainSettings();

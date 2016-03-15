@@ -33,7 +33,7 @@ Examples:
 
 
 
-Scenario: Navigation for unlogged user
+Scenario: Navigation for unlogged user 
 
 Meta: 
 @categories navigation useful release
