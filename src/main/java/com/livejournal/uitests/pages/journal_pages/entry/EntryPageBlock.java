@@ -160,7 +160,7 @@ public class EntryPageBlock extends UIBlock {
         }
         ArrayList<String> likeClass = new ArrayList<String>();
         for (int i = 0; i < likes.size(); i++) {
-            likeClass.add(likes.get(i).getAttribute("class"));
+            likeClass.add(likes.get(i).getAttribute("class").replaceAll("lj-like-item", "").replaceAll("\n", "").replaceAll("-", "").replace(" ", ""));
         }
         return likeClass;
     }
