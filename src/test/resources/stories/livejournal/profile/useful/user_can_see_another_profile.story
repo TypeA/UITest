@@ -4,7 +4,7 @@ User can see another profile
 Scenario: Birthday privacy
 
 Meta:
-@categories profile useful test
+@categories profile useful 
 
 Given logged user <user> on Profile page with setting <setting>
 Then user <user1> can see another user <user> birthday
@@ -25,18 +25,19 @@ Examples:
 Scenario: School privacy
 
 Meta:
-@categories profile useful
-Given logged Profile page with setting <setting>
-Then user <user1> can see school
-Then user <user2> can't see school 
+@categories profile useful 
+
+Given logged user <user> on Profile page with school setting <setting>
+Then user <user1> can see <user> school
+Then user <user2> can't see <user> school
 
 Examples:
-|user1         |user2       |setting   |
-|logged        |null        |everybody |
-|unlogged      |null        |everybody |
-|logged        |unlogged    |friends   |
-|null          |logged      |nobody    |
-|null          |unlogged    |nobody    |
+|user         |user1           |user2       |setting    |
+|testautotest |logged          |nobody      |Yeverybody |
+|testautotest |unlogged      |nobody      |Yeverybody |
+|testautotest |friend        |not_friend  |Friends    |
+|testautotest |nobody        |logged      |Nobody     |
+|testautotest |nobody        |unlogged    |Nobody     |
 
 
 

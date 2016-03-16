@@ -14,10 +14,21 @@ Then in Profile user see new name <name>
 Examples:
 |user          |name       |
 |testautotest  |test       |
-|testautotest  |           |
 |testautotest  |rnd_max    |
 |testautotest  |rnd_border |
 
+
+Scenario: Set null to name
+Meta:
+@categories profile useful test
+
+Given logged user <user> on Edit Profile page
+When user enter another name <name> on Edit profile page
+Then in Profile user see Sticky Error
+
+Examples:
+|user          |name     |
+|testautotest  |         |
 
 
 

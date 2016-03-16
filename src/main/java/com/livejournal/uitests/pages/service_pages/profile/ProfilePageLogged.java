@@ -20,8 +20,14 @@ public class ProfilePageLogged extends ServicePageLogged {
         return startScript("return jQuery('.b-profile-group-row .b-profile-group-body').eq(1).text()").toString();
     }
     
-    public boolean BirthdayIsNotVisible() {
-        String buf= startScript("return jQuery('.b-profile-group-subheader').eq(1).text()").toString();
-        return !buf.equals("Birthdate"); 
+    public String getBirthdayLabel() {
+        return startScript("return jQuery('.b-profile-group-subheader').eq(1).text()").toString();
+        
     }
+    
+    public String getSchoolInfo() {
+        String school = startScript("return jQuery('.b-profile-group-body .b-profile-list').eq(1).text()").toString();
+        return school.trim();
+    }
+
 }

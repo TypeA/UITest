@@ -20,6 +20,7 @@ import org.jbehave.core.annotations.When;
 public class ChangeProfileParameters extends LJTest {
 
     //Scenario: Change name (1/3)
+    //Scenario: Set null to name (1/3)
     //Scenario: Change gender (1/3)
     //Scenario: Change to correct date of birth (1/3)
     @Given("logged user $user on Edit Profile page")
@@ -31,6 +32,7 @@ public class ChangeProfileParameters extends LJTest {
     }
 
     //Scenario: Change name (2/3)
+    //Scenario: Set null to name (2/3)
     @When("user enter another name $name on Edit profile page")
     public void user_enter_name(String name) {
         ThucydidesUtils.putToSession("before", onOpened(EditProfilePageLogged.class).getName());
@@ -53,15 +55,15 @@ public class ChangeProfileParameters extends LJTest {
     //Scenario: Change to correct date of birth (2/3)
     @When("user $user enter another correct date of birth on Edit profile page")
     public void user_enter_birthday(String user) {
-        
+
         ThucydidesUtils.putToSession("year", RandomDate.setRandomYear());
         ThucydidesUtils.putToSession("month", RandomDate.setRandomMonth());
         ThucydidesUtils.putToSession("day", RandomDate.setRandomDay());
-       if ((getDBDate().profile().getBirthdayPrivacyValue(user)).equals("N")) {
-          onOpened(EditProfilePageLogged.class)
-                .setBirthdayPrivacy("F");
-         }
-        
+        if ((getDBDate().profile().getBirthdayPrivacyValue(user)).equals("N")) {
+            onOpened(EditProfilePageLogged.class)
+                    .setBirthdayPrivacy("F");
+        }
+
         onOpened(EditProfilePageLogged.class)
                 .setBirthday(ThucydidesUtils.getFromSession("year").toString(),
                         ThucydidesUtils.getFromSession("month").toString(),
@@ -72,43 +74,49 @@ public class ChangeProfileParameters extends LJTest {
     //Scenario: Change name (3/3)
     @Then("in Profile user see new name $name")
     public void user_see_new_name(String name) {
-        final String ERROR_MSG = "Your name is a required field. At least provide your first name, or a"
-                + " nickname or handle.";
+
         String edit_profile_name = onOpened(EditProfilePageLogged.class).getName();
-        if (name.equals("")) {
-            try {
-                            Thread.sleep(500);
-            } catch(InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            verify().that(onOpened(EditProfilePageLogged.class).getStickyError()
-                    .equals(ERROR_MSG))
-                    .ifResultIsExpected(onOpened(EditProfilePageLogged.class)
-                            .getStickyError() + " appears")
-                    .ifElse(onOpened(EditProfilePageLogged.class)
-                            .getStickyError() + " doesn't appear")
-                    .and()
-                    .that(edit_profile_name
-                            .equals(ThucydidesUtils.getFromSession("before")))
-                    .ifResultIsExpected("Name " + edit_profile_name + " was restored")
-                    .ifElse("Name " + edit_profile_name + " wasn't restored")
-                    .finish();
 
-        } else {
-            verify().that(edit_profile_name
-                    .equals(ThucydidesUtils.getFromSession("name")))
-                    .ifResultIsExpected("Name " + ThucydidesUtils.getFromSession("name") + " is correct")
-                    .ifElse("Name " + edit_profile_name + " is not correct.")
-                    .finish();
+        verify().that(edit_profile_name
+                .equals(ThucydidesUtils.getFromSession("name")))
+                .ifResultIsExpected("Name " + ThucydidesUtils.getFromSession("name") + " is correct")
+                .ifElse("Name " + edit_profile_name + " is not correct.")
+                .finish();
 
-            String currentName = open(ProfilePageLogged.class, new Url().setPrefix(ThucydidesUtils
-                    .getFromSession("user") + "."))
-                    .getProfileName();
-            verify().that(currentName.equals(ThucydidesUtils.getFromSession("name")))
-                    .ifResultIsExpected("Name " + ThucydidesUtils.getFromSession("name") + " is correct")
-                    .ifElse("Name " + currentName + " is not correct.")
-                    .finish();
+        String currentName = open(ProfilePageLogged.class, new Url().setPrefix(ThucydidesUtils
+                .getFromSession("user") + "."))
+                .getProfileName();
+        verify().that(currentName.equals(ThucydidesUtils.getFromSession("name")))
+                .ifResultIsExpected("Name " + ThucydidesUtils.getFromSession("name") + " is correct")
+                .ifElse("Name " + currentName + " is not correct.")
+                .finish();
+
+    }
+
+    //Scenario: Set null to name (3/3)
+    @Then("in Profile user see Sticky Error")
+    public void show_sticky_error() {
+        final String ERROR_MSG = "Your name is a required field. At least provide your first name, or a "
+                + "nickname or handle.";
+        String edit_profile_name = onOpened(EditProfilePageLogged.class).getName();
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
         }
+        verify().that(onOpened(EditProfilePageLogged.class).getStickyError()
+                .equals(ERROR_MSG))
+                .ifResultIsExpected(onOpened(EditProfilePageLogged.class)
+                        .getStickyError() + " appears")
+                .ifElse(onOpened(EditProfilePageLogged.class)
+                        .getStickyError() + " doesn't appear")
+                .and()
+                .that(edit_profile_name
+                        .equals(ThucydidesUtils.getFromSession("before")))
+                .ifResultIsExpected("Name " + edit_profile_name + " was restored")
+                .ifElse("Name " + edit_profile_name + " wasn't restored")
+                .finish();
+
     }
 
     //Scenario: Change gender (3/3)
@@ -125,28 +133,17 @@ public class ChangeProfileParameters extends LJTest {
     public void user_see_new_birthday() {
         ArrayList<String> birthday_list = onOpened(EditProfilePageLogged.class)
                 .getBirthday();
-        verify().that(birthday_list.get(0).equals(ThucydidesUtils.getFromSession("year").toString()))
-                .ifResultIsExpected(ThucydidesUtils.getFromSession("year").toString() + " Is correct year from input")
-                .ifElse(birthday_list.get(0) + " From get function is not correct")
-                .and()
-                .that(birthday_list.get(1).equals(ThucydidesUtils.getFromSession("month").toString()))
-                .ifResultIsExpected(ThucydidesUtils.getFromSession("month").toString() + " Is correct month from input")
-                .ifElse(birthday_list.get(1) + " From get function is not correct")
-                .and()
-                .that(birthday_list.get(2).equals(ThucydidesUtils.getFromSession("day").toString()))
-                .ifResultIsExpected(ThucydidesUtils.getFromSession("day").toString() + " Is correct day from input")
-                .ifElse(birthday_list.get(2) + " From get function is not correct")
-                .finish();
-/*
-        verify().that(birthday_list.get(0).equals(ThucydidesUtils.getFromSession("year").toString())
-                && birthday_list.get(1).equals(ThucydidesUtils.getFromSession("month").toString())
-                && birthday_list.get(2).equals(ThucydidesUtils.getFromSession("day").toString()))
+
+        verify().that((birthday_list.get(0) + birthday_list.get(1) + birthday_list.get(2))
+                .equals(ThucydidesUtils.getFromSession("year").toString()
+                        + ThucydidesUtils.getFromSession("month").toString()
+                        + ThucydidesUtils.getFromSession("day").toString()))
                 .ifResultIsExpected(ThucydidesUtils.getFromSession("year").toString() + " "
-                        + ThucydidesUtils.getFromSession("month").toString() + " " 
-                        + ThucydidesUtils.getFromSession("day").toString() + " Is correct date from input")
+                        + ThucydidesUtils.getFromSession("month").toString() + " "
+                        + ThucydidesUtils.getFromSession("day").toString() + " is correct date")
                 .ifElse(birthday_list.get(0) + " " + birthday_list.get(1) + " " + birthday_list.get(2)
-                        + " From get function is not correct")
-                .finish();*/
+                        + " is incorrect")
+                .finish();
 
     }
 

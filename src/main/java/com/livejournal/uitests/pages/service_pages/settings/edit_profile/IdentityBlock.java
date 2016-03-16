@@ -28,13 +28,16 @@ public class IdentityBlock extends UIBlock {
     @FindBy(name = "opt_showbday")
     private Select birthdayDisplayOption;
 
-    /*
+    
     @FindBy(name = "opt_showschools")
     private Select schoolPrivacy;
-
+/*
     @FindBy(css = ".field_link.field_link--school.nowrap")
     private Link manageSchools;
      */
+    
+    
+    
     @StepGroup
     public void setProfileName(String name) {
         WebElement profileInputName = getDriver().findElement(By.xpath("//div//input[@name='name']"));
@@ -91,5 +94,11 @@ public class IdentityBlock extends UIBlock {
 
         return list;
     }
+    
+    @StepGroup
+    public void setSchoolPrivacy(String privacy) {
+        schoolPrivacy.selectByValue(privacy);
+    }
+    
 
 }

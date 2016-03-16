@@ -47,7 +47,6 @@ public class Friends extends DatabasesData {
             }
         }
         return answer.get(new Random().nextInt(answer.size()));
-//          return answer.get(Min + (int)(Math.random() * ((Max - Min) + 1)))
     }
 
     public ArrayList<String> getAllNotFriends(String user, Integer limit) {
