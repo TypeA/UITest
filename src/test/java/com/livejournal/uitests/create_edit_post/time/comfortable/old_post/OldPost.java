@@ -43,7 +43,8 @@ public class OldPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("New old post")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
                 .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);
