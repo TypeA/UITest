@@ -1,11 +1,14 @@
 Scenario: User can make new post with lj-like tag
 Meta: 
-@categories create_edit_post lj_tags useful
+@categories create_edit_post lj_tags useful likes
 
 Given logged user <name> on Create Post page
-When user create post with lj-like tag
-Then the post is in journal and contains lj-like buttons
+When user create post with lj-like <likes> tag
+Then the post is in journal and contains lj-like <likes> buttons
 
 Examples:
-|name         |
-|testautotest |
+|name         |likes                                                                                    |
+|testautotest |default;                                                                                 |
+|testautotest |facebook;                                                                                |
+|testautotest |repost;twitter;livejournal;                                                              |   
+|testautotest |repost;facebook;twitter;vkontakte;google;surfingbird;odnoklassniki;tumblr;livejournal;   |

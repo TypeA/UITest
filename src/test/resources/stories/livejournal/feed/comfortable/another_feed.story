@@ -1,6 +1,6 @@
 Scenario: Public filters
 Meta: 
-@categories feed comfortable  another_feed 
+@categories feed comfortable  another_feed release
 
 Given user <user> on user2 <user2> Friends Feed
 Then user see only public filters

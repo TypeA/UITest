@@ -1,6 +1,6 @@
 Scenario: Sticky post
 Meta: 
-@categories create_edit_post time comfortable 
+@categories create_edit_post time comfortable release
 
 Given logged user <name> on Create Post page
 When user create new sheduied post sticky
@@ -13,7 +13,7 @@ Examples:
 
 Scenario: Location, mood and music
 Meta: 
-@categories create_edit_post time comfortable
+@categories create_edit_post time comfortable release
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with right element <element> (content <content>)
@@ -28,7 +28,7 @@ Examples:
 
 Scenario: Three posts
 Meta: 
-@categories create_edit_post time comfortable
+@categories create_edit_post time comfortable release
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with Three posts
@@ -41,7 +41,7 @@ Examples:
 
 Scenario: Drop-down menu
 Meta: 
-@categories create_edit_post time comfortable
+@categories create_edit_post time comfortable release
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with drop-down menu content <content>
@@ -57,7 +57,7 @@ Examples:
 
 Scenario: Check-boxes
 Meta: 
-@categories create_edit_post time comfortable 
+@categories create_edit_post time comfortable release
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with check-boxes <checkbox>

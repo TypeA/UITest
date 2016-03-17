@@ -1,7 +1,7 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful 
+@categories navigation useful release
 
 Given logged user (name <name>,region <region>) on Main Page
 When user goes from page <page> using link <link>
@@ -36,7 +36,7 @@ Examples:
 Scenario: Navigation for unlogged user 
 
 Meta: 
-@categories navigation useful
+@categories navigation useful release
 
 Given unlogged user from region <region> on Main Page
 When unlogged user goes from page <page> using link <link>

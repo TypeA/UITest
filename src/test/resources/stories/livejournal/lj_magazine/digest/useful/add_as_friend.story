@@ -1,7 +1,7 @@
 Scenario: Logged user can add to friends author of the post
 
 Meta: 
-@categories lj_magazine digest useful
+@categories lj_magazine digest useful release
 
 Given logged user <user> on the post page
 When user <user> click on the Add to friends button
@@ -15,7 +15,7 @@ Examples:
 Scenario: Logged user cant add to friends ljEditor
 
 Meta: 
-@categories lj_magazine digest useful 123321
+@categories lj_magazine digest useful release
 
 Given logged user <user> on the ljEditor post page
 Then user cant see button add to friends
@@ -28,7 +28,7 @@ Examples:
 Scenario: Unlogged user cant see button Add to friends
 
 Meta: 
-@categories lj_magazine digest useful
+@categories lj_magazine digest useful release
 
 Given unlogged user on the post page
 Then unlogged user cant see button add to friends

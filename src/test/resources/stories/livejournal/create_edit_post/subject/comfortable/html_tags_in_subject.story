@@ -1,6 +1,6 @@
 Scenario: Subject with correct html tags
 Meta: 
-@categories create_edit_post subject comfortable
+@categories create_edit_post subject comfortable release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -17,7 +17,7 @@ Examples:
 
 Scenario: Subject with cropped html tags
 Meta: 
-@categories create_edit_post subject comfortable
+@categories create_edit_post subject comfortable release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
@@ -33,7 +33,7 @@ Examples:
 
 Scenario: Subject with incorrect html tags
 Meta: 
-@categories create_edit_post subject comfortable
+@categories create_edit_post subject comfortable release
 
 Given logged user <name> on Create Post page
 When user create new post with subject <subject>
