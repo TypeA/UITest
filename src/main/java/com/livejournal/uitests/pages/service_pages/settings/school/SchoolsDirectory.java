@@ -18,19 +18,15 @@ public class SchoolsDirectory extends ServicePageLogged {
 
     @FindBy(xpath = "//button[text()='Save Changes']")
     private Button saveButton;
-    /*
-    @FindBy(name = getDBDate().profile().getSchoolId(user) + ":year_start")//извлечь из бд school_id
-    private TextField year_start;
-    
-    @FindBy(name = getDBDate().profile().getSchoolId(user) + ":year_end")//извлечь из бд school_id
-    private TextField year_end;
-     */
 
     public SchoolsDirectory setSchool() {
         addButton.click();
         return this;
     }
 
+    public String getAlertMessage(){
+        return startScript("return jQuery(\".alternating-rows div font\").text()").toString();
+    }
 
     public SchoolsDirectory setYearStart(String year, String schoolid) {
         startScript("return jQuery(\"input[name='" + schoolid + ":year_start']\").val(" + year + ")");
