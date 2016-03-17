@@ -29,9 +29,9 @@ Then user see alert <alert>
 
 Examples:
 |user          |year_start |year_end       |setting    |alert      |
-|--testautotest  |less_min   |rnd_year       |Yeverybody |alert_1    |
-|--testautotest  |min        |less_min       |Yeverybody |alert_2    |
-|--testautotest  |rnd_year   |min            |Yeverybody |alert_2    |
+|testautotest  |less_min   |rnd_year       |Yeverybody |alert_1    |
+|testautotest  |min        |less_min       |Yeverybody |alert_2    |
+|testautotest  |rnd_year   |min            |Yeverybody |alert_2    |
 |testautotest  |min        |current_more    |Yeverybody |alert_3    |
 
 

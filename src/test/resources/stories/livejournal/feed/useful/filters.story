@@ -1,6 +1,6 @@
 Scenario: Default friends filters 
 Meta: 
-@categories feed useful filters
+@categories feed useful filters release
 
 Given logged user <user> with friends on Friends Feed
 When user set filter <filter>
@@ -15,7 +15,7 @@ Examples:
 
 Scenario: Default View
 Meta: 
-@categories feed useful filters
+@categories feed useful filters release
 
 Given logged user <user> with group <filter> on Friends Feed
 Then user see Friends Feed by group <filter>
@@ -28,7 +28,7 @@ Examples:
 
 Scenario: Friends group
 Meta: 
-@categories feed useful filters
+@categories feed useful filters release
 
 Given logged user <user> with group <filter> on Friends Feed
 When user set filter <filter>
@@ -42,7 +42,7 @@ Examples:
 
 Scenario: Edit Filters
 Meta: 
-@categories feed useful filters 
+@categories feed useful filters release
 
 Given logged user <user> on Friends Feed
 When user go to Edit Custom Friends Groups

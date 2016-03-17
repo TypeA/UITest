@@ -1,7 +1,7 @@
 Scenario: Unsuccessfully autorization
 
 Meta: 
-@categories authorization useful 
+@categories authorization useful release
 
 Given unlogged user on Login Form
 When user enter incorrect data: name <name> and clicks LogIn

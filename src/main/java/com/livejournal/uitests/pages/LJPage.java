@@ -74,19 +74,16 @@ public class LJPage extends Page {
                 + "(select upropid from userproplist where name = 'browselang') "
                 + "and userid = "
                 + "(select userid from user where user = '" + user + "');";
-
-        String lang = null;
+        String lang;
         try {
             lang = workWithDB().conect()
                     .select(script2, "value")
                     .finish()
                     .get(0)
                     .get(0);
-
         } catch (Exception ex) {
-            lang = "empty set";
+            lang = "Empty set";
         }
-
         if (!lang.equals("en_LJ")) {
             open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
                     .setLanguage("en_LJ")

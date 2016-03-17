@@ -1,7 +1,7 @@
 Scenario: Links on the account creation page
 
 Meta: 
-@categories registration comfortable 
+@categories registration comfortable release
 
 Given unlogged user on Registration Form
 When user click link <link>

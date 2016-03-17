@@ -31,8 +31,7 @@ public class Friends extends DatabasesData {
         for (int i = 1; i < ans.size(); i++) {
             select = select + " or user = '" + ans.get(i) + "'";
         }
-        select = select + ") "
-                //+ "and user like '%test%' "
+        select = select + ")"
                 + "and user !='" + user + "'"
                 + "and statusvis = 'V'"
                 + "and journaltype = 'P'";
@@ -56,11 +55,9 @@ public class Friends extends DatabasesData {
         for (int i = 1; i < friendid.size(); i++) {
             select2 = select2 + " and userid != '" + friendid.get(i) + "'";
         }
-        select2 = select2 + ")"  
-//                + " and user like '%test%' "
+        select2 = select2 + ")"
                 + "and statusvis = 'V'"
                 + "and journaltype = 'P'"
-//                + "and statusvisdate >= adddate(now(), interval - 500 day) "
                 + "and user !='" + user + "'"
                 + "limit " + limit + ";";
         ArrayList<String> ans = workWithDB().conect()
