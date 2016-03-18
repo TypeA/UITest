@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
  * @author m.prytkova
  */
 public class Friends extends DatabasesData {

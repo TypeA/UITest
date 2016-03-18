@@ -3,8 +3,10 @@ package com.livejournal.uitests.pages.service_pages.settings.friends;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.finish_form.FinishFormGroupPage;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
@@ -14,7 +16,6 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.element.Select;
 
 /**
- *
  * @author s.savinykh
  */
 @DefaultUrl("/friends/editgroups.bml")
@@ -147,6 +148,7 @@ public class ManageGroupsPage extends ServicePageLogged {
         }
         return userInGroup;
     }
+
     public ArrayList<String> getAllUserOutGroup() {
         List<WebElement> options = listUsersOutGroup.getOptions();
         ArrayList<String> userInGroup = new ArrayList();

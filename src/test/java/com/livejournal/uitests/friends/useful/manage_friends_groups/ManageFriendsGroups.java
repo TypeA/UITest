@@ -7,18 +7,16 @@ import com.livejournal.uitests.pages.service_pages.friends_feed_pages.FriendsFee
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.settings.friends.ManageGroupsPage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.openqa.selenium.WebElement;
 
-/**
- *
- * @author m.panferova
- */
+
 public class ManageFriendsGroups extends LJTest {
 
     //Scenario: Change the position of the group(1/4)
@@ -36,9 +34,9 @@ public class ManageFriendsGroups extends LJTest {
         List<ArrayList<String>> groupListBefore = getDBDate().friends().getSortAllGroup(name);
         ThucydidesUtils.putToSession("group_list_before", groupListBefore);
     }
-//
-//    Scenario: Change the position of the group(2/4)
 
+
+//    Scenario: Change the position of the group(2/4)
     @When("user $name moves the group $position and save change")
     public void user_moves_the_group_and_save_change(String name, String position) {
         List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
@@ -54,21 +52,19 @@ public class ManageFriendsGroups extends LJTest {
                 .saveChangesForGroup();
         ThucydidesUtils.putToSession("groupList", putDefaultViewToBegining(changeArrayElements(groupListBefore, moveGroup, position)));
     }
-//
-    //Scenario: Public group(2/3)
 
+    //Scenario: Public group(2/3)
     @When("user (name $name) set the group is public and save the changes")
     public void user_set_the_group_is_public_and_save_the_changes(String name) {
         List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
-        String notPublicValueGroup = getDBDate().friends().getValuePublicGroup(name, true);
+        String notPublicValueGroup = getDBDate().friends().getValuePublicGroup(name, false);
         open(ManageGroupsPage.class)
                 .clickPrivacy(notPublicValueGroup, true)
                 .saveChangesForGroup();
         ThucydidesUtils.putToSession("publicGroup", getDBDate().friends().getNamePublicGroup(name, notPublicValueGroup));
     }
-//
-    //Scenario: Create new group(2/4)
 
+    //Scenario: Create new group(2/4)
     @When("user create new group and save the changes")
     public void user_create_new_group_and_save_the_changes() {
         String group = utility().random().getRandomChar(10);
@@ -97,7 +93,6 @@ public class ManageFriendsGroups extends LJTest {
     }
 //
     //Scenario: Rename group name(2/3)
-
     @When("user (name $name) rename group name and save the changes")
     public void user_rename_group_name_and_save_the_changes(String name) {
         List<ArrayList<String>> groupListBefore = (List<ArrayList<String>>) ThucydidesUtils.getFromSession("group_list_before");
@@ -115,10 +110,12 @@ public class ManageFriendsGroups extends LJTest {
     @When("user (name, $name) delete users in group and save the changes")
     public void user_delete_users_in_group_and_save_the_changes(String name) {
         ArrayList<String> groupList = (ArrayList<String>) ThucydidesUtils.getFromSession("group_list_before");
-        String group = getGroupAndFriendInGroup(name).get(0);
-        String friend = getGroupAndFriendInGroup(name).get(1);
-        onOpened(ManageGroupsPage.class)
-                .moveUserOutByName(group, friend);
+        ArrayList<String> groupAndFriend = getGroupAndFriendInGroup(name);
+        String group = groupAndFriend.get(0);
+        String friend = groupAndFriend.get(1);
+        open(ManageGroupsPage.class)
+                .moveUserOutByName(group, friend)
+                .saveChangesForGroup();
         ThucydidesUtils.putToSession("group", group);
         ThucydidesUtils.putToSession("userOutGroup", friend);
 
@@ -181,8 +178,6 @@ public class ManageFriendsGroups extends LJTest {
         ArrayList<String> nameOfGroup = onOpened(FriendsFeedLogged.class)
                 .openFilters()
                 .getGroups();
-        System.out.println("!!!!!!!!! " + groupListBefore);
-        System.out.println("!!!!!!!!! " + nameOfGroup);
         verify().that(checkFiltersOnFeed(groupListBefore, nameOfGroup))
                 .ifResultIsExpected("Group is changed success")
                 .ifElse("Not change")
@@ -190,7 +185,6 @@ public class ManageFriendsGroups extends LJTest {
     }
 //
     //Scenario: Create new group(4/4)
-
     @Then("there are no posts in the new group (name $name)")
     public void there_are_no_posts_in_the_new_group(String name) {
         String newGroup = ThucydidesUtils.getFromSession("newGroup").toString();
@@ -205,7 +199,6 @@ public class ManageFriendsGroups extends LJTest {
     }
 
     // Scenario: Add users in group(3/3)
-
     @Then("user added to group")
     public void user_added_to_group() {
         String group = ThucydidesUtils.getFromSession("group").toString();
@@ -218,10 +211,11 @@ public class ManageFriendsGroups extends LJTest {
                 .ifElse("User not move")
                 .finish();
     }
+
     //Scenario: Delete users in group(3/3)
     @Then("user deleted from group")
-    public void user_deleted_from_group(){
-    String group = ThucydidesUtils.getFromSession("group").toString();
+    public void user_deleted_from_group() {
+        String group = ThucydidesUtils.getFromSession("group").toString();
         ArrayList<String> usersInGroup = open(ManageGroupsPage.class)
                 .selectByValueGroup(group)
                 .getAllUserInGroup();
@@ -271,7 +265,6 @@ public class ManageFriendsGroups extends LJTest {
     }
 
     private List<ArrayList<String>> removePublicInGroup(List<ArrayList<String>> arraylist) {
-
         for (int i = 0; i < arraylist.get(0).size(); i++) {
             if (arraylist.get(2).get(i).equals("1")) {
                 arraylist.get(0).set(i, arraylist.get(0).get(i).replace(" (public)", ""));
@@ -320,7 +313,6 @@ public class ManageFriendsGroups extends LJTest {
             }
             list.add("Settings");
         }
-        System.out.println("!!!!!!!!! " + list);
         for (int r = 0; r < grouplist.get(0).size(); r++) {
             checkFilter = checkFilter && list.get(r).equalsIgnoreCase(filterFeed.get(r));
         }
@@ -354,10 +346,11 @@ public class ManageFriendsGroups extends LJTest {
         for (int i = 0; i < allGroups.size(); i++) {
             ArrayList<String> allFriendsInGroup = getDBDate().friends().getAllFriendsInGroup(user, allGroups.get(0).get(i));
             if (!allFriendsInGroup.isEmpty()) {
-                groupAndFriend.add(allGroups.get(0).get(i));
+                groupAndFriend.add(allGroups.get(3).get(i));
+                groupAndFriend.add(allFriendsInGroup.get(new Random().nextInt(allFriendsInGroup.size())));
                 break;
             }
-            groupAndFriend.add(allFriendsInGroup.get(new Random().nextInt(allFriendsInGroup.size())));
+
         }
         return groupAndFriend;
     }

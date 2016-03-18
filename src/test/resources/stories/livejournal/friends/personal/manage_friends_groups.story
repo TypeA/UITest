@@ -1,11 +1,11 @@
 Scenario: Change the position of the group
 Meta: 
-@categories friends group personal 
+@categories friends group personal hfghgfhfghgf
 
 Given logged user (name <name>) on Manage Groups Page
 When user <name> moves the group <position> and save change
 Then the changes displayed correctly on Manage Groups Page
-Then the changes displayed correctly on the Friends Feed
+Then the changes displayed correctly on the Friends Feed (name <name>)
 
 Examples:
 |name   |position   |
@@ -14,7 +14,7 @@ Examples:
 
 Scenario: Public group
 Meta: 
-@categories friends group personal 
+@categories friends group personal
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name <name>) set the group is public and save the changes
@@ -30,7 +30,7 @@ Meta:
 @categories friends group personal
 
 Given logged user (name <name>) on Manage Groups Page
-When user (name <name>) create new group and save the changes
+When user create new group and save the changes
 Then the changes displayed correctly on the Friends Feed (name <name>)
 Then there are no posts in the new group (name <name>)
 
@@ -57,11 +57,11 @@ Examples:
 
 Scenario: Rename group name
 Meta: 
-@categories friends group useful 
+@categories friends group useful
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name <name>) rename group name and save the changes
-Then the changes displayed correctly on the Friends Feed
+Then the changes displayed correctly on the Friends Feed (name <name>)
 
 Examples:
 |name   |
@@ -83,7 +83,7 @@ Examples:
 
 Scenario: Delete users in group
 Meta: 
-@categories friends group useful dfgdfgdfgfdg
+@categories friends group useful
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name, <name>) delete users in group and save the changes
