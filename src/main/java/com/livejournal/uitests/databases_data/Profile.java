@@ -61,6 +61,16 @@ public class Profile extends DatabasesData {
 
     }
     
+    public ArrayList<String> getRandomSchoolList() {
+        String select = "select * from schools where country='US' and city = 'New York' limit 10";
+        return workWithDB().conect()
+                .select(select, "schoolid")
+                .finish()
+                .get(0);
+    }
+    
+    
+    
     public String getSchoolId(String user) {
         String select = "select userid from user where user='" + user + "'";
         String userid = workWithDB().conect()
