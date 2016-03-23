@@ -1,39 +1,95 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful release
+@categories navigation useful release ZOZOZO
 
 Given logged user (name <name>,region <region>) on Main Page
-When user goes from page <page> using link <link>
+When user goes from page using link <link>
 Then user on correct page <correct_page>
 
 Examples:
-|name           |region |link           |correct_page                   |page          |
-|cyr_test_cyr   |cyr    |LOGO           |MainPageLogged                 |MainPageLogged|
-|ncyr_test_ncyr |noncyr |BROWSE         |BrowseMainPageLogged           |MainPageLogged|
-|ncyr_test_ncyr |noncyr |RSS            |RssPageLogged                  |MainPageLogged|
-|cyr_test_cyr   |cyr    |LJMAGAZINE     |LJMagazinePageLogged           |MainPageLogged|
-|cyr_test_cyr   |cyr    |FEED           |FriendsFeedLogged              |MainPageLogged|
-|cyr_test_cyr   |cyr    |SHOP           |ShopPageLogged                 |MainPageLogged|
-|cyr_test_cyr   |cyr    |NEWENTRY       |UpdateBmlPageLogged            |MainPageLogged|
-|cyr_test_cyr   |cyr    |JOURNAL        |MyJournalPageLogged            |MainPageLogged|
-|cyr_test_cyr   |cyr    |PROFILE        |ProfilePage                    |MainPageLogged|
-|cyr_test_cyr   |cyr    |STATISTICS     |StatisticsMainPage             |MainPageLogged|
-|cyr_test_cyr   |cyr    |ALBUM          |ScrapBookMainPage              |MainPageLogged|
-|cyr_test_cyr   |cyr    |VIDEO          |VideoAlbumMainPage             |MainPageLogged|
-|cyr_test_cyr   |cyr    |MESSAGES       |InboxMainPage                  |MainPageLogged|
-|cyr_test_cyr   |cyr    |SHEDULED       |SheduledEntriesPage            |MainPageLogged|
-|cyr_test_cyr   |cyr    |RECENTCOMMENTS |RecentCommentsPage             |MainPageLogged|
-|cyr_test_cyr   |cyr    |MNGCOMMUNITIES |ManageCommunitiesPage          |MainPageLogged|
-|cyr_test_cyr   |cyr    |SETTINGS       |SettingsMainPage               |MainPageLogged|
-|cyr_test_cyr   |cyr    |HELP           |SupportMainPageLogged          |MainPageLogged|
-|cyr_test_cyr   |cyr    |LOGOUT         |ServicePageLogged              |MainPageLogged|
+|name           |region |link           |correct_page                   |
+|cyr_test_cyr   |cyr    |LOGO           |MainPageLogged                 |
+|ncyr_test_ncyr |noncyr |BROWSE         |BrowseMainPageLogged           |
+|ncyr_test_ncyr |noncyr |RSS            |RssPageLogged                  |
+|cyr_test_cyr   |cyr    |LJMAGAZINE     |LJMagazinePageLogged           |
+|cyr_test_cyr   |cyr    |FEED           |FriendsFeedLogged              |
+|cyr_test_cyr   |cyr    |SHOP           |ShopPageLogged                 |
+|cyr_test_cyr   |cyr    |NEWENTRY       |UpdateBmlPageLogged            |
+|cyr_test_cyr   |cyr    |JOURNAL        |MyJournalPageLogged            |
+|cyr_test_cyr   |cyr    |PROFILE        |ProfilePageLogged              |
+|cyr_test_cyr   |cyr    |STATISTICS     |StatisticsMainPage             |
+|cyr_test_cyr   |cyr    |ALBUM          |ScrapBookMainPage              |
+|cyr_test_cyr   |cyr    |VIDEO          |VideoAlbumMainPage             |
+|cyr_test_cyr   |cyr    |MESSAGES       |InboxMainPage                  |
+|cyr_test_cyr   |cyr    |SHEDULED       |SheduledEntriesPage            |
+|cyr_test_cyr   |cyr    |RECENTCOMMENTS |RecentCommentsPage             |
+|cyr_test_cyr   |cyr    |MNGCOMMUNITIES |ManageCommunitiesPage          |
+|cyr_test_cyr   |cyr    |SETTINGS       |SettingsMainPage               |
+|cyr_test_cyr   |cyr    |HELP           |SupportMainPageLogged          |
+|cyr_test_cyr   |cyr    |LOGOUT         |ServicePageLogged              |
 
 
 
 
 
 Scenario: Navigation for unlogged user 
+
+Meta: 
+@categories navigation useful release ZOZOZO
+
+Given unlogged user from region <region> on Main Page
+When unlogged user goes from page using link <link>
+Then user on correct page <correct_page>
+
+Examples:
+|region |link           |correct_page            |
+|cyr    |LOGO           |MainPageUnlogged        |
+|noncyr |BROWSE         |BrowseMainPageUnlogged  |
+|noncyr |RSS            |RssPageUnlogged         |
+|cyr    |LJMAGAZINE     |LJMagazinePageUnlogged  |
+|cyr    |SHOP           |ShopPageUnlogged        |
+|cyr    |HELP           |SupportMainPageUnlogged |
+|cyr    |REGISTRATION   |CreateAccountPage       |
+
+
+
+Scenario: Navigation for logged user on journal pages
+
+Meta: 
+@categories navigation useful release
+
+Given logged user (name <name>,region <region>) on Main Page
+When user goes from journal page with syle <syle> using link <link>
+Then user on correct page <correct_page>
+
+Examples:
+|name           |region |link           |correct_page                   |syle               |
+|cyr_test_cyr   |cyr    |LOGO           |MainPageLogged                 |AIR                |
+|ncyr_test_ncyr |noncyr |BROWSE         |BrowseMainPageLogged           |CHAMELEON          |
+|ncyr_test_ncyr |noncyr |RSS            |RssPageLogged                  |EXPRESSIVE         |
+|cyr_test_cyr   |cyr    |LJMAGAZINE     |LJMagazinePageLogged           |MINIMALISM         |
+|cyr_test_cyr   |cyr    |FEED           |FriendsFeedLogged              |SMOOTH SAILING     |
+|cyr_test_cyr   |cyr    |SHOP           |ShopPageLogged                 |TRANQUILITY        |
+|cyr_test_cyr   |cyr    |NEWENTRY       |UpdateBmlPageLogged            |BLOGGISH           |
+|cyr_test_cyr   |cyr    |JOURNAL        |MyJournalPageLogged            |FLEXIBLE SQUARES   |
+|cyr_test_cyr   |cyr    |PROFILE        |ProfilePage                    |AIR                |
+|cyr_test_cyr   |cyr    |STATISTICS     |StatisticsMainPage             |CHAMELEON          |
+|cyr_test_cyr   |cyr    |ALBUM          |ScrapBookMainPage              |EXPRESSIVE         |
+|cyr_test_cyr   |cyr    |VIDEO          |VideoAlbumMainPage             |MINIMALISM         |
+|cyr_test_cyr   |cyr    |MESSAGES       |InboxMainPage                  |SMOOTH SAILING     |
+|cyr_test_cyr   |cyr    |SHEDULED       |SheduledEntriesPage            |TRANQUILITY        |
+|cyr_test_cyr   |cyr    |RECENTCOMMENTS |RecentCommentsPage             |BLOGGISH           |
+|cyr_test_cyr   |cyr    |MNGCOMMUNITIES |ManageCommunitiesPage          |FLEXIBLE SQUARES   |
+|cyr_test_cyr   |cyr    |SETTINGS       |SettingsMainPage               |AIR                |
+|cyr_test_cyr   |cyr    |HELP           |SupportMainPageLogged          |CHAMELEON          |
+|cyr_test_cyr   |cyr    |LOGOUT         |ServicePageLogged              |EXPRESSIVE         |
+
+
+
+
+
+Scenario: Navigation for unlogged user on journal pages
 
 Meta: 
 @categories navigation useful release
@@ -43,11 +99,11 @@ When unlogged user goes from page <page> using link <link>
 Then user on correct page <correct_page>
 
 Examples:
-|region |link           |correct_page            |page            |
-|cyr    |LOGO           |MainPageUnlogged        |MainPageUnlogged|
-|noncyr |BROWSE         |BrowseMainPageUnlogged  |MainPageUnlogged|
-|noncyr |RSS            |RssPageUnlogged         |MainPageUnlogged|
-|cyr    |LJMAGAZINE     |LJMagazinePageUnlogged  |MainPageUnlogged|
-|cyr    |SHOP           |ShopPageUnlogged        |MainPageUnlogged|
-|cyr    |HELP           |SupportMainPageUnlogged |MainPageUnlogged|
-|cyr    |REGISTRATION   |CreateAccountPage       |MainPageUnlogged|
+|region |link           |correct_page            |syle               |
+|cyr    |LOGO           |MainPageUnlogged        |AIR                |
+|noncyr |BROWSE         |BrowseMainPageUnlogged  |CHAMELEON          |
+|noncyr |RSS            |RssPageUnlogged         |EXPRESSIVE         |
+|cyr    |LJMAGAZINE     |LJMagazinePageUnlogged  |MINIMALISM         |
+|cyr    |SHOP           |ShopPageUnlogged        |SMOOTH SAILING     |
+|cyr    |HELP           |SupportMainPageUnlogged |TRANQUILITY        |
+|cyr    |REGISTRATION   |CreateAccountPage       |BLOGGISH           |
