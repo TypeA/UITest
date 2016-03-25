@@ -1,16 +1,21 @@
 package com.livejournal.uitests.navigation.useful.header_navigation;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
+import com.livejournal.uitests.pages.journal_pages.JournalPageLogged;
+import com.livejournal.uitests.pages.journal_pages.JournalPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
 import java.util.ArrayList;
+import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+import org.junit.Assert;
 
 /**
  *
@@ -19,6 +24,7 @@ import org.jbehave.core.annotations.When;
 public class HeaderNavigation extends LJTest {
 
     //Scenario: Navigation for logged user (1/3)
+    //Scenario: Navigation for logged user on journal pages(1/3)
     @Given("logged user (name $name,region $region) on Main Page")
     public void logged_user_on_Main_Page(String name, String region) {
         open(LoginPageUnlogged.class)
@@ -29,6 +35,7 @@ public class HeaderNavigation extends LJTest {
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
+    //Scenario: Navigation for unlogged user on journal pages(1/3)
     @Given("unlogged user from region $region on Main Page")
     public void unlogged_user_from_region_on_Main_Page(String region) {
         open(MainPageUnlogged.class)
@@ -48,17 +55,28 @@ public class HeaderNavigation extends LJTest {
         goToLinkUnloggedService(HeaderLinksList.valueOf(link));
     }
 
-    /*@When("user goes from journal page with syle $syle using link $link")
+    //Scenario: Navigation for logged user on journal pages(2/3)
+    @When("logged user on journal page with syle $syle use link $link")
     public void user_goes_from_gournal_page(String style, String link) {
-
+        String randomUser = getRandomUserWithStyle(style);
+        Assert.assertFalse("There is no required user", randomUser.isEmpty());
+        open(JournalPageLogged.class, new Url().setPrefix(randomUser + "."));
+        goToLinkLoggedJournal(HeaderLinksList.valueOf(link));
     }
 
-    @When("user goes from journal page with syle $syle using link $link")
+    //Scenario: Navigation for unlogged user on journal pages(2/3)
+    @When("unlogged user on journal page with syle $syle use link $link")
     public void unlogged_user_goes_from_gournal_page(String style, String link) {
+        String randomUser = getRandomUserWithStyle(style);
+        Assert.assertFalse("There is no required user", randomUser.isEmpty());
+        open(JournalPageUnlogged.class, new Url().setPrefix(randomUser + "."));
+        goToLinkUnloggedJournal(HeaderLinksList.valueOf(link));
+    }
 
-    }*/
     //Scenario: Navigation for logged user (3/3)
     //Scenario: Navigation for unlogged user (3/3)
+    //Scenario: Navigation for logged user on journal pages(3/3)
+    //Scenario: Navigation for unlogged user on journal pages(3/3)
     @Then("user on correct page $correct_page")
     public void user_in_correct_Page(String correct_page) {
         verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(correct_page))
@@ -171,6 +189,113 @@ public class HeaderNavigation extends LJTest {
         }
     }
 
+    private void goToLinkUnloggedJournal(HeaderLinksList link) {
+        JournalPageUnlogged page = onOpened(JournalPageUnlogged.class);
+        switch (link) {
+            case LOGO:
+                page.clickOnLogo();
+                break;
+            case LJMAGAZINE:
+                page.clickOnLjMagazineMenuItem();
+                break;
+            case BROWSE:
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnBrowse();
+                break;
+            case RSS:
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnRss();
+                break;
+            case SHOP:
+                page.clickOnShopMenuItem();
+                break;
+            case HELP:
+                page.clickOnHelpMenuItem();
+                break;
+            case REGISTRATION:
+                page.clicOnSignUpMenuItem();
+                break;
+        }
+    }
+
+    private void goToLinkLoggedJournal(HeaderLinksList link) {
+        JournalPageLogged page = onOpened(JournalPageLogged.class);
+        switch (link) {
+
+            case LOGO:
+                page.clickOnLogo();
+                break;
+            case LJMAGAZINE:
+                page.clickOnLjMagazineMenuItem();
+                break;
+            case BROWSE:
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnBrowse();
+                break;
+            case RSS:
+                page.moveMouseOverInterestingMenuItem()
+                        .clickOnRss();
+                break;
+            case FEED:
+                page.clickOnFriendsFeedMenuItem();
+                break;
+            case SHOP:
+                page.clickOnShopMenuItem();
+                break;
+            case NEWENTRY:
+                page.clickOnPostNewEntry();
+                break;
+            case JOURNAL:
+                page.clickOnMyJournalMenuItem();
+                break;
+            case PROFILE:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnProfile();
+                break;
+            case STATISTICS:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnStatistics();
+                break;
+            case ALBUM:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnScrapbook();
+                break;
+            case VIDEO:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnVideo();
+                break;
+            case MESSAGES:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnMessagesInMenu();
+                break;
+            case SHEDULED:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnSheduledEntries();
+                break;
+            case RECENTCOMMENTS:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnRecentComments();
+                break;
+            case MNGCOMMUNITIES:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnManageCommunities();
+                break;
+            case SETTINGS:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnSettings();
+                break;
+            case HELP:
+                page.moveMouseOverUserPicMenuItem()
+                        .clickOnSupport();
+                break;
+            case LOGOUT:
+                page.moveMouseOverMyJournalMenuItem()
+                        .clickOnLogOut();
+                break;
+        }
+    }
+
+    @StepGroup
     private String getRandomUserWithStyle(String style) {
         String script = "SELECT DISTINCT user.user "
                 + "FROM user "
@@ -222,7 +347,8 @@ public class HeaderNavigation extends LJTest {
             users.remove("user");
             int index = (int) (Math.random() * (users.size()));
             return users.get(index);
+        } else {
+            return "";
         }
-        return "No such user";
     }
 }

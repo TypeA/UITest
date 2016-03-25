@@ -1,7 +1,7 @@
 Scenario: Navigation for logged user
 
 Meta: 
-@categories navigation useful release ZOZOZO
+@categories navigation useful release
 
 Given logged user (name <name>,region <region>) on Main Page
 When user goes from page using link <link>
@@ -36,7 +36,7 @@ Examples:
 Scenario: Navigation for unlogged user 
 
 Meta: 
-@categories navigation useful release ZOZOZO
+@categories navigation useful release
 
 Given unlogged user from region <region> on Main Page
 When unlogged user goes from page using link <link>
@@ -60,7 +60,7 @@ Meta:
 @categories navigation useful release
 
 Given logged user (name <name>,region <region>) on Main Page
-When user goes from journal page with syle <syle> using link <link>
+When logged user on journal page with syle <syle> use link <link>
 Then user on correct page <correct_page>
 
 Examples:
@@ -73,7 +73,7 @@ Examples:
 |cyr_test_cyr   |cyr    |SHOP           |ShopPageLogged                 |TRANQUILITY        |
 |cyr_test_cyr   |cyr    |NEWENTRY       |UpdateBmlPageLogged            |BLOGGISH           |
 |cyr_test_cyr   |cyr    |JOURNAL        |MyJournalPageLogged            |FLEXIBLE SQUARES   |
-|cyr_test_cyr   |cyr    |PROFILE        |ProfilePage                    |AIR                |
+|cyr_test_cyr   |cyr    |PROFILE        |ProfilePageLogged              |AIR                |
 |cyr_test_cyr   |cyr    |STATISTICS     |StatisticsMainPage             |CHAMELEON          |
 |cyr_test_cyr   |cyr    |ALBUM          |ScrapBookMainPage              |EXPRESSIVE         |
 |cyr_test_cyr   |cyr    |VIDEO          |VideoAlbumMainPage             |MINIMALISM         |
@@ -92,10 +92,10 @@ Examples:
 Scenario: Navigation for unlogged user on journal pages
 
 Meta: 
-@categories navigation useful release
+@categories navigation useful release ZOZOZO
 
 Given unlogged user from region <region> on Main Page
-When unlogged user goes from page <page> using link <link>
+When unlogged user on journal page with syle <syle> use link <link>
 Then user on correct page <correct_page>
 
 Examples:
