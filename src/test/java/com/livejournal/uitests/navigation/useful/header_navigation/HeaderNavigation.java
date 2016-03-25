@@ -2,6 +2,8 @@ package com.livejournal.uitests.navigation.useful.header_navigation;
 
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.LJTest;
+import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
+import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
@@ -37,7 +39,7 @@ public class HeaderNavigation extends LJTest {
     //Scenario: Navigation for logged user (2/3)
     @When("user goes from page using link $link")
     public void user_goes_from_page_using_link(String page, String link) {
-        goToLinkLoggedService( HeaderLinksList.valueOf(link));
+        goToLinkLoggedService(HeaderLinksList.valueOf(link));
     }
 
     //Scenario: Navigation for unlogged user (2/3)
@@ -64,103 +66,106 @@ public class HeaderNavigation extends LJTest {
     }
 
     private void goToLinkUnloggedService(HeaderLinksList link) {
+        ServicePageUnlogged page = onOpened(MainPageUnlogged.class);
         switch (link) {
             case LOGO:
-                onOpened(MainPageUnlogged.class).clickOnLogo();
+                page.clickOnLogo();
                 break;
             case LJMAGAZINE:
-                onOpened(MainPageUnlogged.class).clickOnLjMagazineMenuItem();
+                page.clickOnLjMagazineMenuItem();
                 break;
             case BROWSE:
-                onOpened(MainPageUnlogged.class).moveMouseOverInterestingMenuItem()
+                page.moveMouseOverInterestingMenuItem()
                         .clickOnBrowse();
                 break;
             case RSS:
-                onOpened(MainPageUnlogged.class).moveMouseOverInterestingMenuItem()
+                page.moveMouseOverInterestingMenuItem()
                         .clickOnRss();
                 break;
             case SHOP:
-                onOpened(MainPageUnlogged.class).clickOnShopMenuItem();
+                page.clickOnShopMenuItem();
                 break;
             case HELP:
-                onOpened(MainPageUnlogged.class).clickOnHelpMenuItem();
+                page.clickOnHelpMenuItem();
                 break;
             case REGISTRATION:
-                onOpened(MainPageUnlogged.class).clicOnSignUpMenuItem();
+                page.clicOnSignUpMenuItem();
                 break;
         }
     }
 
     private void goToLinkLoggedService(HeaderLinksList link) {
+        ServicePageLogged page = onOpened(MainPageLogged.class);
         switch (link) {
+
             case LOGO:
-                onOpened(MainPageLogged.class).clickOnLogo();
+                page.clickOnLogo();
                 break;
             case LJMAGAZINE:
-                onOpened(MainPageLogged.class).clickOnLjMagazineMenuItem();
+                page.clickOnLjMagazineMenuItem();
                 break;
             case BROWSE:
-                onOpened(MainPageLogged.class).moveMouseOverInterestingMenuItem()
+                page.moveMouseOverInterestingMenuItem()
                         .clickOnBrowse();
                 break;
             case RSS:
-                onOpened(MainPageLogged.class).moveMouseOverInterestingMenuItem()
+                page.moveMouseOverInterestingMenuItem()
                         .clickOnRss();
                 break;
             case FEED:
-                onOpened(MainPageLogged.class).clickOnFriendsFeedMenuItem();
+                page.clickOnFriendsFeedMenuItem();
                 break;
             case SHOP:
-                onOpened(MainPageLogged.class).clickOnShopMenuItem();
+                page.clickOnShopMenuItem();
                 break;
             case NEWENTRY:
-                onOpened(MainPageLogged.class).clickOnPostNewEntry();
+                page.clickOnPostNewEntry();
                 break;
             case JOURNAL:
-                onOpened(MainPageLogged.class).clickOnMyJournalMenuItem();
+                page.clickOnMyJournalMenuItem();
                 break;
             case PROFILE:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnProfile();
                 break;
             case STATISTICS:
-                onOpened(MainPageLogged.class).moveMouseOverUserPicMenuItem()
+                page.moveMouseOverUserPicMenuItem()
                         .clickOnStatistics();
                 break;
             case ALBUM:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnScrapbook();
                 break;
             case VIDEO:
-                onOpened(MainPageLogged.class).moveMouseOverUserPicMenuItem()
+                page.moveMouseOverUserPicMenuItem()
                         .clickOnVideo();
                 break;
             case MESSAGES:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnMessagesInMenu();
                 break;
             case SHEDULED:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnSheduledEntries();
                 break;
             case RECENTCOMMENTS:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnRecentComments();
                 break;
             case MNGCOMMUNITIES:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnManageCommunities();
                 break;
             case SETTINGS:
-                onOpened(MainPageLogged.class).moveMouseOverUserPicMenuItem()
+                page.moveMouseOverUserPicMenuItem()
                         .clickOnSettings();
                 break;
             case HELP:
-                onOpened(MainPageLogged.class).moveMouseOverUserPicMenuItem()
+                page.moveMouseOverUserPicMenuItem()
                         .clickOnSupport();
                 break;
             case LOGOUT:
-                onOpened(MainPageLogged.class).moveMouseOverMyJournalMenuItem()
+                page.moveMouseOverMyJournalMenuItem()
                         .clickOnLogOut();
                 break;
         }
