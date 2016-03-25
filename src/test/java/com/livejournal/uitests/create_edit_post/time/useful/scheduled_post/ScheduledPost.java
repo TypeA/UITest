@@ -56,7 +56,8 @@ public class ScheduledPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("Sheduled post for deleting or editing")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
                 .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("number_of_entryes", open(SheduledEntriesPage.class).getNumberOfEntryes());
@@ -78,7 +79,8 @@ public class ScheduledPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("New scheduled post")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
                 .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text.trim());
@@ -97,7 +99,9 @@ public class ScheduledPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("New scheduled post")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
+                .usePostContent()
                 .setPrivacy(privacy, groups)
                 .usePage()
                 .postEntry();

@@ -8,12 +8,13 @@ import org.openqa.selenium.support.FindBy;
 /**
  *
  * @author s.savinykh
- */@DefaultUrl("/profile")
-public class ProfilePageLogged extends ServicePageLogged{
-    
-   @FindBy(css = ".b-profile-group-body")
+ */
+@DefaultUrl("/profile")
+public class ProfilePageLogged extends ServicePageLogged {
+
+    @FindBy(css = ".b-profile-group-body")
     private TextField nameLabel;
-    
+
     public String getName() {
         return nameLabel.getText();
     }
