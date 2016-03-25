@@ -92,7 +92,7 @@ Examples:
 Scenario: Navigation for unlogged user on journal pages
 
 Meta: 
-@categories navigation useful release ZOZOZO
+@categories navigation useful release
 
 Given unlogged user from region <region> on Main Page
 When unlogged user on journal page with syle <syle> use link <link>
