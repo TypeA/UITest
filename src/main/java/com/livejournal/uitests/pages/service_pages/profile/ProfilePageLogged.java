@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import java.util.ArrayList;
+import java.util.List;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
@@ -33,12 +34,13 @@ public class ProfilePageLogged extends ServicePageLogged {
     }
     
     public ArrayList<String> getSchoolList() {
-        return onDisplayed(SchoolsBlock.class).getSchoolList();
+         return onDisplayed(SchoolsBlock.class).getSchoolList();
     }
 
     public String getSchoolInfo() {
         String school = startScript("return jQuery('.b-profile-group-body .b-profile-list').eq(1).text()").toString();
         return school.trim();
     }
+    
 
 }

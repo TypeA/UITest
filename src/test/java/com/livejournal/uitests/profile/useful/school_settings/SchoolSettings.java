@@ -62,12 +62,12 @@ public class SchoolSettings extends LJTest {
         String school_page = null;
         boolean isDBequalsPage;
         try {
-            yearlist = getDBDate().profile().getYearInterval("testautotest");
+            yearlist = getDBDate().profile().getYearInterval("testautotest");//исправить!!!
         } catch (NullPointerException ex) {
             yearlist = null;
         }
         String school_db = parseSchoolDB(joinLists(getDBDate().profile()
-                .getSchool(user), yearlist));
+                .getSchool(user).get(0), yearlist));
         if (!user1.equals("nobody")) {
             String username = parseUser(user1, user);
 

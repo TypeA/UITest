@@ -5,7 +5,7 @@ Change profile parameters
 Scenario: Change name
 
 Meta: 
-@categories profile useful 
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
 When user enter another name <name> on Edit profile page
