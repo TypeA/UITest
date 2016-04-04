@@ -33,7 +33,8 @@ public class HtmlTagsInSubject extends LJTest {
                 .closeDraft()
                 .usePostContent()
                 .setSubject(subject)
-                .setPostText(utility().random().getRandomText(30), "html")
+                .useHTMLEditor()
+                .setPostText(utility().random().getRandomText(30))
                 .usePage()
                 .postEntry();
     }

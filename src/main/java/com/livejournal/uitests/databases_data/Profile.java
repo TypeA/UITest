@@ -55,24 +55,51 @@ public class Profile extends DatabasesData {
 
         ArrayList<String> school_id = getSchoolId(user);
         List<ArrayList<String>> school_list = new ArrayList<ArrayList<String>>();
-        
+
         String select = null;
 
         for (int i = 0; i < school_id.size(); i++) {
             select = "select * from schools where schoolid=" + school_id.get(i);
-           school_list.add(workWithDB().conect()
-                .select(select, "name, city, state")
-                .finish()
-                .get(0));
+            school_list.add(workWithDB().conect()
+                    .select(select, "name, city, state")
+                    .finish()
+                    .get(0));
         }
-        /*
-        select = "select * from schools where schoolid=" + school_id;
-        return workWithDB().conect()
-                .select(select, "name, city, state")
+        return school_list;
+    }
+
+    public ArrayList<String> getYearInterval(String user) {
+        ArrayList<String> year_interval = new ArrayList<String>();
+        String select = "select userid from user where user='" + user + "'";
+        String userid = workWithDB().conect()
+                .select(select, "userid")
+                .finish()
+                .get(0)
+                .get(0);
+        select = "select* from lj_c" + userData().getUserClusterId(user) + ".user_schools where userid=" + userid
+                + " order by year_start";
+
+        year_interval = workWithDB().conect()
+                .select(select, "year_start, year_end")
                 .finish()
                 .get(0);
-        */
-        return school_list;
+        return year_interval;
+    }
+    
+    public List<ArrayList<String>> getFullSchoolInfo(String user){
+        String select = "select userid from user where user='" + user + "'";
+        String userid = workWithDB().conect()
+                .select(select, "userid")
+                .finish()
+                .get(0)
+                .get(0);
+        select = "select *  from schools sc inner join lj_c"
+                + userData().getUserClusterId(user) + ".user_schools us on  "
+                + "us.schoolid=sc.schoolid where userid=" + userid
+                + " order by year_start";
+        return workWithDB().conect()
+                .select(select, "name, country, state, city, year_start, year_end")
+                .finish();
     }
 
     public ArrayList<String> getRandomSchoolList() {
@@ -100,26 +127,4 @@ public class Profile extends DatabasesData {
 
     }
 
-    public ArrayList<String>getYearInterval(String user) {
-        ArrayList<String> year_interval = new ArrayList<String>();
-        String select = "select userid from user where user='" + user + "'";
-        String userid = workWithDB().conect()
-                .select(select, "userid")
-                .finish()
-                .get(0)
-                .get(0);
-        select = "select* from lj_c" + userData().getUserClusterId(user) + ".user_schools where userid=" + userid
-                + " order by year_start";
-        
-         year_interval = workWithDB().conect()
-                .select(select, "year_start, year_end")
-                .finish()
-                .get(0);
-        return year_interval;
-        /*if (year_interval.get(0).equals("")) {
-            return null;
-        } else {
-            return year_interval;
-        }*/
-    }
 }

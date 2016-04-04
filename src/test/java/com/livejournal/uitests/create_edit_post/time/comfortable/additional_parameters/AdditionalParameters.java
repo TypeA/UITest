@@ -46,7 +46,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setStickyPost()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -62,7 +63,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setRightBlockContent(element, content)
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -78,7 +80,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setFeedRssIgnore()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -94,11 +97,12 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setThreePosts()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
-    
+
     //Scenario: Drop-down menu (2/3)
     @When("user create new sheduied post with drop-down menu content $content")
     public void user_create_new_sheduied_post_with_dropdown_menu(String content) {
@@ -110,7 +114,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setThreePosts()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
