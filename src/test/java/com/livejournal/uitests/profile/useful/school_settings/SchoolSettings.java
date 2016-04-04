@@ -30,96 +30,6 @@ import org.junit.Assert;
  */
 public class SchoolSettings extends LJTest {
 
-    /*@Given("data from DB")
-    public void db() {
-        System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
-        ArrayList<String> schooldb_list = get4UsSchools(getDBDate().profile().getRandomSchoolList());
-        String user = "testautotest";
-        String year_start = null;
-        String school = null;
-        open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user);
-        /*for (int i = 0; i < 4; i++) {
-//            добавить 4 школы
-            school = schooldb_list.get(i);
-            year_start = RandomDate.setRandomYear();
-            open(SchoolsDirectory.class, new Url().setPostfix("?ctc=US&sc=NY&cc=New%20York&sid="
-                    + school + ")"))
-                    .setSchool();
-            open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&sc=NY&cc=New%20York&sid="
-                    + school + "&authas=" + user))
-                    .setYearStart(year_start, school)
-                    .setYearEnd(setEndYear(year_start), school)
-                    .saveChanges();
-        }
-
-//        блок сравнения на странице page logged
-        ArrayList<String> schoolpg_list = new ArrayList<>();
-        schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
-        System.out.println("+++ TEST DB");
-        ArrayList<String> interval_db = new ArrayList<>();
-        ArrayList<String> interval_list = new ArrayList<>();
-        interval_db = getDBDate().profile().getYearInterval("testautotest");
-        System.out.println("=== " + interval_db);
-        interval_list.add(null);
-        interval_list.add(null);
-        for (int i = 0; i < schooldb_list.size(); i++) {
-           System.out.println("+++++++ SCHOOL FROM PAGE " + schoolpg_list.get(i));
-            interval_list.set(0, interval_db.get(i));
-            interval_list.set(1, interval_db.get(i + 1));
-           /*  System.out.println("==== " + interval_list);
-            System.out.println("+++++++ SCHOOL FROM DB " + joinLists(getDBDate().profile()
-                    .getSchool(user).get(i), interval_list));
-            
-             if (schoolpg_list.get(i).equals(parseSchoolDB(joinLists(getDBDate().profile()
-                    .getSchool(user).get(i), interval_list)))) {
-                System.out.println("TRUEEE");
-            } else {
-                System.out.println("FAAALSEEEE");
-            }
-        }
-        System.out.println("STOP TEST +++++++++++++++++++++++++++++++");
-
-    }
-
-    public ArrayList<String> get4UsSchools(ArrayList<String> list) {//возвращаю список в котором 4 рандомных schoolid
-        ArrayList<String> new_list = new ArrayList<>();
-        Random random = new Random();
-        System.out.println(list);
-        int index = 0;
-        for (int i = 0; i < 4; i++) {
-            index = random.nextInt(list.size());
-            System.out.println(index);
-            new_list.add(list.get(index));
-            list.remove(index);
-        }
-        return new_list;
-    }
-
-    public String setEndYear(String start_year) {
-        final int MIN = Integer.valueOf(start_year);
-        final int MAX = Date.getCurrentYear();
-
-        int year = MIN + (int) (Math.random() * ((MAX - MIN) + 1));
-
-        return String.valueOf(year);
-    }
-
-    public String parseSchoolDB(ArrayList<String> school_list) {//преобразовывает список в строку нужного формата
-        String school = school_list.get(0) + " - " + school_list.get(1) + ", " + school_list.get(2);
-        if (school_list.size() > 3) {
-            if (!school_list.get(4).equals(null)) {
-                school += "  ("
-                        + school_list.get(3) + " - " + school_list.get(4) + ")";
-            } else {
-                school += "  ("
-                        + school_list.get(3) + " present)";
-            }
-        }
-        return school;
-    }*/
     //Scenario: School privacy (1/3)
     @Given("logged user $user on Profile page with school setting $setting")
     public void logged_user_on_edit_profile_page_school(String user, String setting) {
@@ -205,9 +115,7 @@ public class SchoolSettings extends LJTest {
     @Then("user $user1 can see $user school")
     public void logged_user_can_see_school(String user1, String user) {
         boolean isDBequalsPage;
-        ArrayList<String> schoolpg_list = new ArrayList<>();
-        schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
+        ArrayList<String> schoolpg_list = new ArrayList<>();     
         getDBDate().profile().getFullSchoolInfo(user);
         if (!user1.equals("nobody")) {
             String username = parseUser(user1, user);
@@ -215,15 +123,16 @@ public class SchoolSettings extends LJTest {
                 open(LoginPageUnlogged.class)
                         .authorizeBy(username, getDBDate().userData().getUserPassword(username))
                         .defaultLanguageLogged(username);
-                    System.out.println("+++ I");
+                schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
+                .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
-                System.out.println("+++ II");
                 onOpened(ProfilePageLogged.class)
                         .moveMouseOverMyJournalMenuItem().clickOnLogOut();
             } else {
                 open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
+                 schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+                .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
-                System.out.println("+++ III");
             }
 
             verify().that(isDBequalsPage)
@@ -250,9 +159,7 @@ public class SchoolSettings extends LJTest {
     @Then("Then user $user2 can't see $user school")
     public void logged_user_cant_see_school(String user2, String user) {
         boolean isDBequalsPage;
-        ArrayList<String> schoolpg_list = new ArrayList<>();
-        schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
+        ArrayList<String> schoolpg_list = new ArrayList<>();        
         getDBDate().profile().getFullSchoolInfo(user);
         if (!user2.equals("nobody")) {
             String username = parseUser(user2, user);
@@ -261,17 +168,20 @@ public class SchoolSettings extends LJTest {
                 open(LoginPageUnlogged.class)
                         .authorizeBy(username, getDBDate().userData().getUserPassword(username))
                         .defaultLanguageLogged(username);
-
+                schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
+                .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
 
                 onOpened(ProfilePageLogged.class)
                         .moveMouseOverMyJournalMenuItem().clickOnLogOut();
             } else {
                 open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
+                 schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+                .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
 
             }
-
+            
             verify().that(isDBequalsPage)
                     .ifResultIsExpected("Privacy works correctly, cant see schools"
                     )
