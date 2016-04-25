@@ -3,7 +3,7 @@ School settings
 Scenario: School privacy
 
 Meta:
-@categories profile useful
+@categories profile useful test
 
 Given logged user <user> on Profile page with school setting <setting>
 Then user <user1> can see <user> school

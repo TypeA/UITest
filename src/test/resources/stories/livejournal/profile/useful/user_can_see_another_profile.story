@@ -21,29 +21,6 @@ Examples:
 
 
 
-
-Scenario: School privacy
-
-Meta:
-@categories profile useful 
-
-Given logged user <user> on Profile page with school setting <setting>
-Then user <user1> can see <user> school
-Then user <user2> can't see <user> school
-
-Examples:
-|user         |user1         |user2       |setting    |
-|testautotest |logged        |nobody      |Yeverybody |
-|testautotest |unlogged      |nobody      |Yeverybody |
-|testautotest |friend        |not_friend  |Friends    |
-|testautotest |nobody        |logged      |Nobody     |
-|testautotest |nobody        |unlogged    |Nobody     |
-
-
-
-
-
-
 Scenario: Show email
 
 Meta:

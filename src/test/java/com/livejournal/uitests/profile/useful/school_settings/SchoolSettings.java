@@ -37,7 +37,7 @@ public class SchoolSettings extends LJTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defaultLanguageLogged(user);
-        /*добавляем школы в профиль если их нет
+        /*добавляем школы в профиль если их нет, нужно передавать школьный айдишник
         try {
             getDBDate().profile().getSchoolId(user);
         } catch (Exception ex) {
