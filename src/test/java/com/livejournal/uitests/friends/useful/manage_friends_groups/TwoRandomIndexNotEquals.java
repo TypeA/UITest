@@ -15,11 +15,11 @@ class TwoRandomIndexNotEquals {
             indexMoveUp = 2;
         }
         if (size > 2) {
-            indexMoveUp = (int) (Math.random() * size + 2);
-            indexMoveDown = (int) (Math.random() * (size - 1) + 2);
+            indexMoveUp = 2 + (int) (Math.random() * (size-2)+1);
+            indexMoveDown = 2 + (int) (Math.random() * ((size - 1)-2)+1);
             while (indexMoveUp == indexMoveDown) {
-                indexMoveDown = (int) (Math.random() * (size - 1) + 2);
-            }
+                indexMoveDown = 2 + (int) (Math.random() * ((size - 1)-2)+1);
         }
     }
+}
 }
