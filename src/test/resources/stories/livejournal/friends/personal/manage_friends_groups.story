@@ -1,23 +1,24 @@
 Scenario: Change the position of the group
 Meta: 
-@categories friends group personal 
+@categories friends group personal hfghgfhfghgf
 
 Given logged user (name <name>) on Manage Groups Page
-When user moves the group up and moves the group down and save the changes
+When user <name> moves the group <position> and save change
 Then the changes displayed correctly on Manage Groups Page
-Then the changes displayed correctly on the Friends Feed
+Then the changes displayed correctly on the Friends Feed (name <name>)
 
 Examples:
-|name   |
-|test   |
+|name   |position   |
+|test   |up         |
+|test   |down       |
 
 Scenario: Public group
 Meta: 
-@categories friends group personal 
+@categories friends group personal
 
 Given logged user (name <name>) on Manage Groups Page
-When user set the group is public and save the changes
-Then unlogged user can see group
+When user (name <name>) set the group is public and save the changes
+Then unlogged user (name <name>) can see group
 
 Examples:
 |name   |
@@ -30,8 +31,8 @@ Meta:
 
 Given logged user (name <name>) on Manage Groups Page
 When user create new group and save the changes
-Then the changes displayed correctly on the Friends Feed
-Then there are no posts in the new group
+Then the changes displayed correctly on the Friends Feed (name <name>)
+Then there are no posts in the new group (name <name>)
 
 Examples:
 |name   |
@@ -44,8 +45,8 @@ Meta:
 @categories friends group personal
 
 Given logged user (name <name>) on Manage Groups Page
-When user delete group and save the changes
-Then the changes displayed correctly on the Friends Feed
+When user (name <name>) delete group and save the changes
+Then the changes displayed correctly on the Friends Feed (name <name>)
 
 Examples:
 |name   |
@@ -59,8 +60,8 @@ Meta:
 @categories friends group useful
 
 Given logged user (name <name>) on Manage Groups Page
-When user rename group name and save the changes
-Then the changes displayed correctly on the Friends Feed
+When user (name <name>) rename group name and save the changes
+Then the changes displayed correctly on the Friends Feed (name <name>)
 
 Examples:
 |name   |
@@ -72,8 +73,8 @@ Meta:
 @categories friends group useful
 
 Given logged user (name <name>) on Manage Groups Page
-When user add users in group and save the changes
-Then in group displayed correct user
+When user (name $name) add users in group and save the changes
+Then user added to group
 
 Examples:
 |name   |
@@ -85,8 +86,8 @@ Meta:
 @categories friends group useful
 
 Given logged user (name <name>) on Manage Groups Page
-When user delete users in group and save the changes
-Then in group displayed correct user
+When user (name, <name>) delete users in group and save the changes
+Then user deleted from group
 
 Examples:
 |name   |

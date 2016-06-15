@@ -114,7 +114,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <plugin>
+                    <plugin>
                 <groupId>net.thucydides.maven.plugins</groupId>
                 <artifactId>maven-thucydides-plugin</artifactId>
                 <version>${thucydides.version}</version>
@@ -127,7 +127,7 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+</plugin>
         </plugins>
     </build>
 
@@ -140,14 +140,14 @@
                 </file>
             </activation>
             <reporting>
-                <plugins>
-                    <plugin>
+    <plugins>
+        <plugin>
                         <groupId>net.thucydides.maven.plugins</groupId>
                         <artifactId>maven-thucydides-plugin</artifactId>
                         <version>${thucydides.version}</version>
-                    </plugin>
-                </plugins>
-            </reporting>
+        </plugin>
+    </plugins>
+</reporting>
         </profile>
         <profile>
             <id>maven3</id>
@@ -158,11 +158,11 @@
             </activation>
             <build>
                 <plugins>
-                    <plugin>
+   <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-site-plugin</artifactId>
                         <version>3.0-beta-3</version>
-                        <configuration>
+	<configuration>
                             <reportPlugins>
                                 <plugin>
                                     <groupId>net.thucydides.maven.plugins</groupId>
@@ -170,8 +170,8 @@
                                     <version>${thucydides.version}</version>
                                 </plugin>
                             </reportPlugins>
-                        </configuration>
-                    </plugin>
+	</configuration>
+</plugin>
                 </plugins>
             </build>
         </profile>
