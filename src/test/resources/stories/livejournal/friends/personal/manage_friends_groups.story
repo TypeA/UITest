@@ -1,6 +1,6 @@
 Scenario: Change the position of the group
 Meta: 
-@categories friends group personal hfghgfhfghgf
+@categories friends group personal release
 
 Given logged user (name <name>) on Manage Groups Page
 When user <name> moves the group <position> and save change
@@ -14,7 +14,7 @@ Examples:
 
 Scenario: Public group
 Meta: 
-@categories friends group personal
+@categories friends group personal release
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name <name>) set the group is public and save the changes
@@ -27,7 +27,7 @@ Examples:
 
 Scenario: Create new group
 Meta: 
-@categories friends group personal
+@categories friends group personal release
 
 Given logged user (name <name>) on Manage Groups Page
 When user create new group and save the changes
@@ -42,7 +42,7 @@ Examples:
 
 Scenario: Delete group
 Meta: 
-@categories friends group personal
+@categories friends group personal release
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name <name>) delete group and save the changes
@@ -57,7 +57,7 @@ Examples:
 
 Scenario: Rename group name
 Meta: 
-@categories friends group useful
+@categories friends group useful release
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name <name>) rename group name and save the changes
@@ -70,7 +70,7 @@ Examples:
 
 Scenario: Add users in group
 Meta: 
-@categories friends group useful
+@categories friends group useful release
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name $name) add users in group and save the changes
@@ -83,7 +83,7 @@ Examples:
 
 Scenario: Delete users in group
 Meta: 
-@categories friends group useful
+@categories friends group useful release
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name, <name>) delete users in group and save the changes
