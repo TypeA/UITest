@@ -41,7 +41,7 @@ Examples:
 
 Scenario: Drop-down menu
 Meta: 
-@categories create_edit_post time comfortable release
+@categories create_edit_post time comfortable release 
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with drop-down menu content <content>
@@ -55,9 +55,9 @@ Examples:
 
 
 
-Scenario: Check-boxes
+Scenario: Check-boxes 
 Meta: 
-@categories create_edit_post time comfortable release
+@categories create_edit_post time comfortable release 321321
 
 Given logged user <name> on Create Post page
 When user create new sheduied post with check-boxes <checkbox>
@@ -65,7 +65,7 @@ Then the post is scheduled with check-boxes <checkbox>
 
 Examples:
 |name         |checkbox     |
-|testautotest |feed and rss |
+|testautotest |feedandrss   |
 |testautotest |ratings      |
 
 
