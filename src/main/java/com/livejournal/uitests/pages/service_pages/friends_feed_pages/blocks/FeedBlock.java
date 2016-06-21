@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -111,9 +113,16 @@ public class FeedBlock extends UIBlock {
     @StepGroup
     public String getTextFromLJCut(String text) {
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-decor a').click()");
-        try {
-            Thread.sleep(50);
-        } catch (InterruptedException ex) {
+        Boolean flag=true;
+        int i=0;
+        WebElement expandedCut;
+        while (flag) {
+            expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-link lj-widget ng-scope ljcut-expanded"));
+            if ((i<100)&&(expandedCut.isDisplayed())) {
+                flag=false;
+            } else {
+                i++;
+            }
         }
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
 
