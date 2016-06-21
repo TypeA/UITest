@@ -64,17 +64,11 @@ public class AdditionalContent extends UpdateBmlBlockes {
         }
     }
 
-    @FindBy(css = ".lj-widget-22")
+    @FindBy(id = "backdated")
     private CheckBox feedRssIgnore;
 
-    @FindBy(css = ".lj-widget-20")
-    private CheckBox feedRssIgnoreEdit;
-
-    @FindBy(css = ".lj-widget-24")
+    @FindBy(id = "ratingmember")
     private CheckBox ignoreRatings;
-
-    @FindBy(css = ".lj-widget-22")
-    private CheckBox ignoreRatingsEdit;
 
     public AdditionalContent setFoRIgnore(String checkbox) {
         if (checkbox.toLowerCase().equals("feedandrss")) {
@@ -88,11 +82,11 @@ public class AdditionalContent extends UpdateBmlBlockes {
     public Boolean getFoRIgnore(String checkbox) {
         Boolean status =null;
         if (checkbox.equals("feedandrss")) {
-            status = feedRssIgnoreEdit.isSelected();
+            status = feedRssIgnore.isSelected();
         } else if (checkbox.equals("ratings")) {
-            status = ignoreRatingsEdit.isSelected();
+            status = ignoreRatings.isSelected();
         }
-        return feedRssIgnore.isSelected();
+        return status;
     }
 
     @FindBy(css = ".b-updatepage-threeposts-check")
