@@ -26,7 +26,7 @@ Examples:
 
 Scenario: LJ-cut works on feed
 Meta: 
-@categories create_edit_post lj_tags useful release 321321312
+@categories create_edit_post lj_tags useful release
 
 Given logged user <name> on Create Post page
 When user use lj-cut <ljcut> and put some text in it
