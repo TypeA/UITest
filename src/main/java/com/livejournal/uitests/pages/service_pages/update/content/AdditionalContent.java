@@ -77,16 +77,12 @@ public class AdditionalContent extends UpdateBmlBlockes {
     }
 
     public Boolean getFoRIgnore(String checkbox) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-        }
         Boolean status = false;
         if (checkbox.toLowerCase().equals("feedandrss")) {
-            status = feedRssIgnore.isSelected();
+            status = Boolean.valueOf(startScript("jQuery('.lj-widget-20').is(\":checked\")").toString());
             System.out.println("feed and rss = " + status.toString());
         } else if (checkbox.toLowerCase().equals("ratings")) {
-            status = ignoreRatings.isSelected();
+            status = Boolean.valueOf(startScript("jQuery('.lj-widget-20').is(\":checked\")").toString());
             System.out.println("ratings = " + status.toString());
         }
         return status;
