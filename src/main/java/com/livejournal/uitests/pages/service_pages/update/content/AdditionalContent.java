@@ -67,8 +67,14 @@ public class AdditionalContent extends UpdateBmlBlockes {
     @FindBy(css = ".lj-widget-22")
     private CheckBox feedRssIgnore;
 
+    @FindBy(css = ".lj-widget-20")
+    private CheckBox feedRssIgnoreEdit;
+
     @FindBy(css = ".lj-widget-24")
     private CheckBox ignoreRatings;
+
+    @FindBy(css = ".lj-widget-22")
+    private CheckBox ignoreRatingsEdit;
 
     public AdditionalContent setFoRIgnore(String checkbox) {
         if (checkbox.toLowerCase().equals("feedandrss")) {
@@ -80,8 +86,12 @@ public class AdditionalContent extends UpdateBmlBlockes {
     }
 
     public Boolean getFoRIgnore(String checkbox) {
-        System.out.println("=============== " + feedRssIgnore.isSelected());
-
+        Boolean status =null;
+        if (checkbox.equals("feedandrss")) {
+            status = feedRssIgnoreEdit.isSelected();
+        } else if (checkbox.equals("ratings")) {
+            status = ignoreRatingsEdit.isSelected();
+        }
         return feedRssIgnore.isSelected();
     }
 
