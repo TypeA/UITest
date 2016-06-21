@@ -80,21 +80,9 @@ public class AdditionalContent extends UpdateBmlBlockes {
     }
 
     public Boolean getFoRIgnore(String checkbox) {
-        Boolean status = false;
-        this.sendKeys(Keys.PAGE_DOWN);
-        this.sendKeys(Keys.PAGE_DOWN);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException ex) {
-        }
-        if (checkbox.toLowerCase().equals("feedandrss")) {
-            status = startScript("jQuery('.lj-widget-20').is(\":checked\")").toString().equals("true");
-            System.out.println("feed and rss = " + status.toString());
-        } else if (checkbox.toLowerCase().equals("ratings")) {
-            status = startScript("jQuery('.lj-widget-20').is(\":checked\")").toString().equals("true");
-            System.out.println("ratings = " + status.toString());
-        }
-        return status;
+        System.out.println("=============== " + feedRssIgnore.isSelected());
+
+        return feedRssIgnore.isSelected();
     }
 
     @FindBy(css = ".b-updatepage-threeposts-check")
