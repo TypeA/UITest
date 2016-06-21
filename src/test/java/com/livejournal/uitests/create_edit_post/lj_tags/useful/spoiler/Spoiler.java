@@ -1,5 +1,6 @@
 package com.livejournal.uitests.create_edit_post.lj_tags.useful.spoiler;
 
+import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
@@ -75,8 +76,8 @@ public class Spoiler extends LJTest {
 
     //Scenario: Spoiler works on feed (3/3)
     @Then("the post is on feed and contains spoiler with some information in it")
-    public void post_on_feed_and_contains_ljcut_with_some_information_in_it() {
-        onOpened(EntryPageLogged.class).clickOnFriendsFeedMenuItem();
+    public void post_on_feed_and_contains_ljcut_with_some_information_in_it(String name) {
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         verify().that(onOpened(FriendsFeedLogged.class).feed().getTextSpoiler(ThucydidesUtils.getFromSession("text").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
                 .ifResultIsExpected("The spoiler is working properly")
                 .ifElse("The spoiler doesn't work properly")
@@ -86,8 +87,8 @@ public class Spoiler extends LJTest {
 
     //Scenario: Spoiler with custom text on feed (3/3)
     @Then("the post is on feed and contains spoiler with custom title $spoiler")
-    public void post_on_feed_and_contains_spoiler_with_custom_title(String spoiler) {
-        onOpened(EntryPageLogged.class).clickOnFriendsFeedMenuItem();
+    public void post_on_feed_and_contains_spoiler_with_custom_title(String spoiler,String name) {
+        open(FriendsFeedLogged.class, new Url().setPrefix(name + "."));
         verify().that(onOpened(FriendsFeedLogged.class).feed().getSpoilerCustomText(ThucydidesUtils.getFromSession("text").toString()).equals(spoiler))
                 .ifResultIsExpected("The spoiler title displaying correctly")
                 .ifElse("The spoiler title displaying incorrect")
