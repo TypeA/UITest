@@ -91,7 +91,7 @@ public class ScheduledPost extends LJTest {
     public void user_create_new_scheduled_post_with_privacy(String privacy, String group) {
         ArrayList<String> groups = new ArrayList<String>();
         groups.add(group);
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "3")
                 .split(";");
         String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
