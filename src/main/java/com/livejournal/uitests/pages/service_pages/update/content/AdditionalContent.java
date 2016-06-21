@@ -6,6 +6,7 @@ import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.CheckBox;
@@ -80,6 +81,8 @@ public class AdditionalContent extends UpdateBmlBlockes {
 
     public Boolean getFoRIgnore(String checkbox) {
         Boolean status = false;
+        this.sendKeys(Keys.PAGE_DOWN);
+        this.sendKeys(Keys.PAGE_DOWN);
         try {
             Thread.sleep(5000);
         } catch (InterruptedException ex) {
