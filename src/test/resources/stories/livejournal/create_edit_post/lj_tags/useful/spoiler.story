@@ -1,6 +1,6 @@
 Scenario: User can create new entry with spoiler
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful release 321321312
 
 Given logged user <name> on Create Post page
 When user use spoiler <spoiler> and put some text in it
@@ -13,7 +13,7 @@ Examples:
 
 Scenario: User can create new entry with custom title in spoiler
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful release 321321312
 
 Given logged user <name> on Create Post page
 When user use spoiler <spoiler> and put some text in it
@@ -25,7 +25,7 @@ Examples:
 
 Scenario: Spoiler works on feed
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful release 321321312
 
 Given logged user <name> on Create Post page
 When user use spoiler <spoiler> and put some text in it
@@ -38,7 +38,7 @@ Examples:
 
 Scenario: Spoiler with custom text on feed
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful release 321321312
 
 Given logged user <name> on Create Post page
 When user use spoiler <spoiler> and put some text in it
