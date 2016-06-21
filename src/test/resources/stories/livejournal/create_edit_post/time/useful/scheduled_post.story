@@ -1,6 +1,6 @@
 Scenario: Create scheduled post
 Meta: 
-@categories create_edit_post time useful release
+@categories create_edit_post time useful release 321321
 
 Given logged user <name> on Create Post page
 When user create new post and change parameter <parameter> by value <value>
