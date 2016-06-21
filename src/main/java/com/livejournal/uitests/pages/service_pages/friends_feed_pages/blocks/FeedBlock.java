@@ -116,8 +116,11 @@ public class FeedBlock extends UIBlock {
         int i = 0;
         WebElement expandedCut = null;
         while ((i < 50) && (expandedCut == null)) {
-            expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-expanded"));
-            i++;
+            try {
+                expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-expanded"));
+            } catch (Exception e) {
+                i++;
+            }
         }
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
     }
