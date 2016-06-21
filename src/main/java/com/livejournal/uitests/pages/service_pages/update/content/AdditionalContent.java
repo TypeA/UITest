@@ -79,10 +79,10 @@ public class AdditionalContent extends UpdateBmlBlockes {
     public Boolean getFoRIgnore(String checkbox) {
         Boolean status = false;
         if (checkbox.toLowerCase().equals("feedandrss")) {
-            status = Boolean.valueOf(startScript("jQuery('.lj-widget-20').is(\":checked\")").toString());
+            status = startScript("jQuery('.lj-widget-20').is(\":checked\")").toString().equals("true");
             System.out.println("feed and rss = " + status.toString());
         } else if (checkbox.toLowerCase().equals("ratings")) {
-            status = Boolean.valueOf(startScript("jQuery('.lj-widget-20').is(\":checked\")").toString());
+            status = startScript("jQuery('.lj-widget-20').is(\":checked\")").toString().equals("true");
             System.out.println("ratings = " + status.toString());
         }
         return status;
