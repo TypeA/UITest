@@ -84,8 +84,8 @@ public class Ljcut extends LJTest {
     public void post_on_feed_and_contains_ljcut_with_some_information_in_it() {
         onOpened(EntryPageLogged.class).clickOnFriendsFeedMenuItem();
         verify().that(onOpened(FriendsFeedLogged.class).feed().getTextFromLJCut(ThucydidesUtils.getFromSession("before").toString()).equals(ThucydidesUtils.getFromSession("text").toString()))
-                .ifResultIsExpected("The spoiler is working properly")
-                .ifElse("The spoiler doesn't work properly")
+                .ifResultIsExpected("The ljcut is working properly")
+                .ifElse("The ljcut doesn't work properly")
                 .finish();
 
     }
@@ -95,8 +95,8 @@ public class Ljcut extends LJTest {
     public void post_on_feed_and_contains_spoiler_with_custom_title(String ljcut) {
         onOpened(EntryPageLogged.class).clickOnFriendsFeedMenuItem();
         verify().that(onOpened(FriendsFeedLogged.class).feed().getLJCutCustomText(ThucydidesUtils.getFromSession("before").toString()).equals(ljcut))
-                .ifResultIsExpected("The spoiler title displaying correctly")
-                .ifElse("The spoiler title displaying incorrect")
+                .ifResultIsExpected("The ljcut title displaying correctly")
+                .ifElse("The ljcut title displaying incorrect")
                 .finish();
     }
 }
