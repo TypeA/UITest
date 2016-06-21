@@ -117,7 +117,7 @@ public class FeedBlock extends UIBlock {
         int i=0;
         WebElement expandedCut;
         while (flag) {
-            expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-link lj-widget ng-scope ljcut-expanded"));
+            expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-expanded"));
             if ((i<100)&&(expandedCut.isDisplayed())) {
                 flag=false;
             } else {
