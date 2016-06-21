@@ -113,19 +113,13 @@ public class FeedBlock extends UIBlock {
     @StepGroup
     public String getTextFromLJCut(String text) {
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-decor a').click()");
-        Boolean flag=true;
-        int i=0;
-        WebElement expandedCut;
-        while (flag) {
+        int i = 0;
+        WebElement expandedCut = null;
+        while ((i < 50) && (expandedCut == null)) {
             expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-expanded"));
-            if ((i<100)&&(expandedCut.isDisplayed())) {
-                flag=false;
-            } else {
-                i++;
-            }
+            i++;
         }
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
-
     }
 
     @StepGroup
