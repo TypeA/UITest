@@ -3,6 +3,8 @@ package com.livejournal.uitests.pages.service_pages.update.content;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -78,6 +80,10 @@ public class AdditionalContent extends UpdateBmlBlockes {
 
     public Boolean getFoRIgnore(String checkbox) {
         Boolean status = false;
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException ex) {
+        }
         if (checkbox.toLowerCase().equals("feedandrss")) {
             status = startScript("jQuery('.lj-widget-20').is(\":checked\")").toString().equals("true");
             System.out.println("feed and rss = " + status.toString());
