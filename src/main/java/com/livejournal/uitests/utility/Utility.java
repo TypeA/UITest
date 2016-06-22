@@ -22,5 +22,8 @@ public class Utility {
         return new Verification();
     }
 
+    public SSHComands sshCommands() {
+        return new SSHComands();
+    }
 
 }
