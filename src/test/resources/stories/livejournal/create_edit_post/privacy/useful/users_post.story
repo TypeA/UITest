@@ -46,7 +46,7 @@ Examples:
 |testautotest   |Public      |                              |Private        |                              |
 |testautotest   |Friends     |                              |Public         |                              |
 |testautotest   |Custom      |test_group;Work;Local Friends |Friends        |                              |
-|testautotest   |Private     |                              |Custom         |test_group;Work;Local Friends |                            |
+|testautotest   |Private     |                              |Custom         |test_group;Work;Local Friends |
 
 
 
