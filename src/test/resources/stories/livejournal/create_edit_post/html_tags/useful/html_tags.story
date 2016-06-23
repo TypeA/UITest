@@ -8,9 +8,10 @@ Then post with style <tag> is displayed correctly
 
 Examples:
 |name         |tag       |
-|testautotest |b         |      
-|testautotest |i         |
-|testautotest |u         |
+|--testautotest |b         |      
+|--testautotest |i         |
+|--testautotest |u         |
+|testautotest |s         |
 
 
 Scenario: Create post with font

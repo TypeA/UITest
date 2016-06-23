@@ -122,8 +122,8 @@ public class HtmlTags extends LJTest {
     public void post_is_displayed_correctly(String tag) {
         String post_text = ThucydidesUtils.getFromSession("post_text").toString();
         verify().that(onOpened(EntryPageLogged.class).Entry().postWithStyleIsDisplayed(post_text, tag))
-                .ifResultIsExpected("Post is displayed with bold text")
-                .ifElse("Post is not displayed with bold text")
+                .ifResultIsExpected("Tag '" + tag + "' is applied")
+                .ifElse("Tag '" + tag + "' is not applied")
                 .finish();
     }
 
