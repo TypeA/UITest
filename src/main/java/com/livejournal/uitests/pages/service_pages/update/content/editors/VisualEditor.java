@@ -10,6 +10,7 @@ import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlo
 import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlockes;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -47,6 +48,9 @@ public class VisualEditor extends UpdateBmlBlockes {
     @FindBy(css = ".cke_button_underline")
     private Button underlineText;
 
+    @FindBy(css = ".cke_button_strike")
+    private Button strikethroughText;
+
     @FindBy(css = ".cke_button_LJLink2")
     private OpenBubbleButton link;
 
@@ -77,7 +81,13 @@ public class VisualEditor extends UpdateBmlBlockes {
             case "u":
                 button = underlineText;
                 break;
+            case "s":
+                button = strikethroughText;
+                break;
+            default:
+                Assert.fail("Unknown tag " + style_text + "!");
         }
+        
         button.click();
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {

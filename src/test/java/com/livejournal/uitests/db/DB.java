@@ -19,6 +19,8 @@ public class DB extends LJTest {
     public void table_is_displayed() {
         
 
+        
+        
         System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
     }
 
