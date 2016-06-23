@@ -1,4 +1,4 @@
-package com.livejournal.uitests.utility;
+package com.livejournal.uitests.console;
 
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
