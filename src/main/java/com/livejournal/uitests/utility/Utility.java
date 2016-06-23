@@ -1,5 +1,7 @@
 package com.livejournal.uitests.utility;
 
+import com.livejournal.uitests.console.SSHComands;
+
 /**
  *
  * @author m.prytkova
@@ -10,10 +12,6 @@ public class Utility {
         return new RandomObject();
     }
 
-    public Calculation calculation() {
-        return new Calculation();
-    }
-
     public Convertation convertation() {
         return new Convertation();
     }
@@ -22,5 +20,8 @@ public class Utility {
         return new Verification();
     }
 
+    public SSHComands sshCommands() {
+        return new SSHComands();
+    }
 
 }

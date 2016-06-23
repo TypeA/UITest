@@ -39,11 +39,11 @@ public class Filters extends LJTest {
         if (!groups.contains(filter)) {
             open(ManageGroupsPage.class)
                     .createNewGroup(filter)
-                    .moveUserIn(5)
-                    .moveUserIn(4)
-                    .moveUserIn(3)
-                    .moveUserIn(2)
-                    .moveUserIn(1)
+                    .moveUserInByIndex(5)
+                    .moveUserInByIndex(4)
+                    .moveUserInByIndex(3)
+                    .moveUserInByIndex(2)
+                    .moveUserInByIndex(1)
                     .saveChangesForGroup();
         }
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."));

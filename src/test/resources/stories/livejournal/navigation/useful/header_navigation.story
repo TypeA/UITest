@@ -12,7 +12,6 @@ Examples:
 |cyr_test_cyr   |cyr    |LOGO           |MainPageLogged                 |
 |ncyr_test_ncyr |noncyr |BROWSE         |BrowseMainPageLogged           |
 |ncyr_test_ncyr |noncyr |RSS            |RssPageLogged                  |
-|cyr_test_cyr   |cyr    |LJMAGAZINE     |LJMagazinePageLogged           |
 |cyr_test_cyr   |cyr    |FEED           |FriendsFeedLogged              |
 |cyr_test_cyr   |cyr    |SHOP           |ShopPageLogged                 |
 |cyr_test_cyr   |cyr    |NEWENTRY       |UpdateBmlPageLogged            |
@@ -47,7 +46,6 @@ Examples:
 |cyr    |LOGO           |MainPageUnlogged        |
 |noncyr |BROWSE         |BrowseMainPageUnlogged  |
 |noncyr |RSS            |RssPageUnlogged         |
-|cyr    |LJMAGAZINE     |LJMagazinePageUnlogged  |
 |cyr    |SHOP           |ShopPageUnlogged        |
 |cyr    |HELP           |SupportMainPageUnlogged |
 |cyr    |REGISTRATION   |CreateAccountPage       |
@@ -68,7 +66,6 @@ Examples:
 |cyr_test_cyr   |cyr    |LOGO           |MainPageLogged                 |AIR                |
 |ncyr_test_ncyr |noncyr |BROWSE         |BrowseMainPageLogged           |CHAMELEON          |
 |ncyr_test_ncyr |noncyr |RSS            |RssPageLogged                  |EXPRESSIVE         |
-|cyr_test_cyr   |cyr    |LJMAGAZINE     |LJMagazinePageLogged           |MINIMALISM         |
 |cyr_test_cyr   |cyr    |FEED           |FriendsFeedLogged              |SMOOTH SAILING     |
 |cyr_test_cyr   |cyr    |SHOP           |ShopPageLogged                 |TRANQUILITY        |
 |cyr_test_cyr   |cyr    |NEWENTRY       |UpdateBmlPageLogged            |BLOGGISH           |
@@ -103,7 +100,6 @@ Examples:
 |cyr    |LOGO           |MainPageUnlogged        |AIR                |
 |noncyr |BROWSE         |BrowseMainPageUnlogged  |CHAMELEON          |
 |noncyr |RSS            |RssPageUnlogged         |EXPRESSIVE         |
-|cyr    |LJMAGAZINE     |LJMagazinePageUnlogged  |MINIMALISM         |
 |cyr    |SHOP           |ShopPageUnlogged        |SMOOTH SAILING     |
 |cyr    |HELP           |SupportMainPageUnlogged |TRANQUILITY        |
 |cyr    |REGISTRATION   |CreateAccountPage       |BLOGGISH           |

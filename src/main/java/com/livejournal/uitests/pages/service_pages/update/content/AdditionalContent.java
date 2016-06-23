@@ -3,9 +3,13 @@ package com.livejournal.uitests.pages.service_pages.update.content;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.Assert;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
+import ru.yandex.qatools.htmlelements.element.CheckBox;
 
 /**
  *
@@ -37,7 +41,7 @@ public class AdditionalContent extends UpdateBmlBlockes {
     public TextField location;
 
     public AdditionalContent setRightBlockContent(String type, String content) {
-        selestRightBlockContent(type).enter(content);
+        selectRightBlockContent(type).enter(content);
         return this;
     }
 
@@ -46,7 +50,7 @@ public class AdditionalContent extends UpdateBmlBlockes {
                 + type.toLowerCase() + "').val()").toString();
     }
 
-    private TextField selestRightBlockContent(String type) {
+    private TextField selectRightBlockContent(String type) {
         switch (type.toUpperCase()) {
             case "MOOD":
                 return mood;
@@ -61,28 +65,42 @@ public class AdditionalContent extends UpdateBmlBlockes {
     }
 
     @FindBy(id = "backdated")
-    public Button feedRssIgnore;
+    private CheckBox feedRssIgnore;
 
-    public AdditionalContent setFeedRssIgnore() {
-        feedRssIgnore.click();
+    @FindBy(id = "ratingmember")
+    private CheckBox ignoreRatings;
+
+    public AdditionalContent setFoRIgnore(String checkbox) {
+        if (checkbox.toLowerCase().equals("feedandrss")) {
+            feedRssIgnore.select();
+        } else if (checkbox.toLowerCase().equals("ratings")) {
+            ignoreRatings.select();
+        }
         return this;
     }
 
-    public Boolean getFeedRssIgnore() {
-        return feedRssIgnore.isSelected();
+    public Boolean getFoRIgnore(String checkbox) {
+        Boolean status =null;
+        if (checkbox.equals("feedandrss")) {
+            status = feedRssIgnore.isSelected();
+        } else if (checkbox.equals("ratings")) {
+            status = ignoreRatings.isSelected();
+        }
+        return status;
     }
 
-    @FindBy(id = "threeposts_check")
-    public Button threePosts;
+    @FindBy(css = ".b-updatepage-threeposts-check")
+    private CheckBox threePosts;
 
     public AdditionalContent setThreePosts() {
-        threePosts.click();
+        if (!threePosts.isSelected()) {
+            threePosts.select();
+        }
         return this;
     }
-    
+
     public Boolean getThreePosts() {
         return threePosts.isSelected();
     }
-
 
 }

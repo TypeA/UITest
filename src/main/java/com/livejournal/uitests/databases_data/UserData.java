@@ -65,4 +65,11 @@ public class UserData extends DatabasesData {
                 .finish().get(0).get(0);
     }
 
+    public ArrayList<String> getUserWithStatus(String status) {
+        String select = "select user from user where statusvis='" + status + "'";
+        return workWithDB().conect()
+                .select(select, "user")
+                .finish()
+                .get(0);
+    }
 }

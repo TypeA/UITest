@@ -8,7 +8,7 @@ Then the post is in journal and contains spoiler with some information in it
 
 Examples:
 |name         |spoiler       |
-|testautotest |DEFAULT       |
+|cyr_test_cyr |DEFAULT       |
 
 
 Scenario: User can create new entry with custom title in spoiler
@@ -21,7 +21,7 @@ Then the post is in journal and contains spoiler with custom title <spoiler>
 
 Examples:
 |name         |spoiler       |
-|testautotest |ололо         |
+|cyr_test_cyr |ололо         |
 
 Scenario: Spoiler works on feed
 Meta: 
@@ -33,7 +33,7 @@ Then the post is on feed and contains spoiler with some information in it
 
 Examples:
 |name         |spoiler       |
-|testautotest |DEFAULT       |
+|cyr_test_cyr |DEFAULT       |
 
 
 Scenario: Spoiler with custom text on feed
@@ -46,4 +46,4 @@ Then the post is on feed and contains spoiler with custom title <spoiler>
 
 Examples:
 |name         |spoiler       |
-|testautotest |ололо         |
+|cyr_test_cyr |ололо         |
