@@ -9,7 +9,7 @@ public class DB extends LJTest {
 
     @Given("data from DB")
     public void db() {
-        System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
+        System.out.println("!!!!!!!!!!!!!!!!!!!!! start test");
         System.out.println(System.getProperty("user.dir"));
         open(LoginPageUnlogged.class);
 
