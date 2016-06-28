@@ -14,11 +14,9 @@ import com.livejournal.uitests.pages.service_pages.settings.edit_profile.EditPro
 import com.livejournal.uitests.pages.service_pages.settings.school.SchoolsDirectory;
 import com.livejournal.uitests.utility.date.Date;
 import com.livejournal.uitests.utility.date.RandomDate;
-import groovyjarjarantlr.Utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -37,7 +35,7 @@ public class SchoolSettings extends LJTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defaultLanguageLogged(user);
-        /*добавляем школы в профиль если их нет, нужно передавать школьный айдишник
+        //добавляем школы в профиль если их нет, нужно передавать школьный айдишник
         try {
             getDBDate().profile().getSchoolId(user);
         } catch (Exception ex) {
@@ -48,60 +46,59 @@ public class SchoolSettings extends LJTest {
                     .setYearStart(year_start, "1531")
                     .setYearEnd(setEndYear(year_start), "1531")
                     .saveChanges();
-        }*/
+        }
         open(EditProfilePageLogged.class)
                 .setSchoolPrivacy(setting)
                 .saveSettings()
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
-        
+
         JSch jsch = new JSch();
         try {
-        Session session = jsch.getSession("lj", "lj-9.local.bulyon.com", 22);
-        session.setPassword("test");
-        java.util.Properties config = new java.util.Properties();
-        config.put("StrictHostKeyChecking", "no");
-        session.setConfig(config);
-        session.connect();
-        Channel channel = session.openChannel("exec");  // runs commands 
-        ((ChannelExec) channel).setCommand("ljmaint.pl deliver");
-        ((ChannelExec) channel).setErrStream(System.err);
+            Session session = jsch.getSession("lj", "lj-9.local.bulyon.com", 22);
+            session.setPassword("test");
+            java.util.Properties config = new java.util.Properties();
+            config.put("StrictHostKeyChecking", "no");
+            session.setConfig(config);
+            session.connect();
+            Channel channel = session.openChannel("exec");  // runs commands 
+            ((ChannelExec) channel).setCommand("ljmaint.pl deliver");
+            ((ChannelExec) channel).setErrStream(System.err);
 
-        InputStream in = channel.getInputStream();
+            InputStream in = channel.getInputStream();
 
-        channel.connect();
+            channel.connect();
 
-        byte[] tmp = new byte[1024];
-        while (true) {
-            while (in.available() > 0) {
-                int i = in.read(tmp, 0, 1024);
-                if (i < 0) {
+            byte[] tmp = new byte[1024];
+            while (true) {
+                while (in.available() > 0) {
+                    int i = in.read(tmp, 0, 1024);
+                    if (i < 0) {
+                        break;
+                    }
+                    System.out.print(new String(tmp, 0, i));
+                }
+                if (channel.isClosed()) {
+                    if (in.available() > 0) {
+                        continue;
+                    }
+                    System.out.println("exit-status: " + channel.getExitStatus());
                     break;
                 }
-                System.out.print(new String(tmp, 0, i));
-            }
-            if (channel.isClosed()) {
-                if (in.available() > 0) {
-                    continue;
+                try {
+                    Thread.sleep(1000);
+                } catch (Exception ee) {
+                    ee.printStackTrace();
                 }
-                System.out.println("exit-status: " + channel.getExitStatus());
-                break;
             }
-            try {
-                Thread.sleep(1000);
-            } catch (Exception ee) {
-                ee.printStackTrace();
-            }
+            channel.disconnect();
+            session.disconnect();
+        } catch (JSchException jex) {
+            jex.printStackTrace();
+        } catch (IOException ioex) {
+            ioex.printStackTrace();
         }
-        channel.disconnect();
-        session.disconnect();
-    } catch(JSchException jex) {
-        jex.printStackTrace();
-    } catch(IOException ioex) {
-        ioex.printStackTrace();
     }
-    }
-    
 
     //Scenario: Check incorrect school years (1/3)
     @Given("logged user $user on Schools Directory page")
@@ -115,7 +112,7 @@ public class SchoolSettings extends LJTest {
     @Then("user $user1 can see $user school")
     public void logged_user_can_see_school(String user1, String user) {
         boolean isDBequalsPage;
-        ArrayList<String> schoolpg_list = new ArrayList<>();     
+        ArrayList<String> schoolpg_list = new ArrayList<>();
         getDBDate().profile().getFullSchoolInfo(user);
         if (!user1.equals("nobody")) {
             String username = parseUser(user1, user);
@@ -124,14 +121,14 @@ public class SchoolSettings extends LJTest {
                         .authorizeBy(username, getDBDate().userData().getUserPassword(username))
                         .defaultLanguageLogged(username);
                 schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
+                        .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
                 onOpened(ProfilePageLogged.class)
                         .moveMouseOverMyJournalMenuItem().clickOnLogOut();
             } else {
                 open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
-                 schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
+                schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+                        .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
             }
 
@@ -159,7 +156,7 @@ public class SchoolSettings extends LJTest {
     @Then("Then user $user2 can't see $user school")
     public void logged_user_cant_see_school(String user2, String user) {
         boolean isDBequalsPage;
-        ArrayList<String> schoolpg_list = new ArrayList<>();        
+        ArrayList<String> schoolpg_list = new ArrayList<>();
         getDBDate().profile().getFullSchoolInfo(user);
         if (!user2.equals("nobody")) {
             String username = parseUser(user2, user);
@@ -169,19 +166,19 @@ public class SchoolSettings extends LJTest {
                         .authorizeBy(username, getDBDate().userData().getUserPassword(username))
                         .defaultLanguageLogged(username);
                 schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
+                        .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
 
                 onOpened(ProfilePageLogged.class)
                         .moveMouseOverMyJournalMenuItem().clickOnLogOut();
             } else {
                 open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
-                 schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
-                .getSchoolList();
+                schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+                        .getSchoolList();
                 isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
 
             }
-            
+
             verify().that(isDBequalsPage)
                     .ifResultIsExpected("Privacy works correctly, cant see schools"
                     )
@@ -192,7 +189,6 @@ public class SchoolSettings extends LJTest {
         }
     }
 
-    
     //Scenario: School privacy (3/3)
     @Then("user $user2 can't see $user school")
     public void user_cant_see_school(String user2, String user) {

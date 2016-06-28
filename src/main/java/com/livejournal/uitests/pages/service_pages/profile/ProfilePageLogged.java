@@ -25,7 +25,7 @@ public class ProfilePageLogged extends ServicePageLogged {
     @FindBy(css = ".b-profile-group-body")
     private TextField nameLabel;
 
-    public String getName() {
+    public String getProfileName() {
         return nameLabel.getText();
     }
 

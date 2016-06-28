@@ -13,10 +13,10 @@ Then user <user2> can't see <user> school
 Examples:
 |user         |user1         |user2       |setting    |
 |testautotest |logged        |nobody      |Yeverybody |
-|testautotest |unlogged      |nobody      |Yeverybody |
-|testautotest |friend        |not_friend  |Friends    |
-|testautotest |nobody        |logged      |Nobody     |
-|testautotest |nobody        |unlogged    |Nobody     |
+|--testautotest |unlogged      |nobody      |Yeverybody |
+|--testautotest |friend        |not_friend  |Friends    |
+|--testautotest |nobody        |logged      |Nobody     |
+|--testautotest |nobody        |unlogged    |Nobody     |
 
 
 Scenario: Check incorrect school years

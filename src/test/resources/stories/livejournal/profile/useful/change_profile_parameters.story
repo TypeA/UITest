@@ -1,7 +1,6 @@
 Change profile parameters
 
 
-
 Scenario: Change name
 
 Meta: 
@@ -9,22 +8,22 @@ Meta:
 
 Given logged user <user> on Edit Profile page
 When user enter another name <name> on Edit profile page
-Then in Profile user see new name <name>
+Then in Profile user see new correct name
 
 Examples:
 |user          |name       |
-|testautotest  |test       |
+|testautotest  |rnd        |
 |testautotest  |rnd_max    |
-|testautotest  |rnd_border |
 
 
-Scenario: Set null to name
+
+Scenario: Delete profile name
 Meta:
-@categories profile useful 
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
 When user enter another name <name> on Edit profile page
-Then in Profile user see Sticky Error
+Then in Profile user see Error
 
 Examples:
 |user          |name     |
@@ -35,16 +34,17 @@ Examples:
 Scenario: Change gender
 
 Meta: 
-@categories profile useful 
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
 When user enter another gender <gender> on Edit profile page
 Then in Profile user see new gender <gender>
 
 Examples:
-|user        |gender     |
-|testautotest|Male       |
-|testautotest|Female     |
+|user         |gender             |
+|testautotest |Male               |
+|testautotest |Female             |
+|testautotest |Unspecified/Other  |
 
 
 
@@ -52,7 +52,7 @@ Examples:
 Scenario: Change to correct date of birth
 
 Meta: 
-@categories profile useful 
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
 When user <user> enter another correct date of birth on Edit profile page
