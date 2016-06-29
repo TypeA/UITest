@@ -35,69 +35,13 @@ public class SchoolSettings extends LJTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defaultLanguageLogged(user);
-        //добавляем школы в профиль если их нет, нужно передавать школьный айдишник
-        try {
-            getDBDate().profile().getSchoolId(user);
-        } catch (Exception ex) {
-            String year_start = RandomDate.setRandomYear();
-            open(SchoolsDirectory.class, new Url().setPostfix("?year=&ctc=US&cc=Alabaster&sid=1531&sc=AL"))
-                    .setSchool();
-            open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&cc=Alabaster&sid=1531&authas=" + user))
-                    .setYearStart(year_start, "1531")
-                    .setYearEnd(setEndYear(year_start), "1531")
-                    .saveChanges();
-        }
+        addSchool(user);
         open(EditProfilePageLogged.class)
                 .setSchoolPrivacy(setting)
                 .saveSettings()
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
-
-        JSch jsch = new JSch();
-        try {
-            Session session = jsch.getSession("lj", "lj-9.local.bulyon.com", 22);
-            session.setPassword("test");
-            java.util.Properties config = new java.util.Properties();
-            config.put("StrictHostKeyChecking", "no");
-            session.setConfig(config);
-            session.connect();
-            Channel channel = session.openChannel("exec");  // runs commands 
-            ((ChannelExec) channel).setCommand("ljmaint.pl deliver");
-            ((ChannelExec) channel).setErrStream(System.err);
-
-            InputStream in = channel.getInputStream();
-
-            channel.connect();
-
-            byte[] tmp = new byte[1024];
-            while (true) {
-                while (in.available() > 0) {
-                    int i = in.read(tmp, 0, 1024);
-                    if (i < 0) {
-                        break;
-                    }
-                    System.out.print(new String(tmp, 0, i));
-                }
-                if (channel.isClosed()) {
-                    if (in.available() > 0) {
-                        continue;
-                    }
-                    System.out.println("exit-status: " + channel.getExitStatus());
-                    break;
-                }
-                try {
-                    Thread.sleep(1000);
-                } catch (Exception ee) {
-                    ee.printStackTrace();
-                }
-            }
-            channel.disconnect();
-            session.disconnect();
-        } catch (JSchException jex) {
-            jex.printStackTrace();
-        } catch (IOException ioex) {
-            ioex.printStackTrace();
-        }
+        console().restartVarnish();
     }
 
     //Scenario: Check incorrect school years (1/3)
@@ -344,6 +288,20 @@ public class SchoolSettings extends LJTest {
             result.addAll(listA);
             result.addAll(listB);
             return result;
+        }
+    }
+    
+    private void addSchool(String user){
+        try {
+            getDBDate().profile().getSchoolId(user);
+        } catch (Exception ex) {
+            String year_start = RandomDate.setRandomYear();
+            open(SchoolsDirectory.class, new Url().setPostfix("?year=&ctc=US&cc=Alabaster&sid=1531&sc=AL"))
+                    .setSchool();
+            open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&cc=Alabaster&sid=1531&authas=" + user))
+                    .setYearStart(year_start, "1531")
+                    .setYearEnd(setEndYear(year_start), "1531")
+                    .saveChanges();
         }
     }
 }
