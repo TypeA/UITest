@@ -81,6 +81,19 @@ public class Date {
         }
     }
 
+    public static String parseDate(String date) {
+        String[] buf = date.split("-");
+        if (buf.length != 3) {
+            return "not_full";
+        } else {
+            if (String.valueOf(buf[2].charAt(0)).equals("0"))
+            {
+                buf[2] = String.valueOf(buf[2].charAt(1));
+            }
+            return buf[2] + " " + getManthByIndex(buf[1]) + " " + buf[0];
+        }
+    }
+
     public static String getManthByIndex(String index) {
         String month = null;
         switch (index) {

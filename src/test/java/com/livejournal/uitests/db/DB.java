@@ -6,7 +6,7 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 
 public class DB extends LJTest {
-
+    
     @Given("data from DB")
     public void db() {
         System.out.println("!!!!!!!!!!!!!!!!!!!!! start test");
@@ -14,14 +14,10 @@ public class DB extends LJTest {
         open(LoginPageUnlogged.class);
 
     }
-
+    
     @Then("table is displayed")
     public void table_is_displayed() {
         
-
-        
-        
-        System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
     }
-
+    
 }
