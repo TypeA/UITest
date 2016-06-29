@@ -4,7 +4,7 @@ User can see another profile
 Scenario: Birthday privacy
 
 Meta:
-@categories profile useful 
+@categories profile useful test
 
 Given logged user <user> on Profile page with setting <setting>
 Then user <user1> can see another user <user> birthday

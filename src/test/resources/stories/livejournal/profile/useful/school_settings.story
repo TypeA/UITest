@@ -3,7 +3,7 @@ School settings
 Scenario: School privacy
 
 Meta:
-@categories profile useful test
+@categories profile useful DRIVEL
 
 Given logged user <user> on Profile page with school setting <setting>
 Then user <user1> can see <user> school
@@ -22,7 +22,7 @@ Examples:
 Scenario: Check incorrect school years
 
 Meta:
-@categories profile useful
+@categories profile useful DRIVEL
 
 Given logged user <user> on Schools Directory page
 When user <user> set start year <year_start> and end year <year_end>
