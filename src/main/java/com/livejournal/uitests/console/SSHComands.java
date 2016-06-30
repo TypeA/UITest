@@ -82,6 +82,7 @@ public class SSHComands {
             lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
             channel.disconnect();
             session.disconnect();
+            System.out.println("Varnish restarted");
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -100,6 +101,7 @@ public class SSHComands {
             lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
             channel.disconnect();
             session.disconnect();
+            System.out.println("Memcached restarted");
         } catch (Exception e) {
             System.out.println(e);
         }

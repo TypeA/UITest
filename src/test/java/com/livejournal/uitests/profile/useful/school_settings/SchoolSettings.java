@@ -1,10 +1,5 @@
 package com.livejournal.uitests.profile.useful.school_settings;
 
-import com.jcraft.jsch.Channel;
-import com.jcraft.jsch.ChannelExec;
-import com.jcraft.jsch.JSch;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.Session;
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -14,8 +9,6 @@ import com.livejournal.uitests.pages.service_pages.settings.edit_profile.EditPro
 import com.livejournal.uitests.pages.service_pages.settings.school.SchoolsDirectory;
 import com.livejournal.uitests.utility.date.Date;
 import com.livejournal.uitests.utility.date.RandomDate;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -28,169 +21,219 @@ import org.junit.Assert;
  */
 public class SchoolSettings extends LJTest {
 
-    //Scenario: School privacy (1/3)
-    @Given("logged user $user on Profile page with school setting $setting")
-    public void logged_user_on_edit_profile_page_school(String user, String setting) {
-        setting = String.valueOf(setting.charAt(0));
+    //Scenario: School privacy (1/4)
+    @Given("logged user $user on Profile page")
+    public void logged_user_on_edit_profile_page_school(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .defaultLanguageLogged(user);
+    }
+
+    //Scenario: School privacy (2/4)
+    @When("user $user set school setting $setting")
+    public void user_set_school_setting(String setting, String user) {
+        setting = String.valueOf(setting.charAt(0));
         addSchool(user);
         open(EditProfilePageLogged.class)
                 .setSchoolPrivacy(setting)
                 .saveSettings()
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
-        console().restartVarnish();
     }
 
-    //Scenario: Check incorrect school years (1/3)
-    @Given("logged user $user on Schools Directory page")
-    public void logged_user_on_schools_page(String user) {
-        open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user);
-    }
-
-    //Scenario: School privacy (2/3)
+    //Scenario: School privacy (3/4)
     @Then("user $user1 can see $user school")
-    public void logged_user_can_see_school(String user1, String user) {
-        boolean isDBequalsPage;
-        ArrayList<String> schoolpg_list = new ArrayList<>();
-        getDBDate().profile().getFullSchoolInfo(user);
-        if (!user1.equals("nobody")) {
-            String username = parseUser(user1, user);
-            if (!user1.equals("unlogged")) {
-                open(LoginPageUnlogged.class)
-                        .authorizeBy(username, getDBDate().userData().getUserPassword(username))
-                        .defaultLanguageLogged(username);
-                schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                        .getSchoolList();
-                isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
-                onOpened(ProfilePageLogged.class)
-                        .moveMouseOverMyJournalMenuItem().clickOnLogOut();
-            } else {
-                open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
-                schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
-                        .getSchoolList();
-                isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
-            }
-
-            verify().that(isDBequalsPage)
-                    .ifResultIsExpected("Privacy works correctly, all schools are correct"
-                    )
-                    .ifElse("Privacy works incorrect, schools from profile are not equal to"
-                            + "schools from DB :" + getDBDate().profile()
-                            .getFullSchoolInfo(user)
-                    )
-                    .finish();
-        }
-    }
-
-    //Scenario: Check incorrect school years (2/3)
-    @When("user $user set start year $year_start and end year $year_end")
-    public void user_set_years(String user, String year_start, String year_end) {
-        open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&cc=Alabaster&sid=1531&authas=" + user))
-                .setYearStart(parseYear(year_start), "1531")
-                .setYearEnd(setEndYear(parseYear(year_end)), "1531")
-                .saveChanges();
-    }
-
-    //Scenario: School privacy (3/3)
-    @Then("Then user $user2 can't see $user school")
-    public void logged_user_cant_see_school(String user2, String user) {
-        boolean isDBequalsPage;
-        ArrayList<String> schoolpg_list = new ArrayList<>();
-        getDBDate().profile().getFullSchoolInfo(user);
-        if (!user2.equals("nobody")) {
-            String username = parseUser(user2, user);
-
-            if (!user2.equals("unlogged")) {
-                open(LoginPageUnlogged.class)
-                        .authorizeBy(username, getDBDate().userData().getUserPassword(username))
-                        .defaultLanguageLogged(username);
-                schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                        .getSchoolList();
-                isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
-
-                onOpened(ProfilePageLogged.class)
-                        .moveMouseOverMyJournalMenuItem().clickOnLogOut();
-            } else {
-                open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
-                schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
-                        .getSchoolList();
-                isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
-
-            }
-
-            verify().that(isDBequalsPage)
-                    .ifResultIsExpected("Privacy works correctly, cant see schools"
-                    )
-                    .ifElse("Privacy works incorrect, schools are shown" + getDBDate().profile()
-                            .getFullSchoolInfo(user)
-                    )
-                    .finish();
-        }
-    }
-
-    //Scenario: School privacy (3/3)
-    @Then("user $user2 can't see $user school")
-    public void user_cant_see_school(String user2, String user) {
-        if (!user2.equals("nobody")) {
-            String username = parseUser(user2, user);
-            if (!user2.equals("unlogged")) {
-                open(LoginPageUnlogged.class
-                )
-                        .authorizeBy(username, getDBDate().userData().getUserPassword(username))
-                        .defaultLanguageLogged(user);
-                verify().that(open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
-                        .getSchoolInfo().equals(""))
-                        .ifResultIsExpected("User " + user2 + " can't see user "
-                                + user + " school")
-                        .ifElse("User " + user2 + " can see user "
-                                + user + " school")
-                        .finish();
-
-            } else {
-                open(ProfilePageLogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
-                verify().that(open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
-                        .getSchoolInfo().equals(""))
-                        .ifResultIsExpected("Anonymous " + " can't see user "
-                                + user + " school")
-                        .ifElse("Anonymous" + " can see user "
-                                + user + " school")
-                        .finish();
-            }
-        }
-    }
-
-    //Scenario: Check incorrect school years (3/3)
-    @Then("user see alert $alert")
-    public void user_see_alert(String alert) {
-        final String ERR_MSG1 = "Did you really attend this school that long ago?";
-        final String ERR_MSG2 = "Your ending year cannot be earlier than your starting year.";
-        final String ERR_MSG3 = "If you currently attend this school,"
-                + " you should leave the end date field blank or enter \"now\".";
-        String page_alert = onOpened(SchoolsDirectory.class)
-                .getAlertMessage();
-        String error_msg = null;
-        switch (alert) {
-            case "alert_1":
-                error_msg = ERR_MSG1;
-                break;
-            case "alert_2":
-                error_msg = ERR_MSG2;
-                break;
-            case "alert_3":
-                error_msg = ERR_MSG3;
-                break;
-        }
-
-        verify().that(page_alert.equals(error_msg))
-                .ifResultIsExpected(page_alert + " is correct message")
-                .ifElse(error_msg + " is incorrect alert message")
+    public void logged_user_can_see_school(String user1, String user, String setting) {
+        getSchoolFromPageWithSecurity(setting, user1, user);
+        verify().that(true)
+                .ifResultIsExpected("Privacy works correctly, all schools are correct")
+                .ifElse("Privacy works incorrect, schools from profile are not equal to" + "schools from DB :" + getDBDate().profile().getFullSchoolInfo(user))
                 .finish();
     }
+
+    private void addSchool(String user) {
+        if (getDBDate().profile().getSchoolId(user).isEmpty()) {
+            String year_start = RandomDate.setRandomYear();
+            open(SchoolsDirectory.class, new Url().setPostfix("?year=&ctc=US&cc=Alabaster&sid=1531&sc=AL"))
+                    .setSchool();
+            open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&cc=Alabaster&sid=1531&authas=" + user))
+                    .setYearStart(year_start, "1999")
+                    .setYearEnd(setEndYear(year_start), "1999")
+                    .saveChanges();
+        }
+    }
+
+    private void getSchoolFromPageWithSecurity(String setting, String user1, String user) {
+        switch (setting) {
+            case "Yeverybody": {
+                setNeededUser(user, user1);
+                ArrayList<String> schools = new ArrayList<String>();
+                if (user1.equals("unlogged")) {
+                    schools = onOpened(ProfilePageUnlogged.class).getSchoolList();
+                } else {
+                    schools = onOpened(ProfilePageLogged.class).getSchoolList();
+                }
+                System.out.println(schools);
+                break;
+            }
+            case "Friends": {
+                setNeededUser(user, user1);
+                ArrayList<String> schools = onOpened(ProfilePageLogged.class).getSchoolList();
+                System.out.println(schools);
+                break;
+            }
+            case "Nobody": {
+                setNeededUser(user, user1);
+                ArrayList<String> schools = onOpened(ProfilePageLogged.class).getSchoolList();
+                if (schools.isEmpty()) {
+                    System.out.println("Nobody");
+                }
+                break;
+            }
+        }
+    }
+
+    private void setNeededUser(String user, String user1) {
+        switch (user1) {
+            case "unlogged": {
+                console().restartVarnish();
+                open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."));
+                break;
+            }
+            case "logged": {
+                String notFriend = getDBDate().friends().friends().getNotFriend(user);
+                open(LoginPageUnlogged.class).authorizeBy(notFriend, getDBDate().userData().getUserPassword(notFriend));
+                open(ProfilePageLogged.class, new Url().setPrefix(user + "."));
+                break;
+            }
+            case "friend": {
+                String friend = getDBDate().friends().friends().getFriend(user);
+                open(LoginPageUnlogged.class).authorizeBy(friend, getDBDate().userData().getUserPassword(friend));
+                open(ProfilePageLogged.class, new Url().setPrefix(user + "."));
+                break;
+            }
+            case "nobody": {
+                open(LoginPageUnlogged.class).authorizeBy(user, getDBDate().userData().getUserPassword(user));
+                open(ProfilePageLogged.class, new Url().setPrefix(user + "."));
+                break;
+            }
+        }
+    }
+//
+//    //Scenario: School privacy (4/4)
+//    @Then("Then user $user2 can't see $user school")
+//    public void logged_user_cant_see_school(String user2, String user) {
+//        boolean isDBequalsPage;
+//        ArrayList<String> schoolpg_list = new ArrayList<>();
+//        getDBDate().profile().getFullSchoolInfo(user);
+//        if (!user2.equals("nobody")) {
+//            String username = parseUser(user2, user);
+//
+//            if (!user2.equals("unlogged")) {
+//                open(LoginPageUnlogged.class)
+//                        .authorizeBy(username, getDBDate().userData().getUserPassword(username))
+//                        .defaultLanguageLogged(username);
+//                schoolpg_list = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
+//                        .getSchoolList();
+//                isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда впихнуть метод сравнивающий школы
+//
+//                onOpened(ProfilePageLogged.class)
+//                        .moveMouseOverMyJournalMenuItem().clickOnLogOut();
+//            } else {
+//                open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
+//                schoolpg_list = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+//                        .getSchoolList();
+//                isDBequalsPage = isSchoolsEqual(schoolpg_list, user);//сюда вставить метод сравнивающий школы
+//
+//            }
+//
+//            verify().that(isDBequalsPage)
+//                    .ifResultIsExpected("Privacy works correctly, cant see schools"
+//                    )
+//                    .ifElse("Privacy works incorrect, schools are shown" + getDBDate().profile()
+//                            .getFullSchoolInfo(user)
+//                    )
+//                    .finish();
+//        }
+//    }
+//    
+//    
+//    
+//    //Scenario: Check incorrect school years (1/3)
+//    @Given("logged user $user on Schools Directory page")
+//    public void logged_user_on_schools_page(String user) {
+//        open(LoginPageUnlogged.class)
+//                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+//                .defaultLanguageLogged(user);
+//    }
+//
+//    //Scenario: Check incorrect school years (2/3)
+//    @When("user $user set start year $year_start and end year $year_end")
+//    public void user_set_years(String user, String year_start, String year_end) {
+//        open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&cc=Alabaster&sid=1531&authas=" + user))
+//                .setYearStart(parseYear(year_start), "1531")
+//                .setYearEnd(setEndYear(parseYear(year_end)), "1531")
+//                .saveChanges();
+//    }
+//
+//    //Scenario: School privacy (3/3)
+//    @Then("user $user2 can't see $user school")
+//    public void user_cant_see_school(String user2, String user) {
+//        if (!user2.equals("nobody")) {
+//            String username = parseUser(user2, user);
+//            if (!user2.equals("unlogged")) {
+//                open(LoginPageUnlogged.class
+//                )
+//                        .authorizeBy(username, getDBDate().userData().getUserPassword(username))
+//                        .defaultLanguageLogged(user);
+//                verify().that(open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
+//                        .getSchoolInfo().equals(""))
+//                        .ifResultIsExpected("User " + user2 + " can't see user "
+//                                + user + " school")
+//                        .ifElse("User " + user2 + " can see user "
+//                                + user + " school")
+//                        .finish();
+//
+//            } else {
+//                open(ProfilePageLogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
+//                verify().that(open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+//                        .getSchoolInfo().equals(""))
+//                        .ifResultIsExpected("Anonymous " + " can't see user "
+//                                + user + " school")
+//                        .ifElse("Anonymous" + " can see user "
+//                                + user + " school")
+//                        .finish();
+//            }
+//        }
+//    }
+//
+//    //Scenario: Check incorrect school years (3/3)
+//    @Then("user see alert $alert")
+//    public void user_see_alert(String alert) {
+//        final String ERR_MSG1 = "Did you really attend this school that long ago?";
+//        final String ERR_MSG2 = "Your ending year cannot be earlier than your starting year.";
+//        final String ERR_MSG3 = "If you currently attend this school,"
+//                + " you should leave the end date field blank or enter \"now\".";
+//        String page_alert = onOpened(SchoolsDirectory.class)
+//                .getAlertMessage();
+//        String error_msg = null;
+//        switch (alert) {
+//            case "alert_1":
+//                error_msg = ERR_MSG1;
+//                break;
+//            case "alert_2":
+//                error_msg = ERR_MSG2;
+//                break;
+//            case "alert_3":
+//                error_msg = ERR_MSG3;
+//                break;
+//        }
+//
+//        verify().that(page_alert.equals(error_msg))
+//                .ifResultIsExpected(page_alert + " is correct message")
+//                .ifElse(error_msg + " is incorrect alert message")
+//                .finish();
+//    }
 
     public String setEndYear(String start_year) {
         final int MIN = Integer.valueOf(start_year);
@@ -260,7 +303,7 @@ public class SchoolSettings extends LJTest {
             interval_list.set(0, interval_db.get(j));
             interval_list.set(1, interval_db.get(j + 1));
             if (schoolpg_list.get(i).equals(parseSchoolDB(joinLists(getDBDate().profile()
-                    .getSchool(user).get(i), interval_list)))) {
+                    .getSchoolNames(user).get(i), interval_list)))) {
             } else {
                 return false;
             }
@@ -288,20 +331,6 @@ public class SchoolSettings extends LJTest {
             result.addAll(listA);
             result.addAll(listB);
             return result;
-        }
-    }
-    
-    private void addSchool(String user){
-        try {
-            getDBDate().profile().getSchoolId(user);
-        } catch (Exception ex) {
-            String year_start = RandomDate.setRandomYear();
-            open(SchoolsDirectory.class, new Url().setPostfix("?year=&ctc=US&cc=Alabaster&sid=1531&sc=AL"))
-                    .setSchool();
-            open(SchoolsDirectory.class, new Url().setPostfix("manage.bml?ctc=US&cc=Alabaster&sid=1531&authas=" + user))
-                    .setYearStart(year_start, "1531")
-                    .setYearEnd(setEndYear(year_start), "1531")
-                    .saveChanges();
         }
     }
 }
