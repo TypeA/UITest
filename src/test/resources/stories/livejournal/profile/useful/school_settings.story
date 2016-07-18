@@ -3,7 +3,7 @@ School settings
 Scenario: School privacy
 
 Meta:
-@categories profile useful DRIVEL
+@categories profile useful release
 
 Given logged user <user> on Profile page 
 When user <user> set school setting <setting>
