@@ -1,11 +1,11 @@
 package com.livejournal.uitests.databases_data;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author m.prytkova
  */
 public class UserSettings extends DatabasesData {
@@ -166,6 +166,28 @@ public class UserSettings extends DatabasesData {
                 .select(select, "user")
                 .finish()
                 .get(0);
+    }
+
+    public boolean getAllowForMedius(String user) {
+        String select = "select upropid from userproplist where name='allow_for_magazine";
+        String idSetting = workWithDB().conect()
+                .select(select, "upropid")
+                .finish()
+                .get(0)
+                .get(0);
+        String clusterid = userData().getUserClusterId(user);
+        String userid = userData().getUserId(user);
+        String select1 = "select value from lj_c" + clusterid + ".userproplite2 where upropid=" + idSetting + " and userid = " + userid;
+        String valueSetting = workWithDB().conect()
+                .select(select1, "value")
+                .finish()
+                .get(0)
+                .get(0);
+        if (valueSetting.equals("Y")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
