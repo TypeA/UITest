@@ -2,10 +2,9 @@ package com.livejournal.uitests.pages.journal_pages.entry;
 
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.guice.Injectors;
+import net.thucydides.core.util.EnvironmentVariables;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
@@ -14,13 +13,14 @@ import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author s.savinykh
  */
 @Block(
         @FindBy(css = ".hentry"))
-public class EntryPageBlock extends UIBlock {
+public abstract class EntryPageBlock extends UIBlock {
 
     @FindBy(css = ".b-msgsystem-error.b-msgsystem-error-banned ")
     private TextBlock errorTextBanned;

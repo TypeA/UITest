@@ -83,7 +83,7 @@ Examples:
 
 Scenario: Delete users in group
 Meta: 
-@categories friends group useful release
+@categories friends group useful delete_user release
 
 Given logged user (name <name>) on Manage Groups Page
 When user (name, <name>) delete users in group and save the changes
@@ -92,5 +92,5 @@ Then user deleted from group
 Examples:
 |name   |
 |test   |
-|test   |
+
 

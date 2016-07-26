@@ -3,7 +3,6 @@ package com.livejournal.uitests.utility;
 import com.livejournal.uitests.console.SSHComands;
 
 /**
- *
  * @author m.prytkova
  */
 public class Utility {
@@ -22,6 +21,9 @@ public class Utility {
 
     public SSHComands sshCommands() {
         return new SSHComands();
+    }
+    public Calculation calculation(){
+        return new Calculation();
     }
 
 }
