@@ -36,7 +36,7 @@ Examples:
 
 Scenario: Create interesting post
 Meta:
-@categories medius admin admin_medius create_post_medius medius_interesting
+@categories medius admin admin_medius    create_post_medius medius_interesting
 
 Given logged user (name <name>) on Admin Medius Create Post
 When create interesting post in random category
