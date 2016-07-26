@@ -11,7 +11,7 @@ Examples:
 
 Scenario: Create post without sources
 Meta: 
-@categories medius admin admin_medius create_post create_post_medius_without_authors
+@categories medius admin admin_medius create_post create_post_medius_without_authors 
 
 Given logged user (name <user>) on Admin Medius Create Post
 When create post without source in random category
