@@ -51,21 +51,13 @@ public class Profile extends DatabasesData {
                 .get(0);
     }
 
-    public List<ArrayList<String>> getSchool(String user) {// создает список школьных айдишников для одного юзера
-
-        ArrayList<String> school_id = getSchoolId(user);
-        List<ArrayList<String>> school_list = new ArrayList<ArrayList<String>>();
-
-        String select = null;
-
-        for (int i = 0; i < school_id.size(); i++) {
-            select = "select * from schools where schoolid=" + school_id.get(i);
-            school_list.add(workWithDB().conect()
-                    .select(select, "name, city, state")
-                    .finish()
-                    .get(0));
-        }
-        return school_list;
+    public List<ArrayList<String>> getSchoolNames(String user) {
+        String select = "select * from schools sc inner join lj_c"
+                + userData().getUserClusterId(user) + ".user_schools us on " + "us.schoolid=sc.schoolid where userid=" + userData().getUserId(user)
+                + " order by year_start";
+        return workWithDB().conect()
+                .select(select, "name")
+                .finish();
     }
 
     public ArrayList<String> getYearInterval(String user) {
@@ -85,8 +77,8 @@ public class Profile extends DatabasesData {
                 .get(0);
         return year_interval;
     }
-    
-    public List<ArrayList<String>> getFullSchoolInfo(String user){
+
+    public List<ArrayList<String>> getFullSchoolInfo(String user) {
         String select = "select userid from user where user='" + user + "'";
         String userid = workWithDB().conect()
                 .select(select, "userid")
@@ -123,8 +115,6 @@ public class Profile extends DatabasesData {
                 .select(select, "schoolid")
                 .finish()
                 .get(0);
-//                .get(0);
-
     }
 
 }

@@ -3,26 +3,25 @@ School settings
 Scenario: School privacy
 
 Meta:
-@categories profile useful DRIVEL
+@categories profile useful release
 
-Given logged user <user> on Profile page with school setting <setting>
+Given logged user <user> on Profile page 
+When user <user> set school setting <setting>
 Then user <user1> can see <user> school
-Then user <user2> can't see <user> school
 
 
 Examples:
-|user         |user1         |user2       |setting    |
-|testautotest |logged        |nobody      |Yeverybody |
-|--testautotest |unlogged      |nobody      |Yeverybody |
-|--testautotest |friend        |not_friend  |Friends    |
-|--testautotest |nobody        |logged      |Nobody     |
-|--testautotest |nobody        |unlogged    |Nobody     |
+|user         |user1          |setting    |
+|testautotest |logged         |Yeverybody |
+|testautotest |unlogged       |Yeverybody |
+|testautotest |friend         |Friends    |
+|testautotest |nobody         |Nobody     |
 
 
 Scenario: Check incorrect school years
 
 Meta:
-@categories profile useful DRIVEL
+@categories profile useful
 
 Given logged user <user> on Schools Directory page
 When user <user> set start year <year_start> and end year <year_end>

@@ -4,7 +4,7 @@ package com.livejournal.uitests.utility;
  *
  * @author s.savinykh
  */
-public class GetUsers {
+public class GenerateScriptsForAdaptive {
 
     public static String scriptWithMobileView() {  //формирование запроса на включенную опцию Mobile View
         return "SELECT user.user "

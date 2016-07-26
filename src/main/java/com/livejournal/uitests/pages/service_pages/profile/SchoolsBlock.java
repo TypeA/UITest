@@ -3,7 +3,6 @@ package com.livejournal.uitests.pages.service_pages.profile;
 
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import java.util.ArrayList;
-import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -23,7 +22,7 @@ public class SchoolsBlock extends UIBlock {
         ArrayList<WebElement> schools = new ArrayList<WebElement>();
         ArrayList<String> school_list = new ArrayList<String>();
         schools = (ArrayList<WebElement>) findElements(By.cssSelector
-        (".b-profile-group-row.b-profile-group-school ul li"));
+        (".b-profile-group-row.b-profile-group-school ul li a"));
         for (int i = 0; i < schools.size(); i++) {
             school_list.add(schools.get(i).getText());
         }
