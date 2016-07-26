@@ -1,27 +1,26 @@
 package com.livejournal.uitests.db;
 
 import com.livejournal.uitests.LJTest;
-import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
+import java.util.ArrayList;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 
 public class DB extends LJTest {
-
+    
     @Given("data from DB")
     public void db() {
-        System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
-        System.out.println(System.getProperty("user.dir"));
-        open(LoginPageUnlogged.class);
-
+        System.out.println("START TEST +++++++++++++++++++++++++++++++");
+        ArrayList<String> ans = this.getDBDate().bannedUser().getAllUserInBannedList("testautotest");
+        for(int i=0; i<ans.size(); i++){
+            System.out.println(ans.get(i));
+        }
+        System.out.println("STOP TEST +++++++++++++++++++++++++++++++");
+        
     }
-
+    
     @Then("table is displayed")
     public void table_is_displayed() {
         
-
-        
-        
-        System.out.println("!!!!!!!!!!!!!!!!!!!! finish test");
     }
-
+    
 }

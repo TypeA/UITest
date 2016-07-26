@@ -44,7 +44,7 @@ public class Friends extends DatabasesData {
                 answer.add(an);
             }
         }
-        return answer.get(new Random().nextInt(ans.size()));
+        return answer.get(new Random().nextInt(answer.size()));
     }
 
     public ArrayList<String> getAllNotFriends(String user, Integer limit) {

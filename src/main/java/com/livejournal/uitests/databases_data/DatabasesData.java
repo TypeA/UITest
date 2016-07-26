@@ -46,5 +46,9 @@ public class DatabasesData extends Databases {
     public Video video() {
         return new Video();
     }
+    
+    public Profile profile() {
+        return new Profile();
+    }
 
 }

@@ -1,54 +1,66 @@
 Change profile parameters
 
 
-
 Scenario: Change name
 
 Meta: 
-@categories profile useful test
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
 When user enter another name <name> on Edit profile page
-Then in Profile user see new name <name>
+Then in Profile user see new correct name
 
 Examples:
-|user        |name     |
-|testautotest|test    |
-|--testautotest|rnd_name |
-|--testautotest|rnd_max  |
+|user          |name       |
+|testautotest  |rnd        |
+|testautotest  |rnd_max    |
 
+
+
+Scenario: Delete profile name
+Meta:
+@categories profile useful
+
+Given logged user <user> on Edit Profile page
+When user enter another name <name> on Edit profile page
+Then in Profile user see Error
+
+Examples:
+|user          |name     |
+|testautotest  |         |
 
 
 
 Scenario: Change gender
 
 Meta: 
-@categories profile useful 
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
 When user enter another gender <gender> on Edit profile page
 Then in Profile user see new gender <gender>
 
 Examples:
-|user        |gender     |
-|testautotest|male       |
-|testautotest|female     |
+|user         |gender             |
+|testautotest |Male               |
+|testautotest |Female             |
+|testautotest |Unspecified/Other  |
 
 
 
 
-Scenario: Change date of birth
+Scenario: Change to correct date of birth
 
 Meta: 
-@categories profile useful 
+@categories profile useful
 
 Given logged user <user> on Edit Profile page
-When user enter another day <day> month <month> year <year> on Edit profile page
-Then in Profile user see new date of birth <day>.<month>.<year>
+When user <user> enter another correct date of birth on Edit profile page
+Then in Profile user see new date of birth
 
 Examples:
-|user        |day    |month     |year    |
-|testautotest|rnd_day|rnd_mnth  |rnd_year| проверить валидацию
+|user        |
+|testautotest|
 
 
 
