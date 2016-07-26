@@ -1,6 +1,6 @@
 Scenario: content update.bml
 Meta:
-@categories medius admin admin_medius create_post content_admin_medius_create
+@categories medius admin admin_medius create_post    content_admin_medius_create
 
 Given logged user (name <user>) on Admin Medius Create Post
 Then admin can not change date and privacy settings
