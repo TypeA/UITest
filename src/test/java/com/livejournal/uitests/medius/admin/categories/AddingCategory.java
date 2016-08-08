@@ -39,21 +39,6 @@ public class AddingCategory extends LJTest {
         ThucydidesUtils.putToSession("sticker", sticker);
     }
 
-    @When("editor adds new incorrect category with <incorrect_symbol_in_keyword> and <sticker> on Categories Page")
-    public void editor_adds_new_incorrect_category_with_and_on_Categories_Page(String incorrect_symbol_in_keyword, String sticker) {
-        String name = utility().random().getRandomChar(7);
-        String keyword = utility().random().getRandomChar(7).toLowerCase() + incorrect_symbol_in_keyword;
-        String genitive = utility().random().getRandomChar(7);
-        boolean isSticker = Boolean.parseBoolean(sticker);
-
-        onOpened(AdminMediusCategoryPage.class)
-                .AddCategory(name, keyword, genitive, isSticker);
-        ThucydidesUtils.putToSession("name", name);
-        ThucydidesUtils.putToSession("keyword", keyword);
-        ThucydidesUtils.putToSession("genitive", genitive);
-        ThucydidesUtils.putToSession("sticker", sticker);
-    }
-
     //Scenario: Create new usual category
     //Scenario: Create new sticker category
     @Then("new category is in List of categories on Categories Page")
@@ -83,8 +68,8 @@ public class AddingCategory extends LJTest {
         onOpened(AdminMediusCategoryPage.class).printMessageAboutError();
     }
 
-    @Then("new incorrect category is not in List of categories on Categories Page")
-    public void new_incorrect_category_is_not_in_List_of_categories_on_Categories_Page() {
+    @Then("new category is not in List of categories on Categories Page")
+    public void new_category_is_not_in_List_of_categories_on_Categories_Page() {
         String name = ThucydidesUtils.getFromSession("name").toString();
         String incorrectKeyword = ThucydidesUtils.getFromSession("incorrectKeyword").toString();
         String genitive = ThucydidesUtils.getFromSession("genitive").toString();
