@@ -84,6 +84,7 @@ public class MediusUpdateBml extends LJPage {
 
     public MediusUpdateBml enterSource(String source, int number) {
         getDriver().findElement(By.xpath("//input[@update-links-list-input='" + number + "']")).sendKeys(source);
+
         return this;
     }
 

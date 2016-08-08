@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.error_strip;
 
+import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
@@ -18,6 +19,9 @@ public class ErrorStrip extends UIBlock {
 
     @FindBy(css = ".b-msgsystem-wrap")
     private UIBlock errorStrip;
+
+    @FindBy(css = ".b-msgsystem-close span")
+    private Button closeErrorButton;
     
     @StepGroup
     public String getErrorText(){
@@ -29,6 +33,10 @@ public class ErrorStrip extends UIBlock {
             }
         });
         return startScript("return jQuery('.b-msgsystem-body')[0].textContent").toString();
+    }
+
+    public void doClose() {
+        closeErrorButton.click();
     }
 
 }

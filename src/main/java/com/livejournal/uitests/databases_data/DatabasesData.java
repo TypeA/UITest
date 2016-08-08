@@ -3,7 +3,6 @@ package com.livejournal.uitests.databases_data;
 import com.livejournal.uisteps.thucydides.Databases;
 
 /**
- *
  * @author m.prytkova
  */
 public class DatabasesData extends Databases {
@@ -43,12 +42,17 @@ public class DatabasesData extends Databases {
     public Photo photo() {
         return new Photo();
     }
+
     public Video video() {
         return new Video();
     }
-    
+
     public Profile profile() {
         return new Profile();
+    }
+
+    public Medius medius() {
+        return new Medius();
     }
 
 }
