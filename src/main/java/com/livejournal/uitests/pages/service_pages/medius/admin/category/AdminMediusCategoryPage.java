@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 @DefaultUrl("/admin/medius/category")
-public class AdminMediusCategory extends LJPage {
+public class AdminMediusCategoryPage extends LJPage {
 
     @FindBy(name = "name")
     private TextField addName;
@@ -24,7 +24,7 @@ public class AdminMediusCategory extends LJPage {
     private TextField addGenitive;
 
     @FindBy(name = "add")
-    private Button add;
+    private Button addCategoryButton;
 
     @FindBy(name = "is_sticker")
     private UIElement isSticky;
@@ -38,7 +38,7 @@ public class AdminMediusCategory extends LJPage {
             isSticky.click();
         }
 
-        add.click();
+        addCategoryButton.click();
     }
 
     private String getElementActiveCategory(String idCategory) {
@@ -85,15 +85,6 @@ public class AdminMediusCategory extends LJPage {
         } catch (Exception e) {
             return true;
         }
-
-        /*System.out.println(categoryIsAdded(name, keyword, genitive, sticker));
-        if (categoryIsAdded(name, keyword, genitive, sticker))
-            return false;
-        else {
-            boolean isMessageOfError = getDriver().findElement(By.xpath("//div[@class='b-msgsystem-body' and @lj-html='message.body']")).isDisplayed();
-            System.out.println(isMessageOfError);
-            return isMessageOfError;
-        }*/
 
     }
 
