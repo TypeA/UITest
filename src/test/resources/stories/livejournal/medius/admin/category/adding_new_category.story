@@ -1,7 +1,7 @@
 Scenario: Scenario: Create new usual category
 
 Meta:
-@categories medius admin usual category
+@categories medius admin usual category datest
 
 Given logged editor $user on Admin Medius Categories Page
 When editor adds new category with $symbol_in_keyword and $sticker on Categories Page
@@ -40,7 +40,7 @@ Meta:
 Given logged editor $user on Admin Medius Categories Page
 When editor adds new category with $symbol_in_keyword and $sticker on Categories Page
 Then editor sees message about error
-Then new category is in List of categories on Categories Page
+Then new category is not in List of categories on Categories Page
 
 Examples:
 
