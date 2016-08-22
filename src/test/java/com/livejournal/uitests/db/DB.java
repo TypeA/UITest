@@ -10,6 +10,9 @@ public class DB extends LJTest {
     public void db() {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
 
+       // System.out.println("!!!!!!!!!!!!!!!!!!!! " + this.getCurrentBrowser().getCurrentTitle());
+//System.out.println("!!!!!!!!!!!!!!!!!!!! " + this.getCurrentBrowser().getName());
+//System.out.println("!!!!!!!!!!!!!!!!!!!! " + this.getCurrentBrowser().getDriver().getTitle());
      //    List<ArrayList<String>> ans = getDBDate()
             //     .community()
             //     .targetIdWithParams("test_comm", "A");
