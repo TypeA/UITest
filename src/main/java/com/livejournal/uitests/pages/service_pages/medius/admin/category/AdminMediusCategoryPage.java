@@ -4,6 +4,7 @@ import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.LJPage;
+import jnr.ffi.annotations.In;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.findby.By;
 import net.thucydides.core.webelements.Checkbox;
@@ -28,6 +29,9 @@ public class AdminMediusCategoryPage extends LJPage {
 
     @FindBy(name = "is_sticker")
     private UIElement isSticky;
+
+    @FindBy(name = "save")
+    private Button saveChangesButton;
 
     public void AddCategory(String name, String keyword, String genitive, boolean sticker) {
         addName.sendKeys(name);
@@ -66,18 +70,26 @@ public class AdminMediusCategoryPage extends LJPage {
         return nameIsExist && keywordIsExist && genitiveIsExist && activeDefault && stickerOn;
     }
 
-    public void printMessageAboutError() {
-        String rightMessageAboutError = "Keyword can contain only lower-case letters (a-z), digits (0-9), and the underscore character (_)";
-        boolean ourMessageAboutError = getDriver().findElement(By.xpath("//div[@class='b-msgsystem-body' and @lj-html='message.body' and contains(text(), '" + rightMessageAboutError + "')]")).isDisplayed();
+    public void messageAboutError() {
+        String rightMessageAboutError1 = "Keyword can contain only lower-case letters (a-z), digits (0-9), and the underscore character (_)";
+        String rightMessageAboutError2 = "Name of sticker is too long";
 
-        if (ourMessageAboutError) {
-            System.out.println("Ok. Message about error is right");
-        } else {
-            System.out.println("Oops... Message about error is incorrect");
+        try {
+            if (getDriver().findElement(By.xpath("//div[@class='b-msgsystem-body' and @lj-html='message.body' and contains(text(), '" + rightMessageAboutError1 + "')]")).isDisplayed()) {
+                System.out.println("Ok. Message about error is right");
+            } else {
+                System.out.println("Oops... Message about error is incorrect");
+            }
+        } catch (Exception ex) {
+            if (getDriver().findElement(By.xpath("//div[@class='b-msgsystem-body' and @lj-html='message.body' and contains(text(), '" + rightMessageAboutError2 + "')]")).isDisplayed()) {
+                System.out.println("Ok. Message about error is right");
+            } else {
+                System.out.println("Oops... Message about error is incorrect");
+            }
         }
     }
 
-    public boolean incorrectCategoryIsNotAdded(String name, String keyword, String genitive, boolean sticker) {
+    public boolean incorrectCategoryIsNotAdded(String name) {
         try {
             getDriver().findElement(By.xpath("//td[@class='admintable__column admin-categories-name' and input[@value='" + name + "']]")).getText();
             return false;
@@ -85,8 +97,30 @@ public class AdminMediusCategoryPage extends LJPage {
         } catch (Exception e) {
             return true;
         }
-
     }
 
+    public void deleteCategory(String name, String keyword, String genitive) {
+        String idCategory = getDBDate().medius().getIdCategory(name, keyword, genitive);
 
+        try {
+            startScript("jQuery('button[value=\"" + idCategory + "\"]').click()");
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public String editNameCategory(String name, String keyword, String genitive) {
+        String idCategory = getDBDate().medius().getIdCategory(name, keyword, genitive);
+        String newName = "edited" + idCategory;
+        try {
+            startScript("jQuery('input[name=\"name_" + idCategory + "\"]').attr(\"value\",\"" + newName + "\")");
+        } catch (Exception ex) {
+            System.out.println("ooops");
+        }
+        //System.out.println(startScript("jQuery('input[name=\"name_" + idCategory + "\"]').attr(\"value\")").toString());
+        saveChangesButton.click();
+
+
+        return newName;
+    }
 }
