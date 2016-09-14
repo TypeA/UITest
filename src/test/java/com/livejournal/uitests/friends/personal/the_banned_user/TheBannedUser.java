@@ -1,4 +1,4 @@
-package com.livejournal.uitests.friends.useful.the_banned_user;
+package com.livejournal.uitests.friends.personal.the_banned_user;
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;

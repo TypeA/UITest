@@ -1,4 +1,4 @@
-package com.livejournal.uitests.friends.useful.manage_friends_groups;
+package com.livejournal.uitests.friends.personal.manage_friends_groups;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
