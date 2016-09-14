@@ -11,11 +11,11 @@ import org.jbehave.core.annotations.When;
 
 public class AddingNewCategory extends LJTest {
 
-    //Scenario: Create new usual category
-    //Scenario: Create new sticker category
+    //Scenario: Scenario: Create new category
     //Scenario: Fail with creating new usual category
     //Scenario: Delete category
-    //Scenario: Edit name category
+    //Scenario: Edit name and genetive of category
+    //Scenario: Change position of category in top
     @Given("logged editor $user on Admin Medius Categories Page")
     public void logged_editor_on_Admin_Medius_Categories_Page(String user) {
         open(LoginPageUnlogged.class)
@@ -24,11 +24,11 @@ public class AddingNewCategory extends LJTest {
         open(AdminMediusCategoryPage.class);
     }
 
-    //Scenario: Create new usual category
-    //Scenario: Create new sticker category
+    //Scenario: Scenario: Create new category
     //Scenario: Fail with creating new usual category
     //Scenario: Delete category
-    //Scenario: Edit name category
+    //Scenario: Edit name and genetive of category
+    //Scenario: Change position of category in top
     @When("editor adds new category with $symbol_in_keyword and $sticker and $figures on Categories Page")
     public void editor_adds_new_category_with_and_and_on_Categories_Page(String symbol_in_keyword, String sticker, String figures) {
         int setFigures = Integer.parseInt(figures);
@@ -56,30 +56,37 @@ public class AddingNewCategory extends LJTest {
         onOpened(AdminMediusCategoryPage.class).deleteCategory(name, keyword, genitive);
     }
 
-    //Scenario: Edit name category
-    @When("editor change name of new category")
-    public void editor_change_name_of_new_category() {
+    //Scenario: Edit name and genetive of category
+    @When("editor change name and genetive of new category")
+    public void editor_change_name_and_genetive_of_new_category() {
         String name = ThucydidesUtils.getFromSession("name").toString();
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
         String genitive = ThucydidesUtils.getFromSession("genitive").toString();
 
-        String nameNew = onOpened(AdminMediusCategoryPage.class).editNameCategory(name, keyword, genitive);
+        String[] nameAndGenetive = onOpened(AdminMediusCategoryPage.class).editNameAndGenitiveCategory(name, keyword, genitive);
 
-        ThucydidesUtils.putToSession("newName", nameNew);
+        ThucydidesUtils.putToSession("name", nameAndGenetive[0]);
+        ThucydidesUtils.putToSession("genitive", nameAndGenetive[1]);
 
     }
 
-    //Scenario: Create new usual category
-    //Scenario: Create new sticker category
-    //Scenario: Edit name category
+    @When("editor change status Active of new category")
+    public void editor_change_status_Active_of_new_category() {
+        String name = ThucydidesUtils.getFromSession("name").toString();
+        String keyword = ThucydidesUtils.getFromSession("keyword").toString();
+        String genitive = ThucydidesUtils.getFromSession("genitive").toString();
+
+        onOpened(AdminMediusCategoryPage.class).editStatusCategory(name, keyword, genitive);
+    }
+
+    //Scenario: Scenario: Create new category
+    //Scenario: Edit name and genetive of category
     @Then("new category is in List of categories on Categories Page")
     public void new_category_is_in_List_of_categories_on_Categories_Page() {
         String name = ThucydidesUtils.getFromSession("name").toString();
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
         String genitive = ThucydidesUtils.getFromSession("genitive").toString();
         Boolean sticker = Boolean.parseBoolean(ThucydidesUtils.getFromSession("sticker").toString());
-
-        System.out.println(name);
 
         verify().that(onOpened(AdminMediusCategoryPage.class)
                 .categoryIsAdded(name, keyword, genitive, sticker))

@@ -53,8 +53,12 @@ public class AdminMediusCategoryPage extends LJPage {
         return getDriver().findElement(By.name("sticker_" + idCategory)).getAttribute("checked");
     }
 
+    private String getIdCategory(String name, String keyword, String genitive) {
+        return getDBDate().medius().getIdCategory(name, keyword, genitive);
+    }
+
     public boolean categoryIsAdded(String name, String keyword, String genitive, boolean sticker) {
-        String idCategory = getDBDate().medius().getIdCategory(name, keyword, genitive);
+        String idCategory = getIdCategory(name, keyword, genitive);
         boolean nameIsExist = getDriver().findElement(By.name("name_" + idCategory)).isDisplayed();
         boolean keywordIsExist = getDriver().findElement(By.xpath("//td[@class='admintable__column admin-categories-keyword' and contains(text(), '" + keyword + "')]")).isDisplayed();
         boolean genitiveIsExist = getDriver().findElement(By.name("genitive_" + idCategory)).isDisplayed();
@@ -100,7 +104,7 @@ public class AdminMediusCategoryPage extends LJPage {
     }
 
     public void deleteCategory(String name, String keyword, String genitive) {
-        String idCategory = getDBDate().medius().getIdCategory(name, keyword, genitive);
+        String idCategory = getIdCategory(name, keyword, genitive);
 
         try {
             startScript("jQuery('button[value=\"" + idCategory + "\"]').click()");
@@ -109,18 +113,19 @@ public class AdminMediusCategoryPage extends LJPage {
         }
     }
 
-    public String editNameCategory(String name, String keyword, String genitive) {
-        String idCategory = getDBDate().medius().getIdCategory(name, keyword, genitive);
+    public String[] editNameAndGenitiveCategory(String name, String keyword, String genitive) {
+        String idCategory = getIdCategory(name, keyword, genitive);
         String newName = "edited" + idCategory;
+        String newGenitive = "changed" + idCategory;
+
         try {
             startScript("jQuery('input[name=\"name_" + idCategory + "\"]').attr(\"value\",\"" + newName + "\")");
+            startScript("jQuery('input[name=\"genitive_" + idCategory + "\"]').attr(\"value\",\"" + newGenitive + "\")");
         } catch (Exception ex) {
             System.out.println("ooops");
         }
-        //System.out.println(startScript("jQuery('input[name=\"name_" + idCategory + "\"]').attr(\"value\")").toString());
         saveChangesButton.click();
 
-
-        return newName;
+        return new String[]{newName, newGenitive};
     }
 }
