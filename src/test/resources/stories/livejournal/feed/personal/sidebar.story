@@ -1,6 +1,6 @@
 Scenario: Add widget
 Meta: 
-@categories feed personal sidebar release
+@categories feed personal sidebar 
 
 Given logged user (name <name>) without widgets in sidebar on Friends Feed
 When user click Add widget and select widget <widget>
@@ -24,7 +24,7 @@ Examples:
 
 Scenario: Delete widget
 Meta: 
-@categories feed personal sidebar release
+@categories feed personal sidebar 
 
 
 Given logged user (name <name>) with complete set of widgets in sidebar on Friends Feed
@@ -49,7 +49,7 @@ Examples:
 
 Scenario: Up Button on widget
 Meta: 
-@categories feed personal sidebar release
+@categories feed personal sidebar 
 
 Given logged user (name <name>) with complete set of widgets in sidebar on Friends Feed
 When user click Up Button many time on lower widget
@@ -77,7 +77,7 @@ Examples:
 
 Scenario: Up and Down Buttons on widget
 Meta: 
-@categories feed personal sidebar release
+@categories feed personal sidebar 
 
 Given logged user (name <name>) with complete set of widgets in sidebar on Friends Feed
 When user move mouse on middle widget
@@ -91,7 +91,7 @@ Examples:
 
 Scenario: Saving a layout of widgets
 Meta: 
-@categories feed personal sidebar release
+@categories feed personal sidebar 
 
 
 Given logged user (name <name>) with complete set of widgets in sidebar on Friends Feed
