@@ -1,4 +1,4 @@
-package com.livejournal.uitests.adaptive.comfortable.adaptive_settings;
+package com.livejournal.uitests.adaptive.useful.adaptive_settings;
 
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uisteps.core.Url;
