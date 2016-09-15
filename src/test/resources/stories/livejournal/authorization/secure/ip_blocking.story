@@ -1,7 +1,7 @@
 Scenario: IP blocking, when you spent login attempts
 
 Meta: 
-@categories authorization secure release
+@categories authorization secure
 
 Given unlogged user on Login Form
 When user 3 times enters incorrect data: name <name>, incorrect_password <incorrect_password>
