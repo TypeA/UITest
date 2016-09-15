@@ -89,7 +89,8 @@ public class UsersPost extends LJTest {
         String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .setDefault().defaultLanguageLogged(user);
+                .setDefault().defaultLanguageLogged(user)
+                .style().setViewInMyStyle(user, false);
         open(EntryPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -115,7 +116,8 @@ public class UsersPost extends LJTest {
             String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                    .setDefault().defaultLanguageLogged(user);
+                    .setDefault().defaultLanguageLogged(user)
+                    .style().setViewInMyStyle(user, false);;
             open(MyJournalPageLogged.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -134,7 +136,12 @@ public class UsersPost extends LJTest {
     @Then("user see correct privacy $privacy_1 (group $group_1) when edit this post")
     public void user_see_correct_privacy_when_edit_this_post(String privacy_1, String group_1) {
         onOpened(EntryPageLogged.class).Entry().clickOnEditButton();
-        verify().that(utility().verification().sameArrayLists(utility().convertation().stringToList(onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy(), "\\n"), utility().convertation().stringToList(privacy_1 + ";" + group_1, ";")))
+        verify().that(utility().verification().sameArrayLists(
+                     utility().convertation().stringToList(
+                             onOpened(EditJournalBml.class)
+                                     .usePostContent()
+                                     .getCurrentPrivacy(), "\\n"), 
+                utility().convertation().stringToList(privacy_1 + ";" + group_1, ";")))
                 .ifResultIsExpected("User see correct privacy " + privacy_1 + " " + group_1)
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();
