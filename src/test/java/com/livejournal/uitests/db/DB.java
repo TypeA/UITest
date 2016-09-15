@@ -1,6 +1,7 @@
 package com.livejournal.uitests.db;
 
 import com.livejournal.uitests.LJTest;
+import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 
@@ -10,14 +11,7 @@ public class DB extends LJTest {
     public void db() {
         System.out.println("!!!!!!!!!!!!!!!!!!!! start test");
 
-       // System.out.println("!!!!!!!!!!!!!!!!!!!! " + this.getCurrentBrowser().getCurrentTitle());
-//System.out.println("!!!!!!!!!!!!!!!!!!!! " + this.getCurrentBrowser().getName());
-//System.out.println("!!!!!!!!!!!!!!!!!!!! " + this.getCurrentBrowser().getDriver().getTitle());
-     //    List<ArrayList<String>> ans = getDBDate()
-            //     .community()
-            //     .targetIdWithParams("test_comm", "A");
-        // for (int i=0; i<ans.get(0).size(); i++){
-        // System.out.println(ans.get(0).get(i) + " " + ans.get(1).get(i));}
+       open(LoginPageUnlogged.class);
 
     }
 
