@@ -32,7 +32,9 @@ public class AdaptiveSettings extends LJTest {
         setMobileAgent();
         if (!user.toUpperCase().equals("UNLOGGED")) {
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "n");
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                    .style()
+                    .setOptionViewInMyStyle(user, "n");
         }
     }
 
@@ -55,7 +57,9 @@ public class AdaptiveSettings extends LJTest {
         Assert.assertFalse("There is no required user", user.isEmpty());
         ThucydidesUtils.putToSession("viewer", user);
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .style()
+                .setOptionViewInMyStyle(user, "y");
     }
 
     //Scenario: User see Air theme(2/3)

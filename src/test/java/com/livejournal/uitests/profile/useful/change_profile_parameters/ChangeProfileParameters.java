@@ -27,7 +27,7 @@ public class ChangeProfileParameters extends LJTest {
     public void logged_user_on_profile(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user);
+                .setDefault().defaultLanguageLogged(user);
         open(EditProfilePageLogged.class);
         ThucydidesUtils.putToSession("user", user);
     }

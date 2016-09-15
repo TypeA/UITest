@@ -30,7 +30,7 @@ public class ManageFriendsGroups extends LJTest {
     public void logged_user_on_Manage_Groups_Page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         List<ArrayList<String>> groupListBefore = getDBDate().friends().getSortAllGroup(name);
         ThucydidesUtils.putToSession("group_list_before", groupListBefore);
     }

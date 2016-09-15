@@ -19,16 +19,16 @@ public class AddNoteSuccess extends LJTest {
     public void logged_user_on_Edit_Friend_Page(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user)
-                .setDefaultStyle(user);
+                .setDefault().defaultLanguageLogged(user)
+                .setDefault().defaultStyle(user);
     }
 
     @Given("logged user $user on Manage Note")
     public void logged_user_on_Manage_Note(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user)
-                .setDefaultStyle(user);
+                .setDefault().defaultLanguageLogged(user)
+                .setDefault().defaultStyle(user);
         open(ManageNotePage.class);
     }
 

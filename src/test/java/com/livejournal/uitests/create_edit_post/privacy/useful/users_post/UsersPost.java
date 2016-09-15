@@ -28,9 +28,9 @@ public class UsersPost extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name)
-                .defaultMinSecurity(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name)
+                .setDefault().defaultMinSecurity(name);
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
     }
@@ -89,7 +89,7 @@ public class UsersPost extends LJTest {
         String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user);
+                .setDefault().defaultLanguageLogged(user);
         open(EntryPageLogged.class, new Url()
                 .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -115,7 +115,7 @@ public class UsersPost extends LJTest {
             String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                    .defaultLanguageLogged(user);
+                    .setDefault().defaultLanguageLogged(user);
             open(MyJournalPageLogged.class, new Url()
                     .setPrefix(ThucydidesUtils.getFromSession("user").toString() + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));

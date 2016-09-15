@@ -23,7 +23,7 @@ public class MinSecurityCommunity extends LJTest {
     public void logged_user_on_Security_page(String name, String community) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"));
     }
 
@@ -32,7 +32,7 @@ public class MinSecurityCommunity extends LJTest {
     public void logged_user_with_min_security_on_Create_Post_page_in_community(String name, String community, String security) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"))
                 .setMinSecurity(security)
                 .saveSettings();

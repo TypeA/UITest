@@ -22,7 +22,7 @@ public class Sidebar extends LJTest {
     public void logged_user_without_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .sidebar()
                 .deleteAllWidgets();
@@ -38,8 +38,8 @@ public class Sidebar extends LJTest {
     public void logged_user_with_complete_set_of_widgets_in_sidebar_on_Friends_Feed(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .regionSwitchLogged(name, "CYR");
+                .setDefault().defaultLanguageLogged(name)
+                .region().regionSwitchLogged(name, "CYR");
 
         open(FriendsFeedLogged.class, new Url().setPrefix(name + "."))
                 .sidebar()

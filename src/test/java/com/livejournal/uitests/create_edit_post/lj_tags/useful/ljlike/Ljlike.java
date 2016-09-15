@@ -21,7 +21,8 @@ public class Ljlike extends LJTest {
     public void logged_user_on_Create_post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefaultStyle(name);
+                .setDefault()
+                .defaultStyle(name);
         open(UpdateBmlPageLogged.class);
     }
 
