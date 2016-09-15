@@ -29,6 +29,7 @@ public class UsersPost extends LJTest {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .defaultLanguageLogged(name)
+                .setDefaultStyle(name)
                 .defaultMinSecurity(name);
         open(UpdateBmlPageLogged.class);
         ThucydidesUtils.putToSession("user", name);
