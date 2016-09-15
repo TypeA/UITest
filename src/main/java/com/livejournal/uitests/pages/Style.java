@@ -46,11 +46,12 @@ public class Style extends LJPage {
         return onOpened(LJPage.class);
     }
 
-    public LJPage setOptionViewInMyStyle(String user, String optionValue) {
-        if (!optionValue.toUpperCase().equals(getDBDate().userSettings().getInMyStyleSetting(user).toUpperCase())) {
+    public LJPage setViewInMyStyle(String user, boolean setting) {
+        if (setting != getDBDate().userSettings().getInMyStyleSetting(user)) {
             open(SettingsMainPage.class, new Url().setPostfix("?cat=display"))
                     .changeViewInMyStyle()
                     .saveSettings();
+
         }
         return onOpened(LJPage.class);
     }

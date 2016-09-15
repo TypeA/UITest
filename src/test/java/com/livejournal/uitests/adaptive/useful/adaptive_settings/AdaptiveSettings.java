@@ -33,8 +33,7 @@ public class AdaptiveSettings extends LJTest {
         if (!user.toUpperCase().equals("UNLOGGED")) {
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                    .style()
-                    .setOptionViewInMyStyle(user, "n");
+                    .style().setViewInMyStyle(user, false);
         }
     }
 
@@ -58,8 +57,7 @@ public class AdaptiveSettings extends LJTest {
         ThucydidesUtils.putToSession("viewer", user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .style()
-                .setOptionViewInMyStyle(user, "y");
+                .style().setViewInMyStyle(user, true);
     }
 
     //Scenario: User see Air theme(2/3)

@@ -10,11 +10,11 @@ public class DB extends LJTest {
     @Given("data from DB")
     public void db() {
         System.out.println("START TEST +++++++++++++++++++++++++++++++");
-        String name = "testautotest";
+        String user = "test";
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefault().defaultStyle(name);
-        System.out.println("STOP TEST +++++++++++++++++++++++++++++++");
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .style().setViewInMyStyle(user, false);
+        System.out.println("STOP TEST +++++++++++++++++++++++++++++++ ");
 
     }
 
