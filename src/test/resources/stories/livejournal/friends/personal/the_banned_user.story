@@ -24,7 +24,7 @@ Examples:
 
 Scenario: Ban several users
 Meta: 
-@categories banned users personal release
+@categories banned users personal
 
 Given logged user (name <name>) on BannedUsersPage
 When user ban several users and save change
@@ -36,7 +36,7 @@ Examples:
 
 Scenario: Unban several users
 Meta: 
-@categories banned users personal release
+@categories banned users personal
 
 Given logged user (name <name>) on BannedUsersPage
 When user unban several users and save change
