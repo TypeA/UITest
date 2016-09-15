@@ -23,10 +23,8 @@ public class LjuserTag extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefault()
-                .defaultLanguageLogged(name)
-                .setDefault()
-                .defaultStyle(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name);
         open(UpdateBmlPageLogged.class);
     }
 
