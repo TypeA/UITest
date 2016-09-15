@@ -30,9 +30,11 @@ public class PostContentBlock extends UpdateBmlBlockes {
     public PostContentBlock setPostText(String text, String editorType) {
         switch (editorType.toUpperCase()) {
             case "VISUAL":
+                useVisualEditor();
                 visualEditor.setPostText(text);
                 break;
             case "HTML":
+                useHTMLEditor();
                 htmlEditor.setPostText(text);
                 break;
             default:
