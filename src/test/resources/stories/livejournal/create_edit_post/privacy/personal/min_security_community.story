@@ -1,6 +1,6 @@
 Scenario: Min security in creating post in community
 Meta: 
-@categories create_edit_post privacy personal post_community min_security release
+@categories create_edit_post privacy personal post_community min_security release testmaxa
 
 Given logged user <name> on Security page for community <community>
 When user set min security $security in the community <community>
