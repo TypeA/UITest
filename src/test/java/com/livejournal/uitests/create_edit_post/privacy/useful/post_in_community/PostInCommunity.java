@@ -76,6 +76,7 @@ public class PostInCommunity extends LJTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         String user = selectUserForComminuty(community, name_1, ThucydidesUtils.getFromSession("friend_group").toString());
+        System.out.println("++++++++++++++ user in post " + user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .style().setViewInMyStyle(user, false);
@@ -131,13 +132,11 @@ public class PostInCommunity extends LJTest {
                 .finish();
     }
 
-
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
             case MEMBERS:
-                String ans = getDBDate().community().findMemberInCommunityNotInGroup(community);
-                return ans;
+                return getDBDate().community().findMemberInCommunityNotInGroup(community);
             case MAINTAINERS:
                 return getDBDate().community().findMaintainerInComminuty(community);
             case USER_IN_GROUP:

@@ -10,11 +10,8 @@ public class DB extends LJTest {
     @Given("data from DB")
     public void db() {
         System.out.println("START TEST +++++++++++++++++++++++++++++++");
-        String user = "test";
-        open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .style().setViewInMyStyle(user, false);
-        System.out.println("STOP TEST +++++++++++++++++++++++++++++++ ");
+        String user = getDBDate().community().findMaintainerInComminuty("test_comm");
+        System.out.println("STOP TEST +++++++++++++++++++++++++++++++ " + user);
 
     }
 

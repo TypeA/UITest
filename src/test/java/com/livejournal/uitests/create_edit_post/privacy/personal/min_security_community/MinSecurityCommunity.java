@@ -7,6 +7,8 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -66,9 +68,15 @@ public class MinSecurityCommunity extends LJTest {
     //Scenario: Min security in creating post in community (3/3)
     @Then("user can set only allowed security $security when create post in community $community")
     public void user_can_set_only_allowed_security_when_create_post(String security, String community) {
-        ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
+        open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .selectCommunity(community)
+                .selectCommunity(community);
+      /*  try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MinSecurityCommunity.class.getName()).log(Level.SEVERE, null, ex);
+        }*/
+        ArrayList<String> privacy = onOpened(UpdateBmlPageLogged.class)
                 .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))

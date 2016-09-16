@@ -10,14 +10,22 @@ import java.util.Random;
 public class Community extends DatabasesData {
 
     public String findMaintainerInComminuty(String community) {
-        String select = "select r.targetid, r.type from user u left join reluser r on "
+        String select = "select u.user, r.targetid, r.type from user u left join reluser r on "
                 + "u.userid=r.userid where u.user = '"
                 + community + "' and r.type='A';";
         ArrayList<String> users = workWithDB().conect()
                 .select(select, "targetid")
                 .finish()
                 .get(0);
-        return users.get(new Random().nextInt(users.size()));
+        String userid = users.get(new Random().nextInt(users.size()));
+        String select2 = "select user from user"
+                + " where userid = '"
+                + userid + "';";
+        return workWithDB().conect()
+                .select(select2, "user")
+                .finish()
+                .get(0)
+                .get(0);
     }
 
     public ArrayList<String> findAllMembersInCommunity(String community) {
