@@ -71,11 +71,11 @@ public class MinSecurityCommunity extends LJTest {
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .selectCommunity(community);
-        try {
+      /*  try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
             Logger.getLogger(MinSecurityCommunity.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
         ArrayList<String> privacy = onOpened(UpdateBmlPageLogged.class)
                 .usePostContent()
                 .getAllPrivacy();
