@@ -29,11 +29,11 @@ Meta:
 
 Given unlogged user on Registration Form
 When user enter correct data except for the name: name <name>, email <email>, password <password>, day <day>, month <month>, year <year>, gender <gender>
-Then there is <symbols> symbols in name field
+Then correct numders of symbols in name field
 
 Examples:
-|name           |email          |password   |day    |month  |year   |gender |symbols|
-|teNOSst1234rnd |test@test.ru   |Pass123    |1      |4      |1990   |M      |15     |
+|name           |email          |password   |day    |month  |year   |gender |
+|teNOSst1234rnd |test@test.ru   |Pass123    |1      |4      |1990   |M      |
 
 
 

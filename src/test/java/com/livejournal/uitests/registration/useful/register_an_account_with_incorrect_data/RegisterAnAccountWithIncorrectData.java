@@ -1,5 +1,6 @@
 package com.livejournal.uitests.registration.useful.register_an_account_with_incorrect_data;
 
+import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
@@ -80,8 +81,10 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     //Scenario: Register an account with long name(2/3)
     @When("user enter correct data except for the name: name $name, email $email, password $password, day $day, month $month, year $year, gender $gender")
     public void user_enter_correct_data_except_for_the_name(String name, String email, String password, String day, String month, String year, String gender) {
+        String new_name;
+        new_name = numberOfSumbols(utility().random().getRandomName(name), 30);
         onOpened(CreateAccountPage.class)
-                .createAccountData(numberOfSumbols(utility().random().getRandomName(name), 30),
+                .createAccountData(new_name,
                         email,
                         password,
                         Date.parceDayOrGetCurrent(day).toString(),
@@ -89,6 +92,7 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
                         Date.parceYearOrGetCurrent(year).toString(),
                         gender)
                 .clickOnUserNameField();
+        ThucydidesUtils.putToSession("name", new_name);
 
     }
 
@@ -133,11 +137,14 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     }
 
     //Scenario: Register an account with long name(3/3)
-    @Then("there is $symbols symbols in name field")
+    @Then("correct numders of symbols in name field")
     public void there_is_symbols_in_name_field(String symbols) {
-        verify().that(onOpened(CreateAccountPage.class).getNOSinName().equals(Integer.parseInt(symbols)))
-                .ifResultIsExpected("The number of symbolsame in name is correct: " + onOpened(CreateAccountPage.class).getNOSinName())
-                .ifElse("The number of symbolsame in name is incorrect: " + Integer.parseInt(symbols))
+        String long_name = ThucydidesUtils.getFromSession("name")
+                .toString()
+                .substring(0,14);
+        verify().that(onOpened(CreateAccountPage.class).getName().equals(long_name))
+                .ifResultIsExpected("The number of symbolsame in name is correct: " + onOpened(CreateAccountPage.class).getName())
+                .ifElse("The number of symbolsame in name is incorrect: " + long_name)
                 .finish();
 
     }
