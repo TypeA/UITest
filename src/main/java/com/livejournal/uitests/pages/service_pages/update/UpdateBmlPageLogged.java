@@ -78,8 +78,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
                 return communitySelect.isDisplayed();
             }
         });
-        communitySelect.selectByValue(community);
-        System.out.println("+++++++++++++ " + communitySelect.getOptions());
+        communitySelect.selectByVisibleText(community);
+        //System.out.println("+++++++++++++ " + communitySelect.getOptions());
         return this;
     }
 
