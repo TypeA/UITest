@@ -7,6 +7,8 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -69,6 +71,11 @@ public class MinSecurityCommunity extends LJTest {
         open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .selectCommunity(community);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MinSecurityCommunity.class.getName()).log(Level.SEVERE, null, ex);
+        }
         ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
                 .usePostContent()
                 .getAllPrivacy();
