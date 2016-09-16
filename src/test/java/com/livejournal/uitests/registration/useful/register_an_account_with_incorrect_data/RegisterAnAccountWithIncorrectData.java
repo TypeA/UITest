@@ -136,8 +136,8 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     @Then("there is $symbols symbols in name field")
     public void there_is_symbols_in_name_field(String symbols) {
         verify().that(onOpened(CreateAccountPage.class).getNOSinName().equals(Integer.parseInt(symbols)))
-                .ifResultIsExpected("The number of symbolsame in name is correct")
-                .ifElse("The number of symbolsame in name is incorrect!")
+                .ifResultIsExpected("The number of symbolsame in name is correct: " + onOpened(CreateAccountPage.class).getNOSinName())
+                .ifElse("The number of symbolsame in name is incorrect: " + Integer.parseInt(symbols))
                 .finish();
 
     }
