@@ -83,6 +83,9 @@ public class CreateAccountPage extends LJPage {
 
     @StepGroup
     public Integer getNOSinName() {
+        System.out.println("++++++++++++ " + userNameField.getText());
+       // System.out.println("++++++++++++ " + userNameField.g);
+        System.out.println("++++++++++++ " + userNameField.getText().length());
         return userNameField.getText().length();
     }
 
