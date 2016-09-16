@@ -1,6 +1,6 @@
 Scenario: Create scheduled post
 Meta: 
-@categories create_edit_post time useful release
+@categories create_edit_post time useful release testmaxa
 
 Given logged user <name> on Create Post page
 When user create new post and change parameter <parameter> by value <value>
@@ -45,7 +45,7 @@ Examples:
 
 Scenario: Edit scheduled post
 Meta: 
-@categories create_edit_post time useful release
+@categories create_edit_post time useful release 
 
 Given logged user <name> with scheduled post on Scheduled post Page
 When user edit element <element> by change <changes> in the scheduled post
