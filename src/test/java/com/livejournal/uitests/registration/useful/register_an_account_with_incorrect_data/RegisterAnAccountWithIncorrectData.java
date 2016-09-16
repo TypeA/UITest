@@ -137,7 +137,7 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     }
 
     //Scenario: Register an account with long name(3/3)
-    @Then("correct numders of symbols in name field")
+    @Then("numders of symbols in name field is correct")
     public void there_is_symbols_in_name_field(String symbols) {
         String long_name = ThucydidesUtils.getFromSession("name")
                 .toString()
