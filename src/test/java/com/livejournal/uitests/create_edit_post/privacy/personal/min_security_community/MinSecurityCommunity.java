@@ -76,7 +76,7 @@ public class MinSecurityCommunity extends LJTest {
         } catch (InterruptedException ex) {
             Logger.getLogger(MinSecurityCommunity.class.getName()).log(Level.SEVERE, null, ex);
         }
-        ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
+        ArrayList<String> privacy = onOpened(UpdateBmlPageLogged.class)
                 .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))
