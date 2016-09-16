@@ -141,7 +141,7 @@ public class RegisterAnAccountWithIncorrectData extends LJTest {
     public void there_is_symbols_in_name_field() {
         String long_name = ThucydidesUtils.getFromSession("name")
                 .toString()
-                .substring(0,14);
+                .substring(0,15);
         verify().that(onOpened(CreateAccountPage.class).getName().equals(long_name))
                 .ifResultIsExpected("The number of symbolsame in name is correct: " + onOpened(CreateAccountPage.class).getName())
                 .ifElse("The number of symbolsame in name is incorrect: " + long_name)
