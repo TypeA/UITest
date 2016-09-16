@@ -72,6 +72,7 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     public UpdateBmlPageLogged selectCommunity(String community) {
         postToCommunity.click();
         communitySelect.selectByValue(community);
+        System.out.println("+++++++++++++ " + communitySelect.getOptions());
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
