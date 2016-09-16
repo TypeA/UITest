@@ -79,11 +79,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
                 return communitySelect.isDisplayed();
             }
         });
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(UpdateBmlPageLogged.class.getName()).log(Level.SEVERE, null, ex);
-        }
         return this;
     }
 
