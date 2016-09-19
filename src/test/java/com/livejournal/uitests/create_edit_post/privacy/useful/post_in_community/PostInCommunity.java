@@ -79,7 +79,8 @@ public class PostInCommunity extends LJTest {
         System.out.println("++++++++++++++ user in post " + user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .style().setViewInMyStyle(user, false);
+                .style().setViewInMyStyle(user, false)
+                .setDefault().defaultLanguageLogged(user);
         open(EntryPageLogged.class, new Url()
                 .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -105,7 +106,8 @@ public class PostInCommunity extends LJTest {
             String user = selectUserForComminuty(community, name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
                     .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                    .style().setViewInMyStyle(user, false);
+                    .style().setViewInMyStyle(user, false)
+                    .setDefault().defaultLanguageLogged(user);
             open(MyJournalPageLogged.class, new Url()
                     .setPrefix(community + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
