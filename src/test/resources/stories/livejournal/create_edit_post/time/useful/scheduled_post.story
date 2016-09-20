@@ -54,8 +54,8 @@ Then the scheduled post is editing
 Examples:
 |name         |element      |changes           |
 |testautotest |subject      |rnd               |
-|--testautotest |text         |rnd               |
-|--testautotest |tags         |rnd               |
+|testautotest |text         |rnd               |
+|testautotest |tags         |rnd               |
 
 
 Scenario: Edit privacy in scheduled post
