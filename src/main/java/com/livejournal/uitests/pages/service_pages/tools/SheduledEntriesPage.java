@@ -63,6 +63,7 @@ public class SheduledEntriesPage extends ServicePageLogged {
     }
 
     public FinishPostForm editSheduledEntryByText(String content, String text, String post_text) {
+        System.out.println("+++++++++++++++ текст поста внутри метода " + post_text);
         startScript("jQuery('.b-editentry:contains(\"" + post_text + "\") a')[0].click()");
         onOpened(EditJournalBml.class)
                 .editPostContent(content, text);
