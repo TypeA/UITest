@@ -128,4 +128,36 @@ public class AdminMediusCategoryPage extends LJPage {
 
         return new String[]{newName, newGenitive};
     }
+
+    public void editStatusCategory(String name, String keyword, String genitive) {
+        String idCategory = getIdCategory(name, keyword, genitive);
+
+        try {
+            startScript("jQuery('input[name=\"active_" + idCategory + "\"]').attr(\"checked\", \"checked\")");
+        } catch (NullPointerException ex) {
+            System.out.println("oops");
+        }
+
+        saveChangesButton.click();
+    }
+
+    public void changePositionCategory(String name, String keyword, String genitive, String[] positions) {
+        String idCategory = getIdCategory(name, keyword, genitive);
+
+        try {
+            for (String currentPosition : positions) {
+                if (currentPosition.equals("Up"))
+                    startScript("jQuery('button[name=\"up\"][value=\"" + idCategory + "\"]').click()");
+
+                if (currentPosition.equals("Down"))
+                    startScript("jQuery('button[name=\"down\"][value=\"" + idCategory + "\"]').click()");
+            }
+
+        } catch (NullPointerException ex) {
+            System.out.println("Не найдена кнопка");
+        }
+
+        saveChangesButton.click();
+    }
+
 }

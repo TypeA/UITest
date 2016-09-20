@@ -57,7 +57,7 @@ public class AddingNewCategory extends LJTest {
     }
 
     //Scenario: Edit name and genetive of category
-    @When("editor change name and genetive of new category")
+    @When("editor change name and genitive of new category")
     public void editor_change_name_and_genetive_of_new_category() {
         String name = ThucydidesUtils.getFromSession("name").toString();
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
@@ -70,13 +70,15 @@ public class AddingNewCategory extends LJTest {
 
     }
 
-    @When("editor change status Active of new category")
-    public void editor_change_status_Active_of_new_category() {
+    @When("editor change status Active and position of new category")
+    public void editor_change_status_Active_of_new_category(String[] positions) {
         String name = ThucydidesUtils.getFromSession("name").toString();
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
         String genitive = ThucydidesUtils.getFromSession("genitive").toString();
 
+        //String[] correctArrayPositions = positions.split(" ");
         onOpened(AdminMediusCategoryPage.class).editStatusCategory(name, keyword, genitive);
+        onOpened(AdminMediusCategoryPage.class).changePositionCategory(name, keyword, genitive, positions);
     }
 
     //Scenario: Scenario: Create new category
@@ -99,8 +101,6 @@ public class AddingNewCategory extends LJTest {
                         " and genitive = " + genitive +
                         " and checkbox sticker = " + sticker)
                 .finish();
-
-
     }
 
     //Scenario: Fail with creating new usual category
@@ -120,9 +120,5 @@ public class AddingNewCategory extends LJTest {
                 .ifResultIsExpected("Category is not added with name = " + name)
                 .ifElse("Category is added with name=" + name)
                 .finish();
-
-
     }
-
-
 }
