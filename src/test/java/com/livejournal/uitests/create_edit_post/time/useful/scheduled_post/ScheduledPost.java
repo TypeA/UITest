@@ -47,7 +47,7 @@ public class ScheduledPost extends LJTest {
                 .setDefault().defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "2")
                 .split(";");
         String post_text = utility().random().getRandomText(10).trim();
 
@@ -65,7 +65,7 @@ public class ScheduledPost extends LJTest {
         
         System.out.println("+++++++++++++++ первый шаг " );
         System.out.println("+++++++++++++++ текст поста " + ThucydidesUtils.getFromSession("post_text"));
-        System.out.println("+++++++++++++++ количество постов " + ThucydidesUtils.getFromSession("post_text"));
+        System.out.println("+++++++++++++++ количество постов " + ThucydidesUtils.getFromSession("number_of_entryes"));
         System.out.println("+++++++++++++++ data " + date[0] + " " + date[1]);
     }
 
