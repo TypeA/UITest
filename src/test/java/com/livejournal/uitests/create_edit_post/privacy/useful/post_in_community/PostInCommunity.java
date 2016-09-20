@@ -28,7 +28,7 @@ public class PostInCommunity extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         ThucydidesUtils.putToSession("user", name);
     }
 
@@ -38,7 +38,7 @@ public class PostInCommunity extends LJTest {
     public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws IOException {
         String postText = utility().random().getRandomText(30);
         onOpened(LoginPageUnlogged.class)
-                .defaultMinSecurity(community);
+                .setDefault().defaultMinSecurity(community);
         String post_link = open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .selectCommunity(community)
@@ -76,8 +76,11 @@ public class PostInCommunity extends LJTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         String user = selectUserForComminuty(community, name_1, ThucydidesUtils.getFromSession("friend_group").toString());
+        System.out.println("++++++++++++++ user in post " + user);
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .style().setViewInMyStyle(user, false)
+                .setDefault().defaultLanguageLogged(user);
         open(EntryPageLogged.class, new Url()
                 .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -102,7 +105,9 @@ public class PostInCommunity extends LJTest {
         } else {
             String user = selectUserForComminuty(community, name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                    .style().setViewInMyStyle(user, false)
+                    .setDefault().defaultLanguageLogged(user);
             open(MyJournalPageLogged.class, new Url()
                     .setPrefix(community + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -129,13 +134,11 @@ public class PostInCommunity extends LJTest {
                 .finish();
     }
 
-
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
             case MEMBERS:
-                String ans = getDBDate().community().findMemberInCommunityNotInGroup(community);
-                return ans;
+                return getDBDate().community().findMemberInCommunityNotInGroup(community);
             case MAINTAINERS:
                 return getDBDate().community().findMaintainerInComminuty(community);
             case USER_IN_GROUP:

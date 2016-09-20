@@ -1,7 +1,7 @@
 Scenario: User see Air theme
 
 Meta: 
-@categories adaptive comfortable release
+@categories adaptive comfortable
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -28,7 +28,7 @@ Examples:
 Scenario: User see Adaptive Chameleon theme
 
 Meta: 
-@categories adaptive comfortable release
+@categories adaptive comfortable
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -47,7 +47,7 @@ Examples:
 Scenario: User see Non adaptive theme
 
 Meta: 
-@categories adaptive comfortable release
+@categories adaptive comfortable
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page
@@ -62,7 +62,7 @@ Examples:
 Scenario: User see Non adaptive Chameleon theme
 
 Meta: 
-@categories adaptive comfortable release
+@categories adaptive comfortable
 
 Given user <user>
 When user go to the journal (paid <paid>,mobile view <mobileView>,style <style>) page

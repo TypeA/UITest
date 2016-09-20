@@ -44,8 +44,8 @@ public class Composition extends LJTest {
     public void user_by_parametr_on_Feed(String user, String parameter) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user)
-                .regionSwitchLogged(user, parameter);
+                .setDefault().defaultLanguageLogged(user)
+                .region().regionSwitchLogged(user, parameter);
         open(FriendsFeedLogged.class, new Url().setPrefix(user + "."));
         ThucydidesUtils.putToSession("user", user);
     }

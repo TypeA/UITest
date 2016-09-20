@@ -21,7 +21,7 @@ public class HtmlTagsInSubject extends LJTest {
     public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefaultStyle(name);
+                .setDefault().defaultStyle(name);
     }
 
     //Scenario: Subject with correct html tags (2/3)

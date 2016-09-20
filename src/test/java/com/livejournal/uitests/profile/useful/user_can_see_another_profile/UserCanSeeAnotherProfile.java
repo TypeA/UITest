@@ -53,7 +53,7 @@ public class UserCanSeeAnotherProfile extends LJTest {
             if (!user1.equals("unlogged")) {
                 open(LoginPageUnlogged.class)
                         .authorizeBy(username, getDBDate().userData().getUserPassword(username))
-                        .defaultLanguageLogged(username);
+                        .setDefault().defaultLanguageLogged(username);
                 page_date = open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
                         .getProfileBirthday()
                         .trim();
@@ -63,7 +63,8 @@ public class UserCanSeeAnotherProfile extends LJTest {
                         .moveMouseOverMyJournalMenuItem().clickOnLogOut();
             } else {
                 console().restartVarnish();
-                open(ProfilePageUnlogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
+                open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
+                        .setDefault().defaultLanguageUnlogged();
                 page_date = open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
                         .getProfileBirthday()
                         .trim();
@@ -88,7 +89,7 @@ public class UserCanSeeAnotherProfile extends LJTest {
                 open(LoginPageUnlogged.class
                 )
                         .authorizeBy(username, getDBDate().userData().getUserPassword(username))
-                        .defaultLanguageLogged(user);
+                        .setDefault().defaultLanguageLogged(user);
                 isExist = !(open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
                         .getBirthdayLabel().equals("Birthdate"));
                 verify().that(isExist)
@@ -98,7 +99,8 @@ public class UserCanSeeAnotherProfile extends LJTest {
 
             } else {
                 console().restartVarnish();
-                open(ProfilePageLogged.class, new Url().setPrefix(user + ".")).defaultLanguageUnlogged();
+                open(ProfilePageLogged.class, new Url().setPrefix(user + "."))
+                        .setDefault().defaultLanguageUnlogged();
                 isExist = !(open(ProfilePageUnlogged.class, new Url().setPrefix(user + "."))
                         .getBirthdayLabel().equals("Birthdate"));
                 verify().that(isExist)

@@ -1,6 +1,6 @@
 Scenario: Post with correct lj-user tag
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful 
 
 Given logged user <name> on Create Post page
 When user enter correct username <ljuser> in ljuser bubble and create new post
@@ -15,7 +15,7 @@ Examples:
 
 Scenario: Post with uncorrect lj-user tag
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful 
 
 Given logged user <name> on Create Post page
 When user enter incorrect username <ljuser> in ljuser bubble and try to post new entry
@@ -29,7 +29,7 @@ Examples:
 
 Scenario: User can use autocomplete for lj-user tag
 Meta: 
-@categories create_edit_post lj_tags useful release
+@categories create_edit_post lj_tags useful 
 
 Given logged user <name> on Create Post page
 When user <name> enter few symbols of his friend username and choose his name and save post

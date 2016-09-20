@@ -1,4 +1,4 @@
-package com.livejournal.uitests.adaptive.comfortable.adaptive_settings;
+package com.livejournal.uitests.adaptive.useful.adaptive_settings;
 
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uisteps.core.Url;
@@ -32,7 +32,8 @@ public class AdaptiveSettings extends LJTest {
         setMobileAgent();
         if (!user.toUpperCase().equals("UNLOGGED")) {
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "n");
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                    .style().setViewInMyStyle(user, false);
         }
     }
 
@@ -55,7 +56,8 @@ public class AdaptiveSettings extends LJTest {
         Assert.assertFalse("There is no required user", user.isEmpty());
         ThucydidesUtils.putToSession("viewer", user);
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user)).setOptionViewInMyStyle(user, "y");
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .style().setViewInMyStyle(user, true);
     }
 
     //Scenario: User see Air theme(2/3)

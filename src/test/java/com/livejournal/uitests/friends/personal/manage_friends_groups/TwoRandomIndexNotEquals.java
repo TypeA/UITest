@@ -1,4 +1,4 @@
-package com.livejournal.uitests.friends.useful.manage_friends_groups;
+package com.livejournal.uitests.friends.personal.manage_friends_groups;
 
 /**
  *

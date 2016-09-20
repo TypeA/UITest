@@ -92,7 +92,7 @@ public class UserSettings extends DatabasesData {
                 .get(0);
     }
 
-    public String getInMyStyleSetting(String user) {
+    public boolean getInMyStyleSetting(String user) {
         String select1 = "SELECT * "
                 + "FROM user "
                 + "WHERE user='"
@@ -109,13 +109,14 @@ public class UserSettings extends DatabasesData {
                 + user_atr.get(0).get(1)
                 + "';";
         try {
-            return workWithDB().conect()
+             String setting = workWithDB().conect()
                     .select(select2, "value")
                     .finish()
                     .get(0)
                     .get(0);
+             return setting.equals("Y");
         } catch (Exception ex) {
-            return "n";
+            return false;
         }
     }
 

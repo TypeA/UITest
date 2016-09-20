@@ -27,9 +27,9 @@ public class ScheduledPost extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name)
-                .defaultMinSecurity(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name)
+                .setDefault().defaultMinSecurity(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
@@ -43,11 +43,11 @@ public class ScheduledPost extends LJTest {
     public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "2")
                 .split(";");
         String post_text = utility().random().getRandomText(10).trim();
 

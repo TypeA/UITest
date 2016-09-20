@@ -85,8 +85,9 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
-    public Integer getNOSinName() {
-        return Integer.valueOf(startScript("return jQuery('#username').val()").toString().length());
+    public String getName() {
+         return startScript("return jQuery('.b-createpage-input-wrapper.b-createpage-input-username input').val()")
+                 .toString();
     }
 
     @StepGroup

@@ -26,7 +26,7 @@ public class SchoolSettings extends LJTest {
     public void logged_user_on_edit_profile_page_school(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user);
+                .setDefault().defaultLanguageLogged(user);
     }
 
     //Scenario: School privacy (2/4)

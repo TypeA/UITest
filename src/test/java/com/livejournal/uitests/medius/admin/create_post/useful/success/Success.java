@@ -27,8 +27,8 @@ public class Success extends LJTest {
     public void logged_user_on_Admin_Medius_Create_Post(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
-                .defaultLanguageLogged(user)
-                .setDefaultStyle(user);
+                .setDefault().defaultLanguageLogged(user)
+                .setDefault().defaultStyle(user);
         open(MediusUpdateBml.class);
     }
 

@@ -24,7 +24,7 @@ public class Subject extends LJTest {
     public void logged_user_on_create_post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefaultStyle(name);
+                .setDefault().defaultStyle(name);
     }
 
     //User create new post with subject(2/3)

@@ -1,7 +1,7 @@
 Scenario: Forgot password
 
 Meta: 
-@categories authorization comfortable 
+@categories authorization comfortable release
 
 Given unlogged user on Login Form 
 When user click link Forgot Password

@@ -29,8 +29,8 @@ public class HeaderNavigation extends LJTest {
     public void logged_user_on_Main_Page(String name, String region) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .regionSwitchLogged(name, region);
+                .setDefault().defaultLanguageLogged(name)
+                .region().regionSwitchLogged(name, region);
         open(MainPageLogged.class);
     }
 
@@ -39,8 +39,8 @@ public class HeaderNavigation extends LJTest {
     @Given("unlogged user from region $region on Main Page")
     public void unlogged_user_from_region_on_Main_Page(String region) {
         open(MainPageUnlogged.class)
-                .regionSwitchUnlogged(region)
-                .defaultLanguageUnlogged();
+                .region().regionSwitchUnlogged(region)
+                .setDefault().defaultLanguageUnlogged();
     }
 
     //Scenario: Navigation for logged user (2/3)

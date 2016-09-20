@@ -27,7 +27,7 @@ public class Ljcut extends LJTest {
         ThucydidesUtils.putToSession("name", name);
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefaultStyle(name);
+                .setDefault().defaultStyle(name);
         open(UpdateBmlPageLogged.class);
     }
 

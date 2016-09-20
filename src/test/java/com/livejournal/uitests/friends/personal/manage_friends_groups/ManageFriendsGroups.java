@@ -1,4 +1,4 @@
-package com.livejournal.uitests.friends.useful.manage_friends_groups;
+package com.livejournal.uitests.friends.personal.manage_friends_groups;
 
 import com.livejournal.uisteps.core.Url;
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
@@ -30,7 +30,7 @@ public class ManageFriendsGroups extends LJTest {
     public void logged_user_on_Manage_Groups_Page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         List<ArrayList<String>> groupListBefore = getDBDate().friends().getSortAllGroup(name);
         ThucydidesUtils.putToSession("group_list_before", groupListBefore);
     }

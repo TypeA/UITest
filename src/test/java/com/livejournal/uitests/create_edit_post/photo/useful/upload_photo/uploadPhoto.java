@@ -14,7 +14,7 @@ public class uploadPhoto extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         open(UpdateBmlPageLogged.class);
     }
 
