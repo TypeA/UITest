@@ -62,11 +62,6 @@ public class ScheduledPost extends LJTest {
                 .postEntry();
         ThucydidesUtils.putToSession("number_of_entryes", open(SheduledEntriesPage.class).getNumberOfEntryes());
         ThucydidesUtils.putToSession("post_text", post_text);
-        
-        System.out.println("+++++++++++++++ первый шаг " );
-        System.out.println("+++++++++++++++ текст поста " + ThucydidesUtils.getFromSession("post_text"));
-        System.out.println("+++++++++++++++ количество постов " + ThucydidesUtils.getFromSession("number_of_entryes"));
-        System.out.println("+++++++++++++++ data " + date[0] + " " + date[1]);
     }
 
     //Scenario: Create scheduled post (2/3)
@@ -117,7 +112,6 @@ public class ScheduledPost extends LJTest {
     //Scenario: Edit privacy in scheduled post (2/3)
     @When("user edit element $element by change $changes in the scheduled post")
     public void user_edit_the_scheduled_post(String element, String changes) {
-        System.out.println("+++++++++++++++ второй шаг ");
         ThucydidesUtils.putToSession("changes", utility().random().getRandomName(changes));
         onOpened(SheduledEntriesPage.class)
                 .editSheduledEntryByText(element, ThucydidesUtils.getFromSession("changes").toString(), ThucydidesUtils.getFromSession("post_text").toString());
