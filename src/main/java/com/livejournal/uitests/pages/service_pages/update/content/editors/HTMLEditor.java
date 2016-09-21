@@ -7,6 +7,7 @@ import com.livejournal.uitests.pages.service_pages.update.content.UpdateBmlBlock
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import net.thucydides.core.annotations.WhenPageOpens;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
@@ -67,6 +68,7 @@ public class HTMLEditor extends UpdateBmlBlockes {
     
     @StepGroup
     public HTMLEditor setLJCut(String ljcut) {
+        this.sendKeys(Keys.ARROW_DOWN);
         ljCutButton.click()
                 .cutBubble()
                 .useLJCut(ljcut);
