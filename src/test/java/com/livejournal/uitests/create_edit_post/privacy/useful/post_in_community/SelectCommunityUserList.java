@@ -9,5 +9,6 @@ public enum SelectCommunityUserList {
     MEMBERS,
     MAINTAINERS,
     USER_IN_GROUP,
-    OTHER_USER
+    OTHER_USER,
+    NOT_IN_GROUP;
 }
