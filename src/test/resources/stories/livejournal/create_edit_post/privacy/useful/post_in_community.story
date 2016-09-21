@@ -8,11 +8,11 @@ Then user <name_1> can read the post in community <community>
 Then user <name_2> cannot read the post in community <community>
 
 Examples:
-|name           |community   |name_1         |name_2        |privacy     |group     | 
-|testautotest   |test_comm   |members        |other_user    |Members     |          |
-|testautotest   |test_comm   |maintainers    |members       |Maintainers |          |
-|testautotest   |test_comm   |other_user     |              |Public      |          |
-|testautotest   |test_comm   |user_in_group  |members       |Custom      |group1    |
+|name           |community   |name_1         |name_2             |privacy     |group     | 
+|testautotest   |test_comm   |members        |other_user         |Members     |          |
+|testautotest   |test_comm   |maintainers    |members            |Maintainers |          |
+|testautotest   |test_comm   |other_user     |                   |Public      |          |
+|testautotest   |test_comm   |user_in_group  |not_in_group       |Custom      |group1    |
 
 Scenario: Edit post in community
 Meta:
