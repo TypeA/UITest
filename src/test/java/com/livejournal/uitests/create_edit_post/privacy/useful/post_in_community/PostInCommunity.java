@@ -144,7 +144,7 @@ public class PostInCommunity extends LJTest {
             case OTHER_USER:
                 return getDBDate().community().getNotMember(community);
             case NOT_IN_GROUP:
-                return getDBDate().community().getMemberNotInGroup(community);
+                return getDBDate().community().getMemberNotInGroup(community, group);
             default:
                 String user2 = ThucydidesUtils.getFromSession("user").toString();
                 return user2;

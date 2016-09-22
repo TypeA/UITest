@@ -13,12 +13,12 @@ public class DB extends LJTest {
     @Given("data from DB")
     public void db() {
         System.out.println("START TEST +++++++++++++++++++++++++++++++");
-        String user = getDBDate().community().getMember("test_comm");
-       /* ArrayList<String> users =getDBDate().community().getAllMembers("test_comm");
+        ArrayList<String> users = getDBDate().community().getAllMemberNotInGroup("test_comm", "group1");
+        //ArrayList<String> users =getDBDate().community().getAllMembers("test_comm");
         for(int i=0; i<users.size();i++){
         System.out.println("user " + users.get(i));
-        }*/
-        System.out.println("STOP TEST +++++++++++++++++++++++++++++++ " + user);
+        }
+        System.out.println("STOP TEST +++++++++++++++++++++++++++++++ " );
 
 
 
