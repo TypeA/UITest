@@ -10,7 +10,6 @@ import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.io.IOException;
-import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -28,7 +27,7 @@ public class PostInCommunity extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         ThucydidesUtils.putToSession("user", name);
     }
 
@@ -38,7 +37,7 @@ public class PostInCommunity extends LJTest {
     public void user_create_new_post_with_privacy_in_community(String privacy, String group, String community) throws IOException {
         String postText = utility().random().getRandomText(30);
         onOpened(LoginPageUnlogged.class)
-                .defaultMinSecurity(community);
+                .setDefault().defaultMinSecurity(community);
         String post_link = open(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .selectCommunity(community)
@@ -77,7 +76,9 @@ public class PostInCommunity extends LJTest {
                 .clickOnLogOut();
         String user = selectUserForComminuty(community, name_1, ThucydidesUtils.getFromSession("friend_group").toString());
         open(LoginPageUnlogged.class)
-                .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+                .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                .style().setViewInMyStyle(user, false)
+                .setDefault().defaultLanguageLogged(user);
         open(EntryPageLogged.class, new Url()
                 .setPrefix(community + ".")
                 .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -102,7 +103,9 @@ public class PostInCommunity extends LJTest {
         } else {
             String user = selectUserForComminuty(community, name_2, ThucydidesUtils.getFromSession("friend_group").toString());
             open(LoginPageUnlogged.class)
-                    .authorizeBy(user, getDBDate().userData().getUserPassword(user));
+                    .authorizeBy(user, getDBDate().userData().getUserPassword(user))
+                    .style().setViewInMyStyle(user, false)
+                    .setDefault().defaultLanguageLogged(user);
             open(MyJournalPageLogged.class, new Url()
                     .setPrefix(community + ".")
                     .setPostfix(ThucydidesUtils.getFromSession("post_link").toString()));
@@ -128,32 +131,25 @@ public class PostInCommunity extends LJTest {
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();
     }
-
-
+    
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
             case MEMBERS:
-                String ans = getDBDate().community().findMemberInCommunityNotInGroup(community);
-                return ans;
+                return getDBDate().community().getMember(community);
             case MAINTAINERS:
-                return getDBDate().community().findMaintainerInComminuty(community);
+                return getDBDate().community().getMaintainer(community);
             case USER_IN_GROUP:
-                ArrayList<String> in_group = getDBDate().friends().getAllFriendsInGroup(community, group);
-                String user_in_group = getDBDate().friends().getAllFriendsInGroup(community, group).get(0);
-                for (String in_group1 : in_group) {
-                    if (in_group1.contains("test")) {
-                        user_in_group = in_group1;
-                    }
-                }
-                return user_in_group;
+                return getDBDate().community().getMemberInGroup(community, group);
             case OTHER_USER:
-                return getDBDate().friends().getNotFriend(community);
+                return getDBDate().community().getNotMember(community);
+            case NOT_IN_GROUP:
+                return getDBDate().community().getMemberNotInGroup(community, group);
             default:
                 String user2 = ThucydidesUtils.getFromSession("user").toString();
                 return user2;
         }
-
+        
     }
-
+    
 }

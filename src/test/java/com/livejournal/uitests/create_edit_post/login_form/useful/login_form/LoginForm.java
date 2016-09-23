@@ -19,6 +19,7 @@ public class LoginForm extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
+                .setDefault()
                 .defaultLanguageLogged(name);
         System.out.println("==================1");
         open(UpdateBmlPageLogged.class);

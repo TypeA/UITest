@@ -3,18 +3,24 @@ package com.livejournal.uitests.pages.journal_pages.entry;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.guice.Injectors;
+import net.thucydides.core.util.EnvironmentVariables;
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
+import java.util.ArrayList;
+
 /**
- *
  * @author s.savinykh
  */
 @Block(
         @FindBy(css = ".hentry"))
-public class EntryPageBlock extends UIBlock {
+public abstract class EntryPageBlock extends UIBlock {
 
     @FindBy(css = ".b-msgsystem-error.b-msgsystem-error-banned ")
     private TextBlock errorTextBanned;
@@ -56,14 +62,12 @@ public class EntryPageBlock extends UIBlock {
     }
 
     @StepGroup
-    public Boolean containsLjUser(String ljuser) {
-        ljuser = ljuser.toLowerCase();
-        String script = "return jQuery('.e-content span').is(\"[lj\\\\:user='" + ljuser + "']\")";
-        Boolean fl = false;
-        if (Boolean.valueOf(startScript(script).toString())) {
-            fl = startScript("return jQuery('.e-content span')[0].textContent").toString().equals(ljuser);
+    public String getLJUser() {
+        try {
+            return startScript("return jQuery('.b-singlepost-body .ljuser .i-ljuser-username').text()").toString().toLowerCase();
+        } catch (Exception ex) {
+            return "there is no LJUser on the page";
         }
-        return fl;
     }
 
     @StepGroup
@@ -78,6 +82,7 @@ public class EntryPageBlock extends UIBlock {
     }
 
     public boolean postWithStyleIsDisplayed(String text, String tag) {
+        tag = tag.replace("s", "strike");
         return Boolean.valueOf(startScript("return jQuery(\"" + tag + "\").is(\":contains('" + text + "')\")").toString());
     }
 
@@ -143,5 +148,21 @@ public class EntryPageBlock extends UIBlock {
         startScript("jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-head a').click()");
         return startScript("return jQuery('.lj-spoiler:contains(\"" + text + "\") .lj-spoiler-body').text().trim()").toString();
 
+    }
+
+    @StepGroup
+    public ArrayList<String> getLJLikeButtons() {
+        ArrayList<WebElement> likes = new ArrayList<WebElement>();
+        int counter = 0;
+        while ((likes.isEmpty()) && (counter < 50)) {
+            counter++;
+            this.sendKeys(Keys.ARROW_DOWN);
+            likes = (ArrayList<WebElement>) findElements(By.cssSelector(".lj-like-item"));
+        }
+        ArrayList<String> likeClass = new ArrayList<String>();
+        for (int i = 0; i < likes.size(); i++) {
+            likeClass.add(likes.get(i).getAttribute("class").replaceAll("lj-like-item", "").replaceAll("\n", "").replaceAll("-", "").replace(" ", ""));
+        }
+        return likeClass;
     }
 }

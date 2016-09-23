@@ -27,9 +27,9 @@ public class ScheduledPost extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name)
-                .defaultMinSecurity(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name)
+                .setDefault().defaultMinSecurity(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
@@ -43,11 +43,11 @@ public class ScheduledPost extends LJTest {
     public void logged_user_with_scheduled_post_on_Scheduled_post_Page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "2")
                 .split(";");
         String post_text = utility().random().getRandomText(10).trim();
 
@@ -56,7 +56,8 @@ public class ScheduledPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("Sheduled post for deleting or editing")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
                 .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("number_of_entryes", open(SheduledEntriesPage.class).getNumberOfEntryes());
@@ -78,7 +79,8 @@ public class ScheduledPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("New scheduled post")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
                 .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text.trim());
@@ -89,7 +91,7 @@ public class ScheduledPost extends LJTest {
     public void user_create_new_scheduled_post_with_privacy(String privacy, String group) {
         ArrayList<String> groups = new ArrayList<String>();
         groups.add(group);
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "3")
                 .split(";");
         String post_text = utility().random().getRandomText(30);
         onOpened(UpdateBmlPageLogged.class)
@@ -97,7 +99,9 @@ public class ScheduledPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("New scheduled post")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
+                .usePostContent()
                 .setPrivacy(privacy, groups)
                 .usePage()
                 .postEntry();

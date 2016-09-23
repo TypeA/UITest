@@ -21,12 +21,10 @@ public class SpolierBubble extends UIBlock {
     private Button save;
 
     public void useSpoiler(String spoilerText) {
-        if (spoilerText.toUpperCase().equals("DEFAULT")) {
-            save.click();
-        } else {
+        if (!spoilerText.toUpperCase().equals("DEFAULT")) {
             spoiler.enter(spoilerText);
-            save.click();
         }
+        save.click();
 
     }
 

@@ -4,6 +4,8 @@ import com.livejournal.uitests.pages.journal_pages.JournalPageLogged;
 import java.io.IOException;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
+import net.thucydides.core.guice.Injectors;
+import net.thucydides.core.util.EnvironmentVariables;
 import org.openqa.selenium.By;
 
 /**
@@ -50,5 +52,6 @@ public class EntryPageLogged extends JournalPageLogged {
         getDriver().switchTo().defaultContent();
         return videoFromAlbum;
     }
+
 
 }

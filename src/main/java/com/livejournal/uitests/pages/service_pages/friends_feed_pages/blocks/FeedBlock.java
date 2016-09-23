@@ -5,8 +5,12 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
+import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
@@ -109,8 +113,16 @@ public class FeedBlock extends UIBlock {
     @StepGroup
     public String getTextFromLJCut(String text) {
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") .ljcut-decor a').click()");
+        int i = 0;
+        WebElement expandedCut = null;
+        while ((i < 50) && (expandedCut == null)) {
+            try {
+                expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-expanded"));
+            } catch (Exception e) {
+                i++;
+            }
+        }
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
-
     }
 
     @StepGroup

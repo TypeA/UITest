@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Random;
 
 /**
- *
  * @author m.prytkova
  */
 public class Friends extends DatabasesData {
@@ -31,7 +30,7 @@ public class Friends extends DatabasesData {
         for (int i = 1; i < ans.size(); i++) {
             select = select + " or user = '" + ans.get(i) + "'";
         }
-        select = select + ") and user like '%test%' "
+        select = select + ")"
                 + "and user !='" + user + "'"
                 + "and statusvis = 'V'"
                 + "and journaltype = 'P'";
@@ -45,7 +44,7 @@ public class Friends extends DatabasesData {
                 answer.add(an);
             }
         }
-        return answer.get(new Random().nextInt(ans.size()));
+        return answer.get(new Random().nextInt(answer.size()));
     }
 
     public ArrayList<String> getAllNotFriends(String user, Integer limit) {
@@ -55,10 +54,9 @@ public class Friends extends DatabasesData {
         for (int i = 1; i < friendid.size(); i++) {
             select2 = select2 + " and userid != '" + friendid.get(i) + "'";
         }
-        select2 = select2 + ") and user like '%test%' "
+        select2 = select2 + ")"
                 + "and statusvis = 'V'"
                 + "and journaltype = 'P'"
-                + "and statusvisdate >= adddate(now(), interval - 500 day) "
                 + "and user !='" + user + "'"
                 + "limit " + limit + ";";
         ArrayList<String> ans = workWithDB().conect()
@@ -123,15 +121,55 @@ public class Friends extends DatabasesData {
                 .finish();
     }
 
-    public ArrayList<String> getAllPublicGroups(String user) {
+    public ArrayList<String> getAllPublicGroups(String user, boolean isPublic) {
         List<ArrayList<String>> all_groups = getAllGroupsWithParams(user);
         ArrayList<String> groups = new ArrayList<String>();
         for (int i = 0; i < all_groups.get(0).size(); i++) {
-            if (Integer.valueOf(all_groups.get(2).get(i)) == 1) {
+            if (all_groups.get(2).get(i).equals((isPublic) ? "1" : "0")) {
                 groups.add(all_groups.get(0).get(i));
             }
         }
         return groups;
+    }
+
+    public List<ArrayList<String>> getSortAllGroup(String user) {
+        String select = "select groupname, sortorder, is_public, groupnum  from lj_c" + userData().getUserClusterId(user)
+                + ".friendgroup2 where userid =" + userData().getUserId(user)
+                + " order by sortorder";
+        return workWithDB().conect()
+                .select(select, "groupname")
+                .select(select, "sortorder")
+                .select(select, "is_public")
+                .select(select, "groupnum")
+                .finish();
+
+    }
+
+    public String getValuePublicGroup(String user, boolean isPublic) {
+        List<ArrayList<String>> allGroup = getSortAllGroup(user);
+        return allGroup.get(3).get(allGroup.get(2).indexOf((isPublic) ? "1" : "0"));
+    }
+
+    public String getNamePublicGroup(String user, String value) {
+        List<ArrayList<String>> allGroup = getSortAllGroup(user);
+        return allGroup.get(0).get(allGroup.get(3).indexOf(value));
+    }
+
+    public String getRandomGroup(String user, String minOrMax) {
+        String select = "select " + minOrMax + "(sortorder) from lj_c2.friendgroup2 where userid=" + userData().getUserId(user);
+        String sortorder = workWithDB().conect()
+                .select(select, minOrMax + "(sortorder)")
+                .finish()
+                .get(0)
+                .get(0);
+        String select1 = "select groupnum from lj_c2.friendgroup2 where groupname!='Default View' "
+                + "and userid=" + userData().getUserId(user) + " "
+                + "and sortorder!=" + sortorder + " order by RAND() limit 1";
+        return workWithDB().conect()
+                .select(select1, "groupnum")
+                .finish()
+                .get(0)
+                .get(0);
     }
 
     public ArrayList<String> getAllFriendsInGroup(String user, String group) {

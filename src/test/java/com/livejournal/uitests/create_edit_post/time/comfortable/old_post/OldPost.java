@@ -22,8 +22,8 @@ public class OldPost extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
@@ -43,7 +43,8 @@ public class OldPost extends LJTest {
                 .setDateAndTime(date[0], date[1])
                 .usePostContent()
                 .setSubject("New old post")
-                .setPostText(post_text, "html")
+                .useHTMLEditor()
+                .setPostText(post_text)
                 .usePage()
                 .postEntry();
         ThucydidesUtils.putToSession("post_text", post_text);

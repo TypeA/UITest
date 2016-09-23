@@ -8,11 +8,24 @@ import java.util.ArrayList;
  */
 public class Post extends DatabasesData {
 
+    public final String publicSecurity = "public";
+
+
+
     public String getUserPostId(String security, String user) {
-        String select = "select jitemid*256+anum from lj_c2.log2 "
-                + "where journalid in(select userid from user where user='" + user + "') "
-                + "and security '" + security + "' order "
+        String useridAndCluster = "select userid, clusterid from user where user='"+user+"'";
+        String userid = workWithDB().conect()
+                .select(useridAndCluster, "userid")
+                .finish().get(0).get(0);
+
+        String clusterid = workWithDB().conect()
+                .select(useridAndCluster, "clusterid")
+                .finish().get(0).get(0);
+        String select = "select jitemid*256+anum from lj_c"+clusterid+".log2 "
+                + "where journalid="+userid
+                + " and security = '" + security + "' order "
                 + "by rand() limit 1";
+
         return workWithDB().conect()
                 .select(select, "jitemid*256+anum")
                 .finish().get(0).get(0);

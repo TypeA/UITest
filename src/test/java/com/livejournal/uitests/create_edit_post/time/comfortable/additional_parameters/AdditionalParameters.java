@@ -26,8 +26,8 @@ public class AdditionalParameters extends LJTest {
     public void logged_user_on_Create_Post_page(String name) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name)
-                .setDefaultStyle(name);
+                .setDefault().defaultLanguageLogged(name)
+                .setDefault().defaultStyle(name);
         open(SheduledEntriesPage.class)
                 .deleteAllSheduledEntries();
         open(UpdateBmlPageLogged.class);
@@ -38,7 +38,7 @@ public class AdditionalParameters extends LJTest {
     //Scenario: Sticky post (2/3)
     @When("user create new sheduied post sticky")
     public void user_create_new_sheduied_post_sticky() {
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "5")
                 .split(";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -46,7 +46,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setStickyPost()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -54,7 +55,7 @@ public class AdditionalParameters extends LJTest {
     //Scenario: Location, mood and music (2/3)
     @When("user create new sheduied post with right element $element (content $content)")
     public void user_create_new_sheduied_post_with_right_element(String element, String content) {
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "5")
                 .split(";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -62,7 +63,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setRightBlockContent(element, content)
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -70,15 +72,16 @@ public class AdditionalParameters extends LJTest {
     //Scenario: Check-boxes (2/3)
     @When("user create new sheduied post with check-boxes $checkbox")
     public void user_create_new_sheduied_pos_wit_checkboxes(String checkbox) {
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "5")
                 .split(";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
                 .setDateAndTime(date[0], date[1])
                 .useAdditionalContent()
-                .setFeedRssIgnore()
+                .setFoRIgnore(checkbox)
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -86,7 +89,7 @@ public class AdditionalParameters extends LJTest {
     //Scenario: Three posts (2/3)
     @When("user create new sheduied post with Three posts")
     public void user_create_new_sheduied_post_with_Three_posts() {
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "5")
                 .split(";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -94,15 +97,16 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setThreePosts()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
-    
+
     //Scenario: Drop-down menu (2/3)
     @When("user create new sheduied post with drop-down menu content $content")
     public void user_create_new_sheduied_post_with_dropdown_menu(String content) {
-        String[] date = PostTime.getCorrectDate("hour", "1")
+        String[] date = PostTime.getCorrectDate("hour", "5")
                 .split(";");
         onOpened(UpdateBmlPageLogged.class)
                 .closeDraft()
@@ -110,7 +114,8 @@ public class AdditionalParameters extends LJTest {
                 .useAdditionalContent()
                 .setThreePosts()
                 .usePostContent()
-                .setPostText(ThucydidesUtils.getFromSession("post_text").toString(), "html")
+                .useHTMLEditor()
+                .setPostText(ThucydidesUtils.getFromSession("post_text").toString())
                 .usePage()
                 .postEntry();
     }
@@ -151,7 +156,7 @@ public class AdditionalParameters extends LJTest {
                 .clickToScheduledLink()
                 .editSheduledEntryByText(ThucydidesUtils.getFromSession("post_text").toString())
                 .useAdditionalContent()
-                .getFeedRssIgnore();
+                .getFoRIgnore(checkbox);
         verify().that(checkboxState)
                 .ifResultIsExpected("Check-box " + checkbox + " is set")
                 .ifElse("Check-box " + checkbox + " is not set")
