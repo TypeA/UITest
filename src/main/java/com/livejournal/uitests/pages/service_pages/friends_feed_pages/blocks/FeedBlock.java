@@ -112,6 +112,12 @@ public class FeedBlock extends UIBlock {
 
     @StepGroup
     public String getTextFromLJCut(String text) {
+        ArrayList<WebElement> entries = new ArrayList<WebElement>();
+        int counter = 0;
+        while ((entries.isEmpty()) && (counter < 100)) {
+            counter++;
+            entries = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".entryunit"));
+        }
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") b a').click()");
         int i = 0;
         WebElement expandedCut = null;
@@ -127,6 +133,12 @@ public class FeedBlock extends UIBlock {
 
     @StepGroup
     public String getLJCutCustomText(String text) {
+        ArrayList<WebElement> entries = new ArrayList<WebElement>();
+        int counter = 0;
+        while ((entries.isEmpty()) && (counter < 100)) {
+            counter++;
+            entries = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".entryunit"));
+        }
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") b a').attr('title')").toString();
 
     }
