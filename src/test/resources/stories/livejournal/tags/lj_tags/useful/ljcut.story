@@ -26,7 +26,7 @@ Examples:
 
 Scenario: LJ-cut works on feed
 Meta: 
-@categories tags lj_tags useful 
+@categories tags lj_tags useful rrrrrrrrrr
 
 Given logged user <name> on Create Post page
 When user use lj-cut <ljcut> and put some text in it
@@ -39,7 +39,7 @@ Examples:
 
 Scenario: Custom LJ-cut text on feed
 Meta: 
-@categories tags lj_tags useful  
+@categories tags lj_tags useful rrrrrrrrrr
 
 Given logged user <name> on Create Post page
 When user use lj-cut <ljcut> and put some text in it
