@@ -1,5 +1,6 @@
 package com.livejournal.uitests.pages.service_pages.medius.admin.category;
 
+import com.livejournal.uisteps.thucydides.Databases;
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
@@ -11,6 +12,10 @@ import net.thucydides.core.webelements.Checkbox;
 import org.openqa.jetty.html.Input;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @DefaultUrl("/admin/medius/category")
 public class AdminMediusCategoryPage extends LJPage {
@@ -33,7 +38,7 @@ public class AdminMediusCategoryPage extends LJPage {
     @FindBy(name = "save")
     private Button saveChangesButton;
 
-    public void AddCategory(String name, String keyword, String genitive, boolean sticker) {
+    public void addCategory(String name, String keyword, String genitive, boolean sticker) {
         addName.sendKeys(name);
         addKeyword.sendKeys(keyword);
         addGenitive.sendKeys(genitive);
@@ -53,12 +58,12 @@ public class AdminMediusCategoryPage extends LJPage {
         return getDriver().findElement(By.name("sticker_" + idCategory)).getAttribute("checked");
     }
 
-    private String getIdCategory(String name, String keyword, String genitive) {
-        return getDBDate().medius().getIdCategory(name, keyword, genitive);
+    private String getIdCategory(String keyword) {
+        return getDBDate().medius().getIdCategory(keyword);
     }
 
-    public boolean categoryIsAdded(String name, String keyword, String genitive, boolean sticker) {
-        String idCategory = getIdCategory(name, keyword, genitive);
+    public boolean categoryIsAdded(String keyword, boolean sticker) {
+        String idCategory = getIdCategory(keyword);
         boolean nameIsExist = getDriver().findElement(By.name("name_" + idCategory)).isDisplayed();
         boolean keywordIsExist = getDriver().findElement(By.xpath("//td[@class='admintable__column admin-categories-keyword' and contains(text(), '" + keyword + "')]")).isDisplayed();
         boolean genitiveIsExist = getDriver().findElement(By.name("genitive_" + idCategory)).isDisplayed();
@@ -81,40 +86,41 @@ public class AdminMediusCategoryPage extends LJPage {
         try {
             if (getDriver().findElement(By.xpath("//div[@class='b-msgsystem-body' and @lj-html='message.body' and contains(text(), '" + rightMessageAboutError1 + "')]")).isDisplayed()) {
                 System.out.println("Ok. Message about error is right");
-            } else {
-                System.out.println("Oops... Message about error is incorrect");
             }
-        } catch (Exception ex) {
+        } catch (NullPointerException ex) {
             if (getDriver().findElement(By.xpath("//div[@class='b-msgsystem-body' and @lj-html='message.body' and contains(text(), '" + rightMessageAboutError2 + "')]")).isDisplayed()) {
                 System.out.println("Ok. Message about error is right");
-            } else {
-                System.out.println("Oops... Message about error is incorrect");
             }
         }
     }
 
-    public boolean incorrectCategoryIsNotAdded(String name) {
+    public boolean incorrectCategoryIsNotAdded(String keyword) {
         try {
-            getDriver().findElement(By.xpath("//td[@class='admintable__column admin-categories-name' and input[@value='" + name + "']]")).getText();
+            getDriver().findElement(By.xpath("//td[@class='admintable__column admin-categories-keyword' and contains(text(), '" + keyword + "')]")).getText();
             return false;
-
         } catch (Exception e) {
             return true;
         }
     }
 
-    public void deleteCategory(String name, String keyword, String genitive) {
-        String idCategory = getIdCategory(name, keyword, genitive);
+    public String deleteCategory() {
+        //List<String> listInactiveCategories = getDBDate().medius();
+
+        String keywordForVerification = listInactiveCategories.get(0).split(" ")[1];
 
         try {
-            startScript("jQuery('button[value=\"" + idCategory + "\"]').click()");
+            for (String category: listInactiveCategories) {
+                startScript("jQuery('button[value=\"" + category.split(" ")[0] + "\"]').click()");
+            }
         } catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
+
+        return keywordForVerification;
     }
 
-    public String[] editNameAndGenitiveCategory(String name, String keyword, String genitive) {
-        String idCategory = getIdCategory(name, keyword, genitive);
+    public String[] editNameAndGenitiveCategory(String keyword) {
+        String idCategory = getIdCategory(keyword);
         String newName = "edited" + idCategory;
         String newGenitive = "changed" + idCategory;
 
@@ -129,35 +135,37 @@ public class AdminMediusCategoryPage extends LJPage {
         return new String[]{newName, newGenitive};
     }
 
-    public void editStatusCategory(String name, String keyword, String genitive) {
-        String idCategory = getIdCategory(name, keyword, genitive);
+    public String changePositionCategory(String[] positions) {
+        List<String> startList = getDBDate().medius()
+                .getListIdAndKeywordOfUsualActiveCategories();
+        List<String> changedList = new ArrayList<>(startList);
 
         try {
-            startScript("jQuery('input[name=\"active_" + idCategory + "\"]').attr(\"checked\", \"checked\")");
-        } catch (NullPointerException ex) {
-            System.out.println("oops");
-        }
-
-        saveChangesButton.click();
-    }
-
-    public void changePositionCategory(String name, String keyword, String genitive, String[] positions) {
-        String idCategory = getIdCategory(name, keyword, genitive);
-
-        try {
-            for (String currentPosition : positions) {
-                if (currentPosition.equals("Up"))
-                    startScript("jQuery('button[name=\"up\"][value=\"" + idCategory + "\"]').click()");
-
-                if (currentPosition.equals("Down"))
-                    startScript("jQuery('button[name=\"down\"][value=\"" + idCategory + "\"]').click()");
+            for (String position : positions) {
+                if (position.equals("up")) {
+                    startScript("jQuery('button[name=\"up\"][value=\"" + startList.get(startList.size() - 1).split(" ")[0] + "\"]').click()");
+                    saveChangesButton.click();
+                    changedList.add(startList.size() - 2, changedList.get(startList.size() - 1));
+                    changedList.remove(changedList.size() - 1);
+                }
+                if (position.equals("down")) {
+                    startScript("jQuery('button[name=\"down\"][value=\"" + startList.get(0).split(" ")[0] + "\"]').click()");
+                    saveChangesButton.click();
+                    changedList.add(2, startList.get(0));
+                    changedList = changedList.subList(1, changedList.size());
+                }
             }
-
         } catch (NullPointerException ex) {
-            System.out.println("Не найдена кнопка");
+            System.out.println("Ooops.....");
         }
 
-        saveChangesButton.click();
+        return changedList.toString();
     }
 
+    public boolean listOfCategoriesChanged(String expectedListCategories) {
+        String factListCategories = getDBDate().medius()
+                .getListIdAndKeywordOfUsualActiveCategories().toString();
+
+        return expectedListCategories.equals(factListCategories);
+    }
 }
