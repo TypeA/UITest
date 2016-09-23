@@ -4,6 +4,9 @@ import com.livejournal.uisteps.thucydides.WebTest;
 import com.livejournal.uisteps.thucydides.elements.Page;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.CreateAccountPage;
 import com.livejournal.uitests.pages.service_pages.create_account_pages.PopupsBlock;
+import com.livejournal.uitests.pages.service_pages.support_faq.logged.FaqMainPageLogged;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -78,6 +81,13 @@ public class FeaturesOfPassword extends WebTest {
                 .ifElse("Incorrect text!\nCurrent text: " + onDisplayed(PopupsBlock.class).getPopupText())
                 .finish();
         onDisplayed(PopupsBlock.class).clickOnLearnMoreLink();
+
+        ///////нельзя обойтись, не успевает загрузится url страницы
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(FeaturesOfPassword.class.getName()).log(Level.SEVERE, null, ex);
+        }
         verify().thatIsOn((Class<? extends Page>) this.getPageClassByName(page))
                 .finish();
 
