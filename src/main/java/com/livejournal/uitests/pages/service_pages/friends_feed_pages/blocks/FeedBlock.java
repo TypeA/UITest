@@ -5,13 +5,14 @@ import com.livejournal.uisteps.thucydides.elements.Link;
 import com.livejournal.uisteps.thucydides.elements.UIBlock;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ru.yandex.qatools.htmlelements.annotations.Block;
 import ru.yandex.qatools.htmlelements.element.TextBlock;
 
@@ -112,12 +113,15 @@ public class FeedBlock extends UIBlock {
 
     @StepGroup
     public String getTextFromLJCut(String text) {
-        ArrayList<WebElement> entries = new ArrayList<WebElement>();
-        int counter = 0;
-        while ((entries.isEmpty()) && (counter < 100)) {
-            counter++;
-            entries = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".entryunit"));
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                ArrayList<WebElement> entries = new ArrayList<WebElement>();
+                entries = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".entryunit"));
+                return !entries.isEmpty();
+            }
+        });
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") b a').click()");
         int i = 0;
         WebElement expandedCut = null;
@@ -133,12 +137,15 @@ public class FeedBlock extends UIBlock {
 
     @StepGroup
     public String getLJCutCustomText(String text) {
-        ArrayList<WebElement> entries = new ArrayList<WebElement>();
-        int counter = 0;
-        while ((entries.isEmpty()) && (counter < 100)) {
-            counter++;
-            entries = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".entryunit"));
-        }
+        WebDriverWait wait = new WebDriverWait(getDriver(), 10);
+        wait.until(new ExpectedCondition<Boolean>() {
+            @Override
+            public Boolean apply(WebDriver d) {
+                ArrayList<WebElement> entries = new ArrayList<WebElement>();
+                entries = (ArrayList<WebElement>) getDriver().findElements(By.cssSelector(".entryunit"));
+                return !entries.isEmpty();
+            }
+        });
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") b a').attr('title')").toString();
 
     }
