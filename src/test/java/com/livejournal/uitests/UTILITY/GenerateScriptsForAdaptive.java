@@ -29,6 +29,8 @@ public class GenerateScriptsForAdaptive {
                     + "left join s2styles on lj_c" + (i + 1) + ".userproplite2.value = s2styles.styleid "
                     + "left join lj_c" + (i + 1) + ".log2 on lj_c" + (i + 1) + ".log2.journalid = user.userid "
                     + "WHERE  lj_c" + (i + 1) + ".userproplite2.upropid = 96 "
+                    + "AND user.user NOT LIKE '\\_%' "
+                    + "AND user.user NOT LIKE '%\\_' "
                     + "AND user.statusvis = 'V' "
                     + "AND lj_c" + (i + 1) + ".log2.security = 'public' ";
             if (needPass.toUpperCase().equals("NEED PASS")) {
