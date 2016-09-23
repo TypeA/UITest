@@ -89,5 +89,5 @@ Then new category is in List of categories with changed position on Categories P
 
 Examples:
 
-|user               |symbol_in_keyword  |sticker    |figures    |positions      |
-|testautotest       |                   |false      |5          |{Up, Up, Down} |
+|user               |symbol_in_keyword  |sticker    |figures    |positions  |
+|testautotest       |                   |false      |5          |Up Down    |

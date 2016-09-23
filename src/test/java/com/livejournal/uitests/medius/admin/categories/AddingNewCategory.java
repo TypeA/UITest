@@ -28,7 +28,6 @@ public class AddingNewCategory extends LJTest {
     //Scenario: Fail with creating new usual category
     //Scenario: Delete category
     //Scenario: Edit name and genetive of category
-    //Scenario: Change position of category in top
     @When("editor adds new category with $symbol_in_keyword and $sticker and $figures on Categories Page")
     public void editor_adds_new_category_with_and_and_on_Categories_Page(String symbol_in_keyword, String sticker, String figures) {
         int setFigures = Integer.parseInt(figures);
@@ -70,6 +69,7 @@ public class AddingNewCategory extends LJTest {
 
     }
 
+    //Change position of category in top
     @When("editor change status Active and position of new category")
     public void editor_change_status_Active_of_new_category(String[] positions) {
         String name = ThucydidesUtils.getFromSession("name").toString();
