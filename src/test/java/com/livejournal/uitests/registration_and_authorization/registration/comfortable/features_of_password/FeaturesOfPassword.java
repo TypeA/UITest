@@ -81,8 +81,8 @@ public class FeaturesOfPassword extends WebTest {
                 .ifElse("Incorrect text!\nCurrent text: " + onDisplayed(PopupsBlock.class).getPopupText())
                 .finish();
         onDisplayed(PopupsBlock.class).clickOnLearnMoreLink();
-        
-///////нельзя обойтись, не успевает загрузится url страницы
+
+        ///////нельзя обойтись, не успевает загрузится url страницы
         try {
             Thread.sleep(1000);
         } catch (InterruptedException ex) {
