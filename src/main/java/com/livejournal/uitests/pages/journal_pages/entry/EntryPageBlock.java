@@ -82,6 +82,7 @@ public abstract class EntryPageBlock extends UIBlock {
     }
 
     public boolean postWithStyleIsDisplayed(String text, String tag) {
+        tag = tag.replace("s", "strike");
         return Boolean.valueOf(startScript("return jQuery(\"" + tag + "\").is(\":contains('" + text + "')\")").toString());
     }
 

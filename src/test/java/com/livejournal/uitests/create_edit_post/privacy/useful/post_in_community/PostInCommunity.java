@@ -10,7 +10,6 @@ import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.io.IOException;
-import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
@@ -76,7 +75,6 @@ public class PostInCommunity extends LJTest {
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         String user = selectUserForComminuty(community, name_1, ThucydidesUtils.getFromSession("friend_group").toString());
-        System.out.println("++++++++++++++ user in post " + user);
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, getDBDate().userData().getUserPassword(user))
                 .style().setViewInMyStyle(user, false)
@@ -133,30 +131,25 @@ public class PostInCommunity extends LJTest {
                 .ifElse("User see incorrect privacy " + onOpened(EditJournalBml.class).usePostContent().getCurrentPrivacy())
                 .finish();
     }
-
+    
     @StepGroup
     private String selectUserForComminuty(String community, String name, String group) {
         switch (SelectCommunityUserList.valueOf(name.toUpperCase())) {
             case MEMBERS:
-                return getDBDate().community().findMemberInCommunityNotInGroup(community);
+                return getDBDate().community().getMember(community);
             case MAINTAINERS:
-                return getDBDate().community().findMaintainerInComminuty(community);
+                return getDBDate().community().getMaintainer(community);
             case USER_IN_GROUP:
-                ArrayList<String> in_group = getDBDate().friends().getAllFriendsInGroup(community, group);
-                String user_in_group = getDBDate().friends().getAllFriendsInGroup(community, group).get(0);
-                for (String in_group1 : in_group) {
-                    if (in_group1.contains("test")) {
-                        user_in_group = in_group1;
-                    }
-                }
-                return user_in_group;
+                return getDBDate().community().getMemberInGroup(community, group);
             case OTHER_USER:
-                return getDBDate().friends().getNotFriend(community);
+                return getDBDate().community().getNotMember(community);
+            case NOT_IN_GROUP:
+                return getDBDate().community().getMemberNotInGroup(community, group);
             default:
                 String user2 = ThucydidesUtils.getFromSession("user").toString();
                 return user2;
         }
-
+        
     }
-
+    
 }

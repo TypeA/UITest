@@ -9,49 +9,64 @@ import java.util.Random;
  */
 public class Community extends DatabasesData {
 
-    public String findMaintainerInComminuty(String community) {
-        String select = "select u.user, r.targetid, r.type from user u left join reluser r on "
+    public ArrayList<String> getAllMaintainers(String community) {
+        String select = "select u.user, r.targetid, r.type from user u "
+                + "left join reluser r on "
                 + "u.userid=r.userid where u.user = '"
                 + community + "' and r.type='A';";
         ArrayList<String> users = workWithDB().conect()
                 .select(select, "targetid")
                 .finish()
                 .get(0);
-        String userid = users.get(new Random().nextInt(users.size()));
+        String dop = "";
+        for (int i = 1; i < users.size(); i++) {
+            dop = dop + " or userid=" + users.get(i);
+        }
         String select2 = "select user from user"
-                + " where userid = '"
-                + userid + "';";
+                + " where (userid = "
+                + users.get(0) + dop + ");";
         return workWithDB().conect()
                 .select(select2, "user")
                 .finish()
-                .get(0)
                 .get(0);
     }
 
-    public ArrayList<String> findAllMembersInCommunity(String community) {
-        String select = "select f.friendid, u.user from friends f"
-                + "left join user u"
-                + "on f.friendid = u.userid"
-                + "where f.userid = "
-                + "(select userid from user where user = '" + community + "');";
-        return workWithDB().conect()
-                .select(select, "user")
-                .finish()
-                .get(0);
-    }
-
-    public String findMemberInCommunityNotInGroup(String community) {
-        String select = "select f.userid, f.friendid, u.user, f.groupmask "
-                + "from friends f "
-                + "left join user u on f.friendid = u.userid "
-                + "where f.userid = "
-                + "(select userid from user where user = '" + community + "') "
-                + "and f.groupmask = 1;";
-        ArrayList<String> users = workWithDB().conect()
-                .select(select, "user")
-                .finish()
-                .get(0);
+    public String getMaintainer(String community) {
+        ArrayList<String> users = getAllMaintainers(community);
         return users.get(new Random().nextInt(users.size()));
+    }
+
+    public ArrayList<String> getAllMembers(String community) {
+        return this.friends().getAllFriends(community);
+    }
+
+    public String getMember(String community) {
+        ArrayList<String> allMembers = getAllMembers(community);
+        ArrayList<String> allMaintainers = getAllMaintainers(community);
+        allMembers.removeAll(allMaintainers);
+        return allMembers.get(new Random().nextInt(allMembers.size()));
+    }
+
+    public String getNotMember(String community) {
+        return this.friends().getNotFriend(community);
+    }
+
+    public String getMemberInGroup(String community, String group) {
+        return this.friends().getFriendInGroup(community, group);
+    }
+
+    public ArrayList<String> getAllMemberNotInGroup(String community, String group) {
+        ArrayList<String> allMembers = getAllMembers(community);
+        ArrayList<String> all_in_group = friends().getAllFriendsInGroup(community, group);
+        ArrayList<String> allMaintainers = getAllMaintainers(community);
+        allMembers.removeAll(all_in_group);
+        allMembers.removeAll(allMaintainers);
+        return allMembers;
+    }
+
+    public String getMemberNotInGroup(String community, String group) {
+        ArrayList<String> not_in_group =getAllMemberNotInGroup(community, group);
+        return not_in_group.get(new Random().nextInt(not_in_group.size()));
     }
 
 }

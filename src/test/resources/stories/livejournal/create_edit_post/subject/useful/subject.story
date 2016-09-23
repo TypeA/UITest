@@ -18,7 +18,7 @@ Examples:
 
 Scenario: User restore post with subject from draft
 Meta: 
-@categories create_edit_post subject useful draft release
+@categories create_edit_post subject useful draft
 
 Given logged user <name> on Create Post page
 When user write new post with subject <subject>
