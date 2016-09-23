@@ -19,7 +19,7 @@ Examples:
 Scenario: Password description
 
 Meta: 
-@categories registration_and_authorization comfortable release
+@categories registration_and_authorization comfortable release testmaxa
 @issue LJSUP-21440
 
 Given unlogged user on Registration Form

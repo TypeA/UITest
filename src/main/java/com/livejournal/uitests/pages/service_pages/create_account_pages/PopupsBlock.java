@@ -22,7 +22,7 @@ public class PopupsBlock extends UIBlock {
     @FindBy(css = ".b-popup-noclosecontrol:not([style*='display: none']) [style*='display: block;']")
     private TextBlock popupText;
 
-    @FindBy(css = ".b-popup-outer a[href*='/support/faqbrowse.bml']")
+    @FindBy(css = ".b-popup-outer a")
     private Link learnMoreLink;
 
     public boolean displayingPopupBlock() {
