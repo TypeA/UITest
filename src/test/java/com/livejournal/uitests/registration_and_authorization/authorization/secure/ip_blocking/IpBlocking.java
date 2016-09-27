@@ -19,7 +19,6 @@ public class IpBlocking extends LJTest {
         open(LoginPageUnlogged.class)
                 .moveMouseOverLangSwitch()
                 .switchLang("EN");
-              //  .region().regionSwitchUnlogged("noncyr");
     }
 
     //Scenario: IP blocking, when you spent login attempts(2/3)
@@ -40,8 +39,7 @@ public class IpBlocking extends LJTest {
         verify().that(getCurrentUrl().contains("/login.bml"))
                 .ifResultIsExpected("IP is blocked")
                 .ifElse("IP is not blocked!")
-                .finish();
-               
+                .finish();              
     }
 
 }
