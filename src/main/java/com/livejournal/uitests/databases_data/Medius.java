@@ -12,19 +12,29 @@ public class Medius extends DatabasesData {
                 .get(0);
     }
 
-    public List<String> getListIdAndKeywordOfUsualActiveCategories() {
-        String select = "select id, keyword from medius_categories where active =1 and type = 'C' and position !=1 order by position";
+    public List<ArrayList<String>> getListIdAndKeywordOfCategories(boolean isActive, boolean isSticker) {
+        String select = "select id, keyword from medius_categories where";
 
-        List<String> listId = workWithDB().conect().select(select, "id").finish().get(0);
-        List<String> listKeywords = workWithDB().conect().select(select, "keyword").finish().get(0);
+        if(isActive)
+            select = select.concat(" active =1 and");
+        else select = select.concat(" active =0 and");
 
-        List<String> listIdWithKeyword = new ArrayList<>();
-        for (int i = 0; i < listId.size(); i++) {
-            listIdWithKeyword.add(listId.get(i) + " " + listKeywords.get(i));
-        }
+        if (isSticker)
+            select = select.concat(" type = 'T' and position !=1 order by position");
+        else select = select.concat(" type = 'C' and position !=1 order by position");
 
-        return listIdWithKeyword;
+        return workWithDB().conect()
+                .select(select, "id")
+                .select(select, "keyword")
+                .finish();
     }
 
+    public List<ArrayList<String>> getListIdAndKeywordOfAllCategories() {
+        String select = "select id, keyword from medius_categories";
 
+        return workWithDB().conect()
+                .select(select, "id")
+                .select(select, "keyword")
+                .finish();
+    }
 }
