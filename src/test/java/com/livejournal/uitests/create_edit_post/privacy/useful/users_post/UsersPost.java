@@ -83,7 +83,7 @@ public class UsersPost extends LJTest {
     //Scenario: Create post (3/4)
     @Then("user $name_1 can read the post")
     public void user_can_read_post(String name_1) {
-        open(MainPageLogged.class)
+        onOpened(EntryPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());

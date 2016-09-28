@@ -71,7 +71,7 @@ public class PostInCommunity extends LJTest {
     //Scenario: Create post in community (3/4)
     @Then("user $name_1 can read the post in community $community")
     public void user_can_read_the_post(String name_1, String community) {
-        open(MainPageLogged.class)
+        onOpened(EntryPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         String user = selectUserForComminuty(community, name_1, ThucydidesUtils.getFromSession("friend_group").toString());
