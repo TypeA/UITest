@@ -87,7 +87,7 @@ public class PostInCommunity extends LJTest {
                 .ifResultIsExpected("User can see post '" + postText + "'")
                 .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPageLogged.class).Entry().getPostText() + "'")
                 .finish();
-        onOpened(EntryPageLogged.class
+        onOpened(EntryPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
     }
