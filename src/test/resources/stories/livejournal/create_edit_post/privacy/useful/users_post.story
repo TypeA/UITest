@@ -1,6 +1,6 @@
 Scenario: Create post
 Meta: 
-@categories create_edit_post privacy useful release
+@categories create_edit_post privacy useful release testmaxa
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
