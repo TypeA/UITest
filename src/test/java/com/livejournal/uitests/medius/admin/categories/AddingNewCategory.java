@@ -47,25 +47,29 @@ public class AddingNewCategory extends LJTest {
     }
 
     //Scenario: Delete category
-    @When("editor delete any category")
-    public void editor_delete_any_category() {
-        String removedKeyword = onOpened(AdminMediusCategoryPage.class).deleteCategory();
+    @When("editor delete any category with $symbol_in_keyword")
+    public void editor_delete_any_category_with(String symbol_in_keyword) {
+        String keyword = getRandomKeywordFromListOfAllCategoriesWithSpecialKey(symbol_in_keyword);
 
-        ThucydidesUtils.putToSession("keyword", removedKeyword);
+        onOpened(AdminMediusCategoryPage.class).deleteCategory(keyword);
+
+        ThucydidesUtils.putToSession("keyword", keyword);
     }
 
     //Scenario: Edit name and genitive of category
-    @When("editor change name and genitive of any category")
-    public void editor_change_name_and_genitive_of_any_category() {
-        String changedCategory = onOpened(AdminMediusCategoryPage.class).editNameAndGenitiveCategory();
+    @When("editor change name and genitive of any category with $symbol_in_keyword")
+    public void editor_change_name_and_genitive_of_any_category_with(String symbol_in_keyword) {
+        String keyword = getRandomKeywordFromListOfAllCategoriesWithSpecialKey(symbol_in_keyword);
 
-        ThucydidesUtils.putToSession("editedCategory", changedCategory);
+        onOpened(AdminMediusCategoryPage.class).editNameAndGenitiveCategory(keyword);
+
+        ThucydidesUtils.putToSession("keyword", keyword);
     }
 
     //Scenario: Change position of category in top
     @When("editor change $position of any category")
     public void editor_change_of_any_category(String position) {
-        String keyword = getRandomKeywordFromListCategories();
+        String keyword = getRandomKeywordFromListCategories(true, false);
 
         List<String> expectedListCategories = createExpectedListCategories(keyword, position);
 
@@ -76,16 +80,17 @@ public class AddingNewCategory extends LJTest {
     }
 
     //Scenario: Create new category
-    @Then("new category is in List of categories on Categories Page")
-    public void new_category_is_in_List_of_categories_on_Categories_Page() {
+    //Scenario: Edit name and genitive of category
+    @Then("category is in List of categories on Categories Page")
+    public void category_is_in_List_of_categories_on_Categories_Page() {
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
         boolean sticker = Boolean.parseBoolean(ThucydidesUtils.getFromSession("sticker").toString());
 
         verify().that(onOpened(AdminMediusCategoryPage.class)
                 .categoryIsAdded(keyword, sticker))
-                .ifResultIsExpected("Category is added with keyword = " + keyword +
+                .ifResultIsExpected("Category is added/changed with keyword = " + keyword +
                         " sticker = " + sticker)
-                .ifElse("Category is not added with keyword = " + keyword +
+                .ifElse("Category is not added/changed with keyword = " + keyword +
                         " and sticker = " + sticker)
                 .finish();
     }
@@ -121,40 +126,37 @@ public class AddingNewCategory extends LJTest {
                 .finish();
     }
 
-    //Scenario: Edit name and genitive of category
-    @Then("category's name and genitive changed")
-    public void category_s_name_and_genitive_changed() {
-        String changedCategory = ThucydidesUtils.getFromSession("editedCategory").toString();
-
-        verify().that(onOpened(AdminMediusCategoryPage.class).categoryChanged(changedCategory))
-                .ifResultIsExpected("Name and genitive of category with keyword " + changedCategory.split(" ")[1] + " changed")
-                .ifElse("category hasn't changes")
-                .finish();
-
-    }
-
-    public String getRandomKeywordFromListCategories() {
-        List<ArrayList<String>> listIdWithKeywordOfCategories = getDBDate().medius().getListIdAndKeywordOfCategories(true, false);
-        listIdWithKeywordOfCategories.get(1).subList(1, listIdWithKeywordOfCategories.get(0).size()-2);
+    public String getRandomKeywordFromListCategories(boolean isActive, boolean isSticker) {
+        List<ArrayList<String>> listIdWithKeywordOfCategories = getDBDate().medius().getListIdAndKeywordOfCategories(isActive, isSticker);
+        listIdWithKeywordOfCategories.get(1).subList(1, listIdWithKeywordOfCategories.get(0).size() - 2);
 
         return listIdWithKeywordOfCategories.get(1).get(new Random().nextInt(listIdWithKeywordOfCategories.get(1).size()));
+    }
+
+    public String getRandomKeywordFromListOfAllCategoriesWithSpecialKey(String key) {
+        List<ArrayList<String>> listIdWithKeywordOfCategories = getDBDate().medius().getListIdAndKeywordOfAllCategories();
+        String expectedKeyword = "";
+        for (String keyword : listIdWithKeywordOfCategories.get(1)) {
+            if (keyword.endsWith(key))
+                expectedKeyword = keyword;
+        }
+        return expectedKeyword;
     }
 
     public List<String> createExpectedListCategories(String keyword, String position) {
         List<ArrayList<String>> listIdWithKeywordOfCategories = getDBDate().medius().getListIdAndKeywordOfCategories(true, false);
         List<String> listOfKeywords = listIdWithKeywordOfCategories.get(1);
 
-        if(position.equals("up")) {
-            listOfKeywords.add(listOfKeywords.indexOf(keyword)-1, keyword);
+        if (position.equals("up")) {
+            listOfKeywords.add(listOfKeywords.indexOf(keyword) - 1, keyword);
             listOfKeywords.remove(listOfKeywords.lastIndexOf(keyword));
         }
 
-        if(position.equals("down")) {
-            listOfKeywords.add(listOfKeywords.indexOf(keyword)+2, keyword);
+        if (position.equals("down")) {
+            listOfKeywords.add(listOfKeywords.indexOf(keyword) + 2, keyword);
             listOfKeywords.remove(listOfKeywords.indexOf(keyword));
         }
 
         return listOfKeywords;
     }
-
 }

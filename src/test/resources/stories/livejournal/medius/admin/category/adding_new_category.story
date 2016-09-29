@@ -1,21 +1,21 @@
 Scenario: Create new category
 
 Meta:
-@categories medius admin adding category
+@categories medius admin adding category gg
 
 Given logged editor <user> on Admin Medius Categories Page
 When editor adds new category with <symbol_in_keyword> and <sticker> and <figures> on Categories Page
-Then new category is in List of categories on Categories Page
+Then category is in List of categories on Categories Page
 
 Examples:
 
 |user               |symbol_in_keyword  |sticker    |figures    |
-|testautotest       |                   |false      |4          |
-|testautotest       |_                  |false      |5          |
+|--testautotest       |                   |false      |4          |
+|--testautotest       |_                  |false      |5          |
 |testautotest       |6                  |false      |6          |
 
-|testautotest       |                   |true       |4          |
-|testautotest       |_                  |true       |3          |
+|--testautotest       |                   |true       |4          |
+|--testautotest       |_                  |true       |3          |
 |testautotest       |6                  |true       |2          |
 
 
@@ -48,16 +48,16 @@ Examples:
 Scenario: Delete category
 
 Meta:
-@categories medius admin removing category
+@categories medius admin removing category gg
 
 Given logged editor <user> on Admin Medius Categories Page
-When editor delete any category
+When editor delete any category with <symbol_in_keyword>
 Then category is not in List of categories on Categories Page
 
 Examples:
 
-|user           |
-|testautotest   |
+|user           |symbol_in_keyword  |
+|testautotest   |6                  |
 
 Scenario: Edit name and genitive of category
 
@@ -65,14 +65,13 @@ Meta:
 @categories medius admin edit category
 
 Given logged editor <user> on Admin Medius Categories Page
-When editor change name and genitive of any category
-Then category's name and genitive changed
+When editor change name and genitive of any category with <symbol_in_keyword>
+Then category is in List of categories on Categories Page
 
 Examples:
 
-|user           |
-|testautotest   |
-|testautotest   |
+|user           |symbol_in_keyword  |
+|testautotest   |6                  |
 
 Scenario: Change position of category in top
 

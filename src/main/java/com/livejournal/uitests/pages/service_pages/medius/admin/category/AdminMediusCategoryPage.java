@@ -103,50 +103,17 @@ public class AdminMediusCategoryPage extends LJPage {
         }
     }
 
-    public String deleteCategory() {
-        /*List<ArrayList<String>> listInactiveCategories = getDBDate()
-                .medius().getListIdAndKeywordOfAllCategories();
-        String keywordForVerification = "";
+    public AdminMediusCategoryPage deleteCategory(String keyword) {
+        startScript("jQuery('button[name=\"delete\"][value=\"" + getIdCategory(keyword) + "\"]').click()");
 
-        try {
-            for (String category : listInactiveCategories) {
-                String keyword = category.split(" ")[1];
-                if (keyword.endsWith("6")) {
-                    keywordForVerification = keyword;
-                    startScript("jQuery('button[name=\"delete\"][value=\"" + category.split(" ")[0] + "\"]').click()");
-                }
-            }
-        } catch (NullPointerException ex) {
-            System.out.println(ex.getMessage());
-        }
-
-        return keywordForVerification;*/
-        return null;
+        return this;
     }
 
-    public String editNameAndGenitiveCategory() {
-        /*List<String> listInactiveCategories = getDBDate().medius().getListIdAndKeywordOfAllCategories();
-        String editedCategory = "";
+    public AdminMediusCategoryPage editNameAndGenitiveCategory(String keyword) {
+        startScript("jQuery('input[name=\"name_" + getIdCategory(keyword) + "\"]').attr(\"value\",\"edited\")");
+        startScript("jQuery('input[name=\"genitive_" + getIdCategory(keyword) + "\"]').attr(\"value\",\"changed\")");
 
-        try {
-            for (String category : listInactiveCategories) {
-                String keyword = category.split(" ")[1];
-                if (keyword.endsWith("_")) {
-                    startScript("jQuery('input[name=\"name_"
-                            + category.split(" ")[0] + "\"]').attr(\"value\",\"edited\")");
-                    startScript("jQuery('input[name=\"genitive_"
-                            + category.split(" ")[0] + "\"]').attr(\"value\",\"changed\")");
-
-                    editedCategory = category;
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println("ooops");
-        }
-        saveChangesButton.click();
-
-        return editedCategory;*/
-        return  null;
+        return this;
     }
 
     public AdminMediusCategoryPage changePositionCategory(String position, String keyword) {

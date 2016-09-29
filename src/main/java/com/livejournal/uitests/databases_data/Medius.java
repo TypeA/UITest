@@ -15,7 +15,7 @@ public class Medius extends DatabasesData {
     public List<ArrayList<String>> getListIdAndKeywordOfCategories(boolean isActive, boolean isSticker) {
         String select = "select id, keyword from medius_categories where";
 
-        if(isActive)
+        if (isActive)
             select = select.concat(" active =1 and");
         else select = select.concat(" active =0 and");
 
@@ -30,7 +30,7 @@ public class Medius extends DatabasesData {
     }
 
     public List<ArrayList<String>> getListIdAndKeywordOfAllCategories() {
-        String select = "select id, keyword from medius_categories";
+        String select = "select id, keyword from medius_categories where position !=1";
 
         return workWithDB().conect()
                 .select(select, "id")
