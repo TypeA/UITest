@@ -19,8 +19,8 @@ Examples:
 Scenario: Password description
 
 Meta: 
-@categories registration_and_authorization comfortable release testmaxa
-@issue LJSUP-21440
+
+@categories registration_and_authorization comfortable release
 
 Given unlogged user on Registration Form
 When user enter password <password>

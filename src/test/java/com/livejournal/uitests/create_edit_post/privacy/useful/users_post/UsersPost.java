@@ -6,7 +6,6 @@ import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
 import com.livejournal.uitests.pages.service_pages.update.EditJournalBml;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.io.IOException;
@@ -83,7 +82,7 @@ public class UsersPost extends LJTest {
     //Scenario: Create post (3/4)
     @Then("user $name_1 can read the post")
     public void user_can_read_post(String name_1) {
-        open(MainPageLogged.class)
+        onOpened(EntryPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
         String user = selectFriend(ThucydidesUtils.getFromSession("user").toString(), name_1, ThucydidesUtils.getFromSession("friend_group").toString());
@@ -99,7 +98,7 @@ public class UsersPost extends LJTest {
                 .ifResultIsExpected("User can see post '" + postText + "'")
                 .ifElse("User cannot see post '" + postText + "', but see '" + onOpened(EntryPageLogged.class).Entry().getPostText() + "'")
                 .finish();
-        open(MainPageLogged.class)
+        onOpened(EntryPageLogged.class)
                 .moveMouseOverMyJournalMenuItem()
                 .clickOnLogOut();
     }

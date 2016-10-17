@@ -84,7 +84,7 @@ public class FeaturesOfPassword extends WebTest {
 
         ///////нельзя обойтись, не успевает загрузится url страницы
         try {
-            Thread.sleep(1000);
+            Thread.sleep(3000);
         } catch (InterruptedException ex) {
             Logger.getLogger(FeaturesOfPassword.class.getName()).log(Level.SEVERE, null, ex);
         }

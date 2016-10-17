@@ -14,63 +14,65 @@ import ru.yandex.qatools.htmlelements.annotations.Block;
         @FindBy(css = ".s-nav-item-lang .s-nav-sub.s-drop"))
 public class LangSwitchMenu extends UIBlock {
 
-    @FindBy(xpath = ".//*[@data-lang='en_LJ'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='en_LJ'] a")
     public Link langEn;
 
-    @FindBy(xpath = ".//*[@data-lang='ru'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='ru'] a")
     public Link langRu;
 
-    @FindBy(xpath = ".//*[@data-lang='uk'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='uk'] a")
     public Link langUk;
 
-    @FindBy(xpath = ".//*[@data-lang='fr'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='fr'] a")
     public Link langFr;
 
-    @FindBy(xpath = ".//*[@data-lang='pt'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='pt'] a")
     public Link langPt;
 
-    @FindBy(xpath = ".//*[@data-lang='es'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='es'] a")
     public Link langEs;
 
-    @FindBy(xpath = ".//*[@data-lang='de'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='de'] a")
     public Link langDe;
 
-    @FindBy(xpath = ".//*[@data-lang='it'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='it'] a")
     public Link langIt;
 
-    @FindBy(xpath = ".//*[@data-lang='be'][2]")
+    @FindBy(css = ".s-header-sub-list__item[data-lang='be'] a")
     public Link langBe;
 
     public Class<ServicePageUnlogged> switchLang(String language) {
+        Link lang = null;
         switch (language.toUpperCase()) {
             case "EN":
-                langEn.click();
-                return(ServicePageUnlogged.class);
+                lang = langEn;
+                break;
             case "RU":
-                langRu.click();
-                return(ServicePageUnlogged.class);
+                lang = langRu;
+                break;
             case "UK":
-                langUk.click();
-                return(ServicePageUnlogged.class);
+                lang = langUk;
+                break;
             case "FR":
-                langFr.click();
-                return(ServicePageUnlogged.class);
+                lang = langFr;
+                break;
             case "PT":
-                langPt.click();
-                return(ServicePageUnlogged.class);
+                lang = langPt;
+                break;
             case "ES":
-                langEs.click();
-                return(ServicePageUnlogged.class);
+                lang = langEs;
+                break;
             case "DE":
-                langDe.click();
-                return(ServicePageUnlogged.class);
+                lang = langDe;
+                break;
             case "IT":
-                langIt.click();
-                return(ServicePageUnlogged.class);
+                lang = langIt;
+                break;
             case "BE":
-                langBe.click();
-                return(ServicePageUnlogged.class);
+                lang = langBe;
+                break;
         }
+        lang.click();
         return(ServicePageUnlogged.class);
     }
 
