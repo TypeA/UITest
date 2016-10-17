@@ -81,7 +81,8 @@ public class HeaderNavigation extends LJTest {
                 .finish();
     }
 
-    private void goToLinkUnloggedService(HeaderLinksList link) {
+    @StepGroup
+    public void goToLinkUnloggedService(HeaderLinksList link) {
         ServicePageUnlogged page = onOpened(SupportMainPageUnlogged.class);
         switch (link) {
             case LOGO:
@@ -110,7 +111,8 @@ public class HeaderNavigation extends LJTest {
         }
     }
 
-    private void goToLinkLoggedService(HeaderLinksList link) {
+    @StepGroup
+    public void goToLinkLoggedService(HeaderLinksList link) {
         ServicePageLogged page = onOpened(ServicePageLogged.class);
         switch (link) {
 
@@ -186,8 +188,9 @@ public class HeaderNavigation extends LJTest {
                 break;
         }
     }
-
-    private void goToLinkUnloggedJournal(HeaderLinksList link) {
+    
+    @StepGroup
+    public void goToLinkUnloggedJournal(HeaderLinksList link) {
         JournalPageUnlogged page = onOpened(JournalPageUnlogged.class);
         switch (link) {
             case LOGO:
@@ -216,7 +219,8 @@ public class HeaderNavigation extends LJTest {
         }
     }
 
-    private void goToLinkLoggedJournal(HeaderLinksList link) {
+    @StepGroup
+    public void goToLinkLoggedJournal(HeaderLinksList link) {
         JournalPageLogged page = onOpened(JournalPageLogged.class);
         switch (link) {
 
@@ -294,7 +298,7 @@ public class HeaderNavigation extends LJTest {
     }
 
     @StepGroup
-    private String getRandomUserWithStyle(String style) {
+    public String getRandomUserWithStyle(String style) {
         String script = "SELECT DISTINCT user.user "
                 + "FROM user "
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "
