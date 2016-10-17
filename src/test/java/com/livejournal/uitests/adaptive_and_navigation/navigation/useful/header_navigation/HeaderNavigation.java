@@ -8,8 +8,7 @@ import com.livejournal.uitests.pages.journal_pages.JournalPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageUnlogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPageLogged;
-import com.livejournal.uitests.pages.service_pages.main_pages.MainPageUnlogged;
+import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.SupportMainPageUnlogged;
 import java.util.ArrayList;
 import net.thucydides.core.annotations.StepGroup;
 import org.jbehave.core.annotations.Given;
@@ -31,14 +30,13 @@ public class HeaderNavigation extends LJTest {
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
                 .setDefault().defaultLanguageLogged(name)
                 .region().regionSwitchLogged(name, region);
-        open(MainPageLogged.class);
     }
 
     //Scenario: Navigation for unlogged user (1/3)   
     //Scenario: Navigation for unlogged user on journal pages(1/3)
     @Given("unlogged user from region $region on Main Page")
     public void unlogged_user_from_region_on_Main_Page(String region) {
-        open(MainPageUnlogged.class)
+        open(SupportMainPageUnlogged.class)
                 .region().regionSwitchUnlogged(region)
                 .setDefault().defaultLanguageUnlogged();
     }
@@ -84,7 +82,7 @@ public class HeaderNavigation extends LJTest {
     }
 
     private void goToLinkUnloggedService(HeaderLinksList link) {
-        ServicePageUnlogged page = onOpened(MainPageUnlogged.class);
+        ServicePageUnlogged page = onOpened(SupportMainPageUnlogged.class);
         switch (link) {
             case LOGO:
                 page.clickOnLogo();
@@ -113,7 +111,7 @@ public class HeaderNavigation extends LJTest {
     }
 
     private void goToLinkLoggedService(HeaderLinksList link) {
-        ServicePageLogged page = onOpened(MainPageLogged.class);
+        ServicePageLogged page = onOpened(ServicePageLogged.class);
         switch (link) {
 
             case LOGO:
