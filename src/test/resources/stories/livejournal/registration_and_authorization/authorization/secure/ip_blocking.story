@@ -1,7 +1,7 @@
 Scenario: IP blocking, when you spent login attempts
 
 Meta: 
-@categories registration_and_authorization secure release testmaxa
+@categories registration_and_authorization secure release
 
 Given unlogged user on Login Form
 When user <user> 3 times enters incorrect password
