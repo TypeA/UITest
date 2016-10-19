@@ -24,14 +24,12 @@ public class IpBlocking extends LJTest {
     //Scenario: IP blocking, when you spent login attempts(2/3)
     @When("user $user 3 times enters incorrect password")
     public void user_3_times_enters_incorrect_data(String user) {
-        System.out.println("!!!!!!!!!!! " + user);
         onOpened(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));
         onOpened(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));
         onOpened(LoginPageUnlogged.class)
-                .authorizeBy(user, utility().random().getRandomText(10));
-      //  new IterationsWithLoginForm(onOpened(LoginPageUnlogged.class), 3, user, utility().random().getRandomText(10)).run();
+                .authorizeBy(user, utility().random().getRandomText(10));       
     }
 
     //Scenario: IP blocking, when you spent login attempts(3/3)
