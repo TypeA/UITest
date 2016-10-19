@@ -26,9 +26,9 @@ public class IpBlocking extends LJTest {
     public void user_3_times_enters_incorrect_data(String user) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));
-        onOpened(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));
-        onOpened(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));       
     }
 
