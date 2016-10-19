@@ -294,7 +294,7 @@ public class HeaderNavigation extends LJTest {
     }
 
     @StepGroup
-    private String getRandomUserWithStyle(String style) {
+    public String getRandomUserWithStyle(String style) {
         String script = "SELECT DISTINCT user.user "
                 + "FROM user "
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "

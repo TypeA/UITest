@@ -111,7 +111,7 @@ public class AdaptiveSettings extends LJTest {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @StepGroup
-    private String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
+    public String getNeededUser(String needPass, String userType, Boolean paid, Boolean mobileView, String style) {
 
         List<ArrayList<String>> users = getAllUsers(needPass, userType, paid, style);
         users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
@@ -141,7 +141,7 @@ public class AdaptiveSettings extends LJTest {
     }
 
     @StepGroup
-    private Boolean isCorrectStyle(String style) {
+    public Boolean isCorrectStyle(String style) {
         String script1 = "", script2 = "";
         switch (style.toUpperCase()) {
             case "AIR":
