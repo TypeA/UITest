@@ -24,7 +24,7 @@ public class IpBlocking extends LJTest {
     //Scenario: IP blocking, when you spent login attempts(2/3)
     @When("user $user 3 times enters incorrect password")
     public void user_3_times_enters_incorrect_data(String user) {
-        onOpened(LoginPageUnlogged.class)
+        open(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));
         onOpened(LoginPageUnlogged.class)
                 .authorizeBy(user, utility().random().getRandomText(10));
