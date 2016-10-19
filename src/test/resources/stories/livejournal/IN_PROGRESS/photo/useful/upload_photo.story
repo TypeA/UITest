@@ -1,6 +1,6 @@
 Scenario: upload photo to post with different privacy
 Meta: 
-@categories create_edit_post photo privacy dsf132313123131
+@categories photo privacy dsf132313123131
 
 Given logged user <name> on Create Post page
 When upload photo to post with privacy <privacy>
