@@ -78,6 +78,11 @@ public class PostContentBlock extends UpdateBmlBlockes {
 
     @StepGroup
     public PostContentBlock setPrivacy(String privacy, ArrayList<String> group) {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(PostContentBlock.class.getName()).log(Level.SEVERE, null, ex);
+        }
         privacySelect.selectByVisibleText(privacy);
         if (privacy.equals("Custom")) {
             for (String group1 : group) {
