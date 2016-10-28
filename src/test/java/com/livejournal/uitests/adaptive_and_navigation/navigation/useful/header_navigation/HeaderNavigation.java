@@ -57,7 +57,6 @@ public class HeaderNavigation extends LJTest {
     @When("logged user on journal page with syle $syle use link $link")
     public void user_goes_from_gournal_page(String style, String link) {
         String randomUser = getRandomUserWithStyle(style);
-        System.out.println("!!!!! USER: "+randomUser);
         Assert.assertFalse("There is no required user", randomUser.isEmpty());
         open(JournalPageLogged.class, new Url().setPrefix(randomUser + "."));
         goToLinkLoggedJournal(HeaderLinksList.valueOf(link));
