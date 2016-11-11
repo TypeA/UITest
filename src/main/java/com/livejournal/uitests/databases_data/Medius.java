@@ -12,7 +12,7 @@ public class Medius extends DatabasesData {
                 .get(0);
     }
 
-    public List<ArrayList<String>> getListIdAndKeywordOfCategories(boolean isActive, boolean isSticker) {
+    public List<ArrayList<String>> getListIdAndKeywordOfCategoriesByActiveAndSticker(boolean isActive, boolean isSticker) {
         String select = "select id, keyword from medius_categories where";
 
         if (isActive)
@@ -28,6 +28,19 @@ public class Medius extends DatabasesData {
                 .select(select, "keyword")
                 .finish();
     }
+
+    public List<ArrayList<String>> getListIdAndKeywordOfCategoriesByActive(boolean isActive) {
+            String select = "select id, keyword from medius_categories where";
+
+            if (isActive)
+                select = select.concat(" active =1 and");
+            else select = select.concat(" active =0 and");
+
+            return workWithDB().conect()
+                    .select(select, "id")
+                    .select(select, "keyword")
+                    .finish();
+        }
 
     public List<ArrayList<String>> getListIdAndKeywordOfAllCategories() {
         String select = "select id, keyword from medius_categories where position !=1";
