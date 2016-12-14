@@ -64,7 +64,7 @@ public class Subject extends LJTest {
     //User restore post with subject from draft(3/3)
     @Then("user can restore this post with subject $subject from draft")
     public void user_can_restore_this_post_with_subject_from_draft(String subject) throws InterruptedException {
-        Thread.sleep(5000);
+        Thread.sleep(10000);
         open(UpdateBmlPageLogged.class)
                 .restoreFromDraft();
         Thread.sleep(3000);
