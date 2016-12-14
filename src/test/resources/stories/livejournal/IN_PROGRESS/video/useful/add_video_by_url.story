@@ -1,6 +1,6 @@
 Scenario: add video by url
 Meta:
-@categories create_edit_post video_by_url useful dsgfdsgdfretretretre
+@categories video_by_url useful dsgfdsgdfretretretre
 
 Given logged user <name> on Create Post page
 When add video by url <video_url>

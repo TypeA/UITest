@@ -12,7 +12,7 @@ import org.jbehave.core.annotations.When;
  * @author m.prytkova
  */
 public class IpBlocking extends LJTest {
-    
+
     //Scenario: IP blocking, when you spent login attempts(1/3)
     @Given("unlogged user on Login Form")
     public void unlogged_user_on_Login_Form() {
@@ -24,7 +24,12 @@ public class IpBlocking extends LJTest {
     //Scenario: IP blocking, when you spent login attempts(2/3)
     @When("user $user 3 times enters incorrect password")
     public void user_3_times_enters_incorrect_data(String user) {
-        new IterationsWithLoginForm(onOpened(LoginPageUnlogged.class), 3, user, utility().random().getRandomText(10)).run();
+        onOpened(LoginPageUnlogged.class)
+                .authorizeBy(user, utility().random().getRandomText(10), false);
+        onOpened(LoginPageUnlogged.class)
+                .authorizeBy(user, utility().random().getRandomText(10), false);
+        onOpened(LoginPageUnlogged.class)
+                .authorizeBy(user, utility().random().getRandomText(10), false);       
     }
 
     //Scenario: IP blocking, when you spent login attempts(3/3)
@@ -39,7 +44,7 @@ public class IpBlocking extends LJTest {
         verify().that(getCurrentUrl().contains("/login.bml"))
                 .ifResultIsExpected("IP is blocked")
                 .ifElse("IP is not blocked!")
-                .finish();              
+                .finish();
     }
 
 }

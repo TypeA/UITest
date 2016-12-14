@@ -1,6 +1,6 @@
 Scenario: add photo to post from album 
 Meta:
-@categories create_edit_post photo from_album useful
+@categories photo from_album useful
 
 Given logged user <name> on Create Post page
 When create post with photo from album with link <link> and with size <size> (user, <name>)

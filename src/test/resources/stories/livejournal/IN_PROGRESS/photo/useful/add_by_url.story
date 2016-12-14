@@ -1,6 +1,6 @@
 Scenario: add photo by url with different size
 Meta:
-@categories create_edit_post photo by_url useful
+@categories photo by_url useful
 
 Given logged user <name> on Create Post page
 When add photo by url <photo_url> with size <size> and with link <link>
