@@ -16,7 +16,7 @@ import java.util.Random;
 public class AddingNewCategory extends LJTest {
 
     //Scenario: Create new category
-    //Scenario: Fail with adding category*
+    //Scenario: Fail with adding category
     //Scenario: Delete category*
     //Scenario: Edit name and genitive of category*
     //Scenario: Change position of category in top*
@@ -30,14 +30,72 @@ public class AddingNewCategory extends LJTest {
     }
 
     //Scenario: Create new category
-    //Scenario: Fail with adding category*
-    @When("editor adds new category with $symbol_in_keyword and $sticker and $figures on Categories Page")
-    public void editor_adds_new_category_on_Categories_Page(String symbol_in_keyword, String sticker, String figures) {
-        int setFigures = Integer.parseInt(figures);
-        String name = utility().random().getRandomChar(setFigures);
-        String keyword = utility().random().getRandomChar(setFigures).toLowerCase() + symbol_in_keyword;
-        String genitive = utility().random().getRandomChar(setFigures);
+    //Scenario: Fail with adding category
+    @When("editor adds new category with $keyword_with and $sticker and $limit_10 on Categories Page")
+    public void editor_adds_new_category_on_Categories_Page(String keyword_with, String sticker, String limit_10) {
+        int count_of_chars;
+        switch (limit_10.trim()) {
+            case ">":
+                count_of_chars = utility().random().getRandomValue(10) + 10;
+                break;
+            case "<":
+                count_of_chars = utility().random().getRandomValue(10);
+                break;
+            case "=":
+                count_of_chars = 10;
+                break;
+            default: count_of_chars=0;
+        }
 
+        String name = "";
+        String keyword = "";
+        String genitive = "";
+        String[] punctuation = {",", ".", ":", ";", "!", "?", "\'", "\"", "[", "]", "-"};
+        switch (keyword_with) {
+            case "text":
+                name = utility().random().getRandomText(count_of_chars);
+                keyword = utility().random().getRandomText(count_of_chars).toLowerCase();
+                genitive = utility().random().getRandomText(count_of_chars);
+                break;
+            case "upper_text":
+                name = utility().random().getRandomText(count_of_chars).toUpperCase();
+                keyword = utility().random().getRandomText(count_of_chars).toUpperCase();
+                genitive = utility().random().getRandomText(count_of_chars).toUpperCase();
+                break;
+            case "russian_text":
+                name = utility().random().getRandomRussianText(count_of_chars);
+                keyword = utility().random().getRandomRussianText(count_of_chars);
+                genitive = utility().random().getRandomRussianText(count_of_chars);
+                break;
+            case "number":
+                name = utility().random().getRandomText(count_of_chars - 1)
+                        + utility().random().getRandomValue(10);
+                keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase()
+                        + utility().random().getRandomValue(10);
+                genitive = utility().random().getRandomText(count_of_chars - 1)
+                        + utility().random().getRandomValue(10);
+                break;
+            case "punctuation":
+                int i = utility().random().getRandomValue(punctuation.length-1);
+                name = utility().random().getRandomText(count_of_chars - 1)
+                        + punctuation[i];
+                keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase()
+                        + punctuation[i];
+                genitive = utility().random().getRandomText(count_of_chars - 1)
+                        + punctuation[i];
+                break;
+            case "_":
+                name = utility().random().getRandomText(count_of_chars - 1) + "_";
+                keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase() + "_";
+                genitive = utility().random().getRandomText(count_of_chars - 1) + "_";
+                break;
+            default:
+                name = null;
+                keyword = null;
+                genitive = null;
+        }
+
+        System.out.println("name: " + name +", key: " + keyword);
         onOpened(AdminMediusCategoryPage.class)
                 .addCategory(name, keyword, genitive, sticker);
 
@@ -128,23 +186,29 @@ public class AddingNewCategory extends LJTest {
                 .finish();
     }
 
-    //Scenario: Fail with adding category*
+    //Scenario: Fail with adding category
     @Then("editor sees message about error and category is not in List of categories on Categories Page")
     public void editor_sees_message_about_error_and_category_is_not_in_List_of_categories_on_Categories_Page() {
-        String messageAboutError1 = "Keyword can contain only lower-case letters (a-z), " +
-                "digits (0-9), and the underscore character (_)";
-        String messageAboutError2 = "Name of sticker is too long";
-        String keyword = ThucydidesUtils.getFromSession("keyword").toString();
+        String categoryKeyword = ThucydidesUtils.getFromSession("keyword").toString();
+        boolean rightMessageAboutError = false;
+        String messageAboutError = onOpened(AdminMediusCategoryPage.class).getMessageAboutError();
+        switch (messageAboutError) {
+            case "Keyword can contain only lower-case letters (a-z), digits (0-9), and the underscore character (_)":
+                rightMessageAboutError = true;
+                break;
+            case "Name of sticker is too long":
+                rightMessageAboutError = true;
+                break;
+        }
 
-        verify().that((onOpened(AdminMediusCategoryPage.class).getMessageAboutError().equals(messageAboutError1))
-                      ||(onOpened(AdminMediusCategoryPage.class).getMessageAboutError().equals(messageAboutError2)))
-                .ifResultIsExpected("Message about error is ok")
-                .ifElse("Wrong/unknown mesage about error or message about error didn't found")
+        verify().that(rightMessageAboutError)
+                .ifResultIsExpected("Right mesage: " + messageAboutError)
+                .ifElse("Missing or wrong message: " + messageAboutError)
                 .and()
-                .that(getIdCategory(keyword) == null)
-                .ifResultIsExpected("Category didn't added to List of Categories with: keyword = " + keyword)
+                .that(getIdCategory(categoryKeyword) == null)
+                .ifResultIsExpected("Category didn't added to List of Categories with: keyword = " + categoryKeyword)
                 .ifElse("Category is added to List of Categories with: keyword = "
-                        + onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(getIdCategory(keyword)))
+                        + onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(getIdCategory(categoryKeyword)))
                 .finish();
     }
 

@@ -45,4 +45,17 @@ public class RandomObject {
         return text.toString().replaceAll(" +", " ").trim().substring(0, n).replace("'", "").replace("\"", "");
     }
 
+    public String getRandomRussianText(int n) {
+
+            StringBuilder text = new StringBuilder();
+            for (int i = 0; i < n; i++) {
+                char c = (char) ((int) 'а' + Math.random() * ((int) 'я' - (int) 'а' + 1));
+                char a = (char) ((int) 'А' + Math.random() * ((int) 'Я' - (int) 'А' + 1));
+                char g = (char) ((int) ' ' + Math.random() * ((int) '\'' - (int) ' ' + 1));
+                //char w = (char) ((int) '!' + Math.random() * ((int) '\\' - (int) '!' + 1));
+                text.append(c).append(a).append(n);
+            }
+            return text.toString().replaceAll(" +", " ").trim().substring(0, n).replace("'", "").replace("\"", "");
+        }
+
 }

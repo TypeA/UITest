@@ -1,47 +1,34 @@
 Scenario: Create new category
 
 Meta:
-@categories medius admin category adding
+@categories medius admin category adding gg
 
 Given logged editor <user> on Admin Medius Categories Page
-When editor adds new category with <symbol_in_keyword> and <sticker> and <figures> on Categories Page
+When editor adds new category with <keyword_with> and <sticker> and <limit_10> on Categories Page
 Then category is in List of categories on Categories Page
 
 Examples:
 
-|user               |symbol_in_keyword  |sticker    |figures    |
-|testautotest       |                   |false      |4          |
-|--testautotest       |_                  |false      |5          |
-|--testautotest       |6                  |false      |6          |
-|--testautotest       |                   |true       |4          |
-|--testautotest       |_                  |true       |3          |
-|testautotest       |6                  |true       |2          |
-
+|user               |keyword_with  |sticker   |limit_10   |
+|testautotest       |text          |true      |=          |
+|testautotest       |_             |false     |>          |
+|testautotest       |number        |true      |<          |
 
 Scenario: Fail with adding category
 
 Meta:
-@categories medius admin category failed_adding
+@categories medius admin category failed_adding gg
 
 Given logged editor <user> on Admin Medius Categories Page
-When editor adds new category with <symbol_in_keyword> and <sticker> and <figures> on Categories Page
+When editor adds new category with <keyword_with> and <sticker> and <limit_10> on Categories Page
 Then editor sees message about error and category is not in List of categories on Categories Page
 
 Examples:
 
-|user               |symbol_in_keyword  |sticker    |figures    |
-|testautotest       |L                  |false      |4          |
-|testautotest       |!                  |false      |5          |
-|testautotest       |ж                  |false      |4          |
-|testautotest       |Й                  |false      |6          |
-|testautotest       |'                  |false      |3          |
-|testautotest       |F                  |true       |2          |
-|testautotest       |?                  |true       |4          |
-|testautotest       |й                  |true       |3          |
-|testautotest       |Ы                  |true       |4          |
-|testautotest       |'                  |true       |3          |
-|testautotest       |"                  |true       |2          |
-|testautotest       |                   |true       |6          |
+|user               |keyword_with  |sticker   |limit_10   |
+|testautotest       |upper_text    |true      |>          |
+|testautotest       |punctuation   |false     |<          |
+|testautotest       |russian_text  |false     |=          |
 
 Scenario: Delete category
 

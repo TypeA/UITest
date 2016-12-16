@@ -54,7 +54,7 @@ public class AdminMediusCategoryPage extends LJPage {
 
     public String getCategoryKeyword(String idCategory) {
         return startScript("return " +
-                "jQuery('input[name=\"name_"+ idCategory +"\"]')" +
+                "jQuery('input[name=\"name_" + idCategory + "\"]')" +
                 ".parent()" +
                 ".siblings('.admin-categories-keyword')" +
                 ".text()" +
