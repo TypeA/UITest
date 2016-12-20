@@ -7,6 +7,7 @@ import com.livejournal.uitests.utility.Utility;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
+import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.logging.LogEntry;
 
 public class LJTest extends WebTest {
