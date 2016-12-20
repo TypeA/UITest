@@ -7,7 +7,6 @@ import com.livejournal.uitests.utility.Utility;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
-import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.logging.LogEntry;
 
 public class LJTest extends WebTest {
@@ -24,7 +23,7 @@ public class LJTest extends WebTest {
         return new Utility();
     }
 
-    @StepGroup
+
     public List<ArrayList<String>> getLoggs() {
 
         LinkedHashSet<String> severe = new LinkedHashSet<String>();
