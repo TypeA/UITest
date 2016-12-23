@@ -17,7 +17,7 @@ Examples:
 Scenario: Fail with adding category
 
 Meta:
-@categories medius admin category failed_adding gg
+@categories medius admin category failed_adding
 
 Given logged editor <user> on Admin Medius Categories Page
 When editor adds new category with <keyword_with> and <sticker> and <limit_10> on Categories Page

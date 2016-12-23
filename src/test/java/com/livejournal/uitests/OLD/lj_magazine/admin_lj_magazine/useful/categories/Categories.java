@@ -39,8 +39,8 @@ public class Categories extends LJTest {
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
         verify().that(open(LJMagazinePageLogged.class)
                 .categoryExistOnLJMagagazine(Boolean.valueOf(usual_category), categoryName, keyword))
-                .ifResultIsExpected("Category = " + categoryName + " is exist")
-                .ifElse("Category  = " + categoryName + " is not exist")
+                .ifResultIsExpected("MediusAdminCategory = " + categoryName + " is exist")
+                .ifElse("MediusAdminCategory  = " + categoryName + " is not exist")
                 .finish();
 
     }
@@ -63,8 +63,8 @@ public class Categories extends LJTest {
         String idCategory = ThucydidesUtils.getFromSession("idCategory").toString();
         verify().that(open(LJMagazinePageLogged.class)
                 .categoryExistOnLJMagagazine(Boolean.valueOf(special_category) ? false : true, categoryName, getDBDate().discovery().getKeywordCategories(idCategory)))
-                .ifResultIsExpected("Category = " + categoryName + " is changed")
-                .ifElse("Category  = " + categoryName + " is not changed")
+                .ifResultIsExpected("MediusAdminCategory = " + categoryName + " is changed")
+                .ifElse("MediusAdminCategory  = " + categoryName + " is not changed")
                 .finish();
     }
 
@@ -84,8 +84,8 @@ public class Categories extends LJTest {
         String categoryName = ThucydidesUtils.getFromSession("nameCategory").toString();
         verify().that(open(LJMagazinePageLogged.class)
                 .categoryExistOnLJMagagazine(Boolean.valueOf(usual_category), categoryName, ThucydidesUtils.getFromSession("keywordCategory").toString()).equals(false))
-                .ifResultIsExpected("Category = " + categoryName + " is changed")
-                .ifElse("Category  = " + categoryName + " is not changed")
+                .ifResultIsExpected("MediusAdminCategory = " + categoryName + " is changed")
+                .ifElse("MediusAdminCategory  = " + categoryName + " is not changed")
                 .finish();
     }
 }

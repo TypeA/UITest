@@ -1,5 +1,8 @@
 package com.livejournal.uitests.medius.admin.categories;
 
+/**
+ * Created by d.maslovskaya on 23.12.2016.
+ */
 
 import com.livejournal.uisteps.thucydides.ThucydidesUtils;
 import com.livejournal.uitests.LJTest;
@@ -13,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class AddingNewCategory extends LJTest {
+public class MediusAdminCategory extends LJTest {
 
     //Scenario: Create new category
     //Scenario: Fail with adding category
@@ -44,66 +47,46 @@ public class AddingNewCategory extends LJTest {
             case "=":
                 count_of_chars = 10;
                 break;
-            default: count_of_chars=0;
+            default:
+                count_of_chars = 0;
         }
 
-        String name = "";
+        String name = utility().random().getRandomText(count_of_chars);
+        String genitive = utility().random().getRandomText(count_of_chars);
         String keyword = "";
-        String genitive = "";
+
         String[] punctuation = {",", ".", ":", ";", "!", "?", "\'", "\"", "[", "]", "-"};
         switch (keyword_with) {
             case "text":
-                name = utility().random().getRandomText(count_of_chars);
                 keyword = utility().random().getRandomText(count_of_chars).toLowerCase();
-                genitive = utility().random().getRandomText(count_of_chars);
                 break;
             case "upper_text":
-                name = utility().random().getRandomText(count_of_chars).toUpperCase();
                 keyword = utility().random().getRandomText(count_of_chars).toUpperCase();
-                genitive = utility().random().getRandomText(count_of_chars).toUpperCase();
                 break;
             case "russian_text":
-                name = utility().random().getRandomRussianText(count_of_chars);
                 keyword = utility().random().getRandomRussianText(count_of_chars);
-                genitive = utility().random().getRandomRussianText(count_of_chars);
-                break;
             case "number":
-                name = utility().random().getRandomText(count_of_chars - 1)
-                        + utility().random().getRandomValue(10);
                 keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase()
-                        + utility().random().getRandomValue(10);
-                genitive = utility().random().getRandomText(count_of_chars - 1)
                         + utility().random().getRandomValue(10);
                 break;
             case "punctuation":
-                int i = utility().random().getRandomValue(punctuation.length-1);
-                name = utility().random().getRandomText(count_of_chars - 1)
-                        + punctuation[i];
+                int i = utility().random().getRandomValue(punctuation.length - 1);
                 keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase()
-                        + punctuation[i];
-                genitive = utility().random().getRandomText(count_of_chars - 1)
                         + punctuation[i];
                 break;
             case "_":
-                name = utility().random().getRandomText(count_of_chars - 1) + "_";
                 keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase() + "_";
-                genitive = utility().random().getRandomText(count_of_chars - 1) + "_";
                 break;
             default:
-                name = null;
                 keyword = null;
-                genitive = null;
         }
 
-        System.out.println("name: " + name +", key: " + keyword);
         onOpened(AdminMediusCategoryPage.class)
                 .addCategory(name, keyword, genitive, sticker);
 
-        ThucydidesUtils.putToSession("name", name);
-        ThucydidesUtils.putToSession("keyword", keyword);
-        ThucydidesUtils.putToSession("genitive", genitive);
-        ThucydidesUtils.putToSession("sticker", sticker);
-        ThucydidesUtils.putToSession("active", false);
+        Category category = new Category(name, keyword, genitive, Boolean.parseBoolean(sticker));
+        System.out.println("new category " + category.toString());
+        ThucydidesUtils.putToSession("addedCategory", category);
     }
 
     //Scenario: Delete category*
@@ -150,13 +133,9 @@ public class AddingNewCategory extends LJTest {
     //Scenario: Edit name and genitive of category*
     @Then("category is in List of categories on Categories Page")
     public void category_is_in_List_of_categories_on_Categories_Page() {
-        String expectedName = ThucydidesUtils.getFromSession("name").toString();
-        String expectedKeyword = ThucydidesUtils.getFromSession("keyword").toString();
-        String expectedGenitive = ThucydidesUtils.getFromSession("genitive").toString();
-        boolean expectedSticker = Boolean.parseBoolean(ThucydidesUtils.getFromSession("sticker").toString());
-        boolean expectedActive = Boolean.parseBoolean(ThucydidesUtils.getFromSession("active").toString());
+        Category expectedCategory = (Category) ThucydidesUtils.getFromSession("addedCategory");
 
-        String idCategory = getIdCategory(expectedKeyword);
+        String idCategory = getIdCategory(expectedCategory.getKeyword());
 
         String receivedName = onOpened(AdminMediusCategoryPage.class).getCategoryName(idCategory);
         String receivedKeyword = onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(idCategory);
@@ -164,25 +143,26 @@ public class AddingNewCategory extends LJTest {
         boolean receivedSticker = onOpened(AdminMediusCategoryPage.class).getCategorySticker(idCategory);
         boolean receivedActive = onOpened(AdminMediusCategoryPage.class).getCategoryActive(idCategory);
 
-        verify().that(receivedName.equals(expectedName))
-                .ifResultIsExpected("Category in List of Categories with: name = " + expectedName)
-                .ifElse("Category did not found with expected name! Received name = " + receivedName)
+        System.out.println("expected category " + expectedCategory.toString());
+        verify().that(receivedName.equals(expectedCategory.getName()))
+                .ifResultIsExpected("MediusAdminCategory in List of Categories with: name = " + expectedCategory.getName())
+                .ifElse("MediusAdminCategory did not found with expected name! Received name = " + receivedName)
                 .and()
-                .that(receivedGenitive.equals(expectedGenitive))
-                .ifResultIsExpected("Category in List of Categories with: genitive = " + expectedGenitive)
-                .ifElse("Category did not found d with expected genitive! Received genitive = " + receivedGenitive)
+                .that(receivedGenitive.equals(expectedCategory.getGenitive()))
+                .ifResultIsExpected("MediusAdminCategory in List of Categories with: genitive = " + expectedCategory.getGenitive())
+                .ifElse("MediusAdminCategory did not found d with expected genitive! Received genitive = " + receivedGenitive)
                 .and()
-                .that(receivedKeyword.equals(expectedKeyword))
-                .ifResultIsExpected("Category in List of Categories with: keyword = " + expectedKeyword)
-                .ifElse("Category did not found with expected keyword! Received keyword = " + receivedKeyword)
+                .that(receivedKeyword.equals(expectedCategory.getKeyword()))
+                .ifResultIsExpected("MediusAdminCategory in List of Categories with: keyword = " + expectedCategory.getKeyword())
+                .ifElse("MediusAdminCategory did not found with expected keyword! Received keyword = " + receivedKeyword)
                 .and()
-                .that(receivedSticker == expectedSticker)
-                .ifResultIsExpected("Category in List of Categories with: sticker = " + expectedSticker)
-                .ifElse("Category did not found with expected sticker! Received sticker = " + receivedSticker)
+                .that(receivedSticker == expectedCategory.isStiker())
+                .ifResultIsExpected("MediusAdminCategory in List of Categories with: sticker = " + expectedCategory.isStiker())
+                .ifElse("MediusAdminCategory did not found with expected sticker! Received sticker = " + receivedSticker)
                 .and()
-                .that(receivedActive == expectedActive)
-                .ifResultIsExpected("Category in List of Categories with: activator = " + expectedActive)
-                .ifElse("Category did not found with expected activator! Received activator = " + receivedActive)
+                .that(receivedActive == expectedCategory.isActive())
+                .ifResultIsExpected("MediusAdminCategory in List of Categories with: activator = " + expectedCategory.isActive())
+                .ifElse("MediusAdminCategory did not found with expected activator! Received activator = " + receivedActive)
                 .finish();
     }
 
@@ -206,8 +186,8 @@ public class AddingNewCategory extends LJTest {
                 .ifElse("Missing or wrong message: " + messageAboutError)
                 .and()
                 .that(getIdCategory(categoryKeyword) == null)
-                .ifResultIsExpected("Category didn't added to List of Categories with: keyword = " + categoryKeyword)
-                .ifElse("Category is added to List of Categories with: keyword = "
+                .ifResultIsExpected("MediusAdminCategory didn't added to List of Categories with: keyword = " + categoryKeyword)
+                .ifElse("MediusAdminCategory is added to List of Categories with: keyword = "
                         + onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(getIdCategory(categoryKeyword)))
                 .finish();
     }
@@ -218,8 +198,8 @@ public class AddingNewCategory extends LJTest {
         String keyword = ThucydidesUtils.getFromSession("keyword").toString();
 
         verify().that(getIdCategory(keyword) == null)
-                .ifResultIsExpected("Category was deleted List of Categories with: keyword = " + keyword)
-                .ifElse("Category is in List of Categories with: keyword = "
+                .ifResultIsExpected("MediusAdminCategory was deleted List of Categories with: keyword = " + keyword)
+                .ifElse("MediusAdminCategory is in List of Categories with: keyword = "
                         + getIdCategory(keyword))
                 .finish();
     }
