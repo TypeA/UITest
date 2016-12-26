@@ -1,9 +1,14 @@
 package com.livejournal.uitests.pages.service_pages.medius.admin.category;
 
+/**
+ * Created by d.maslovskaya on 23.12.2016.
+ */
+
 import com.livejournal.uisteps.thucydides.elements.Button;
 import com.livejournal.uisteps.thucydides.elements.TextField;
 import com.livejournal.uisteps.thucydides.elements.UIElement;
 import com.livejournal.uitests.pages.LJPage;
+
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.findby.By;
 import org.openqa.selenium.support.FindBy;
@@ -40,6 +45,14 @@ public class AdminMediusCategoryPage extends LJPage {
         addCategoryButton.click();
 
         return this;
+    }
+
+    public Category getCategory(String idCategory) {
+        return new Category(getCategoryName(idCategory),
+                getCategoryKeyword(idCategory),
+                getCategoryGenitive(idCategory),
+                getCategorySticker(idCategory),
+                getCategoryActive(idCategory));
     }
 
     public String getCategoryName(String idCategory) {
@@ -126,5 +139,72 @@ public class AdminMediusCategoryPage extends LJPage {
                 .getAttribute("value").equals("changed");
 
         return nameChanged && genitiveChanged;
+    }
+
+    public static class Category {
+        private String name;
+        private final String keyword;
+        private String genitive;
+        private final boolean stiker;
+        private boolean active;
+
+        public Category(String name, String keyword, String genitive, boolean stiker) {
+            this.name = name;
+            this.keyword = keyword;
+            this.genitive = genitive;
+            this.stiker = stiker;
+            this.active = false;
+        }
+
+        public Category(String name, String keyword, String genitive, boolean stiker, boolean active) {
+            this.name = name;
+            this.keyword = keyword;
+            this.genitive = genitive;
+            this.stiker = stiker;
+            this.active = active;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public String getKeyword() {
+            return keyword;
+        }
+
+        public String getGenitive() {
+            return genitive;
+        }
+
+        public boolean isStiker() {
+            return stiker;
+        }
+
+        public boolean isActive() {
+            return active;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public void setGenitive(String genitive) {
+            this.genitive = genitive;
+        }
+
+        public void setActive(boolean active) {
+            this.active = active;
+        }
+
+        @Override
+        public String toString() {
+            return "Name: " + this.name
+                    + " Keyword: " + this.keyword
+                    + " Genetive: " + this.genitive
+                    + " Sticker: " + this.stiker
+                    + " Active: " + this.active;
+        }
+
+
     }
 }

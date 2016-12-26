@@ -10,14 +10,14 @@ Then category is in List of categories on Categories Page
 Examples:
 
 |user               |keyword_with  |sticker   |limit_10   |
-|testautotest       |text          |true      |=          |
-|testautotest       |_             |false     |>          |
-|testautotest       |number        |true      |<          |
+|testautotest       |text          |true      |=10        |
+|testautotest       |_             |false     |>10        |
+|testautotest       |number        |true      |<10        |
 
 Scenario: Fail with adding category
 
 Meta:
-@categories medius admin category failed_adding
+@categories medius admin category failed_adding gg
 
 Given logged editor <user> on Admin Medius Categories Page
 When editor adds new category with <keyword_with> and <sticker> and <limit_10> on Categories Page
@@ -26,9 +26,9 @@ Then editor sees message about error and category is not in List of categories o
 Examples:
 
 |user               |keyword_with  |sticker   |limit_10   |
-|testautotest       |upper_text    |true      |>          |
-|testautotest       |punctuation   |false     |<          |
-|testautotest       |russian_text  |false     |=          |
+|testautotest       |upper_text    |true      |>10        |
+|testautotest       |punctuation   |false     |<10        |
+|testautotest       |russian_text  |false     |=10        |
 
 Scenario: Delete category
 

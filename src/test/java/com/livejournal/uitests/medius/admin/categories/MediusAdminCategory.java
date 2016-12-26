@@ -36,56 +36,15 @@ public class MediusAdminCategory extends LJTest {
     //Scenario: Fail with adding category
     @When("editor adds new category with $keyword_with and $sticker and $limit_10 on Categories Page")
     public void editor_adds_new_category_on_Categories_Page(String keyword_with, String sticker, String limit_10) {
-        int count_of_chars;
-        switch (limit_10.trim()) {
-            case ">":
-                count_of_chars = utility().random().getRandomValue(10) + 10;
-                break;
-            case "<":
-                count_of_chars = utility().random().getRandomValue(10);
-                break;
-            case "=":
-                count_of_chars = 10;
-                break;
-            default:
-                count_of_chars = 0;
-        }
+        int categoryWordsLenght = choiceRandomWordLengthByIndex(limit_10);
+        System.out.println(limit_10);
+        String name = utility().random().getRandomText(categoryWordsLenght);
+        String genitive = utility().random().getRandomText(categoryWordsLenght);
+        String keyword = generateRandomCategoryKeyword(categoryWordsLenght, keyword_with);
 
-        String name = utility().random().getRandomText(count_of_chars);
-        String genitive = utility().random().getRandomText(count_of_chars);
-        String keyword = "";
+        onOpened(AdminMediusCategoryPage.class).addCategory(name, keyword, genitive, sticker);
 
-        String[] punctuation = {",", ".", ":", ";", "!", "?", "\'", "\"", "[", "]", "-"};
-        switch (keyword_with) {
-            case "text":
-                keyword = utility().random().getRandomText(count_of_chars).toLowerCase();
-                break;
-            case "upper_text":
-                keyword = utility().random().getRandomText(count_of_chars).toUpperCase();
-                break;
-            case "russian_text":
-                keyword = utility().random().getRandomRussianText(count_of_chars);
-            case "number":
-                keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase()
-                        + utility().random().getRandomValue(10);
-                break;
-            case "punctuation":
-                int i = utility().random().getRandomValue(punctuation.length - 1);
-                keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase()
-                        + punctuation[i];
-                break;
-            case "_":
-                keyword = utility().random().getRandomText(count_of_chars - 1).toLowerCase() + "_";
-                break;
-            default:
-                keyword = null;
-        }
-
-        onOpened(AdminMediusCategoryPage.class)
-                .addCategory(name, keyword, genitive, sticker);
-
-        Category category = new Category(name, keyword, genitive, Boolean.parseBoolean(sticker));
-        System.out.println("new category " + category.toString());
+        AdminMediusCategoryPage.Category category = new AdminMediusCategoryPage.Category(name, keyword, genitive, Boolean.parseBoolean(sticker));
         ThucydidesUtils.putToSession("addedCategory", category);
     }
 
@@ -133,43 +92,36 @@ public class MediusAdminCategory extends LJTest {
     //Scenario: Edit name and genitive of category*
     @Then("category is in List of categories on Categories Page")
     public void category_is_in_List_of_categories_on_Categories_Page() {
-        Category expectedCategory = (Category) ThucydidesUtils.getFromSession("addedCategory");
-
+        AdminMediusCategoryPage.Category expectedCategory = (AdminMediusCategoryPage.Category) ThucydidesUtils.getFromSession("addedCategory");
         String idCategory = getIdCategory(expectedCategory.getKeyword());
+        AdminMediusCategoryPage.Category receivedCategory = onOpened(AdminMediusCategoryPage.class).getCategory(idCategory);
 
-        String receivedName = onOpened(AdminMediusCategoryPage.class).getCategoryName(idCategory);
-        String receivedKeyword = onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(idCategory);
-        String receivedGenitive = onOpened(AdminMediusCategoryPage.class).getCategoryGenitive(idCategory);
-        boolean receivedSticker = onOpened(AdminMediusCategoryPage.class).getCategorySticker(idCategory);
-        boolean receivedActive = onOpened(AdminMediusCategoryPage.class).getCategoryActive(idCategory);
-
-        System.out.println("expected category " + expectedCategory.toString());
-        verify().that(receivedName.equals(expectedCategory.getName()))
+        verify().that(receivedCategory.getName().equals(expectedCategory.getName()))
                 .ifResultIsExpected("MediusAdminCategory in List of Categories with: name = " + expectedCategory.getName())
-                .ifElse("MediusAdminCategory did not found with expected name! Received name = " + receivedName)
+                .ifElse("MediusAdminCategory did not found with expected name! Received name = " + receivedCategory.getName())
                 .and()
-                .that(receivedGenitive.equals(expectedCategory.getGenitive()))
+                .that(receivedCategory.getGenitive().equals(expectedCategory.getGenitive()))
                 .ifResultIsExpected("MediusAdminCategory in List of Categories with: genitive = " + expectedCategory.getGenitive())
-                .ifElse("MediusAdminCategory did not found d with expected genitive! Received genitive = " + receivedGenitive)
+                .ifElse("MediusAdminCategory did not found d with expected genitive! Received genitive = " + receivedCategory.getGenitive())
                 .and()
-                .that(receivedKeyword.equals(expectedCategory.getKeyword()))
+                .that(receivedCategory.getKeyword().equals(expectedCategory.getKeyword()))
                 .ifResultIsExpected("MediusAdminCategory in List of Categories with: keyword = " + expectedCategory.getKeyword())
-                .ifElse("MediusAdminCategory did not found with expected keyword! Received keyword = " + receivedKeyword)
+                .ifElse("MediusAdminCategory did not found with expected keyword! Received keyword = " + receivedCategory.getKeyword())
                 .and()
-                .that(receivedSticker == expectedCategory.isStiker())
+                .that(receivedCategory.isStiker() == expectedCategory.isStiker())
                 .ifResultIsExpected("MediusAdminCategory in List of Categories with: sticker = " + expectedCategory.isStiker())
-                .ifElse("MediusAdminCategory did not found with expected sticker! Received sticker = " + receivedSticker)
+                .ifElse("MediusAdminCategory did not found with expected sticker! Received sticker = " + receivedCategory.isStiker())
                 .and()
-                .that(receivedActive == expectedCategory.isActive())
+                .that(receivedCategory.isActive() == expectedCategory.isActive())
                 .ifResultIsExpected("MediusAdminCategory in List of Categories with: activator = " + expectedCategory.isActive())
-                .ifElse("MediusAdminCategory did not found with expected activator! Received activator = " + receivedActive)
+                .ifElse("MediusAdminCategory did not found with expected activator! Received activator = " + receivedCategory.isActive())
                 .finish();
     }
 
     //Scenario: Fail with adding category
     @Then("editor sees message about error and category is not in List of categories on Categories Page")
     public void editor_sees_message_about_error_and_category_is_not_in_List_of_categories_on_Categories_Page() {
-        String categoryKeyword = ThucydidesUtils.getFromSession("keyword").toString();
+        AdminMediusCategoryPage.Category expectedCategory = (AdminMediusCategoryPage.Category) ThucydidesUtils.getFromSession("addedCategory");
         boolean rightMessageAboutError = false;
         String messageAboutError = onOpened(AdminMediusCategoryPage.class).getMessageAboutError();
         switch (messageAboutError) {
@@ -185,10 +137,10 @@ public class MediusAdminCategory extends LJTest {
                 .ifResultIsExpected("Right mesage: " + messageAboutError)
                 .ifElse("Missing or wrong message: " + messageAboutError)
                 .and()
-                .that(getIdCategory(categoryKeyword) == null)
-                .ifResultIsExpected("MediusAdminCategory didn't added to List of Categories with: keyword = " + categoryKeyword)
+                .that(getIdCategory(expectedCategory.getKeyword()) == null)
+                .ifResultIsExpected("MediusAdminCategory didn't added to List of Categories with: keyword = " + expectedCategory.getKeyword())
                 .ifElse("MediusAdminCategory is added to List of Categories with: keyword = "
-                        + onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(getIdCategory(categoryKeyword)))
+                        + onOpened(AdminMediusCategoryPage.class).getCategoryKeyword(getIdCategory(expectedCategory.getKeyword())))
                 .finish();
     }
 
@@ -214,6 +166,55 @@ public class MediusAdminCategory extends LJTest {
                 .ifResultIsExpected("Positions of Medius active categories changed successfully")
                 .ifElse("Positions of Medius active categories haven't changes")
                 .finish();
+    }
+
+    private int choiceRandomWordLengthByIndex(String index) {
+        int categoryNameLength;
+        switch (index.trim()) {
+            case ">10":
+                categoryNameLength = utility().random().getRandomValue(10) + 10;
+                break;
+            case "<10":
+                categoryNameLength = utility().random().getRandomValue(10);
+                break;
+            case "=10":
+                categoryNameLength = 10;
+                break;
+            default:
+                categoryNameLength = 0;
+        }
+        return categoryNameLength;
+    }
+
+    private String generateRandomCategoryKeyword(int charsCount, String key) {
+        String keyword = "";
+        String[] punctuation = {",", ".", ":", ";", "!", "?", "\'", "\"", "[", "]", "-"};
+        switch (key.trim()) {
+            case "text":
+                keyword = utility().random().getRandomText(charsCount).toLowerCase();
+                break;
+            case "upper_text":
+                keyword = utility().random().getRandomText(charsCount).toUpperCase();
+                break;
+            case "russian_text":
+                keyword = utility().random().getRandomRussianText(charsCount);
+                break;
+            case "number":
+                keyword = utility().random().getRandomText(charsCount - 1).toLowerCase()
+                        + utility().random().getRandomValue(10);
+                break;
+            case "punctuation":
+                int i = utility().random().getRandomValue(punctuation.length - 1);
+                keyword = utility().random().getRandomText(charsCount - 1).toLowerCase()
+                        + punctuation[i];
+                break;
+            case "_":
+                keyword = utility().random().getRandomText(charsCount - 1).toLowerCase() + "_";
+                break;
+            default:
+                keyword = null;
+        }
+        return keyword;
     }
 
     private String getRandomKeywordFromListCategoriesByActiveAndSticker(boolean isActive, boolean isSticker) {
