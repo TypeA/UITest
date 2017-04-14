@@ -1,11 +1,11 @@
 package com.livejournal.uitests.databases_data;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.junit.Assert;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- *
  * @author m.prytkova
  */
 public class UserSettings extends DatabasesData {
@@ -92,7 +92,7 @@ public class UserSettings extends DatabasesData {
                 .get(0);
     }
 
-    public String getInMyStyleSetting(String user) {
+    public boolean getInMyStyleSetting(String user) {
         String select1 = "SELECT * "
                 + "FROM user "
                 + "WHERE user='"
@@ -109,13 +109,14 @@ public class UserSettings extends DatabasesData {
                 + user_atr.get(0).get(1)
                 + "';";
         try {
-            return workWithDB().conect()
+             String setting = workWithDB().conect()
                     .select(select2, "value")
                     .finish()
                     .get(0)
                     .get(0);
+             return setting.equals("Y");
         } catch (Exception ex) {
-            return "n";
+            return false;
         }
     }
 
@@ -150,22 +151,44 @@ public class UserSettings extends DatabasesData {
     }
 
     public ArrayList<String> getUsersWithCustomFeed() {
-        String select = "(select u.user, c.userid from lj_c2.userproplite2 c\n"
-                + "left join user u on c.userid = u.userid\n"
+        String select = "(select u.user, c.userid from lj_c2.userproplite2 c"
+                + "left join user u on c.userid = u.userid"
                 + "where c.upropid = 327 "
-                + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'\n"
-                + "and u.statusvis = 'V')\n"
-                + "UNION \n"
-                + "(select u.user, c.userid from lj_c1.userproplite2 c\n"
-                + "left join user u on c.userid = u.userid\n"
+                + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'"
+                + "and u.statusvis = 'V')"
+                + "UNION "
+                + "(select u.user, c.userid from lj_c1.userproplite2 c"
+                + "left join user u on c.userid = u.userid"
                 + "where c.upropid = 327 "
-                + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'\n"
+                + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'"
                 + "and u.statusvis = 'V' )";
 
         return workWithDB().conect()
                 .select(select, "user")
                 .finish()
                 .get(0);
+    }
+
+    public boolean getAllowForMedius(String user) {
+        String select = "select upropid from userproplist where name='allow_for_magazine";
+        String idSetting = workWithDB().conect()
+                .select(select, "upropid")
+                .finish()
+                .get(0)
+                .get(0);
+        String clusterid = userData().getUserClusterId(user);
+        String userid = userData().getUserId(user);
+        String select1 = "select value from lj_c" + clusterid + ".userproplite2 where upropid=" + idSetting + " and userid = " + userid;
+        String valueSetting = workWithDB().conect()
+                .select(select1, "value")
+                .finish()
+                .get(0)
+                .get(0);
+        if (valueSetting.equals("Y")) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }

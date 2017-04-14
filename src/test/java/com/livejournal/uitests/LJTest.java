@@ -1,8 +1,9 @@
 package com.livejournal.uitests;
 
 import com.livejournal.uisteps.thucydides.WebTest;
-import com.livejournal.uitests.redis_data.RedisData;
+import com.livejournal.uitests.console.SSHComands;
 import com.livejournal.uitests.databases_data.DatabasesData;
+import com.livejournal.uitests.redis_data.RedisData;
 import com.livejournal.uitests.utility.Utility;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
@@ -21,6 +22,10 @@ public class LJTest extends WebTest {
 
     public Utility utility() {
         return new Utility();
+    }
+    
+    public SSHComands console() {
+        return new SSHComands();
     }
 
 

@@ -2,11 +2,9 @@ package com.livejournal.uitests.databases_data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
-/**
- *
- * @author m.prytkova
- */
+
 public class UserData extends DatabasesData {
 
     public String getUserPassword(String user) {
@@ -65,4 +63,33 @@ public class UserData extends DatabasesData {
                 .finish().get(0).get(0);
     }
 
+    public ArrayList<String> getUserWithStatus(String status) {
+        String select = "select user from user where statusvis='" + status + "'";
+        return workWithDB().conect()
+                .select(select, "user")
+                .finish()
+                .get(0);
+    }
+
+    public String getActiveUserWithPosts() {
+        String select1 = "(select journalid from lj_c2.log2 " +
+                "where security='public'  group by journalid having count(jitemid)>20) union" +
+                "(select journalid from lj_c1.log2 " +
+                "where security='public'  group by journalid having count(jitemid)>20)";
+        ArrayList<String> usersid = workWithDB().conect()
+                .select(select1, "journalid")
+                .finish()
+                .get(0);
+        String[] array = new String[usersid.size()];
+        array = usersid.toArray(array);
+        String.join(", ", array);
+        System.out.println("!!!!!!!! "+String.join(", ", array));
+        String select2 = "select user from user where statusvis='V' and userid in("
+                + String.join(", ", array)+")";
+        return workWithDB().conect()
+                .select(select2, "user")
+                .finish()
+                .get(0)
+                .get(0);
+    }
 }

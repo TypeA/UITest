@@ -7,6 +7,8 @@ import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.ServicePageLogged;
 import com.livejournal.uitests.pages.service_pages.update.content.AdditionalContent;
 import com.livejournal.uitests.pages.service_pages.update.content.PostContentBlock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.openqa.selenium.WebDriver;
@@ -69,7 +71,6 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
     @StepGroup
     public UpdateBmlPageLogged selectCommunity(String community) {
         postToCommunity.click();
-        communitySelect.selectByValue(community);
         WebDriverWait wait = new WebDriverWait(getDriver(), 10);
         wait.until(new ExpectedCondition<Boolean>() {
             @Override
@@ -77,6 +78,8 @@ public class UpdateBmlPageLogged extends ServicePageLogged {
                 return communitySelect.isDisplayed();
             }
         });
+        communitySelect.selectByVisibleText(community);
+        //System.out.println("+++++++++++++ " + communitySelect.getOptions());
         return this;
     }
 

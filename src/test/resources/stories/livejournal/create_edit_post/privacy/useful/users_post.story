@@ -1,6 +1,6 @@
 Scenario: Create post
 Meta: 
-@categories create_edit_post privacy useful
+@categories create_edit_post privacy useful release 
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
@@ -17,7 +17,7 @@ Examples:
          
 Scenario: Privacy in editing 
 Meta: 
-@categories create_edit_post privacy useful
+@categories create_edit_post privacy useful release
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
@@ -34,7 +34,7 @@ Examples:
 
 Scenario: Edit post
 Meta: 
-@categories create_edit_post privacy useful
+@categories create_edit_post privacy useful release
 
 Given logged user <name> on Create Post page
 When user create new post with privacy <privacy> (group <group>)
@@ -46,13 +46,13 @@ Examples:
 |testautotest   |Public      |                              |Private        |                              |
 |testautotest   |Friends     |                              |Public         |                              |
 |testautotest   |Custom      |test_group;Work;Local Friends |Friends        |                              |
-|testautotest   |Private     |                              |Custom         |test_group;Work;Local Friends |                            |
+|cyr_test_cyr   |Private     |                              |Custom         |test_group;Work;Local Friends |
 
 
 
 Scenario: Restore privacy from draft
 Meta: 
-@categories create_edit_post privacy useful
+@categories create_edit_post privacy useful release
 
 Given logged user <name> on Create Post page
 When user write new post with privacy <privacy> (group <group>) 

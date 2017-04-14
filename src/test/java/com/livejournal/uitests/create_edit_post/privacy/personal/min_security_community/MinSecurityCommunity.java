@@ -7,6 +7,8 @@ import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.settings.SettingsMainPage;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
@@ -23,7 +25,7 @@ public class MinSecurityCommunity extends LJTest {
     public void logged_user_on_Security_page(String name, String community) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"));
     }
 
@@ -32,7 +34,7 @@ public class MinSecurityCommunity extends LJTest {
     public void logged_user_with_min_security_on_Create_Post_page_in_community(String name, String community, String security) {
         open(LoginPageUnlogged.class)
                 .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .defaultLanguageLogged(name);
+                .setDefault().defaultLanguageLogged(name);
         open(SettingsMainPage.class, new Url().setPostfix("?authas=" + community + "&cat=privacy"))
                 .setMinSecurity(security)
                 .saveSettings();
@@ -66,9 +68,16 @@ public class MinSecurityCommunity extends LJTest {
     //Scenario: Min security in creating post in community (3/3)
     @Then("user can set only allowed security $security when create post in community $community")
     public void user_can_set_only_allowed_security_when_create_post(String security, String community) {
-        ArrayList<String> privacy = open(UpdateBmlPageLogged.class)
+        open(UpdateBmlPageLogged.class)
                 .closeDraft()
-                .selectCommunity(community)
+                .selectCommunity(community);
+        ///// без задержки не обойтись, слишком медленно подгружаются данные
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MinSecurityCommunity.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ArrayList<String> privacy = onOpened(UpdateBmlPageLogged.class)
                 .usePostContent()
                 .getAllPrivacy();
         verify().that(correctPrivacy(security).equals(privacy))

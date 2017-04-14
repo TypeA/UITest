@@ -8,6 +8,8 @@ import com.livejournal.uitests.pages.LJPage;
 import com.livejournal.uitests.pages.journal_pages.journal.MyJournalPageLogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.PrivacyPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.support_faq.unlogged.TosPageUnlogged;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import net.thucydides.core.annotations.DefaultUrl;
 import net.thucydides.core.annotations.StepGroup;
 import org.junit.Assert;
@@ -65,6 +67,7 @@ public class CreateAccountPage extends LJPage {
 
     @StepGroup
     public CreateAccountPage createAccountData(String name, String email, String password, String day, String month, String year, String gender) {
+        System.out.println("========name:" + name);
         userNameField.enter(name);
         emailField.enter(email);
         passwordField.enter(password);
@@ -82,8 +85,9 @@ public class CreateAccountPage extends LJPage {
     }
 
     @StepGroup
-    public Integer getNOSinName() {
-        return userNameField.getText().length();
+    public String getName() {
+         return startScript("return jQuery('.b-createpage-input-wrapper.b-createpage-input-username input').val()")
+                 .toString();
     }
 
     @StepGroup

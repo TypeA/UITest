@@ -36,15 +36,14 @@ public class FiltersBlock extends UIBlock {
     }
 
     @StepGroup
-    public String getGroups() {
+    public ArrayList<String> getGroups() {
         List<WebElement> list = getDriver()
                 .findElements(By.xpath("//ul[@class='l-flatslide-menu-items l-flatslide-menu-items-active']//li//a"));
-        StringBuilder filresFeed = new StringBuilder();
+        ArrayList<String> groupOnFeed = new ArrayList<String>();
         for (WebElement list1 : list) {
-            String filter = list1.getAttribute("text");
-            filresFeed.append(filter);
+            groupOnFeed.add(list1.getAttribute("text"));
         }
-        return filresFeed.toString();
+        return groupOnFeed;
     }
 
     @StepGroup

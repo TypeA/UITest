@@ -20,13 +20,13 @@ public class BubblesUpdateBml extends UIBlock {
     }
 
     @StepGroup
-    public LJUserBubble userBubble() {
-        return onDisplayed(LJUserBubble.class);
+    public UserBubble userBubble() {
+        return onDisplayed(UserBubble.class);
     }
 
     @StepGroup
-    public LJCutBubble cutBubble() {
-        return onDisplayed(LJCutBubble.class);
+    public CutBubble cutBubble() {
+        return onDisplayed(CutBubble.class);
     }
 
     @StepGroup
@@ -42,6 +42,16 @@ public class BubblesUpdateBml extends UIBlock {
     @StepGroup
     public PhotoBubble photoBubble() {
         return onDisplayed(PhotoBubble.class);
+    }
+
+    @StepGroup
+    public VideoBubble videoBubble() {
+        return onDisplayed(VideoBubble.class);
+    }
+
+    @StepGroup
+    public LikeBubble likeBubble() {
+        return onDisplayed(LikeBubble.class);
     }
 
 }
