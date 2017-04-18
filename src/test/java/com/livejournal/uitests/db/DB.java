@@ -1,4 +1,4 @@
-package com.livejournal.uitests.db;
+package com.livejournal.uitests.DB;
 
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
@@ -29,16 +29,16 @@ public class DB extends LJTest {
             Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        for (int i = 0; i < pages.size(); i++) {
+        for (String page : pages) {
 
-            this.openUrl(pages.get(i));
+            this.openUrl(page);
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException ex) {
                 Logger.getLogger(DB.class.getName()).log(Level.SEVERE, null, ex);
             }
             List<ArrayList<String>> loggs = getLoggs();
-            addTable().pageOpen(pages.get(i))
+            addTable().pageOpen(page)
                     .importantErrors(loggs.get(0))
                     .otherErrors(null)
                     .finish();
@@ -50,7 +50,7 @@ public class DB extends LJTest {
 
     private ArrayList<String> scanerUrl(String text) {
 
-        ArrayList<String> pages = new ArrayList<String>();
+        ArrayList<String> pages = new ArrayList<>();
         Scanner scanner = null;
         try {
             scanner = new Scanner(new File(text));
