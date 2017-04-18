@@ -4,11 +4,12 @@ import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.journal_pages.entry.EntryPageLogged;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
 import com.livejournal.uitests.pages.service_pages.update.UpdateBmlPageLogged;
-import java.util.ArrayList;
-import java.util.Arrays;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -20,8 +21,8 @@ public class Ljlike extends LJTest {
     @Given("logged user $name on Create Post page")
     public void logged_user_on_Create_post_page(String name) {
         open(LoginPageUnlogged.class)
-                .authorizeBy(name, getDBDate().userData().getUserPassword(name))
-                .setDefault().defaultStyle(name);
+                .authorizeBy(name, getDBDate().userData().getUserPassword(name));
+                //.setDefault().defaultStyle(name);
         open(UpdateBmlPageLogged.class);
     }
 
@@ -51,7 +52,7 @@ public class Ljlike extends LJTest {
     private Boolean ljlikesVerification(ArrayList<String> actual, ArrayList<String> expected) {
 
         if (expected.get(0).toLowerCase().equals("default")) {
-            String exp[] = {"repost", "facebook", "twitter", "vkontakte", "google", "tumblr", "odnoklassniki"};
+            String exp[] = {"repost", "facebook", "twitter", "vkontakte", "google", "tumblr", "odnoklassniki", "pocket"};
             expected.addAll(Arrays.asList(exp));
             expected.remove("default");
         }
