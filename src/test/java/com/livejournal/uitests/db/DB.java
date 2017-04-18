@@ -1,4 +1,4 @@
-package com.livejournal.uitests.DB;
+package com.livejournal.uitests.db;
 
 import com.livejournal.uitests.LJTest;
 import com.livejournal.uitests.pages.service_pages.login_page.LoginPageUnlogged;
