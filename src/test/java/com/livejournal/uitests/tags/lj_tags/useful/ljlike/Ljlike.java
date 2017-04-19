@@ -51,7 +51,7 @@ public class Ljlike extends LJTest {
     private Boolean ljlikesVerification(ArrayList<String> actual, ArrayList<String> expected) {
 
         if (expected.get(0).toLowerCase().equals("default")) {
-            String exp[] = {"repost", "facebook", "twitter", "vkontakte", "google", "tumblr", "odnoklassniki"};
+            String exp[] = {"repost", "facebook", "twitter", "vkontakte", "google", "tumblr", "odnoklassniki","pocket"};
             expected.addAll(Arrays.asList(exp));
             expected.remove("default");
         }

@@ -10,5 +10,5 @@ Examples:
 |name         |likes                                                                                    |
 |testautotest |default;                                                                                 |
 |testautotest |facebook;                                                                                |
-|testautotest |repost;twitter;livejournal;                                                              |   
+|testautotest |repost;twitter;livejournal;                                                              |
 |testautotest |repost;facebook;twitter;vkontakte;google;surfingbird;odnoklassniki;tumblr;livejournal;   |

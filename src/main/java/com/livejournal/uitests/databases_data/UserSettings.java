@@ -72,7 +72,7 @@ public class UserSettings extends DatabasesData {
                 + "FROM lj_c"
                 + user_atr.get(0).get(0)
                 + ".userproplite2 "
-                + "WHERE upropid = '96' and userid = '"
+                + "WHERE upropid = (select upropid from userproplist where name ='s2_style') and userid = '"
                 + user_atr.get(0).get(1)
                 + "';";
         String styleid = workWithDB().conect()
