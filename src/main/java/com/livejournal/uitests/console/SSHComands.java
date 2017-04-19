@@ -23,7 +23,7 @@ public class SSHComands {
     private static final int SSH_PORT = 22;
     private static final int CONNECTION_TIMEOUT = 10000;
     private static final int BUFFER_SIZE = 1024;
-    private static final String HOSTNAME = Injectors.getInjector().getInstance(EnvironmentVariables.class).copy().getProperty("webdriver.base.url");//"172.19.9.80";
+    private static final String HOSTNAME = Injectors.getInjector().getInstance(EnvironmentVariables.class).copy().getProperty("webdriver.base.url");
     private static final String USERNAME = "lj";
     private static final String PASSWORD = "test";
 
