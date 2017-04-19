@@ -153,7 +153,7 @@ public class UserSettings extends DatabasesData {
     public ArrayList<String> getUsersWithCustomFeed() {
         String select = "(select u.user, c.userid from lj_c2.userproplite2 c"
                 + "left join user u on c.userid = u.userid"
-                + "where c.upropid = 327 "
+                + "where c.upropid = (select upropid from userproplist where name='friendsfeed_style') "
                 + "and c.value not like '%242F33%00A3D9%007399%0086B3%FFFFFF%242F33%7A9199%DAE3E6%F8F9FB%'"
                 + "and u.statusvis = 'V')"
                 + "UNION "
