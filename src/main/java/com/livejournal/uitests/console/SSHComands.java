@@ -5,6 +5,9 @@ import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.JSchException;
 import com.jcraft.jsch.Session;
+import net.thucydides.core.guice.Injectors;
+import net.thucydides.core.util.EnvironmentVariables;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -20,7 +23,7 @@ public class SSHComands {
     private static final int SSH_PORT = 22;
     private static final int CONNECTION_TIMEOUT = 10000;
     private static final int BUFFER_SIZE = 1024;
-    private static final String HOSTNAME = "172.19.9.80";
+    private static final String HOSTNAME = Injectors.getInjector().getInstance(EnvironmentVariables.class).copy().getProperty("webdriver.base.url");
     private static final String USERNAME = "lj";
     private static final String PASSWORD = "test";
 
@@ -51,7 +54,9 @@ public class SSHComands {
                 if (i < 0) {
                     break;
                 }
-                result.append(new String(tmp, 0, i));
+                String rawout = new String(tmp, 0, i);
+                System.out.println(rawout);
+                result.append(rawout);
             }
             if (channel.isClosed()) {
                 int exitStatus = channel.getExitStatus();
@@ -97,6 +102,7 @@ public class SSHComands {
             Channel channel = initChannel(command, session);
             InputStream in = channel.getInputStream();
             channel.connect();
+            channel.run();
             String dataFromChannel = getDataFromChannel(channel, in);
             lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
             channel.disconnect();
@@ -107,4 +113,24 @@ public class SSHComands {
         }
         return lines;
     }
+
+    public List<String> update_machine() {
+        List<String> lines = new ArrayList<String>();
+        try {
+            String command = "up_lj\n";
+            Session session = initSession();
+            Channel channel = initChannel(command, session);
+            InputStream in = channel.getInputStream();
+            channel.connect();
+            String dataFromChannel = getDataFromChannel(channel, in);
+            lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
+            channel.disconnect();
+            session.disconnect();
+            System.out.println("Machine updated");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return lines;
+    }
+
 }
