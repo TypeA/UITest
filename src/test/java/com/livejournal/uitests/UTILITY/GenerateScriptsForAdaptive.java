@@ -11,8 +11,8 @@ public class GenerateScriptsForAdaptive {
                 + "FROM user "
                 + "left join lj_c2.userproplite2 on user.userid = lj_c2.userproplite2.userid "
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "
-                + "WHERE lj_c2.userproplite2.upropid = 402 "
-                + "OR lj_c1.userproplite2.upropid = 402;";
+                + "WHERE lj_c2.userproplite2.upropid = (select * from userproplist where name ='cust_mobile_adaptive') "
+                + "OR lj_c1.userproplite2.upropid = (select * from userproplist where name ='cust_mobile_adaptive');";
 
     }
 
@@ -28,7 +28,7 @@ public class GenerateScriptsForAdaptive {
             script[i] += "left join lj_c" + (i + 1) + ".userproplite2 on user.userid = lj_c" + (i + 1) + ".userproplite2.userid "
                     + "left join s2styles on lj_c" + (i + 1) + ".userproplite2.value = s2styles.styleid "
                     + "left join lj_c" + (i + 1) + ".log2 on lj_c" + (i + 1) + ".log2.journalid = user.userid "
-                    + "WHERE  lj_c" + (i + 1) + ".userproplite2.upropid = 96 "
+                    + "WHERE  lj_c" + (i + 1) + ".userproplite2.upropid = (select upropid from userproplist where name ='s2_style') "
                     + "AND user.user NOT LIKE '\\_%' "
                     + "AND user.user NOT LIKE '%\\_' "
                     + "AND user.statusvis = 'V' "
