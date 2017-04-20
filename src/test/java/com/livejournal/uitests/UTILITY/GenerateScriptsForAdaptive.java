@@ -11,8 +11,8 @@ public class GenerateScriptsForAdaptive {
                 + "FROM user "
                 + "left join lj_c2.userproplite2 on user.userid = lj_c2.userproplite2.userid "
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "
-                + "WHERE lj_c2.userproplite2.upropid = (select * from userproplist where name ='cust_mobile_adaptive') "
-                + "OR lj_c1.userproplite2.upropid = (select * from userproplist where name ='cust_mobile_adaptive');";
+                + "WHERE lj_c2.userproplite2.upropid = (select upropid from userproplist where name ='cust_mobile_adaptive') "
+                + "OR lj_c1.userproplite2.upropid = (select upropid from userproplist where name ='cust_mobile_adaptive');";
 
     }
 
