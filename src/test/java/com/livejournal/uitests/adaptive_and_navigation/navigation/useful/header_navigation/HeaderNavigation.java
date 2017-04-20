@@ -304,7 +304,7 @@ public class HeaderNavigation extends LJTest {
                 + "left join lj_c1.userproplite2 on user.userid = lj_c1.userproplite2.userid "
                 + "left join s2styles on lj_c1.userproplite2.value = s2styles.styleid "
                 + "left join lj_c1.log2 on lj_c1.log2.journalid = user.userid "
-                + "WHERE  lj_c1.userproplite2.upropid = 96 "
+                + "WHERE  lj_c1.userproplite2.upropid = (select upropid from userproplist where name ='s2_style') "
                 + "AND user.statusvis = 'V' "
                 + "AND lj_c1.log2.security = 'public' "
                 + "AND user.journaltype = 'P'";
