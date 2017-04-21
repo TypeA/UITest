@@ -117,6 +117,7 @@ public class AdaptiveSettings extends LJTest {
         users.get(1).addAll(users.get(2)); //соединение результатов с двух кластеров в один список
         users.get(1).remove("system"); //удаление пользователя system
         users.get(1).remove("medius");
+        users.get(1).remove("lj_magazine");
         ArrayList<String> neededUsers = new ArrayList<>();
         if (mobileView) {
             for (int i = 0; i < users.get(0).size(); i++) {
