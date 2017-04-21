@@ -13,8 +13,8 @@ import junit.framework.Assert;
 public class LJPage extends Page {
 
     public LJPage() {
-        getUrl().setUser("ljdev9c")
-                .setPassword("Ivie6oovai");
+        getUrl();/*.setUser("ljdev9c")
+                .setPassword("Ivie6oovai");*/
     }
 
     public <T extends Object> T elem(T element) {
