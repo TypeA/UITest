@@ -45,7 +45,7 @@ public class UserSettings extends DatabasesData {
                 + "FROM lj_c"
                 + user_atr.get(0).get(0)
                 + ".userproplite2 "
-                + "WHERE upropid = '402' and userid='"
+                + "WHERE upropid = (select upropid from userproplist where name =''cust_mobile_adaptive') and userid='"
                 + user_atr.get(0).get(1)
                 + "';";
         try {
@@ -105,7 +105,7 @@ public class UserSettings extends DatabasesData {
                 + "FROM lj_c"
                 + user_atr.get(0).get(0)
                 + ".userproplite2 "
-                + "WHERE upropid = '175' and userid='"
+                + "WHERE upropid = (select upropid from userproplist where name = 'opt_stylealwaysmine') and userid='"
                 + user_atr.get(0).get(1)
                 + "';";
         try {
