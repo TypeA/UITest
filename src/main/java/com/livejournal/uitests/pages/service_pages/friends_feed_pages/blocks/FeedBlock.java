@@ -125,9 +125,10 @@ public class FeedBlock extends UIBlock {
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") b a').click()");
         int i = 0;
         WebElement expandedCut = null;
-        while ((i < 50) && (expandedCut == null)) {
+        while ((i < 30) && (expandedCut == null)) {
             try {
                 expandedCut = (WebElement) findElement(By.cssSelector(".ljcut-expanded"));
+                Thread.sleep(100);
             } catch (Exception e) {
                 i++;
             }
