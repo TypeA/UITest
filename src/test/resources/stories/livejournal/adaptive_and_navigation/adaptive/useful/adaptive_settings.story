@@ -267,7 +267,7 @@ Examples:
 |true               |true                   |Chameleon      |true               |true                   |Chameleon      |Chameleon              |
 
 
-!--Scenario: User with Adaptive Chameleon see correct theme in journal with option 'in my style'
+Scenario: User with Adaptive Chameleon see correct theme in journal with option 'in my style'
 
 !--Meta:
 !--@categories adaptive adaptive_and_navigation

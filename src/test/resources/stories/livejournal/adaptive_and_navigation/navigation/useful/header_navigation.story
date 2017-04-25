@@ -55,7 +55,7 @@ Examples:
 Scenario: Navigation for logged user on journal pages
 
 Meta: 
-@categories navigation adaptive_and_navigation useful release
+@categories navigation adaptive_and_navigation useful release release1111111
 
 Given logged user (name <name>,region <region>) on Main Page
 When logged user on journal page with syle <syle> use link <link>
