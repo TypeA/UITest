@@ -267,11 +267,11 @@ Examples:
 |true               |true                   |Chameleon      |true               |true                   |Chameleon      |Chameleon              |
 
 
-Scenario: User with Adaptive Chameleon see correct theme in journal with option 'in my style'
+!--Scenario: User with Adaptive Chameleon see correct theme in journal with option 'in my style'
 
-Meta: 
-@categories adaptive adaptive_and_navigation
+!--Meta:
+!--@categories adaptive adaptive_and_navigation
 
-Given user <user> with option in my style
-When user go to the random journal <journal> page
-Then user see correct style <correctStyle> in journal
+!--Given user <user> with option in my style
+!--When user go to the random journal <journal> page
+!--Then user see correct style <correctStyle> in journal
