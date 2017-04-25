@@ -40,6 +40,14 @@ public class MyJournalPageLogged extends JournalPageLogged {
             }
         });
         startScript("jQuery('.entryunit__text:contains(\"" + text + "\") b a').click()");
+        WebElement expandedCut = null;
+        int i = 0;
+        while ((i < 30) && (expandedCut == null)) try {
+            Thread.sleep(100);
+            expandedCut = (WebElement) getDriver().findElements(By.cssSelector(".entryunit"));
+        } catch (Exception e) {
+            i++;
+        }
         return startScript("return jQuery('.entryunit__text:contains(\"" + text + "\") div').text().trim()").toString();
 
     }
