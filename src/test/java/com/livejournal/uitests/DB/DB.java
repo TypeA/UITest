@@ -8,6 +8,7 @@ public class DB extends LJTest{
 
     @Given("data from DB")
     public void db() {
+        System.out.println("======================================== DEBUG ========================================");
 
     }
 
