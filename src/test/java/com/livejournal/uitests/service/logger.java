@@ -12,12 +12,14 @@ import java.util.logging.Level;
  */
 public class logger extends LJTest {
 
-    @Given("")
+    //Scenario: Logger for unlogged user(1/2)
+    @Given("unlogged user on page $page with url $url")
     public void unlogged_user_on_page_with_url(String page,String url) {
         openUrl(url);
     }
 
-    @Then("")
+    //Scenario: Logger for unlogged user(2/2)
+    @Then("user get logs from dev console")
     public void user_get_logs_from_dev_console() {
         String logs = getLogs();
         verify().that(logs.isEmpty())
