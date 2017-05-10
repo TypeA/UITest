@@ -29,7 +29,6 @@ Examples:
 |User profile page                          |http://tema.livejournal.com/profile                                        |
 |User feed                                  |http://100.livejournal.com/feed                                            |
 |User feed only journals                    |http://100.livejournal.com/feed/journals/                                  |
-|User feed                                  |http://100.livejournal.com/feed/                                           |
 |User photos                                |http://tema.livejournal.com/photo                                          |
 |User photo album                           |http://tema.livejournal.com/photo/album/475                                |
 |User photo                                 |http://tema.livejournal.com/photo/album/475/?mode=view&id=1688697&page=1   |
