@@ -9,6 +9,7 @@ import org.jbehave.core.annotations.Given;
 public class service extends LJTest {
     @Given("user updating machine")
     public void user_updating_machine() {
+        console().collect_trunk();
         console().update_machine();
     }
 }

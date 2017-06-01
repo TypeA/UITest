@@ -133,4 +133,23 @@ public class SSHComands {
         return lines;
     }
 
+    public List<String> collect_trunk() {
+        List<String> lines = new ArrayList<String>();
+        try {
+            String command = "htdocs/lj-team/jir-git/bin/collect-trunk\n";
+            Session session = initSession();
+            Channel channel = initChannel(command, session);
+            InputStream in = channel.getInputStream();
+            channel.connect();
+            String dataFromChannel = getDataFromChannel(channel, in);
+            lines.addAll(Arrays.asList(dataFromChannel.split("\n")));
+            channel.disconnect();
+            session.disconnect();
+            System.out.println("Trunk collected");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return lines;
+    }
+
 }
